@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component, createContext } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { useAppInitializer } from "./hooks/handler/app/useAppInitializer";
+import { Loader } from "semantic-ui-react";
+import { Route, Routes } from "react-router-dom";
+import Review from "./pages/Review";
+import Home from "./pages/Home";
+
+export const IdTokenContext = createContext("");
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  const { lineIdToken, ErrorBoundary } = useAppInitializer();
+  const app = (
+    <IdTokenContext.Provider value={lineIdToken}>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="review" element={<Review />} />
+      </Routes>
+    </IdTokenContext.Provider>
   );
+  if (lineIdToken) {
+    return (
+      <>
+        {process.env.NEXT_PUBLIC_VERCEL_ENV == "production" ? (
+          <ErrorBoundary>{app}</ErrorBoundary>
+        ) : (
+          app
+        )}
+      </>
+    );
+  }
+  return <Loader inline="centered">ログイン中</Loader>;
 }
 
 export default App;
