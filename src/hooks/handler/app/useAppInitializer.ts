@@ -16,9 +16,9 @@ export const useAppInitializer = () => {
   useEffect(() => {
     // ifがないとBugsnag.start時にAPI KEYがないとエラーが発生する。
     // .env.development.localにAPI KEYを記述すればエラーは消えるがローカルで使わないため分岐をかける。
-    if (process.env.NEXT_PUBLIC_VERCEL_ENV === "production") {
+    if (process.env.NODE_ENV === "production") {
       Bugsnag.start({
-        apiKey: process.env.NEXT_PUBLIC_BUGSNAG_API_KEY || "",
+        apiKey: process.env.REACT_APP_BUGSNAG_API_KEY || "",
         plugins: [new BugsnagPluginReact()],
         enabledReleaseStages: ["production"],
         releaseStage: process.env.NODE_ENV,
@@ -38,9 +38,9 @@ export const useAppInitializer = () => {
   // LINEのログイン処理を行う
   useEffect(() => {
     if (location.pathname === "/") {
-      liff.init({ liffId: `${process.env.NEXT_PUBLIC_LIFF_ID}` });
+      liff.init({ liffId: `${process.env.REACT_APP_LIFF_ID}` });
     } else {
-      liff.init({ liffId: `${process.env.NEXT_PUBLIC_LIFF_ID}` }).then(() => {
+      liff.init({ liffId: `${process.env.REACT_APP_LIFF_ID}` }).then(() => {
         // ローカルで開発する場合、クエリパラメータにLINE IDを直書きすることでデバッグできます。
         // e.g) http://localhost:3001/advice?lineId=xxx
         if (!liff.isLoggedIn() && process.env.NODE_ENV === "development") {
