@@ -24,7 +24,7 @@ export const SizePartButtons = (props: Props) => {
       <Button.Group fluid>
         <Button
           className={
-            handler.active == ButtonState.TooSmall
+            handler.active === ButtonState.TooSmall
               ? styles.activeButton
               : styles.inactiveButton
           }
@@ -39,7 +39,7 @@ export const SizePartButtons = (props: Props) => {
         </Button>
         <Button
           className={
-            handler.active == ButtonState.JustFit
+            handler.active === ButtonState.JustFit
               ? styles.activeButton
               : styles.inactiveButton
           }
@@ -49,7 +49,7 @@ export const SizePartButtons = (props: Props) => {
         </Button>
         <Button
           className={
-            handler.active == ButtonState.TooBig
+            handler.active === ButtonState.TooBig
               ? styles.activeButton
               : styles.inactiveButton
           }

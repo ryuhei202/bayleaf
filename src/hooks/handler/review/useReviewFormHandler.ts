@@ -4,7 +4,7 @@ import { Review } from "../../../models/review/Review";
 import { IdTokenContext } from "../../../App";
 import { customAxios } from "../../../models/shared/customAxios";
 
-type useReviewFormHandler = {
+type ReviewFormHandler = {
   readonly onClick: () => void;
   readonly onSelectReview: (review: Review) => void;
   readonly reviews: Review[];
@@ -15,13 +15,13 @@ type useReviewFormHandler = {
 export const useReviewFormHandler = (
   data: FormResponse[] | undefined,
   karteId: number
-): useReviewFormHandler => {
+): ReviewFormHandler => {
   const idToken = useContext(IdTokenContext);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [validation, setValidation] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const onClick = async () => {
-    if (reviews.length != data?.length) {
+    if (reviews.length !== data?.length) {
       setValidation("入力していないレビューがあります。");
       return;
     }

@@ -1,5 +1,4 @@
-import React, { Component, createContext } from "react";
-import logo from "./logo.svg";
+import { createContext } from "react";
 import "./App.css";
 import { useAppInitializer } from "./hooks/handler/app/useAppInitializer";
 import { Loader } from "semantic-ui-react";
@@ -22,7 +21,7 @@ function App() {
   if (lineIdToken) {
     return (
       <>
-        {process.env.NEXT_PUBLIC_VERCEL_ENV == "production" ? (
+        {process.env.NEXT_PUBLIC_VERCEL_ENV === "production" ? (
           <ErrorBoundary>{app}</ErrorBoundary>
         ) : (
           app

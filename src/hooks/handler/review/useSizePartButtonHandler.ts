@@ -1,7 +1,7 @@
 import { Review } from "../../../models/review/Review";
 import { useState } from "react";
 
-type useSizePartButtonHandler = {
+type SizePartButtonHandler = {
   readonly addSizeError: (sizePartError: SizeError) => void;
   readonly clearSizeError: (sizePart: number) => void;
   readonly active: ButtonState;
@@ -20,13 +20,13 @@ export enum ButtonState {
 export const useSizePartButtonHandler = (
   review: Review,
   onSelectSize: (review: Review) => void
-): useSizePartButtonHandler => {
+): SizePartButtonHandler => {
   const [active, setActive] = useState<ButtonState>(ButtonState.JustFit);
 
   const isActiveButton = (errorType: number) => {
-    if (errorType == 1) {
+    if (errorType === 1) {
       setActive(ButtonState.TooBig);
-    } else if (errorType == 2) {
+    } else if (errorType === 2) {
       setActive(ButtonState.TooSmall);
     } else {
       setActive(ButtonState.JustFit);
@@ -34,7 +34,7 @@ export const useSizePartButtonHandler = (
   };
   const addSizeError = (sizePartError: SizeError) => {
     const sizePartExists = review.sizeErrors.some(
-      (se) => se.sizePart == sizePartError.sizePart
+      (se) => se.sizePart === sizePartError.sizePart
     );
     if (sizePartExists) {
       overwriteSizeError(sizePartError);

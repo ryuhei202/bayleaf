@@ -22,7 +22,7 @@ export const KarteLists = (props: Props) => {
   if (!data) return <Loader active inline="centered" />;
   return (
     <>
-      {data.length == 1 ? (
+      {data.length === 1 ? (
         props.onSelectKarte(data[0].id)
       ) : (
         <Container>

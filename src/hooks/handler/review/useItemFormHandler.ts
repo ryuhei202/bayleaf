@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FormResponse } from "../../../models/review/FormResponse";
 import { Review } from "../../../models/review/Review";
 
-type useItemFormHandler = {
+type ItemFormHandler = {
   readonly review: Review;
   readonly rating: number;
   readonly inputRate: (ratingNum: number) => void;
@@ -15,7 +15,7 @@ type useItemFormHandler = {
 export const useItemFormHandler = (
   item: FormResponse,
   onSelectReview: (review: Review) => void
-): useItemFormHandler => {
+): ItemFormHandler => {
   const [review, setReview] = useState<Review>({
     chartItemId: item.chartItemId,
     rating: undefined,
