@@ -1,0 +1,10 @@
+.activeButton {
+  background-color: #27406c !important;
+  color: white !important;
+  border: 0.05em solid #27406c !important;
+}
+.inactiveButton {
+  background-color: white !important;
+  color: #27406c !important;
+  border: 0.05em solid #27406c !important;
+}
