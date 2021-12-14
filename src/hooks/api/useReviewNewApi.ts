@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import useSWR from "swr";
 import { FormResponse } from "../../models/review/FormResponse";
-import { IdTokenContext } from "../../pages/_app";
+import { IdTokenContext } from "../../App";
 import { customAxios } from "../../models/shared/customAxios";
 
 type reviewNewApi = {

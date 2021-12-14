@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import useSWR from "swr";
 import { KarteListResponse } from "../../models/review/KarteListResponse";
-import { IdTokenContext } from "../../pages/_app";
+import { IdTokenContext } from "../../App";
 import { customAxios } from "../../models/shared/customAxios";
 
 type reviewIndexApi = {
