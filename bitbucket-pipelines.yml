@@ -5,9 +5,8 @@ pipelines:
     staging:
       - step:
           name: Build
-          deployment: staging
           script:
-            - yarn install && yarn build:staging LIFF_ID=$LIFF_ID
+            - yarn install && yarn build:staging LIFF_ID=$LIFF_ID_STAGING
           artifacts:
             - build/**
       - step:
@@ -22,9 +21,8 @@ pipelines:
     master:
       - step:
           name: Build
-          deployment: production
           script:
-            - yarn install && yarn build LIFF_ID=$LIFF_ID
+            - yarn install && yarn build LIFF_ID=$LIFF_ID_PRODUCTION
           artifacts:
             - build/**
       - step:
