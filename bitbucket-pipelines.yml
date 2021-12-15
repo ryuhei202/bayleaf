@@ -6,7 +6,7 @@ pipelines:
       - step:
           name: Build
           script:
-            - yarn install && yarn build:staging
+            - yarn install && yarn build:staging LIFF_ID=$LIFF_ID
           artifacts:
             - build/**
       - step:
@@ -22,7 +22,7 @@ pipelines:
       - step:
           name: Build
           script:
-            - yarn install && yarn build
+            - yarn install && yarn build LIFF_ID=$LIFF_ID
           artifacts:
             - build/**
       - step:
