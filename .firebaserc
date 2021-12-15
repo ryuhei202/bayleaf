@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "bayleaf-stg-uwear"
+    "production": "bayleeaf-uwear",
+    "staging": "bayleeaf-stg-uwear"
   }
 }
