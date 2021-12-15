@@ -38,9 +38,9 @@ export const useAppInitializer = () => {
   // LINEのログイン処理を行う
   useEffect(() => {
     if (location.pathname === "/") {
-      liff.init({ liffId: `${process.env.LIFF_ID}` });
+      liff.init({ liffId: `${process.env.REACT_APP_LIFF_ID}` });
     } else {
-      liff.init({ liffId: `${process.env.LIFF_ID}` }).then(() => {
+      liff.init({ liffId: `${process.env.REACT_APP_LIFF_ID}` }).then(() => {
         // ローカルで開発する場合、クエリパラメータにLINE IDを直書きすることでデバッグできます。
         // e.g) http://localhost:3001/advice?lineId=xxx
         if (!liff.isLoggedIn() && process.env.NODE_ENV === "development") {
