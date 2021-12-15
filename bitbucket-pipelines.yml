@@ -5,9 +5,11 @@ pipelines:
     staging:
       - step:
           name: Build
-          deployment: staging
           script:
-            - yarn install && yarn build:staging LIFF_ID=$LIFF_ID
+            - yarn install
+            - REACT_APP_BUGSNAG_API_KEY=$BUGSNAG_API_KEY
+            - REACT_APP_LIFF_ID=$LIFF_ID_STAGING
+            - yarn build:staging
           artifacts:
             - build/**
       - step:
@@ -22,9 +24,12 @@ pipelines:
     master:
       - step:
           name: Build
-          deployment: production
           script:
-            - yarn install && yarn build LIFF_ID=$LIFF_ID
+            - yarn install && yarn build LIFF_ID=$LIFF_ID_PRODUCTION
+            - REACT_APP_BUGSNAG_API_KEY=$BUGSNAG_API_KEY
+            - REACT_APP_GA_TRACKING_ID=$GA_TRACKING_ID
+            - REACT_APP_LIFF_ID=$LIFF_ID_PRODUCTION
+            - yarn build
           artifacts:
             - build/**
       - step:
