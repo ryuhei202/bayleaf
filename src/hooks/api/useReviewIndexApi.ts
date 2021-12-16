@@ -25,7 +25,7 @@ export const useReviewIndexApi = (): reviewIndexApi => {
         return r.data;
       });
   const { data, error } = useSWR(
-    [`${process.env.NEXT_PUBLIC_HOST_URL}/reviews`, idToken],
+    [`${process.env.REACT_APP_HOST_URL}/reviews`, idToken],
     fetcher
   );
   return { data, error };

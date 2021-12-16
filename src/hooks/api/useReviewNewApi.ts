@@ -28,7 +28,7 @@ export const useReviewNewApi = (karteId: number): reviewNewApi => {
       });
 
   const { data, error } = useSWR(
-    [`${process.env.NEXT_PUBLIC_HOST_URL}/reviews/new`, idToken, karteId],
+    [`${process.env.REACT_APP_HOST_URL}/reviews/new`, idToken, karteId],
     fetcher
   );
 

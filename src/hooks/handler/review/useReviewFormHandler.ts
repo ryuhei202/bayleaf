@@ -28,7 +28,7 @@ export const useReviewFormHandler = (
     setLoading(true);
     await customAxios
       .post(
-        `${process.env.NEXT_PUBLIC_HOST_URL}/reviews`,
+        `${process.env.REACT_APP_HOST_URL}/reviews`,
         { reviews: reviews, chartId: karteId },
         { headers: { Authorization: idToken } }
       )
