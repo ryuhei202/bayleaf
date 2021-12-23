@@ -21,7 +21,8 @@ function App() {
   if (lineIdToken) {
     return (
       <>
-        {process.env.NODE_ENV === "production" ? (
+        {process.env.NODE_ENV === "production" &&
+        ErrorBoundary !== undefined ? (
           <ErrorBoundary>{app}</ErrorBoundary>
         ) : (
           app
