@@ -8,6 +8,7 @@ import ReactGA from "react-ga";
 
 export const useAppInitializer = () => {
   const [lineIdToken, setLineIdToken] = useState("");
+  const [liffErrorMessage, setLiffErrorMessage] = useState("");
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const lineId = searchParams.get("lineId");
@@ -51,6 +52,9 @@ export const useAppInitializer = () => {
           }
         } else {
           setLineIdToken(liff.getIDToken() ?? "");
+          if (!liff.isInClient()) {
+            setLiffErrorMessage("スマホのLINEアプリから開いてください。");
+          }
         }
       });
     }
@@ -58,6 +62,7 @@ export const useAppInitializer = () => {
 
   return {
     lineIdToken,
+    liffErrorMessage,
     ErrorBoundary,
   };
 };
