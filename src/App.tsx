@@ -33,7 +33,11 @@ function App() {
   if (liffErrorMessage) {
     return <ErrorMessage message={liffErrorMessage} />;
   }
-  return <Loader inline="centered">ログイン中</Loader>;
+  return (
+    <Loader active inline="centered">
+      ログイン中
+    </Loader>
+  );
 }
 
 export default App;
