@@ -5,11 +5,12 @@ import { Loader } from "semantic-ui-react";
 import { Route, Routes } from "react-router-dom";
 import Review from "./pages/Review";
 import Home from "./pages/Home";
+import { ErrorMessage } from "./components/shared/ErrorMessage";
 
 export const IdTokenContext = createContext("");
 
 function App() {
-  const { lineIdToken, ErrorBoundary } = useAppInitializer();
+  const { lineIdToken, liffErrorMessage, ErrorBoundary } = useAppInitializer();
   const app = (
     <IdTokenContext.Provider value={lineIdToken}>
       <Routes>
@@ -29,7 +30,14 @@ function App() {
       </>
     );
   }
-  return <Loader inline="centered">ログイン中</Loader>;
+  if (liffErrorMessage) {
+    return <ErrorMessage message={liffErrorMessage} />;
+  }
+  return (
+    <Loader active inline="centered">
+      ログイン中
+    </Loader>
+  );
 }
 
 export default App;
