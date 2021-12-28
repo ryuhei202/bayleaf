@@ -48,7 +48,7 @@ export const useAppInitializer = () => {
           if (lineId) {
             setLineIdToken(lineId);
           } else {
-            throw new Error("LINE ID いれなさい");
+            setLiffErrorMessage("LINE ID いれなさい");
           }
         } else {
           setLineIdToken(liff.getIDToken() ?? "");
