@@ -1,26 +1,26 @@
 {
   "version": "0.2.0",
   "configurations": [
-      {
+    {
       "type": "node",
       "request": "attach",
       "name": "Launch Program",
       "skipFiles": ["<node_internals>/**"],
       "port": 9229
-      },
-      {
-        "name": "Launch local file",
-        "type": "chrome",
-        "request": "launch",
-        "file": "${workspaceFolder}/index.html"
-      },
-      {
-        "name": "Launch remote website",
-        "type": "chrome",
-        "request": "launch",
-        "url": "http://localhost:3001",
-        "webRoot": "${workspaceFolder}",
-        "sourceMaps": true
-      }
+    },
+    {
+      "name": "Launch local file",
+      "type": "chrome",
+      "request": "launch",
+      "file": "${workspaceFolder}/index.html"
+    },
+    {
+      "name": "Launch remote website",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3001",
+      "webRoot": "${workspaceFolder}",
+      "sourceMaps": true
+    }
   ]
 }
