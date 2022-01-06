@@ -1,3 +1,7 @@
+.star {
+  color: #ffd400;
+  outline-style: none !important;
+}
 .ratingStar {
   text-align: center;
   margin-top: 1em;

@@ -15,7 +15,7 @@ export const RatingStar = (props: Props) => {
     items.push(
       <GridColumn className={styles.gridColumn} key={i}>
         <Icon
-          style={{ color: "#FFD400" }}
+          className={styles.star}
           name={i <= props.rating ? star : outlineStar}
           size="huge"
           onClick={() => props.inputRate(i)}
