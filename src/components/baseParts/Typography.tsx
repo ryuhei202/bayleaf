@@ -50,6 +50,8 @@ export const Typography = ({
   classes.push(bold ? "font-semibold" : "");
 
   return (
-    <p className={`font-sans ${className} ${classes.join(" ")}`}>{children}</p>
+    <p className={`font-sans ${className ?? ""} ${classes.join(" ")}`}>
+      {children}
+    </p>
   );
 };

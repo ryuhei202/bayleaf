@@ -8,7 +8,7 @@ export const FriendIcon = ({ className }: Props) => {
       width="65"
       height="49"
       viewBox="0 0 65 49"
-      className={`${className} fill-current`}
+      className={`${className ?? ""} fill-current`}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path

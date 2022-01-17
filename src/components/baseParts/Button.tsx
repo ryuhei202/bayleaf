@@ -1,5 +1,4 @@
 import React from "react";
-import { Typography } from "./Typography";
 
 type Props = {
   children?: React.ReactNode;
@@ -67,12 +66,11 @@ export const Button = ({
     classes.push(disableElevation ? "shadow-none" : "shadow-md");
   }
 
-  if (typeof children === "string") {
-    children = <Typography>{children}</Typography>;
-  }
-
   return (
-    <button className={`${className} ${classes.join(" ")}`} onClick={onClick}>
+    <button
+      className={`${className ?? ""} ${classes.join(" ")}`}
+      onClick={onClick}
+    >
       {children}
     </button>
   );

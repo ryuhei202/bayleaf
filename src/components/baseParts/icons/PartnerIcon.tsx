@@ -8,7 +8,7 @@ export const PartnerIcon = ({ className }: Props) => {
       width="63"
       height="49"
       viewBox="0 0 63 49"
-      className={`${className} fill-current`}
+      className={`${className ?? ""} fill-current`}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
