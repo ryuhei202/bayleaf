@@ -11,7 +11,6 @@ const Template: ComponentStory<typeof Typography> = (args) => (
 );
 
 export const StringChild = Template.bind({});
-StringChild.parameters = { control: { type: "text" } };
 StringChild.args = {
   children: "サンプルテキスト",
 };

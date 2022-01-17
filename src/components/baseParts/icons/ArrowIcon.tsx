@@ -1,10 +1,14 @@
-export const ArrowIcon = () => {
+type Props = {
+  className?: string;
+};
+
+export const ArrowIcon = ({ className }: Props) => {
   return (
     <svg
       width="50"
       height="50"
       viewBox="0 0 50 50"
-      className="stroke-current fill-transparent"
+      className={`${className} stroke-current fill-transparent`}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path

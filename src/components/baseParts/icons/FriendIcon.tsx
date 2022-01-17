@@ -1,10 +1,14 @@
-export const FriendIcon = () => {
+type Props = {
+  className?: string;
+};
+
+export const FriendIcon = ({ className }: Props) => {
   return (
     <svg
       width="65"
       height="49"
       viewBox="0 0 65 49"
-      className="fill-current"
+      className={`${className} fill-current`}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
