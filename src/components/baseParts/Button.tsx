@@ -7,7 +7,8 @@ type Props = {
   variant?: "default" | "primary";
   disabled?: boolean;
   disableElevation?: boolean;
-  size?: "small" | "medium";
+  border?: boolean;
+  size?: "small" | "medium" | "none";
   radius?: "small" | "large";
 };
 
@@ -18,6 +19,7 @@ export const Button = ({
   variant,
   disabled,
   disableElevation,
+  border,
   size,
   radius,
 }: Props) => {
@@ -43,11 +45,15 @@ export const Button = ({
           return "py-4";
         case "small":
           return "py-3";
+        case "none":
+          return "py-0";
         default:
           return "py-3";
       }
     })()
   );
+
+  classes.push(border ? "border border-slate-700" : "");
 
   if (disabled) {
     onClick = () => {};
