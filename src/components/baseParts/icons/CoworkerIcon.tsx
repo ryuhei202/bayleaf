@@ -8,7 +8,7 @@ export const CoworkerIcon = ({ className }: Props) => {
       width="48"
       height="57"
       viewBox="0 0 48 57"
-      className={`${className} fill-current`}
+      className={`${className ?? ""} fill-current`}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path

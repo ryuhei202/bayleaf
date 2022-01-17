@@ -8,7 +8,7 @@ export const FamilyIcon = ({ className }: Props) => {
       width="58"
       height="56"
       viewBox="0 0 58 56"
-      className={`${className} fill-current`}
+      className={`${className ?? ""} fill-current`}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
