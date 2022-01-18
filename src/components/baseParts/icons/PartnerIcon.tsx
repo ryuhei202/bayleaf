@@ -1,10 +1,14 @@
-export const PartnerIcon = () => {
+type Props = {
+  className?: string;
+};
+
+export const PartnerIcon = ({ className }: Props) => {
   return (
     <svg
       width="63"
       height="49"
       viewBox="0 0 63 49"
-      className="fill-current"
+      className={`${className ?? ""} fill-current`}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
