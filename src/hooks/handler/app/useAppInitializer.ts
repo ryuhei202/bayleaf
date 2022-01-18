@@ -12,6 +12,8 @@ export const useAppInitializer = () => {
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const lineId = searchParams.get("lineId");
+  const convertedStylistId = Number(searchParams.get("stylistId") ?? undefined);
+  const stylistId = isNaN(convertedStylistId) ? undefined : convertedStylistId;
 
   // bugsnagを呼び出す
   useEffect(() => {
@@ -62,6 +64,7 @@ export const useAppInitializer = () => {
 
   return {
     lineIdToken,
+    stylistId,
     liffErrorMessage,
     ErrorBoundary,
   };
