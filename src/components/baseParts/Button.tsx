@@ -65,7 +65,7 @@ export const Button = ({
           case "primary":
             return "bg-midnight text-slate-200 shadow-midnight";
           default:
-            return "bg-white text-slate-700 shadow-slate-200";
+            return "bg-white text-slate-700";
         }
       })()
     );
