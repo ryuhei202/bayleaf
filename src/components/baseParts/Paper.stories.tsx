@@ -1,5 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { Button } from "./Button";
+import { Divider } from "./Divider";
 import { EditIcon } from "./icons/EditIcon";
 import { Paper } from "./Paper";
 import { Typography } from "./Typography";
@@ -22,19 +23,22 @@ Default.decorators = [
 Default.args = {
   children: (
     <>
-      <Typography variant="body">こんにちは</Typography>
+      <Typography variant="body" className="mb-4">
+        こんにちは
+      </Typography>
       <Button
         disableElevation
         border
         radius="small"
         size="none"
-        className="flex justify-center h-8"
+        className="flex justify-center h-8 mb-4"
       >
         <EditIcon className="h-4 w-fit my-auto mr-1" />
         <Typography bold variant="body" className="my-auto">
           編集
         </Typography>
       </Button>
+      <Divider />
     </>
   ),
 };
