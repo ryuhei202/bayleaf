@@ -23,7 +23,7 @@ Default.decorators = [
 Default.args = {
   children: (
     <>
-      <Typography size="xs" className="mb-4">
+      <Typography variant="body" className="mb-4">
         こんにちは
       </Typography>
       <Button
@@ -34,7 +34,7 @@ Default.args = {
         className="flex justify-center h-8 mb-4"
       >
         <EditIcon className="h-4 w-fit my-auto mr-1" />
-        <Typography bold size="xs" className="my-auto">
+        <Typography bold variant="body" className="my-auto">
           編集
         </Typography>
       </Button>

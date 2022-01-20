@@ -3,7 +3,7 @@ import React from "react";
 type Props = {
   className?: string;
   children?: React.ReactNode;
-  size?: "2xl" | "sm" | "xs" | "base";
+  variant?: "title" | "subtitle" | "header" | "body";
   color?: "primary" | "secondary" | "strong-gray";
   bold?: boolean;
 };
@@ -11,7 +11,7 @@ type Props = {
 export const Typography = ({
   className,
   children,
-  size,
+  variant,
   color,
   bold,
 }: Props) => {
@@ -19,14 +19,13 @@ export const Typography = ({
 
   classes.push(
     (() => {
-      switch (size) {
-        case "2xl":
+      switch (variant) {
+        case "title":
           return "text-2xl";
-        case "sm":
+        case "header":
           return "text-sm";
-        case "xs":
+        case "body":
           return "text-xs";
-        case "base":
         default:
           return "text-base";
       }
