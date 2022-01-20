@@ -48,11 +48,7 @@ function App() {
   if (liffErrorMessage) {
     return <ErrorMessage message={liffErrorMessage} />;
   }
-  return (
-    <Loader active inline="centered">
-      ログイン中
-    </Loader>
-  );
+  return <Loader active>ログイン中</Loader>;
 }
 
 export default App;
