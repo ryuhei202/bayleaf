@@ -23,7 +23,7 @@ export const Typography = ({
         case "title":
           return "text-2xl";
         case "header":
-          return "text-sm";
+          return "text-xl";
         case "body":
           return "text-xs";
         default:

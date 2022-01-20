@@ -11,7 +11,7 @@ export const Hearing = () => {
       {memberId === undefined ? (
         <MemberListContainer setMemberId={setMemberId} />
       ) : (
-        <ReferenceContainer />
+        <ReferenceContainer memberId={memberId} />
       )}
     </>
   );

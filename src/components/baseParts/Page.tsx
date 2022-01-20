@@ -6,6 +6,6 @@ type Props = {
 
 export const Page = ({ children }: Props) => {
   return (
-    <div className="overflow-auto h-screen bg-slate-200 px-5">{children}</div>
+    <div className="overflow-auto h-screen bg-slate-200 px-4">{children}</div>
   );
 };

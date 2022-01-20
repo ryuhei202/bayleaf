@@ -17,7 +17,7 @@ export const MemberList = ({ data, setMemberId }: Props) => {
     <Page>
       <PageHeader title="アカウントを選択してください" className="mb-16" />
       {data.map((member) => (
-        <div className="mb-5">
+        <div className="mb-5" key={member.id}>
           <Button variant="default" onClick={() => setMemberId(member.id)}>
             <CoworkerIcon className="mb-3" />
             <Typography bold>
