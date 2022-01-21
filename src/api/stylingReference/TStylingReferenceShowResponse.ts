@@ -4,5 +4,5 @@ export type TStylingReferenceShowResponse = {
     readonly id: number;
     readonly name: string;
   }[];
-  readonly text: string;
+  readonly text: string | null;
 };

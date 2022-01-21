@@ -19,7 +19,7 @@ type Props = {
 export const TargetForm = ({ defaultValue, onSubmit, onCancel }: Props) => {
   const [value, setValue] = useState<number | undefined>(defaultValue);
   return (
-    <Page>
+    <Page className="px-5">
       <div className="flex flex-col justify-between h-full">
         <div>
           <PageHeader
@@ -75,7 +75,7 @@ export const TargetForm = ({ defaultValue, onSubmit, onCancel }: Props) => {
             <Typography bold>特になし</Typography>
           </Button>
         </div>
-        <div className="mt-auto mb-10 flex flex-row">
+        <div className="mt-auto mb-10 flex flex-row space-x-3">
           <IconButton className="flex-none">
             <ArrowIcon className="h-10 w-fit my-auto" />
           </IconButton>

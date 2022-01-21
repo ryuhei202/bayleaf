@@ -1,18 +1,27 @@
 import { TStylingReferenceShowResponse } from "../../api/stylingReference/TStylingReferenceShowResponse";
-import { Button } from "../baseParts/Button";
-import { Divider } from "../baseParts/Divider";
-import { EditIcon } from "../baseParts/icons/EditIcon";
 import { Typography } from "../baseParts/Typography";
 
 type Props = {
   readonly stylingReference?: TStylingReferenceShowResponse;
   readonly titleText: string;
+  readonly className?: string;
 };
-export const TextAnswer = ({ stylingReference, titleText }: Props) => {
+export const TextAnswer = ({
+  stylingReference,
+  titleText,
+  className,
+}: Props) => {
   return (
-    <div>
-      <Typography className="mb-3 mt-4">{titleText}</Typography>
-      <Typography bold variant="header" className="mb-4">
+    <div className={className ?? ""}>
+      <Typography bold color="primary" size="sm" className="mb-3">
+        {titleText}
+      </Typography>
+      <Typography
+        bold
+        color="strong-gray"
+        size="xs"
+        className="whitespace-pre-wrap"
+      >
         {stylingReference?.text}
       </Typography>
     </div>

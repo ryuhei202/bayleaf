@@ -12,7 +12,7 @@ export const EditButton = () => {
       className="flex justify-center h-8"
     >
       <EditIcon className="h-4 w-fit my-auto mr-1" />
-      <Typography bold variant="body" className="my-auto">
+      <Typography bold size="xs" className="my-auto">
         編集
       </Typography>
     </Button>

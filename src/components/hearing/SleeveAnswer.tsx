@@ -16,6 +16,7 @@ export const SleeveAnswer = ({ stylingReference }: Props) => {
         <TitledAnswer
           titleText="トップス枚数"
           choice={stylingReference?.choices.map((choice) => choice.name).pop()}
+          className="mb-4"
         />
       </EditableLayout>
     </div>

@@ -14,7 +14,7 @@ type Props = {
 };
 export const MemberList = ({ data, setMemberId }: Props) => {
   return (
-    <Page>
+    <Page className="px-5">
       <PageHeader title="アカウントを選択してください" className="mb-16" />
       {data.map((member) => (
         <div className="mb-5" key={member.id}>
