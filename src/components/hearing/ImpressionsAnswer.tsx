@@ -4,11 +4,11 @@ import { TitledAnswer } from "./TitledAnswer";
 
 type Props = {
   readonly impressionReference?: TStylingReferenceShowResponse;
-  readonly especiallyInpressionReference?: TStylingReferenceShowResponse;
+  readonly especiallyImpressionReference?: TStylingReferenceShowResponse;
 };
 export const ImpressionsAnswer = ({
   impressionReference,
-  especiallyInpressionReference,
+  especiallyImpressionReference,
 }: Props) => {
   return (
     <EditableLayout>
@@ -21,7 +21,7 @@ export const ImpressionsAnswer = ({
       />
       <TitledAnswer
         titleText="特に与えたい印象"
-        choice={especiallyInpressionReference?.choices
+        choice={especiallyImpressionReference?.choices
           .map((choice) => choice.name)
           .pop()}
         className="mb-4"

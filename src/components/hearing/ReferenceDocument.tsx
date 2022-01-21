@@ -34,7 +34,7 @@ export const ReferenceDocument = ({ stylingReference }: Props) => {
               <Divider className="mb-4" />
               <ImpressionsAnswer
                 impressionReference={findCategoryData(3)}
-                especiallyInpressionReference={findCategoryData(4)}
+                especiallyImpressionReference={findCategoryData(4)}
               />
             </>
           ) : (
