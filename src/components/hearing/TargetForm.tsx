@@ -39,7 +39,7 @@ export const TargetForm = ({ defaultValue, onSubmit, onCancel }: Props) => {
               onClick={defaultValue ? () => setValue(1) : () => onSubmit(1)}
             >
               <CoworkerIcon className="mb-3" />
-              <Typography bold>職場</Typography>
+              <Typography>職場</Typography>
             </Button>
             <Button
               className="basis-1/2"
@@ -47,7 +47,7 @@ export const TargetForm = ({ defaultValue, onSubmit, onCancel }: Props) => {
               onClick={defaultValue ? () => setValue(2) : () => onSubmit(2)}
             >
               <FamilyIcon className="mb-3" />
-              <Typography bold>家族</Typography>
+              <Typography>家族</Typography>
             </Button>
           </div>
           <div className="mb-5 flex flex-row space-x-5">
@@ -57,7 +57,7 @@ export const TargetForm = ({ defaultValue, onSubmit, onCancel }: Props) => {
               onClick={defaultValue ? () => setValue(3) : () => onSubmit(3)}
             >
               <PartnerIcon className="mb-3" />
-              <Typography bold>異性(恋人)</Typography>
+              <Typography>異性(恋人)</Typography>
             </Button>
             <Button
               className="basis-1/2"
@@ -65,14 +65,14 @@ export const TargetForm = ({ defaultValue, onSubmit, onCancel }: Props) => {
               onClick={defaultValue ? () => setValue(4) : () => onSubmit(4)}
             >
               <FriendIcon className="mb-3" />
-              <Typography bold>友人</Typography>
+              <Typography>友人</Typography>
             </Button>
           </div>
           <Button
             variant={value === 5 ? "primary" : "default"}
             onClick={defaultValue ? () => setValue(5) : () => onSubmit(5)}
           >
-            <Typography bold>特になし</Typography>
+            <Typography>特になし</Typography>
           </Button>
         </div>
         <div className="mt-auto mb-10 flex flex-row space-x-3">
@@ -81,9 +81,7 @@ export const TargetForm = ({ defaultValue, onSubmit, onCancel }: Props) => {
           </IconButton>
           {defaultValue ? (
             <Button size="none" className="grow">
-              <Typography bold className="my-auto">
-                変更を適用する
-              </Typography>
+              <Typography className="my-auto">変更を適用する</Typography>
             </Button>
           ) : (
             <></>

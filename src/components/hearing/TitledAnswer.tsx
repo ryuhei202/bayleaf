@@ -8,12 +8,10 @@ type Props = {
 export const TitledAnswer = ({ titleText, choice, className }: Props) => {
   return (
     <div className={className ?? ""}>
-      <Typography bold color="primary" size="sm" className="mb-3">
+      <Typography color="primary" size="sm" className="mb-3">
         {titleText}
       </Typography>
-      <Typography bold color="strong-gray">
-        {choice}
-      </Typography>
+      <Typography color="strong-gray">{choice}</Typography>
     </div>
   );
 };

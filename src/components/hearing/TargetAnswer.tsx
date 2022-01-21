@@ -18,7 +18,6 @@ export const TargetAnswer = ({ stylingReference }: Props) => {
         <div className="bg-gray-100 mb-4 p-2">
           <Typography
             className="mb-3"
-            bold
             color="primary"
             size="xs"
             children="スタイリストからの補足"
