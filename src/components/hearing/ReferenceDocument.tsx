@@ -4,6 +4,7 @@ import { Divider } from "../baseParts/Divider";
 import { Page } from "../baseParts/Page";
 import { PageHeader } from "../baseParts/PageHeader";
 import { Paper } from "../baseParts/Paper";
+import { Typography } from "../baseParts/Typography";
 import { ImpressionsAnswer } from "./ImpressionsAnswer";
 import { SleeveAnswer } from "./SleeveAnswer";
 import { TargetAnswer } from "./TargetAnswer";
@@ -74,10 +75,16 @@ export const ReferenceDocument = ({ stylingReference }: Props) => {
           )}
         </Paper>
       </div>
-      <div className="p-3 space-y-3">
-        <Button variant="primary">前回と同じ内容でコーデを作る</Button>
-        <Button variant="primary">
-          スタイリストと相談してからコーデを作る
+      <div className="px-3 py-2 space-y-2 fixed bottom-0 bg-white border-t-2 border-neutral-300">
+        <Button variant="primary" size="small">
+          <Typography size="sm" className="my-auto">
+            前回と同じ内容でコーデを作る
+          </Typography>
+        </Button>
+        <Button variant="primary" size="small">
+          <Typography size="sm" className="my-auto">
+            スタイリストと相談してからコーデを作る
+          </Typography>
         </Button>
       </div>
     </>
