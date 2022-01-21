@@ -3,7 +3,7 @@ import React from "react";
 type Props = {
   className?: string;
   children?: React.ReactNode;
-  variant?: "title" | "subtitle" | "header" | "body";
+  size?: "2xl" | "sm" | "xs" | "base";
   color?: "primary" | "secondary" | "strong-gray";
   bold?: boolean;
 };
@@ -11,7 +11,7 @@ type Props = {
 export const Typography = ({
   className,
   children,
-  variant,
+  size,
   color,
   bold,
 }: Props) => {
@@ -19,13 +19,20 @@ export const Typography = ({
 
   classes.push(
     (() => {
-      switch (variant) {
-        case "title":
+      switch (size) {
+        case "2xl":
           return "text-2xl";
+<<<<<<< HEAD
         case "header":
           return "text-xl";
         case "body":
+=======
+        case "sm":
+          return "text-sm";
+        case "xs":
+>>>>>>> feature/LEEAP-1955-bayfeaf-typography
           return "text-xs";
+        case "base":
         default:
           return "text-base";
       }
