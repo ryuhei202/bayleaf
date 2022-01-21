@@ -1,8 +1,4 @@
 import { TStylingReferenceShowResponse } from "../../api/stylingReference/TStylingReferenceShowResponse";
-import { Button } from "../baseParts/Button";
-import { Divider } from "../baseParts/Divider";
-import { EditIcon } from "../baseParts/icons/EditIcon";
-import { Typography } from "../baseParts/Typography";
 import { EditableLayout } from "./EditableLayout";
 import { TitledAnswer } from "./TitledAnswer";
 
