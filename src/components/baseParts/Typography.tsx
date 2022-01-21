@@ -22,15 +22,9 @@ export const Typography = ({
       switch (size) {
         case "2xl":
           return "text-2xl";
-<<<<<<< HEAD
-        case "header":
-          return "text-xl";
-        case "body":
-=======
         case "sm":
           return "text-sm";
         case "xs":
->>>>>>> feature/LEEAP-1955-bayfeaf-typography
           return "text-xs";
         case "base":
         default:
