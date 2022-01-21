@@ -1,4 +1,5 @@
 import "../src/index.css";
+import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -9,4 +10,8 @@ export const parameters = {
     },
   },
   layout: "fullscreen",
+  viewport: {
+    viewports: INITIAL_VIEWPORTS,
+    defaultViewport: "iphone12",
+  },
 };
