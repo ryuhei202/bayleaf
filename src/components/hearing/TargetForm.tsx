@@ -90,12 +90,7 @@ export const TargetForm = ({ defaultValue, onSubmit, onCancel }: Props) => {
             <ArrowIcon className="h-10 w-fit my-auto" />
           </IconButton>
           {defaultValue ? (
-            <Button
-              disabled={value === undefined}
-              size="none"
-              className="grow"
-              onClick={handleSubmit}
-            >
+            <Button size="none" className="grow" onClick={handleSubmit}>
               <Typography className="my-auto">変更を適用する</Typography>
             </Button>
           ) : (
