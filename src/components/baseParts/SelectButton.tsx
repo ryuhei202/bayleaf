@@ -1,33 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Button } from "./Button";
 
 type Props = {
   selected: boolean;
+  disabled?: boolean;
   children?: React.ReactNode;
   className?: string;
   onClick?: () => void;
-  onTransitionEnd?: () => void;
+  onSelectTransitionEnd?: () => void;
 };
 
 export const SelectButton = ({
   selected,
   children,
   className,
-  onTransitionEnd,
-  onClick,
+  onSelectTransitionEnd,
+  ...props
 }: Props) => {
-  const durationMs = 2000;
-  let classes: string[] = [];
+  const durationMs = 1000;
+  const durationClass = "duration-1000";
 
   useEffect(() => {
-    onTransitionEnd ? setTimeout(onTransitionEnd, durationMs) : undefined;
+    if (onSelectTransitionEnd !== undefined && selected)
+      setTimeout(onSelectTransitionEnd, durationMs);
   }, [selected]);
 
   return (
     <Button
-      className={`${className ?? ""} transition duration-[${durationMs}ms]`}
+      className={`${className ?? ""} transition ${durationClass}`}
       variant={selected ? "primary" : "default"}
-      onClick={onClick}
+      {...props}
     >
       {children}
     </Button>
