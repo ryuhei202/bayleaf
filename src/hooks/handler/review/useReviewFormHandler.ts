@@ -2,7 +2,7 @@ import { FormResponse } from "../../../models/review/FormResponse";
 import { useContext, useState } from "react";
 import { Review } from "../../../models/review/Review";
 import { IdTokenContext, StylistIdContext } from "../../../App";
-import { customAxios } from "../../../models/shared/customAxios";
+import { customAxios } from "../../../api/customAxios";
 
 type ReviewFormHandler = {
   readonly onClick: () => void;

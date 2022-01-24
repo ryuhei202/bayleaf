@@ -2,7 +2,7 @@ import { useContext } from "react";
 import useSWR from "swr";
 import { KarteListResponse } from "../../models/review/KarteListResponse";
 import { IdTokenContext, StylistIdContext } from "../../App";
-import { customAxios } from "../../models/shared/customAxios";
+import { customAxios } from "../../api/customAxios";
 
 type reviewIndexApi = {
   readonly data?: KarteListResponse[];

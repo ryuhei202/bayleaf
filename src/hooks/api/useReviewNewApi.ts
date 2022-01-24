@@ -2,7 +2,7 @@ import { useContext } from "react";
 import useSWR from "swr";
 import { FormResponse } from "../../models/review/FormResponse";
 import { IdTokenContext, StylistIdContext } from "../../App";
-import { customAxios } from "../../models/shared/customAxios";
+import { customAxios } from "../../api/customAxios";
 
 type reviewNewApi = {
   readonly data?: FormResponse[];
