@@ -64,9 +64,9 @@ export const Button = ({
       (() => {
         switch (variant) {
           case "primary":
-            return "bg-midnight text-slate-200 shadow-midnight/40";
+            return "bg-midnight text-slate-200 shadow-midnight/40 fill-midnight";
           default:
-            return "bg-white text-slate-700";
+            return "bg-white text-slate-700 fill-white";
         }
       })()
     );

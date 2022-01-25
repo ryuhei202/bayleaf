@@ -10,4 +10,9 @@ const Template: ComponentStory<typeof TargetForm> = (args) => (
   <TargetForm {...args} />
 );
 
-export const Default = Template.bind({});
+export const NoDefaultValues = Template.bind({});
+
+export const DefaultValues = Template.bind({});
+DefaultValues.args = {
+  defaultValue: 1,
+};

@@ -2,22 +2,20 @@ import { useState } from "react";
 import { Button } from "../baseParts/Button";
 import { IconButton } from "../baseParts/IconButton";
 import { ArrowIcon } from "../baseParts/icons/ArrowIcon";
-import { CoworkerIcon } from "../baseParts/icons/CoworkerIcon";
-import { FamilyIcon } from "../baseParts/icons/FamilyIcon";
-import { FriendIcon } from "../baseParts/icons/FriendIcon";
-import { PartnerIcon } from "../baseParts/icons/PartnerIcon";
+import { LongSleeveIcon } from "../baseParts/icons/LongSleeveIcon";
+import { ShortSleeveIcon } from "../baseParts/icons/ShortSleeveIcon";
 import { Page } from "../baseParts/Page";
 import { PageHeader } from "../baseParts/PageHeader";
 import { SelectButton } from "../baseParts/SelectButton";
 import { Typography } from "../baseParts/Typography";
 
 type Props = {
-  defaultValue?: 1 | 2 | 3 | 4 | 5;
+  defaultValue?: 23 | 24 | 25 | 26;
   onSubmit: (id: number) => void;
   onCancel: () => void;
 };
 
-export const TargetForm = ({ defaultValue, onSubmit, onCancel }: Props) => {
+export const SleeveForm = ({ defaultValue, onSubmit, onCancel }: Props) => {
   const [value, setValue] = useState<number | undefined>(defaultValue);
   const handleSubmit = () => {
     if (value !== undefined) onSubmit(value);
@@ -30,60 +28,55 @@ export const TargetForm = ({ defaultValue, onSubmit, onCancel }: Props) => {
           <PageHeader
             title={
               <>
-                誰を意識した洋服を
+                トップスの長袖・半袖の
                 <br />
-                着たいですか？
+                枚数を選んでください
               </>
             }
             className="mb-16"
           />
-          <div className="mb-5 flex flex-row space-x-5">
+          <div className="space-y-5">
             <SelectButton
-              className="basis-1/2"
-              selected={value === 1}
-              onClick={() => setValue(1)}
+              selected={value === 23}
+              onClick={() => setValue(23)}
               onSelectTransitionEnd={defaultValue ? undefined : handleSubmit}
             >
-              <CoworkerIcon className="mb-3" />
-              <Typography>職場</Typography>
+              <LongSleeveIcon />
+              <LongSleeveIcon className="-ml-4" />
+              <LongSleeveIcon className="-ml-4" />
+              <Typography>長袖3 / 半袖0</Typography>
             </SelectButton>
             <SelectButton
-              className="basis-1/2"
-              selected={value === 2}
-              onClick={() => setValue(2)}
+              selected={value === 24}
+              onClick={() => setValue(24)}
               onSelectTransitionEnd={defaultValue ? undefined : handleSubmit}
             >
-              <FamilyIcon className="mb-3" />
-              <Typography>家族</Typography>
+              <LongSleeveIcon />
+              <LongSleeveIcon className="-ml-4" />
+              <ShortSleeveIcon className="ml-4" />
+              <Typography>長袖2 / 半袖1</Typography>
+            </SelectButton>
+            <SelectButton
+              selected={value === 25}
+              onClick={() => setValue(25)}
+              onSelectTransitionEnd={defaultValue ? undefined : handleSubmit}
+            >
+              <LongSleeveIcon />
+              <ShortSleeveIcon className="ml-4" />
+              <ShortSleeveIcon className="-ml-2" />
+              <Typography>長袖1 / 半袖2</Typography>
+            </SelectButton>
+            <SelectButton
+              selected={value === 26}
+              onClick={() => setValue(26)}
+              onSelectTransitionEnd={defaultValue ? undefined : handleSubmit}
+            >
+              <ShortSleeveIcon />
+              <ShortSleeveIcon className="-ml-2" />
+              <ShortSleeveIcon className="-ml-2" />
+              <Typography>長袖0 / 半袖3</Typography>
             </SelectButton>
           </div>
-          <div className="mb-5 flex flex-row space-x-5">
-            <SelectButton
-              className="basis-1/2"
-              selected={value === 3}
-              onClick={() => setValue(3)}
-              onSelectTransitionEnd={defaultValue ? undefined : handleSubmit}
-            >
-              <PartnerIcon className="mb-3" />
-              <Typography>異性(恋人)</Typography>
-            </SelectButton>
-            <SelectButton
-              className="basis-1/2"
-              selected={value === 4}
-              onClick={() => setValue(4)}
-              onSelectTransitionEnd={defaultValue ? undefined : handleSubmit}
-            >
-              <FriendIcon className="mb-3" />
-              <Typography>友人</Typography>
-            </SelectButton>
-          </div>
-          <SelectButton
-            selected={value === 5}
-            onClick={() => setValue(5)}
-            onSelectTransitionEnd={defaultValue ? undefined : handleSubmit}
-          >
-            <Typography>特になし</Typography>
-          </SelectButton>
         </div>
         <div className="mt-auto mb-10 flex flex-row space-x-3">
           <IconButton className="flex-none" onClick={onCancel}>
