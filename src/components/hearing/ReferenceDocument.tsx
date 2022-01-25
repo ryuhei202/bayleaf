@@ -19,6 +19,7 @@ type Props = {
   readonly otherReference?: TStylingReferenceShowResponse;
   readonly summaryReference?: TStylingReferenceShowResponse;
   readonly referenceChanged: boolean;
+  readonly allowHearingSkip: boolean;
   readonly onClickEdit: (id: number) => void;
   readonly onSubmit: (isSkipingHearing: boolean) => void;
 };
@@ -30,6 +31,7 @@ export const ReferenceDocument = ({
   otherReference,
   summaryReference,
   referenceChanged,
+  allowHearingSkip,
   onClickEdit,
   onSubmit,
 }: Props) => {
@@ -107,14 +109,14 @@ export const ReferenceDocument = ({
         </Paper>
       </div>
       <div className="px-3 py-2 w-screen space-y-2 fixed bottom-0 bg-white border-t-2 border-neutral-300">
-        {referenceChanged ? (
-          <></>
-        ) : (
+        {allowHearingSkip ? (
           <Button variant="primary" size="small" onClick={() => onSubmit(true)}>
             <Typography size="sm" className="my-auto">
               前回と同じ内容でコーデを作る
             </Typography>
           </Button>
+        ) : (
+          <></>
         )}
         <Button variant="primary" size="small" onClick={() => onSubmit(false)}>
           <Typography size="sm" className="my-auto">

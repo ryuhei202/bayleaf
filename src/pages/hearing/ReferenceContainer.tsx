@@ -50,6 +50,7 @@ export const ReferenceContainer = ({ member, stylingReference }: Props) => {
     presentRequiredCategoryIds,
     presentCurrentOptionId,
     presentCurrentOptionIds,
+    presentAllowHearingSkip,
   } = useReferenceContainerPresenters(
     stylingReference,
     member,
@@ -119,6 +120,7 @@ export const ReferenceContainer = ({ member, stylingReference }: Props) => {
         (reference) => reference.categoryId === REFERENCE_CATEGORY_IDS.OTHER
       )}
       referenceChanged={modifiedChoices.length > 0}
+      allowHearingSkip={presentAllowHearingSkip()}
       onClickEdit={setEditingCategory}
       onSubmit={handleDocumentSubmit}
     />

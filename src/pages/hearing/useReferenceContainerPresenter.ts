@@ -1,7 +1,7 @@
+import { REFERENCE_CATEGORY_IDS } from "./../../models/hearing/ReferenceCategorieIds";
 import { TStylingReferenceShowResponse } from "../../api/stylingReference/TStylingReferenceShowResponse";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { M_PLAN_IDS } from "../../models/hearing/MPlanIds";
-import { REFERENCE_CATEGORY_IDS } from "../../models/hearing/ReferenceCategorieIds";
 import { ReferenceOptions } from "../../models/hearing/ReferenceOptions";
 import { TReferenceChoice } from "../../models/hearing/TReferenceChoice";
 
@@ -19,6 +19,7 @@ type ReferenceContainerPresenter = {
   presentRequiredCategoryIds: () => number[];
   presentCurrentOptionId: (categoryId: number) => number | undefined;
   presentCurrentOptionIds: (categoryId: number) => number[] | undefined;
+  presentAllowHearingSkip: () => boolean;
 };
 
 export const useReferenceContainerPresenters = (
@@ -126,6 +127,16 @@ export const useReferenceContainerPresenters = (
     }
   };
 
+  const presentAllowHearingSkip = () => {
+    const isSleeveChoice =
+      modifiedChoices.length === 1 &&
+      [
+        REFERENCE_CATEGORY_IDS.CASUAL_SLEEVE,
+        REFERENCE_CATEGORY_IDS.BUSINESS_SLEEVE,
+      ].includes(modifiedChoices[0].categoryId);
+    return modifiedChoices.length === 0 || isSleeveChoice;
+  };
+
   return {
     presentReference,
     presentImpressionsReference,
@@ -133,5 +144,6 @@ export const useReferenceContainerPresenters = (
     presentRequiredCategoryIds,
     presentCurrentOptionId,
     presentCurrentOptionIds,
+    presentAllowHearingSkip,
   };
 };
