@@ -1,17 +1,18 @@
 import { useState } from "react";
-import { useHearingHandler } from "../../hooks/hearing/useHearingHandler";
+import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { MemberListContainer } from "./MemberListContainer";
-import { ReferenceContainer } from "./ReferenceContainer";
+import { ReferenceFetcher } from "./ReferenceFetcher";
 
 export const Hearing = () => {
-  const [memberId, setMemberId] = useState<number | undefined>(undefined);
+  const [member, setMember] =
+    useState<TMembersIndexResponse | undefined>(undefined);
 
   return (
     <>
-      {memberId === undefined ? (
-        <MemberListContainer setMemberId={setMemberId} />
+      {member === undefined ? (
+        <MemberListContainer setMember={setMember} />
       ) : (
-        <ReferenceContainer memberId={memberId} />
+        <ReferenceFetcher member={member} />
       )}
     </>
   );
