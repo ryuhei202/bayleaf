@@ -20,7 +20,7 @@ export const useItemFormHandler = (
     chartItemId: item.chartItemId,
     rating: undefined,
     sizeErrors: [],
-    freeText: "",
+    freeText: item.textFeedback,
   });
   const [rating, setRating] = useState<number>(0);
 

@@ -5,4 +5,5 @@ export type FormResponse = {
     readonly value: number;
     readonly name: string;
   }[];
+  readonly textFeedback: string;
 };
