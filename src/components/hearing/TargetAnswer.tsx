@@ -4,14 +4,15 @@ import { EditableLayout } from "./EditableLayout";
 import { TitledAnswer } from "./TitledAnswer";
 
 type Props = {
-  readonly stylingReference?: TStylingReferenceShowResponse;
+  readonly stylingReference: TStylingReferenceShowResponse;
+  readonly onClickEdit?: () => void;
 };
-export const TargetAnswer = ({ stylingReference }: Props) => {
+export const TargetAnswer = ({ stylingReference, ...props }: Props) => {
   return (
-    <EditableLayout>
+    <EditableLayout {...props}>
       <TitledAnswer
         titleText="意識する相手"
-        choice={stylingReference?.choices.map((choice) => choice.name).pop()}
+        choice={stylingReference?.choices.map((choice) => choice.name)[0]}
         className="mb-4"
       />
       {stylingReference?.text !== null ? (

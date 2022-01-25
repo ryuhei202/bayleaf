@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ReferenceOptions } from "../../models/hearing/ReferenceOptions";
 import { IconButton } from "../baseParts/IconButton";
 import { ArrowIcon } from "../baseParts/icons/ArrowIcon";
 import { Page } from "../baseParts/Page";
@@ -6,8 +7,8 @@ import { PageHeader } from "../baseParts/PageHeader";
 import { SelectButton } from "../baseParts/SelectButton";
 
 type Props = {
-  options: (6 | 7 | 8 | 9 | 10 | 11)[];
-  onSubmit: (id: number) => void;
+  options: number[];
+  onSubmit: (optionId: number) => void;
   onCancel: () => void;
 };
 
@@ -16,6 +17,8 @@ export const PrimaryImpressionForm = ({
   onSubmit,
   onCancel,
 }: Props) => {
+  const MULTIPLE_IMPRESSIONS = ReferenceOptions.MULTIPLE_IMPRESSIONS;
+  const PRIMARY_IMPRESSION = ReferenceOptions.PRIMARY_IMPRESSIONS;
   const [value, setValue] = useState<number | undefined>(undefined);
 
   const handleSubmit = () => {
@@ -37,68 +40,68 @@ export const PrimaryImpressionForm = ({
             className="mb-16"
           />
           <div className="space-y-5">
-            {options.includes(6) ? (
+            {options.includes(MULTIPLE_IMPRESSIONS.KIND.id) ? (
               <SelectButton
-                selected={value === 6}
-                onClick={() => setValue(6)}
+                selected={value === PRIMARY_IMPRESSION.KIND.id}
+                onClick={() => setValue(PRIMARY_IMPRESSION.KIND.id)}
                 onSelectTransitionEnd={handleSubmit}
               >
-                優しい
+                {PRIMARY_IMPRESSION.KIND.name}
               </SelectButton>
             ) : (
               <></>
             )}
-            {options.includes(7) ? (
+            {options.includes(MULTIPLE_IMPRESSIONS.YOUNG.id) ? (
               <SelectButton
-                selected={value === 7}
-                onClick={() => setValue(7)}
+                selected={value === PRIMARY_IMPRESSION.YOUNG.id}
+                onClick={() => setValue(PRIMARY_IMPRESSION.YOUNG.id)}
                 onSelectTransitionEnd={handleSubmit}
               >
-                若々しい
+                {PRIMARY_IMPRESSION.YOUNG.name}
               </SelectButton>
             ) : (
               <></>
             )}
-            {options.includes(8) ? (
+            {options.includes(MULTIPLE_IMPRESSIONS.AGE_FIT.id) ? (
               <SelectButton
-                selected={value === 8}
-                onClick={() => setValue(8)}
+                selected={value === PRIMARY_IMPRESSION.AGE_FIT.id}
+                onClick={() => setValue(PRIMARY_IMPRESSION.AGE_FIT.id)}
                 onSelectTransitionEnd={handleSubmit}
               >
-                年齢に合った
+                {PRIMARY_IMPRESSION.AGE_FIT.name}
               </SelectButton>
             ) : (
               <></>
             )}
-            {options.includes(9) ? (
+            {options.includes(MULTIPLE_IMPRESSIONS.CLEAN.id) ? (
               <SelectButton
-                selected={value === 9}
-                onClick={() => setValue(9)}
+                selected={value === PRIMARY_IMPRESSION.CLEAN.id}
+                onClick={() => setValue(PRIMARY_IMPRESSION.CLEAN.id)}
                 onSelectTransitionEnd={handleSubmit}
               >
-                清潔感のある
+                {PRIMARY_IMPRESSION.CLEAN.name}
               </SelectButton>
             ) : (
               <></>
             )}
-            {options.includes(10) ? (
+            {options.includes(MULTIPLE_IMPRESSIONS.CALM.id) ? (
               <SelectButton
-                selected={value === 10}
-                onClick={() => setValue(10)}
+                selected={value === PRIMARY_IMPRESSION.CALM.id}
+                onClick={() => setValue(PRIMARY_IMPRESSION.CALM.id)}
                 onSelectTransitionEnd={handleSubmit}
               >
-                落ち着いた
+                {PRIMARY_IMPRESSION.CALM.name}
               </SelectButton>
             ) : (
               <></>
             )}
-            {options.includes(11) ? (
+            {options.includes(MULTIPLE_IMPRESSIONS.ACTIVE.id) ? (
               <SelectButton
-                selected={value === 11}
-                onClick={() => setValue(11)}
+                selected={value === PRIMARY_IMPRESSION.ACTIVE.id}
+                onClick={() => setValue(PRIMARY_IMPRESSION.ACTIVE.id)}
                 onSelectTransitionEnd={handleSubmit}
               >
-                活発な(アクティブな)
+                {PRIMARY_IMPRESSION.ACTIVE.name}
               </SelectButton>
             ) : (
               <></>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ReferenceOptions } from "../../models/hearing/ReferenceOptions";
 import { Button } from "../baseParts/Button";
 import { IconButton } from "../baseParts/IconButton";
 import { ArrowIcon } from "../baseParts/icons/ArrowIcon";
@@ -10,15 +11,20 @@ import { SelectButton } from "../baseParts/SelectButton";
 import { Typography } from "../baseParts/Typography";
 
 type Props = {
-  defaultValue?: 23 | 24 | 25 | 26;
-  onSubmit: (id: number) => void;
+  defaultValue?: number;
+  onSubmit: (optionId: number) => void;
   onCancel: () => void;
 };
 
-export const SleeveForm = ({ defaultValue, onSubmit, onCancel }: Props) => {
+export const CasualSleeveForm = ({
+  defaultValue,
+  onSubmit,
+  onCancel,
+}: Props) => {
+  const CASUAL_SLEEVE = ReferenceOptions.CASUAL_SLEEVE;
   const [value, setValue] = useState<number | undefined>(defaultValue);
   const handleSubmit = () => {
-    if (value !== undefined) onSubmit(value);
+    if (value) onSubmit(value);
   };
 
   return (
@@ -37,44 +43,44 @@ export const SleeveForm = ({ defaultValue, onSubmit, onCancel }: Props) => {
           />
           <div className="space-y-5">
             <SelectButton
-              selected={value === 23}
-              onClick={() => setValue(23)}
+              selected={value === CASUAL_SLEEVE.LONG_3_SHORT_0.id}
+              onClick={() => setValue(CASUAL_SLEEVE.LONG_3_SHORT_0.id)}
               onSelectTransitionEnd={defaultValue ? undefined : handleSubmit}
             >
               <LongSleeveIcon />
               <LongSleeveIcon className="-ml-4" />
               <LongSleeveIcon className="-ml-4" />
-              <Typography>長袖3 / 半袖0</Typography>
+              <Typography>{CASUAL_SLEEVE.LONG_3_SHORT_0.name}</Typography>
             </SelectButton>
             <SelectButton
-              selected={value === 24}
-              onClick={() => setValue(24)}
+              selected={value === CASUAL_SLEEVE.LONG_2_SHORT_1.id}
+              onClick={() => setValue(CASUAL_SLEEVE.LONG_2_SHORT_1.id)}
               onSelectTransitionEnd={defaultValue ? undefined : handleSubmit}
             >
               <LongSleeveIcon />
               <LongSleeveIcon className="-ml-4" />
               <ShortSleeveIcon className="ml-4" />
-              <Typography>長袖2 / 半袖1</Typography>
+              <Typography>{CASUAL_SLEEVE.LONG_2_SHORT_1.name}</Typography>
             </SelectButton>
             <SelectButton
-              selected={value === 25}
-              onClick={() => setValue(25)}
+              selected={value === CASUAL_SLEEVE.LONG_1_SHORT_2.id}
+              onClick={() => setValue(CASUAL_SLEEVE.LONG_1_SHORT_2.id)}
               onSelectTransitionEnd={defaultValue ? undefined : handleSubmit}
             >
               <LongSleeveIcon />
               <ShortSleeveIcon className="ml-4" />
               <ShortSleeveIcon className="-ml-2" />
-              <Typography>長袖1 / 半袖2</Typography>
+              <Typography>{CASUAL_SLEEVE.LONG_1_SHORT_2.name}</Typography>
             </SelectButton>
             <SelectButton
-              selected={value === 26}
-              onClick={() => setValue(26)}
+              selected={value === CASUAL_SLEEVE.LONG_0_SHORT_3.id}
+              onClick={() => setValue(CASUAL_SLEEVE.LONG_0_SHORT_3.id)}
               onSelectTransitionEnd={defaultValue ? undefined : handleSubmit}
             >
               <ShortSleeveIcon />
               <ShortSleeveIcon className="-ml-2" />
               <ShortSleeveIcon className="-ml-2" />
-              <Typography>長袖0 / 半袖3</Typography>
+              <Typography>{CASUAL_SLEEVE.LONG_0_SHORT_3.name}</Typography>
             </SelectButton>
           </div>
         </div>
@@ -83,7 +89,12 @@ export const SleeveForm = ({ defaultValue, onSubmit, onCancel }: Props) => {
             <ArrowIcon className="h-10 w-fit my-auto" />
           </IconButton>
           {defaultValue ? (
-            <Button size="none" className="grow" onClick={handleSubmit}>
+            <Button
+              disabled={defaultValue === value}
+              size="none"
+              className="grow"
+              onClick={handleSubmit}
+            >
               <Typography className="my-auto">変更を適用する</Typography>
             </Button>
           ) : (

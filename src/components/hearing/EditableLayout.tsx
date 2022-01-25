@@ -1,15 +1,15 @@
-import { Divider } from "../baseParts/Divider";
 import { EditButton } from "../baseParts/EditButton";
 
 type Props = {
   readonly children: React.ReactNode;
+  readonly onClickEdit?: () => void;
 };
 
-export const EditableLayout = ({ children }: Props) => {
+export const EditableLayout = ({ children, onClickEdit }: Props) => {
   return (
     <div className="mb-4">
       {children}
-      <EditButton />
+      <EditButton onClick={onClickEdit} />
     </div>
   );
 };

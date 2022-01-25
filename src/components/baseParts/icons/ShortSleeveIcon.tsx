@@ -3,7 +3,6 @@ type Props = {
 };
 
 export const ShortSleeveIcon = ({ className }: Props) => {
-  let fillClass;
   return (
     <svg
       width="46"

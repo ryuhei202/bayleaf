@@ -3,7 +3,7 @@ import { Typography } from "../baseParts/Typography";
 
 type Props = {
   readonly titleText: string;
-  readonly stylingReference?: TStylingReferenceShowResponse;
+  readonly stylingReference: TStylingReferenceShowResponse;
   readonly className?: string;
 };
 export const TextAnswer = ({
@@ -17,7 +17,7 @@ export const TextAnswer = ({
         {titleText}
       </Typography>
       <Typography color="strong-gray" size="xs" className="whitespace-pre-wrap">
-        {stylingReference?.text}
+        {stylingReference.text}
       </Typography>
     </div>
   );

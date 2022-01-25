@@ -3,27 +3,29 @@ import { EditableLayout } from "./EditableLayout";
 import { TitledAnswer } from "./TitledAnswer";
 
 type Props = {
-  readonly impressionReference?: TStylingReferenceShowResponse;
-  readonly especiallyImpressionReference?: TStylingReferenceShowResponse;
+  readonly multipleImpressionsReference: TStylingReferenceShowResponse;
+  readonly primaryImpressionReference: TStylingReferenceShowResponse;
+  readonly onClickEdit?: () => void;
 };
 export const ImpressionsAnswer = ({
-  impressionReference,
-  especiallyImpressionReference,
+  multipleImpressionsReference,
+  primaryImpressionReference,
+  ...props
 }: Props) => {
   return (
-    <EditableLayout>
+    <EditableLayout {...props}>
       <TitledAnswer
         titleText="与えたい印象"
-        choice={impressionReference?.choices
+        choice={multipleImpressionsReference?.choices
           .map((choice) => choice.name)
           .join(" / ")}
         className="mb-4"
       />
       <TitledAnswer
         titleText="特に与えたい印象"
-        choice={especiallyImpressionReference?.choices
-          .map((choice) => choice.name)
-          .pop()}
+        choice={
+          primaryImpressionReference?.choices.map((choice) => choice.name)[0]
+        }
         className="mb-4"
       />
     </EditableLayout>

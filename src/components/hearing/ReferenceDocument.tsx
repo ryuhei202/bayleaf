@@ -1,7 +1,6 @@
 import { TStylingReferenceShowResponse } from "../../api/stylingReference/TStylingReferenceShowResponse";
 import { Button } from "../baseParts/Button";
 import { Divider } from "../baseParts/Divider";
-import { Page } from "../baseParts/Page";
 import { PageHeader } from "../baseParts/PageHeader";
 import { Paper } from "../baseParts/Paper";
 import { Typography } from "../baseParts/Typography";
@@ -11,49 +10,81 @@ import { TargetAnswer } from "./TargetAnswer";
 import { TextAnswer } from "./TextAnswer";
 
 type Props = {
-  readonly stylingReference: TStylingReferenceShowResponse[];
+  readonly targetReference?: TStylingReferenceShowResponse;
+  readonly impressionReference?: {
+    multipleImpressionsReference: TStylingReferenceShowResponse;
+    primaryImpressionReference: TStylingReferenceShowResponse;
+  };
+  readonly sleeveReference?: TStylingReferenceShowResponse;
+  readonly otherReference?: TStylingReferenceShowResponse;
+  readonly summaryReference?: TStylingReferenceShowResponse;
+  readonly referenceChanged: boolean;
+  readonly onClickEdit: (id: number) => void;
+  readonly onSubmit: (isSkipingHearing: boolean) => void;
 };
 
-export const ReferenceDocument = ({ stylingReference }: Props) => {
-  const findCategoryData = (
-    id: number
-  ): TStylingReferenceShowResponse | undefined => {
-    return stylingReference.find((s) => s.categoryId === id);
-  };
+export const ReferenceDocument = ({
+  targetReference,
+  impressionReference,
+  sleeveReference,
+  otherReference,
+  summaryReference,
+  referenceChanged,
+  onClickEdit,
+  onSubmit,
+}: Props) => {
   return (
     <>
-      <div className="px-4 pb-8 overflow-auto h-fit bg-slate-200">
-        <PageHeader title="前回のコーデ情報" className="my-8" />
+      <div className="px-4 pb-8 overflow-auto h-screen bg-slate-200">
+        <PageHeader
+          title={referenceChanged ? "ヒアリング内容の確認" : "前回のコーデ情報"}
+          className="my-8"
+        />
         <Paper>
-          {findCategoryData(1) ? (
-            <TargetAnswer stylingReference={findCategoryData(1)} />
+          {targetReference ? (
+            <TargetAnswer
+              stylingReference={targetReference}
+              onClickEdit={() => onClickEdit(targetReference.categoryId)}
+            />
           ) : (
             <></>
           )}
-          {findCategoryData(3) && findCategoryData(4) ? (
+          {impressionReference ? (
             <>
               <Divider className="mb-4" />
               <ImpressionsAnswer
-                impressionReference={findCategoryData(3)}
-                especiallyImpressionReference={findCategoryData(4)}
+                multipleImpressionsReference={
+                  impressionReference.multipleImpressionsReference
+                }
+                primaryImpressionReference={
+                  impressionReference.primaryImpressionReference
+                }
+                onClickEdit={() =>
+                  onClickEdit(
+                    impressionReference.multipleImpressionsReference.categoryId
+                  )
+                }
               />
             </>
           ) : (
             <></>
           )}
-          {findCategoryData(6) ? (
+          {sleeveReference ? (
             <>
               <Divider className="mb-4" />
-              <SleeveAnswer stylingReference={findCategoryData(6)} />
+              <SleeveAnswer
+                stylingReference={sleeveReference}
+                onClickEdit={() => onClickEdit(sleeveReference.categoryId)}
+              />
             </>
           ) : (
             <></>
           )}
-          {findCategoryData(8) ? (
+          {otherReference ? (
             <>
               <Divider />
               <TextAnswer
-                stylingReference={findCategoryData(8)}
+                stylingReference={otherReference}
                 titleText="その他"
                 className="mb-4  mt-4"
               />
@@ -61,11 +92,11 @@ export const ReferenceDocument = ({ stylingReference }: Props) => {
           ) : (
             <></>
           )}
-          {findCategoryData(7) ? (
+          {summaryReference && !referenceChanged ? (
             <>
               <Divider />
               <TextAnswer
-                stylingReference={findCategoryData(7)}
+                stylingReference={summaryReference}
                 titleText="コーデイメージ"
                 className="mb-4  mt-4"
               />
@@ -75,13 +106,17 @@ export const ReferenceDocument = ({ stylingReference }: Props) => {
           )}
         </Paper>
       </div>
-      <div className="px-3 py-2 space-y-2 fixed bottom-0 bg-white border-t-2 border-neutral-300">
-        <Button variant="primary" size="small">
-          <Typography size="sm" className="my-auto">
-            前回と同じ内容でコーデを作る
-          </Typography>
-        </Button>
-        <Button variant="primary" size="small">
+      <div className="px-3 py-2 w-screen space-y-2 fixed bottom-0 bg-white border-t-2 border-neutral-300">
+        {referenceChanged ? (
+          <></>
+        ) : (
+          <Button variant="primary" size="small" onClick={() => onSubmit(true)}>
+            <Typography size="sm" className="my-auto">
+              前回と同じ内容でコーデを作る
+            </Typography>
+          </Button>
+        )}
+        <Button variant="primary" size="small" onClick={() => onSubmit(false)}>
           <Typography size="sm" className="my-auto">
             スタイリストと相談してからコーデを作る
           </Typography>
