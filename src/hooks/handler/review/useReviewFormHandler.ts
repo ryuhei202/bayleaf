@@ -1,7 +1,7 @@
 import { FormResponse } from "../../../models/review/FormResponse";
 import { useContext, useState } from "react";
 import { Review } from "../../../models/review/Review";
-import { IdTokenContext } from "../../../App";
+import { IdTokenContext, StylistIdContext } from "../../../App";
 import { customAxios } from "../../../models/shared/customAxios";
 
 type ReviewFormHandler = {
@@ -17,6 +17,7 @@ export const useReviewFormHandler = (
   karteId: number
 ): ReviewFormHandler => {
   const idToken = useContext(IdTokenContext);
+  const stylistId = useContext(StylistIdContext);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [validation, setValidation] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -29,7 +30,7 @@ export const useReviewFormHandler = (
     await customAxios
       .post(
         `${process.env.REACT_APP_HOST_URL}/reviews`,
-        { reviews: reviews, chartId: karteId },
+        { stylistId, reviews: reviews, chartId: karteId },
         { headers: { Authorization: idToken } }
       )
       .then(() => closeLiffApp())
