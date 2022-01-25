@@ -9,14 +9,19 @@ import { ErrorMessage } from "./components/shared/ErrorMessage";
 
 export const IdTokenContext = createContext("");
 
+export const StylistIdContext = createContext<number | undefined>(undefined);
+
 function App() {
-  const { lineIdToken, liffErrorMessage, ErrorBoundary } = useAppInitializer();
+  const { lineIdToken, stylistId, liffErrorMessage, ErrorBoundary } =
+    useAppInitializer();
   const app = (
     <IdTokenContext.Provider value={lineIdToken}>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="review" element={<Review />} />
-      </Routes>
+      <StylistIdContext.Provider value={stylistId}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="review" element={<Review />} />
+        </Routes>
+      </StylistIdContext.Provider>
     </IdTokenContext.Provider>
   );
   if (lineIdToken) {

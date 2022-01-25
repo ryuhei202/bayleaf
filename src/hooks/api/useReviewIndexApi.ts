@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import useSWR from "swr";
 import { KarteListResponse } from "../../models/review/KarteListResponse";
-import { IdTokenContext } from "../../App";
+import { IdTokenContext, StylistIdContext } from "../../App";
 import { customAxios } from "../../models/shared/customAxios";
 
 type reviewIndexApi = {
@@ -11,6 +11,8 @@ type reviewIndexApi = {
 
 export const useReviewIndexApi = (): reviewIndexApi => {
   const idToken = useContext(IdTokenContext);
+  const stylistId = useContext(StylistIdContext);
+
   const fetcher = (
     url: string,
     idToken: string
@@ -19,6 +21,9 @@ export const useReviewIndexApi = (): reviewIndexApi => {
       .get(`${url}`, {
         headers: {
           Authorization: idToken,
+        },
+        params: {
+          stylistId,
         },
       })
       .then((r) => {
