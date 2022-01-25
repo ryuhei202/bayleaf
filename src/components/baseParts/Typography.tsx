@@ -5,7 +5,7 @@ type Props = {
   children?: React.ReactNode;
   size?: "2xl" | "sm" | "xs" | "base";
   color?: "primary" | "secondary" | "strong-gray";
-  bold?: boolean;
+  weight?: "regular" | "medium" | "bold";
 };
 
 export const Typography = ({
@@ -13,7 +13,7 @@ export const Typography = ({
   children,
   size,
   color,
-  bold,
+  weight,
 }: Props) => {
   let classes: string[] = [];
 
@@ -48,10 +48,24 @@ export const Typography = ({
     })()
   );
 
-  classes.push(bold ? "font-semibold" : "");
+  classes.push(
+    (() => {
+      switch (weight) {
+        case "regular":
+          return "font-regular";
+        case "bold":
+          return "font-bold";
+        case "medium":
+        default:
+          return "font-medium";
+      }
+    })()
+  );
+
+  classes.push();
 
   return (
-    <p className={`font-sans ${className ?? ""} ${classes.join(" ")}`}>
+    <p className={`font-body ${className ?? ""} ${classes.join(" ")}`}>
       {children}
     </p>
   );
