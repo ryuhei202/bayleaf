@@ -13,7 +13,7 @@ import { Typography } from "../baseParts/Typography";
 type Props = {
   defaultValue?: number;
   onSubmit: (optionId: number) => void;
-  onCancel: () => void;
+  onCancel?: () => void;
 };
 
 export const BusinessSleeveForm = ({
@@ -73,9 +73,13 @@ export const BusinessSleeveForm = ({
           </div>
         </div>
         <div className="mt-auto mb-10 flex flex-row space-x-3">
-          <IconButton className="flex-none" onClick={onCancel}>
-            <ArrowIcon className="h-10 w-fit my-auto" />
-          </IconButton>
+          {onCancel ? (
+            <IconButton className="flex-none" onClick={onCancel}>
+              <ArrowIcon className="h-10 w-fit my-auto" />
+            </IconButton>
+          ) : (
+            <></>
+          )}
           {defaultValue ? (
             <Button
               disabled={defaultValue === value}

@@ -82,27 +82,30 @@ export const RequiredCategoryForms = ({ categoryIds, onSubmit }: Props) => {
   switch (categoryIds[currentIndex]) {
     case REFERENCE_CATEGORY_IDS.TARGET:
       return (
-        <TargetForm onSubmit={handleTargetFormSubmit} onCancel={handleCancel} />
+        <TargetForm
+          onSubmit={handleTargetFormSubmit}
+          onCancel={currentIndex === 0 ? undefined : handleCancel}
+        />
       );
     case REFERENCE_CATEGORY_IDS.MULTIPLE_IMPRESSIONS:
       return (
         <ImpressionForm
           onSubmit={handleImpressionFormSubmit}
-          onCancel={handleCancel}
+          onCancel={currentIndex === 0 ? undefined : handleCancel}
         />
       );
     case REFERENCE_CATEGORY_IDS.CASUAL_SLEEVE:
       return (
         <CasualSleeveForm
           onSubmit={handleCasualSleeveFormSubmit}
-          onCancel={handleCancel}
+          onCancel={currentIndex === 0 ? undefined : handleCancel}
         />
       );
     case REFERENCE_CATEGORY_IDS.BUSINESS_SLEEVE:
       return (
         <BusinessSleeveForm
           onSubmit={handleBusinessSleeveFormSubmit}
-          onCancel={handleCancel}
+          onCancel={currentIndex === 0 ? undefined : handleCancel}
         />
       );
     default:
