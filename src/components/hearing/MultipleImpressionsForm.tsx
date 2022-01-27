@@ -60,98 +60,23 @@ export const MultipleImpressionsForm = ({
             className="mb-16"
           />
           <div className="space-y-5">
-            <SelectButton
-              selected={values?.includes(MULTIPLE_IMPRESSIONS.KIND.id) ?? false}
-              disabled={
-                values &&
-                values.length >= CHOICE_NUMBER &&
-                !values.includes(MULTIPLE_IMPRESSIONS.KIND.id)
-              }
-              onClick={() => handleClick(MULTIPLE_IMPRESSIONS.KIND.id)}
-              onSelectTransitionEnd={
-                defaultValues !== undefined ? undefined : handleSubmit
-              }
-            >
-              {MULTIPLE_IMPRESSIONS.KIND.name}
-            </SelectButton>
-            <SelectButton
-              selected={
-                values?.includes(MULTIPLE_IMPRESSIONS.YOUNG.id) ?? false
-              }
-              disabled={
-                values &&
-                values.length >= CHOICE_NUMBER &&
-                !values.includes(MULTIPLE_IMPRESSIONS.YOUNG.id)
-              }
-              onClick={() => handleClick(MULTIPLE_IMPRESSIONS.YOUNG.id)}
-              onSelectTransitionEnd={
-                defaultValues !== undefined ? undefined : handleSubmit
-              }
-            >
-              {MULTIPLE_IMPRESSIONS.YOUNG.name}
-            </SelectButton>
-            <SelectButton
-              selected={
-                values?.includes(MULTIPLE_IMPRESSIONS.AGE_FIT.id) ?? false
-              }
-              disabled={
-                values &&
-                values.length >= 3 &&
-                !values.includes(MULTIPLE_IMPRESSIONS.AGE_FIT.id)
-              }
-              onClick={() => handleClick(MULTIPLE_IMPRESSIONS.AGE_FIT.id)}
-              onSelectTransitionEnd={
-                defaultValues !== undefined ? undefined : handleSubmit
-              }
-            >
-              {MULTIPLE_IMPRESSIONS.AGE_FIT.name}
-            </SelectButton>
-            <SelectButton
-              selected={
-                values?.includes(MULTIPLE_IMPRESSIONS.CLEAN.id) ?? false
-              }
-              disabled={
-                values &&
-                values.length >= CHOICE_NUMBER &&
-                !values.includes(MULTIPLE_IMPRESSIONS.CLEAN.id)
-              }
-              onClick={() => handleClick(MULTIPLE_IMPRESSIONS.CLEAN.id)}
-              onSelectTransitionEnd={
-                defaultValues !== undefined ? undefined : handleSubmit
-              }
-            >
-              {MULTIPLE_IMPRESSIONS.CLEAN.name}
-            </SelectButton>
-            <SelectButton
-              selected={values?.includes(MULTIPLE_IMPRESSIONS.CALM.id) ?? false}
-              disabled={
-                values &&
-                values.length >= CHOICE_NUMBER &&
-                !values.includes(MULTIPLE_IMPRESSIONS.CALM.id)
-              }
-              onClick={() => handleClick(MULTIPLE_IMPRESSIONS.CALM.id)}
-              onSelectTransitionEnd={
-                defaultValues !== undefined ? undefined : handleSubmit
-              }
-            >
-              {MULTIPLE_IMPRESSIONS.CALM.name}
-            </SelectButton>
-            <SelectButton
-              selected={
-                values?.includes(MULTIPLE_IMPRESSIONS.ACTIVE.id) ?? false
-              }
-              disabled={
-                values &&
-                values.length >= CHOICE_NUMBER &&
-                !values.includes(MULTIPLE_IMPRESSIONS.ACTIVE.id)
-              }
-              onClick={() => handleClick(MULTIPLE_IMPRESSIONS.ACTIVE.id)}
-              onSelectTransitionEnd={
-                defaultValues !== undefined ? undefined : handleSubmit
-              }
-            >
-              {MULTIPLE_IMPRESSIONS.ACTIVE.name}
-            </SelectButton>
+            {Object.values(MULTIPLE_IMPRESSIONS).map((option) => (
+              <SelectButton
+                selected={values?.includes(option.id) ?? false}
+                disabled={
+                  values &&
+                  values.length >= CHOICE_NUMBER &&
+                  !values.includes(option.id)
+                }
+                onClick={() => handleClick(option.id)}
+                onSelectTransitionEnd={
+                  defaultValues !== undefined ? undefined : handleSubmit
+                }
+                key={option.id}
+              >
+                {option.name}
+              </SelectButton>
+            ))}
           </div>
         </div>
         <div className="mt-auto mb-10 flex flex-row space-x-3">

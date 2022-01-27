@@ -25,6 +25,30 @@ export const PrimaryImpressionForm = ({
     if (value !== undefined) onSubmit(value);
   };
 
+  const selections = options
+    .map((option) => {
+      switch (option) {
+        case MULTIPLE_IMPRESSIONS.KIND.id:
+          return PRIMARY_IMPRESSION.KIND;
+        case MULTIPLE_IMPRESSIONS.YOUNG.id:
+          return PRIMARY_IMPRESSION.YOUNG;
+        case MULTIPLE_IMPRESSIONS.AGE_FIT.id:
+          return PRIMARY_IMPRESSION.AGE_FIT;
+        case MULTIPLE_IMPRESSIONS.CLEAN.id:
+          return PRIMARY_IMPRESSION.CLEAN;
+        case MULTIPLE_IMPRESSIONS.CALM.id:
+          return PRIMARY_IMPRESSION.CALM;
+        case MULTIPLE_IMPRESSIONS.ACTIVE.id:
+          return PRIMARY_IMPRESSION.ACTIVE;
+        default:
+          return undefined;
+      }
+    })
+    .filter(
+      (option): option is Exclude<typeof option, undefined> =>
+        option !== undefined
+    );
+
   return (
     <Page className="px-5">
       <div className="flex flex-col justify-between h-full">
@@ -40,72 +64,16 @@ export const PrimaryImpressionForm = ({
             className="mb-16"
           />
           <div className="space-y-5">
-            {options.includes(MULTIPLE_IMPRESSIONS.KIND.id) ? (
+            {selections.map((selection) => (
               <SelectButton
-                selected={value === PRIMARY_IMPRESSION.KIND.id}
-                onClick={() => setValue(PRIMARY_IMPRESSION.KIND.id)}
+                selected={value === selection.id}
+                onClick={() => setValue(selection.id)}
                 onSelectTransitionEnd={handleSubmit}
+                key={selection.id}
               >
-                {PRIMARY_IMPRESSION.KIND.name}
+                {selection.name}
               </SelectButton>
-            ) : (
-              <></>
-            )}
-            {options.includes(MULTIPLE_IMPRESSIONS.YOUNG.id) ? (
-              <SelectButton
-                selected={value === PRIMARY_IMPRESSION.YOUNG.id}
-                onClick={() => setValue(PRIMARY_IMPRESSION.YOUNG.id)}
-                onSelectTransitionEnd={handleSubmit}
-              >
-                {PRIMARY_IMPRESSION.YOUNG.name}
-              </SelectButton>
-            ) : (
-              <></>
-            )}
-            {options.includes(MULTIPLE_IMPRESSIONS.AGE_FIT.id) ? (
-              <SelectButton
-                selected={value === PRIMARY_IMPRESSION.AGE_FIT.id}
-                onClick={() => setValue(PRIMARY_IMPRESSION.AGE_FIT.id)}
-                onSelectTransitionEnd={handleSubmit}
-              >
-                {PRIMARY_IMPRESSION.AGE_FIT.name}
-              </SelectButton>
-            ) : (
-              <></>
-            )}
-            {options.includes(MULTIPLE_IMPRESSIONS.CLEAN.id) ? (
-              <SelectButton
-                selected={value === PRIMARY_IMPRESSION.CLEAN.id}
-                onClick={() => setValue(PRIMARY_IMPRESSION.CLEAN.id)}
-                onSelectTransitionEnd={handleSubmit}
-              >
-                {PRIMARY_IMPRESSION.CLEAN.name}
-              </SelectButton>
-            ) : (
-              <></>
-            )}
-            {options.includes(MULTIPLE_IMPRESSIONS.CALM.id) ? (
-              <SelectButton
-                selected={value === PRIMARY_IMPRESSION.CALM.id}
-                onClick={() => setValue(PRIMARY_IMPRESSION.CALM.id)}
-                onSelectTransitionEnd={handleSubmit}
-              >
-                {PRIMARY_IMPRESSION.CALM.name}
-              </SelectButton>
-            ) : (
-              <></>
-            )}
-            {options.includes(MULTIPLE_IMPRESSIONS.ACTIVE.id) ? (
-              <SelectButton
-                selected={value === PRIMARY_IMPRESSION.ACTIVE.id}
-                onClick={() => setValue(PRIMARY_IMPRESSION.ACTIVE.id)}
-                onSelectTransitionEnd={handleSubmit}
-              >
-                {PRIMARY_IMPRESSION.ACTIVE.name}
-              </SelectButton>
-            ) : (
-              <></>
-            )}
+            ))}
           </div>
         </div>
         <div className="mt-auto mb-10 flex flex-row space-x-3">
