@@ -5,7 +5,7 @@ import { TStylingReferenceShowResponse } from "../../api/stylingReference/TStyli
 import { REFERENCE_CATEGORY_IDS } from "../../models/hearing/ReferenceCategorieIds";
 import { TReferenceChoice } from "../../models/hearing/TReferenceChoice";
 
-type ReferenceContainerHandlers = {
+type ReferenceContainerHandler = {
   handleFormCancel: () => void;
   handleTargetFormSubmit: (optionId: number) => void;
   handleSleeveFormSubmit: (optionId: number) => void;
@@ -15,13 +15,13 @@ type ReferenceContainerHandlers = {
   handleDocumentSubmit: (_skippingHearing: boolean) => void;
 };
 
-export const useReferenceContainerHandlers = (
+export const getReferenceContainerHandler = (
   stylingReference: TStylingReferenceShowResponse[],
   modifiedChoices: TReferenceChoice[],
   setEditingCategory: (categoryId: number | undefined) => void,
   setModifiedChoices: (modifiedChoice: TReferenceChoice[]) => void,
   mutate: UseMutateFunction<AxiosResponse>
-): ReferenceContainerHandlers => {
+): ReferenceContainerHandler => {
   const updateModifiedChoices = (choice: TReferenceChoice) => {
     const currentIndex = modifiedChoices.findIndex(
       (previousChoice) => previousChoice.categoryId === choice.categoryId

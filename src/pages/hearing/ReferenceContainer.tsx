@@ -9,9 +9,9 @@ import { TargetForm } from "../../components/hearing/TargetForm";
 import { REFERENCE_CATEGORY_IDS } from "../../models/hearing/ReferenceCategorieIds";
 import { TReferenceChoice } from "../../models/hearing/TReferenceChoice";
 import { ImpressionForm } from "./ImpressionForm";
-import { useReferenceContainerHandlers } from "./useReferenceContainerHandlers";
+import { getReferenceContainerHandler } from "./getReferenceContainerHandler";
 import { RequiredCategoryForms } from "./RequiredCategoryForms";
-import { useReferenceContainerPresenters } from "./useReferenceContainerPresenter";
+import { getReferenceContainerPresenter } from "./getReferenceContainerPresenter";
 
 type Props = {
   readonly member: TMembersIndexResponse;
@@ -28,41 +28,25 @@ export const ReferenceContainer = ({ member, stylingReference }: Props) => {
     modifiedChoices.flatMap((choice) => choice.optionIds),
     member.id
   );
-  const {
-    handleFormCancel,
-    handleTargetFormSubmit,
-    handleSleeveFormSubmit,
-    handleBusinessSleeveFormSubmit,
-    handleImpressionsFormSubmit,
-    handleRequiredFormsSubmit,
-    handleDocumentSubmit,
-  } = useReferenceContainerHandlers(
+  const handler = getReferenceContainerHandler(
     stylingReference,
     modifiedChoices,
     setEditingCategory,
     setModifiedChoices,
     mutate
   );
-  const {
-    presentReference,
-    presentImpressionsReference,
-    presentSleeveReference,
-    presentRequiredCategoryIds,
-    presentCurrentOptionId,
-    presentCurrentOptionIds,
-    presentAllowHearingSkip,
-  } = useReferenceContainerPresenters(
+  const presenter = getReferenceContainerPresenter(
     stylingReference,
     member,
     modifiedChoices
   );
 
-  const requiredCategoryIds = presentRequiredCategoryIds();
+  const requiredCategoryIds = presenter.presentRequiredCategoryIds();
   if (requiredCategoryIds.length > 0) {
     return (
       <RequiredCategoryForms
         categoryIds={requiredCategoryIds}
-        onSubmit={handleRequiredFormsSubmit}
+        onSubmit={handler.handleRequiredFormsSubmit}
       />
     );
   }
@@ -71,48 +55,52 @@ export const ReferenceContainer = ({ member, stylingReference }: Props) => {
     case REFERENCE_CATEGORY_IDS.TARGET:
       return (
         <TargetForm
-          defaultValue={presentCurrentOptionId(REFERENCE_CATEGORY_IDS.TARGET)}
-          onSubmit={handleTargetFormSubmit}
-          onCancel={handleFormCancel}
+          defaultValue={presenter.presentCurrentOptionId(
+            REFERENCE_CATEGORY_IDS.TARGET
+          )}
+          onSubmit={handler.handleTargetFormSubmit}
+          onCancel={handler.handleFormCancel}
         />
       );
     case REFERENCE_CATEGORY_IDS.MULTIPLE_IMPRESSIONS:
       return (
         <ImpressionForm
-          defaultValues={presentCurrentOptionIds(
+          defaultValues={presenter.presentCurrentOptionIds(
             REFERENCE_CATEGORY_IDS.MULTIPLE_IMPRESSIONS
           )}
-          onSubmit={handleImpressionsFormSubmit}
-          onCancel={handleFormCancel}
+          onSubmit={handler.handleImpressionsFormSubmit}
+          onCancel={handler.handleFormCancel}
         />
       );
     case REFERENCE_CATEGORY_IDS.CASUAL_SLEEVE:
       return (
         <CasualSleeveForm
-          defaultValue={presentCurrentOptionId(
+          defaultValue={presenter.presentCurrentOptionId(
             REFERENCE_CATEGORY_IDS.CASUAL_SLEEVE
           )}
-          onSubmit={handleSleeveFormSubmit}
-          onCancel={handleFormCancel}
+          onSubmit={handler.handleSleeveFormSubmit}
+          onCancel={handler.handleFormCancel}
         />
       );
     case REFERENCE_CATEGORY_IDS.BUSINESS_SLEEVE:
       return (
         <BusinessSleeveForm
-          defaultValue={presentCurrentOptionId(
+          defaultValue={presenter.presentCurrentOptionId(
             REFERENCE_CATEGORY_IDS.BUSINESS_SLEEVE
           )}
-          onSubmit={handleBusinessSleeveFormSubmit}
-          onCancel={handleFormCancel}
+          onSubmit={handler.handleBusinessSleeveFormSubmit}
+          onCancel={handler.handleFormCancel}
         />
       );
   }
 
   return (
     <ReferenceDocument
-      targetReference={presentReference(REFERENCE_CATEGORY_IDS.TARGET)}
-      impressionReference={presentImpressionsReference()}
-      sleeveReference={presentSleeveReference()}
+      targetReference={presenter.presentReference(
+        REFERENCE_CATEGORY_IDS.TARGET
+      )}
+      impressionReference={presenter.presentImpressionsReference()}
+      sleeveReference={presenter.presentSleeveReference()}
       summaryReference={stylingReference.find(
         (reference) => reference.categoryId === REFERENCE_CATEGORY_IDS.SUMMARY
       )}
@@ -120,9 +108,9 @@ export const ReferenceContainer = ({ member, stylingReference }: Props) => {
         (reference) => reference.categoryId === REFERENCE_CATEGORY_IDS.OTHER
       )}
       referenceChanged={modifiedChoices.length > 0}
-      allowHearingSkip={presentAllowHearingSkip()}
+      allowHearingSkip={presenter.presentAllowHearingSkip()}
       onClickEdit={setEditingCategory}
-      onSubmit={handleDocumentSubmit}
+      onSubmit={handler.handleDocumentSubmit}
     />
   );
 };

@@ -22,7 +22,7 @@ type ReferenceContainerPresenter = {
   presentAllowHearingSkip: () => boolean;
 };
 
-export const useReferenceContainerPresenters = (
+export const getReferenceContainerPresenter = (
   stylingReference: TStylingReferenceShowResponse[],
   member: TMembersIndexResponse,
   modifiedChoices: TReferenceChoice[]
