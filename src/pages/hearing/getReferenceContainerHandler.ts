@@ -12,7 +12,7 @@ type ReferenceContainerHandler = {
   handleBusinessSleeveFormSubmit: (optionId: number) => void;
   handleImpressionsFormSubmit: (choices: TReferenceChoice[]) => void;
   handleRequiredFormsSubmit: (choices: TReferenceChoice[]) => void;
-  handleDocumentSubmit: (_skippingHearing: boolean) => void;
+  handleDocumentSubmit: (isSkipingHearing: boolean) => void;
 };
 
 export const getReferenceContainerHandler = (
@@ -74,10 +74,21 @@ export const getReferenceContainerHandler = (
     });
   };
 
-  const handleDocumentSubmit = (_skippingHearing: boolean) => {
+  const handleDocumentSubmit = (isSkipingHearing: boolean) => {
     mutate(undefined, {
       onSuccess: () => {
-        liff.closeWindow();
+        liff
+          .sendMessages([
+            {
+              type: "text",
+              text: isSkipingHearing
+                ? "前回と同じ内容でコーデを作る"
+                : "スタイリストと相談してからコーデを作る",
+            },
+          ])
+          .then(() => {
+            liff.closeWindow();
+          });
       },
     });
   };
