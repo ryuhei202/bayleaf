@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import liff from "@line/liff";
 import { useLocation, useSearchParams } from "react-router-dom";
 import ReactGA from "react-ga";
+import { QueryClient } from "react-query";
 
 export const useAppInitializer = () => {
   const [lineIdToken, setLineIdToken] = useState("");
@@ -61,11 +62,19 @@ export const useAppInitializer = () => {
       });
     }
   });
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+      },
+    },
+  });
 
   return {
     lineIdToken,
     stylistId,
     liffErrorMessage,
     ErrorBoundary,
+    queryClient,
   };
 };
