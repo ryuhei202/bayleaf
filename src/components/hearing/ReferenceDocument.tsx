@@ -42,7 +42,7 @@ export const ReferenceDocument = ({
           title={referenceChanged ? "ヒアリング内容の確認" : "前回のコーデ情報"}
           className="my-8"
         />
-        <Paper className="mb-24">
+        <Paper className="mb-28">
           {targetReference ? (
             <TargetAnswer
               stylingReference={targetReference}
@@ -108,9 +108,13 @@ export const ReferenceDocument = ({
           )}
         </Paper>
       </div>
-      <div className="px-3 py-2 w-screen space-y-2 fixed bottom-0 bg-white border-t-2 border-neutral-300">
+      <div className="px-3 py-4 w-screen space-y-3 fixed bottom-0 bg-white border-t-2 border-neutral-300">
         {allowHearingSkip ? (
-          <Button variant="primary" size="small" onClick={() => onSubmit(true)}>
+          <Button
+            variant="primary"
+            size="medium"
+            onClick={() => onSubmit(true)}
+          >
             <Typography size="sm" className="my-auto">
               前回と同じ内容でコーデを作る
             </Typography>
@@ -118,7 +122,7 @@ export const ReferenceDocument = ({
         ) : (
           <></>
         )}
-        <Button variant="primary" size="small" onClick={() => onSubmit(false)}>
+        <Button variant="primary" size="medium" onClick={() => onSubmit(false)}>
           <Typography size="sm" className="my-auto">
             スタイリストと相談してからコーデを作る
           </Typography>
