@@ -3,29 +3,30 @@ import React from "react";
 type Props = {
   className?: string;
   children?: React.ReactNode;
-  variant?: "title" | "subtitle" | "header" | "body";
+  size?: "2xl" | "sm" | "xs" | "base";
   color?: "primary" | "secondary" | "strong-gray";
-  bold?: boolean;
+  weight?: "regular" | "medium" | "bold";
 };
 
 export const Typography = ({
   className,
   children,
-  variant,
+  size,
   color,
-  bold,
+  weight,
 }: Props) => {
   let classes: string[] = [];
 
   classes.push(
     (() => {
-      switch (variant) {
-        case "title":
+      switch (size) {
+        case "2xl":
           return "text-2xl";
-        case "header":
+        case "sm":
           return "text-sm";
-        case "body":
+        case "xs":
           return "text-xs";
+        case "base":
         default:
           return "text-base";
       }
@@ -47,10 +48,24 @@ export const Typography = ({
     })()
   );
 
-  classes.push(bold ? "font-semibold" : "");
+  classes.push(
+    (() => {
+      switch (weight) {
+        case "regular":
+          return "font-regular";
+        case "bold":
+          return "font-bold";
+        case "medium":
+        default:
+          return "font-medium";
+      }
+    })()
+  );
+
+  classes.push();
 
   return (
-    <p className={`font-sans ${className ?? ""} ${classes.join(" ")}`}>
+    <p className={`font-body ${className ?? ""} ${classes.join(" ")}`}>
       {children}
     </p>
   );

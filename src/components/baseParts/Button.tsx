@@ -8,7 +8,7 @@ type Props = {
   disabled?: boolean;
   disableElevation?: boolean;
   border?: boolean;
-  size?: "small" | "medium" | "none";
+  size?: "small" | "medium" | "large" | "none";
   radius?: "small" | "large";
 };
 
@@ -23,7 +23,7 @@ export const Button = ({
   size,
   radius,
 }: Props) => {
-  let classes: string[] = ["px-3", "w-full"];
+  let classes: string[] = ["px-3", "w-full", "font-medium", "text-base"];
 
   classes.push(
     (() => {
@@ -41,12 +41,13 @@ export const Button = ({
   classes.push(
     (() => {
       switch (size) {
-        case "medium":
-          return "py-4";
-        case "small":
-          return "py-3";
         case "none":
           return "py-0";
+        case "large":
+          return "py-4";
+        case "small":
+          return "py-2";
+        case "medium":
         default:
           return "py-3";
       }
@@ -63,9 +64,9 @@ export const Button = ({
       (() => {
         switch (variant) {
           case "primary":
-            return "bg-midnight text-slate-200 shadow-midnight";
+            return "bg-midnight text-slate-200 shadow-midnight/40 fill-midnight";
           default:
-            return "bg-white text-slate-700 shadow-slate-200";
+            return "bg-white text-slate-700 fill-white";
         }
       })()
     );

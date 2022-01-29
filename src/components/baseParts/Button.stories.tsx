@@ -23,7 +23,7 @@ NodeChild.args = {
   children: (
     <>
       <CoworkerIcon className="mb-3" />
-      <Typography bold>職場</Typography>
+      <Typography>職場</Typography>
     </>
   ),
 };

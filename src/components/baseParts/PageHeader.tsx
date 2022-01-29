@@ -9,17 +9,17 @@ type Props = {
 
 export const PageHeader = ({ title, subtitle, className }: Props) => {
   return (
-    <div className={`${className} mt-8`}>
+    <div className={`${className ?? ""} mt-8`}>
       <Typography
-        variant="title"
+        size="2xl"
         color="primary"
-        bold
+        weight="bold"
         className="leading-9 mb-2"
       >
         {title}
       </Typography>
       {subtitle ? (
-        <Typography variant="subtitle" color="primary" bold>
+        <Typography size="sm" color="primary" weight="bold">
           {subtitle}
         </Typography>
       ) : (
