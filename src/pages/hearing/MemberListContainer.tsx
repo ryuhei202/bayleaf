@@ -1,16 +1,15 @@
-import { Dispatch, SetStateAction } from "react";
 import { Loader } from "semantic-ui-react";
+import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { useMembersIndex } from "../../api/members/useMembersIndex";
 import { Typography } from "../../components/baseParts/Typography";
 import { MemberList } from "../../components/hearing/MemberList";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 
 type Props = {
-  readonly setMemberId: React.Dispatch<
-    React.SetStateAction<number | undefined>
-  >;
+  readonly setMember: (member: TMembersIndexResponse) => void;
 };
-export const MemberListContainer = ({ setMemberId }: Props) => {
+
+export const MemberListContainer = ({ setMember }: Props) => {
   const { data, error } = useMembersIndex();
 
   if (!data) return <Loader active />;
@@ -19,7 +18,7 @@ export const MemberListContainer = ({ setMemberId }: Props) => {
 
   if (error) return <ErrorMessage message={error.message} />;
   if (data.length === 1) {
-    setMemberId(data[0].id);
+    setMember(data[0]);
   }
-  return <MemberList data={data} setMemberId={setMemberId} />;
+  return <MemberList data={data} setMember={setMember} />;
 };

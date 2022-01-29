@@ -12,13 +12,13 @@ const Template: ComponentStory<typeof ReferenceDocument> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  stylingReference: [
-    {
-      categoryId: 1,
-      choices: [{ id: 1, name: "職場" }],
-      text: "シャツの着用が必須",
-    },
-    {
+  targetReference: {
+    categoryId: 1,
+    choices: [{ id: 1, name: "職場" }],
+    text: "シャツの着用が必須",
+  },
+  impressionReference: {
+    multipleImpressionsReference: {
       categoryId: 3,
       choices: [
         { id: 6, name: "優しい" },
@@ -27,25 +27,25 @@ Default.args = {
       ],
       text: null,
     },
-    {
+    primaryImpressionReference: {
       categoryId: 4,
       choices: [{ id: 12, name: "優しい" }],
       text: null,
     },
-    {
-      categoryId: 6,
-      choices: [{ id: 23, name: "長袖3 / 半袖0" }],
-      text: null,
-    },
-    {
-      categoryId: 8,
-      choices: [],
-      text: "手首は細いので、かなり補足調整できるバンドにしている",
-    },
-    {
-      categoryId: 7,
-      choices: [{ id: 1, name: "職場" }],
-      text: "■全体イメージ（フォーマル-カジュアル度合い\n動きやすさを重視したイメージ\n\n■シルエット\n体型に合わせた細く見えるシルエット\n\n■色味\nスタイリストおすすめの色味",
-    },
-  ],
+  },
+  sleeveReference: {
+    categoryId: 6,
+    choices: [{ id: 23, name: "長袖3 / 半袖0" }],
+    text: null,
+  },
+  otherReference: {
+    categoryId: 8,
+    choices: [],
+    text: "手首は細いので、かなり補足調整できるバンドにしている",
+  },
+  summaryReference: {
+    categoryId: 7,
+    choices: [{ id: 1, name: "職場" }],
+    text: "■全体イメージ（フォーマル-カジュアル度合い\n動きやすさを重視したイメージ\n\n■シルエット\n体型に合わせた細く見えるシルエット\n\n■色味\nスタイリストおすすめの色味",
+  },
 };

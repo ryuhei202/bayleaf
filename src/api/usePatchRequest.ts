@@ -8,15 +8,18 @@ export const usePatchRequest = <T>(path: string, params: T) => {
   const stylistId = useContext(StylistIdContext);
 
   const { mutate, isLoading } = useMutation(path, () =>
-    customAxios.patch(`${process.env.REACT_APP_HOST_URL}/${path}`, {
-      headers: {
-        Authorization: idToken,
-      },
-      params: {
-        stylistId,
+    customAxios.patch(
+      `${process.env.REACT_APP_HOST_URL}/${path}`,
+      {
         ...params,
+        stylistId,
       },
-    })
+      {
+        headers: {
+          Authorization: idToken,
+        },
+      }
+    )
   );
 
   return { mutate, isLoading };

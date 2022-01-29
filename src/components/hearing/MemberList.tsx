@@ -7,17 +7,16 @@ import { Typography } from "../baseParts/Typography";
 
 type Props = {
   readonly data: TMembersIndexResponse[];
-  readonly setMemberId: React.Dispatch<
-    React.SetStateAction<number | undefined>
-  >;
+  readonly setMember: (member: TMembersIndexResponse) => void;
 };
-export const MemberList = ({ data, setMemberId }: Props) => {
+
+export const MemberList = ({ data, setMember }: Props) => {
   return (
     <Page className="px-5">
       <PageHeader title="アカウントを選択してください" className="mb-16" />
       {data.map((member) => (
         <div className="mb-5" key={member.id}>
-          <Button variant="default" onClick={() => setMemberId(member.id)}>
+          <Button variant="default" onClick={() => setMember(member)}>
             <CoworkerIcon className="mb-3" />
             <Typography>
               {member.email} <br />

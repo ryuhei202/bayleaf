@@ -23,7 +23,7 @@ export const SelectButton = ({
   useEffect(() => {
     if (onSelectTransitionEnd !== undefined && selected)
       setTimeout(onSelectTransitionEnd, durationMs);
-  }, [selected]);
+  }, [selected, onSelectTransitionEnd]);
 
   return (
     <Button

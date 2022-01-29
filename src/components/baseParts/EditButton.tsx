@@ -2,9 +2,14 @@ import { Button } from "./Button";
 import { EditIcon } from "./icons/EditIcon";
 import { Typography } from "./Typography";
 
-export const EditButton = () => {
+type Props = {
+  onClick?: () => void;
+};
+
+export const EditButton = ({ ...props }: Props) => {
   return (
     <Button
+      {...props}
       disableElevation
       border
       radius="small"

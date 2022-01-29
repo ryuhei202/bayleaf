@@ -10,17 +10,21 @@ import { Page } from "../baseParts/Page";
 import { PageHeader } from "../baseParts/PageHeader";
 import { SelectButton } from "../baseParts/SelectButton";
 import { Typography } from "../baseParts/Typography";
+import { ReferenceOptions } from "../../models/hearing/ReferenceOptions";
 
 type Props = {
-  defaultValue?: 1 | 2 | 3 | 4 | 5;
-  onSubmit: (id: number) => void;
-  onCancel: () => void;
+  defaultValue?: number;
+  onSubmit: (optionId: number) => void;
+  onCancel?: () => void;
 };
 
 export const TargetForm = ({ defaultValue, onSubmit, onCancel }: Props) => {
+  const TARGET = ReferenceOptions.TARGET;
   const [value, setValue] = useState<number | undefined>(defaultValue);
   const handleSubmit = () => {
-    if (value !== undefined) onSubmit(value);
+    if (value) {
+      onSubmit(value);
+    }
   };
 
   return (
@@ -40,57 +44,66 @@ export const TargetForm = ({ defaultValue, onSubmit, onCancel }: Props) => {
           <div className="mb-5 flex flex-row space-x-5">
             <SelectButton
               className="basis-1/2"
-              selected={value === 1}
-              onClick={() => setValue(1)}
+              selected={value === TARGET.COWORKER.id}
+              onClick={() => setValue(TARGET.COWORKER.id)}
               onSelectTransitionEnd={defaultValue ? undefined : handleSubmit}
             >
               <CoworkerIcon className="mb-3" />
-              <Typography>職場</Typography>
+              <Typography>{TARGET.COWORKER.name}</Typography>
             </SelectButton>
             <SelectButton
               className="basis-1/2"
-              selected={value === 2}
-              onClick={() => setValue(2)}
+              selected={value === TARGET.FAMILY.id}
+              onClick={() => setValue(TARGET.FAMILY.id)}
               onSelectTransitionEnd={defaultValue ? undefined : handleSubmit}
             >
               <FamilyIcon className="mb-3" />
-              <Typography>家族</Typography>
+              <Typography>{TARGET.FAMILY.name}</Typography>
             </SelectButton>
           </div>
           <div className="mb-5 flex flex-row space-x-5">
             <SelectButton
               className="basis-1/2"
-              selected={value === 3}
-              onClick={() => setValue(3)}
+              selected={value === TARGET.PARTNER.id}
+              onClick={() => setValue(TARGET.PARTNER.id)}
               onSelectTransitionEnd={defaultValue ? undefined : handleSubmit}
             >
               <PartnerIcon className="mb-3" />
-              <Typography>異性(恋人)</Typography>
+              <Typography>{TARGET.PARTNER.name}</Typography>
             </SelectButton>
             <SelectButton
               className="basis-1/2"
-              selected={value === 4}
-              onClick={() => setValue(4)}
+              selected={value === TARGET.FRIEND.id}
+              onClick={() => setValue(TARGET.FRIEND.id)}
               onSelectTransitionEnd={defaultValue ? undefined : handleSubmit}
             >
               <FriendIcon className="mb-3" />
-              <Typography>友人</Typography>
+              <Typography>{TARGET.FRIEND.name}</Typography>
             </SelectButton>
           </div>
           <SelectButton
-            selected={value === 5}
-            onClick={() => setValue(5)}
+            selected={value === TARGET.NONE.id}
+            onClick={() => setValue(TARGET.NONE.id)}
             onSelectTransitionEnd={defaultValue ? undefined : handleSubmit}
           >
-            <Typography>特になし</Typography>
+            <Typography>{TARGET.NONE.name}</Typography>
           </SelectButton>
         </div>
         <div className="mt-auto mb-10 flex flex-row space-x-3">
-          <IconButton className="flex-none" onClick={onCancel}>
-            <ArrowIcon className="h-10 w-fit my-auto" />
-          </IconButton>
+          {onCancel ? (
+            <IconButton className="flex-none" onClick={onCancel}>
+              <ArrowIcon className="h-10 w-fit my-auto" />
+            </IconButton>
+          ) : (
+            <></>
+          )}
           {defaultValue ? (
-            <Button size="none" className="grow" onClick={handleSubmit}>
+            <Button
+              disabled={defaultValue === value}
+              size="none"
+              className="grow"
+              onClick={handleSubmit}
+            >
               <Typography className="my-auto">変更を適用する</Typography>
             </Button>
           ) : (

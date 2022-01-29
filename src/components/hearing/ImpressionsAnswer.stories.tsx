@@ -12,7 +12,7 @@ const Template: ComponentStory<typeof ImpressionsAnswer> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  impressionReference: {
+  multipleImpressionsReference: {
     categoryId: 3,
     choices: [
       { id: 6, name: "優しい" },
@@ -21,7 +21,7 @@ Default.args = {
     ],
     text: null,
   },
-  especiallyImpressionReference: {
+  primaryImpressionReference: {
     categoryId: 4,
     choices: [{ id: 12, name: "優しい" }],
     text: null,
