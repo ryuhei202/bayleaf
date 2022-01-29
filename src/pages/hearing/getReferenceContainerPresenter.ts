@@ -75,7 +75,8 @@ export const getReferenceContainerPresenter = (
   const presentRequiredCategoryIds = () => {
     const requiredCategoryIds = [
       REFERENCE_CATEGORY_IDS.TARGET,
-      REFERENCE_CATEGORY_IDS.MULTIPLE_IMPRESSIONS,
+      // TODO: コーデルール適用後uncomment
+      // REFERENCE_CATEGORY_IDS.MULTIPLE_IMPRESSIONS,
     ];
     switch (member.mPlanId) {
       case M_PLAN_IDS.CASUAL:
