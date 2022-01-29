@@ -42,7 +42,7 @@ export const ReferenceDocument = ({
           title={referenceChanged ? "ヒアリング内容の確認" : "前回のコーデ情報"}
           className="my-8"
         />
-        <Paper>
+        <Paper className="mb-24">
           {targetReference ? (
             <TargetAnswer
               stylingReference={targetReference}
@@ -94,7 +94,7 @@ export const ReferenceDocument = ({
           ) : (
             <></>
           )}
-          {summaryReference && !referenceChanged ? (
+          {summaryReference && allowHearingSkip ? (
             <>
               <Divider />
               <TextAnswer
