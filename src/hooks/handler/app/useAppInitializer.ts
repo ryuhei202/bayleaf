@@ -24,12 +24,12 @@ export const useAppInitializer = () => {
       Bugsnag.start({
         apiKey: process.env.REACT_APP_BUGSNAG_API_KEY || "",
         plugins: [new BugsnagPluginReact()],
-        enabledReleaseStages: ["production"],
-        releaseStage: process.env.NODE_ENV,
+        enabledReleaseStages: ["production", "staging"],
+        releaseStage: process.env.REACT_APP_ENV,
       });
     }
   }, []);
-  const ErrorBoundary = Bugsnag.getPlugin("react")?.createErrorBoundary(React)!;
+  const ErrorBoundary = Bugsnag.getPlugin("react")?.createErrorBoundary(React);
 
   // GoogleAnalyticsを呼び出す
   useEffect(() => {
