@@ -35,15 +35,7 @@ function App() {
     </QueryClientProvider>
   );
   if (lineIdToken) {
-    return (
-      <>
-        {process.env.NODE_ENV === "production" ? (
-          <ErrorBoundary>{app}</ErrorBoundary>
-        ) : (
-          app
-        )}
-      </>
-    );
+    return <>{ErrorBoundary ? <ErrorBoundary>{app}</ErrorBoundary> : app}</>;
   }
   if (liffErrorMessage) {
     return <ErrorMessage message={liffErrorMessage} />;
