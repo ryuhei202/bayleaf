@@ -17,7 +17,7 @@ export const ReviewForm = (props: Props) => {
   const handler = useReviewFormHandler(data, props.selectedKarteId);
 
   if (error) return <ErrorMessage message={error.response.data.message} />;
-  if (!data) return <Loader active inline="centered" />;
+  if (!data) return <Loader active />;
   return (
     <>
       <Container fluid>

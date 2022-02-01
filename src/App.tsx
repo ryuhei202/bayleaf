@@ -6,44 +6,41 @@ import { Route, Routes } from "react-router-dom";
 import Review from "./pages/Review";
 import Home from "./pages/Home";
 import { ErrorMessage } from "./components/shared/ErrorMessage";
+import { Hearing } from "./pages/hearing/Hearing";
+import { QueryClientProvider } from "react-query";
 
 export const IdTokenContext = createContext("");
 
 export const StylistIdContext = createContext<number | undefined>(undefined);
 
 function App() {
-  const { lineIdToken, stylistId, liffErrorMessage, ErrorBoundary } =
-    useAppInitializer();
+  const {
+    lineIdToken,
+    stylistId,
+    liffErrorMessage,
+    ErrorBoundary,
+    queryClient,
+  } = useAppInitializer();
   const app = (
-    <IdTokenContext.Provider value={lineIdToken}>
-      <StylistIdContext.Provider value={stylistId}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="review" element={<Review />} />
-        </Routes>
-      </StylistIdContext.Provider>
-    </IdTokenContext.Provider>
+    <QueryClientProvider client={queryClient}>
+      <IdTokenContext.Provider value={lineIdToken}>
+        <StylistIdContext.Provider value={stylistId}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="review" element={<Review />} />
+            <Route path="hearing" element={<Hearing />} />
+          </Routes>
+        </StylistIdContext.Provider>
+      </IdTokenContext.Provider>
+    </QueryClientProvider>
   );
   if (lineIdToken) {
-    return (
-      <>
-        {process.env.NODE_ENV === "production" &&
-        ErrorBoundary !== undefined ? (
-          <ErrorBoundary>{app}</ErrorBoundary>
-        ) : (
-          app
-        )}
-      </>
-    );
+    return <>{ErrorBoundary ? <ErrorBoundary>{app}</ErrorBoundary> : app}</>;
   }
   if (liffErrorMessage) {
     return <ErrorMessage message={liffErrorMessage} />;
   }
-  return (
-    <Loader active inline="centered">
-      ログイン中
-    </Loader>
-  );
+  return <Loader active>ログイン中</Loader>;
 }
 
 export default App;

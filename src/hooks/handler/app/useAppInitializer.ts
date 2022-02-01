@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import liff from "@line/liff";
 import { useLocation, useSearchParams } from "react-router-dom";
 import ReactGA from "react-ga";
+import { QueryClient } from "react-query";
 
 export const useAppInitializer = () => {
   const [lineIdToken, setLineIdToken] = useState("");
@@ -23,8 +24,8 @@ export const useAppInitializer = () => {
       Bugsnag.start({
         apiKey: process.env.REACT_APP_BUGSNAG_API_KEY || "",
         plugins: [new BugsnagPluginReact()],
-        enabledReleaseStages: ["production"],
-        releaseStage: process.env.NODE_ENV,
+        enabledReleaseStages: ["production", "staging"],
+        releaseStage: process.env.REACT_APP_ENV,
       });
     }
   }, []);
@@ -61,11 +62,19 @@ export const useAppInitializer = () => {
       });
     }
   });
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+      },
+    },
+  });
 
   return {
     lineIdToken,
     stylistId,
     liffErrorMessage,
     ErrorBoundary,
+    queryClient,
   };
 };

@@ -11,8 +11,8 @@ const Review = () => {
   );
 
   useEffect(() => {
-    document.title = "leeap|レビュー";
-  });
+    document.title = "レビュー | leeap";
+  }, []);
 
   return (
     <>
