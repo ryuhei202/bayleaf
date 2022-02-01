@@ -1,8 +1,5 @@
 import { useState } from "react";
 import { ReferenceOptions } from "../../models/hearing/ReferenceOptions";
-import { Button } from "../baseParts/Button";
-import { IconButton } from "../baseParts/IconButton";
-import { ArrowIcon } from "../baseParts/icons/ArrowIcon";
 import { LongSleeveIcon } from "../baseParts/icons/LongSleeveIcon";
 import { ShortSleeveIcon } from "../baseParts/icons/ShortSleeveIcon";
 import { Page } from "../baseParts/Page";
