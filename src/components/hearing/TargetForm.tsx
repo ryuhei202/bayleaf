@@ -29,7 +29,7 @@ export const TargetForm = ({ defaultValue, onSubmit, onCancel }: Props) => {
 
   return (
     <Page className="px-5">
-      <div className="flex flex-col justify-between h-full">
+      <div className="flex flex-col h-full justify-between">
         <div>
           <PageHeader
             title={
@@ -89,7 +89,7 @@ export const TargetForm = ({ defaultValue, onSubmit, onCancel }: Props) => {
             <Typography>{TARGET.NONE.name}</Typography>
           </SelectButton>
         </div>
-        <div className="mt-auto mb-10 flex flex-row space-x-3">
+        <div className="mt-auto mb-10 flex flex-row space-x-3 ml-0">
           {onCancel ? (
             <IconButton className="flex-none" onClick={onCancel}>
               <ArrowIcon className="h-10 w-fit my-auto" />

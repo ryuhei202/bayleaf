@@ -29,7 +29,7 @@ export const CasualSleeveForm = ({
 
   return (
     <Page className="px-5">
-      <div className="flex flex-col justify-between h-full">
+      <div className="flex flex-col justify-items-stretch h-full">
         <div>
           <PageHeader
             title={
