@@ -84,7 +84,7 @@ export const CasualSleeveForm = ({
             </SelectButton>
           </div>
         </div>
-        <div className="mt-auto mb-10 flex flex-row space-x-3">
+        <div className="mt-auto mb-10 flex flex-row space-x-3 100vw">
           {onCancel ? (
             <IconButton className="flex-none" onClick={onCancel}>
               <ArrowIcon className="h-10 w-fit my-auto" />
