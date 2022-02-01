@@ -89,10 +89,10 @@ export const TargetForm = ({ defaultValue, onSubmit, onCancel }: Props) => {
             <Typography>{TARGET.NONE.name}</Typography>
           </SelectButton>
         </div>
-        <div className="mb-10 flex flex-row space-x-3">
+        <div className="mb-10 flex flex-row ">
           {onCancel ? (
-            <IconButton className="flex-none" onClick={onCancel}>
-              <ArrowIcon className="h-10 w-fit my-auto" />
+            <IconButton onClick={onCancel}>
+              <ArrowIcon className="h-10 my-auto" />
             </IconButton>
           ) : (
             <></>
