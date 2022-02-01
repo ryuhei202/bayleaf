@@ -29,7 +29,7 @@ export const CasualSleeveForm = ({
 
   return (
     <Page className="px-5">
-      <div className="flex flex-col justify-items-stretch h-full">
+      <div className="flex flex-col h-full justify-between">
         <div>
           <PageHeader
             title={
@@ -84,7 +84,7 @@ export const CasualSleeveForm = ({
             </SelectButton>
           </div>
         </div>
-        <div className="mt-auto mb-10 flex flex-row space-x-3 100vw">
+        <div className="mb-10 flex flex-row space-x-3">
           {onCancel ? (
             <IconButton className="flex-none" onClick={onCancel}>
               <ArrowIcon className="h-10 w-fit my-auto" />
@@ -96,7 +96,7 @@ export const CasualSleeveForm = ({
             <Button
               disabled={defaultValue === value}
               size="none"
-              className="grow"
+              // className="grow"
               onClick={handleSubmit}
             >
               <Typography className="my-auto">変更を適用する</Typography>
