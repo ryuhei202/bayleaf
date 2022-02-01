@@ -84,10 +84,10 @@ export const CasualSleeveForm = ({
             </SelectButton>
           </div>
         </div>
-        <div className="w-full flex flex-row mb-10">
+        <div className="flex flex-row mb-10">
           {onCancel ? (
             <IconButton onClick={onCancel}>
-              <ArrowIcon className="h-10 w-fit my-auto" />
+              <ArrowIcon className="h-10 my-auto" />
             </IconButton>
           ) : (
             <></>

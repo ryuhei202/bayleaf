@@ -89,7 +89,7 @@ export const TargetForm = ({ defaultValue, onSubmit, onCancel }: Props) => {
             <Typography>{TARGET.NONE.name}</Typography>
           </SelectButton>
         </div>
-        <div className="mb-10 flex flex-row ">
+        <div className="mb-10 flex flex-row">
           {onCancel ? (
             <IconButton onClick={onCancel}>
               <ArrowIcon className="h-10 my-auto" />
@@ -101,7 +101,7 @@ export const TargetForm = ({ defaultValue, onSubmit, onCancel }: Props) => {
             <Button
               disabled={defaultValue === value}
               size="none"
-              className="grow"
+              className="grow ml-3"
               onClick={handleSubmit}
             >
               <Typography className="my-auto">変更を適用する</Typography>

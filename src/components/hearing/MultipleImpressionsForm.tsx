@@ -79,10 +79,10 @@ export const MultipleImpressionsForm = ({
             ))}
           </div>
         </div>
-        <div className="mt-auto mb-10 flex flex-row space-x-3">
+        <div className="flex flex-row mb-10">
           {onCancel ? (
             <IconButton className="flex-none" onClick={onCancel}>
-              <ArrowIcon className="h-10 w-fit my-auto" />
+              <ArrowIcon className="h-10 my-auto" />
             </IconButton>
           ) : (
             <></>
@@ -91,7 +91,7 @@ export const MultipleImpressionsForm = ({
             <Button
               disabled={values?.length !== 3}
               size="none"
-              className="grow"
+              className="grow ml-3"
               onClick={handleSubmit}
             >
               <Typography className="my-auto">変更を適用する</Typography>

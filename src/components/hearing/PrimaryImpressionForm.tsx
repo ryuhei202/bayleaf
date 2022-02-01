@@ -76,9 +76,9 @@ export const PrimaryImpressionForm = ({
             ))}
           </div>
         </div>
-        <div className="mt-auto mb-10 flex flex-row space-x-3">
-          <IconButton className="flex-none" onClick={onCancel}>
-            <ArrowIcon className="h-10 w-fit my-auto" />
+        <div className="flex flex-row mb-10">
+          <IconButton onClick={onCancel}>
+            <ArrowIcon className="h-10 my-auto" />
           </IconButton>
         </div>
       </div>
