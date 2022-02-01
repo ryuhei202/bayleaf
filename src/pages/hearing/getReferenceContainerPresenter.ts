@@ -86,12 +86,12 @@ export const getReferenceContainerPresenter = (
         requiredCategoryIds.push(REFERENCE_CATEGORY_IDS.BUSINESS_SLEEVE);
     }
     return requiredCategoryIds
-      .filter(
-        (categoryId) =>
-          stylingReference.findIndex(
-            (reference) => reference.categoryId === categoryId
-          ) === -1
-      )
+      .filter((categoryId) => {
+        const s = stylingReference.find(
+          (reference) => reference.categoryId === categoryId
+        );
+        return s === undefined || s.choices.length === 0;
+      })
       .filter(
         (categoryId) =>
           modifiedChoices.findIndex(
