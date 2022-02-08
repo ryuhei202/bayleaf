@@ -57,7 +57,6 @@ export const BusinessSleeveForm = ({
               onSelectTransitionEnd={defaultValue ? undefined : handleSubmit}
             >
               <LongSleeveIcon />
-              <LongSleeveIcon className="-ml-4" />
               <ShortSleeveIcon className="ml-4" />
               <Typography>{BUSINESS_SLEEVE.LONG_1_SHORT_1.name}</Typography>
             </SelectButton>
