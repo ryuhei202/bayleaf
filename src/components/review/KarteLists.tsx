@@ -17,7 +17,14 @@ type Props = {
 
 export const KarteLists = (props: Props) => {
   const { data, error } = useReviewIndexApi();
-  if (error) return <ErrorMessage message={error.response.data.message} />;
+  if (error)
+    return (
+      <ErrorMessage
+        message={
+          error.response?.data?.message ?? "予期せぬエラーが発生しました。"
+        }
+      />
+    );
   if (!data) return <Loader active />;
   return (
     <>
