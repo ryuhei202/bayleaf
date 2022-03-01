@@ -14,7 +14,7 @@ export const MemberListContainer = ({ setMember }: Props) => {
 
   if (!data) return <Loader active />;
   if (data?.length <= 0)
-    return <Typography className="m-4">ヒアリングが存在しません</Typography>;
+    return <Typography className="m-4">ユーザーが存在しません</Typography>;
 
   if (error) return <ErrorMessage message={error.message} />;
   if (data.length === 1) {
