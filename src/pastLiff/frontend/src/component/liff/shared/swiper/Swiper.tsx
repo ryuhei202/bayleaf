@@ -1,8 +1,8 @@
 import React from "react";
-import SwipeableViews from "react-swipeable-views";
 import MobileStepper from "@material-ui/core/MobileStepper";
 import { SwiperViewData } from "./viewData/SwiperViewData";
 import { SwiperCallback } from "./callback/SwiperCallback";
+import SwipeableViews from "react-swipeable-views";
 
 // ----------------------------------------
 // props
@@ -24,7 +24,7 @@ const Swiper = (props: SwiperProps) => (
     <SwipeableViews
       onChangeIndex={props.callback.onChangeStep}
       slideStyle={{
-        padding: props.viewData.padding ? props.viewData.padding : ""
+        padding: props.viewData.padding ? props.viewData.padding : "",
       }}
     >
       {props.children}

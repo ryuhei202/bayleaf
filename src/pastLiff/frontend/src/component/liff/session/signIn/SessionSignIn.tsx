@@ -22,16 +22,16 @@ const styles = () =>
       top: 0,
       right: 0,
       left: 0,
-      bottom: 0
+      bottom: 0,
     },
     brandImageWrapper: {
       margin: "1rem 0",
-      textAlign: "center"
+      textAlign: "center",
     },
     brandImage: {
       width: "100px",
-      height: "auto"
-    }
+      height: "auto",
+    },
   });
 
 // ----------------------------------------
@@ -60,7 +60,7 @@ const SessionSignIn = (
     <Router>
       <Route
         path={`${liffPath}`}
-        render={() => (
+        element={() => (
           <div className={props.classes.container}>
             <div className={props.classes.brandImageWrapper}>
               <img
@@ -76,15 +76,10 @@ const SessionSignIn = (
           </div>
         )}
       ></Route>
+      <Route path="/password/reset" element={() => <PasswordReset />}></Route>
       <Route
-        exact
-        path="/password/reset"
-        render={() => <PasswordReset />}
-      ></Route>
-      <Route
-        exact
         path="/password/reset-requested"
-        render={() => <PasswordResetRequested />}
+        element={() => <PasswordResetRequested />}
       ></Route>
     </Router>
   );

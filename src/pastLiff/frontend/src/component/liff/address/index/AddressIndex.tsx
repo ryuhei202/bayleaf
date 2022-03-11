@@ -8,11 +8,11 @@ import AddressDestination from "../destination/AddressDestination";
 import AddressConfirm from "../confirm/AddressConfirm";
 import {
   AddressMemberData,
-  AddressMemberDataDefault
+  AddressMemberDataDefault,
 } from "../../../../model/liff/address/data/AddressMemberData";
 import {
   AddressDestinationData,
-  AddressDestinationDataDefault
+  AddressDestinationDataDefault,
 } from "../../../../model/liff/address/data/AddressDestinationData";
 import { useAddressIndexPresenter } from "./presenter/UseAddressIndexPresenter";
 import {} from "../member/viewData/AddressMemberFormViewData";
@@ -21,17 +21,17 @@ import { useAddressIndexHandler } from "./handler/UseAddressIndexHandler";
 import { AddressMemberFormData } from "../member/viewData/AddressMemberFormData";
 import {
   AddressDeliveryTimeData,
-  AddressDeliveryTimeDataDefault
+  AddressDeliveryTimeDataDefault,
 } from "../../../../model/liff/address/data/AddressDeliveryTimeData";
 import { AddressIndexViewData } from "./viewData/AddressIndexViewData";
 import {
   AddressOptionsData,
-  AddressOptionsDataDefault
+  AddressOptionsDataDefault,
 } from "../../../../model/liff/address/data/AddressOptionsData";
 import { AddressConfirmFormData } from "../confirm/viewData/AddressConfirmFormData";
 import { AddressDestinationDataInputStatusType } from "../../../../model/liff/address/data/enum/AddressDestinationDataInputStatusType";
 import ErrorResponse, {
-  DefaultErrorResponse
+  DefaultErrorResponse,
 } from "../../../../model/api/response/shared/ErrorResponse";
 import { cloneDeep } from "lodash";
 
@@ -119,7 +119,7 @@ const AddressIndex = () => {
     shouldClearResponseError: shouldClearResponseError,
     onLoad: onLoad,
     onError: onError,
-    onOptionsLoad: onOptionsLoad
+    onOptionsLoad: onOptionsLoad,
   };
 
   // ----------------------------------------
@@ -142,9 +142,8 @@ const AddressIndex = () => {
   return (
     <Router>
       <Route
-        exact
         path={rootPath}
-        render={() =>
+        element={() =>
           _destData.input_status ===
           AddressDestinationDataInputStatusType.None ? (
             <AddressMember
@@ -163,14 +162,12 @@ const AddressIndex = () => {
       />
       {/* デザイン変更により、AddressShow -> AddressConfirmに統一 */}
       <Route
-        exact
         path={"/address/show"}
-        render={() => <AddressShow viewData={presenter.showViewData()} />}
+        element={() => <AddressShow viewData={presenter.showViewData()} />}
       />
       <Route
-        exact
         path={"/address/member"}
-        render={() => (
+        element={() => (
           <AddressMember
             viewData={presenter.memberFormViewData()}
             callback={handler.memberCallback()}
@@ -178,9 +175,8 @@ const AddressIndex = () => {
         )}
       />
       <Route
-        exact
         path={"/address/destination"}
-        render={() => (
+        element={() => (
           <AddressDestination
             viewData={presenter.destFormViewData()}
             callback={handler.destCallback()}
@@ -188,9 +184,8 @@ const AddressIndex = () => {
         )}
       />
       <Route
-        exact
         path={"/address/confirm"}
-        render={() => (
+        element={() => (
           <AddressConfirm
             viewData={presenter.confirmViewData()}
             callback={handler.confirmCallback()}

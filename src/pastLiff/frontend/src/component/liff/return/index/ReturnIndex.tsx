@@ -1,5 +1,5 @@
 import React from "react";
-import { HashRouter, Redirect, Route } from "react-router-dom";
+import { HashRouter, Navigate, Route } from "react-router-dom";
 import ReturnSelect from "../select/ReturnSelect";
 import { ReturnIndexRouting } from "./routing/ReturnIndexRouting";
 
@@ -13,13 +13,12 @@ const ReturnIndex = () => {
   return (
     <HashRouter>
       <Route
-        exact
         path={""}
-        render={() => <Redirect to={ReturnIndexRouting.returnSelect} />}
+        element={() => <Navigate to={ReturnIndexRouting.returnSelect} />}
       />
       <Route
         path={ReturnIndexRouting.returnSelect}
-        render={() => <ReturnSelect />}
+        element={() => <ReturnSelect />}
       />
     </HashRouter>
   );
