@@ -18,6 +18,9 @@ export const ItemForm = (props: Props) => {
   return (
     <div className={styles.itemForm}>
       <Image src={props.item.itemImageUrl} size="small" rounded centered />
+      <Header size="medium" textAlign="center">
+        {props.item.smallCategoryName}
+      </Header>
       <RatingStar inputRate={handler.inputRate} rating={handler.rating} />
       <div>
         <Header as="h2">サイズ</Header>
