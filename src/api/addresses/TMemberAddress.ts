@@ -10,7 +10,5 @@ export type TMemberAddress = {
   readonly addr3: string;
   readonly company1: string;
   readonly company2: string;
-  readonly tel: string;
-  readonly yamatoCenterCode: string;
-  readonly delivSameFlg: boolean;
+  readonly inputStatus: "done" | "not_input";
 };
