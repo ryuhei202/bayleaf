@@ -15,7 +15,7 @@ export const useStylingReferenceUpdate = (
   memberId: number
 ): StylingReferenceUpdate => {
   const params = { optionIds };
-  const { mutate, isLoading } = usePatchRequest<Params>(
+  const { mutate, isLoading } = usePatchRequest<Params, AxiosResponse>(
     `members/${memberId}/styling_reference`,
     params
   );

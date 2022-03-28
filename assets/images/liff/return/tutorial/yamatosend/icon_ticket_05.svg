@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60" height="60" viewBox="0 0 60 60">
+  <defs>
+    <clipPath id="clip-icon_ticket">
+      <rect width="60" height="60"/>
+    </clipPath>
+  </defs>
+  <g id="icon_ticket" clip-path="url(#clip-icon_ticket)">
+    <rect width="60" height="60" fill="#fff"/>
+    <g id="グループ_6503" data-name="グループ 6503" transform="translate(-7513.919 -119.879)">
+      <g id="グループ_6501" data-name="グループ 6501" transform="translate(7520.014 148.061)">
+        <g id="長方形_1358" data-name="長方形 1358" fill="#fff" stroke="#cbcbcb" stroke-width="1">
+          <rect width="52.176" height="22.075" stroke="none"/>
+          <rect x="0.5" y="0.5" width="51.176" height="21.075" fill="none"/>
+        </g>
+        <g id="グループ_6500" data-name="グループ 6500" transform="translate(6.02 1.003)">
+          <g id="長方形_1359" data-name="長方形 1359" fill="#fff" stroke="#cbcbcb" stroke-width="1">
+            <path d="M0,0H1A0,0,0,0,1,1,0V14.549a.5.5,0,0,1-.5.5h0a.5.5,0,0,1-.5-.5V0A0,0,0,0,1,0,0Z" stroke="none"/>
+            <rect x="0.5" y="0.5" width="0.003" height="14.051" rx="0.002" fill="none"/>
+          </g>
+          <g id="長方形_1361" data-name="長方形 1361" transform="translate(39.132 3.01) rotate(90)" fill="#fff" stroke="#cbcbcb" stroke-width="1">
+            <rect width="1.003" height="33.112" rx="0.502" stroke="none"/>
+            <rect x="0.5" y="0.5" width="0.003" height="32.112" rx="0.002" fill="none"/>
+          </g>
+          <g id="長方形_1366" data-name="長方形 1366" transform="translate(33.112 9.031) rotate(90)" fill="#fff" stroke="#cbcbcb" stroke-width="1">
+            <rect width="1.003" height="27.092" rx="0.502" stroke="none"/>
+            <rect x="0.5" y="0.5" width="0.003" height="26.092" rx="0.002" fill="none"/>
+          </g>
+          <g id="長方形_1362" data-name="長方形 1362" transform="translate(23.078 6.02) rotate(90)" fill="#fff" stroke="#cbcbcb" stroke-width="1">
+            <rect width="1.003" height="17.058" rx="0.502" stroke="none"/>
+            <rect x="0.5" y="0.5" width="0.003" height="16.058" rx="0.002" fill="none"/>
+          </g>
+          <g id="長方形_1363" data-name="長方形 1363" transform="translate(39.132 6.02) rotate(90)" fill="#fff" stroke="#cbcbcb" stroke-width="1">
+            <rect width="1.003" height="5.017" rx="0.502" stroke="none"/>
+            <rect x="0.5" y="0.5" width="0.003" height="4.017" rx="0.002" fill="none"/>
+          </g>
+          <g id="長方形_1364" data-name="長方形 1364" transform="translate(33.112 17.058) rotate(90)" fill="#fff" stroke="#cbcbcb" stroke-width="1">
+            <rect width="1.003" height="5.017" rx="0.502" stroke="none"/>
+            <rect x="0.5" y="0.5" width="0.003" height="4.017" rx="0.002" fill="none"/>
+          </g>
+          <g id="長方形_1365" data-name="長方形 1365" transform="translate(39.132 17.058) rotate(90)" fill="#fff" stroke="#cbcbcb" stroke-width="1">
+            <rect width="1.003" height="5.017" rx="0.502" stroke="none"/>
+            <rect x="0.5" y="0.5" width="0.003" height="4.017" rx="0.002" fill="none"/>
+          </g>
+          <g id="長方形_1360" data-name="長方形 1360" transform="translate(0 16.054)" fill="#fff" stroke="#cbcbcb" stroke-width="1">
+            <rect width="1.003" height="2.007" rx="0.502" stroke="none"/>
+            <rect x="0.5" y="0.5" width="0.003" height="1.007" rx="0.002" fill="none"/>
+          </g>
+        </g>
+      </g>
+      <g id="グループ_6502" data-name="グループ 6502" transform="translate(7515.92 145.134) rotate(-17)">
+        <g id="長方形_1358-2" data-name="長方形 1358" transform="translate(0 0)" fill="#fff" stroke="#cbcbcb" stroke-width="1">
+          <rect width="52.176" height="22.075" stroke="none"/>
+          <rect x="0.5" y="0.5" width="51.176" height="21.075" fill="none"/>
+        </g>
+        <g id="グループ_6500-2" data-name="グループ 6500" transform="translate(6.02 1.003)">
+          <g id="長方形_1359-2" data-name="長方形 1359" fill="#fff" stroke="#cbcbcb" stroke-width="1">
+            <path d="M0,0H1A0,0,0,0,1,1,0V14.549a.5.5,0,0,1-.5.5h0a.5.5,0,0,1-.5-.5V0A0,0,0,0,1,0,0Z" stroke="none"/>
+            <rect x="0.5" y="0.5" width="0.003" height="14.051" rx="0.002" fill="none"/>
+          </g>
+          <g id="長方形_1361-2" data-name="長方形 1361" transform="translate(39.132 3.01) rotate(90)" fill="#fff" stroke="#cbcbcb" stroke-width="1">
+            <rect width="1.003" height="33.112" rx="0.502" stroke="none"/>
+            <rect x="0.5" y="0.5" width="0.003" height="32.112" rx="0.002" fill="none"/>
+          </g>
+          <g id="長方形_1366-2" data-name="長方形 1366" transform="translate(33.112 9.031) rotate(90)" fill="#fff" stroke="#cbcbcb" stroke-width="1">
+            <rect width="1.003" height="27.092" rx="0.502" stroke="none"/>
+            <rect x="0.5" y="0.5" width="0.003" height="26.092" rx="0.002" fill="none"/>
+          </g>
+          <g id="長方形_1362-2" data-name="長方形 1362" transform="translate(23.078 6.02) rotate(90)" fill="#fff" stroke="#cbcbcb" stroke-width="1">
+            <rect width="1.003" height="17.058" rx="0.502" stroke="none"/>
+            <rect x="0.5" y="0.5" width="0.003" height="16.058" rx="0.002" fill="none"/>
+          </g>
+          <g id="長方形_1363-2" data-name="長方形 1363" transform="translate(39.132 6.02) rotate(90)" fill="#fff" stroke="#cbcbcb" stroke-width="1">
+            <rect width="1.003" height="5.017" rx="0.502" stroke="none"/>
+            <rect x="0.5" y="0.5" width="0.003" height="4.017" rx="0.002" fill="none"/>
+          </g>
+          <g id="長方形_1364-2" data-name="長方形 1364" transform="translate(33.112 17.058) rotate(90)" fill="#fff" stroke="#cbcbcb" stroke-width="1">
+            <rect width="1.003" height="5.017" rx="0.502" stroke="none"/>
+            <rect x="0.5" y="0.5" width="0.003" height="4.017" rx="0.002" fill="none"/>
+          </g>
+          <g id="長方形_1365-2" data-name="長方形 1365" transform="translate(39.132 17.058) rotate(90)" fill="#fff" stroke="#cbcbcb" stroke-width="1">
+            <rect width="1.003" height="5.017" rx="0.502" stroke="none"/>
+            <rect x="0.5" y="0.5" width="0.003" height="4.017" rx="0.002" fill="none"/>
+          </g>
+          <g id="長方形_1360-2" data-name="長方形 1360" transform="translate(0 16.054)" fill="#fff" stroke="#cbcbcb" stroke-width="1">
+            <rect width="1.003" height="2.007" rx="0.502" stroke="none"/>
+            <rect x="0.5" y="0.5" width="0.003" height="1.007" rx="0.002" fill="none"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
