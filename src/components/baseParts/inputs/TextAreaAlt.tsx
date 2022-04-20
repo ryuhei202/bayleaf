@@ -20,6 +20,7 @@ export const TextAreaAlt = ({
     "rounded-md",
     "border",
     "border-slate-400",
+    "resize-none",
   ];
 
   return (
