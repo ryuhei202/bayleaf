@@ -6,6 +6,9 @@ module.exports = {
         midnight: "#00266F",
       },
     },
+    screens: {
+      xs: { max: "330px" },
+    },
   },
   plugins: [],
   important: true, // semantic-uiに上書きされてしまうので、tailwindcssを最優先にする
