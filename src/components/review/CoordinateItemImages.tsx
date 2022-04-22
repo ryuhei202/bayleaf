@@ -4,8 +4,8 @@ import { Typography } from "../baseParts/Typography";
 
 type TProps = {
   items: {
-    cateSmallName: string;
-    imagePaths: { large_thumb: string; large: string };
+    imagePaths: { defaultPath: string; expandedPath: string };
+    caption?: string;
   }[];
 };
 
@@ -17,17 +17,21 @@ export const CoordinateItemImages = ({ items }: TProps) => {
           <div>
             <ExpandableImage
               className="max-h-[120px]"
-              defaultImageSrc={item.imagePaths.large_thumb}
-              ExpandedImageSrc={item.imagePaths.large}
+              defaultImageSrc={item.imagePaths.defaultPath}
+              ExpandedImageSrc={item.imagePaths.expandedPath}
             />
-            <Typography
-              className="mt-1 text-center"
-              size="xs"
-              color="primary"
-              weight="medium"
-            >
-              {item.cateSmallName}
-            </Typography>
+            {item.caption ? (
+              <Typography
+                className="mt-1 text-center"
+                size="xs"
+                color="primary"
+                weight="medium"
+              >
+                {item.caption}
+              </Typography>
+            ) : (
+              <></>
+            )}
           </div>
         );
       })}

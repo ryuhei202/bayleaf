@@ -1,4 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { TCoordinateItemResponse } from "../../api/coordinates/TCoordinateItemResponse";
 import { CoordinateItemImages } from "./CoordinateItemImages";
 
 export default {
@@ -16,11 +17,11 @@ const Template: ComponentStory<typeof CoordinateItemImages> = (args) => (
 export const Default = Template.bind({});
 const items = [...Array(4)].map(() => {
   return {
-    cateSmallName: "シャツ",
+    caption: "シャツ",
     imagePaths: {
-      large_thumb:
+      defaultPath:
         "https://stg.leeap.jp/files/preregistered_item/168/16899/large_thumb_IMG_3977.JPG",
-      large:
+      expandedPath:
         "https://stg.leeap.jp/files/preregistered_item/168/16899/large_IMG_3977.JPG",
     },
   };
@@ -29,6 +30,7 @@ const items = [...Array(4)].map(() => {
 Default.args = {
   items,
 };
+
 Default.decorators = [
   (Story) => (
     <div className="bg-slate-200 w-full p-3">
