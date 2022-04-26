@@ -1,3 +1,6 @@
+import { AxiosResponse } from "axios";
+import { UseMutateFunction } from "react-query/types/react/types";
+import { TReviewCreateParams } from "../../api/reviews/useReviewCreate";
 import {
   TReviewFormData,
   TReviewFormDataReview,
@@ -16,6 +19,12 @@ type TReviewContainerHandlerArgs = {
   reviewFormData: TReviewFormData;
   setReviewFormData: (formData: TReviewFormData) => void;
   setSelectedCoordinateId: (id: number) => void;
+  reviewMutate: UseMutateFunction<
+    AxiosResponse,
+    unknown,
+    TReviewCreateParams,
+    unknown
+  >;
 };
 
 export const getReviewContainerHandler = ({
@@ -23,6 +32,7 @@ export const getReviewContainerHandler = ({
   reviewFormData,
   setReviewFormData,
   setSelectedCoordinateId,
+  reviewMutate,
 }: TReviewContainerHandlerArgs): TReviewContainerHandler => {
   const currentReviewIndex = () => {
     return reviewFormData.reviews.findIndex(
@@ -71,7 +81,8 @@ export const getReviewContainerHandler = ({
   const handleReviewReasonFormSubmit = () => {
     const nextReview = reviewFormData.reviews[currentReviewIndex() + 1];
     if (nextReview == undefined) {
-      // TODO POST処理を実装
+      reviewMutate(reviewCeateParams());
+      // TODO 別タスクでonSuccessの処理実装
     } else {
       setSelectedCoordinateId(nextReview.coordinateId);
     }
@@ -92,6 +103,18 @@ export const getReviewContainerHandler = ({
     const dupReviews = reviewFormData.reviews.concat();
     dupReviews[currentReviewIndex()] = review;
     setReviewFormData({ reviews: dupReviews });
+  };
+
+  const reviewCeateParams = (): TReviewCreateParams => {
+    const reviews = reviewFormData.reviews.map((data) => {
+      return {
+        coordinateId: data.coordinateId,
+        choiceId: data.choices.reviewOptionId!,
+        reasonChoiceIds: data.choices.reviewReasonOptionIds,
+        text: data.choices.reviewReasonText,
+      };
+    });
+    return { reviews };
   };
 
   return {
