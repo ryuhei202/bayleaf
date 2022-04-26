@@ -3,11 +3,11 @@ import "./App.css";
 import { useAppInitializer } from "./hooks/handler/app/useAppInitializer";
 import { Loader } from "semantic-ui-react";
 import { Route, Routes } from "react-router-dom";
-import Review from "./pages/Review";
 import Home from "./pages/Home";
 import { ErrorMessage } from "./components/shared/ErrorMessage";
 import { Hearing } from "./pages/hearing/Hearing";
 import { QueryClientProvider } from "react-query";
+import { Review } from "./pages/review/Review";
 
 export const IdTokenContext = createContext("");
 
