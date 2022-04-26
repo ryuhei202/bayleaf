@@ -7,6 +7,6 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/custom-forms")],
   important: true, // semantic-uiに上書きされてしまうので、tailwindcssを最優先にする
 };
