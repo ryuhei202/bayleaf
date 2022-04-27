@@ -4,7 +4,7 @@ type Props = {
   children?: React.ReactNode;
   className?: string;
   onClick?: () => void;
-  variant?: "default" | "primary";
+  variant?: "default" | "primary" | "text";
   disabled?: boolean;
   disableElevation?: boolean;
   border?: boolean;
@@ -65,12 +65,18 @@ export const Button = ({
         switch (variant) {
           case "primary":
             return "bg-midnight text-slate-200 shadow-midnight/40 fill-midnight";
+          case "text":
+            return "text-slate-700";
+          case "default":
           default:
             return "bg-white text-slate-700 fill-white";
         }
       })()
     );
-    classes.push(disableElevation ? "shadow-none" : "shadow-md");
+
+    classes.push(
+      variant == "text" || disableElevation ? "shadow-none" : "shadow-md"
+    );
   }
 
   return (
