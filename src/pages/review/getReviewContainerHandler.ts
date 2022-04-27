@@ -81,7 +81,7 @@ export const getReviewContainerHandler = ({
   const handleReviewReasonFormSubmit = () => {
     const nextReview = reviewFormData.reviews[currentReviewIndex() + 1];
     if (nextReview == undefined) {
-      reviewMutate(reviewCeateParams());
+      reviewMutate(reviewCreateParams());
       // TODO 別タスクでonSuccessの処理実装
     } else {
       setSelectedCoordinateId(nextReview.coordinateId);
@@ -105,7 +105,7 @@ export const getReviewContainerHandler = ({
     setReviewFormData({ reviews: dupReviews });
   };
 
-  const reviewCeateParams = (): TReviewCreateParams => {
+  const reviewCreateParams = (): TReviewCreateParams => {
     const reviews = reviewFormData.reviews.map((data) => {
       return {
         coordinateId: data.coordinateId,
