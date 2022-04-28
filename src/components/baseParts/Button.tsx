@@ -1,4 +1,5 @@
 import React from "react";
+import { Loader } from "semantic-ui-react";
 
 type Props = {
   children?: React.ReactNode;
@@ -10,6 +11,7 @@ type Props = {
   border?: boolean;
   size?: "small" | "medium" | "large" | "none";
   radius?: "small" | "large";
+  isLoading?: boolean;
 };
 
 export const Button = ({
@@ -22,8 +24,15 @@ export const Button = ({
   border,
   size,
   radius,
+  isLoading,
 }: Props) => {
-  let classes: string[] = ["px-3", "w-full", "font-medium", "text-base"];
+  let classes: string[] = [
+    "px-3",
+    "w-full",
+    "font-medium",
+    "text-base",
+    "relative",
+  ];
 
   classes.push(
     (() => {
@@ -82,9 +91,17 @@ export const Button = ({
   return (
     <button
       className={`${className ?? ""} ${classes.join(" ")}`}
-      onClick={onClick}
+      onClick={isLoading ? () => {} : onClick}
     >
-      {children}
+      <span className={isLoading ? "opacity-40" : ""}>{children}</span>
+
+      {isLoading ? (
+        <div className="absolute flex justify-center items-center inset-0">
+          <Loader size="mini" inline active inverted={variant === "primary"} />
+        </div>
+      ) : (
+        <></>
+      )}
     </button>
   );
 };
