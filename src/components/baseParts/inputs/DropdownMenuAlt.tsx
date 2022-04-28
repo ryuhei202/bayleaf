@@ -12,20 +12,11 @@ export const DropdownMenuAlt = ({
   children,
   className,
 }: TProps) => {
-  const classes = [
-    "py-1",
-    "px-2",
-    "w-full",
-    "rounded",
-    "bg-slate-200",
-    "border-solid",
-    "border-2",
-    "border-gray-600",
-    "h-11",
-  ];
   return (
     <select
-      className={`${className ?? ""} ${classes.join(" ")}`}
+      className={`py-1 px-2 w-full rounded bg-slate-200 border-solid border-2 border-gray-600 h-11 ${
+        className ?? ""
+      }`}
       value={value}
       onChange={onChange}
     >
