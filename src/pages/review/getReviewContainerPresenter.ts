@@ -13,6 +13,7 @@ type TReviewContainerPresenter = {
   currentFormType: () => REVIEW_FORM_TYPE;
   displayReasonOptions: () => TReviewOptionResponse[];
   selectedCoordinate: () => TCoordinateResponse;
+  isLastCoordinate: () => boolean;
 };
 
 type TReviewContainerPresenterArgs = {
@@ -74,6 +75,10 @@ export const getReviewContainerPresenter = ({
     return coodinates.find((c) => c.id === selectedCoordinateId)!;
   };
 
+  const isLastCoordinate = () => {
+    return coodinates[coodinates.length - 1].id === selectedCoordinateId;
+  };
+
   return {
     isSatisfiedCurrentReview,
     currentReviewReasonOptionIds,
@@ -82,5 +87,6 @@ export const getReviewContainerPresenter = ({
     currentFormType,
     displayReasonOptions,
     selectedCoordinate,
+    isLastCoordinate,
   };
 };

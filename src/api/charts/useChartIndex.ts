@@ -8,7 +8,7 @@ type TChartIndex = {
 };
 
 export type TChartIndexParams = {
-  readonly rentalStatuses: CHART_RENTAL_STATUS[];
+  readonly rentalStatus: CHART_RENTAL_STATUS[];
 };
 
 type TChartIndexArgs = { params: TChartIndexParams };

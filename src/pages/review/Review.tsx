@@ -14,7 +14,7 @@ export const Review = () => {
     useState<TChartResponse | undefined>(undefined);
   const { data: chartIndexData, error: chartIndexError } = useChartIndex({
     params: {
-      rentalStatuses: [
+      rentalStatus: [
         CHART_RENTAL_STATUS.WAIT_RENTAL_RETURN,
         CHART_RENTAL_STATUS.WAIT_INSPECTION,
         CHART_RENTAL_STATUS.WAIT_WAIT_REVIEW,
