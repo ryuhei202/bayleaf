@@ -11,6 +11,8 @@ type Props = {
   readonly text: string;
   readonly isSatisfied: boolean;
   readonly isValid: boolean;
+  readonly isLastCoordinate: boolean;
+  readonly isLoadingReviewCreate: boolean;
   readonly onClickReasonOption: (optionIds: number) => void;
   readonly onChangeText: (text: string) => void;
   readonly onSubmit: () => void;
@@ -23,6 +25,8 @@ export const ReviewReasonForm = ({
   text,
   isSatisfied,
   isValid,
+  isLastCoordinate,
+  isLoadingReviewCreate,
   onClickReasonOption,
   onChangeText,
   onSubmit,
@@ -80,8 +84,13 @@ export const ReviewReasonForm = ({
           </div>
         </div>
         <div className="flex flex-col space-y-1 bg-white px-5 py-3">
-          <Button onClick={onSubmit} variant="primary" disabled={!isValid}>
-            回答を完了する
+          <Button
+            onClick={onSubmit}
+            variant="primary"
+            disabled={!isValid}
+            isLoading={isLoadingReviewCreate}
+          >
+            {isLastCoordinate ? "回答を完了する" : "次のコーデへ進む"}
           </Button>
 
           <Button onClick={onCancel} variant="text">
