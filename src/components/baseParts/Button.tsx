@@ -1,15 +1,17 @@
 import React from "react";
+import { Loader } from "semantic-ui-react";
 
 type Props = {
   children?: React.ReactNode;
   className?: string;
   onClick?: () => void;
-  variant?: "default" | "primary";
+  variant?: "default" | "primary" | "text";
   disabled?: boolean;
   disableElevation?: boolean;
   border?: boolean;
   size?: "small" | "medium" | "large" | "none";
   radius?: "small" | "large";
+  isLoading?: boolean;
 };
 
 export const Button = ({
@@ -22,8 +24,15 @@ export const Button = ({
   border,
   size,
   radius,
+  isLoading,
 }: Props) => {
-  let classes: string[] = ["px-3", "w-full", "font-medium", "text-base"];
+  let classes: string[] = [
+    "px-3",
+    "w-full",
+    "font-medium",
+    "text-base",
+    "relative",
+  ];
 
   classes.push(
     (() => {
@@ -65,20 +74,34 @@ export const Button = ({
         switch (variant) {
           case "primary":
             return "bg-midnight text-slate-200 shadow-midnight/40 fill-midnight";
+          case "text":
+            return "text-slate-700";
+          case "default":
           default:
             return "bg-white text-slate-700 fill-white";
         }
       })()
     );
-    classes.push(disableElevation ? "shadow-none" : "shadow-md");
+
+    classes.push(
+      variant == "text" || disableElevation ? "shadow-none" : "shadow-md"
+    );
   }
 
   return (
     <button
       className={`${className ?? ""} ${classes.join(" ")}`}
-      onClick={onClick}
+      onClick={isLoading ? () => {} : onClick}
     >
-      {children}
+      <span className={isLoading ? "opacity-40" : ""}>{children}</span>
+
+      {isLoading ? (
+        <div className="absolute flex justify-center items-center inset-0">
+          <Loader size="mini" inline active inverted={variant === "primary"} />
+        </div>
+      ) : (
+        <></>
+      )}
     </button>
   );
 };
