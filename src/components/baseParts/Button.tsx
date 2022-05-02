@@ -84,7 +84,7 @@ export const Button = ({
     );
 
     classes.push(
-      variant == "text" || disableElevation ? "shadow-none" : "shadow-md"
+      variant === "text" || disableElevation ? "shadow-none" : "shadow-md"
     );
   }
 

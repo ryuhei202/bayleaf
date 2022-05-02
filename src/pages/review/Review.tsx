@@ -27,7 +27,7 @@ export const Review = () => {
   }, []);
 
   useEffect(() => {
-    if (chartIndexData == undefined) return;
+    if (chartIndexData === undefined) return;
 
     if (chartIndexData.charts.length === 1)
       setSelectedChart(chartIndexData.charts[0]);

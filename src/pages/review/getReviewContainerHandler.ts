@@ -81,7 +81,7 @@ export const getReviewContainerHandler = ({
 
   const handleReviewReasonFormSubmit = () => {
     const nextReview = reviewFormData.reviews[currentReviewIndex() + 1];
-    if (nextReview == undefined) {
+    if (nextReview === undefined) {
       reviewMutate(reviewCreateParams(), {
         onSuccess: () => {
           liff.closeWindow();
