@@ -13,8 +13,9 @@ export const ImageAlt = ({ imageSrc, className, onClick }: TProps) => {
         src={imageSrc}
         className={`${
           className ?? ""
-        } rounded-md object-contain max-h-full max-w-full w-auto h-auto`}
+        } rounded-md object-contain max-h-full max-w-full w-auto h-auto m-auto`}
         onClick={onClick}
+        alt=""
       />
     </div>
   );

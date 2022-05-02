@@ -1,0 +1,4 @@
+export enum REVIEW_FORM_TYPE {
+  REVIEW,
+  REVIEW_REASON,
+}
