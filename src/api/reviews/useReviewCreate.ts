@@ -22,7 +22,7 @@ export type TReviewCreateParams = {
 };
 
 export const useReviewCreate = (): TReviewCreate => {
-  const { mutate, isLoading } = usePostRequest<TReviewCreateParams>(`reviews`);
+  const { mutate, isLoading } = usePostRequest<TReviewCreateParams>("reviews");
 
   return { mutate, isLoading };
 };
