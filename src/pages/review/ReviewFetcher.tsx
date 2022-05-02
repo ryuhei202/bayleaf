@@ -1,6 +1,7 @@
 import { Loader } from "semantic-ui-react";
 import { useCoordinateIndex } from "../../api/coordinates/useCoordinateIndex";
 import { useReviewOptionIndex } from "../../api/reviews/useReviewOptionIndex";
+import { Typography } from "../../components/baseParts/Typography";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { ReviewContainer } from "./ReviewContainer";
 
@@ -21,9 +22,23 @@ export const ReviewFetcher = ({ chartId }: TProps) => {
 
   if (!coordinateData || !reviewOptionData) return <Loader active />;
 
+  const reviewTargetCoordinates = coordinateData.coordinates.filter(
+    (c) => !c.isReviewed
+  );
+
+  if (reviewTargetCoordinates.length === 0) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Typography>
+          <>レビュー対象のコーデはありません。</>
+        </Typography>
+      </div>
+    );
+  }
+
   return (
     <ReviewContainer
-      coordinateResponses={coordinateData.coodinates}
+      coordinateResponses={reviewTargetCoordinates}
       reviewOptionResponses={reviewOptionData.options}
       reviewReasonOptionResponses={reviewOptionData.reasonOptions}
     />

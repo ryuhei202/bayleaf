@@ -1,3 +1,4 @@
+import liff from "@line/liff/dist/lib";
 import { AxiosResponse } from "axios";
 import { UseMutateFunction } from "react-query/types/react/types";
 import { TReviewCreateParams } from "../../api/reviews/useReviewCreate";
@@ -81,8 +82,11 @@ export const getReviewContainerHandler = ({
   const handleReviewReasonFormSubmit = () => {
     const nextReview = reviewFormData.reviews[currentReviewIndex() + 1];
     if (nextReview == undefined) {
-      reviewMutate(reviewCreateParams());
-      // TODO 別タスクでonSuccessの処理実装
+      reviewMutate(reviewCreateParams(), {
+        onSuccess: () => {
+          liff.closeWindow();
+        },
+      });
     } else {
       setSelectedCoordinateId(nextReview.coordinateId);
     }

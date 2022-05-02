@@ -18,8 +18,7 @@ type Props = {
 const setInitReviewFormData = (
   coordinateResponses: TCoordinateResponse[]
 ): TReviewFormData => {
-  const targetCoodinates = coordinateResponses.filter((c) => !c.isReviewed);
-  const reviews = targetCoodinates.map((coordinate) => {
+  const reviews = coordinateResponses.map((coordinate) => {
     return {
       coordinateId: coordinate.id,
       choices: {
@@ -45,7 +44,7 @@ export const ReviewContainer = ({
     reviewFormData.reviews[0].coordinateId
   );
 
-  const { mutate: reviewMutate, isLoading: isLoadingCreatereview } =
+  const { mutate: reviewMutate, isLoading: isLoadingReviewCreate } =
     useReviewCreate();
 
   const handler = getReviewContainerHandler({
@@ -80,6 +79,8 @@ export const ReviewContainer = ({
           text={presenter.currentReviewReasonText()}
           isSatisfied={presenter.isSatisfiedCurrentReview()}
           isValid={presenter.isValidCurrentReview()}
+          isLastCoordinate={presenter.isLastCoordinate()}
+          isLoadingReviewCreate={isLoadingReviewCreate}
           onClickReasonOption={handler.handleClickReviewReason}
           onSubmit={handler.handleReviewReasonFormSubmit}
           onCancel={handler.handleCanselReviewReason}
