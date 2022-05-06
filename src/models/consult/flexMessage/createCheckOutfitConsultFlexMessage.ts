@@ -1,12 +1,12 @@
-type TCoordinateAnswer = {
+type TCheckOutfitAnswer = {
   itemImageUrls: string[];
 };
 
 /**
- * 着こなし相談のシーンFlexメッセージをJSON文字列で返却
+ * 着こなし相談のFlexメッセージをJSON文字列で返却
  */
-export const createCoordinateConsultFlexMessage = (
-  formAnswer: TCoordinateAnswer
+export const createCheckOutfitConsultFlexMessage = (
+  formAnswer: TCheckOutfitAnswer
 ): string => {
   let flexMessage = {
     type: "bubble",
