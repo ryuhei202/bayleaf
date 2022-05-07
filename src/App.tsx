@@ -8,6 +8,7 @@ import { ErrorMessage } from "./components/shared/ErrorMessage";
 import { Hearing } from "./pages/hearing/Hearing";
 import { QueryClientProvider } from "react-query";
 import { Review } from "./pages/review/Review";
+import { Consult } from "./pages/consult/Consult";
 
 export const IdTokenContext = createContext("");
 
@@ -29,6 +30,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="review" element={<Review />} />
             <Route path="hearing" element={<Hearing />} />
+            <Route path="consult" element={<Consult />} />
           </Routes>
         </StylistIdContext.Provider>
       </IdTokenContext.Provider>
