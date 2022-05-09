@@ -11,7 +11,7 @@ type TAgeAnswer = {
 export const createAgeConsultFlexMessage = (
   formAnswers: TAgeAnswer[]
 ): string => {
-  let flexMessage = {
+  const flexMessage = {
     type: "carousel",
     contents: formAnswers.map((answer) => {
       return {
