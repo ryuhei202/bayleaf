@@ -15,7 +15,7 @@ type TSizeAnswer = {
 export const createSizeConsultFlexMessage = (
   formAnswers: TSizeAnswer[]
 ): string => {
-  let flexMessage = {
+  const flexMessage = {
     type: "carousel",
     contents: formAnswers.map((answer) => {
       return {
