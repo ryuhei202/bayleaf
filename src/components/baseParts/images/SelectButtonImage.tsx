@@ -1,9 +1,10 @@
+import React from "react";
 import { ImageAlt } from "./ImageAlt";
 
 type TProps = {
   imageSrc: string;
   value: string;
-  onChange: () => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string;
 };
 export const SelectButtonImage = ({
