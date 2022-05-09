@@ -13,7 +13,7 @@ type TCombinationAnswer = {
 export const createCombinationConsultFlexMessage = (
   formAnswer: TCombinationAnswer
 ): string => {
-  let contents = [
+  const contents = [
     {
       type: "text",
       text: "■相談内容",
