@@ -11,7 +11,7 @@ type TDesignAnswer = {
 export const createDesignConsultFlexMessage = (
   formAnswers: TDesignAnswer[]
 ): string => {
-  let flexMessage = {
+  const flexMessage = {
     type: "carousel",
     contents: formAnswers.map((answer) => {
       return {
