@@ -8,7 +8,7 @@ type TCheckOutfitAnswer = {
 export const createCheckOutfitConsultFlexMessage = (
   formAnswer: TCheckOutfitAnswer
 ): string => {
-  let flexMessage = {
+  const flexMessage = {
     type: "bubble",
     body: {
       type: "box",
