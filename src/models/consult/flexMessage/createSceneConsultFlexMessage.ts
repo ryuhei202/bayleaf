@@ -9,7 +9,7 @@ type TSceneAnswer = {
 export const createSceneConsultFlexMessage = (
   formAnswer: TSceneAnswer
 ): string => {
-  let flexMessage = {
+  const flexMessage = {
     type: "bubble",
     body: {
       type: "box",
