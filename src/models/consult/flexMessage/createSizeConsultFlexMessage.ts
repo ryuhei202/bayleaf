@@ -1,13 +1,4 @@
-import { TConsultingItem } from "../TConsultingItem";
-
-type TSizeAnswer = {
-  item: TConsultingItem;
-  parts: {
-    name: string;
-    option: string;
-  }[];
-  additionalText?: string;
-};
+import { TSizeAnswer } from "../TSizeAnswer";
 
 /**
  * 着こなし相談のサイズFlexメッセージをJSON文字列で返却
