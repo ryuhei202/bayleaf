@@ -14,25 +14,19 @@ type TProps = {
   >;
 };
 export const ConsultItemList = ({ items, title, setSelectedItems }: TProps) => {
-  const [checkedItemsIndex, setCheckedItemsIndex] = useState<number[]>([]);
+  const [checkedItems, setCheckedItems] = useState<TCoordinateItemResponse[]>(
+    []
+  );
   const handleChange = (
-    index: number,
+    item: TCoordinateItemResponse,
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     if (event.target.checked) {
-      setCheckedItemsIndex([...checkedItemsIndex, index]);
+      setCheckedItems([...checkedItems, item]);
     } else {
-      let newCheckedItemsIndex = [...checkedItemsIndex];
-      setCheckedItemsIndex(newCheckedItemsIndex.filter((i) => i !== index));
+      let newCheckedItems = [...checkedItems];
+      setCheckedItems(newCheckedItems.filter((i) => i.id !== item.id));
     }
-  };
-
-  const onSubmit = () => {
-    let selectedItems: TCoordinateItemResponse[] = [];
-    items.map((item, index) => {
-      if (checkedItemsIndex.includes(index)) selectedItems.push(item);
-    });
-    setSelectedItems(selectedItems);
   };
 
   return (
@@ -48,7 +42,7 @@ export const ConsultItemList = ({ items, title, setSelectedItems }: TProps) => {
                   className="space-x-2 mt-4 ml-auto mr-auto"
                   imageSrc={item.imagePaths.largeThumb}
                   value={""}
-                  onChange={(event) => handleChange(index, event)}
+                  onChange={(event) => handleChange(item, event)}
                 />
                 <Typography
                   className="mt-1 text-center"
@@ -63,7 +57,10 @@ export const ConsultItemList = ({ items, title, setSelectedItems }: TProps) => {
           </div>
         </div>
         <div className="flex flex-col space-y-1 px-5 py-3">
-          <Button onClick={onSubmit} disabled={checkedItemsIndex.length === 0}>
+          <Button
+            onClick={() => setSelectedItems(checkedItems)}
+            disabled={checkedItems.length === 0}
+          >
             次へ
           </Button>
         </div>
