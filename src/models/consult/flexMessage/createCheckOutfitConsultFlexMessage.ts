@@ -1,4 +1,4 @@
-type TCheckOutfitAnswer = {
+export type TCheckOutfitAnswer = {
   itemImageUrls: string[];
 };
 

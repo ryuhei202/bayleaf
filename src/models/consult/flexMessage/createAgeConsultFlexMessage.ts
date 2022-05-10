@@ -1,6 +1,6 @@
 import { TConsultingItem } from "../TConsultingItem";
 
-type TAgeAnswer = {
+export type TAgeAnswer = {
   item: TConsultingItem;
   ageOption: "若く感じた" | "地味に感じた";
 };

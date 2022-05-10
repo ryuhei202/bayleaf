@@ -1,4 +1,4 @@
-type TSceneAnswer = {
+export type TSceneAnswer = {
   itemImageUrls: string[];
   freetext: string;
 };

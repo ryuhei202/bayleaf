@@ -1,6 +1,6 @@
 import { TConsultingItem } from "../TConsultingItem";
 
-type TSizeAnswer = {
+export type TSizeAnswer = {
   item: TConsultingItem;
   parts: {
     name: string;
