@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { TCoordinateItemResponse } from "../../../api/coordinates/TCoordinateItemResponse";
-import { Button } from "../../../components/baseParts/Button";
-import { SelectButtonImage } from "../../../components/baseParts/images/SelectButtonImage";
-import { Page } from "../../../components/baseParts/Page";
-import { PageHeader } from "../../../components/baseParts/PageHeader";
-import { Typography } from "../../../components/baseParts/Typography";
+import { TCoordinateItemResponse } from "../../api/coordinates/TCoordinateItemResponse";
+import { Button } from "../../components/baseParts/Button";
+import { SelectButtonImage } from "../../components/baseParts/images/SelectButtonImage";
+import { Page } from "../../components/baseParts/Page";
+import { PageHeader } from "../../components/baseParts/PageHeader";
+import { Typography } from "../../components/baseParts/Typography";
 
 type TProps = {
   readonly items: TCoordinateItemResponse[];

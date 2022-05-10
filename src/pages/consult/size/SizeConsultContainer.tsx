@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { TCoordinateItemResponse } from "../../../api/coordinates/TCoordinateItemResponse";
-import { ConsultItemList } from "./ConsultItemList";
+import { ConsultItemList } from "../ConsultItemList";
 import { SizeDetailContainer } from "./SizeDetailContainer";
 
 type TProps = {

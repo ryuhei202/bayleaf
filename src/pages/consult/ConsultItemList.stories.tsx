@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { TCoordinateItemResponse } from "../../../api/coordinates/TCoordinateItemResponse";
+import { TCoordinateItemResponse } from "../../api/coordinates/TCoordinateItemResponse";
 import { ConsultItemList } from "./ConsultItemList";
 
 export default {
