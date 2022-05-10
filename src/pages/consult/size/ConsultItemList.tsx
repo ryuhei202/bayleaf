@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { TCoordinateItemResponse } from "../../api/coordinates/TCoordinateItemResponse";
-import { Button } from "../baseParts/Button";
-import { SelectButtonImage } from "../baseParts/images/SelectButtonImage";
-import { Page } from "../baseParts/Page";
-import { PageHeader } from "../baseParts/PageHeader";
-import { Typography } from "../baseParts/Typography";
+import { TCoordinateItemResponse } from "../../../api/coordinates/TCoordinateItemResponse";
+import { Button } from "../../../components/baseParts/Button";
+import { SelectButtonImage } from "../../../components/baseParts/images/SelectButtonImage";
+import { Page } from "../../../components/baseParts/Page";
+import { PageHeader } from "../../../components/baseParts/PageHeader";
+import { Typography } from "../../../components/baseParts/Typography";
 
 type TProps = {
   readonly items: TCoordinateItemResponse[];
@@ -36,7 +36,7 @@ export const ConsultItemList = ({ items, title, setSelectedItems }: TProps) => {
           <PageHeader title={title} className="mb-8" />
           <Typography>気になるアイテムを選択してください</Typography>
           <div className="flex flex-wrap justify-evenly">
-            {items.map((item, index) => (
+            {items.map((item) => (
               <div className="w-[120px]">
                 <SelectButtonImage
                   className="space-x-2 mt-4 ml-auto mr-auto"

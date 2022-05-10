@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { TCoordinateItemResponse } from "../../../api/coordinates/TCoordinateItemResponse";
-import { ConsultItemList } from "../../../components/consult/ConsultItemList";
-import { SizeDetail } from "./SizeDetail";
+import { ConsultItemList } from "./ConsultItemList";
+import { SizeDetailContainer } from "./SizeDetailContainer";
 
 type TProps = {
   readonly items: TCoordinateItemResponse[];
@@ -14,7 +14,7 @@ export const SizeConsultContainer = ({ items }: TProps) => {
   return (
     <>
       {selectedItems.length ? (
-        <SizeDetail selectedItems={selectedItems} />
+        <SizeDetailContainer selectedItems={selectedItems} />
       ) : (
         <ConsultItemList
           items={items}
