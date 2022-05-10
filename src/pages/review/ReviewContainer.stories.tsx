@@ -16,6 +16,8 @@ const Template: ComponentStory<typeof ReviewContainer> = (args) => (
 export const Default = Template.bind({});
 const items: TCoordinateItemResponse[] = [...Array(4)].map(() => {
   return {
+    id: 111111,
+    isTops: true,
     cateSmallName: "シャツ",
     imagePaths: {
       thumb:

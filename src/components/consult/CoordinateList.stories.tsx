@@ -22,6 +22,8 @@ const coordinates: TCoordinateResponse[] = [
     isReviewed: false,
     items: [
       {
+        id: 111111,
+        isTops: false,
         cateSmallName: "チノパンツ",
         imagePaths: {
           original:
@@ -36,6 +38,8 @@ const coordinates: TCoordinateResponse[] = [
         color: "ブラック",
       },
       {
+        id: 111111,
+        isTops: true,
         cateSmallName: "シャツ",
         imagePaths: {
           original:
@@ -50,6 +54,8 @@ const coordinates: TCoordinateResponse[] = [
         color: "ベージュ",
       },
       {
+        id: 111111,
+        isTops: true,
         cateSmallName: "ニット",
         imagePaths: {
           original:
@@ -64,6 +70,8 @@ const coordinates: TCoordinateResponse[] = [
         color: "ブラウン",
       },
       {
+        id: 111111,
+        isTops: true,
         cateSmallName: "裏起毛トレーナー",
         imagePaths: {
           original:
@@ -76,20 +84,6 @@ const coordinates: TCoordinateResponse[] = [
             "https://stg.leeap.jp/files/preregistered_item/166/16615/thumb_IMG_3437.JPG",
         },
         color: "エンジ",
-      },
-      {
-        cateSmallName: "柄カットソー",
-        imagePaths: {
-          original:
-            "https://stg.leeap.jp/files/preregistered_item/167/16783/IMG_3418.JPG",
-          large:
-            "https://stg.leeap.jp/files/preregistered_item/167/16783/large_IMG_3418.JPG",
-          largeThumb:
-            "https://stg.leeap.jp/files/preregistered_item/167/16783/large_thumb_IMG_3418.JPG",
-          thumb:
-            "https://stg.leeap.jp/files/preregistered_item/167/16783/thumb_IMG_3418.JPG",
-        },
-        color: "パープル",
       },
     ],
   },
