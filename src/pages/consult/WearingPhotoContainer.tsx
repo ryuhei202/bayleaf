@@ -1,16 +1,18 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { TImagePathsResponse } from "../../api/shared/TImagePathsResponse";
 import { Page } from "../../components/baseParts/Page";
 import { WearingPhoto } from "./WearingPhoto";
 
 export const WearingPhotoContainer = () => {
-  const [alreadySent, setAlreadySent] = useState<boolean>(false);
+  const [imagePaths, setImagePaths] =
+    useState<TImagePathsResponse | undefined>(undefined);
 
   return (
     <Page>
-      {alreadySent ? (
+      {imagePaths ? (
         <div>AfterConsult</div>
       ) : (
-        <WearingPhoto setAlreadySent={setAlreadySent} />
+        <WearingPhoto setImagePaths={setImagePaths} />
       )}
     </Page>
   );

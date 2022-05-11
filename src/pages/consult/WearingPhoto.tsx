@@ -1,18 +1,20 @@
+import { AxiosResponse } from "axios";
 import { ChangeEventHandler, Dispatch, SetStateAction, useState } from "react";
 import {
   TMemberPhotoCreateParams,
   TMemberPhotoCreateResponse,
   useMemberPhotoCreate,
 } from "../../api/consult/useMemberPhotoCreate";
+import { TImagePathsResponse } from "../../api/shared/TImagePathsResponse";
 import { Button } from "../../components/baseParts/Button";
 import { UploadButton } from "../../components/baseParts/inputs/UploadButton";
 import { MEMBER_PHOTO_CATEGORY_ID } from "../../models/consult/MemberPhotoCategoryId";
 
 type TProps = {
-  setAlreadySent: Dispatch<SetStateAction<boolean>>;
+  setImagePaths: Dispatch<SetStateAction<TImagePathsResponse | undefined>>;
 };
 
-export const WearingPhoto = ({ setAlreadySent }: TProps) => {
+export const WearingPhoto = ({ setImagePaths }: TProps) => {
   const [imageFileName, setImageFileName] = useState<string>("");
   const [imageData, setImageData] = useState<string>("");
   const [preUploadImage, setPreUploadImage] = useState<string>("");
@@ -43,8 +45,10 @@ export const WearingPhoto = ({ setAlreadySent }: TProps) => {
       },
     };
     mutate(params, {
-      onSuccess: (data, error) => {
-        setAlreadySent((b) => !b);
+      onSuccess: (data: AxiosResponse<TMemberPhotoCreateResponse>) => {
+        if (data && data.data) {
+          setImagePaths(data.data.imagePaths);
+        }
       },
     });
   };
