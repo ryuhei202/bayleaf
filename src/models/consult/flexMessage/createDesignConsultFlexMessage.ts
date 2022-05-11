@@ -1,6 +1,6 @@
 import { TConsultingItem } from "../TConsultingItem";
 
-export type TDesignAnswer = {
+type TDesignAnswer = {
   item: TConsultingItem;
   freetext: string;
 };

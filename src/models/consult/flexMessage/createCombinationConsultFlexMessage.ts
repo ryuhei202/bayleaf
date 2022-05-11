@@ -1,4 +1,4 @@
-export type TCombinationAnswer = {
+type TCombinationAnswer = {
   itemImageUrls: string[];
   personalItem?: {
     category: string;
