@@ -13,7 +13,8 @@ type TProps = {
 };
 
 export const WearingPhoto = ({ setAlreadySent }: TProps) => {
-  const [preUploadImageName, setPreUploadImageName] = useState<string>("");
+  const [imageFileName, setImageFileName] = useState<string>("");
+  const [imageData, setImageData] = useState<string>("");
   const [preUploadImage, setPreUploadImage] = useState<string>("");
   const { mutate, isLoading } = useMemberPhotoCreate();
 
@@ -21,11 +22,14 @@ export const WearingPhoto = ({ setAlreadySent }: TProps) => {
     const files = event.target.files;
 
     if (files && files[0]) {
-      setPreUploadImageName(files[0].name);
+      setImageFileName(files[0].name);
       const reader = new FileReader();
       reader.readAsDataURL(files[0]);
+      const imageType = files[0].type;
+
       reader.onload = (e: any) => {
         setPreUploadImage(e.target.result);
+        setImageData(e.target.result.replace(`data:${imageType};base64,`, ""));
       };
     }
   };
@@ -34,8 +38,8 @@ export const WearingPhoto = ({ setAlreadySent }: TProps) => {
     const params: TMemberPhotoCreateParams = {
       image: {
         memberPhotoCategoryId: MEMBER_PHOTO_CATEGORY_ID.WEARING,
-        imageData: preUploadImage,
-        imageFileName: preUploadImageName,
+        imageData: imageData,
+        imageFileName: imageFileName,
       },
     };
     mutate(params, {
@@ -53,11 +57,10 @@ export const WearingPhoto = ({ setAlreadySent }: TProps) => {
       <Button
         onClick={onSubmit}
         isLoading={isLoading}
-        disabled={!preUploadImageName || !preUploadImage}
+        disabled={!imageFileName || !preUploadImage}
       >
         次へ
       </Button>
-      {/* disabled追加 */}
     </div>
   );
 };
