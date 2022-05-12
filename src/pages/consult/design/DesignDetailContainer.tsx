@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { TConsultingItem } from "../../../models/consult/TConsultingItem";
 import { TDesignAnswer } from "../../../models/consult/TDesignAnswer";
+import { DesignDetailForm } from "./DesignDetailForm";
 
 type TProps = {
   selectedItems: TConsultingItem[];
@@ -22,7 +23,11 @@ export const DesignDetailContainer = ({ selectedItems }: TProps) => {
       {selectedItems.length === answeredItems.length ? (
         <>{/* TODO: 別タスクで実装 */}</>
       ) : (
-        <></>
+        <DesignDetailForm
+          selectedItem={selectedItems[currentAnswerItemIndex]}
+          answeredItems={answeredItems}
+          setAnsweredItems={setAnsweredItems}
+        />
       )}
     </>
   );

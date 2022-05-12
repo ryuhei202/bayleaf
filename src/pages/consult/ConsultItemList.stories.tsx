@@ -3,7 +3,7 @@ import { TConsultingItem } from "../../models/consult/TConsultingItem";
 import { ConsultItemList } from "./ConsultItemList";
 
 export default {
-  title: "Consult/Size/ConsultItemList",
+  title: "Consult/ConsultItemList",
   component: ConsultItemList,
 } as ComponentMeta<typeof ConsultItemList>;
 

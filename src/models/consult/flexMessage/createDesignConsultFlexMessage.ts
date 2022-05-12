@@ -67,7 +67,7 @@ export const createDesignConsultFlexMessage = (
                   contents: [
                     {
                       type: "text",
-                      text: answer.freetext,
+                      text: answer.freeText,
                       size: "xxs",
                       wrap: true,
                     },
