@@ -63,6 +63,8 @@ export const SizeDetailSelection = ({
         additionalText: additionalText || undefined,
       },
     ]);
+    setParts([]);
+    setAdditionalText(undefined);
   };
 
   return (
@@ -90,18 +92,22 @@ export const SizeDetailSelection = ({
         {selectedItem.isTops
           ? Object.values(RELATION_PART_AND_BUTTON_TYPE.TOPS).map((item) => (
               <ItemPartSizeSelectButtons
+                key={item.part}
                 item={item}
                 isSelected={isSelected}
                 onPartChanged={onPartChanged}
               />
             ))
-          : Object.values(RELATION_PART_AND_BUTTON_TYPE.BOTTOMS).map((item) => (
-              <ItemPartSizeSelectButtons
-                item={item}
-                isSelected={isSelected}
-                onPartChanged={onPartChanged}
-              />
-            ))}
+          : Object.values(RELATION_PART_AND_BUTTON_TYPE.BOTTOMS).map(
+              (item, index) => (
+                <ItemPartSizeSelectButtons
+                  key={index}
+                  item={item}
+                  isSelected={isSelected}
+                  onPartChanged={onPartChanged}
+                />
+              )
+            )}
       </div>
       <div className="px-5">
         <Typography>その他</Typography>

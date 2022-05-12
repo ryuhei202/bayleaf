@@ -25,7 +25,8 @@ export const ItemPartSizeSelectButtons = ({
       <Typography className="w-[100px] mt-auto mb-auto">{item.part}</Typography>
       {Object.values(item.buttonType).map((buttonType) => (
         <SelectButton
-          className="w-[115px] rounded-sm"
+          key={item.part}
+          className="w-[115px] rounded-sm duration-75"
           selected={isSelected(item.part, buttonType)}
           onClick={() => onPartChanged(item.part, buttonType)}
         >

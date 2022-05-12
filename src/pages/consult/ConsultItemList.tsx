@@ -34,8 +34,8 @@ export const ConsultItemList = ({ items, title, setSelectedItems }: TProps) => {
           <PageHeader title={title} className="mb-8" />
           <Typography>気になるアイテムを選択してください</Typography>
           <div className="flex flex-wrap justify-evenly">
-            {items.map((item) => (
-              <div className="w-[120px]">
+            {items.map((item, index) => (
+              <div className="w-[120px]" key={item.id}>
                 <SelectButtonImage
                   className="space-x-2 mt-4 ml-auto mr-auto"
                   imageSrc={item.imagePaths.largeThumb}

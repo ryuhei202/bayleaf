@@ -27,6 +27,7 @@ export const DesignDetailForm = ({
         freeText,
       },
     ]);
+    setFreeText("");
   };
 
   const onSkip = () => {
@@ -37,6 +38,7 @@ export const DesignDetailForm = ({
         freeText: "",
       },
     ]);
+    setFreeText("");
   };
 
   return (
@@ -71,7 +73,7 @@ export const DesignDetailForm = ({
           <Button onClick={onSubmit} disabled={freeText === ""}>
             次へ
           </Button>
-          <Button onClick={onSkip} variant="text">
+          <Button onClick={onSkip} variant="text" disabled={freeText !== ""}>
             SKIP
           </Button>
         </div>
