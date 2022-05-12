@@ -89,24 +89,18 @@ export const SizeDetailSelection = ({
       <div className="mt-5">
         {selectedItem.isTops
           ? Object.values(RELATION_PART_AND_BUTTON_TYPE.TOPS).map((item) => (
-              <div className="px-6 flex mt-4 ">
-                <Typography className="w-[100px]">{item.part}</Typography>
-                <ItemPartSizeSelectButtons
-                  item={item}
-                  isSelected={isSelected}
-                  onPartChanged={onPartChanged}
-                />
-              </div>
+              <ItemPartSizeSelectButtons
+                item={item}
+                isSelected={isSelected}
+                onPartChanged={onPartChanged}
+              />
             ))
           : Object.values(RELATION_PART_AND_BUTTON_TYPE.BOTTOMS).map((item) => (
-              <div className="px-6 flex mt-4 h-[50px]">
-                <Typography className="w-[100px]">{item.part}</Typography>
-                <ItemPartSizeSelectButtons
-                  item={item}
-                  isSelected={isSelected}
-                  onPartChanged={onPartChanged}
-                />
-              </div>
+              <ItemPartSizeSelectButtons
+                item={item}
+                isSelected={isSelected}
+                onPartChanged={onPartChanged}
+              />
             ))}
       </div>
       <div className="px-5">
