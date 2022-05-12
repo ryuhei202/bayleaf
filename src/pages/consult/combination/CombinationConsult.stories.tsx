@@ -1,5 +1,4 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { TConsultingItem } from "../../../models/consult/TConsultingItem";
 import { CombinationConsult } from "./CombinationConsult";
 
 export default {
