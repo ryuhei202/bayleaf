@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { TConsultingItem } from "../../../models/consult/TConsultingItem";
+import { AfterConsultContainer } from "../AfterConsultContainer";
 import { SceneDetailForm } from "./SceneDetailForm";
 
 type TProps = {
@@ -14,7 +15,7 @@ export const SceneConsultContainer = ({ items }: TProps) => {
   return (
     <>
       {flexMessage ? (
-        <></>
+        <AfterConsultContainer flexMessage={flexMessage} />
       ) : (
         <SceneDetailForm
           itemImageUrls={getItemImageUrls()}
