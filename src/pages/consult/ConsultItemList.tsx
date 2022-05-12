@@ -1,24 +1,22 @@
 import React, { useState } from "react";
-import { TCoordinateItemResponse } from "../../api/coordinates/TCoordinateItemResponse";
 import { Button } from "../../components/baseParts/Button";
 import { SelectButtonImage } from "../../components/baseParts/images/SelectButtonImage";
 import { Page } from "../../components/baseParts/Page";
 import { PageHeader } from "../../components/baseParts/PageHeader";
 import { Typography } from "../../components/baseParts/Typography";
+import { TConsultingItem } from "../../models/consult/TConsultingItem";
 
 type TProps = {
-  readonly items: TCoordinateItemResponse[];
+  readonly items: TConsultingItem[];
   readonly title: React.ReactNode;
   readonly setSelectedItems: React.Dispatch<
-    React.SetStateAction<TCoordinateItemResponse[]>
+    React.SetStateAction<TConsultingItem[]>
   >;
 };
 export const ConsultItemList = ({ items, title, setSelectedItems }: TProps) => {
-  const [checkedItems, setCheckedItems] = useState<TCoordinateItemResponse[]>(
-    []
-  );
+  const [checkedItems, setCheckedItems] = useState<TConsultingItem[]>([]);
   const handleChange = (
-    item: TCoordinateItemResponse,
+    item: TConsultingItem,
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     if (event.target.checked) {

@@ -1,16 +1,14 @@
 import { useState } from "react";
-import { TCoordinateItemResponse } from "../../../api/coordinates/TCoordinateItemResponse";
+import { TConsultingItem } from "../../../models/consult/TConsultingItem";
 import { ConsultItemList } from "../ConsultItemList";
 import { SizeDetailContainer } from "./SizeDetailContainer";
 
 type TProps = {
-  readonly items: TCoordinateItemResponse[];
+  readonly items: TConsultingItem[];
 };
 
 export const SizeConsultContainer = ({ items }: TProps) => {
-  const [selectedItems, setSelectedItems] = useState<TCoordinateItemResponse[]>(
-    []
-  );
+  const [selectedItems, setSelectedItems] = useState<TConsultingItem[]>([]);
   return (
     <>
       {selectedItems.length ? (

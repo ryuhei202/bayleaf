@@ -1,5 +1,4 @@
-import { ChangeEvent, useState } from "react";
-import { TCoordinateItemResponse } from "../../../api/coordinates/TCoordinateItemResponse";
+import { useState } from "react";
 import { Button } from "../../../components/baseParts/Button";
 import { ExpandableImage } from "../../../components/baseParts/images/ExpandableImage";
 import { TextAreaAlt } from "../../../components/baseParts/inputs/TextAreaAlt";
@@ -11,10 +10,11 @@ import {
   ITEM_LENGTH_BUTTON,
   ITEM_SIZE_BUTTON,
 } from "../../../models/consult/SizePartButton";
+import { TConsultingItem } from "../../../models/consult/TConsultingItem";
 import { TSizeAnswer } from "../../../models/consult/TSizeAnswer";
 import { TSizePart } from "../../../models/shared/TSizePart";
 type TProps = {
-  selectedItem: TCoordinateItemResponse;
+  selectedItem: TConsultingItem;
   answeredItems: TSizeAnswer[];
   setAnsweredItems: React.Dispatch<React.SetStateAction<TSizeAnswer[]>>;
 };

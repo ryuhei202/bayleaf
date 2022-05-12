@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { TCoordinateItemResponse } from "../../../api/coordinates/TCoordinateItemResponse";
+import { TConsultingItem } from "../../../models/consult/TConsultingItem";
 import { TSizeAnswer } from "../../../models/consult/TSizeAnswer";
 import { SizeDetailSelection } from "./SizeDetailSelection";
 
 type TProps = {
-  selectedItems: TCoordinateItemResponse[];
+  selectedItems: TConsultingItem[];
 };
 export const SizeDetailContainer = ({ selectedItems }: TProps) => {
   const [answeredItems, setAnsweredItems] = useState<TSizeAnswer[]>([]);
