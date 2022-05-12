@@ -22,7 +22,7 @@ Default.args = {
   ),
   subTitle:
     "コーデを自信を持って着ていただけるように、お悩み内容を確認しスタイリストからご連絡させていただきます。",
-  btnText: "完了",
+  btnText: "LINEへ戻る",
   onClick: () => {},
 };
 
