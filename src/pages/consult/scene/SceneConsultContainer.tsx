@@ -1,12 +1,26 @@
+import { useState } from "react";
 import { TConsultingItem } from "../../../models/consult/TConsultingItem";
+import { SceneDetailForm } from "./SceneDetailForm";
 
 type TProps = {
   readonly items: TConsultingItem[];
 };
 
 export const SceneConsultContainer = ({ items }: TProps) => {
-  const getItemImagePaths = (): string[] => {
+  const [flexMessage, setFlexMessage] = useState<string | null>(null);
+  const getItemImageUrls = (): string[] => {
     return items.map((item) => item.imagePaths.thumb);
   };
-  return <></>;
+  return (
+    <>
+      {flexMessage ? (
+        <></>
+      ) : (
+        <SceneDetailForm
+          itemImageUrls={getItemImageUrls()}
+          setFlexMessage={setFlexMessage}
+        />
+      )}
+    </>
+  );
 };
