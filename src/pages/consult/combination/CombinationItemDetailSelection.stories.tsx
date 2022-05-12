@@ -1,14 +1,15 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { CombinationItemCategorySelection } from "./CombinationItemCategorySelection";
+import { CombinationItemDetailSelection } from "./CombinationItemDetailSelection";
 
 export default {
-  title: "Consult/Combination/CombinationItemCategorySelection",
-  component: CombinationItemCategorySelection,
-} as ComponentMeta<typeof CombinationItemCategorySelection>;
+  title: "Consult/Combination/CombinationItemDetailSelection",
+  component: CombinationItemDetailSelection,
+} as ComponentMeta<typeof CombinationItemDetailSelection>;
 
 const Template: ComponentStory<typeof CombinationItemCategorySelection> = (
   args
-) => <CombinationItemCategorySelection {...args} />;
+) => <CombinationItemDetailSelection {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

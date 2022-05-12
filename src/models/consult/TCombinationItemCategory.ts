@@ -1,5 +1,5 @@
 export const COMBINATION_ITEM_CATEGORY = {
-  OUTOR: "アウター",
+  OUTER: "アウター",
   TOPS: "トップス",
   BOTTOMS: "ボトムス",
   SHOES: "シューズ",

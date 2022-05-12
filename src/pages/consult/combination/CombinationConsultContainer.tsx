@@ -7,6 +7,7 @@ import { TCombinationItemCategory } from "../../../models/consult/TCombinationIt
 import { TConsultingItem } from "../../../models/consult/TConsultingItem";
 import { CombinationConsult } from "./CombinationConsult";
 import { CombinationItemCategorySelection } from "./CombinationItemCategorySelection";
+import { CombinationItemDetailSelection } from "./CombinationItemDetailSelection";
 
 type TProps = {
   readonly items: TConsultingItem[];
@@ -16,7 +17,7 @@ export const CombinationConsultContainer = ({ items }: TProps) => {
     COMBINATION_FORM.IMAGE_SEND
   );
   const [itemCategory, setItemCategory] =
-    useState<TCombinationItemCategory | "">("");
+    useState<TCombinationItemCategory | undefined>(undefined);
   switch (currentFormType) {
     case COMBINATION_FORM.IMAGE_SEND:
       return <CombinationConsult setCurrentFormType={setCurrentFormType} />;
@@ -29,7 +30,7 @@ export const CombinationConsultContainer = ({ items }: TProps) => {
         />
       );
     case COMBINATION_FORM.ITEM_DETAIL:
-      return <></>;
+      return <CombinationItemDetailSelection itemCategory={itemCategory} />;
     default:
       return <></>;
   }

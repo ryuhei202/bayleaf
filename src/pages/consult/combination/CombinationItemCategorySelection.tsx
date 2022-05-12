@@ -16,9 +16,9 @@ type TProps = {
   readonly setCurrentFormType: React.Dispatch<
     React.SetStateAction<TCombiantionForm>
   >;
-  readonly itemCategory: TCombinationItemCategory | "";
+  readonly itemCategory: TCombinationItemCategory | undefined;
   readonly setItemCategory: React.Dispatch<
-    React.SetStateAction<TCombinationItemCategory | "">
+    React.SetStateAction<TCombinationItemCategory | undefined>
   >;
 };
 
@@ -41,14 +41,11 @@ export const CombinationItemCategorySelection = ({
           className="mb-8"
         />
         <Typography color="strong-gray">アイテムのカテゴリ（必須）</Typography>
-
         <DropdownMenuAlt
-          value={itemCategory}
+          value={itemCategory || ""}
           placeholder="アイテムのカテゴリを選択"
           onChange={(event) =>
-            setItemCategory(
-              (event.target.value as TCombinationItemCategory) || ""
-            )
+            setItemCategory(event.target.value as TCombinationItemCategory)
           }
         >
           {Object.values(COMBINATION_ITEM_CATEGORY).map((category) => (
@@ -62,7 +59,7 @@ export const CombinationItemCategorySelection = ({
             onClick={() => setCurrentFormType(COMBINATION_FORM.ITEM_DETAIL)}
             variant="primary"
             className="my-5"
-            disabled={itemCategory === ""}
+            disabled={itemCategory === undefined}
           >
             次へ
           </Button>
