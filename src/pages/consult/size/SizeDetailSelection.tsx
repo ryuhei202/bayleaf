@@ -3,7 +3,6 @@ import { Button } from "../../../components/baseParts/Button";
 import { ExpandableImage } from "../../../components/baseParts/images/ExpandableImage";
 import { TextAreaAlt } from "../../../components/baseParts/inputs/TextAreaAlt";
 import { Page } from "../../../components/baseParts/Page";
-import { SelectButton } from "../../../components/baseParts/SelectButton";
 import { Typography } from "../../../components/baseParts/Typography";
 import { RELATION_PART_AND_BUTTON } from "../../../models/consult/RelationPartAndButton";
 import {
@@ -13,6 +12,7 @@ import {
 import { TConsultingItem } from "../../../models/consult/TConsultingItem";
 import { TSizeAnswer } from "../../../models/consult/TSizeAnswer";
 import { TSizePart } from "../../../models/shared/TSizePart";
+import { ItemPartSizeSelectButtons } from "./ItemPartSizeSelectButtons";
 type TProps = {
   selectedItem: TConsultingItem;
   answeredItems: TSizeAnswer[];
@@ -28,7 +28,7 @@ export const SizeDetailSelection = ({
   const [additionalText, setAdditionalText] =
     useState<string | undefined>(undefined);
 
-  const onPartChanged = (buttonType: string, sizePart: string) => {
+  const onPartChanged = (sizePart: string, buttonType: string) => {
     const newParts = parts.filter((part) => part.name !== sizePart);
     if (buttonType === (ITEM_SIZE_BUTTON.FIT || ITEM_LENGTH_BUTTON.FIT)) {
       return setParts(newParts);
@@ -50,7 +50,7 @@ export const SizeDetailSelection = ({
     }
   };
 
-  const onChangeText = (value: string) => {
+  const onTextChanged = (value: string) => {
     setAdditionalText(value);
   };
 
@@ -91,31 +91,21 @@ export const SizeDetailSelection = ({
           ? Object.values(RELATION_PART_AND_BUTTON.TOPS).map((item) => (
               <div className="px-6 flex mt-4 ">
                 <Typography className="w-[100px]">{item.part}</Typography>
-                {Object.values(item.buttonType).map((buttonType) => (
-                  <SelectButton
-                    className="w-[115px] rounded-sm"
-                    selected={isSelected(item.part, buttonType)}
-                    onClick={() => onPartChanged(buttonType, item.part)}
-                  >
-                    <Typography size="sm" className="text-[12px]">
-                      {buttonType}
-                    </Typography>
-                  </SelectButton>
-                ))}
+                <ItemPartSizeSelectButtons
+                  item={item}
+                  isSelected={isSelected}
+                  onPartChanged={onPartChanged}
+                />
               </div>
             ))
           : Object.values(RELATION_PART_AND_BUTTON.BOTTOMS).map((item) => (
               <div className="px-6 flex mt-4 h-[50px]">
                 <Typography className="w-[100px]">{item.part}</Typography>
-                {Object.values(item.buttonType).map((buttonType) => (
-                  <SelectButton
-                    className="w-[115px] rounded-sm"
-                    selected={isSelected(item.part, buttonType)}
-                    onClick={() => onPartChanged(buttonType, item.part)}
-                  >
-                    <Typography size="sm">{buttonType}</Typography>
-                  </SelectButton>
-                ))}
+                <ItemPartSizeSelectButtons
+                  item={item}
+                  isSelected={isSelected}
+                  onPartChanged={onPartChanged}
+                />
               </div>
             ))}
       </div>
@@ -124,7 +114,7 @@ export const SizeDetailSelection = ({
         <TextAreaAlt
           className="h-28"
           value={additionalText ?? ""}
-          onChange={(event) => onChangeText(event.target.value)}
+          onChange={(event) => onTextChanged(event.target.value)}
           placeholder="上記の選択肢にないサイズの気になる部位がある場合はご入力ください。"
         />
       </div>
