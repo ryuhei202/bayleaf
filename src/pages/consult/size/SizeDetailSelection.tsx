@@ -4,7 +4,7 @@ import { ExpandableImage } from "../../../components/baseParts/images/Expandable
 import { TextAreaAlt } from "../../../components/baseParts/inputs/TextAreaAlt";
 import { Page } from "../../../components/baseParts/Page";
 import { Typography } from "../../../components/baseParts/Typography";
-import { RELATION_PART_AND_BUTTON } from "../../../models/consult/RelationPartAndButton";
+import { RELATION_PART_AND_BUTTON_TYPE } from "../../../models/consult/RelationPartAndButtonType";
 import {
   ITEM_LENGTH_BUTTON,
   ITEM_SIZE_BUTTON,
@@ -88,7 +88,7 @@ export const SizeDetailSelection = ({
       </div>
       <div className="mt-5">
         {selectedItem.isTops
-          ? Object.values(RELATION_PART_AND_BUTTON.TOPS).map((item) => (
+          ? Object.values(RELATION_PART_AND_BUTTON_TYPE.TOPS).map((item) => (
               <div className="px-6 flex mt-4 ">
                 <Typography className="w-[100px]">{item.part}</Typography>
                 <ItemPartSizeSelectButtons
@@ -98,7 +98,7 @@ export const SizeDetailSelection = ({
                 />
               </div>
             ))
-          : Object.values(RELATION_PART_AND_BUTTON.BOTTOMS).map((item) => (
+          : Object.values(RELATION_PART_AND_BUTTON_TYPE.BOTTOMS).map((item) => (
               <div className="px-6 flex mt-4 h-[50px]">
                 <Typography className="w-[100px]">{item.part}</Typography>
                 <ItemPartSizeSelectButtons

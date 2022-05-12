@@ -1,6 +1,6 @@
 import { SelectButton } from "../../../components/baseParts/SelectButton";
 import { Typography } from "../../../components/baseParts/Typography";
-import { BOTTOMS_TYPE, TOPS_TYPE } from "../../../models/consult/SizePart";
+import { TBottoms, TTops } from "../../../models/consult/SizePart";
 import {
   ITEM_LENGTH_BUTTON,
   ITEM_SIZE_BUTTON,
@@ -8,7 +8,7 @@ import {
 
 type TProps = {
   readonly item: {
-    part: TOPS_TYPE | BOTTOMS_TYPE;
+    part: TTops | TBottoms;
     buttonType: typeof ITEM_SIZE_BUTTON | typeof ITEM_LENGTH_BUTTON;
   };
   readonly isSelected: (part: string, buttonType: string) => boolean;

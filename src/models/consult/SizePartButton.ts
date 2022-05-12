@@ -9,7 +9,7 @@ export const ITEM_LENGTH_BUTTON = {
   LONG: "長い",
 } as const;
 
-export type ITEM_SIZE_BUTTON_TYPE =
+export type TItemSizeButton =
   typeof ITEM_SIZE_BUTTON[keyof typeof ITEM_SIZE_BUTTON];
-export type ITEM_LENGTH_BUTTON_TYPE =
+export type TItemLengthButton =
   typeof ITEM_LENGTH_BUTTON[keyof typeof ITEM_LENGTH_BUTTON];
