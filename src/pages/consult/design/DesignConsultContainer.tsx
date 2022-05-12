@@ -1,19 +1,18 @@
 import { useState } from "react";
-import { TCoordinateItemResponse } from "../../../api/coordinates/TCoordinateItemResponse";
+import { TConsultingItem } from "../../../models/consult/TConsultingItem";
 import { ConsultItemList } from "../ConsultItemList";
+import { DesignDetailContainer } from "./DesignDetailContainer";
 
 type TProps = {
-  readonly items: TCoordinateItemResponse[];
+  readonly items: TConsultingItem[];
 };
 
 export const DesignConsultContainer = ({ items }: TProps) => {
-  const [selectedItems, setSelectedItems] = useState<TCoordinateItemResponse[]>(
-    []
-  );
+  const [selectedItems, setSelectedItems] = useState<TConsultingItem[]>([]);
   return (
     <>
       {selectedItems.length ? (
-        <></>
+        <DesignDetailContainer selectedItems={selectedItems} />
       ) : (
         <ConsultItemList
           items={items}
