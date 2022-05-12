@@ -60,7 +60,7 @@ export const SizeDetailSelection = ({
       {
         item: selectedItem,
         parts,
-        additionalText: additionalText ? additionalText : undefined,
+        additionalText: additionalText || undefined,
       },
     ]);
   };
