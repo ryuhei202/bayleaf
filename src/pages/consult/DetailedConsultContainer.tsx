@@ -5,7 +5,7 @@ import {
 } from "../../models/consult/choice/ConsultChoice";
 import { AgeConsultContainer } from "./AgeConsultContainer";
 import { CheckOutfitConsultContainer } from "./CheckOutfitConsultContainer";
-import { CombinationConsultContainer } from "./CombinationConsultContainer";
+import { CombinationConsultContainer } from "./combination/CombinationConsultContainer";
 import { DesignConsultContainer } from "./DesignConsultContainer";
 import { SceneConsultContainer } from "./SceneConsultContainer";
 import { SizeConsultContainer } from "./SizeConsultContainer";
@@ -29,7 +29,7 @@ export const DetailedConsultContainer = ({
     case ConsultChoice.SCENE:
       return <SceneConsultContainer coordinate={coordinate} />;
     case ConsultChoice.CONBINATION:
-      return <CombinationConsultContainer coordinate={coordinate} />;
+      return <CombinationConsultContainer items={coordinate.items} />;
     case ConsultChoice.CHECKOUTFIT:
       return <CheckOutfitConsultContainer coordinate={coordinate} />;
   }
