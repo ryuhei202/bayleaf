@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { TCoordinateItemResponse } from "../../../api/coordinates/TCoordinateItemResponse";
+import { TConsultingItem } from "../../../models/consult/TConsultingItem";
 import { SizeDetailSelection } from "./SizeDetailSelection";
 
 export default {
@@ -13,7 +13,7 @@ const Template: ComponentStory<typeof SizeDetailSelection> = (args) => (
 
 export const Default = Template.bind({});
 
-const selectedItem: TCoordinateItemResponse = {
+const selectedItem: TConsultingItem = {
   id: 111111,
   isTops: true,
   cateSmallName: "シャツ",

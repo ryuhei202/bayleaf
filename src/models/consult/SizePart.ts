@@ -12,5 +12,5 @@ export const BOTTOMS = {
   LENGTH_LEG: "股下",
 } as const;
 
-export type TOPS_TYPE = typeof TOPS[keyof typeof TOPS];
-export type BOTTOMS_TYPE = typeof BOTTOMS[keyof typeof BOTTOMS];
+export type TTops = typeof TOPS[keyof typeof TOPS];
+export type TBottoms = typeof BOTTOMS[keyof typeof BOTTOMS];

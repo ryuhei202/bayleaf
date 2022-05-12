@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { TCoordinateItemResponse } from "../../api/coordinates/TCoordinateItemResponse";
+import { TConsultingItem } from "../../models/consult/TConsultingItem";
 import { ConsultItemList } from "./ConsultItemList";
 
 export default {
@@ -12,7 +12,7 @@ const Template: ComponentStory<typeof ConsultItemList> = (args) => (
 );
 
 export const Default = Template.bind({});
-const items: TCoordinateItemResponse[] = [
+const items: TConsultingItem[] = [
   {
     id: 111111,
     isTops: true,
