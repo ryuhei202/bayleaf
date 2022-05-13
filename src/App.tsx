@@ -15,7 +15,6 @@ Sentry.init({
   dsn: "https://123fe4fd435a42339c28bcb4b55c5874@o1202316.ingest.sentry.io/6401495",
   integrations: [new BrowserTracing()],
   tracesSampleRate: 0,
-  environment: "development",
 });
 
 export const IdTokenContext = createContext("");
