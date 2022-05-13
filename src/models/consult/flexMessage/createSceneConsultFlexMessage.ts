@@ -1,6 +1,6 @@
 type TSceneAnswer = {
   itemImageUrls: string[];
-  freetext: string;
+  freeText: string;
 };
 
 /**
@@ -59,7 +59,7 @@ export const createSceneConsultFlexMessage = (
         },
         {
           type: "text",
-          text: formAnswer.freetext,
+          text: formAnswer.freeText,
           margin: "md",
           size: "xxs",
           wrap: true,
