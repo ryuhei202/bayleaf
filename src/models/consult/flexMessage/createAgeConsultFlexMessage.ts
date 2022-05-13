@@ -1,9 +1,4 @@
-import { TConsultingItem } from "../TConsultingItem";
-
-type TAgeAnswer = {
-  item: TConsultingItem;
-  ageOption: "若く感じた" | "地味に感じた";
-};
+import { TAgeAnswer } from "../TAgeAnswer";
 
 /**
  * 着こなし相談の年齢FlexメッセージをJSON文字列で返却
