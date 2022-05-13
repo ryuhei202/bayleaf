@@ -4,11 +4,11 @@ import {
   ConsultChoiceType,
 } from "../../models/consult/choice/ConsultChoice";
 import { AgeConsultContainer } from "./AgeConsultContainer";
-import { CheckOutfitConsultContainer } from "./CheckOutfitConsultContainer";
 import { CombinationConsultContainer } from "./CombinationConsultContainer";
 import { DesignConsultContainer } from "./DesignConsultContainer";
 import { SceneConsultContainer } from "./SceneConsultContainer";
 import { SizeConsultContainer } from "./SizeConsultContainer";
+import { WearingPhotoContainer } from "./WearingPhotoContainer";
 
 type TProps = {
   selectedConsultOption: ConsultChoiceType;
@@ -31,6 +31,6 @@ export const DetailedConsultContainer = ({
     case ConsultChoice.CONBINATION:
       return <CombinationConsultContainer coordinate={coordinate} />;
     case ConsultChoice.CHECKOUTFIT:
-      return <CheckOutfitConsultContainer coordinate={coordinate} />;
+      return <WearingPhotoContainer items={coordinate.items} />;
   }
 };
