@@ -1,9 +1,10 @@
 type Props = {
+  className?: string;
   uploadType?: "select" | "snap";
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
 };
 
-export const UploadButton = ({ uploadType, onChange }: Props) => {
+export const UploadButton = ({ className, uploadType, onChange }: Props) => {
   const classes: string[] = [
     "block",
     "text-center",
@@ -40,7 +41,7 @@ export const UploadButton = ({ uploadType, onChange }: Props) => {
             onChange={onChange}
           />
         )}
-        <span className={classes.join(" ")}>
+        <span className={`${className ?? ""} ${classes.join(" ")}`}>
           {uploadType === "snap" ? "撮影する" : "画像フォルダから選ぶ"}
         </span>
       </label>
