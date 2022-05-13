@@ -1,4 +1,3 @@
-import { isDisabled } from "@testing-library/user-event/dist/utils";
 import { useState } from "react";
 import { Button } from "../../../components/baseParts/Button";
 import { DropdownMenuAlt } from "../../../components/baseParts/inputs/DropdownMenuAlt";
@@ -6,10 +5,10 @@ import { TextAreaAlt } from "../../../components/baseParts/inputs/TextAreaAlt";
 import { Page } from "../../../components/baseParts/Page";
 import { PageHeader } from "../../../components/baseParts/PageHeader";
 import { Typography } from "../../../components/baseParts/Typography";
+import { createCombinationConsultFlexMessage } from "../../../models/consult/flexMessage/createCombinationConsultFlexMessage";
 import { TCombinationItemCategory } from "../../../models/consult/TCombinationItemCategory";
 import {
-  COMBINATION_ITEM_DETAILS,
-  getItemDetails,
+  CombinationItemDetails,
   TCombinationBagDetails,
   TCombinationBottomsDetails,
   TCombinationHatDetails,
@@ -17,16 +16,23 @@ import {
   TCombinationShoesDetails,
   TCombinationTopsDetails,
 } from "../../../models/consult/TCombinationItemDetails";
+import { TConsultingItem } from "../../../models/consult/TConsultingItem";
 import { TPersonalItem } from "../../../models/consult/TPersonalItem";
 import { COLORS, TColors } from "../../../models/shared/TColors";
 import { PATTERNS, TPatterns } from "../../../models/shared/TPatterns";
 
 type TProps = {
   readonly itemCategory: TCombinationItemCategory | undefined;
+  readonly items: TConsultingItem[];
+  readonly setFlexMessage: React.Dispatch<React.SetStateAction<string | null>>;
 };
-export const CombinationItemDetailSelection = ({ itemCategory }: TProps) => {
+
+export const CombinationItemDetailSelection = ({
+  itemCategory,
+  items,
+  setFlexMessage,
+}: TProps) => {
   const [personalItem, setPersonalItem] = useState<TPersonalItem>({
-    image: undefined,
     cateLargeName: itemCategory,
     cateSmallName: undefined,
     color: undefined,
@@ -45,12 +51,18 @@ export const CombinationItemDetailSelection = ({ itemCategory }: TProps) => {
       return true;
     if (
       !personalItem.additionalText &&
-      (personalItem.cateSmallName === COMBINATION_ITEM_DETAILS.OTHER.OTHERS ||
+      (personalItem.cateSmallName === CombinationItemDetails.OTHER.OTHERS ||
         personalItem.color === COLORS.OTHER ||
         personalItem.pattern === PATTERNS.OTHER)
     )
       return true;
     return false;
+  };
+  const onSubmit = () => {
+    const itemImageUrls = items.map((item) => item.imagePaths.thumb);
+    setFlexMessage(
+      createCombinationConsultFlexMessage({ itemImageUrls, personalItem })
+    );
   };
   return (
     <Page>
@@ -85,16 +97,18 @@ export const CombinationItemDetailSelection = ({ itemCategory }: TProps) => {
               });
             }}
           >
-            {Object.values(getItemDetails(itemCategory)).map((category) => (
+            {Object.values(
+              CombinationItemDetails.getItemDetails(itemCategory)
+            ).map((category) => (
               <option key={category} value={category}>
                 {category}
               </option>
             ))}
             <option
-              key={COMBINATION_ITEM_DETAILS.OTHER.OTHERS}
-              value={COMBINATION_ITEM_DETAILS.OTHER.OTHERS}
+              key={CombinationItemDetails.OTHER.OTHERS}
+              value={CombinationItemDetails.OTHER.OTHERS}
             >
-              {COMBINATION_ITEM_DETAILS.OTHER.OTHERS}
+              {CombinationItemDetails.OTHER.OTHERS}
             </option>
           </DropdownMenuAlt>
         </div>
@@ -156,7 +170,7 @@ export const CombinationItemDetailSelection = ({ itemCategory }: TProps) => {
         </div>
         <div>
           <Button
-            onClick={() => {}}
+            onClick={onSubmit}
             variant="primary"
             className="my-5"
             disabled={isDisabled()}

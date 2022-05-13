@@ -1,11 +1,4 @@
-type TCombinationAnswer = {
-  itemImageUrls: string[];
-  personalItem?: {
-    category: string;
-    color: string;
-    additionalText?: string;
-  };
-};
+import { TCombinationAnswer } from "../TCombinationAnswer";
 
 /**
  * 着こなし相談の私物FlexメッセージをJSON文字列で返却
@@ -61,13 +54,13 @@ export const createCombinationConsultFlexMessage = (
     });
     contents.push({
       type: "text",
-      text: `${formAnswer.personalItem.category}／${formAnswer.personalItem.color}`,
+      text: `${formAnswer.personalItem.cateSmallName}／${formAnswer.personalItem.color}`,
       margin: "md",
       size: "xxs",
       wrap: true,
     });
 
-    if (formAnswer.personalItem.additionalText !== undefined) {
+    if (!!formAnswer.personalItem.additionalText) {
       contents.push({
         type: "text",
         text: "■使いたいアイテムの詳細情報",

@@ -3,7 +3,7 @@ import {
   TCombinationItemCategory,
 } from "./TCombinationItemCategory";
 
-export namespace COMBINATION_ITEM_DETAILS {
+export namespace CombinationItemDetails {
   export const OUTER = {
     JACKET: "ジャケット",
     BLOUSON: "ブルゾン",
@@ -54,45 +54,45 @@ export namespace COMBINATION_ITEM_DETAILS {
   export const OTHER = {
     OTHERS: "その他",
   } as const;
+
+  export const getItemDetails = (
+    itemCategory: TCombinationItemCategory | undefined
+  ):
+    | typeof CombinationItemDetails.OUTER
+    | typeof CombinationItemDetails.TOPS
+    | typeof CombinationItemDetails.BOTTOMS
+    | typeof CombinationItemDetails.SHOES
+    | typeof CombinationItemDetails.BAG
+    | typeof CombinationItemDetails.HAT => {
+    switch (itemCategory) {
+      case COMBINATION_ITEM_CATEGORY.OUTER:
+        return CombinationItemDetails.OUTER;
+      case COMBINATION_ITEM_CATEGORY.TOPS:
+        return CombinationItemDetails.TOPS;
+      case COMBINATION_ITEM_CATEGORY.BOTTOMS:
+        return CombinationItemDetails.BOTTOMS;
+      case COMBINATION_ITEM_CATEGORY.SHOES:
+        return CombinationItemDetails.SHOES;
+      case COMBINATION_ITEM_CATEGORY.BAG:
+        return CombinationItemDetails.BAG;
+      case COMBINATION_ITEM_CATEGORY.HAT:
+        return CombinationItemDetails.HAT;
+      default:
+        throw Error("予期せぬエラーが発生しました");
+    }
+  };
 }
 export type TCombinationOuterDetails =
-  typeof COMBINATION_ITEM_DETAILS.OUTER[keyof typeof COMBINATION_ITEM_DETAILS.OUTER];
+  typeof CombinationItemDetails.OUTER[keyof typeof CombinationItemDetails.OUTER];
 export type TCombinationTopsDetails =
-  typeof COMBINATION_ITEM_DETAILS.TOPS[keyof typeof COMBINATION_ITEM_DETAILS.TOPS];
+  typeof CombinationItemDetails.TOPS[keyof typeof CombinationItemDetails.TOPS];
 export type TCombinationBottomsDetails =
-  typeof COMBINATION_ITEM_DETAILS.BOTTOMS[keyof typeof COMBINATION_ITEM_DETAILS.BOTTOMS];
+  typeof CombinationItemDetails.BOTTOMS[keyof typeof CombinationItemDetails.BOTTOMS];
 export type TCombinationShoesDetails =
-  typeof COMBINATION_ITEM_DETAILS.SHOES[keyof typeof COMBINATION_ITEM_DETAILS.SHOES];
+  typeof CombinationItemDetails.SHOES[keyof typeof CombinationItemDetails.SHOES];
 export type TCombinationBagDetails =
-  typeof COMBINATION_ITEM_DETAILS.BAG[keyof typeof COMBINATION_ITEM_DETAILS.BAG];
+  typeof CombinationItemDetails.BAG[keyof typeof CombinationItemDetails.BAG];
 export type TCombinationHatDetails =
-  typeof COMBINATION_ITEM_DETAILS.HAT[keyof typeof COMBINATION_ITEM_DETAILS.HAT];
+  typeof CombinationItemDetails.HAT[keyof typeof CombinationItemDetails.HAT];
 export type TCombinationOthersDetails =
-  typeof COMBINATION_ITEM_DETAILS.OTHER[keyof typeof COMBINATION_ITEM_DETAILS.OTHER];
-
-export const getItemDetails = (
-  itemCategory: TCombinationItemCategory | undefined
-):
-  | typeof COMBINATION_ITEM_DETAILS.OUTER
-  | typeof COMBINATION_ITEM_DETAILS.TOPS
-  | typeof COMBINATION_ITEM_DETAILS.BOTTOMS
-  | typeof COMBINATION_ITEM_DETAILS.SHOES
-  | typeof COMBINATION_ITEM_DETAILS.BAG
-  | typeof COMBINATION_ITEM_DETAILS.HAT => {
-  switch (itemCategory) {
-    case COMBINATION_ITEM_CATEGORY.OUTER:
-      return COMBINATION_ITEM_DETAILS.OUTER;
-    case COMBINATION_ITEM_CATEGORY.TOPS:
-      return COMBINATION_ITEM_DETAILS.TOPS;
-    case COMBINATION_ITEM_CATEGORY.BOTTOMS:
-      return COMBINATION_ITEM_DETAILS.BOTTOMS;
-    case COMBINATION_ITEM_CATEGORY.SHOES:
-      return COMBINATION_ITEM_DETAILS.SHOES;
-    case COMBINATION_ITEM_CATEGORY.BAG:
-      return COMBINATION_ITEM_DETAILS.BAG;
-    case COMBINATION_ITEM_CATEGORY.HAT:
-      return COMBINATION_ITEM_DETAILS.HAT;
-    default:
-      throw Error("予期せぬエラーが発生しました");
-  }
-};
+  typeof CombinationItemDetails.OTHER[keyof typeof CombinationItemDetails.OTHER];

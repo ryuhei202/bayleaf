@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { TCombinationAnswer } from "../../../models/consult/TCombinationAnswer";
 import {
   COMBINATION_FORM,
   TCombiantionForm,
 } from "../../../models/consult/TCombinationForm";
 import { TCombinationItemCategory } from "../../../models/consult/TCombinationItemCategory";
 import { TConsultingItem } from "../../../models/consult/TConsultingItem";
+import { AfterConsultContainer } from "../AfterConsultContainer";
 import { CombinationConsult } from "./CombinationConsult";
 import { CombinationItemCategorySelection } from "./CombinationItemCategorySelection";
 import { CombinationItemDetailSelection } from "./CombinationItemDetailSelection";
@@ -18,6 +20,12 @@ export const CombinationConsultContainer = ({ items }: TProps) => {
   );
   const [itemCategory, setItemCategory] =
     useState<TCombinationItemCategory | undefined>(undefined);
+  const [flexMessage, setFlexMessage] = useState<string | null>(null);
+
+  if (flexMessage) {
+    return <AfterConsultContainer flexMessage={flexMessage} />;
+  }
+
   switch (currentFormType) {
     case COMBINATION_FORM.IMAGE_SEND:
       return <CombinationConsult setCurrentFormType={setCurrentFormType} />;
@@ -30,7 +38,13 @@ export const CombinationConsultContainer = ({ items }: TProps) => {
         />
       );
     case COMBINATION_FORM.ITEM_DETAIL:
-      return <CombinationItemDetailSelection itemCategory={itemCategory} />;
+      return (
+        <CombinationItemDetailSelection
+          itemCategory={itemCategory}
+          items={items}
+          setFlexMessage={setFlexMessage}
+        />
+      );
     default:
       return <></>;
   }
