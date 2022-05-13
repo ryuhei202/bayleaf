@@ -15,6 +15,7 @@ Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DSN,
   integrations: [new BrowserTracing()],
   tracesSampleRate: 0,
+  environment: process.env.REACT_APP_ENV,
 });
 
 export const IdTokenContext = createContext("");
