@@ -1,6 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
-import { useImageUploadHandler } from "../../hooks/handler/image/useImageUploadHandler";
 import { ImageUploader } from "./ImageUploader";
 
 export default {
