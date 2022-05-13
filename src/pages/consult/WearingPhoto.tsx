@@ -1,5 +1,6 @@
 import { AxiosResponse } from "axios";
-import { ChangeEventHandler, Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
+
 import {
   TMemberPhotoCreateParams,
   TMemberPhotoCreateResponse,
@@ -7,63 +8,79 @@ import {
 } from "../../api/consult/useMemberPhotoCreate";
 import { TImagePathsResponse } from "../../api/shared/TImagePathsResponse";
 import { Button } from "../../components/baseParts/Button";
-import { UploadButton } from "../../components/baseParts/inputs/UploadButton";
+import { ImageAlt } from "../../components/baseParts/images/ImageAlt";
+import { ImageUploader } from "../../components/baseParts/ImageUploader";
+import { PageHeader } from "../../components/baseParts/PageHeader";
+import { Typography } from "../../components/baseParts/Typography";
+import { useImageUploadHandler } from "../../hooks/handler/image/useImageUploadHandler";
 import { MEMBER_PHOTO_CATEGORY_ID } from "../../models/consult/MemberPhotoCategoryId";
+import { TConsultingItem } from "../../models/consult/TConsultingItem";
 
 type TProps = {
-  setImagePaths: Dispatch<SetStateAction<TImagePathsResponse | undefined>>;
+  items: TConsultingItem[];
+  setUploadedImagePaths: Dispatch<
+    SetStateAction<TImagePathsResponse | undefined>
+  >;
 };
 
-export const WearingPhoto = ({ setImagePaths }: TProps) => {
-  const [imageFileName, setImageFileName] = useState<string>("");
-  const [imageData, setImageData] = useState<string>("");
-  const [preUploadImage, setPreUploadImage] = useState<string>("");
+export const WearingPhoto = ({ items, setUploadedImagePaths }: TProps) => {
+  const { imageFileName, imageData, preUploadImage, onChangeFile } =
+    useImageUploadHandler();
   const { mutate, isLoading } = useMemberPhotoCreate();
 
-  const onChangeFile: ChangeEventHandler<HTMLInputElement> = (event) => {
-    const files = event.target.files;
-
-    if (files && files[0]) {
-      setImageFileName(files[0].name);
-      const reader = new FileReader();
-      reader.readAsDataURL(files[0]);
-      const imageType = files[0].type;
-
-      reader.onload = (e: any) => {
-        setPreUploadImage(e.target.result);
-        setImageData(e.target.result.replace(`data:${imageType};base64,`, ""));
+  const onSubmit = () => {
+    if (imageData && imageFileName) {
+      const params: TMemberPhotoCreateParams = {
+        image: {
+          memberPhotoCategoryId: MEMBER_PHOTO_CATEGORY_ID.WEARING,
+          imageData: imageData,
+          imageFileName: imageFileName,
+        },
       };
+      mutate(params, {
+        onSuccess: (data: AxiosResponse<TMemberPhotoCreateResponse>) => {
+          if (data && data.data) {
+            setUploadedImagePaths(data.data.imagePaths);
+          }
+        },
+      });
     }
   };
 
-  const onSubmit = () => {
-    const params: TMemberPhotoCreateParams = {
-      image: {
-        memberPhotoCategoryId: MEMBER_PHOTO_CATEGORY_ID.WEARING,
-        imageData: imageData,
-        imageFileName: imageFileName,
-      },
-    };
-    mutate(params, {
-      onSuccess: (data: AxiosResponse<TMemberPhotoCreateResponse>) => {
-        if (data && data.data) {
-          setImagePaths(data.data.imagePaths);
-        }
-      },
-    });
-  };
-
   return (
-    <div className="content-center">
-      <img src={preUploadImage} />
-      <UploadButton uploadType="select" onChange={onChangeFile} />
-      <UploadButton uploadType="snap" onChange={onChangeFile} />
+    <div className="m-8">
+      <PageHeader title="着用写真を送ってください" />
+      <Typography className="my-6">
+        以下のアイテムを着用している写真を送ってください。
+        <br />
+        着用写真をもとにサイズ感や着こなしを確認します。
+      </Typography>
+
+      <div className="flex h-[150px] justify-center space-x-3 mt-4">
+        {items.map((item) => {
+          return <ImageAlt imageSrc={item.imagePaths.large} />;
+        })}
+      </div>
+      <hr className="border-none h-1 bg-gray-400 my-5" />
+
+      <ImageUploader onChange={onChangeFile} preUploadImage={preUploadImage} />
+
       <Button
         onClick={onSubmit}
         isLoading={isLoading}
-        disabled={!imageFileName || !preUploadImage}
+        disabled={!imageFileName && !imageData}
       >
         次へ
+      </Button>
+      <Button
+        variant="text"
+        className="mt-4 px-10"
+        onClick={() => {}}
+        disabled={!!imageFileName && !!imageData}
+      >
+        <Typography className="text-lg text-indigo-900 underline underline-offset-4">
+          あとで着用写真を送る
+        </Typography>
       </Button>
     </div>
   );
