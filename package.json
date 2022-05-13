@@ -6,6 +6,8 @@
     "@bugsnag/js": "^7.14.1",
     "@bugsnag/plugin-react": "^7.14.0",
     "@line/liff": "^2.18.0",
+    "@sentry/react": "^6.19.7",
+    "@sentry/tracing": "^6.19.7",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
