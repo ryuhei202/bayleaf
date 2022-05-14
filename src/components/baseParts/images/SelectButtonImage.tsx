@@ -1,9 +1,10 @@
+import React from "react";
 import { ImageAlt } from "./ImageAlt";
 
 type TProps = {
   imageSrc: string;
   value: string;
-  onChange: () => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string;
 };
 export const SelectButtonImage = ({
@@ -13,7 +14,7 @@ export const SelectButtonImage = ({
   className,
 }: TProps) => {
   return (
-    <div className={`w-full relative ${className ?? ""}`}>
+    <div className={`w-fit relative ${className ?? ""}`}>
       <input
         type="checkbox"
         className="form-checkbox absolute right-1.5 bottom-1.5 rounded-full text-gray-600 focus:outline-none h-5 w-5"
