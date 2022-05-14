@@ -29,7 +29,6 @@ export const useAppInitializer = () => {
       });
     }
   }, []);
-  const ErrorBoundary = Bugsnag.getPlugin("react")?.createErrorBoundary(React);
 
   // GoogleAnalyticsを呼び出す
   useEffect(() => {
@@ -74,7 +73,6 @@ export const useAppInitializer = () => {
     lineIdToken,
     stylistId,
     liffErrorMessage,
-    ErrorBoundary,
     queryClient,
   };
 };
