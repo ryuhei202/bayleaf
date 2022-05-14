@@ -3,6 +3,7 @@ import {
   ConsultChoice,
   ConsultChoiceType,
 } from "../../models/consult/choice/ConsultChoice";
+import { createCheckOutfitConsultFlexMessage } from "../../models/consult/flexMessage/createCheckOutfitConsultFlexMessage";
 import { AgeConsultContainer } from "./AgeConsultContainer";
 import { CombinationConsultContainer } from "./CombinationConsultContainer";
 import { DesignConsultContainer } from "./DesignConsultContainer";
@@ -31,6 +32,15 @@ export const DetailedConsultContainer = ({
     case ConsultChoice.CONBINATION:
       return <CombinationConsultContainer coordinate={coordinate} />;
     case ConsultChoice.CHECKOUTFIT:
-      return <WearingPhotoContainer items={coordinate.items} />;
+      return (
+        <WearingPhotoContainer
+          items={coordinate.items}
+          flexMessage={createCheckOutfitConsultFlexMessage({
+            itemImageUrls: coordinate.items.map(
+              (item) => item.imagePaths.original
+            ),
+          })}
+        />
+      );
   }
 };
