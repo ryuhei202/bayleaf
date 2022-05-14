@@ -1,52 +1,31 @@
-import { AxiosResponse } from "axios";
-import { Dispatch, SetStateAction } from "react";
+import { ChangeEventHandler } from "react";
 
-import {
-  TMemberPhotoCreateParams,
-  TMemberPhotoCreateResponse,
-  useMemberPhotoCreate,
-} from "../../api/consult/useMemberPhotoCreate";
-import { TImagePathsResponse } from "../../api/shared/TImagePathsResponse";
 import { Button } from "../../components/baseParts/Button";
 import { ImageAlt } from "../../components/baseParts/images/ImageAlt";
 import { ImageUploader } from "../../components/baseParts/ImageUploader";
 import { PageHeader } from "../../components/baseParts/PageHeader";
 import { Typography } from "../../components/baseParts/Typography";
-import { useImageUploadHandler } from "../../hooks/handler/image/useImageUploadHandler";
-import { MEMBER_PHOTO_CATEGORY_ID } from "../../models/consult/MemberPhotoCategoryId";
 import { TConsultingItem } from "../../models/consult/TConsultingItem";
 
 type TProps = {
   items: TConsultingItem[];
-  setUploadedImagePaths: Dispatch<
-    SetStateAction<TImagePathsResponse | undefined>
-  >;
+  preUploadImage: string;
+  imageFileName: string;
+  imageData: string;
+  onChangeFile: ChangeEventHandler<HTMLInputElement>;
+  onSubmit: () => void;
+  isLoading: boolean;
 };
 
-export const WearingPhoto = ({ items, setUploadedImagePaths }: TProps) => {
-  const { imageFileName, imageData, preUploadImage, onChangeFile } =
-    useImageUploadHandler();
-  const { mutate, isLoading } = useMemberPhotoCreate();
-
-  const onSubmit = () => {
-    if (imageData && imageFileName) {
-      const params: TMemberPhotoCreateParams = {
-        image: {
-          memberPhotoCategoryId: MEMBER_PHOTO_CATEGORY_ID.WEARING,
-          imageData: imageData,
-          imageFileName: imageFileName,
-        },
-      };
-      mutate(params, {
-        onSuccess: (data: AxiosResponse<TMemberPhotoCreateResponse>) => {
-          if (data && data.data) {
-            setUploadedImagePaths(data.data.imagePaths);
-          }
-        },
-      });
-    }
-  };
-
+export const WearingPhoto = ({
+  items,
+  preUploadImage,
+  imageFileName,
+  imageData,
+  onChangeFile,
+  onSubmit,
+  isLoading,
+}: TProps) => {
   return (
     <div className="m-8">
       <PageHeader title="着用写真を送ってください" />
