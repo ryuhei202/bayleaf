@@ -15,6 +15,7 @@ type TProps = {
   onChangeFile: ChangeEventHandler<HTMLInputElement>;
   onSubmit: () => void;
   isLoading: boolean;
+  onSkip: () => void;
 };
 
 export const WearingPhoto = ({
@@ -25,6 +26,7 @@ export const WearingPhoto = ({
   onChangeFile,
   onSubmit,
   isLoading,
+  onSkip,
 }: TProps) => {
   return (
     <div className="m-8">
@@ -54,7 +56,7 @@ export const WearingPhoto = ({
       <Button
         variant="text"
         className="mt-4 px-10"
-        onClick={() => {}}
+        onClick={onSkip}
         disabled={!!imageFileName && !!imageData}
       >
         <Typography className="text-lg text-indigo-900 underline underline-offset-4">

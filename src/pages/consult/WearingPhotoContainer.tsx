@@ -22,17 +22,21 @@ type TProps = {
 export const WearingPhotoContainer = ({ items, flexMessage }: TProps) => {
   const [uploadedImagePaths, setUploadedImagePaths] =
     useState<TImagePathsResponse | undefined>(undefined);
-
-  if (uploadedImagePaths)
-    return (
-      <Page>
-        <AfterConsultContainer flexMessage={flexMessage} />
-      </Page>
-    );
-
+  const [isSkipped, setIsSkipped] = useState<boolean>(false);
   const { imageFileName, imageData, preUploadImage, onChangeFile } =
     useImageUploadHandler();
   const { mutate, isLoading } = useMemberPhotoCreate();
+
+  if (uploadedImagePaths || isSkipped)
+    return (
+      <Page>
+        <AfterConsultContainer
+          flexMessage={flexMessage}
+          wearingPhoto={uploadedImagePaths}
+        />
+      </Page>
+    );
+
   const onSubmit = () => {
     if (imageData && imageFileName) {
       const params: TMemberPhotoCreateParams = {
@@ -52,6 +56,8 @@ export const WearingPhotoContainer = ({ items, flexMessage }: TProps) => {
     }
   };
 
+  const onSkip = () => setIsSkipped(true);
+
   return (
     <Page>
       <WearingPhoto
@@ -62,6 +68,7 @@ export const WearingPhotoContainer = ({ items, flexMessage }: TProps) => {
         onChangeFile={onChangeFile}
         onSubmit={onSubmit}
         isLoading={isLoading}
+        onSkip={onSkip}
       />
     </Page>
   );
