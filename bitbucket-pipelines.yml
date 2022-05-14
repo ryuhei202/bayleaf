@@ -21,7 +21,6 @@ pipelines:
                 DEBUG: "true"
       - step:
           name: Create Release in Sentry
-          deployment: staging
           script:
             - pipe: sentryio/sentry-new-release:0.3.0
               variables:
@@ -49,7 +48,6 @@ pipelines:
                 DEBUG: "true"
       - step:
           name: Create Release in Sentry
-          deployment: production
           script:
             - pipe: sentryio/sentry-new-release:0.3.0
               variables:
