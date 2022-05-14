@@ -1,7 +1,7 @@
 import { ChangeEventHandler } from "react";
 import { ImageAlt } from "./images/ImageAlt";
 import { UploadButton } from "./inputs/UploadButton";
-import DefaultSrc from "../../images/image.png";
+import DefaultSrc from "../../images/upload_preview.png";
 
 type Props = {
   onChange?: ChangeEventHandler<HTMLInputElement>;
