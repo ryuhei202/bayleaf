@@ -16,18 +16,22 @@ export const AfterConsultContainer = ({
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | undefined>(undefined);
 
-  let photoMessage;
+  const additionalMessage =
+    wearingPhoto !== undefined
+      ? {
+          type: "image",
+          originalContentUrl: wearingPhoto.large,
+          previewImageUrl: wearingPhoto.largeThumb,
+        }
+      : {
+          type: "text",
+          text: "> 「あとで着用写真を送信します」を選択しました。",
+        };
 
-  if (wearingPhoto) {
-    photoMessage = {
-      type: "image",
-      originalContentUrl: wearingPhoto.large,
-      previewImageUrl: wearingPhoto.largeThumb,
-    };
-  }
-  const parseFlexMessage = photoMessage
-    ? [JSON.parse(flexMessage), photoMessage]
+  const parseFlexMessage = additionalMessage
+    ? [JSON.parse(flexMessage), additionalMessage]
     : [JSON.parse(flexMessage)];
+  console.log(parseFlexMessage);
 
   liff
     .sendMessages(parseFlexMessage)
@@ -40,7 +44,7 @@ export const AfterConsultContainer = ({
 
   if (error) return <ErrorMessage message={error.message} />;
   if (isLoading) return <Loader active />;
-  return (
+  return wearingPhoto ? (
     <AfterConsult
       title={
         <>
@@ -50,6 +54,19 @@ export const AfterConsultContainer = ({
         </>
       }
       subTitle="コーデを自信を持って着ていただけるように、お悩み内容を確認しスタイリストからご連絡させていただきます。"
+      btnText="LINEへ戻る"
+      onClick={() => liff.closeWindow()}
+    />
+  ) : (
+    <AfterConsult
+      title={
+        <>
+          LINEで相談したいアイテムの
+          <br />
+          着用写真をお送りください！
+        </>
+      }
+      subTitle="ご相談したいアイテムの着用写真をお送り次第、スタイリストからLINEでご相談内容を詳しく伺います。"
       btnText="LINEへ戻る"
       onClick={() => liff.closeWindow()}
     />
