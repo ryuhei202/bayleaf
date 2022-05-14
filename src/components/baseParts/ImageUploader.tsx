@@ -1,6 +1,7 @@
 import { ChangeEventHandler } from "react";
 import { ImageAlt } from "./images/ImageAlt";
 import { UploadButton } from "./inputs/UploadButton";
+import DefaultSrc from "../../images/image.png";
 
 type Props = {
   onChange?: ChangeEventHandler<HTMLInputElement>;
@@ -15,11 +16,7 @@ export const ImageUploader = ({
 }: Props) => {
   return (
     <div className={className ?? ""}>
-      <ImageAlt
-        imageSrc={
-          preUploadImage ?? "https://placehold.jp/1478x1108.png"
-        } /** TODO: 差し替え */
-      />
+      <ImageAlt imageSrc={preUploadImage ?? DefaultSrc} />
       <UploadButton uploadType="select" onChange={onChange} className="my-3" />
       <UploadButton uploadType="snap" onChange={onChange} className="my-3" />
     </div>
