@@ -39,18 +39,7 @@ function App() {
     </QueryClientProvider>
   );
   if (lineIdToken) {
-    return (
-      <Sentry.ErrorBoundary>
-        <button
-          onClick={() => {
-            throw new Error("Break the world");
-          }}
-        >
-          Break the world
-        </button>
-        {app}
-      </Sentry.ErrorBoundary>
-    );
+    return <Sentry.ErrorBoundary>{app}</Sentry.ErrorBoundary>;
   }
   if (liffErrorMessage) {
     return <ErrorMessage message={liffErrorMessage} />;
