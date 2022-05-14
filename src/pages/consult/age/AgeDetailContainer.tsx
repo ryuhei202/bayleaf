@@ -11,11 +11,11 @@ type TProps = {
 
 export const AgeDetailContainer = ({ selectedItems }: TProps) => {
   const [answeredItems, setAnsweredItems] = useState<TAgeAnswer[]>([]);
-  const currentItem = selectedItems[answeredItems.length];
 
   if (answeredItems.length === selectedItems.length)
     return <>{/** 別タスクで実装 */}</>;
 
+  const currentItem = selectedItems[answeredItems.length];
   return (
     <AgeDetailSelection
       selectedItem={currentItem}
