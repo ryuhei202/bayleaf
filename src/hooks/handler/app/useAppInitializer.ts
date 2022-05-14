@@ -1,6 +1,5 @@
 import Bugsnag from "@bugsnag/js";
 import BugsnagPluginReact from "@bugsnag/plugin-react";
-import React from "react";
 import { useEffect, useState } from "react";
 import liff from "@line/liff";
 import { useLocation, useSearchParams } from "react-router-dom";
