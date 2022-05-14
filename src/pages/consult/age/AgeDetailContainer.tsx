@@ -1,4 +1,7 @@
-import { useAgeAnswerHandler } from "../../../hooks/handler/consult/useAgeAnswerHandler";
+import { useState } from "react";
+
+import { TAGE_CHOICES } from "../../../models/consult/choice/AgeChoice";
+import { TAgeAnswer } from "../../../models/consult/TAgeAnswer";
 import { TConsultingItem } from "../../../models/consult/TConsultingItem";
 import { AgeDetailSelection } from "./AgeDetailSelection";
 
@@ -7,27 +10,21 @@ type TProps = {
 };
 
 export const AgeDetailContainer = ({ selectedItems }: TProps) => {
-  const {
-    answeredItems,
-    setAnsweredItems,
-    currentAnswerItemIndex,
-    handleCurrentAnswerItemIndex,
-  } = useAgeAnswerHandler(selectedItems);
+  const [answeredItems, setAnsweredItems] = useState<TAgeAnswer[]>([]);
+  const currentItem = selectedItems[answeredItems.length];
+
+  if (answeredItems.length === selectedItems.length)
+    return <>{/** 別タスクで実装 */}</>;
 
   return (
-    <>
-      {answeredItems.length === selectedItems.length ? (
-        {
-          /** 別タスクで実装 */
-        }
-      ) : (
-        <AgeDetailSelection
-          selectedItem={selectedItems[currentAnswerItemIndex]}
-          answeredItems={answeredItems}
-          setAnsweredItems={setAnsweredItems}
-          handleCurrentAnswerItemIndex={handleCurrentAnswerItemIndex}
-        />
-      )}
-    </>
+    <AgeDetailSelection
+      selectedItem={currentItem}
+      onSelect={(ageOption: TAGE_CHOICES) => {
+        setAnsweredItems([
+          ...answeredItems,
+          { item: currentItem, ageOption: ageOption },
+        ]);
+      }}
+    />
   );
 };

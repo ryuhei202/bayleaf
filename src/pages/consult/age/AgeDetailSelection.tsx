@@ -1,5 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
-
 import { Button } from "../../../components/baseParts/Button";
 import { ExpandableImage } from "../../../components/baseParts/images/ExpandableImage";
 import { Page } from "../../../components/baseParts/Page";
@@ -8,30 +6,14 @@ import {
   AGE_CHOICES,
   TAGE_CHOICES,
 } from "../../../models/consult/choice/AgeChoice";
-import { TAgeAnswer } from "../../../models/consult/TAgeAnswer";
 import { TConsultingItem } from "../../../models/consult/TConsultingItem";
 
 type TProps = {
   selectedItem: TConsultingItem;
-  answeredItems: TAgeAnswer[];
-  setAnsweredItems: Dispatch<SetStateAction<TAgeAnswer[]>>;
-  handleCurrentAnswerItemIndex: () => void;
+  onSelect: (choice: TAGE_CHOICES) => void;
 };
 
-export const AgeDetailSelection = ({
-  selectedItem,
-  answeredItems,
-  setAnsweredItems,
-  handleCurrentAnswerItemIndex,
-}: TProps) => {
-  const onClickChoice = (ageOption: TAGE_CHOICES) => {
-    setAnsweredItems([
-      ...answeredItems,
-      { item: selectedItem, ageOption: ageOption },
-    ]);
-    handleCurrentAnswerItemIndex();
-  };
-
+export const AgeDetailSelection = ({ selectedItem, onSelect }: TProps) => {
   return (
     <Page>
       <div className="px-5">
@@ -55,7 +37,7 @@ export const AgeDetailSelection = ({
             <Button
               className="my-3"
               variant="primary"
-              onClick={() => onClickChoice(choice)}
+              onClick={() => onSelect(choice)}
             >
               {choice}
             </Button>
