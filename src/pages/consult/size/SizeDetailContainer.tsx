@@ -34,7 +34,7 @@ export const SizeDetailContainer = ({ selectedItems }: TProps) => {
       ) : (
         <SizeDetailSelection
           selectedItem={selectedItems[currentAnswerItemIndex]}
-          handleSubmit={handleSubmit}
+          onSubmit={handleSubmit}
         />
       )}
     </>

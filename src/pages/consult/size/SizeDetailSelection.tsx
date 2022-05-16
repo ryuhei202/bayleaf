@@ -14,13 +14,10 @@ import { TSizePart } from "../../../models/shared/TSizePart";
 import { ItemPartSizeSelectButtons } from "./ItemPartSizeSelectButtons";
 type TProps = {
   selectedItem: TConsultingItem;
-  handleSubmit: (
-    parts: TSizePart[],
-    additionalText: string | undefined
-  ) => void;
+  onSubmit: (parts: TSizePart[], additionalText: string | undefined) => void;
 };
 
-export const SizeDetailSelection = ({ selectedItem, handleSubmit }: TProps) => {
+export const SizeDetailSelection = ({ selectedItem, onSubmit }: TProps) => {
   const [parts, setParts] = useState<TSizePart[]>([]);
   const [additionalText, setAdditionalText] =
     useState<string | undefined>(undefined);
@@ -107,7 +104,7 @@ export const SizeDetailSelection = ({ selectedItem, handleSubmit }: TProps) => {
       </div>
       <div className="p-5">
         <Button
-          onClick={() => handleSubmit(parts, additionalText)}
+          onClick={() => onSubmit(parts, additionalText)}
           disabled={parts.length || !!additionalText ? false : true}
         >
           次へ
