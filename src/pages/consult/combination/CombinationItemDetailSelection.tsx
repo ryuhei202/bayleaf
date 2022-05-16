@@ -5,7 +5,6 @@ import { TextAreaAlt } from "../../../components/baseParts/inputs/TextAreaAlt";
 import { Page } from "../../../components/baseParts/Page";
 import { PageHeader } from "../../../components/baseParts/PageHeader";
 import { Typography } from "../../../components/baseParts/Typography";
-import { createCombinationConsultFlexMessage } from "../../../models/consult/flexMessage/createCombinationConsultFlexMessage";
 import { TCombinationItemCategory } from "../../../models/consult/TCombinationItemCategory";
 import {
   CombinationItemDetails,
@@ -16,21 +15,18 @@ import {
   TCombinationShoesDetails,
   TCombinationTopsDetails,
 } from "../../../models/consult/TCombinationItemDetails";
-import { TConsultingItem } from "../../../models/consult/TConsultingItem";
 import { TPersonalItem } from "../../../models/consult/TPersonalItem";
 import { COLORS, TColors } from "../../../models/shared/TColors";
 import { PATTERNS, TPatterns } from "../../../models/shared/TPatterns";
 
 type TProps = {
   readonly itemCategory: TCombinationItemCategory | undefined;
-  readonly items: TConsultingItem[];
-  readonly setFlexMessage: React.Dispatch<React.SetStateAction<string | null>>;
+  readonly onSubmit: (personalItem: TPersonalItem) => void;
 };
 
 export const CombinationItemDetailSelection = ({
   itemCategory,
-  items,
-  setFlexMessage,
+  onSubmit,
 }: TProps) => {
   const [personalItem, setPersonalItem] = useState<TPersonalItem>({
     cateLargeName: itemCategory,
@@ -58,12 +54,7 @@ export const CombinationItemDetailSelection = ({
       return true;
     return false;
   };
-  const onSubmit = () => {
-    const itemImageUrls = items.map((item) => item.imagePaths.thumb);
-    setFlexMessage(
-      createCombinationConsultFlexMessage({ itemImageUrls, personalItem })
-    );
-  };
+
   return (
     <Page>
       <div className="flex flex-col h-full px-5">
@@ -170,7 +161,7 @@ export const CombinationItemDetailSelection = ({
         </div>
         <div>
           <Button
-            onClick={onSubmit}
+            onClick={() => onSubmit(personalItem)}
             variant="primary"
             className="my-5"
             disabled={isDisabled()}

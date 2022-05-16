@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { TCombinationAnswer } from "../../../models/consult/TCombinationAnswer";
+import { createCombinationConsultFlexMessage } from "../../../models/consult/flexMessage/createCombinationConsultFlexMessage";
 import {
   COMBINATION_FORM,
   TCombiantionForm,
 } from "../../../models/consult/TCombinationForm";
 import { TCombinationItemCategory } from "../../../models/consult/TCombinationItemCategory";
 import { TConsultingItem } from "../../../models/consult/TConsultingItem";
+import { TPersonalItem } from "../../../models/consult/TPersonalItem";
 import { AfterConsultContainer } from "../AfterConsultContainer";
 import { CombinationConsult } from "./CombinationConsult";
 import { CombinationItemCategorySelection } from "./CombinationItemCategorySelection";
@@ -21,6 +22,13 @@ export const CombinationConsultContainer = ({ items }: TProps) => {
   const [itemCategory, setItemCategory] =
     useState<TCombinationItemCategory | undefined>(undefined);
   const [flexMessage, setFlexMessage] = useState<string | null>(null);
+
+  const handleSubmit = (personalItem: TPersonalItem) => {
+    const itemImageUrls = items.map((item) => item.imagePaths.thumb);
+    setFlexMessage(
+      createCombinationConsultFlexMessage({ itemImageUrls, personalItem })
+    );
+  };
 
   if (flexMessage) {
     return <AfterConsultContainer flexMessage={flexMessage} />;
@@ -41,8 +49,7 @@ export const CombinationConsultContainer = ({ items }: TProps) => {
       return (
         <CombinationItemDetailSelection
           itemCategory={itemCategory}
-          items={items}
-          setFlexMessage={setFlexMessage}
+          onSubmit={handleSubmit}
         />
       );
     default:
