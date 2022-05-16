@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { TConsultingItem } from "../../../models/consult/TConsultingItem";
 import { TSizeAnswer } from "../../../models/consult/TSizeAnswer";
+import { TSizePart } from "../../../models/shared/TSizePart";
 import { SizeDetailSelection } from "./SizeDetailSelection";
 
 type TProps = {
@@ -11,11 +12,20 @@ export const SizeDetailContainer = ({ selectedItems }: TProps) => {
   const [currentAnswerItemIndex, setCurrentAnswerItemIndex] =
     useState<number>(0);
 
-  useEffect(() => {
-    const remainingAnswers: number =
-      selectedItems.length - answeredItems.length;
-    setCurrentAnswerItemIndex(selectedItems.length - remainingAnswers);
-  }, [answeredItems]);
+  const handleSubmit = (
+    parts: TSizePart[],
+    additionalText: string | undefined
+  ) => {
+    setAnsweredItems([
+      ...answeredItems,
+      {
+        item: selectedItems[currentAnswerItemIndex],
+        parts,
+        additionalText: additionalText || undefined,
+      },
+    ]);
+    setCurrentAnswerItemIndex(currentAnswerItemIndex + 1);
+  };
 
   return (
     <>
@@ -24,8 +34,7 @@ export const SizeDetailContainer = ({ selectedItems }: TProps) => {
       ) : (
         <SizeDetailSelection
           selectedItem={selectedItems[currentAnswerItemIndex]}
-          answeredItems={answeredItems}
-          setAnsweredItems={setAnsweredItems}
+          handleSubmit={handleSubmit}
         />
       )}
     </>

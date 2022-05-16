@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../../../components/baseParts/Button";
 import { ExpandableImage } from "../../../components/baseParts/images/ExpandableImage";
 import { TextAreaAlt } from "../../../components/baseParts/inputs/TextAreaAlt";
@@ -10,23 +10,25 @@ import {
   ITEM_SIZE_BUTTON,
 } from "../../../models/consult/SizePartButton";
 import { TConsultingItem } from "../../../models/consult/TConsultingItem";
-import { TSizeAnswer } from "../../../models/consult/TSizeAnswer";
 import { TSizePart } from "../../../models/shared/TSizePart";
 import { ItemPartSizeSelectButtons } from "./ItemPartSizeSelectButtons";
 type TProps = {
   selectedItem: TConsultingItem;
-  answeredItems: TSizeAnswer[];
-  setAnsweredItems: React.Dispatch<React.SetStateAction<TSizeAnswer[]>>;
+  handleSubmit: (
+    parts: TSizePart[],
+    additionalText: string | undefined
+  ) => void;
 };
 
-export const SizeDetailSelection = ({
-  selectedItem,
-  answeredItems,
-  setAnsweredItems,
-}: TProps) => {
+export const SizeDetailSelection = ({ selectedItem, handleSubmit }: TProps) => {
   const [parts, setParts] = useState<TSizePart[]>([]);
   const [additionalText, setAdditionalText] =
     useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    setParts([]);
+    setAdditionalText(undefined);
+  }, [selectedItem]);
 
   const onPartChanged = (sizePart: string, buttonType: string) => {
     const newParts = parts.filter((part) => part.name !== sizePart);
@@ -42,29 +44,16 @@ export const SizeDetailSelection = ({
     ]);
   };
 
+  const onTextChanged = (value: string) => {
+    setAdditionalText(value);
+  };
+
   const isSelected = (part: string, buttonType: string): boolean => {
     if (buttonType === (ITEM_SIZE_BUTTON.FIT || ITEM_LENGTH_BUTTON.FIT)) {
       return !parts.map((part) => part.name).includes(part);
     } else {
       return parts.find((p) => p.name === part)?.option === buttonType;
     }
-  };
-
-  const onTextChanged = (value: string) => {
-    setAdditionalText(value);
-  };
-
-  const onSubmit = () => {
-    setAnsweredItems([
-      ...answeredItems,
-      {
-        item: selectedItem,
-        parts,
-        additionalText: additionalText || undefined,
-      },
-    ]);
-    setParts([]);
-    setAdditionalText(undefined);
   };
 
   return (
@@ -118,7 +107,7 @@ export const SizeDetailSelection = ({
       </div>
       <div className="p-5">
         <Button
-          onClick={onSubmit}
+          onClick={() => handleSubmit(parts, additionalText)}
           disabled={parts.length || !!additionalText ? false : true}
         >
           次へ
