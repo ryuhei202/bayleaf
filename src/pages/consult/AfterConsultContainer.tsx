@@ -18,8 +18,8 @@ export const AfterConsultContainer = ({
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | undefined>(undefined);
 
-  const additionalMessage = isPhotoSendable
-    ? wearingPhoto !== undefined
+  const createAdditionalMessage = () => {
+    return wearingPhoto !== undefined
       ? {
           type: "image",
           originalContentUrl: wearingPhoto.large,
@@ -28,11 +28,13 @@ export const AfterConsultContainer = ({
       : {
           type: "text",
           text: "> 「あとで着用写真を送信します」を選択しました。",
-        }
-    : "";
+        };
+  };
+
+  const additionalMessage = isPhotoSendable ? createAdditionalMessage() : null;
 
   const parseFlexMessage =
-    additionalMessage === ""
+    additionalMessage === null
       ? [JSON.parse(flexMessage)]
       : [JSON.parse(flexMessage), additionalMessage];
 
