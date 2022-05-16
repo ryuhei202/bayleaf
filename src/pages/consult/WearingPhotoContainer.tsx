@@ -32,6 +32,7 @@ export const WearingPhotoContainer = ({ items, flexMessage }: TProps) => {
       <Page>
         <AfterConsultContainer
           flexMessage={flexMessage}
+          isPhotoSendable={true}
           wearingPhoto={uploadedImagePaths}
         />
       </Page>

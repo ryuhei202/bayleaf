@@ -15,7 +15,10 @@ export const SceneConsultContainer = ({ items }: TProps) => {
   return (
     <>
       {flexMessage ? (
-        <AfterConsultContainer flexMessage={flexMessage} />
+        <AfterConsultContainer
+          flexMessage={flexMessage}
+          isPhotoSendable={false}
+        />
       ) : (
         <SceneDetailForm
           itemImageUrls={getItemImageUrls()}
