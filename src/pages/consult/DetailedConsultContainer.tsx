@@ -7,8 +7,8 @@ import { AgeConsultContainer } from "./AgeConsultContainer";
 import { CheckOutfitConsultContainer } from "./CheckOutfitConsultContainer";
 import { CombinationConsultContainer } from "./CombinationConsultContainer";
 import { DesignConsultContainer } from "./design/DesignConsultContainer";
-import { SceneConsultContainer } from "./SceneConsultContainer";
 import { SizeConsultContainer } from "./size/SizeConsultContainer";
+import { SceneConsultContainer } from "./scene/SceneConsultContainer";
 
 type TProps = {
   selectedConsultOption: ConsultChoiceType;
@@ -27,7 +27,7 @@ export const DetailedConsultContainer = ({
     case ConsultChoice.AGE:
       return <AgeConsultContainer coordinate={coordinate} />;
     case ConsultChoice.SCENE:
-      return <SceneConsultContainer coordinate={coordinate} />;
+      return <SceneConsultContainer items={coordinate.items} />;
     case ConsultChoice.CONBINATION:
       return <CombinationConsultContainer coordinate={coordinate} />;
     case ConsultChoice.CHECKOUTFIT:
