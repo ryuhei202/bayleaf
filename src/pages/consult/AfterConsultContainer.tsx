@@ -7,27 +7,36 @@ import { AfterConsult } from "./AfterConsult";
 
 type TProps = {
   readonly flexMessage: string;
+  readonly isPhotoSendable: boolean;
   readonly wearingPhoto?: TImagePathsResponse;
 };
 export const AfterConsultContainer = ({
   flexMessage,
+  isPhotoSendable,
   wearingPhoto,
 }: TProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | undefined>(undefined);
 
-  let photoMessage;
+  const createAdditionalMessage = () => {
+    return wearingPhoto !== undefined
+      ? {
+          type: "image",
+          originalContentUrl: wearingPhoto.large,
+          previewImageUrl: wearingPhoto.largeThumb,
+        }
+      : {
+          type: "text",
+          text: "> 「あとで着用写真を送信します」を選択しました。",
+        };
+  };
 
-  if (wearingPhoto) {
-    photoMessage = {
-      type: "image",
-      originalContentUrl: wearingPhoto.large,
-      previewImageUrl: wearingPhoto.largeThumb,
-    };
-  }
-  const parseFlexMessage = photoMessage
-    ? [JSON.parse(flexMessage), photoMessage]
-    : [JSON.parse(flexMessage)];
+  const additionalMessage = isPhotoSendable ? createAdditionalMessage() : null;
+
+  const parseFlexMessage =
+    additionalMessage === null
+      ? [JSON.parse(flexMessage)]
+      : [JSON.parse(flexMessage), additionalMessage];
 
   liff
     .sendMessages(parseFlexMessage)
@@ -40,7 +49,20 @@ export const AfterConsultContainer = ({
 
   if (error) return <ErrorMessage message={error.message} />;
   if (isLoading) return <Loader active />;
-  return (
+  return isPhotoSendable && wearingPhoto !== undefined ? (
+    <AfterConsult
+      title={
+        <>
+          LINEで相談したいアイテムの
+          <br />
+          着用写真をお送りください！
+        </>
+      }
+      subTitle="ご相談したいアイテムの着用写真をお送り次第、スタイリストからLINEでご相談内容を詳しく伺います。"
+      btnText="LINEへ戻る"
+      onClick={() => liff.closeWindow()}
+    />
+  ) : (
     <AfterConsult
       title={
         <>
