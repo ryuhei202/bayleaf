@@ -55,7 +55,7 @@ export const SizeDetailSelection = ({ selectedItem, onSubmit }: TProps) => {
 
   return (
     <Page>
-      <div className="px-5 py-5">
+      <div className="px-5 py-5 text-center">
         <div className="w-[120px] ml-auto mr-auto">
           <ExpandableImage
             defaultImageSrc={selectedItem.imagePaths.largeThumb}
