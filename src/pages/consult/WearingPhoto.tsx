@@ -6,10 +6,11 @@ import { ImageUploader } from "../../components/baseParts/ImageUploader";
 import { PageHeader } from "../../components/baseParts/PageHeader";
 import { Typography } from "../../components/baseParts/Typography";
 import { TConsultingItem } from "../../models/consult/TConsultingItem";
+import PreviewWearing from "../../images/preview_wearing.png";
 
 type TProps = {
   items: TConsultingItem[];
-  preUploadImage: string;
+  preUploadImage: string | null;
   imageFileName: string;
   imageData: string;
   onChangeFile: ChangeEventHandler<HTMLInputElement>;
@@ -44,7 +45,11 @@ export const WearingPhoto = ({
       </div>
       <hr className="border-none h-1 bg-gray-400 my-5" />
 
-      <ImageUploader onChange={onChangeFile} preUploadImage={preUploadImage} />
+      <ImageUploader
+        onChange={onChangeFile}
+        preUploadImage={preUploadImage}
+        defaultSrc={PreviewWearing}
+      />
 
       <Button
         onClick={onSubmit}

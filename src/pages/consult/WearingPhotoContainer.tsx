@@ -63,7 +63,7 @@ export const WearingPhotoContainer = ({ items, flexMessage }: TProps) => {
     <Page>
       <WearingPhoto
         items={items}
-        preUploadImage={preUploadImage ?? ""}
+        preUploadImage={preUploadImage ?? null}
         imageFileName={imageFileName ?? ""}
         imageData={imageData ?? ""}
         onChangeFile={onChangeFile}

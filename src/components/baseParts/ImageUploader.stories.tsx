@@ -1,6 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 import { ImageUploader } from "./ImageUploader";
+import DefaultSrc from "../../images/preview_default.png";
 
 export default {
   title: "baseParts/ImageUploader",
@@ -12,6 +13,10 @@ const Template: ComponentStory<typeof ImageUploader> = (args) => (
 );
 
 export const Default = Template.bind({});
+Default.args = {
+  defaultSrc: DefaultSrc,
+  preUploadImage: null,
+};
 
 Default.decorators = [
   (Story) => (
