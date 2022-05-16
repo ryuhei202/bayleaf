@@ -41,8 +41,8 @@ export const DesignDetailContainer = ({ selectedItems }: TProps) => {
       ) : (
         <DesignDetailForm
           selectedItem={selectedItems[currentAnswerItemIndex]}
-          handleSubmit={handleSubmit}
-          handleSkip={handleSkip}
+          onSubmit={handleSubmit}
+          onSkip={handleSkip}
         />
       )}
     </>
