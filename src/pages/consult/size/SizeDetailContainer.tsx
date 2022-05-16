@@ -9,8 +9,6 @@ type TProps = {
 };
 export const SizeDetailContainer = ({ selectedItems }: TProps) => {
   const [answeredItems, setAnsweredItems] = useState<TSizeAnswer[]>([]);
-  const [currentAnswerItemIndex, setCurrentAnswerItemIndex] =
-    useState<number>(0);
 
   const handleSubmit = (
     parts: TSizePart[],
@@ -19,12 +17,11 @@ export const SizeDetailContainer = ({ selectedItems }: TProps) => {
     setAnsweredItems([
       ...answeredItems,
       {
-        item: selectedItems[currentAnswerItemIndex],
+        item: selectedItems[answeredItems.length],
         parts,
         additionalText: additionalText || undefined,
       },
     ]);
-    setCurrentAnswerItemIndex(currentAnswerItemIndex + 1);
   };
 
   return (
@@ -33,7 +30,7 @@ export const SizeDetailContainer = ({ selectedItems }: TProps) => {
         <>{/* TODO: 別タスクで実装 */}</>
       ) : (
         <SizeDetailSelection
-          selectedItem={selectedItems[currentAnswerItemIndex]}
+          selectedItem={selectedItems[answeredItems.length]}
           onSubmit={handleSubmit}
         />
       )}

@@ -9,29 +9,25 @@ type TProps = {
 
 export const DesignDetailContainer = ({ selectedItems }: TProps) => {
   const [answeredItems, setAnsweredItems] = useState<TDesignAnswer[]>([]);
-  const [currentAnswerItemIndex, setCurrentAnswerItemIndex] =
-    useState<number>(0);
 
   const handleSubmit = (freeText: string) => {
     setAnsweredItems([
       ...answeredItems,
       {
-        item: selectedItems[currentAnswerItemIndex],
+        item: selectedItems[answeredItems.length],
         freeText,
       },
     ]);
-    setCurrentAnswerItemIndex(currentAnswerItemIndex + 1);
   };
 
   const handleSkip = () => {
     setAnsweredItems([
       ...answeredItems,
       {
-        item: selectedItems[currentAnswerItemIndex],
+        item: selectedItems[answeredItems.length],
         freeText: "",
       },
     ]);
-    setCurrentAnswerItemIndex(currentAnswerItemIndex + 1);
   };
 
   return (
@@ -40,7 +36,7 @@ export const DesignDetailContainer = ({ selectedItems }: TProps) => {
         <>{/* TODO: 別タスクで実装 */}</>
       ) : (
         <DesignDetailForm
-          selectedItem={selectedItems[currentAnswerItemIndex]}
+          selectedItem={selectedItems[answeredItems.length]}
           onSubmit={handleSubmit}
           onSkip={handleSkip}
         />
