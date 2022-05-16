@@ -15,16 +15,17 @@ type TProps = {
 };
 export const ConsultItemList = ({ items, title, setSelectedItems }: TProps) => {
   const [checkedItems, setCheckedItems] = useState<TConsultingItem[]>([]);
-  const handleChange = (
-    item: TConsultingItem,
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    if (event.target.checked) {
+  const handleChange = (item: TConsultingItem, checked: Boolean) => {
+    if (checked) {
       setCheckedItems([...checkedItems, item]);
     } else {
       let newCheckedItems = [...checkedItems];
       setCheckedItems(newCheckedItems.filter((i) => i.id !== item.id));
     }
+  };
+
+  const handleImageClick = (item: TConsultingItem) => {
+    handleChange(item, !checkedItems.includes(item));
   };
 
   return (
@@ -40,7 +41,9 @@ export const ConsultItemList = ({ items, title, setSelectedItems }: TProps) => {
                   className="space-x-2 mt-4 ml-auto mr-auto"
                   imageSrc={item.imagePaths.largeThumb}
                   value={""}
-                  onChange={(event) => handleChange(item, event)}
+                  onChange={(event) => handleChange(item, event.target.checked)}
+                  onImageClick={() => handleImageClick(item)}
+                  checked={checkedItems.includes(item)}
                 />
                 <Typography
                   className="mt-1 text-center"
