@@ -49,8 +49,7 @@ const items: TConsultingItem[] = [
 ];
 Default.args = {
   itemCategory: COMBINATION_ITEM_CATEGORY.TOPS,
-  items,
-  setFlexMessage: () => {},
+  onSubmit: () => {},
 };
 
 Default.decorators = [(Story) => <Story />];

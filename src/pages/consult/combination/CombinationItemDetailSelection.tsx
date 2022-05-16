@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button } from "../../../components/baseParts/Button";
 import { DropdownMenuAlt } from "../../../components/baseParts/inputs/DropdownMenuAlt";
 import { TextAreaAlt } from "../../../components/baseParts/inputs/TextAreaAlt";
@@ -8,12 +7,7 @@ import { Typography } from "../../../components/baseParts/Typography";
 import { TCombinationItemCategory } from "../../../models/consult/TCombinationItemCategory";
 import {
   CombinationItemDetails,
-  TCombinationBagDetails,
-  TCombinationBottomsDetails,
-  TCombinationHatDetails,
-  TCombinationOuterDetails,
-  TCombinationShoesDetails,
-  TCombinationTopsDetails,
+  TCombinationDetails,
 } from "../../../models/consult/TCombinationItemDetails";
 import { TPersonalItem } from "../../../models/consult/TPersonalItem";
 import { COLORS, TColors } from "../../../models/shared/TColors";
@@ -21,21 +15,23 @@ import { PATTERNS, TPatterns } from "../../../models/shared/TPatterns";
 
 type TProps = {
   readonly itemCategory: TCombinationItemCategory | undefined;
+  readonly personalItem: TPersonalItem;
   readonly onSubmit: (personalItem: TPersonalItem) => void;
+  readonly onCategoryChange: (cateSmallName: TCombinationDetails) => void;
+  readonly onColorChange: (color: TColors) => void;
+  readonly onPatternChange: (pattern: TPatterns) => void;
+  readonly onTextChange: (additionalText: string) => void;
 };
 
 export const CombinationItemDetailSelection = ({
   itemCategory,
+  personalItem,
   onSubmit,
+  onCategoryChange,
+  onColorChange,
+  onPatternChange,
+  onTextChange,
 }: TProps) => {
-  const [personalItem, setPersonalItem] = useState<TPersonalItem>({
-    cateLargeName: itemCategory,
-    cateSmallName: undefined,
-    color: undefined,
-    pattern: undefined,
-    additionalText: undefined,
-  });
-
   const isDisabled = (): boolean => {
     if (
       !(
@@ -75,18 +71,9 @@ export const CombinationItemDetailSelection = ({
           <DropdownMenuAlt
             value={personalItem.cateSmallName || ""}
             placeholder="詳細のカテゴリを選択"
-            onChange={(event) => {
-              setPersonalItem({
-                ...personalItem,
-                cateSmallName: event.target.value as
-                  | TCombinationOuterDetails
-                  | TCombinationTopsDetails
-                  | TCombinationBottomsDetails
-                  | TCombinationShoesDetails
-                  | TCombinationBagDetails
-                  | TCombinationHatDetails,
-              });
-            }}
+            onChange={(event) =>
+              onCategoryChange(event.target.value as TCombinationDetails)
+            }
           >
             {Object.values(
               CombinationItemDetails.getItemDetails(itemCategory)
@@ -110,12 +97,7 @@ export const CombinationItemDetailSelection = ({
           <DropdownMenuAlt
             value={personalItem.color || ""}
             placeholder="アイテムの色を選択"
-            onChange={(event) =>
-              setPersonalItem({
-                ...personalItem,
-                color: event.target.value as TColors,
-              })
-            }
+            onChange={(event) => onColorChange(event.target.value as TColors)}
           >
             {Object.values(COLORS).map((color) => (
               <option key={color} value={color}>
@@ -132,10 +114,7 @@ export const CombinationItemDetailSelection = ({
             value={personalItem.pattern || ""}
             placeholder="詳細のカテゴリを選択"
             onChange={(event) =>
-              setPersonalItem({
-                ...personalItem,
-                pattern: event.target.value as TPatterns,
-              })
+              onPatternChange(event.target.value as TPatterns)
             }
           >
             {Object.values(PATTERNS).map((pattern) => (
@@ -150,12 +129,7 @@ export const CombinationItemDetailSelection = ({
           <TextAreaAlt
             className="h-[150px]"
             value={personalItem.additionalText || ""}
-            onChange={(event) =>
-              setPersonalItem({
-                ...personalItem,
-                additionalText: event.target.value,
-              })
-            }
+            onChange={(event) => onTextChange(event.target.value)}
             placeholder="スニーカーのブランドはスタンスミスです"
           />
         </div>

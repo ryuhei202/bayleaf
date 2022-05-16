@@ -19,6 +19,7 @@ export const ImageUploader = ({
     <div className={className ?? ""}>
       <ImageAlt
         imageSrc={preUploadImage === null ? defaultSrc : preUploadImage}
+        className={"h-[380px] w-fit"}
       />
       <UploadButton uploadType="select" onChange={onChange} className="my-3" />
       <UploadButton uploadType="snap" onChange={onChange} className="my-3" />

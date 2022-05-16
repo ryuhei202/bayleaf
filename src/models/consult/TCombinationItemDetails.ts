@@ -96,3 +96,11 @@ export type TCombinationHatDetails =
   typeof CombinationItemDetails.HAT[keyof typeof CombinationItemDetails.HAT];
 export type TCombinationOthersDetails =
   typeof CombinationItemDetails.OTHER[keyof typeof CombinationItemDetails.OTHER];
+export type TCombinationDetails =
+  | TCombinationOthersDetails
+  | TCombinationOuterDetails
+  | TCombinationTopsDetails
+  | TCombinationBottomsDetails
+  | TCombinationShoesDetails
+  | TCombinationBagDetails
+  | TCombinationHatDetails;
