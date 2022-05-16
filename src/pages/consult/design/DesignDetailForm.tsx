@@ -1,45 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../../../components/baseParts/Button";
 import { ExpandableImage } from "../../../components/baseParts/images/ExpandableImage";
 import { TextAreaAlt } from "../../../components/baseParts/inputs/TextAreaAlt";
 import { Page } from "../../../components/baseParts/Page";
 import { Typography } from "../../../components/baseParts/Typography";
 import { TConsultingItem } from "../../../models/consult/TConsultingItem";
-import { TDesignAnswer } from "../../../models/consult/TDesignAnswer";
 
 type TProps = {
   selectedItem: TConsultingItem;
-  answeredItems: TDesignAnswer[];
-  setAnsweredItems: React.Dispatch<React.SetStateAction<TDesignAnswer[]>>;
+  handleSubmit: (freeText: string) => void;
+  handleSkip: () => void;
 };
 export const DesignDetailForm = ({
   selectedItem,
-  answeredItems,
-  setAnsweredItems,
+  handleSubmit,
+  handleSkip,
 }: TProps) => {
   const [freeText, setFreeText] = useState<string>("");
 
-  const onSubmit = () => {
-    setAnsweredItems([
-      ...answeredItems,
-      {
-        item: selectedItem,
-        freeText,
-      },
-    ]);
+  useEffect(() => {
     setFreeText("");
-  };
-
-  const onSkip = () => {
-    setAnsweredItems([
-      ...answeredItems,
-      {
-        item: selectedItem,
-        freeText: "",
-      },
-    ]);
-    setFreeText("");
-  };
+  }, [selectedItem]);
 
   return (
     <Page>
@@ -70,10 +51,17 @@ export const DesignDetailForm = ({
           </div>
         </div>
         <div className="flex flex-col space-y-1 px-5 pb-3">
-          <Button onClick={onSubmit} disabled={freeText === ""}>
+          <Button
+            onClick={() => handleSubmit(freeText)}
+            disabled={freeText === ""}
+          >
             次へ
           </Button>
-          <Button onClick={onSkip} variant="text" disabled={freeText !== ""}>
+          <Button
+            onClick={handleSkip}
+            variant="text"
+            disabled={freeText !== ""}
+          >
             SKIP
           </Button>
         </div>

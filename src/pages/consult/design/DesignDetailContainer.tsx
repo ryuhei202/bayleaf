@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { TConsultingItem } from "../../../models/consult/TConsultingItem";
 import { TDesignAnswer } from "../../../models/consult/TDesignAnswer";
 import { DesignDetailForm } from "./DesignDetailForm";
@@ -12,11 +12,27 @@ export const DesignDetailContainer = ({ selectedItems }: TProps) => {
   const [currentAnswerItemIndex, setCurrentAnswerItemIndex] =
     useState<number>(0);
 
-  useEffect(() => {
-    const remainingAnswers: number =
-      selectedItems.length - answeredItems.length;
-    setCurrentAnswerItemIndex(selectedItems.length - remainingAnswers);
-  }, [answeredItems]);
+  const handleSubmit = (freeText: string) => {
+    setAnsweredItems([
+      ...answeredItems,
+      {
+        item: selectedItems[currentAnswerItemIndex],
+        freeText,
+      },
+    ]);
+    setCurrentAnswerItemIndex(currentAnswerItemIndex + 1);
+  };
+
+  const handleSkip = () => {
+    setAnsweredItems([
+      ...answeredItems,
+      {
+        item: selectedItems[currentAnswerItemIndex],
+        freeText: "",
+      },
+    ]);
+    setCurrentAnswerItemIndex(currentAnswerItemIndex + 1);
+  };
 
   return (
     <>
@@ -25,8 +41,8 @@ export const DesignDetailContainer = ({ selectedItems }: TProps) => {
       ) : (
         <DesignDetailForm
           selectedItem={selectedItems[currentAnswerItemIndex]}
-          answeredItems={answeredItems}
-          setAnsweredItems={setAnsweredItems}
+          handleSubmit={handleSubmit}
+          handleSkip={handleSkip}
         />
       )}
     </>
