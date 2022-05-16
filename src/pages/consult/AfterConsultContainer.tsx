@@ -31,7 +31,6 @@ export const AfterConsultContainer = ({
   const parseFlexMessage = additionalMessage
     ? [JSON.parse(flexMessage), additionalMessage]
     : [JSON.parse(flexMessage)];
-  console.log(parseFlexMessage);
 
   liff
     .sendMessages(parseFlexMessage)
