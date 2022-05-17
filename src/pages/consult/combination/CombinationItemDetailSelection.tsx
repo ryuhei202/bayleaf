@@ -14,7 +14,7 @@ import { COLORS, TColors } from "../../../models/shared/TColors";
 import { PATTERNS, TPatterns } from "../../../models/shared/TPatterns";
 
 type TProps = {
-  readonly itemCategory: TCombinationItemCategory | undefined;
+  readonly itemCategory: TCombinationItemCategory;
   readonly personalItem: TPersonalItem;
   readonly onSubmit: (personalItem: TPersonalItem) => void;
   readonly onCategoryChange: (cateSmallName: TCombinationDetails) => void;

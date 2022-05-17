@@ -144,7 +144,7 @@ export const CombinationConsultContainer = ({ items }: TProps) => {
     case COMBINATION_FORM.ITEM_DETAIL:
       return (
         <CombinationItemDetailSelection
-          itemCategory={itemCategory}
+          itemCategory={itemCategory as TCombinationItemCategory}
           personalItem={personalItem}
           onSubmit={handleSubmit}
           onCategoryChange={handleCategoryChange}

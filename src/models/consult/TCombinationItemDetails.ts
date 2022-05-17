@@ -55,15 +55,7 @@ export namespace CombinationItemDetails {
     OTHERS: "その他",
   } as const;
 
-  export const getItemDetails = (
-    itemCategory: TCombinationItemCategory | undefined
-  ):
-    | typeof CombinationItemDetails.OUTER
-    | typeof CombinationItemDetails.TOPS
-    | typeof CombinationItemDetails.BOTTOMS
-    | typeof CombinationItemDetails.SHOES
-    | typeof CombinationItemDetails.BAG
-    | typeof CombinationItemDetails.HAT => {
+  export const getItemDetails = (itemCategory: TCombinationItemCategory) => {
     switch (itemCategory) {
       case COMBINATION_ITEM_CATEGORY.OUTER:
         return CombinationItemDetails.OUTER;
