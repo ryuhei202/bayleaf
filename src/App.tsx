@@ -8,19 +8,23 @@ import { ErrorMessage } from "./components/shared/ErrorMessage";
 import { Hearing } from "./pages/hearing/Hearing";
 import { QueryClientProvider } from "react-query";
 import { Review } from "./pages/review/Review";
+import * as Sentry from "@sentry/react";
+import { BrowserTracing } from "@sentry/tracing";
+
+Sentry.init({
+  dsn: process.env.REACT_APP_SENTRY_DSN,
+  integrations: [new BrowserTracing()],
+  tracesSampleRate: 0,
+  environment: process.env.REACT_APP_ENV,
+});
 
 export const IdTokenContext = createContext("");
 
 export const StylistIdContext = createContext<number | undefined>(undefined);
 
 function App() {
-  const {
-    lineIdToken,
-    stylistId,
-    liffErrorMessage,
-    ErrorBoundary,
-    queryClient,
-  } = useAppInitializer();
+  const { lineIdToken, stylistId, liffErrorMessage, queryClient } =
+    useAppInitializer();
   const app = (
     <QueryClientProvider client={queryClient}>
       <IdTokenContext.Provider value={lineIdToken}>
@@ -35,7 +39,7 @@ function App() {
     </QueryClientProvider>
   );
   if (lineIdToken) {
-    return <>{ErrorBoundary ? <ErrorBoundary>{app}</ErrorBoundary> : app}</>;
+    return <Sentry.ErrorBoundary>{app}</Sentry.ErrorBoundary>;
   }
   if (liffErrorMessage) {
     return <ErrorMessage message={liffErrorMessage} />;

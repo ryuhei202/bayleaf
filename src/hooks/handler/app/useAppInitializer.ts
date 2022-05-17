@@ -1,6 +1,3 @@
-import Bugsnag from "@bugsnag/js";
-import BugsnagPluginReact from "@bugsnag/plugin-react";
-import React from "react";
 import { useEffect, useState } from "react";
 import liff from "@line/liff";
 import { useLocation, useSearchParams } from "react-router-dom";
@@ -15,21 +12,6 @@ export const useAppInitializer = () => {
   const lineId = searchParams.get("lineId");
   const convertedStylistId = Number(searchParams.get("stylistId") ?? undefined);
   const stylistId = isNaN(convertedStylistId) ? undefined : convertedStylistId;
-
-  // bugsnagを呼び出す
-  useEffect(() => {
-    // ifがないとBugsnag.start時にAPI KEYがないとエラーが発生する。
-    // .env.development.localにAPI KEYを記述すればエラーは消えるがローカルで使わないため分岐をかける。
-    if (process.env.NODE_ENV === "production") {
-      Bugsnag.start({
-        apiKey: process.env.REACT_APP_BUGSNAG_API_KEY || "",
-        plugins: [new BugsnagPluginReact()],
-        enabledReleaseStages: ["production", "staging"],
-        releaseStage: process.env.REACT_APP_ENV,
-      });
-    }
-  }, []);
-  const ErrorBoundary = Bugsnag.getPlugin("react")?.createErrorBoundary(React);
 
   // GoogleAnalyticsを呼び出す
   useEffect(() => {
@@ -74,7 +56,6 @@ export const useAppInitializer = () => {
     lineIdToken,
     stylistId,
     liffErrorMessage,
-    ErrorBoundary,
     queryClient,
   };
 };
