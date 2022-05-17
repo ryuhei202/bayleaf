@@ -10,7 +10,7 @@ import {
 import PreviewDefault from "../../../images/preview_default.png";
 
 type TProps = {
-  readonly setCurrentFormType: React.Dispatch<
+  readonly onChangeCurrentFormType: React.Dispatch<
     React.SetStateAction<TCombiantionForm>
   >;
   readonly onChangeFile: ChangeEventHandler<HTMLInputElement>;
@@ -22,7 +22,7 @@ type TProps = {
 };
 
 export const CombinationConsult = ({
-  setCurrentFormType,
+  onChangeCurrentFormType,
   onChangeFile,
   preUploadImage,
   onSubmit,
@@ -58,7 +58,9 @@ export const CombinationConsult = ({
             次へ
           </Button>
           <Button
-            onClick={() => setCurrentFormType(COMBINATION_FORM.ITEM_CATEGORY)}
+            onClick={() =>
+              onChangeCurrentFormType(COMBINATION_FORM.ITEM_CATEGORY)
+            }
             disabled={!!imageFileName && !!imageData}
             variant="text"
           >
