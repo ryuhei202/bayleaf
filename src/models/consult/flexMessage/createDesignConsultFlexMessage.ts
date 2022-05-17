@@ -1,9 +1,4 @@
-import { TConsultingItem } from "../TConsultingItem";
-
-type TDesignAnswer = {
-  item: TConsultingItem;
-  freetext: string;
-};
+import { TDesignAnswer } from "../TDesignAnswer";
 
 /**
  * 着こなし相談の色・柄FlexメッセージをJSON文字列で返却
@@ -72,7 +67,7 @@ export const createDesignConsultFlexMessage = (
                   contents: [
                     {
                       type: "text",
-                      text: answer.freetext,
+                      text: answer.freeText,
                       size: "xxs",
                       wrap: true,
                     },
