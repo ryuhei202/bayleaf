@@ -5,6 +5,7 @@ import {
   TMemberPhotoCreateResponse,
   useMemberPhotoCreate,
 } from "../../../api/consult/useMemberPhotoCreate";
+import { TImagePathsResponse } from "../../../api/shared/TImagePathsResponse";
 import { useImageUploadHandler } from "../../../hooks/handler/image/useImageUploadHandler";
 import { createCombinationConsultFlexMessage } from "../../../models/consult/flexMessage/createCombinationConsultFlexMessage";
 import { MEMBER_PHOTO_CATEGORY_ID } from "../../../models/consult/MemberPhotoCategoryId";
@@ -29,13 +30,11 @@ export const CombinationConsultContainer = ({ items }: TProps) => {
   );
   const [itemCategory, setItemCategory] =
     useState<TCombinationItemCategory | undefined>(undefined);
-  const [personalItem, setPersonalItem] = useState<TPersonalItem>({
-    cateLargeName: itemCategory,
-  });
 
   const [flexMessage, setFlexMessage] = useState<string | null>(null);
   const { imageFileName, imageData, preUploadImage, onChangeFile } =
     useImageUploadHandler();
+  const [response, setResponse] = useState<TImagePathsResponse | null>(null);
   const { mutateAsync, isLoading } = useMemberPhotoCreate();
   const handleSubmit = ({
     cateSmallName,
@@ -43,16 +42,15 @@ export const CombinationConsultContainer = ({ items }: TProps) => {
     pattern,
     additionalText,
   }: TPersonalItem) => {
-    const newPersonalItem = {
-      ...personalItem,
+    const personalItem: TPersonalItem = {
+      cateLargeName: itemCategory,
       cateSmallName,
       color,
       pattern,
       additionalText,
     };
-    setPersonalItem(newPersonalItem);
     if (imageFileName && imageData) {
-      postPhoto(newPersonalItem);
+      postPhoto(personalItem);
       return;
     }
 
@@ -60,7 +58,7 @@ export const CombinationConsultContainer = ({ items }: TProps) => {
     setFlexMessage(
       createCombinationConsultFlexMessage({
         itemImageUrls,
-        personalItem: newPersonalItem,
+        personalItem,
       })
     );
   };
@@ -76,11 +74,11 @@ export const CombinationConsultContainer = ({ items }: TProps) => {
     await mutateAsync(params, {
       onSuccess: (data: AxiosResponse<TMemberPhotoCreateResponse>) => {
         if (data && data.data) {
+          setResponse(data.data.imagePaths);
           const newPersonalItem = {
             ...personalItem,
             image: data.data.imagePaths,
           };
-          setPersonalItem(newPersonalItem);
           const itemImageUrls = items.map((item) => item.imagePaths.thumb);
           setFlexMessage(
             createCombinationConsultFlexMessage({
@@ -94,11 +92,11 @@ export const CombinationConsultContainer = ({ items }: TProps) => {
   };
 
   if (flexMessage) {
-    return personalItem.image ? (
+    return response ? (
       <AfterConsultContainer
         flexMessage={flexMessage}
         isPhotoSendable={true}
-        wearingPhoto={personalItem.image}
+        wearingPhoto={response}
       />
     ) : (
       <AfterConsultContainer
