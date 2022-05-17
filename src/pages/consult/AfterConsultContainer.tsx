@@ -1,4 +1,5 @@
 import liff from "@line/liff/dist/lib";
+import { useEffect } from "react";
 import { useState } from "react";
 import { Loader } from "semantic-ui-react";
 import { TImagePathsResponse } from "../../api/shared/TImagePathsResponse";
@@ -18,34 +19,38 @@ export const AfterConsultContainer = ({
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | undefined>(undefined);
 
-  const createAdditionalMessage = () => {
-    return wearingPhoto !== undefined
-      ? {
-          type: "image",
-          originalContentUrl: wearingPhoto.large,
-          previewImageUrl: wearingPhoto.largeThumb,
-        }
-      : {
-          type: "text",
-          text: "> 「あとで着用写真を送信します」を選択しました。",
-        };
-  };
-
-  const additionalMessage = isPhotoSendable ? createAdditionalMessage() : null;
-
-  const parseFlexMessage =
-    additionalMessage === null
-      ? [JSON.parse(flexMessage)]
-      : [JSON.parse(flexMessage), additionalMessage];
-
-  liff
-    .sendMessages(parseFlexMessage)
-    .then(() => {
-      setIsLoading(false);
-    })
-    .catch((error) => {
-      setError(error);
-    });
+  // 相談LINEメッセージを送信
+  useEffect(() => {
+    const consultLineMessages: any[] = [
+      {
+        type: "text",
+        text: "コーデの着こなし相談をします！",
+      },
+    ];
+    consultLineMessages.push(JSON.parse(flexMessage));
+    if (isPhotoSendable) {
+      consultLineMessages.push(
+        wearingPhoto !== undefined
+          ? {
+              type: "image",
+              originalContentUrl: wearingPhoto.large,
+              previewImageUrl: wearingPhoto.largeThumb,
+            }
+          : {
+              type: "text",
+              text: "> 「あとで着用写真を送信します」を選択しました。",
+            }
+      );
+    }
+    liff
+      .sendMessages(consultLineMessages)
+      .then(() => {
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setError(error);
+      });
+  }, [flexMessage, isPhotoSendable, wearingPhoto]);
 
   if (error) return <ErrorMessage message={error.message} />;
   if (isLoading) return <Loader active />;
@@ -58,7 +63,7 @@ export const AfterConsultContainer = ({
           着用写真をお送りください！
         </>
       }
-      subTitle="ご相談したいアイテムの着用写真をお送り次第、スタイリストからLINEでご相談内容を詳しく伺います。"
+      subTitle="ご相談したいアイテムの着用写真をお受け取り次第、スタイリストからLINEでご相談内容を詳しく伺います。"
       btnText="LINEへ戻る"
       onClick={() => liff.closeWindow()}
     />
