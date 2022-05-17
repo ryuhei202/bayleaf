@@ -1,4 +1,5 @@
 import { AxiosResponse } from "axios";
+import { useContext } from "react";
 import { useState } from "react";
 
 import {
@@ -12,6 +13,7 @@ import { useImageUploadHandler } from "../../hooks/handler/image/useImageUploadH
 import { MEMBER_PHOTO_CATEGORY_ID } from "../../models/consult/MemberPhotoCategoryId";
 import { TConsultingItem } from "../../models/consult/TConsultingItem";
 import { AfterConsultContainer } from "./AfterConsultContainer";
+import { ConsultChartIdContext } from "./ConsultFetcher";
 import { WearingPhoto } from "./WearingPhoto";
 
 type TProps = {
@@ -26,6 +28,7 @@ export const WearingPhotoContainer = ({ items, flexMessage }: TProps) => {
   const { imageFileName, imageData, preUploadImage, onChangeFile } =
     useImageUploadHandler();
   const { mutate, isLoading } = useMemberPhotoCreate();
+  const chartId = useContext(ConsultChartIdContext);
 
   if (uploadedImagePaths || isSkipped)
     return (
@@ -45,6 +48,8 @@ export const WearingPhotoContainer = ({ items, flexMessage }: TProps) => {
           memberPhotoCategoryId: MEMBER_PHOTO_CATEGORY_ID.WEARING,
           imageData: imageData,
           imageFileName: imageFileName,
+          chartId,
+          itemIds: items.map((item) => item.id),
         },
       };
       mutate(params, {

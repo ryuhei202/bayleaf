@@ -25,6 +25,8 @@ export type TMemberPhotoCreateParams = {
     readonly memberPhotoCategoryId: MEMBER_PHOTO_CATEGORY_ID_TYPE;
     readonly imageData: string;
     readonly imageFileName: string;
+    readonly chartId?: number;
+    readonly itemIds?: number[];
   };
 };
 
