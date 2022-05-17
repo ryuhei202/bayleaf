@@ -66,7 +66,10 @@ export const CombinationConsultContainer = ({ items }: TProps) => {
     });
   };
   const handleSubmit = () => {
-    if (imageFileName && imageData) return postPhoto();
+    if (imageFileName && imageData) {
+      postPhoto();
+      return;
+    }
 
     const itemImageUrls = items.map((item) => item.imagePaths.thumb);
     setFlexMessage(
