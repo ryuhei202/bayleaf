@@ -112,7 +112,7 @@ export const CombinationConsultContainer = ({ items }: TProps) => {
     case COMBINATION_FORM.IMAGE_SEND:
       return (
         <CombinationConsult
-          onChangeCurrentFormType={setCurrentFormType}
+          onClickNext={() => setCurrentFormType(COMBINATION_FORM.ITEM_CATEGORY)}
           onChangeFile={onChangeFile}
           preUploadImage={preUploadImage}
           onSubmit={handleSubmit}

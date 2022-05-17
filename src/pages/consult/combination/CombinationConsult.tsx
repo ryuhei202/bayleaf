@@ -3,16 +3,10 @@ import { Button } from "../../../components/baseParts/Button";
 import { ImageUploader } from "../../../components/baseParts/ImageUploader";
 import { Page } from "../../../components/baseParts/Page";
 import { PageHeader } from "../../../components/baseParts/PageHeader";
-import {
-  COMBINATION_FORM,
-  TCombiantionForm,
-} from "../../../models/consult/TCombinationForm";
 import PreviewDefault from "../../../images/preview_default.png";
 
 type TProps = {
-  readonly onChangeCurrentFormType: React.Dispatch<
-    React.SetStateAction<TCombiantionForm>
-  >;
+  readonly onClickNext: () => void;
   readonly onChangeFile: ChangeEventHandler<HTMLInputElement>;
   readonly preUploadImage: string | null;
   readonly onSubmit: ({}) => void;
@@ -22,7 +16,7 @@ type TProps = {
 };
 
 export const CombinationConsult = ({
-  onChangeCurrentFormType,
+  onClickNext,
   onChangeFile,
   preUploadImage,
   onSubmit,
@@ -58,9 +52,7 @@ export const CombinationConsult = ({
             次へ
           </Button>
           <Button
-            onClick={() =>
-              onChangeCurrentFormType(COMBINATION_FORM.ITEM_CATEGORY)
-            }
+            onClick={onClickNext}
             disabled={!!imageFileName && !!imageData}
             variant="text"
           >
