@@ -32,24 +32,16 @@ export const CombinationItemDetailSelection = ({
   onPatternChange,
   onTextChange,
 }: TProps) => {
-  const isDisabled = (): boolean => {
-    if (
-      !(
-        personalItem.cateSmallName &&
-        personalItem.color &&
-        personalItem.pattern
-      )
-    )
-      return true;
-    if (
-      !personalItem.additionalText &&
-      (personalItem.cateSmallName === CombinationItemDetails.OTHER.OTHERS ||
-        personalItem.color === COLORS.OTHER ||
-        personalItem.pattern === PATTERNS.OTHER)
-    )
-      return true;
-    return false;
-  };
+  const isInComplete = !(
+    personalItem.cateSmallName &&
+    personalItem.color &&
+    personalItem.pattern
+  );
+  const isTextEmptyOther =
+    !personalItem.additionalText &&
+    (personalItem.cateSmallName === CombinationItemDetails.OTHER.OTHERS ||
+      personalItem.color === COLORS.OTHER ||
+      personalItem.pattern === PATTERNS.OTHER);
 
   return (
     <Page>
@@ -138,7 +130,7 @@ export const CombinationItemDetailSelection = ({
             onClick={() => onSubmit(personalItem)}
             variant="primary"
             className="my-5"
-            disabled={isDisabled()}
+            disabled={isInComplete || isTextEmptyOther}
           >
             完了
           </Button>
