@@ -33,8 +33,8 @@ export const AfterConsultContainer = ({
         wearingPhoto !== undefined
           ? {
               type: "image",
-              originalContentUrl: wearingPhoto.large,
-              previewImageUrl: wearingPhoto.largeThumb,
+              originalContentUrl: wearingPhoto.original,
+              previewImageUrl: wearingPhoto.large,
             }
           : {
               type: "text",
