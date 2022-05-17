@@ -3,12 +3,13 @@ import {
   ConsultChoice,
   ConsultChoiceType,
 } from "../../models/consult/choice/ConsultChoice";
+import { createCheckOutfitConsultFlexMessage } from "../../models/consult/flexMessage/createCheckOutfitConsultFlexMessage";
 import { AgeConsultContainer } from "./AgeConsultContainer";
-import { CheckOutfitConsultContainer } from "./CheckOutfitConsultContainer";
 import { CombinationConsultContainer } from "./CombinationConsultContainer";
 import { DesignConsultContainer } from "./design/DesignConsultContainer";
 import { SizeConsultContainer } from "./size/SizeConsultContainer";
 import { SceneConsultContainer } from "./scene/SceneConsultContainer";
+import { WearingPhotoContainer } from "./WearingPhotoContainer";
 
 type TProps = {
   selectedConsultOption: ConsultChoiceType;
@@ -31,6 +32,15 @@ export const DetailedConsultContainer = ({
     case ConsultChoice.CONBINATION:
       return <CombinationConsultContainer coordinate={coordinate} />;
     case ConsultChoice.CHECKOUTFIT:
-      return <CheckOutfitConsultContainer coordinate={coordinate} />;
+      return (
+        <WearingPhotoContainer
+          items={coordinate.items}
+          flexMessage={createCheckOutfitConsultFlexMessage({
+            itemImageUrls: coordinate.items.map(
+              (item) => item.imagePaths.original
+            ),
+          })}
+        />
+      );
   }
 };
