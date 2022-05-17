@@ -3,12 +3,13 @@ import {
   ConsultChoice,
   ConsultChoiceType,
 } from "../../models/consult/choice/ConsultChoice";
-import { AgeConsultContainer } from "./AgeConsultContainer";
-import { CheckOutfitConsultContainer } from "./CheckOutfitConsultContainer";
 import { CombinationConsultContainer } from "./combination/CombinationConsultContainer";
+import { AgeConsultContainer } from "./age/AgeConsultContainer";
+import { createCheckOutfitConsultFlexMessage } from "../../models/consult/flexMessage/createCheckOutfitConsultFlexMessage";
 import { DesignConsultContainer } from "./design/DesignConsultContainer";
 import { SizeConsultContainer } from "./size/SizeConsultContainer";
 import { SceneConsultContainer } from "./scene/SceneConsultContainer";
+import { WearingPhotoContainer } from "./WearingPhotoContainer";
 
 type TProps = {
   selectedConsultOption: ConsultChoiceType;
@@ -25,12 +26,21 @@ export const DetailedConsultContainer = ({
     case ConsultChoice.DESIGN:
       return <DesignConsultContainer items={coordinate.items} />;
     case ConsultChoice.AGE:
-      return <AgeConsultContainer coordinate={coordinate} />;
+      return <AgeConsultContainer items={coordinate.items} />;
     case ConsultChoice.SCENE:
       return <SceneConsultContainer items={coordinate.items} />;
     case ConsultChoice.CONBINATION:
       return <CombinationConsultContainer items={coordinate.items} />;
     case ConsultChoice.CHECKOUTFIT:
-      return <CheckOutfitConsultContainer coordinate={coordinate} />;
+      return (
+        <WearingPhotoContainer
+          items={coordinate.items}
+          flexMessage={createCheckOutfitConsultFlexMessage({
+            itemImageUrls: coordinate.items.map(
+              (item) => item.imagePaths.original
+            ),
+          })}
+        />
+      );
   }
 };
