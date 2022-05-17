@@ -4,11 +4,12 @@ import {
   ConsultChoiceType,
 } from "../../models/consult/choice/ConsultChoice";
 import { AgeConsultContainer } from "./age/AgeConsultContainer";
-import { CheckOutfitConsultContainer } from "./CheckOutfitConsultContainer";
+import { createCheckOutfitConsultFlexMessage } from "../../models/consult/flexMessage/createCheckOutfitConsultFlexMessage";
 import { CombinationConsultContainer } from "./CombinationConsultContainer";
-import { DesignConsultContainer } from "./DesignConsultContainer";
-import { SceneConsultContainer } from "./SceneConsultContainer";
-import { SizeConsultContainer } from "./SizeConsultContainer";
+import { DesignConsultContainer } from "./design/DesignConsultContainer";
+import { SizeConsultContainer } from "./size/SizeConsultContainer";
+import { SceneConsultContainer } from "./scene/SceneConsultContainer";
+import { WearingPhotoContainer } from "./WearingPhotoContainer";
 
 type TProps = {
   selectedConsultOption: ConsultChoiceType;
@@ -21,16 +22,25 @@ export const DetailedConsultContainer = ({
 }: TProps) => {
   switch (selectedConsultOption) {
     case ConsultChoice.SIZE:
-      return <SizeConsultContainer coordinate={coordinate} />;
+      return <SizeConsultContainer items={coordinate.items} />;
     case ConsultChoice.DESIGN:
-      return <DesignConsultContainer coordinate={coordinate} />;
+      return <DesignConsultContainer items={coordinate.items} />;
     case ConsultChoice.AGE:
       return <AgeConsultContainer items={coordinate.items} />;
     case ConsultChoice.SCENE:
-      return <SceneConsultContainer coordinate={coordinate} />;
+      return <SceneConsultContainer items={coordinate.items} />;
     case ConsultChoice.CONBINATION:
       return <CombinationConsultContainer coordinate={coordinate} />;
     case ConsultChoice.CHECKOUTFIT:
-      return <CheckOutfitConsultContainer coordinate={coordinate} />;
+      return (
+        <WearingPhotoContainer
+          items={coordinate.items}
+          flexMessage={createCheckOutfitConsultFlexMessage({
+            itemImageUrls: coordinate.items.map(
+              (item) => item.imagePaths.original
+            ),
+          })}
+        />
+      );
   }
 };
