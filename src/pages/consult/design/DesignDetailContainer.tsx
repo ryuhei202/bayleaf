@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { createDesignConsultFlexMessage } from "../../../models/consult/flexMessage/createDesignConsultFlexMessage";
 import { TConsultingItem } from "../../../models/consult/TConsultingItem";
 import { TDesignAnswer } from "../../../models/consult/TDesignAnswer";
+import { WearingPhotoContainer } from "../WearingPhotoContainer";
 import { DesignDetailForm } from "./DesignDetailForm";
 
 type TProps = {
@@ -33,7 +35,10 @@ export const DesignDetailContainer = ({ selectedItems }: TProps) => {
   return (
     <>
       {selectedItems.length === answeredItems.length ? (
-        <>{/* TODO: 別タスクで実装 */}</>
+        <WearingPhotoContainer
+          flexMessage={createDesignConsultFlexMessage(answeredItems)}
+          items={selectedItems}
+        />
       ) : (
         <DesignDetailForm
           selectedItem={selectedItems[answeredItems.length]}
