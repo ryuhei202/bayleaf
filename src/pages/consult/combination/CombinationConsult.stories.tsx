@@ -12,7 +12,7 @@ const Template: ComponentStory<typeof CombinationConsult> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  onChangeCurrentFormType: () => {},
+  onClickNext: () => {},
 };
 
 Default.decorators = [(Story) => <Story />];

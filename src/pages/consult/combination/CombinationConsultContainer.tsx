@@ -137,6 +137,6 @@ export const CombinationConsultContainer = ({ items }: TProps) => {
         />
       );
     default:
-      return <></>;
+      throw Error("予期せぬエラーが発生しました");
   }
 };
