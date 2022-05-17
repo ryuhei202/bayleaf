@@ -3,9 +3,9 @@ import {
   ConsultChoice,
   ConsultChoiceType,
 } from "../../models/consult/choice/ConsultChoice";
+import { CombinationConsultContainer } from "./combination/CombinationConsultContainer";
 import { AgeConsultContainer } from "./age/AgeConsultContainer";
 import { createCheckOutfitConsultFlexMessage } from "../../models/consult/flexMessage/createCheckOutfitConsultFlexMessage";
-import { CombinationConsultContainer } from "./CombinationConsultContainer";
 import { DesignConsultContainer } from "./design/DesignConsultContainer";
 import { SizeConsultContainer } from "./size/SizeConsultContainer";
 import { SceneConsultContainer } from "./scene/SceneConsultContainer";
@@ -30,7 +30,7 @@ export const DetailedConsultContainer = ({
     case ConsultChoice.SCENE:
       return <SceneConsultContainer items={coordinate.items} />;
     case ConsultChoice.CONBINATION:
-      return <CombinationConsultContainer coordinate={coordinate} />;
+      return <CombinationConsultContainer items={coordinate.items} />;
     case ConsultChoice.CHECKOUTFIT:
       return (
         <WearingPhotoContainer

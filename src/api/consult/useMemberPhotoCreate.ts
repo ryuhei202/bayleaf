@@ -1,11 +1,17 @@
 import { AxiosResponse } from "axios";
-import { UseMutateFunction } from "react-query";
+import { UseMutateAsyncFunction, UseMutateFunction } from "react-query";
 import { MEMBER_PHOTO_CATEGORY_ID_TYPE } from "../../models/consult/MemberPhotoCategoryId";
 import { TImagePathsResponse } from "../shared/TImagePathsResponse";
 import { usePostRequest } from "../usePostRequest";
 
 type TMemberPhotoCreate = {
   readonly mutate: UseMutateFunction<
+    AxiosResponse,
+    unknown,
+    TMemberPhotoCreateParams,
+    unknown
+  >;
+  readonly mutateAsync: UseMutateAsyncFunction<
     AxiosResponse,
     unknown,
     TMemberPhotoCreateParams,
@@ -27,8 +33,8 @@ export type TMemberPhotoCreateResponse = {
 };
 
 export const useMemberPhotoCreate = (): TMemberPhotoCreate => {
-  const { mutate, isLoading } =
+  const { mutate, mutateAsync, isLoading } =
     usePostRequest<TMemberPhotoCreateParams>("member_photos");
 
-  return { mutate, isLoading };
+  return { mutate, mutateAsync, isLoading };
 };
