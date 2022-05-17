@@ -16,12 +16,7 @@ import { PATTERNS, TPatterns } from "../../../models/shared/TPatterns";
 
 type TProps = {
   readonly itemCategory: TCombinationItemCategory;
-  readonly onSubmit: ({
-    cateSmallName,
-    color,
-    pattern,
-    additionalText,
-  }: TPersonalItem) => void;
+  readonly onSubmit: (personalItem: TPersonalItem) => void;
 };
 
 export const CombinationItemDetailSelection = ({
