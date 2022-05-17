@@ -3,8 +3,8 @@ import {
   ConsultChoice,
   ConsultChoiceType,
 } from "../../models/consult/choice/ConsultChoice";
+import { AgeConsultContainer } from "./age/AgeConsultContainer";
 import { createCheckOutfitConsultFlexMessage } from "../../models/consult/flexMessage/createCheckOutfitConsultFlexMessage";
-import { AgeConsultContainer } from "./AgeConsultContainer";
 import { CombinationConsultContainer } from "./CombinationConsultContainer";
 import { DesignConsultContainer } from "./design/DesignConsultContainer";
 import { SizeConsultContainer } from "./size/SizeConsultContainer";
@@ -26,7 +26,7 @@ export const DetailedConsultContainer = ({
     case ConsultChoice.DESIGN:
       return <DesignConsultContainer items={coordinate.items} />;
     case ConsultChoice.AGE:
-      return <AgeConsultContainer coordinate={coordinate} />;
+      return <AgeConsultContainer items={coordinate.items} />;
     case ConsultChoice.SCENE:
       return <SceneConsultContainer items={coordinate.items} />;
     case ConsultChoice.CONBINATION:
