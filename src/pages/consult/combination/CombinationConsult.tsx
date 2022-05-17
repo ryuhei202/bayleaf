@@ -15,7 +15,7 @@ type TProps = {
   >;
   readonly onChangeFile: ChangeEventHandler<HTMLInputElement>;
   readonly preUploadImage: string | null;
-  readonly onSubmit: () => void;
+  readonly onSubmit: ({}) => void;
   readonly isLoading: boolean;
   readonly imageData: string | null;
   readonly imageFileName: string | null;
@@ -50,7 +50,7 @@ export const CombinationConsult = ({
             defaultSrc={PreviewDefault}
           />
           <Button
-            onClick={onSubmit}
+            onClick={() => onSubmit({})}
             className="mb-3"
             isLoading={isLoading}
             disabled={!imageFileName && !imageData}

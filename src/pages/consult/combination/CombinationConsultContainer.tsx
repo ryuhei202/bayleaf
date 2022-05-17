@@ -13,11 +13,8 @@ import {
   TCombiantionForm,
 } from "../../../models/consult/TCombinationForm";
 import { TCombinationItemCategory } from "../../../models/consult/TCombinationItemCategory";
-import { TCombinationDetails } from "../../../models/consult/TCombinationItemDetails";
 import { TConsultingItem } from "../../../models/consult/TConsultingItem";
 import { TPersonalItem } from "../../../models/consult/TPersonalItem";
-import { TColors } from "../../../models/shared/TColors";
-import { TPatterns } from "../../../models/shared/TPatterns";
 import { AfterConsultContainer } from "../AfterConsultContainer";
 import { CombinationConsult } from "./CombinationConsult";
 import { CombinationItemCategorySelection } from "./CombinationItemCategorySelection";
@@ -40,44 +37,35 @@ export const CombinationConsultContainer = ({ items }: TProps) => {
   const { imageFileName, imageData, preUploadImage, onChangeFile } =
     useImageUploadHandler();
   const { mutateAsync, isLoading } = useMemberPhotoCreate();
-
-  const handleCategoryChange = (cateSmallName: TCombinationDetails) => {
-    setPersonalItem({
+  const handleSubmit = ({
+    cateSmallName,
+    color,
+    pattern,
+    additionalText,
+  }: TPersonalItem) => {
+    const newPersonalItem = {
       ...personalItem,
       cateSmallName,
-    });
-  };
-  const handleColorChange = (color: TColors) => {
-    setPersonalItem({
-      ...personalItem,
       color,
-    });
-  };
-  const handlePatternChange = (pattern: TPatterns) => {
-    setPersonalItem({
-      ...personalItem,
       pattern,
-    });
-  };
-  const handleTextChange = (additionalText: string) => {
-    setPersonalItem({
-      ...personalItem,
       additionalText,
-    });
-  };
-  const handleSubmit = () => {
+    };
+    setPersonalItem(newPersonalItem);
     if (imageFileName && imageData) {
-      postPhoto();
+      postPhoto(newPersonalItem);
       return;
     }
 
     const itemImageUrls = items.map((item) => item.imagePaths.thumb);
     setFlexMessage(
-      createCombinationConsultFlexMessage({ itemImageUrls, personalItem })
+      createCombinationConsultFlexMessage({
+        itemImageUrls,
+        personalItem: newPersonalItem,
+      })
     );
   };
 
-  const postPhoto = async () => {
+  const postPhoto = async (personalItem: TPersonalItem) => {
     const params: TMemberPhotoCreateParams = {
       image: {
         memberPhotoCategoryId: MEMBER_PHOTO_CATEGORY_ID.PERSONALITEM,
@@ -145,12 +133,7 @@ export const CombinationConsultContainer = ({ items }: TProps) => {
       return (
         <CombinationItemDetailSelection
           itemCategory={itemCategory as TCombinationItemCategory}
-          personalItem={personalItem}
           onSubmit={handleSubmit}
-          onCategoryChange={handleCategoryChange}
-          onColorChange={handleColorChange}
-          onPatternChange={handlePatternChange}
-          onTextChange={handleTextChange}
         />
       );
     default:
