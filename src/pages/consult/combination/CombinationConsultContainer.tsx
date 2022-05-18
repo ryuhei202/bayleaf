@@ -4,7 +4,7 @@ import {
   TMemberPhotoCreateParams,
   TMemberPhotoCreateResponse,
   useMemberPhotoCreate,
-} from "../../../api/consult/useMemberPhotoCreate";
+} from "../../../api/memberPhotos/useMemberPhotoCreate";
 import { TImagePathsResponse } from "../../../api/shared/TImagePathsResponse";
 import { createCombinationConsultFlexMessage } from "../../../models/consult/flexMessage/createCombinationConsultFlexMessage";
 import { MEMBER_PHOTO_CATEGORY_ID } from "../../../models/consult/MemberPhotoCategoryId";
