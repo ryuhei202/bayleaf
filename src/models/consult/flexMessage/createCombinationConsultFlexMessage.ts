@@ -80,11 +80,15 @@ export const createCombinationConsultFlexMessage = (
   }
 
   let flexMessage = {
-    type: "bubble",
-    body: {
-      type: "box",
-      layout: "vertical",
-      contents,
+    type: "flex",
+    altText: "靴やアウターなど私物との組み合わせが気になる",
+    contents: {
+      type: "bubble",
+      body: {
+        type: "box",
+        layout: "vertical",
+        contents,
+      },
     },
   };
 
