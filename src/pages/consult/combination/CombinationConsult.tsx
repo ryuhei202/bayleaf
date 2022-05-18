@@ -1,29 +1,24 @@
-import { ChangeEventHandler } from "react";
 import { Button } from "../../../components/baseParts/Button";
 import { ImageUploader } from "../../../components/baseParts/ImageUploader";
 import { Page } from "../../../components/baseParts/Page";
 import { PageHeader } from "../../../components/baseParts/PageHeader";
+import { useImageUploadHandler } from "../../../hooks/handler/image/useImageUploadHandler";
 import PreviewDefault from "../../../images/preview_default.png";
 
 type TProps = {
   readonly onClickNext: () => void;
-  readonly onChangeFile: ChangeEventHandler<HTMLInputElement>;
-  readonly preUploadImage: string | null;
-  readonly onSubmit: ({}) => void;
+  readonly onSubmit: (imageFileName: string, imageData: string) => void;
   readonly isLoading: boolean;
-  readonly imageData: string | null;
-  readonly imageFileName: string | null;
 };
 
 export const CombinationConsult = ({
   onClickNext,
-  onChangeFile,
-  preUploadImage,
   onSubmit,
   isLoading,
-  imageData,
-  imageFileName,
 }: TProps) => {
+  const { imageFileName, imageData, preUploadImage, onChangeFile } =
+    useImageUploadHandler();
+
   return (
     <Page>
       <div className="flex flex-col px-5 h-full">
@@ -44,7 +39,7 @@ export const CombinationConsult = ({
             defaultSrc={PreviewDefault}
           />
           <Button
-            onClick={() => onSubmit({})}
+            onClick={() => onSubmit(imageFileName!, imageData!)}
             className="mb-3"
             isLoading={isLoading}
             disabled={!imageFileName && !imageData}

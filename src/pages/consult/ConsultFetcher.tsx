@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { Loader } from "semantic-ui-react";
 
@@ -11,6 +12,9 @@ import { CoordinateListContainer } from "./CoordinateListContainer";
 type TProps = {
   readonly chartId: number;
 };
+
+export const ConsultChartIdContext =
+  React.createContext<number | undefined>(undefined);
 
 export const ConsultFetcher = ({ chartId }: TProps) => {
   const [selectedCoordinate, setSelectedCoordinate] =
@@ -33,7 +37,9 @@ export const ConsultFetcher = ({ chartId }: TProps) => {
     );
 
   return selectedCoordinate ? (
-    <ConsultOption coordinate={selectedCoordinate} />
+    <ConsultChartIdContext.Provider value={chartId}>
+      <ConsultOption coordinate={selectedCoordinate} />
+    </ConsultChartIdContext.Provider>
   ) : (
     <CoordinateListContainer
       coordinates={coordinateData.coordinates}

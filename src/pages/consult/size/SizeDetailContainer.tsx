@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { createSizeConsultFlexMessage } from "../../../models/consult/flexMessage/createSizeConsultFlexMessage";
 import { TConsultingItem } from "../../../models/consult/TConsultingItem";
 import { TSizeAnswer } from "../../../models/consult/TSizeAnswer";
 import { TSizePart } from "../../../models/shared/TSizePart";
+import { WearingPhotoContainer } from "../WearingPhotoContainer";
 import { SizeDetailSelection } from "./SizeDetailSelection";
 
 type TProps = {
@@ -27,7 +29,10 @@ export const SizeDetailContainer = ({ selectedItems }: TProps) => {
   return (
     <>
       {selectedItems.length === answeredItems.length ? (
-        <>{/* TODO: 別タスクで実装 */}</>
+        <WearingPhotoContainer
+          items={selectedItems}
+          flexMessage={createSizeConsultFlexMessage(answeredItems)}
+        />
       ) : (
         <SizeDetailSelection
           selectedItem={selectedItems[answeredItems.length]}
