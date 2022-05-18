@@ -19,6 +19,16 @@ export const AfterConsultContainer = ({
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | undefined>(undefined);
 
+  const sendMessages = async (messages: any[]) => {
+    const liff = (await import("@line/liff")).default;
+    liff.sendMessages(messages);
+  };
+
+  const closeWindow = async () => {
+    const liff = (await import("@line/liff")).default;
+    liff.closeWindow();
+  };
+
   // 相談LINEメッセージを送信
   useEffect(() => {
     const consultLineMessages: any[] = [
@@ -42,8 +52,7 @@ export const AfterConsultContainer = ({
             }
       );
     }
-    liff
-      .sendMessages(consultLineMessages)
+    sendMessages(consultLineMessages)
       .then(() => {
         setIsLoading(false);
       })
@@ -65,7 +74,7 @@ export const AfterConsultContainer = ({
       }
       subTitle="ご相談したいアイテムの着用写真をお受け取り次第、スタイリストからLINEでご相談内容を詳しく伺います。"
       btnText="LINEへ戻る"
-      onClick={() => liff.closeWindow()}
+      onClick={closeWindow}
     />
   ) : (
     <AfterConsult
@@ -78,7 +87,7 @@ export const AfterConsultContainer = ({
       }
       subTitle="コーデを自信を持って着ていただけるように、お悩み内容を確認しスタイリストからご連絡させていただきます。"
       btnText="LINEへ戻る"
-      onClick={() => liff.closeWindow()}
+      onClick={closeWindow}
     />
   );
 };
