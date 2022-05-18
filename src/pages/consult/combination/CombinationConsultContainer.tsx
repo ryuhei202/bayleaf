@@ -33,7 +33,7 @@ export const CombinationConsultContainer = ({ items }: TProps) => {
   const [response, setResponse] = useState<TImagePathsResponse | null>(null);
   const { mutateAsync, isLoading } = useMemberPhotoCreate();
 
-  const createFlexMessage = (personalItem: TPersonalItem) => {
+  const createFlexMessage = (personalItem?: TPersonalItem) => {
     const itemImageUrls = items.map((item) => item.imagePaths.thumb);
     setFlexMessage(
       createCombinationConsultFlexMessage({
@@ -58,7 +58,7 @@ export const CombinationConsultContainer = ({ items }: TProps) => {
       onSuccess: (data: AxiosResponse<TMemberPhotoCreateResponse>) => {
         if (data && data.data) {
           setResponse(data.data.imagePaths);
-          createFlexMessage({ image: data.data.imagePaths });
+          createFlexMessage();
         }
       },
     });

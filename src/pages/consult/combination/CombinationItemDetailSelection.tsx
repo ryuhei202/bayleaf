@@ -120,7 +120,12 @@ export const CombinationItemDetailSelection = ({
         <div>
           <Button
             onClick={() =>
-              onSubmit({ cateSmallName, color, pattern, additionalText })
+              onSubmit({
+                cateSmallName: cateSmallName!,
+                color: color!,
+                pattern: pattern!,
+                additionalText,
+              })
             }
             variant="primary"
             className="my-5"

@@ -54,7 +54,7 @@ export const createCombinationConsultFlexMessage = (
     });
     contents.push({
       type: "text",
-      text: `${formAnswer.personalItem.cateSmallName}／${formAnswer.personalItem.color}`,
+      text: `${formAnswer.personalItem.cateSmallName}／${formAnswer.personalItem.color}／${formAnswer.personalItem.pattern}`,
       margin: "md",
       size: "xxs",
       wrap: true,
