@@ -1,5 +1,4 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { TCoordinateItemResponse } from "../../api/coordinates/TCoordinateItemResponse";
 import { CoordinateItemImages } from "./CoordinateItemImages";
 
 export default {
