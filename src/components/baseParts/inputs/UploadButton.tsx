@@ -22,29 +22,34 @@ export const UploadButton = ({ className, uploadType, onChange }: Props) => {
 
   return (
     <>
-      <label htmlFor="upload-button">
-        {uploadType === "snap" ? (
+      {uploadType === "snap" ? (
+        <label htmlFor="upload-image-button">
           <input
-            id="upload-button"
+            id="upload-image-button"
             type="file"
             accept="image/*"
             capture="environment"
             className="hidden"
             onChange={onChange}
           />
-        ) : (
+          <span className={`${className ?? ""} ${classes.join(" ")}`}>
+            撮影する
+          </span>
+        </label>
+      ) : (
+        <label htmlFor="capture-image-button">
           <input
-            id="upload-button"
+            id="capture-image-button"
             type="file"
             accept="image/*"
             className="hidden"
             onChange={onChange}
           />
-        )}
-        <span className={`${className ?? ""} ${classes.join(" ")}`}>
-          {uploadType === "snap" ? "撮影する" : "画像フォルダから選ぶ"}
-        </span>
-      </label>
+          <span className={`${className ?? ""} ${classes.join(" ")}`}>
+            画像フォルダから選ぶ
+          </span>
+        </label>
+      )}
     </>
   );
 };
