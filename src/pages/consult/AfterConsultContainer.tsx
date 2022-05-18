@@ -1,4 +1,3 @@
-import liff from "@line/liff/dist/lib";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Loader } from "semantic-ui-react";
