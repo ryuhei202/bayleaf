@@ -7,12 +7,12 @@ export const createDesignConsultFlexMessage = (
   formAnswers: TDesignAnswer[]
 ): string => {
   const flexMessage = {
-    type: "carousel",
-    contents: formAnswers.map((answer) => {
-      return {
-        type: "flex",
-        altText: "色や柄が気になる",
-        contents: {
+    type: "flex",
+    altText: "色や柄が気になる",
+    contents: {
+      type: "carousel",
+      contents: formAnswers.map((answer) => {
+        return {
           type: "bubble",
           body: {
             type: "box",
@@ -83,9 +83,9 @@ export const createDesignConsultFlexMessage = (
               },
             ],
           },
-        },
-      };
-    }),
+        };
+      }),
+    },
   };
 
   return JSON.stringify(flexMessage);
