@@ -47,9 +47,9 @@ export const AfterConsultContainer = ({
     consultLineMessages.push({
       type: "image",
       originalContentUrl:
-        "https://firebasestorage.googleapis.com/v0/b/leeap-chat-board-public/o/icons%2F1588841461336_3164.jpg",
+        "https://p1-078379c8.imageflux.jp/f=webp:auto%2Cw=1200/images/b29d452d0c3ac40400615aa8ad7326da.jpg",
       previewImageUrl:
-        "https://firebasestorage.googleapis.com/v0/b/leeap-chat-board-public/o/icons%2F1588841461336_3164.jpg",
+        "https://p1-078379c8.imageflux.jp/f=webp:auto%2Cw=1200/images/b29d452d0c3ac40400615aa8ad7326da.jpg",
     });
     liff
       .sendMessages(consultLineMessages)
