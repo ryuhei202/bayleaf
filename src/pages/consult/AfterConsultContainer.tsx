@@ -43,6 +43,14 @@ export const AfterConsultContainer = ({
             }
       );
     }
+    // テスト用
+    consultLineMessages.push({
+      type: "image",
+      originalContentUrl:
+        "https://firebasestorage.googleapis.com/v0/b/leeap-chat-board-public/o/icons%2F1588841461336_3164.jpg",
+      previewImageUrl:
+        "https://firebasestorage.googleapis.com/v0/b/leeap-chat-board-public/o/icons%2F1588841461336_3164.jpg",
+    });
     liff
       .sendMessages(consultLineMessages)
       .then(() => {
