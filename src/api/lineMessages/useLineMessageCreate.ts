@@ -13,7 +13,7 @@ type TLineMessageCreate = {
 };
 
 export type TLineMessageCreateParams = {
-  readonly messages: any[];
+  readonly messages: string[];
 };
 
 export const useLineMessageCreate = (): TLineMessageCreate => {

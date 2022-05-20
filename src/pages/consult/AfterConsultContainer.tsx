@@ -24,17 +24,17 @@ export const AfterConsultContainer = ({
 
   // 相談LINEメッセージを送信
   useEffect(() => {
-    const consultLineMessages: any[] = [
-      {
+    const consultLineMessages: string[] = [
+      JSON.stringify({
         type: "text",
         text: "コーデの着こなし相談を受け付けました！",
-      },
+      }),
     ];
-    consultLineMessages.push(JSON.parse(flexMessage));
+    consultLineMessages.push(flexMessage);
     if (isPhotoSendable) {
       consultLineMessages.push(
         wearingPhoto !== undefined
-          ? {
+          ? JSON.stringify({
               type: "image",
               originalContentUrl:
                 process.env.REACT_APP_ENV === "production"
@@ -44,8 +44,8 @@ export const AfterConsultContainer = ({
                 process.env.REACT_APP_ENV === "production"
                   ? wearingPhoto.large
                   : OUTFIT_TEST_IMAGE_URL,
-            }
-          : {
+            })
+          : JSON.stringify({
               type: "text",
               text: "着用写真の送信をお願いします！",
               quickReply: {
@@ -66,7 +66,7 @@ export const AfterConsultContainer = ({
                   },
                 ],
               },
-            }
+            })
       );
     }
     liff
