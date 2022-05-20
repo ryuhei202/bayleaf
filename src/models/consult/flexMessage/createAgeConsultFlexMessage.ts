@@ -1,3 +1,4 @@
+import { ITEM_TEST_IMAGE_URL } from "../../../images/TestImageUrl";
 import { TAgeAnswer } from "../TAgeAnswer";
 
 /**
@@ -50,7 +51,10 @@ export const createAgeConsultFlexMessage = (
                     contents: [
                       {
                         type: "image",
-                        url: answer.item.imagePaths.original,
+                        url:
+                          process.env.REACT_APP_ENV == "production"
+                            ? answer.item.imagePaths.original
+                            : ITEM_TEST_IMAGE_URL.original,
                         margin: "none",
                       },
                       {

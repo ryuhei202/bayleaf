@@ -1,3 +1,5 @@
+import { ITEM_TEST_IMAGE_URL } from "../../../images/TestImageUrl";
+
 type TSceneAnswer = {
   itemImageUrls: string[];
   freeText: string;
@@ -46,7 +48,10 @@ export const createSceneConsultFlexMessage = (
             contents: formAnswer.itemImageUrls.map((imageUrl) => {
               return {
                 type: "image",
-                url: imageUrl,
+                url:
+                  process.env.REACT_APP_ENV == "production"
+                    ? imageUrl
+                    : ITEM_TEST_IMAGE_URL.original,
               };
             }),
             margin: "md",
