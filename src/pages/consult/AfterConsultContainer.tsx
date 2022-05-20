@@ -1,5 +1,4 @@
 import liff from "@line/liff/dist/lib";
-import * as Sentry from "@sentry/react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Loader } from "semantic-ui-react";
@@ -60,7 +59,6 @@ export const AfterConsultContainer = ({
           setIsLoading(false);
         },
         onError: (error) => {
-          Sentry.captureException(error);
           setError(error);
         },
       }
