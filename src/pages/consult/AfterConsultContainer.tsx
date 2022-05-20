@@ -1,8 +1,8 @@
 import liff from "@line/liff/dist/lib";
-import * as Sentry from "@sentry/react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Loader } from "semantic-ui-react";
+import { useLineMessageCreate } from "../../api/lineMessages/useLineMessageCreate";
 import { TImagePathsResponse } from "../../api/shared/TImagePathsResponse";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { AfterConsult } from "./AfterConsult";
@@ -19,6 +19,7 @@ export const AfterConsultContainer = ({
 }: TProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | undefined>(undefined);
+  const { mutate } = useLineMessageCreate();
 
   // 相談LINEメッセージを送信
   useEffect(() => {
@@ -51,16 +52,18 @@ export const AfterConsultContainer = ({
       previewImageUrl:
         "https://p1-078379c8.imageflux.jp/f=webp:auto%2Cw=1200/images/b29d452d0c3ac40400615aa8ad7326da.jpg",
     });
-    liff
-      .sendMessages(consultLineMessages)
-      .then(() => {
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        Sentry.captureException(error);
-        setError(error);
-      });
-  }, [flexMessage, isPhotoSendable, wearingPhoto]);
+    mutate(
+      { messages: consultLineMessages },
+      {
+        onSuccess: () => {
+          setIsLoading(false);
+        },
+        onError: (error) => {
+          setError(error);
+        },
+      }
+    );
+  }, [flexMessage, isPhotoSendable, wearingPhoto, mutate]);
 
   if (error) return <ErrorMessage message={error.message} />;
   if (isLoading) return <Loader active />;

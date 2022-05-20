@@ -6,7 +6,7 @@ import {
   TMemberPhotoCreateParams,
   TMemberPhotoCreateResponse,
   useMemberPhotoCreate,
-} from "../../api/consult/useMemberPhotoCreate";
+} from "../../api/memberPhotos/useMemberPhotoCreate";
 import { TImagePathsResponse } from "../../api/shared/TImagePathsResponse";
 import { Page } from "../../components/baseParts/Page";
 import { useImageUploadHandler } from "../../hooks/handler/image/useImageUploadHandler";
