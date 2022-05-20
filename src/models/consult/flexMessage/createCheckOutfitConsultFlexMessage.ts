@@ -48,7 +48,7 @@ export const createCheckOutfitConsultFlexMessage = (
               return {
                 type: "image",
                 url:
-                  process.env.REACT_APP_ENV == "production"
+                  process.env.REACT_APP_ENV === "production"
                     ? imageUrl
                     : ITEM_TEST_IMAGE_URL.original,
               };
