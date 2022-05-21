@@ -5,7 +5,7 @@ import {
 } from "../../models/consult/choice/ConsultChoice";
 import { CombinationConsultContainer } from "./combination/CombinationConsultContainer";
 import { AgeConsultContainer } from "./age/AgeConsultContainer";
-import { createCheckOutfitConsultFlexMessage } from "../../models/consult/flexMessage/createCheckOutfitConsultFlexMessage";
+import { createCheckOutfitConsultFlexMessage } from "./createFlexMessage/createCheckOutfitConsultFlexMessage";
 import { DesignConsultContainer } from "./design/DesignConsultContainer";
 import { SizeConsultContainer } from "./size/SizeConsultContainer";
 import { SceneConsultContainer } from "./scene/SceneConsultContainer";

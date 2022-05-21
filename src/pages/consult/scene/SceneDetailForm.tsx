@@ -3,7 +3,7 @@ import { Button } from "../../../components/baseParts/Button";
 import { TextAreaAlt } from "../../../components/baseParts/inputs/TextAreaAlt";
 import { Page } from "../../../components/baseParts/Page";
 import { PageHeader } from "../../../components/baseParts/PageHeader";
-import { createSceneConsultFlexMessage } from "../../../models/consult/flexMessage/createSceneConsultFlexMessage";
+import { createSceneConsultFlexMessage } from "../createFlexMessage/createSceneConsultFlexMessage";
 
 type TProps = {
   readonly itemImageUrls: string[];

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createDesignConsultFlexMessage } from "../../../models/consult/flexMessage/createDesignConsultFlexMessage";
+import { createDesignConsultFlexMessage } from "../createFlexMessage/createDesignConsultFlexMessage";
 import { TConsultingItem } from "../../../models/consult/TConsultingItem";
 import { TDesignAnswer } from "../../../models/consult/TDesignAnswer";
 import { WearingPhotoContainer } from "../WearingPhotoContainer";

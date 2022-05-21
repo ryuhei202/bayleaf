@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createSizeConsultFlexMessage } from "../../../models/consult/flexMessage/createSizeConsultFlexMessage";
+import { createSizeConsultFlexMessage } from "../createFlexMessage/createSizeConsultFlexMessage";
 import { TConsultingItem } from "../../../models/consult/TConsultingItem";
 import { TSizeAnswer } from "../../../models/consult/TSizeAnswer";
 import { TSizePart } from "../../../models/shared/TSizePart";

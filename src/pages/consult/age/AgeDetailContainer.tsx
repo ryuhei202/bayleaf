@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { TAGE_CHOICES } from "../../../models/consult/choice/AgeChoice";
-import { createAgeConsultFlexMessage } from "../../../models/consult/flexMessage/createAgeConsultFlexMessage";
+import { createAgeConsultFlexMessage } from "../createFlexMessage/createAgeConsultFlexMessage";
 import { TAgeAnswer } from "../../../models/consult/TAgeAnswer";
 import { TConsultingItem } from "../../../models/consult/TConsultingItem";
 import { WearingPhotoContainer } from "../WearingPhotoContainer";
