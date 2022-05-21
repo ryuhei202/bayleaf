@@ -3,13 +3,11 @@ import { Button } from "../../../components/baseParts/Button";
 import { TextAreaAlt } from "../../../components/baseParts/inputs/TextAreaAlt";
 import { Page } from "../../../components/baseParts/Page";
 import { PageHeader } from "../../../components/baseParts/PageHeader";
-import { createSceneConsultFlexMessage } from "../createFlexMessage/createSceneConsultFlexMessage";
 
 type TProps = {
-  readonly itemImageUrls: string[];
-  readonly setFlexMessage: React.Dispatch<React.SetStateAction<string | null>>;
+  readonly onSubmit: (freeText: string) => void;
 };
-export const SceneDetailForm = ({ itemImageUrls, setFlexMessage }: TProps) => {
+export const SceneDetailForm = ({ onSubmit }: TProps) => {
   const [freeText, setFreeText] = useState<string>("");
   return (
     <Page>
@@ -33,14 +31,7 @@ export const SceneDetailForm = ({ itemImageUrls, setFlexMessage }: TProps) => {
           />
         </div>
         <div className="flex flex-col space-y-1 px-5 py-3">
-          <Button
-            onClick={() =>
-              setFlexMessage(
-                createSceneConsultFlexMessage({ itemImageUrls, freeText })
-              )
-            }
-            disabled={freeText === ""}
-          >
+          <Button onClick={() => onSubmit(freeText)} disabled={freeText === ""}>
             完了
           </Button>
         </div>

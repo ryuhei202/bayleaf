@@ -11,13 +11,7 @@ const Template: ComponentStory<typeof SceneDetailForm> = (args) => (
 );
 export const Default = Template.bind({});
 Default.args = {
-  itemImageUrls: [
-    "https://stg.leeap.jp/files/preregistered_item/168/16899/thumb_IMG_3977.JPG",
-    "https://stg.leeap.jp/files/preregistered_item/168/16899/thumb_IMG_3977.JPG",
-    "https://stg.leeap.jp/files/preregistered_item/168/16899/thumb_IMG_3977.JPG",
-    "https://stg.leeap.jp/files/preregistered_item/168/16899/thumb_IMG_3977.JPG",
-  ],
-  setFlexMessage: () => {},
+  onSubmit: () => {},
 };
 
 Default.decorators = [(Story) => <Story />];

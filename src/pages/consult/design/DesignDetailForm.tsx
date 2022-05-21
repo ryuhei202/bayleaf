@@ -9,13 +9,8 @@ import { TConsultingItem } from "../../../models/consult/TConsultingItem";
 type TProps = {
   selectedItem: TConsultingItem;
   onSubmit: (freeText: string) => void;
-  onSkip: () => void;
 };
-export const DesignDetailForm = ({
-  selectedItem,
-  onSubmit,
-  onSkip,
-}: TProps) => {
+export const DesignDetailForm = ({ selectedItem, onSubmit }: TProps) => {
   const [freeText, setFreeText] = useState<string>("");
 
   useEffect(() => {
@@ -53,9 +48,6 @@ export const DesignDetailForm = ({
         <div className="flex flex-col space-y-1 px-5 pb-3">
           <Button onClick={() => onSubmit(freeText)} disabled={freeText === ""}>
             次へ
-          </Button>
-          <Button onClick={onSkip} variant="text" disabled={freeText !== ""}>
-            SKIP
           </Button>
         </div>
       </div>

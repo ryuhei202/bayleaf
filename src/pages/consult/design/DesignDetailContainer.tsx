@@ -22,16 +22,6 @@ export const DesignDetailContainer = ({ selectedItems }: TProps) => {
     ]);
   };
 
-  const handleSkip = () => {
-    setAnsweredItems([
-      ...answeredItems,
-      {
-        item: selectedItems[answeredItems.length],
-        freeText: "",
-      },
-    ]);
-  };
-
   return (
     <>
       {selectedItems.length === answeredItems.length ? (
@@ -43,7 +33,6 @@ export const DesignDetailContainer = ({ selectedItems }: TProps) => {
         <DesignDetailForm
           selectedItem={selectedItems[answeredItems.length]}
           onSubmit={handleSubmit}
-          onSkip={handleSkip}
         />
       )}
     </>

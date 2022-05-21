@@ -5,7 +5,6 @@ import {
   TMemberPhotoCreateResponse,
   useMemberPhotoCreate,
 } from "../../../api/memberPhotos/useMemberPhotoCreate";
-import { TImagePathsResponse } from "../../../api/shared/TImagePathsResponse";
 import { createCombinationConsultFlexMessage } from "../createFlexMessage/createCombinationConsultFlexMessage";
 import { MEMBER_PHOTO_CATEGORY_ID } from "../../../models/consult/MemberPhotoCategoryId";
 import {
@@ -19,6 +18,9 @@ import { AfterConsultContainer } from "../AfterConsultContainer";
 import { CombinationConsult } from "./CombinationConsult";
 import { CombinationItemCategorySelection } from "./CombinationItemCategorySelection";
 import { CombinationItemDetailSelection } from "./CombinationItemDetailSelection";
+import { useConsultLineMessageSender } from "../useConsultLineMessageSender";
+import { ErrorMessage } from "../../../components/shared/ErrorMessage";
+import { Loader } from "semantic-ui-react";
 
 type TProps = {
   readonly items: TConsultingItem[];
@@ -29,18 +31,15 @@ export const CombinationConsultContainer = ({ items }: TProps) => {
   );
   const [itemCategory, setItemCategory] =
     useState<TCombinationItemCategory | undefined>(undefined);
-  const [flexMessage, setFlexMessage] = useState<string | null>(null);
-  const [response, setResponse] = useState<TImagePathsResponse | null>(null);
   const { mutateAsync, isLoading } = useMemberPhotoCreate();
+  const { send, isSending, isError, isSuccess } = useConsultLineMessageSender();
 
-  const createFlexMessage = (personalItem?: TPersonalItem) => {
+  const createFlexMessage = (personalItem?: TPersonalItem): string => {
     const itemImageUrls = items.map((item) => item.imagePaths.thumb);
-    setFlexMessage(
-      createCombinationConsultFlexMessage({
-        itemImageUrls,
-        personalItem,
-      })
-    );
+    return createCombinationConsultFlexMessage({
+      itemImageUrls,
+      personalItem,
+    });
   };
 
   const handleCombinationConsultSubmit = async (
@@ -57,27 +56,15 @@ export const CombinationConsultContainer = ({ items }: TProps) => {
     await mutateAsync(params, {
       onSuccess: (data: AxiosResponse<TMemberPhotoCreateResponse>) => {
         if (data && data.data) {
-          setResponse(data.data.imagePaths);
-          createFlexMessage();
+          send(createFlexMessage(), true, data.data.imagePaths);
         }
       },
     });
   };
 
-  if (flexMessage) {
-    return response ? (
-      <AfterConsultContainer
-        flexMessage={flexMessage}
-        isPhotoSendable={true}
-        wearingPhoto={response}
-      />
-    ) : (
-      <AfterConsultContainer
-        flexMessage={flexMessage}
-        isPhotoSendable={false}
-      />
-    );
-  }
+  if (isSuccess) return <AfterConsultContainer />;
+  if (isError) return <ErrorMessage message="予期せぬエラーが発生しました" />;
+  if (isSending) return <Loader active />;
 
   switch (currentFormType) {
     case COMBINATION_FORM.IMAGE_SEND:
@@ -100,7 +87,9 @@ export const CombinationConsultContainer = ({ items }: TProps) => {
       return (
         <CombinationItemDetailSelection
           itemCategory={itemCategory as TCombinationItemCategory}
-          onSubmit={createFlexMessage}
+          onSubmit={(personalItem) => {
+            send(createFlexMessage(personalItem), false);
+          }}
         />
       );
     default:
