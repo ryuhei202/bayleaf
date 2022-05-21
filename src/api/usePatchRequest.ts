@@ -11,7 +11,7 @@ export const usePatchRequest = <T>(path: string, params: T) => {
   const { mutate, isLoading } = useMutation(
     path,
     () =>
-      customAxios.patch(
+      customAxios().patch(
         `${process.env.REACT_APP_HOST_URL}/${path}`,
         {
           ...params,

@@ -1,4 +1,8 @@
 import axios from "axios";
-import applyCaseMiddleware from "axios-case-converter";
+import applyCaseMiddleware, {
+  PreservedKeysCondition,
+} from "axios-case-converter";
 
-export const customAxios = applyCaseMiddleware(axios.create());
+export const customAxios = (
+  preservedKeys?: string[] | PreservedKeysCondition
+) => applyCaseMiddleware(axios.create(), { preservedKeys });

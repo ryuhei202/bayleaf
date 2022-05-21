@@ -17,7 +17,7 @@ export const useGetRequest = <TResponse, TParams = {}>(
   const { data, error } = useQuery<TResponse, Error>(
     path,
     () =>
-      customAxios
+      customAxios()
         .get(`${process.env.REACT_APP_HOST_URL}/${path}`, {
           headers: {
             Authorization: idToken,
