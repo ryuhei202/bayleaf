@@ -13,12 +13,14 @@ type TLineMessageCreate = {
 };
 
 export type TLineMessageCreateParams = {
-  readonly messages: string[];
+  readonly messages: any[];
 };
 
 export const useLineMessageCreate = (): TLineMessageCreate => {
-  const { mutate, isLoading } =
-    usePostRequest<TLineMessageCreateParams>("line_messages");
+  const { mutate, isLoading } = usePostRequest<TLineMessageCreateParams>(
+    "line_messages",
+    (input) => "stylistId" !== input
+  );
 
   return { mutate, isLoading };
 };

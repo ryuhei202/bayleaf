@@ -24,17 +24,17 @@ export const AfterConsultContainer = ({
 
   // 相談LINEメッセージを送信
   useEffect(() => {
-    const consultLineMessages: string[] = [
-      JSON.stringify({
+    const consultLineMessages: any[] = [
+      {
         type: "text",
         text: "コーデの着こなし相談を受け付けました！",
-      }),
+      },
     ];
-    consultLineMessages.push(flexMessage);
+    consultLineMessages.push(JSON.parse(flexMessage));
     if (isPhotoSendable) {
       consultLineMessages.push(
         wearingPhoto !== undefined
-          ? JSON.stringify({
+          ? {
               type: "image",
               originalContentUrl:
                 process.env.REACT_APP_ENV === "production"
@@ -44,8 +44,8 @@ export const AfterConsultContainer = ({
                 process.env.REACT_APP_ENV === "production"
                   ? wearingPhoto.large
                   : OUTFIT_TEST_IMAGE_URL,
-            })
-          : JSON.stringify({
+            }
+          : {
               type: "text",
               text: "着用写真の送信をお願いします！",
               quickReply: {
@@ -66,32 +66,43 @@ export const AfterConsultContainer = ({
                   },
                 ],
               },
-            })
+            }
       );
     }
-    liff
-      .sendMessages([
-        {
-          type: "text",
-          text: "> コーデの着こなし相談をする",
+    mutate(
+      { messages: consultLineMessages },
+      {
+        onSuccess: () => {
+          setIsLoading(false);
         },
-      ])
-      .then(() => {
-        mutate(
-          { messages: consultLineMessages },
-          {
-            onSuccess: () => {
-              setIsLoading(false);
-            },
-            onError: (error) => {
-              setError(error);
-            },
-          }
-        );
-      })
-      .catch((error) => {
-        setError(error);
-      });
+        onError: (error) => {
+          setError(error);
+        },
+      }
+    );
+    // liff
+    //   .sendMessages([
+    //     {
+    //       type: "text",
+    //       text: "> コーデの着こなし相談をする",
+    //     },
+    //   ])
+    //   .then(() => {
+    //     mutate(
+    //       { messages: consultLineMessages },
+    //       {
+    //         onSuccess: () => {
+    //           setIsLoading(false);
+    //         },
+    //         onError: (error) => {
+    //           setError(error);
+    //         },
+    //       }
+    //     );
+    //   })
+    //   .catch((error) => {
+    //     setError(error);
+    //   });
   }, [flexMessage, isPhotoSendable, wearingPhoto, mutate]);
 
   if (error) return <ErrorMessage message={error.message} />;
