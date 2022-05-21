@@ -1,5 +1,5 @@
 import { ITEM_TEST_IMAGE_URL } from "../../../images/TestImageUrl";
-import { TDesignAnswer } from "../TDesignAnswer";
+import { TDesignAnswer } from "../../../models/consult/TDesignAnswer";
 
 /**
  * 着こなし相談の色・柄FlexメッセージをJSON文字列で返却

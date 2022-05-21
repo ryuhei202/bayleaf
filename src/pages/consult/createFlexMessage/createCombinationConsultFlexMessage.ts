@@ -1,5 +1,5 @@
 import { ITEM_TEST_IMAGE_URL } from "../../../images/TestImageUrl";
-import { TCombinationAnswer } from "../TCombinationAnswer";
+import { TCombinationAnswer } from "../../../models/consult/TCombinationAnswer";
 
 /**
  * 着こなし相談の私物FlexメッセージをJSON文字列で返却

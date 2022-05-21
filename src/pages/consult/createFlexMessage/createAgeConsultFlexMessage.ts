@@ -1,15 +1,15 @@
 import { ITEM_TEST_IMAGE_URL } from "../../../images/TestImageUrl";
-import { TSizeAnswer } from "../TSizeAnswer";
+import { TAgeAnswer } from "../../../models/consult/TAgeAnswer";
 
 /**
- * 着こなし相談のサイズFlexメッセージをJSON文字列で返却
+ * 着こなし相談の年齢FlexメッセージをJSON文字列で返却
  */
-export const createSizeConsultFlexMessage = (
-  formAnswers: TSizeAnswer[]
+export const createAgeConsultFlexMessage = (
+  formAnswers: TAgeAnswer[]
 ): string => {
   const flexMessage = {
     type: "flex",
-    altText: "[相談内容]サイズが気になる",
+    altText: "[相談内容]年齢に合っているか気になる",
     sender: true,
     contents: {
       type: "carousel",
@@ -29,14 +29,14 @@ export const createSizeConsultFlexMessage = (
               },
               {
                 type: "text",
-                text: "サイズが気になる",
+                text: "年齢に合っているか気になる",
                 size: "xl",
                 margin: "md",
                 wrap: true,
               },
               {
                 type: "text",
-                text: "■サイズが合ってないと感じるアイテム",
+                text: "■年齢に合っているか気になるアイテム",
                 margin: "lg",
                 weight: "bold",
                 size: "sm",
@@ -72,25 +72,14 @@ export const createSizeConsultFlexMessage = (
                   {
                     type: "box",
                     layout: "vertical",
-                    contents: (() => {
-                      let results = answer.parts.map((part) => {
-                        return {
-                          type: "text",
-                          text: `・${part.name}が「${part.option}」`,
-                          size: "xxs",
-                          wrap: true,
-                        };
-                      });
-                      if (answer.additionalText !== undefined) {
-                        results.push({
-                          type: "text",
-                          text: `・その他\n${answer.additionalText}`,
-                          size: "xxs",
-                          wrap: true,
-                        });
-                      }
-                      return results;
-                    })(),
+                    contents: [
+                      {
+                        type: "text",
+                        text: answer.ageOption,
+                        size: "xxs",
+                        wrap: true,
+                      },
+                    ],
                     margin: "none",
                   },
                 ],
