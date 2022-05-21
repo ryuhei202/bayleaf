@@ -12,7 +12,7 @@ export const usePostRequest = <T>(
   const idToken = useContext(IdTokenContext);
   const stylistId = useContext(StylistIdContext);
 
-  const { mutate, mutateAsync, isLoading } = useMutation(
+  const { mutate, mutateAsync, isLoading, isSuccess } = useMutation(
     path,
     (params: T) =>
       customAxios(preservedKeys).post(
@@ -34,5 +34,5 @@ export const usePostRequest = <T>(
     }
   );
 
-  return { mutate, mutateAsync, isLoading };
+  return { mutate, mutateAsync, isLoading, isSuccess };
 };
