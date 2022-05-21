@@ -9,7 +9,8 @@ export const createDesignConsultFlexMessage = (
 ): string => {
   const flexMessage = {
     type: "flex",
-    altText: "色や柄が気になる",
+    altText: "[相談内容]色や柄が気になる",
+    sender: true,
     contents: {
       type: "carousel",
       contents: formAnswers.map((answer) => {

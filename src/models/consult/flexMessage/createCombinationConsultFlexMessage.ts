@@ -85,7 +85,8 @@ export const createCombinationConsultFlexMessage = (
 
   let flexMessage = {
     type: "flex",
-    altText: "靴やアウターなど私物との組み合わせが気になる",
+    altText: "[相談内容]靴やアウターなど私物との組み合わせが気になる",
+    sender: true,
     contents: {
       type: "bubble",
       body: {

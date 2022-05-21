@@ -9,7 +9,8 @@ export const createSizeConsultFlexMessage = (
 ): string => {
   const flexMessage = {
     type: "flex",
-    altText: "サイズが気になる",
+    altText: "[相談内容]サイズが気になる",
+    sender: true,
     contents: {
       type: "carousel",
       contents: formAnswers.map((answer) => {

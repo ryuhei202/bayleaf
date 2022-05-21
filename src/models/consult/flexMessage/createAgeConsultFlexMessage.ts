@@ -9,7 +9,8 @@ export const createAgeConsultFlexMessage = (
 ): string => {
   const flexMessage = {
     type: "flex",
-    altText: "年齢に合っているか気になる",
+    altText: "[相談内容]年齢に合っているか気になる",
+    sender: true,
     contents: {
       type: "carousel",
       contents: formAnswers.map((answer) => {

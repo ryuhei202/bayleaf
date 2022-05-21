@@ -13,7 +13,8 @@ export const createSceneConsultFlexMessage = (
 ): string => {
   const flexMessage = {
     type: "flex",
-    altText: "使うシーンに合っているか気になる",
+    altText: "[相談内容]使うシーンに合っているか気になる",
+    sender: true,
     contents: {
       type: "bubble",
       body: {

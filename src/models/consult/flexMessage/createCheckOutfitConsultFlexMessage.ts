@@ -12,7 +12,8 @@ export const createCheckOutfitConsultFlexMessage = (
 ): string => {
   const flexMessage = {
     type: "flex",
-    altText: "とにかく着こなしを確認してほしい",
+    altText: "[相談内容]とにかく着こなしを確認してほしい",
+    sender: true,
     contents: {
       type: "bubble",
       body: {
