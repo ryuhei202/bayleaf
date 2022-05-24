@@ -4,6 +4,7 @@ import { TReviewOptionResponse } from "../../api/reviews/TReviewOptionResponse";
 import { Button } from "../../components/baseParts/Button";
 import { Page } from "../../components/baseParts/Page";
 import { PageHeader } from "../../components/baseParts/PageHeader";
+import { convertItemsToItemImagesProps } from "../../components/review/convertItemsToItemImagesProps";
 import { CoordinateItemImages } from "../../components/review/CoordinateItemImages";
 
 type Props = {
@@ -13,22 +14,6 @@ type Props = {
 };
 
 export const ReviewForm = ({ coordinate, reviewOptions, onSubmit }: Props) => {
-  const itemImagesProps = (): ComponentProps<typeof CoordinateItemImages> => {
-    const items = coordinate.items.map((item) => {
-      return {
-        imagePaths: {
-          defaultPath: item.imagePaths.largeThumb,
-          expandedPath: item.imagePaths.large,
-        },
-        caption: item.cateSmallName,
-      };
-    });
-
-    return {
-      items,
-    };
-  };
-
   return (
     <Page>
       <div className="flex flex-col justify-between h-full">
@@ -41,7 +26,9 @@ export const ReviewForm = ({ coordinate, reviewOptions, onSubmit }: Props) => {
             }
             className="mb-16"
           />
-          <CoordinateItemImages {...itemImagesProps()} />
+          <CoordinateItemImages
+            {...convertItemsToItemImagesProps(coordinate.items)}
+          />
         </div>
         <div className="flex flex-col space-y-3 bg-white p-5">
           {reviewOptions.map((option) => {
