@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { useQuery } from "react-query";
+import * as Sentry from "@sentry/react";
 import { IdTokenContext, StylistIdContext } from "../App";
 import { customAxios } from "./customAxios";
 
@@ -13,18 +14,25 @@ export const useGetRequest = <TResponse, TParams = {}>(
   const idToken = useContext(IdTokenContext);
   const stylistId = useContext(StylistIdContext);
 
-  const { data, error } = useQuery<TResponse, Error>(path, () =>
-    customAxios
-      .get(`${process.env.REACT_APP_HOST_URL}/${path}`, {
-        headers: {
-          Authorization: idToken,
-        },
-        params: {
-          ...params,
-          stylistId,
-        },
-      })
-      .then((r) => r.data)
+  const { data, error } = useQuery<TResponse, Error>(
+    path,
+    () =>
+      customAxios()
+        .get(`${process.env.REACT_APP_HOST_URL}/${path}`, {
+          headers: {
+            Authorization: idToken,
+          },
+          params: {
+            ...params,
+            stylistId,
+          },
+        })
+        .then((r) => r.data),
+    {
+      onError: (error) => {
+        Sentry.captureException(error);
+      },
+    }
   );
 
   return {

@@ -14,6 +14,8 @@ const Template: ComponentStory<typeof ReviewForm> = (args) => (
 export const Default = Template.bind({});
 const items: TCoordinateItemResponse[] = [...Array(4)].map(() => {
   return {
+    id: 111111,
+    isTops: true,
     cateSmallName: "シャツ",
     imagePaths: {
       thumb:
@@ -25,6 +27,7 @@ const items: TCoordinateItemResponse[] = [...Array(4)].map(() => {
       large:
         "https://stg.leeap.jp/files/preregistered_item/168/16899/large_IMG_3977.JPG",
     },
+    color: "白",
   };
 });
 
