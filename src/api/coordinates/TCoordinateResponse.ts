@@ -2,6 +2,6 @@ import { TCoordinateItemResponse } from "./TCoordinateItemResponse";
 
 export type TCoordinateResponse = {
   readonly id: number;
-  readonly isReviewed: boolean;
+  readonly isReviewedOrSkipped: boolean;
   readonly items: TCoordinateItemResponse[];
 };

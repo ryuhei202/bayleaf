@@ -51,12 +51,12 @@ const reviewReasonOptionResponses: TReviewOptionResponse[] = [
 const coordinateResponses: TCoordinateResponse[] = [
   {
     id: 10,
-    isReviewed: false,
+    isReviewedOrSkipped: false,
     items,
   },
   {
     id: 11,
-    isReviewed: false,
+    isReviewedOrSkipped: false,
     items,
   },
 ];
