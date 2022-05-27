@@ -21,8 +21,7 @@ export const ReviewSkipForm = ({ chartId }: TProps) => {
   const { data: coordinateData, error: coordinateError } = useCoordinateIndex({
     chartId,
   });
-  const { mutate: mutateReviewSkip, isLoading: isLoadingReviewSkip } =
-    useReviewSkip();
+  const { mutate: mutateReviewSkip } = useReviewSkip();
   const onClickSkipButton = () => {
     mutateReviewSkip(
       { chartId },

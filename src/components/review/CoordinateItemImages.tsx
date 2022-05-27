@@ -1,5 +1,3 @@
-import React from "react";
-import { TCoordinateItemResponse } from "../../api/coordinates/TCoordinateItemResponse";
 import { ExpandableImage } from "../baseParts/images/ExpandableImage";
 import { Typography } from "../baseParts/Typography";
 

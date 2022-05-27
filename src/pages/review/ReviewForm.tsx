@@ -1,4 +1,3 @@
-import { ComponentProps } from "react";
 import { TCoordinateResponse } from "../../api/coordinates/TCoordinateResponse";
 import { TReviewOptionResponse } from "../../api/reviews/TReviewOptionResponse";
 import { Button } from "../../components/baseParts/Button";
