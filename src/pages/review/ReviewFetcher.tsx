@@ -1,8 +1,6 @@
 import { Loader } from "semantic-ui-react";
 import { TCoordinateResponse } from "../../api/coordinates/TCoordinateResponse";
-import { useCoordinateIndex } from "../../api/coordinates/useCoordinateIndex";
 import { useReviewOptionIndex } from "../../api/reviews/useReviewOptionIndex";
-import { Typography } from "../../components/baseParts/Typography";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { ReviewContainer } from "./ReviewContainer";
 
