@@ -1,4 +1,3 @@
-import React from "react";
 import { ExpandableImage } from "../baseParts/images/ExpandableImage";
 import { Typography } from "../baseParts/Typography";
 
@@ -14,7 +13,7 @@ export const CoordinateItemImages = ({ items }: TProps) => {
     <div className="flex justify-evenly">
       {items.map((item) => {
         return (
-          <div>
+          <div key={item.imagePaths.defaultPath}>
             <ExpandableImage
               className="max-h-[120px]"
               defaultImageSrc={item.imagePaths.defaultPath}

@@ -1,44 +1,25 @@
 import { Loader } from "semantic-ui-react";
-import { useCoordinateIndex } from "../../api/coordinates/useCoordinateIndex";
+import { TCoordinateResponse } from "../../api/coordinates/TCoordinateResponse";
 import { useReviewOptionIndex } from "../../api/reviews/useReviewOptionIndex";
-import { Typography } from "../../components/baseParts/Typography";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { ReviewContainer } from "./ReviewContainer";
 
 type TProps = {
-  readonly chartId: number;
+  readonly coordinates: TCoordinateResponse[];
 };
 
-export const ReviewFetcher = ({ chartId }: TProps) => {
-  const { data: coordinateData, error: coordinateError } = useCoordinateIndex({
-    chartId,
-  });
+export const ReviewFetcher = ({ coordinates }: TProps) => {
   const { data: reviewOptionData, error: reviewOptionError } =
     useReviewOptionIndex();
 
-  [coordinateError, reviewOptionError].forEach((error) => {
-    if (error) return <ErrorMessage message={error.message} />;
-  });
+  if (reviewOptionError)
+    return <ErrorMessage message={reviewOptionError.message} />;
 
-  if (!coordinateData || !reviewOptionData) return <Loader active />;
-
-  const reviewTargetCoordinates = coordinateData.coordinates.filter(
-    (c) => !c.isReviewed
-  );
-
-  if (reviewTargetCoordinates.length === 0) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <Typography>
-          <>レビュー対象のコーデはありません。</>
-        </Typography>
-      </div>
-    );
-  }
+  if (!coordinates || !reviewOptionData) return <Loader active />;
 
   return (
     <ReviewContainer
-      coordinateResponses={reviewTargetCoordinates}
+      coordinateResponses={coordinates}
       reviewOptionResponses={reviewOptionData.options}
       reviewReasonOptionResponses={reviewOptionData.reasonOptions}
     />
