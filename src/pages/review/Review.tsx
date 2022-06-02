@@ -23,7 +23,7 @@ export const Review = () => {
   });
 
   useEffect(() => {
-    document.title = `${process.env.REACT_APP_GA_TRACKING_ID}`;
+    document.title = `leeap | レビュー`;
   }, []);
 
   useEffect(() => {

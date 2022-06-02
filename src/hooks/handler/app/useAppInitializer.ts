@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import liff from "@line/liff";
 import { useLocation, useSearchParams } from "react-router-dom";
-import ReactGA from "react-ga";
 import { QueryClient } from "react-query";
+import ReactGA from "react-ga4";
 
 export const useAppInitializer = () => {
   const [lineIdToken, setLineIdToken] = useState("");
@@ -17,7 +17,7 @@ export const useAppInitializer = () => {
   useEffect(() => {
     if (process.env.REACT_APP_GA_TRACKING_ID) {
       ReactGA.initialize(process.env.REACT_APP_GA_TRACKING_ID);
-      ReactGA.pageview(location.pathname + location.search);
+      ReactGA.send({ pathname: location.pathname, search: location.search });
     }
   }, [location]);
 
