@@ -17,7 +17,7 @@ export const useAppInitializer = () => {
   useEffect(() => {
     if (process.env.REACT_APP_GA_TRACKING_ID) {
       ReactGA.initialize(process.env.REACT_APP_GA_TRACKING_ID);
-      ReactGA.send({ pathname: location.pathname, search: location.search });
+      ReactGA.send(location.pathname + location.search);
     }
   }, [location]);
 
