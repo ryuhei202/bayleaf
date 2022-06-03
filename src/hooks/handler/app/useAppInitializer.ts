@@ -3,6 +3,16 @@ import liff from "@line/liff";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { QueryClient } from "react-query";
 
+declare global {
+  interface Window {
+    gtag?: (
+      key: string,
+      trackingId: string,
+      config: { page_path: string }
+    ) => void;
+  }
+}
+
 export const useAppInitializer = () => {
   const [lineIdToken, setLineIdToken] = useState("");
   const [liffErrorMessage, setLiffErrorMessage] = useState("");
