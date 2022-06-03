@@ -5,7 +5,7 @@ import { QueryClient } from "react-query";
 
 declare global {
   interface Window {
-    gtag?: Gtag.Gtag;
+    gtag: Gtag.Gtag;
   }
 }
 
@@ -21,6 +21,20 @@ export const useAppInitializer = () => {
   // GoogleAnalyticsを呼び出す
   useEffect(() => {
     if (process.env.REACT_APP_GA_TRACKING_ID) {
+      // gtag.jsをhaedに埋め込む
+      const gtagScript = document.createElement("script");
+      gtagScript.id = "gtagScript";
+      gtagScript.src = `https://www.googletagmanager.com/gtag/js?id=${process.env.REACT_APP_GA_TRACKING_ID}`;
+      gtagScript.async = true;
+      document.head.appendChild(gtagScript);
+      // 実行用scriptをheadタグに埋め込み
+      const execScript = document.createElement("script");
+      execScript.id = "execScript";
+      execScript.text = `window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', '${process.env.REACT_APP_GA_TRACKING_ID}');`;
+      document.head.appendChild(execScript);
       if (!window.gtag) return;
       window.gtag("config", process.env.REACT_APP_GA_TRACKING_ID, {
         page_path: location.pathname,
