@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import liff from "@line/liff";
 import { useLocation, useSearchParams } from "react-router-dom";
-import ReactGA from "react-ga";
 import { QueryClient } from "react-query";
 
 export const useAppInitializer = () => {
@@ -16,8 +15,24 @@ export const useAppInitializer = () => {
   // GoogleAnalyticsを呼び出す
   useEffect(() => {
     if (process.env.REACT_APP_GA_TRACKING_ID) {
-      ReactGA.initialize(process.env.REACT_APP_GA_TRACKING_ID);
-      ReactGA.pageview(location.pathname + location.search);
+      // gtag.jsをheadに埋め込む
+      const gtagScript = document.createElement("script");
+      gtagScript.id = "gtagScript";
+      gtagScript.src = `https://www.googletagmanager.com/gtag/js?id=${process.env.REACT_APP_GA_TRACKING_ID}`;
+      gtagScript.async = true;
+      document.head.appendChild(gtagScript);
+      // 実行用scriptをheadに埋め込む
+      const execScript = document.createElement("script");
+      execScript.id = "execScript";
+      execScript.text = `window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', '${process.env.REACT_APP_GA_TRACKING_ID}');`;
+      document.head.appendChild(execScript);
+      if (!window.gtag) return;
+      window.gtag("config", process.env.REACT_APP_GA_TRACKING_ID, {
+        page_path: location.pathname,
+      });
     }
   }, [location]);
 
