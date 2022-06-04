@@ -1,0 +1,11 @@
+#!/bin/sh
+exec ruby -x "$0" "$@"
+
+#!ruby
+current_branch = `git branch | grep '*'`.chomp.sub('* ', '')
+commit_msgs = File.readlines(ARGV[0])
+
+open(ARGV[0], 'w') {|file|
+   file.print commit_msgs[0].chomp
+   file.puts " <#{current_branch}>"
+}
