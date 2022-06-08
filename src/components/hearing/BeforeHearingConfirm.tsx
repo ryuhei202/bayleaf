@@ -5,7 +5,7 @@ import { PageHeader } from "../baseParts/PageHeader";
 type TProps = {
   readonly onClick: () => void;
 };
-export const BeforeHearingForm = ({ onClick }: TProps) => {
+export const BeforeHearingConfirm = ({ onClick }: TProps) => {
   return (
     <Page>
       <div className="flex flex-col h-full justify-between">
