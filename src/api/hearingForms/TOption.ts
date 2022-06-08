@@ -1,4 +1,4 @@
-export type Option = {
+export type TOption = {
   readonly id: number;
   readonly name: string;
   readonly nextFormId: number;

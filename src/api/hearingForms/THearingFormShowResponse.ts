@@ -1,10 +1,10 @@
-import { Option } from "./Option";
+import { TOption } from "./TOption";
 
-export type HearingFormShowResponse = {
+export type THearingFormShowResponse = {
   readonly id: number;
   readonly categoryId: number;
   readonly categoryName: string;
   readonly multipleAnswerNextFormId: number;
   readonly title: string;
-  readonly options: Option[];
+  readonly options: TOption[];
 };

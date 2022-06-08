@@ -1,6 +1,6 @@
-import { HearingParams } from "./HearingParams";
+import { THearingParams } from "./THearingParams";
 
 export type TChartCreateRequest = {
   memberId: number;
-  hearings: HearingParams[];
+  hearings: THearingParams[];
 };
