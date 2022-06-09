@@ -36,7 +36,7 @@ export const MultipleSelectForm = ({
 
     if (selectedOptionIds.includes(optionId)) {
       const newSelectedOptions = selectedOptions.filter(
-        (o) => o.id != optionId
+        (o) => o.id !== optionId
       );
       setSelectedOptions(newSelectedOptions);
     } else {
@@ -63,7 +63,7 @@ export const MultipleSelectForm = ({
   };
 
   const handleChangeText = (id: number, text: string) => {
-    const newSelectedOptions = selectedOptions.filter((o) => o.id != id);
+    const newSelectedOptions = selectedOptions.filter((o) => o.id !== id);
     if (text === "") {
       setSelectedOptions(newSelectedOptions);
     } else {

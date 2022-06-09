@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { Loader } from "semantic-ui-react";
 import { TFormParams } from "../../api/charts/TFormParams";
-import { THearingFormShowResponse } from "../../api/hearingForms/THearingFormShowResponse";
 import { useHearingFormsShow } from "../../api/hearingForms/useHearingFormsShow";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { BeforeHearingConfirm } from "../../components/hearing/BeforeHearingConfirm";
 import { MultipleSelectForm } from "../../components/hearing/MultipleSelectForm";
+import { PremiumPlanConfirm } from "../../components/hearing/PremiumPlanConfirm";
 import { SingleSelectForm } from "../../components/hearing/SingleSelectForm";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
+import { PLANS } from "../../models/shared/TPlans";
 import { getHearingFetchHandler } from "./handler/getHearingFetchHandler";
 
 type TProps = {
@@ -16,9 +17,6 @@ type TProps = {
 export type AnsweredHearing = TFormParams;
 
 export const HearingFetcher = ({ member }: TProps) => {
-  // TODO: プレミアムプランIDを差し替える
-  const PLEMIUM_PLAN_ID = 99999999;
-
   const [nextFormId, setNextFormId] = useState<number | null>(null);
   const [currentAnswerNumber, setCurrentAnswerNumber] = useState<number>(1);
   const [firstAnsweredHearings, setFirstAnsweredHearings] = useState<
@@ -33,6 +31,7 @@ export const HearingFetcher = ({ member }: TProps) => {
 
   const {
     handleClickFirstNext,
+    handleClickSecondNext,
     handleSubmitForm,
     handleCancelForm,
     formattedResponseData,
@@ -52,13 +51,18 @@ export const HearingFetcher = ({ member }: TProps) => {
     return <ErrorMessage message={hearingFormError.message} />;
 
   if (nextFormId === null && firstAnsweredHearings.length <= 0) {
-    return <BeforeHearingConfirm onClick={handleClickFirstNext} />;
+    return (
+      <BeforeHearingConfirm
+        onClick={handleClickFirstNext}
+        planId={member.mPlanId}
+      />
+    );
   }
 
   if (nextFormId === null) {
-    return member.mPlanId === PLEMIUM_PLAN_ID &&
+    return member.mPlanId === PLANS.PREMIUM &&
       secondAnsweredHearings.length <= 0 ? (
-      <>プレミアムプランの方は2コーデお届けするので、2回答えていただきます</>
+      <PremiumPlanConfirm onClick={handleClickSecondNext} />
     ) : (
       <>最後の確認画面</>
     );
@@ -66,7 +70,7 @@ export const HearingFetcher = ({ member }: TProps) => {
 
   if (!hearingFormData) return <Loader active />;
 
-  // // スキップ処理
+  // スキップ処理
   // if (hearingFormData.options.length === 1) {
   //   handleSkipForm(hearingFormData.id, hearingFormData.options[0]);
   // }

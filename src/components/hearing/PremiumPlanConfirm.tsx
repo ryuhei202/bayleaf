@@ -1,36 +1,25 @@
-import { PLANS } from "../../models/shared/TPlans";
 import { Button } from "../baseParts/Button";
 import { Page } from "../baseParts/Page";
 import { PageHeader } from "../baseParts/PageHeader";
 
 type TProps = {
   readonly onClick: () => void;
-  readonly planId: number;
 };
-export const BeforeHearingConfirm = ({ onClick, planId }: TProps) => {
+export const PremiumPlanConfirm = ({ onClick }: TProps) => {
   return (
     <Page>
       <div className="flex flex-col h-full justify-between">
         <div className="space-y-1	h-[50vh] relative">
           <div className="absolute w-[100vw] px-5 py-3 bottom-0">
             <PageHeader
-              title="次回発送するコーディネートのために、ヒアリングに答えていただきます"
-              subtitle={
-                <>
-                  ※全部で5~10問あります
-                  <br />
-                  {planId === PLANS.PREMIUM
-                    ? "プレミアムプランのお客様は2回お答えください"
-                    : ""}
-                </>
-              }
+              title="プレミアムプランの方は2コーデですので2回答えていただきます"
               className="mb-8"
             />
           </div>
         </div>
         <div className="flex flex-col space-y-1 align-middle px-5 py-3 my-auto">
           <Button onClick={onClick} variant="primary">
-            ヒアリングに進む
+            二度目のヒアリングに進む
           </Button>
         </div>
       </div>

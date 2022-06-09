@@ -3,7 +3,7 @@ import { Typography } from "./Typography";
 
 type Props = {
   title: React.ReactNode;
-  subtitle?: string;
+  subtitle?: React.ReactNode;
   className?: string;
 };
 

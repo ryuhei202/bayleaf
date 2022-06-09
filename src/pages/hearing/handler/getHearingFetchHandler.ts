@@ -8,6 +8,7 @@ import { AnsweredHearing } from "../HearingFetcher";
 
 type THearingFetchHandler = {
   readonly handleClickFirstNext: () => void;
+  readonly handleClickSecondNext: () => void;
   readonly handleSubmitForm: (
     answer: AnsweredHearing,
     nextFormIdArg: number | null
@@ -47,6 +48,13 @@ export const getHearingFetchHandler = ({
   const handleClickFirstNext = () => {
     setNextFormId(HEARING_FORM.FIRST);
   };
+
+  // プレミアムの確認画面の次へ進むボタンを押すと発火するメソッド
+  const handleClickSecondNext = () => {
+    setCurrentAnswerNumber(2);
+    setNextFormId(HEARING_FORM.FIRST);
+  };
+
   const handleSubmitForm = (
     answer: AnsweredHearing,
     nextFormIdArg: number | null
@@ -109,6 +117,7 @@ export const getHearingFetchHandler = ({
 
   return {
     handleClickFirstNext,
+    handleClickSecondNext,
     handleSubmitForm,
     handleCancelForm,
     formattedResponseData,
