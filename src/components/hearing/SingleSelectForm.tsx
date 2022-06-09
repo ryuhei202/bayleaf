@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { TOptionParams } from "../../api/charts/TOptionParams";
 import { THearingFormShowResponse } from "../../api/hearingForms/THearingFormShowResponse";
+import { ESPECIALLY_CATEGORY } from "../../models/hearing/THearingForms";
 import { AnsweredHearing } from "../../pages/hearing/HearingFetcher";
 import { Button } from "../baseParts/Button";
 import { IconButton } from "../baseParts/IconButton";
@@ -75,16 +76,31 @@ export const SingleSelectForm = ({ response, onSubmit, onCancel }: TProps) => {
           <div className="space-y-5">
             {response.options.map((option) =>
               option.isText ? (
-                <>
-                  <Typography>{option.name}</Typography>
-                  <TextAreaAlt
-                    className="h-[120px]"
-                    value={selectedOption?.text ?? ""}
-                    onChange={(event) =>
-                      handleChangeText(option.id, event.target.value as string)
-                    }
-                  />
-                </>
+                Object.values(ESPECIALLY_CATEGORY).some(
+                  (c) => c === response.categoryId
+                ) ? (
+                  <SelectButton
+                    key={option.id}
+                    selected={selectedOption?.id === option.id}
+                    onClick={() => handleClick(option.id)}
+                  >
+                    {option.name}
+                  </SelectButton>
+                ) : (
+                  <>
+                    <Typography>{option.name}</Typography>
+                    <TextAreaAlt
+                      className="h-[120px]"
+                      value={selectedOption?.text ?? ""}
+                      onChange={(event) =>
+                        handleChangeText(
+                          option.id,
+                          event.target.value as string
+                        )
+                      }
+                    />
+                  </>
+                )
               ) : (
                 <SelectButton
                   key={option.id}
