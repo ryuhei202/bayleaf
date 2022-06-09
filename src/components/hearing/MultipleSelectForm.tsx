@@ -31,15 +31,22 @@ export const MultipleSelectForm = ({
     setSelectedOptions([]);
   }, [response]);
 
-  const handleClick = (optionId: number) => {
+  const handleClick = (optionId: number, isSingleAnswer: boolean) => {
     const selectedOptionIds = selectedOptions.map((option) => option.id);
+
     if (selectedOptionIds.includes(optionId)) {
       const newSelectedOptions = selectedOptions.filter(
         (o) => o.id != optionId
       );
       setSelectedOptions(newSelectedOptions);
     } else {
-      setSelectedOptions([...selectedOptions, { id: optionId }]);
+      const someAnswerNum = response.options
+        .filter((o) => o.isSingleAnswer === isSingleAnswer)
+        .map((s) => s.id);
+      const newSelectedOptions = selectedOptions.filter((s) =>
+        someAnswerNum.includes(s.id)
+      );
+      setSelectedOptions([...newSelectedOptions, { id: optionId }]);
     }
   };
   const handleSubmit = () => {
@@ -95,7 +102,7 @@ export const MultipleSelectForm = ({
                   selected={selectedOptions
                     .map((option) => option.id)
                     .includes(option.id)}
-                  onClick={() => handleClick(option.id)}
+                  onClick={() => handleClick(option.id, option.isSingleAnswer)}
                 >
                   {option.name}
                 </SelectButton>

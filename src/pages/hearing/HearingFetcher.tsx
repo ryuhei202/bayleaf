@@ -36,6 +36,7 @@ export const HearingFetcher = ({ member }: TProps) => {
     handleSubmitForm,
     handleCancelForm,
     formattedResponseData,
+    handleSkipForm,
   } = getHearingFetchHandler({
     nextFormId,
     firstAnsweredHearings,
@@ -64,6 +65,11 @@ export const HearingFetcher = ({ member }: TProps) => {
   }
 
   if (!hearingFormData) return <Loader active />;
+
+  // // スキップ処理
+  // if (hearingFormData.options.length === 1) {
+  //   handleSkipForm(hearingFormData.id, hearingFormData.options[0]);
+  // }
 
   if (hearingFormData.multipleAnswerNextFormId !== null) {
     return (

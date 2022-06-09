@@ -1,4 +1,5 @@
 import { THearingFormShowResponse } from "../../../api/hearingForms/THearingFormShowResponse";
+import { TOption } from "../../../api/hearingForms/TOption";
 import {
   ESPECIALLY_CATEGORY,
   HEARING_FORM,
@@ -15,6 +16,7 @@ type THearingFetchHandler = {
   readonly formattedResponseData: (
     hearingFormData: THearingFormShowResponse
   ) => THearingFormShowResponse;
+  readonly handleSkipForm: (formId: number, option: TOption) => void;
 };
 
 type TArgs = {
@@ -66,7 +68,7 @@ export const getHearingFetchHandler = ({
     } else {
       const newAnswers = secondAnsweredHearings.slice(0, -1);
       setSecondAnsweredHearings(newAnswers);
-      setNextFormId(firstAnsweredHearings.slice(-1)[0]?.id ?? null);
+      setNextFormId(secondAnsweredHearings.slice(-1)[0]?.id ?? null);
     }
   };
 
@@ -91,10 +93,25 @@ export const getHearingFetchHandler = ({
     return { ...hearingFormData, options };
   };
 
+  // スキップメソッド
+  const handleSkipForm = (formId: number, option: TOption) => {
+    setNextFormId(option.nextFormId);
+    const answer = {
+      id: formId,
+      options: [{ id: option.id }],
+    };
+    if (currentAnswerNumber === 1) {
+      setFirstAnsweredHearings([...firstAnsweredHearings, answer]);
+    } else {
+      setSecondAnsweredHearings([...secondAnsweredHearings, answer]);
+    }
+  };
+
   return {
     handleClickFirstNext,
     handleSubmitForm,
     handleCancelForm,
     formattedResponseData,
+    handleSkipForm,
   };
 };
