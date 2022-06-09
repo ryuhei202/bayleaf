@@ -1,4 +1,8 @@
-import { HEARING_FORM } from "../../../models/hearing/THearingForms";
+import { THearingFormShowResponse } from "../../../api/hearingForms/THearingFormShowResponse";
+import {
+  ESPECIALLY_CATEGORY,
+  HEARING_FORM,
+} from "../../../models/hearing/THearingForms";
 import { AnsweredHearing } from "../HearingFetcher";
 
 type THearingFetchHandler = {
@@ -8,6 +12,9 @@ type THearingFetchHandler = {
     nextFormIdArg: number | null
   ) => void;
   readonly handleCancelForm: () => void;
+  readonly formattedResponseData: (
+    hearingFormData: THearingFormShowResponse
+  ) => THearingFormShowResponse;
 };
 
 type TArgs = {
@@ -63,9 +70,31 @@ export const getHearingFetchHandler = ({
     }
   };
 
+  // 複数選択した後に1つ選択するものはレスポンスを整形してフォームに渡す
+  const formattedResponseData = (
+    hearingFormData: THearingFormShowResponse
+  ): THearingFormShowResponse => {
+    if (
+      !Object.values(ESPECIALLY_CATEGORY).some(
+        (c) => c === hearingFormData.categoryId
+      )
+    )
+      return hearingFormData;
+    const optionIds =
+      currentAnswerNumber === 1
+        ? firstAnsweredHearings.slice(-1)[0].options.map((o) => o.id)
+        : secondAnsweredHearings.slice(-1)[0].options.map((o) => o.id);
+    const options = hearingFormData.options.filter((o) =>
+      optionIds.includes(o.id)
+    );
+
+    return { ...hearingFormData, options };
+  };
+
   return {
     handleClickFirstNext,
     handleSubmitForm,
     handleCancelForm,
+    formattedResponseData,
   };
 };

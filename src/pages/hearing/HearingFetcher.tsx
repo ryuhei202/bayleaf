@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Loader } from "semantic-ui-react";
 import { TFormParams } from "../../api/charts/TFormParams";
+import { THearingFormShowResponse } from "../../api/hearingForms/THearingFormShowResponse";
 import { useHearingFormsShow } from "../../api/hearingForms/useHearingFormsShow";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { BeforeHearingConfirm } from "../../components/hearing/BeforeHearingConfirm";
@@ -30,17 +31,21 @@ export const HearingFetcher = ({ member }: TProps) => {
   const { data: hearingFormData, error: hearingFormError } =
     useHearingFormsShow({ hearingFormId: nextFormId });
 
-  const { handleClickFirstNext, handleSubmitForm, handleCancelForm } =
-    getHearingFetchHandler({
-      nextFormId,
-      firstAnsweredHearings,
-      secondAnsweredHearings,
-      currentAnswerNumber,
-      setNextFormId,
-      setFirstAnsweredHearings,
-      setCurrentAnswerNumber,
-      setSecondAnsweredHearings,
-    });
+  const {
+    handleClickFirstNext,
+    handleSubmitForm,
+    handleCancelForm,
+    formattedResponseData,
+  } = getHearingFetchHandler({
+    nextFormId,
+    firstAnsweredHearings,
+    secondAnsweredHearings,
+    currentAnswerNumber,
+    setNextFormId,
+    setFirstAnsweredHearings,
+    setCurrentAnswerNumber,
+    setSecondAnsweredHearings,
+  });
 
   if (hearingFormError)
     return <ErrorMessage message={hearingFormError.message} />;
@@ -72,7 +77,7 @@ export const HearingFetcher = ({ member }: TProps) => {
 
   return (
     <SingleSelectForm
-      response={hearingFormData}
+      response={formattedResponseData(hearingFormData)}
       onSubmit={handleSubmitForm}
       onCancel={handleCancelForm}
     />
