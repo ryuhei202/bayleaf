@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { TFormParams } from "../../api/charts/TFormParams";
+import { useEffect, useState } from "react";
 import { TOptionParams } from "../../api/charts/TOptionParams";
 import { THearingFormShowResponse } from "../../api/hearingForms/THearingFormShowResponse";
 import { AnsweredHearing } from "../../pages/hearing/HearingFetcher";
@@ -26,6 +25,10 @@ type TSelectedOption = TOptionParams;
 export const SingleSelectForm = ({ response, onSubmit, onCancel }: TProps) => {
   const [selectedOption, setSelectedOption] =
     useState<TSelectedOption | undefined>(undefined);
+
+  useEffect(() => {
+    setSelectedOption(undefined);
+  }, [response]);
 
   const handleClick = (id: number) => {
     if (selectedOption?.id === id) {
@@ -76,7 +79,7 @@ export const SingleSelectForm = ({ response, onSubmit, onCancel }: TProps) => {
                   <Typography>{option.name}</Typography>
                   <TextAreaAlt
                     className="h-[120px]"
-                    value={selectedOption?.text || ""}
+                    value={selectedOption?.text ?? ""}
                     onChange={(event) =>
                       handleChangeText(option.id, event.target.value as string)
                     }

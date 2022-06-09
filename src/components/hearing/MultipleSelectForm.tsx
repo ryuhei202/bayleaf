@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TFormParams } from "../../api/charts/TFormParams";
 import { TOptionParams } from "../../api/charts/TOptionParams";
 import { THearingFormShowResponse } from "../../api/hearingForms/THearingFormShowResponse";
@@ -27,6 +27,10 @@ export const MultipleSelectForm = ({
 }: TProps) => {
   const [selectedOptions, setSelectedOptions] = useState<TSelectedOption[]>([]);
 
+  useEffect(() => {
+    setSelectedOptions([]);
+  }, [response]);
+
   const handleClick = (optionId: number) => {
     const selectedOptionIds = selectedOptions.map((option) => option.id);
     if (selectedOptionIds.includes(optionId)) {
@@ -52,11 +56,11 @@ export const MultipleSelectForm = ({
   };
 
   const handleChangeText = (id: number, text: string) => {
+    const newSelectedOptions = selectedOptions.filter((o) => o.id != id);
     if (text === "") {
-      const newSelectedOptions = selectedOptions.filter((o) => o.id != id);
       setSelectedOptions(newSelectedOptions);
     } else {
-      setSelectedOptions([...selectedOptions, { id, text }]);
+      setSelectedOptions([...newSelectedOptions, { id, text }]);
     }
   };
 
