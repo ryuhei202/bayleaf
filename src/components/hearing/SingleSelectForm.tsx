@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { TFormParams } from "../../api/charts/TFormParams";
 import { TOptionParams } from "../../api/charts/TOptionParams";
 import { THearingFormShowResponse } from "../../api/hearingForms/THearingFormShowResponse";
+import { AnsweredHearing } from "../../pages/hearing/HearingFetcher";
 import { Button } from "../baseParts/Button";
 import { IconButton } from "../baseParts/IconButton";
 import { ArrowIcon } from "../baseParts/icons/ArrowIcon";
@@ -12,7 +14,10 @@ import { Typography } from "../baseParts/Typography";
 
 type TProps = {
   readonly response: THearingFormShowResponse;
-  readonly onSubmit: () => void;
+  readonly onSubmit: (
+    answer: AnsweredHearing,
+    nextFormId: number | null
+  ) => void;
   readonly onCancel: () => void;
 };
 
@@ -30,7 +35,21 @@ export const SingleSelectForm = ({ response, onSubmit, onCancel }: TProps) => {
     }
   };
   const handleSubmit = () => {
-    onSubmit();
+    if (isSelectedOption(selectedOption)) {
+      const answer: AnsweredHearing = {
+        id: response.id,
+        options: [selectedOption],
+      };
+      const nextFormId = response.options.find(
+        (o) => o.id === selectedOption.id
+      )?.nextFormId;
+      if (nextFormId !== undefined) onSubmit(answer, nextFormId);
+    }
+  };
+  const isSelectedOption = (
+    selectedOption: any
+  ): selectedOption is TSelectedOption => {
+    return selectedOption !== undefined;
   };
 
   const handleChangeText = (id: number, text: string) => {

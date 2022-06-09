@@ -1,19 +1,71 @@
 import { HEARING_FORM } from "../../../models/hearing/THearingForms";
+import { AnsweredHearing } from "../HearingFetcher";
 
 type THearingFetchHandler = {
   readonly handleClickFirstNext: () => void;
+  readonly handleSubmitForm: (
+    answer: AnsweredHearing,
+    nextFormIdArg: number | null
+  ) => void;
+  readonly handleCancelForm: () => void;
 };
+
 type TArgs = {
+  readonly nextFormId: number | null;
+  readonly firstAnsweredHearings: AnsweredHearing[];
+  readonly secondAnsweredHearings: AnsweredHearing[];
+  readonly currentAnswerNumber: number;
   readonly setNextFormId: React.Dispatch<React.SetStateAction<number | null>>;
+  readonly setFirstAnsweredHearings: React.Dispatch<
+    React.SetStateAction<AnsweredHearing[]>
+  >;
+  readonly setSecondAnsweredHearings: React.Dispatch<
+    React.SetStateAction<AnsweredHearing[]>
+  >;
+  readonly setCurrentAnswerNumber: React.Dispatch<React.SetStateAction<number>>;
 };
+
 export const getHearingFetchHandler = ({
+  nextFormId,
+  firstAnsweredHearings,
+  secondAnsweredHearings,
+  currentAnswerNumber,
   setNextFormId,
+  setFirstAnsweredHearings,
+  setCurrentAnswerNumber,
+  setSecondAnsweredHearings,
 }: TArgs): THearingFetchHandler => {
   const handleClickFirstNext = () => {
     setNextFormId(HEARING_FORM.FIRST);
   };
+  const handleSubmitForm = (
+    answer: AnsweredHearing,
+    nextFormIdArg: number | null
+  ) => {
+    if (currentAnswerNumber === 1) {
+      setFirstAnsweredHearings([...firstAnsweredHearings, answer]);
+    } else {
+      setSecondAnsweredHearings([...secondAnsweredHearings, answer]);
+    }
+    setNextFormId(nextFormIdArg);
+  };
+
+  // 答えの配列の最後を削除する
+  const handleCancelForm = () => {
+    if (currentAnswerNumber === 1) {
+      const newAnswers = firstAnsweredHearings.slice(0, -1);
+      setFirstAnsweredHearings(newAnswers);
+      setNextFormId(firstAnsweredHearings.slice(-1)[0]?.id ?? null);
+    } else {
+      const newAnswers = secondAnsweredHearings.slice(0, -1);
+      setSecondAnsweredHearings(newAnswers);
+      setNextFormId(firstAnsweredHearings.slice(-1)[0]?.id ?? null);
+    }
+  };
 
   return {
     handleClickFirstNext,
+    handleSubmitForm,
+    handleCancelForm,
   };
 };

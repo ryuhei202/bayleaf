@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Loader } from "semantic-ui-react";
-import { THearingParams } from "../../api/charts/THearingParams";
+import { TFormParams } from "../../api/charts/TFormParams";
 import { useHearingFormsShow } from "../../api/hearingForms/useHearingFormsShow";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { BeforeHearingConfirm } from "../../components/hearing/BeforeHearingConfirm";
@@ -12,25 +12,50 @@ import { getHearingFetchHandler } from "./handler/getHearingFetchHandler";
 type TProps = {
   readonly member: TMembersIndexResponse;
 };
-type AnsweredHearing = THearingParams;
+export type AnsweredHearing = TFormParams;
 
 export const HearingFetcher = ({ member }: TProps) => {
+  // TODO: プレミアムプランIDを差し替える
+  const PLEMIUM_PLAN_ID = 99999999;
+
   const [nextFormId, setNextFormId] = useState<number | null>(null);
-  const [answeredHearings, setAnsweredHearings] = useState<AnsweredHearing[]>(
-    []
-  );
+  const [currentAnswerNumber, setCurrentAnswerNumber] = useState<number>(1);
+  const [firstAnsweredHearings, setFirstAnsweredHearings] = useState<
+    AnsweredHearing[]
+  >([]);
+  const [secondAnsweredHearings, setSecondAnsweredHearings] = useState<
+    AnsweredHearing[]
+  >([]);
+
   const { data: hearingFormData, error: hearingFormError } =
     useHearingFormsShow({ hearingFormId: nextFormId });
 
-  const { handleClickFirstNext } = getHearingFetchHandler({
-    setNextFormId,
-  });
+  const { handleClickFirstNext, handleSubmitForm, handleCancelForm } =
+    getHearingFetchHandler({
+      nextFormId,
+      firstAnsweredHearings,
+      secondAnsweredHearings,
+      currentAnswerNumber,
+      setNextFormId,
+      setFirstAnsweredHearings,
+      setCurrentAnswerNumber,
+      setSecondAnsweredHearings,
+    });
 
   if (hearingFormError)
     return <ErrorMessage message={hearingFormError.message} />;
 
-  if (nextFormId === null && answeredHearings.length <= 0) {
+  if (nextFormId === null && firstAnsweredHearings.length <= 0) {
     return <BeforeHearingConfirm onClick={handleClickFirstNext} />;
+  }
+
+  if (nextFormId === null) {
+    return member.mPlanId === PLEMIUM_PLAN_ID &&
+      secondAnsweredHearings.length <= 0 ? (
+      <>プレミアムプランの方は2コーデお届けするので、2回答えていただきます</>
+    ) : (
+      <>最後の確認画面</>
+    );
   }
 
   if (!hearingFormData) return <Loader active />;
@@ -39,8 +64,8 @@ export const HearingFetcher = ({ member }: TProps) => {
     return (
       <MultipleSelectForm
         response={hearingFormData}
-        onSubmit={() => {}}
-        onCancel={() => {}}
+        onSubmit={handleSubmitForm}
+        onCancel={handleCancelForm}
       />
     );
   }
@@ -48,8 +73,8 @@ export const HearingFetcher = ({ member }: TProps) => {
   return (
     <SingleSelectForm
       response={hearingFormData}
-      onSubmit={() => {}}
-      onCancel={() => {}}
+      onSubmit={handleSubmitForm}
+      onCancel={handleCancelForm}
     />
   );
 };

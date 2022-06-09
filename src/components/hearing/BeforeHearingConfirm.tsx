@@ -12,7 +12,7 @@ export const BeforeHearingConfirm = ({ onClick }: TProps) => {
         <div className="space-y-1	h-[50vh] relative">
           <div className="absolute w-[100vw] px-5 py-3 bottom-0">
             <PageHeader
-              title="次回発送するコーディネートのためのヒアリングに答えていただきます"
+              title="次回発送するコーディネートのために、ヒアリングに答えていただきます"
               subtitle="※全部で5~10問あります"
               className="mb-8"
             />

@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { TFormParams } from "../../api/charts/TFormParams";
 import { TOptionParams } from "../../api/charts/TOptionParams";
 import { THearingFormShowResponse } from "../../api/hearingForms/THearingFormShowResponse";
+import { AnsweredHearing } from "../../pages/hearing/HearingFetcher";
 import { Button } from "../baseParts/Button";
 import { IconButton } from "../baseParts/IconButton";
 import { ArrowIcon } from "../baseParts/icons/ArrowIcon";
@@ -12,18 +14,18 @@ import { Typography } from "../baseParts/Typography";
 
 type TProps = {
   readonly response: THearingFormShowResponse;
-  readonly onSubmit: () => void;
+  readonly onSubmit: (answer: TFormParams, nextFormId: number | null) => void;
   readonly onCancel: () => void;
 };
 
-type SelectedOptions = TOptionParams;
+type TSelectedOption = TOptionParams;
 
 export const MultipleSelectForm = ({
   response,
   onSubmit,
   onCancel,
 }: TProps) => {
-  const [selectedOptions, setSelectedOptions] = useState<SelectedOptions[]>([]);
+  const [selectedOptions, setSelectedOptions] = useState<TSelectedOption[]>([]);
 
   const handleClick = (optionId: number) => {
     const selectedOptionIds = selectedOptions.map((option) => option.id);
@@ -37,11 +39,16 @@ export const MultipleSelectForm = ({
     }
   };
   const handleSubmit = () => {
-    const hearingAnswers = {
+    const answer: AnsweredHearing = {
       id: response.id,
       options: selectedOptions,
     };
-    onSubmit();
+    const nextFormId =
+      selectedOptions.length > 1
+        ? response.multipleAnswerNextFormId
+        : response.options.find((o) => o.id === selectedOptions[0].id)
+            ?.nextFormId;
+    if (nextFormId !== undefined) onSubmit(answer, nextFormId);
   };
 
   const handleChangeText = (id: number, text: string) => {
@@ -70,7 +77,7 @@ export const MultipleSelectForm = ({
                   <TextAreaAlt
                     className="h-[120px]"
                     value={
-                      selectedOptions.find((o) => o.id === option.id)?.text ||
+                      selectedOptions.find((o) => o.id === option.id)?.text ??
                       ""
                     }
                     onChange={(event) =>
