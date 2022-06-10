@@ -75,7 +75,7 @@ export const MultipleSelectForm = ({
     const requiredTextOptionIds = response.options
       .filter((o) => o.isText)
       .map((r) => r.id);
-    return selectedOptions.every(
+    return selectedOptions.some(
       (option) =>
         requiredTextOptionIds.includes(option.id) && option.text == undefined
     );

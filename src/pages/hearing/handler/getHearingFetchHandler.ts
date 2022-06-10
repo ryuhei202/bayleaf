@@ -4,6 +4,7 @@ import { TOption } from "../../../api/hearingForms/TOption";
 import {
   ESPECIALLY_CATEGORY,
   HEARING_FORM,
+  SKIP_ANSWER_FORM,
 } from "../../../models/hearing/THearingForms";
 import { AnsweredHearing } from "../HearingFetcher";
 
@@ -81,13 +82,23 @@ export const getHearingFetchHandler = ({
   // 答えの配列の最後を削除する
   const handleCancelForm = () => {
     if (currentAnswerNumber === 1) {
-      const newAnswers = firstAnsweredHearings.slice(0, -1);
+      let newAnswers = firstAnsweredHearings.slice(0, -1);
+      let lastAnswerId = firstAnsweredHearings.slice(-1)[0]?.id;
+      if (Object.values(SKIP_ANSWER_FORM).some((f) => f === lastAnswerId)) {
+        newAnswers = newAnswers.slice(0, -1);
+        lastAnswerId = firstAnsweredHearings.slice(-2)[0]?.id;
+      }
       setFirstAnsweredHearings(newAnswers);
-      setNextFormId(firstAnsweredHearings.slice(-1)[0]?.id ?? null);
+      setNextFormId(lastAnswerId ?? null);
     } else {
-      const newAnswers = secondAnsweredHearings.slice(0, -1);
-      setSecondAnsweredHearings(newAnswers);
-      setNextFormId(secondAnsweredHearings.slice(-1)[0]?.id ?? null);
+      let newAnswers = secondAnsweredHearings.slice(0, -1);
+      let lastAnswerId = secondAnsweredHearings.slice(-1)[0]?.id;
+      if (Object.values(SKIP_ANSWER_FORM).some((f) => f === lastAnswerId)) {
+        newAnswers = newAnswers.slice(0, -1);
+        lastAnswerId = secondAnsweredHearings.slice(-2)[0]?.id;
+      }
+      setFirstAnsweredHearings(newAnswers);
+      setNextFormId(lastAnswerId ?? null);
     }
   };
 

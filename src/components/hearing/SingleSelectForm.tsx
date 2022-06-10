@@ -37,11 +37,11 @@ export const SingleSelectForm = ({
     setSelectedOption(undefined);
   }, [response]);
 
-  const handleClick = (id: number) => {
+  const handleClick = (id: number, text?: string) => {
     if (selectedOption?.id === id) {
       setSelectedOption(undefined);
     } else {
-      setSelectedOption({ id });
+      setSelectedOption({ id, text });
     }
   };
   const handleSubmit = () => {
@@ -106,7 +106,13 @@ export const SingleSelectForm = ({
                     <SelectButton
                       key={option.id}
                       selected={selectedOption?.id === option.id}
-                      onClick={() => handleClick(option.id)}
+                      onClick={() =>
+                        handleClick(
+                          option.id,
+                          beforeAnswerText?.find((t) => t.id === option.id)
+                            ?.text
+                        )
+                      }
                     >
                       {option.name}
                     </SelectButton>
