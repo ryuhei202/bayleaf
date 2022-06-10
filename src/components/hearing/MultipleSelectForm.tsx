@@ -129,6 +129,7 @@ export const MultipleSelectForm = ({
                     .map((option) => option.id)
                     .includes(option.id)}
                   onClick={() => handleClick(option.id, option.isSingleAnswer)}
+                  className={option.isSingleAnswer ? "mb-7" : ""}
                 >
                   {option.name}
                 </SelectButton>
