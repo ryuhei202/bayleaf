@@ -64,6 +64,18 @@ export const SingleSelectForm = ({ response, onSubmit, onCancel }: TProps) => {
     }
   };
 
+  const validateNextButton = (): boolean => {
+    if (selectedOption === undefined) return true;
+    // テキストが必要な選択肢でテキストが存在しない場合はtureを返す
+    const requiredTextOptionIds = response.options
+      .filter((o) => o.isText)
+      .map((r) => r.id);
+    return (
+      requiredTextOptionIds.includes(selectedOption.id) &&
+      selectedOption.text == undefined
+    );
+  };
+
   return (
     <Page className="px-5">
       <div className="flex flex-col justify-between h-full">
@@ -88,9 +100,16 @@ export const SingleSelectForm = ({ response, onSubmit, onCancel }: TProps) => {
                   </SelectButton>
                 ) : (
                   <>
-                    <Typography>{option.name}</Typography>
+                    <SelectButton
+                      key={option.id}
+                      selected={selectedOption?.id === option.id}
+                      onClick={() => handleClick(option.id)}
+                    >
+                      {option.name}
+                    </SelectButton>
                     <TextAreaAlt
                       className="h-[120px]"
+                      placeholder={`${option.name}を選んだ場合は入力してください`}
                       value={selectedOption?.text ?? ""}
                       onChange={(event) =>
                         handleChangeText(
@@ -98,6 +117,7 @@ export const SingleSelectForm = ({ response, onSubmit, onCancel }: TProps) => {
                           event.target.value as string
                         )
                       }
+                      disabled={selectedOption?.id !== option.id}
                     />
                   </>
                 )
@@ -118,7 +138,7 @@ export const SingleSelectForm = ({ response, onSubmit, onCancel }: TProps) => {
             <ArrowIcon className="h-10 my-auto" />
           </IconButton>
           <Button
-            disabled={selectedOption === undefined}
+            disabled={validateNextButton()}
             size="none"
             className="grow ml-3"
             onClick={handleSubmit}

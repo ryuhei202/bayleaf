@@ -7,11 +7,12 @@ export default {
   component: PremiumPlanConfirm,
 } as ComponentMeta<typeof PremiumPlanConfirm>;
 
-const Template: ComponentStory<typeof BeforeHearingConfirm> = (args) => (
+const Template: ComponentStory<typeof PremiumPlanConfirm> = (args) => (
   <PremiumPlanConfirm {...args} />
 );
 
 export const DefaultValues = Template.bind({});
 DefaultValues.args = {
   onClick: () => {},
+  onCancel: () => {},
 };

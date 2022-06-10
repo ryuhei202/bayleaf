@@ -4,8 +4,9 @@ import { PageHeader } from "../baseParts/PageHeader";
 
 type TProps = {
   readonly onClick: () => void;
+  readonly onCancel: () => void;
 };
-export const PremiumPlanConfirm = ({ onClick }: TProps) => {
+export const PremiumPlanConfirm = ({ onClick, onCancel }: TProps) => {
   return (
     <Page>
       <div className="flex flex-col h-full justify-between">
@@ -20,6 +21,9 @@ export const PremiumPlanConfirm = ({ onClick }: TProps) => {
         <div className="flex flex-col space-y-1 align-middle px-5 py-3 my-auto">
           <Button onClick={onClick} variant="primary">
             二度目のヒアリングに進む
+          </Button>
+          <Button onClick={onCancel} variant="text">
+            一つ前に戻る
           </Button>
         </div>
       </div>

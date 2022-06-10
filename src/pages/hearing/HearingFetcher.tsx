@@ -32,6 +32,7 @@ export const HearingFetcher = ({ member }: TProps) => {
   const {
     handleClickFirstNext,
     handleClickSecondNext,
+    handleCancelSecondNext,
     handleSubmitForm,
     handleCancelForm,
     formattedResponseData,
@@ -62,7 +63,10 @@ export const HearingFetcher = ({ member }: TProps) => {
   if (nextFormId === null) {
     return member.mPlanId === PLANS.PREMIUM &&
       secondAnsweredHearings.length <= 0 ? (
-      <PremiumPlanConfirm onClick={handleClickSecondNext} />
+      <PremiumPlanConfirm
+        onClick={handleClickSecondNext}
+        onCancel={handleCancelSecondNext}
+      />
     ) : (
       <>最後の確認画面</>
     );

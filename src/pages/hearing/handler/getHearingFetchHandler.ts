@@ -9,6 +9,7 @@ import { AnsweredHearing } from "../HearingFetcher";
 type THearingFetchHandler = {
   readonly handleClickFirstNext: () => void;
   readonly handleClickSecondNext: () => void;
+  readonly handleCancelSecondNext: () => void;
   readonly handleSubmitForm: (
     answer: AnsweredHearing,
     nextFormIdArg: number | null
@@ -53,6 +54,12 @@ export const getHearingFetchHandler = ({
   const handleClickSecondNext = () => {
     setCurrentAnswerNumber(2);
     setNextFormId(HEARING_FORM.FIRST);
+  };
+
+  const handleCancelSecondNext = () => {
+    const newNextFormId = firstAnsweredHearings.slice(-1)[0]?.id ?? null;
+    setSecondAnsweredHearings([]);
+    setNextFormId(newNextFormId);
   };
 
   const handleSubmitForm = (
@@ -118,6 +125,7 @@ export const getHearingFetchHandler = ({
   return {
     handleClickFirstNext,
     handleClickSecondNext,
+    handleCancelSecondNext,
     handleSubmitForm,
     handleCancelForm,
     formattedResponseData,

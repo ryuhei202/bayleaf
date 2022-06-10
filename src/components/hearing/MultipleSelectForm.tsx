@@ -49,6 +49,7 @@ export const MultipleSelectForm = ({
       setSelectedOptions([...newSelectedOptions, { id: optionId }]);
     }
   };
+
   const handleSubmit = () => {
     const answer: AnsweredHearing = {
       id: response.id,
@@ -64,11 +65,20 @@ export const MultipleSelectForm = ({
 
   const handleChangeText = (id: number, text: string) => {
     const newSelectedOptions = selectedOptions.filter((o) => o.id !== id);
-    if (text === "") {
-      setSelectedOptions(newSelectedOptions);
-    } else {
-      setSelectedOptions([...newSelectedOptions, { id, text }]);
-    }
+    setSelectedOptions([...newSelectedOptions, { id, text }]);
+  };
+
+  const validateNextButton = (): boolean => {
+    if (selectedOptions.length < 1) return true;
+
+    // テキストが必要な選択肢でテキストが存在しない場合はtureを返す
+    const requiredTextOptionIds = response.options
+      .filter((o) => o.isText)
+      .map((r) => r.id);
+    return selectedOptions.every(
+      (option) =>
+        requiredTextOptionIds.includes(option.id) && option.text == undefined
+    );
   };
 
   return (
@@ -84,15 +94,31 @@ export const MultipleSelectForm = ({
             {response.options.map((option) =>
               option.isText ? (
                 <>
-                  <Typography>{option.name}</Typography>
+                  <SelectButton
+                    key={option.id}
+                    selected={selectedOptions
+                      .map((option) => option.id)
+                      .includes(option.id)}
+                    onClick={() =>
+                      handleClick(option.id, option.isSingleAnswer)
+                    }
+                  >
+                    {option.name}
+                  </SelectButton>
                   <TextAreaAlt
                     className="h-[120px]"
+                    placeholder={`${option.name}を選んだ場合は入力してください`}
                     value={
                       selectedOptions.find((o) => o.id === option.id)?.text ??
                       ""
                     }
                     onChange={(event) =>
                       handleChangeText(option.id, event.target.value as string)
+                    }
+                    disabled={
+                      !selectedOptions
+                        .map((option) => option.id)
+                        .includes(option.id)
                     }
                   />
                 </>
@@ -115,7 +141,7 @@ export const MultipleSelectForm = ({
             <ArrowIcon className="h-10 my-auto" />
           </IconButton>
           <Button
-            disabled={selectedOptions.length < 1}
+            disabled={validateNextButton()}
             size="none"
             className="grow ml-3"
             onClick={handleSubmit}
