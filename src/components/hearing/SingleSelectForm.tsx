@@ -19,11 +19,17 @@ type TProps = {
     nextFormId: number | null
   ) => void;
   readonly onCancel: () => void;
+  readonly beforeAnswerText?: TOptionParams[];
 };
 
 type TSelectedOption = TOptionParams;
 
-export const SingleSelectForm = ({ response, onSubmit, onCancel }: TProps) => {
+export const SingleSelectForm = ({
+  response,
+  onSubmit,
+  onCancel,
+  beforeAnswerText,
+}: TProps) => {
   const [selectedOption, setSelectedOption] =
     useState<TSelectedOption | undefined>(undefined);
 
@@ -66,7 +72,12 @@ export const SingleSelectForm = ({ response, onSubmit, onCancel }: TProps) => {
 
   const validateNextButton = (): boolean => {
     if (selectedOption === undefined) return true;
-    // テキストが必要な選択肢でテキストが存在しない場合はtureを返す
+    if (
+      Object.values(ESPECIALLY_CATEGORY).some((c) => c === response.categoryId)
+    )
+      return false;
+
+    // テキストが必要な選択肢でテキストが存在しない場合はtrueを返す
     const requiredTextOptionIds = response.options
       .filter((o) => o.isText)
       .map((r) => r.id);
@@ -91,13 +102,20 @@ export const SingleSelectForm = ({ response, onSubmit, onCancel }: TProps) => {
                 Object.values(ESPECIALLY_CATEGORY).some(
                   (c) => c === response.categoryId
                 ) ? (
-                  <SelectButton
-                    key={option.id}
-                    selected={selectedOption?.id === option.id}
-                    onClick={() => handleClick(option.id)}
-                  >
-                    {option.name}
-                  </SelectButton>
+                  <>
+                    <SelectButton
+                      key={option.id}
+                      selected={selectedOption?.id === option.id}
+                      onClick={() => handleClick(option.id)}
+                    >
+                      {option.name}
+                    </SelectButton>
+                    <Typography className="ml-2">
+                      {option.name}の回答内容：
+                      {beforeAnswerText?.find((t) => t.id === option.id)
+                        ?.text || ""}
+                    </Typography>
+                  </>
                 ) : (
                   <>
                     <SelectButton

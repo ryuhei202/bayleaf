@@ -71,7 +71,7 @@ export const MultipleSelectForm = ({
   const validateNextButton = (): boolean => {
     if (selectedOptions.length < 1) return true;
 
-    // テキストが必要な選択肢でテキストが存在しない場合はtureを返す
+    // テキストが必要な選択肢でテキストが存在しない場合はtrueを返す
     const requiredTextOptionIds = response.options
       .filter((o) => o.isText)
       .map((r) => r.id);

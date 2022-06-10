@@ -37,6 +37,7 @@ export const HearingFetcher = ({ member }: TProps) => {
     handleCancelForm,
     formattedResponseData,
     handleSkipForm,
+    getBeforeAnswerText,
   } = getHearingFetchHandler({
     nextFormId,
     firstAnsweredHearings,
@@ -94,6 +95,7 @@ export const HearingFetcher = ({ member }: TProps) => {
       response={formattedResponseData(hearingFormData)}
       onSubmit={handleSubmitForm}
       onCancel={handleCancelForm}
+      beforeAnswerText={getBeforeAnswerText(hearingFormData)}
     />
   );
 };

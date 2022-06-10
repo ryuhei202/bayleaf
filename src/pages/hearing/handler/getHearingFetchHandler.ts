@@ -1,3 +1,4 @@
+import { TOptionParams } from "../../../api/charts/TOptionParams";
 import { THearingFormShowResponse } from "../../../api/hearingForms/THearingFormShowResponse";
 import { TOption } from "../../../api/hearingForms/TOption";
 import {
@@ -19,6 +20,9 @@ type THearingFetchHandler = {
     hearingFormData: THearingFormShowResponse
   ) => THearingFormShowResponse;
   readonly handleSkipForm: (formId: number, option: TOption) => void;
+  readonly getBeforeAnswerText: (
+    hearingFormData: THearingFormShowResponse
+  ) => TOptionParams[] | undefined;
 };
 
 type TArgs = {
@@ -122,6 +126,32 @@ export const getHearingFetchHandler = ({
     }
   };
 
+  const getBeforeAnswerText = (
+    hearingFormData: THearingFormShowResponse
+  ): TOptionParams[] | undefined => {
+    if (
+      !Object.values(ESPECIALLY_CATEGORY).some(
+        (c) => c === hearingFormData.categoryId
+      )
+    )
+      return undefined;
+    if (currentAnswerNumber === 1) {
+      return firstAnsweredHearings
+        .slice(-1)[0]
+        .options.filter((o) => isNotUndefinedtext(o));
+    } else {
+      return secondAnsweredHearings
+        .slice(-1)[0]
+        .options.filter((o) => isNotUndefinedtext(o));
+    }
+  };
+
+  const isNotUndefinedtext = (
+    option: any
+  ): option is Required<TOptionParams> => {
+    return option.text !== undefined;
+  };
+
   return {
     handleClickFirstNext,
     handleClickSecondNext,
@@ -130,5 +160,6 @@ export const getHearingFetchHandler = ({
     handleCancelForm,
     formattedResponseData,
     handleSkipForm,
+    getBeforeAnswerText,
   };
 };
