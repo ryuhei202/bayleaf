@@ -1,4 +1,7 @@
+import liff from "@line/liff/dist/lib";
+import { TChartCreateRequest } from "../../../api/charts/TChartCreateRequest";
 import { TOptionParams } from "../../../api/charts/TOptionParams";
+import { useChartCreate } from "../../../api/charts/useChartCreate";
 import { THearingFormShowResponse } from "../../../api/hearingForms/THearingFormShowResponse";
 import { TOption } from "../../../api/hearingForms/TOption";
 import { THearingAnswer } from "../../../models/hearing/THearingAnswer";
@@ -34,10 +37,12 @@ type THearingFetchHandler = {
   readonly formattedConfirmAnswers: () => THearingAnswer[];
   readonly handleCancelFinalConfirm: () => void;
   readonly handleClickReset: () => void;
+  readonly handleSubmitComplete: () => void;
+  readonly isLoading: boolean;
 };
 
 type TArgs = {
-  readonly nextFormId: number | null;
+  readonly memberId: number;
   readonly firstAnsweredHearings: AnsweredHearing[];
   readonly secondAnsweredHearings: AnsweredHearing[];
   readonly currentAnswerNumber: number;
@@ -51,8 +56,8 @@ type TArgs = {
   readonly setCurrentAnswerNumber: React.Dispatch<React.SetStateAction<1 | 2>>;
 };
 
-export const getHearingFetchHandler = ({
-  nextFormId,
+export const useHearingFetchHandler = ({
+  memberId,
   firstAnsweredHearings,
   secondAnsweredHearings,
   currentAnswerNumber,
@@ -61,6 +66,7 @@ export const getHearingFetchHandler = ({
   setCurrentAnswerNumber,
   setSecondAnsweredHearings,
 }: TArgs): THearingFetchHandler => {
+  const { mutate, isLoading } = useChartCreate();
   const handleClickFirstNext = () => {
     setNextFormId(HEARING_FORM.FIRST);
   };
@@ -173,33 +179,35 @@ export const getHearingFetchHandler = ({
 
   // 確認画面へ渡すために答えた情報を整形する
   const formattedConfirmAnswers = (): THearingAnswer[] => {
-    const formattedAnswer = [firstAnsweredHearings, secondAnsweredHearings].map(
-      (answers) => {
-        return answers.reduce((answer: THearingConfirm[], value) => {
-          let someCategory = answer.find(
-            (h) => h.categoryName === value.categoryName
-          );
-          if (someCategory) {
-            someCategory.forms.push({
-              title: value.title,
-              optionName: value.options.map((o) => o.name),
-            });
-          } else {
-            answer.push({
-              categoryName: value.categoryName,
-              forms: [
-                {
-                  title: value.title,
-                  optionName: value.options.map((o) => o.name),
-                },
-              ],
-            });
-          }
-          return answer;
-        }, []);
-      }
-    );
-    return [{ answer: formattedAnswer[0] }, { answer: formattedAnswer[1] }];
+    const formattedAnswer = [firstAnsweredHearings, secondAnsweredHearings]
+      .filter((h) => h.length !== 0)
+      .map((answers) => {
+        return {
+          answer: answers.reduce((answer: THearingConfirm[], value) => {
+            let someCategory = answer.find(
+              (h) => h.categoryName === value.categoryName
+            );
+            if (someCategory) {
+              someCategory.forms.push({
+                title: value.title,
+                optionName: value.options.map((o) => o.name),
+              });
+            } else {
+              answer.push({
+                categoryName: value.categoryName,
+                forms: [
+                  {
+                    title: value.title,
+                    optionName: value.options.map((o) => o.name),
+                  },
+                ],
+              });
+            }
+            return answer;
+          }, []),
+        };
+      });
+    return formattedAnswer;
   };
 
   const handleCancelFinalConfirm = () => {
@@ -215,6 +223,32 @@ export const getHearingFetchHandler = ({
     setCurrentAnswerNumber(1);
     setFirstAnsweredHearings([]);
     setSecondAnsweredHearings([]);
+  };
+
+  const handleSubmitComplete = () => {
+    const hearings = [firstAnsweredHearings, secondAnsweredHearings]
+      .filter((f) => f.length !== 0)
+      .map((hearings) => {
+        return {
+          forms: hearings.map((hearing) => {
+            return {
+              id: hearing.id,
+              options: hearing.options.map((o) => {
+                return { id: o.id, text: o.text };
+              }),
+            };
+          }),
+        };
+      });
+    const params: TChartCreateRequest = {
+      memberId,
+      hearings,
+    };
+    mutate(params, {
+      onSuccess: () => {
+        liff.closeWindow();
+      },
+    });
   };
 
   const isNotUndefinedtext = (
@@ -249,5 +283,7 @@ export const getHearingFetchHandler = ({
     formattedConfirmAnswers,
     handleCancelFinalConfirm,
     handleClickReset,
+    handleSubmitComplete,
+    isLoading,
   };
 };

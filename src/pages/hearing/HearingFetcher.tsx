@@ -12,7 +12,7 @@ import { PremiumPlanConfirm } from "../../components/hearing/PremiumPlanConfirm"
 import { SingleSelectForm } from "../../components/hearing/SingleSelectForm";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { PLANS } from "../../models/shared/TPlans";
-import { getHearingFetchHandler } from "./handler/getHearingFetchHandler";
+import { useHearingFetchHandler } from "./handler/useHearingFetchHandler";
 
 type TProps = {
   readonly member: TMembersIndexResponse;
@@ -23,6 +23,7 @@ export type AnsweredHearing = {
   readonly categoryName: string;
   readonly options: {
     id: number;
+    text?: string;
     name: string;
   }[];
 };
@@ -40,7 +41,6 @@ export const HearingFetcher = ({ member }: TProps) => {
   const { data: hearingFormData, error: hearingFormError } =
     useHearingFormsShow({ hearingFormId: nextFormId });
 
-  const { mutate } = useChartCreate();
   const {
     handleClickFirstNext,
     handleClickPremiumNext,
@@ -51,10 +51,12 @@ export const HearingFetcher = ({ member }: TProps) => {
     handleSkipForm,
     getBeforeAnswerText,
     formattedConfirmAnswers,
+    handleSubmitComplete,
     handleCancelFinalConfirm,
     handleClickReset,
-  } = getHearingFetchHandler({
-    nextFormId,
+    isLoading,
+  } = useHearingFetchHandler({
+    memberId: member.id,
     firstAnsweredHearings,
     secondAnsweredHearings,
     currentAnswerNumber,
@@ -89,13 +91,25 @@ export const HearingFetcher = ({ member }: TProps) => {
         confirmAnswers={formattedConfirmAnswers()}
         footer={
           <>
-            <Button variant="primary" onClick={() => {}}>
+            <Button
+              variant="primary"
+              onClick={handleSubmitComplete}
+              disabled={isLoading}
+            >
               ヒアリングを完了する
             </Button>
-            <Button variant="primary" onClick={handleCancelFinalConfirm}>
-              前に戻る
+            <Button
+              variant="primary"
+              onClick={handleCancelFinalConfirm}
+              disabled={isLoading}
+            >
+              ひとつ前に戻る
             </Button>
-            <Button variant="primary" onClick={handleClickReset}>
+            <Button
+              variant="primary"
+              onClick={handleClickReset}
+              disabled={isLoading}
+            >
               最初からやり直す
             </Button>
           </>
