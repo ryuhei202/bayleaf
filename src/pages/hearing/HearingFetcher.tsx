@@ -115,7 +115,11 @@ export const HearingFetcher = ({ member }: TProps) => {
             </Button>
             <Button
               variant="text"
-              onClick={handleClickReset}
+              onClick={() => {
+                if (window.confirm("最初からやり直しますか？")) {
+                  handleClickReset();
+                }
+              }}
               disabled={isPostLoading}
             >
               最初からやり直す
