@@ -3,6 +3,8 @@ import { Loader } from "semantic-ui-react";
 import { useHearingFormsShow } from "../../api/hearingForms/useHearingFormsShow";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { Button } from "../../components/baseParts/Button";
+import { Page } from "../../components/baseParts/Page";
+import { PageHeader } from "../../components/baseParts/PageHeader";
 import { BeforeHearingConfirm } from "../../components/hearing/BeforeHearingConfirm";
 import { HearingAnswerConfirm } from "../../components/hearing/HearingAnswerConfirm";
 import { MultipleSelectForm } from "../../components/hearing/MultipleSelectForm";
@@ -65,6 +67,18 @@ export const HearingFetcher = ({ member }: TProps) => {
     setCurrentAnswerNumber,
     setSecondAnsweredHearings,
   });
+
+  if (member.isAlreadyHearing) {
+    return (
+      <Page>
+        <PageHeader
+          title="既に回答済みです。"
+          className="m-4"
+          subtitle="スタイリストが対応しますので、少々お待ちください。"
+        />
+      </Page>
+    );
+  }
 
   if (hearingFormError) {
     return <ErrorMessage message={hearingFormError.message} />;
