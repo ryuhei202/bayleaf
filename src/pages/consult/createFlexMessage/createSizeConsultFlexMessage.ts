@@ -53,9 +53,9 @@ export const createSizeConsultFlexMessage = (
                       {
                         type: "image",
                         url:
-                          process.env.REACT_APP_ENV === "production"
-                            ? answer.item.imagePaths.original
-                            : ITEM_TEST_IMAGE_URL.original,
+                          process.env.REACT_APP_ENV === "development"
+                            ? ITEM_TEST_IMAGE_URL.original
+                            : answer.item.imagePaths.original,
                         margin: "none",
                       },
                       {

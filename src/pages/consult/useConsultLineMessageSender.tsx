@@ -39,13 +39,13 @@ export const useConsultLineMessageSender = (): ConsultLineMessage => {
           type: "image",
           sender: true,
           originalContentUrl:
-            process.env.REACT_APP_ENV === "production"
-              ? wearingPhoto.original
-              : OUTFIT_TEST_IMAGE_URL,
+            process.env.REACT_APP_ENV === "development"
+              ? OUTFIT_TEST_IMAGE_URL
+              : wearingPhoto.original,
           previewImageUrl:
-            process.env.REACT_APP_ENV === "production"
-              ? wearingPhoto.large
-              : OUTFIT_TEST_IMAGE_URL,
+            process.env.REACT_APP_ENV === "development"
+              ? OUTFIT_TEST_IMAGE_URL
+              : wearingPhoto.large,
         });
         consultLineMessages.push({
           type: "text",
