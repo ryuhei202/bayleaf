@@ -6,10 +6,7 @@ type TProps = {
 };
 
 export const FormConfirm = ({ form }: TProps) => {
-  const choice =
-    form.optionName.length === 1
-      ? form.optionName[0]
-      : form.optionName.join(" / ");
+  const choice = form.optionName.join(" / ");
 
   return (
     <TitledAnswer titleText={form.title} choice={choice} className="pb-4" />
