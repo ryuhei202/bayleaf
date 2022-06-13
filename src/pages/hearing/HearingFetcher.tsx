@@ -18,7 +18,7 @@ export type AnsweredHearing = TFormParams;
 
 export const HearingFetcher = ({ member }: TProps) => {
   const [nextFormId, setNextFormId] = useState<number | null>(null);
-  const [currentAnswerNumber, setCurrentAnswerNumber] = useState<number>(1);
+  const [currentAnswerNumber, setCurrentAnswerNumber] = useState<1 | 2>(1);
   const [firstAnsweredHearings, setFirstAnsweredHearings] = useState<
     AnsweredHearing[]
   >([]);
@@ -31,8 +31,8 @@ export const HearingFetcher = ({ member }: TProps) => {
 
   const {
     handleClickFirstNext,
-    handleClickSecondNext,
-    handleCancelSecondNext,
+    handleClickPremiumNext,
+    handleCancelPremiumNext,
     handleSubmitForm,
     handleCancelForm,
     formattedResponseData,
@@ -65,8 +65,8 @@ export const HearingFetcher = ({ member }: TProps) => {
     return member.mPlanId === PLANS.PREMIUM &&
       secondAnsweredHearings.length <= 0 ? (
       <PremiumPlanConfirm
-        onClick={handleClickSecondNext}
-        onCancel={handleCancelSecondNext}
+        onClick={handleClickPremiumNext}
+        onCancel={handleCancelPremiumNext}
       />
     ) : (
       <>最後の確認画面</>
@@ -75,7 +75,7 @@ export const HearingFetcher = ({ member }: TProps) => {
 
   if (!hearingFormData) return <Loader active />;
 
-  // スキップ処理;
+  // スキップ処理
   if (hearingFormData.options.length === 1) {
     handleSkipForm(hearingFormData.id, hearingFormData.options[0]);
   }

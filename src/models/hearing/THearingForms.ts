@@ -8,7 +8,7 @@ export const SKIP_ANSWER_FORM = {
   COMPANYTRIP: 15,
 } as const;
 
-// 特に〜のカテゴリID
+// 「特に〜」のカテゴリID
 export const ESPECIALLY_CATEGORY = {
   WHERE: 7,
   WHO: 8,

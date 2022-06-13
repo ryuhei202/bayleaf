@@ -10,8 +10,8 @@ import { AnsweredHearing } from "../HearingFetcher";
 
 type THearingFetchHandler = {
   readonly handleClickFirstNext: () => void;
-  readonly handleClickSecondNext: () => void;
-  readonly handleCancelSecondNext: () => void;
+  readonly handleClickPremiumNext: () => void;
+  readonly handleCancelPremiumNext: () => void;
   readonly handleSubmitForm: (
     answer: AnsweredHearing,
     nextFormIdArg: number | null
@@ -38,7 +38,7 @@ type TArgs = {
   readonly setSecondAnsweredHearings: React.Dispatch<
     React.SetStateAction<AnsweredHearing[]>
   >;
-  readonly setCurrentAnswerNumber: React.Dispatch<React.SetStateAction<number>>;
+  readonly setCurrentAnswerNumber: React.Dispatch<React.SetStateAction<1 | 2>>;
 };
 
 export const getHearingFetchHandler = ({
@@ -55,16 +55,15 @@ export const getHearingFetchHandler = ({
     setNextFormId(HEARING_FORM.FIRST);
   };
 
-  // プレミアムの確認画面の次へ進むボタンを押すと発火するメソッド
-  const handleClickSecondNext = () => {
+  const handleClickPremiumNext = () => {
     setCurrentAnswerNumber(2);
     setNextFormId(HEARING_FORM.FIRST);
   };
 
-  const handleCancelSecondNext = () => {
-    const newNextFormId = firstAnsweredHearings.slice(-1)[0]?.id ?? null;
+  const handleCancelPremiumNext = () => {
     setSecondAnsweredHearings([]);
-    setNextFormId(newNextFormId);
+    setCurrentAnswerNumber(1);
+    removeLastAnswer(firstAnsweredHearings, 1);
   };
 
   const handleSubmitForm = (
@@ -79,39 +78,41 @@ export const getHearingFetchHandler = ({
     setNextFormId(nextFormIdArg);
   };
 
-  // 答えの配列の最後を削除する
+  // 各フォームの戻るボタンをクリック
   const handleCancelForm = () => {
     if (currentAnswerNumber === 1) {
-      let newAnswers = firstAnsweredHearings.slice(0, -1);
-      let lastAnswerId = firstAnsweredHearings.slice(-1)[0]?.id;
-      if (Object.values(SKIP_ANSWER_FORM).some((f) => f === lastAnswerId)) {
-        newAnswers = newAnswers.slice(0, -1);
-        lastAnswerId = firstAnsweredHearings.slice(-2)[0]?.id;
-      }
-      setFirstAnsweredHearings(newAnswers);
-      setNextFormId(lastAnswerId ?? null);
+      removeLastAnswer(firstAnsweredHearings, 1);
     } else {
-      let newAnswers = secondAnsweredHearings.slice(0, -1);
-      let lastAnswerId = secondAnsweredHearings.slice(-1)[0]?.id;
-      if (Object.values(SKIP_ANSWER_FORM).some((f) => f === lastAnswerId)) {
-        newAnswers = newAnswers.slice(0, -1);
-        lastAnswerId = secondAnsweredHearings.slice(-2)[0]?.id;
-      }
-      setFirstAnsweredHearings(newAnswers);
-      setNextFormId(lastAnswerId ?? null);
+      removeLastAnswer(secondAnsweredHearings, 2);
     }
+  };
+
+  // 答えの配列の最後を削除する
+  const removeLastAnswer = (
+    answeredHearings: AnsweredHearing[],
+    answerNum: number
+  ) => {
+    let newAnswers = answeredHearings.slice(0, -1);
+    let lastAnswerId = getLastAnswerId(answeredHearings);
+    if (isSkip(lastAnswerId)) {
+      lastAnswerId = getLastAnswerId(newAnswers);
+      newAnswers = newAnswers.slice(0, -1);
+    }
+    if (answerNum === 1) {
+      setFirstAnsweredHearings(newAnswers);
+    } else {
+      setSecondAnsweredHearings(newAnswers);
+    }
+    setNextFormId(lastAnswerId ?? null);
   };
 
   // 複数選択した後に1つ選択するものはレスポンスを整形してフォームに渡す
   const formattedResponseData = (
     hearingFormData: THearingFormShowResponse
   ): THearingFormShowResponse => {
-    if (
-      !Object.values(ESPECIALLY_CATEGORY).some(
-        (c) => c === hearingFormData.categoryId
-      )
-    )
+    if (!isEspeciallyCategory(hearingFormData.categoryId)) {
       return hearingFormData;
+    }
     const optionIds =
       currentAnswerNumber === 1
         ? firstAnsweredHearings.slice(-1)[0].options.map((o) => o.id)
@@ -137,15 +138,11 @@ export const getHearingFetchHandler = ({
     }
   };
 
+  // その他のテキストを次のフォームに渡すためのメソッド
   const getBeforeAnswerText = (
     hearingFormData: THearingFormShowResponse
   ): TOptionParams[] | undefined => {
-    if (
-      !Object.values(ESPECIALLY_CATEGORY).some(
-        (c) => c === hearingFormData.categoryId
-      )
-    )
-      return undefined;
+    if (!isEspeciallyCategory(hearingFormData.categoryId)) return undefined;
     if (currentAnswerNumber === 1) {
       return firstAnsweredHearings
         .slice(-1)[0]
@@ -163,10 +160,24 @@ export const getHearingFetchHandler = ({
     return option.text !== undefined;
   };
 
+  const isSkip = (lastAnswerId?: number): boolean => {
+    return Object.values(SKIP_ANSWER_FORM).some((f) => f === lastAnswerId);
+  };
+
+  const isEspeciallyCategory = (categoryId: number): boolean => {
+    return Object.values(ESPECIALLY_CATEGORY).some((c) => c === categoryId);
+  };
+
+  const getLastAnswerId = (
+    answeredHearing: AnsweredHearing[]
+  ): number | undefined => {
+    return answeredHearing.slice(-1)[0]?.id;
+  };
+
   return {
     handleClickFirstNext,
-    handleClickSecondNext,
-    handleCancelSecondNext,
+    handleClickPremiumNext,
+    handleCancelPremiumNext,
     handleSubmitForm,
     handleCancelForm,
     formattedResponseData,
