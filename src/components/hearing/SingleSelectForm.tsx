@@ -93,7 +93,7 @@ export const SingleSelectForm = ({
       .map((r) => r.id);
     return (
       requiredTextOptionIds.includes(selectedOption.id) &&
-      selectedOption.text == undefined
+      selectedOption.text === undefined
     );
   };
 
@@ -170,7 +170,11 @@ export const SingleSelectForm = ({
           </div>
         </div>
         <div className="flex flex-row mb-10">
-          <IconButton className="flex-none" onClick={onCancel}>
+          <IconButton
+            className="flex-none"
+            onClick={onCancel}
+            GAEvent={{ action: "back_to_the_last", category: "hearing" }}
+          >
             <ArrowIcon className="h-10 my-auto" />
           </IconButton>
           <Button

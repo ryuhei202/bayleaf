@@ -159,7 +159,11 @@ export const MultipleSelectForm = ({
           </div>
         </div>
         <div className="flex flex-row mb-10">
-          <IconButton className="flex-none" onClick={onCancel}>
+          <IconButton
+            className="flex-none"
+            onClick={onCancel}
+            GAEvent={{ action: "back_to_the_last", category: "hearing" }}
+          >
             <ArrowIcon className="h-10 my-auto" />
           </IconButton>
           <Button

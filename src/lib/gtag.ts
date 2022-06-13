@@ -6,8 +6,9 @@ export type TGAEvent = {
   readonly label?: string;
 };
 
+const { data } = useMembersIndex();
+
 export const analyzeEvent = ({ action, category, label }: TGAEvent) => {
-  const { data } = useMembersIndex();
   if (data === undefined) return;
 
   window.gtag("event", action, {

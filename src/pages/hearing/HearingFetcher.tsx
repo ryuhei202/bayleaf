@@ -110,6 +110,7 @@ export const HearingFetcher = ({ member }: TProps) => {
               variant="default"
               disableElevation
               border
+              GAEvent={{ action: "back_to_the_last", category: "hearing" }}
             >
               ひとつ前に戻る
             </Button>
@@ -117,6 +118,10 @@ export const HearingFetcher = ({ member }: TProps) => {
               variant="text"
               onClick={handleClickReset}
               disabled={isPostLoading}
+              GAEvent={{
+                action: "start_over",
+                category: "hearing",
+              }}
             >
               最初からやり直す
             </Button>
