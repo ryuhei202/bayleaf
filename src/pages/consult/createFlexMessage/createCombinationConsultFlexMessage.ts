@@ -37,9 +37,9 @@ export const createCombinationConsultFlexMessage = (
         return {
           type: "image",
           url:
-            process.env.REACT_APP_ENV === "production"
-              ? imageUrl
-              : ITEM_TEST_IMAGE_URL.original,
+            process.env.REACT_APP_ENV === "development"
+              ? ITEM_TEST_IMAGE_URL.original
+              : imageUrl,
         };
       }),
       margin: "md",
