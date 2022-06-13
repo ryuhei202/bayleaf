@@ -1,6 +1,8 @@
 import { TOptionParams } from "../../../api/charts/TOptionParams";
 import { THearingFormShowResponse } from "../../../api/hearingForms/THearingFormShowResponse";
 import { TOption } from "../../../api/hearingForms/TOption";
+import { THearingAnswer } from "../../../models/hearing/THearingAnswer";
+import { THearingConfirm } from "../../../models/hearing/THearingConfirm";
 import {
   ESPECIALLY_CATEGORY,
   HEARING_FORM,
@@ -20,10 +22,18 @@ type THearingFetchHandler = {
   readonly formattedResponseData: (
     hearingFormData: THearingFormShowResponse
   ) => THearingFormShowResponse;
-  readonly handleSkipForm: (formId: number, option: TOption) => void;
+  readonly handleSkipForm: (
+    formId: number,
+    title: string,
+    option: TOption,
+    categoryName: string
+  ) => void;
   readonly getBeforeAnswerText: (
     hearingFormData: THearingFormShowResponse
   ) => TOptionParams[] | undefined;
+  readonly formattedConfirmAnswers: () => THearingAnswer[];
+  readonly handleCancelFinalConfirm: () => void;
+  readonly handleClickReset: () => void;
 };
 
 type TArgs = {
@@ -125,11 +135,18 @@ export const getHearingFetchHandler = ({
   };
 
   // スキップメソッド
-  const handleSkipForm = (formId: number, option: TOption) => {
+  const handleSkipForm = (
+    formId: number,
+    title: string,
+    option: TOption,
+    categoryName: string
+  ) => {
     setNextFormId(option.nextFormId);
     const answer = {
       id: formId,
-      options: [{ id: option.id }],
+      title,
+      options: [{ id: option.id, name: option.name }],
+      categoryName,
     };
     if (currentAnswerNumber === 1) {
       setFirstAnsweredHearings([...firstAnsweredHearings, answer]);
@@ -152,6 +169,52 @@ export const getHearingFetchHandler = ({
         .slice(-1)[0]
         .options.filter((o) => isNotUndefinedtext(o));
     }
+  };
+
+  // 確認画面へ渡すために答えた情報を整形する
+  const formattedConfirmAnswers = (): THearingAnswer[] => {
+    const formattedAnswer = [firstAnsweredHearings, secondAnsweredHearings].map(
+      (answers) => {
+        return answers.reduce((answer: THearingConfirm[], value) => {
+          let someCategory = answer.find(
+            (h) => h.categoryName === value.categoryName
+          );
+          if (someCategory) {
+            someCategory.forms.push({
+              title: value.title,
+              optionName: value.options.map((o) => o.name),
+            });
+          } else {
+            answer.push({
+              categoryName: value.categoryName,
+              forms: [
+                {
+                  title: value.title,
+                  optionName: value.options.map((o) => o.name),
+                },
+              ],
+            });
+          }
+          return answer;
+        }, []);
+      }
+    );
+    return [{ answer: formattedAnswer[0] }, { answer: formattedAnswer[1] }];
+  };
+
+  const handleCancelFinalConfirm = () => {
+    if (currentAnswerNumber === 1) {
+      removeLastAnswer(firstAnsweredHearings, 1);
+    } else {
+      removeLastAnswer(secondAnsweredHearings, 1);
+    }
+  };
+
+  const handleClickReset = () => {
+    setNextFormId(null);
+    setCurrentAnswerNumber(1);
+    setFirstAnsweredHearings([]);
+    setSecondAnsweredHearings([]);
   };
 
   const isNotUndefinedtext = (
@@ -183,5 +246,8 @@ export const getHearingFetchHandler = ({
     formattedResponseData,
     handleSkipForm,
     getBeforeAnswerText,
+    formattedConfirmAnswers,
+    handleCancelFinalConfirm,
+    handleClickReset,
   };
 };

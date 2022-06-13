@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Loader } from "semantic-ui-react";
 import { TFormParams } from "../../api/charts/TFormParams";
+import { useChartCreate } from "../../api/charts/useChartCreate";
 import { useHearingFormsShow } from "../../api/hearingForms/useHearingFormsShow";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
+import { Button } from "../../components/baseParts/Button";
 import { BeforeHearingConfirm } from "../../components/hearing/BeforeHearingConfirm";
+import { HearingAnswerConfirm } from "../../components/hearing/HearingAnswerConfirm";
 import { MultipleSelectForm } from "../../components/hearing/MultipleSelectForm";
 import { PremiumPlanConfirm } from "../../components/hearing/PremiumPlanConfirm";
 import { SingleSelectForm } from "../../components/hearing/SingleSelectForm";
@@ -14,7 +17,15 @@ import { getHearingFetchHandler } from "./handler/getHearingFetchHandler";
 type TProps = {
   readonly member: TMembersIndexResponse;
 };
-export type AnsweredHearing = TFormParams;
+export type AnsweredHearing = {
+  readonly id: number;
+  readonly title: string;
+  readonly categoryName: string;
+  readonly options: {
+    id: number;
+    name: string;
+  }[];
+};
 
 export const HearingFetcher = ({ member }: TProps) => {
   const [nextFormId, setNextFormId] = useState<number | null>(null);
@@ -29,6 +40,7 @@ export const HearingFetcher = ({ member }: TProps) => {
   const { data: hearingFormData, error: hearingFormError } =
     useHearingFormsShow({ hearingFormId: nextFormId });
 
+  const { mutate } = useChartCreate();
   const {
     handleClickFirstNext,
     handleClickPremiumNext,
@@ -38,6 +50,9 @@ export const HearingFetcher = ({ member }: TProps) => {
     formattedResponseData,
     handleSkipForm,
     getBeforeAnswerText,
+    formattedConfirmAnswers,
+    handleCancelFinalConfirm,
+    handleClickReset,
   } = getHearingFetchHandler({
     nextFormId,
     firstAnsweredHearings,
@@ -69,7 +84,23 @@ export const HearingFetcher = ({ member }: TProps) => {
         onCancel={handleCancelPremiumNext}
       />
     ) : (
-      <>最後の確認画面</>
+      <HearingAnswerConfirm
+        title="ヒアリング確認画面"
+        confirmAnswers={formattedConfirmAnswers()}
+        footer={
+          <>
+            <Button variant="primary" onClick={() => {}}>
+              ヒアリングを完了する
+            </Button>
+            <Button variant="primary" onClick={handleCancelFinalConfirm}>
+              前に戻る
+            </Button>
+            <Button variant="primary" onClick={handleClickReset}>
+              最初からやり直す
+            </Button>
+          </>
+        }
+      />
     );
   }
 
@@ -77,7 +108,12 @@ export const HearingFetcher = ({ member }: TProps) => {
 
   // スキップ処理
   if (hearingFormData.options.length === 1) {
-    handleSkipForm(hearingFormData.id, hearingFormData.options[0]);
+    handleSkipForm(
+      hearingFormData.id,
+      hearingFormData.title,
+      hearingFormData.options[0],
+      hearingFormData.categoryName
+    );
   }
 
   if (hearingFormData.multipleAnswerNextFormId !== null) {

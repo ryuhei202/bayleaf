@@ -7,13 +7,13 @@ import { AnswerConfirm } from "./AnswerConfirm";
 type TProps = {
   readonly title: string;
   readonly confirmAnswers: THearingAnswer[];
-  readonly Footer: JSX.Element;
+  readonly footer: JSX.Element;
 };
 
 export const HearingAnswerConfirm = ({
   title,
   confirmAnswers,
-  Footer,
+  footer,
 }: TProps) => {
   return (
     <Page>
@@ -25,7 +25,7 @@ export const HearingAnswerConfirm = ({
           ))}
         </div>
       </div>
-      <FooterWrapper className="px-3 py-4">{Footer}</FooterWrapper>
+      <FooterWrapper className="px-3 py-4">{footer}</FooterWrapper>
     </Page>
   );
 };

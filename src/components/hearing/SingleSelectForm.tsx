@@ -22,7 +22,7 @@ type TProps = {
   readonly beforeAnswerText?: TOptionParams[];
 };
 
-type TSelectedOption = TOptionParams;
+type TSelectedOption = TOptionParams & { readonly name: string };
 
 export const SingleSelectForm = ({
   response,
@@ -37,18 +37,20 @@ export const SingleSelectForm = ({
     setSelectedOption(undefined);
   }, [response]);
 
-  const handleClick = (id: number, text?: string) => {
+  const handleClick = (id: number, name: string, text?: string) => {
     if (selectedOption?.id === id) {
       setSelectedOption(undefined);
     } else {
-      setSelectedOption({ id, text });
+      setSelectedOption({ id, text, name });
     }
   };
   const handleSubmit = () => {
     if (isSelectedOption(selectedOption)) {
       const answer: AnsweredHearing = {
         id: response.id,
+        title: response.title,
         options: [selectedOption],
+        categoryName: response.categoryName,
       };
       const nextFormId = response.options.find(
         (o) => o.id === selectedOption.id
@@ -62,11 +64,19 @@ export const SingleSelectForm = ({
     return selectedOption !== undefined;
   };
 
-  const handleChangeText = (id: number, text: string) => {
+  const handleChangeText = ({
+    id,
+    name,
+    text,
+  }: {
+    id: number;
+    name: string;
+    text: string;
+  }) => {
     if (text === "") {
       setSelectedOption(undefined);
     } else {
-      setSelectedOption({ id, text });
+      setSelectedOption({ id, text, name });
     }
   };
 
@@ -109,6 +119,7 @@ export const SingleSelectForm = ({
                       onClick={() =>
                         handleClick(
                           option.id,
+                          option.name,
                           beforeAnswerText?.find((t) => t.id === option.id)
                             ?.text
                         )
@@ -127,7 +138,7 @@ export const SingleSelectForm = ({
                     <SelectButton
                       key={option.id}
                       selected={selectedOption?.id === option.id}
-                      onClick={() => handleClick(option.id)}
+                      onClick={() => handleClick(option.id, option.name)}
                     >
                       {option.name}
                     </SelectButton>
@@ -136,10 +147,11 @@ export const SingleSelectForm = ({
                       placeholder={`${option.name}を選んだ場合は入力してください`}
                       value={selectedOption?.text ?? ""}
                       onChange={(event) =>
-                        handleChangeText(
-                          option.id,
-                          event.target.value as string
-                        )
+                        handleChangeText({
+                          id: option.id,
+                          name: option.name,
+                          text: event.target.value as string,
+                        })
                       }
                       disabled={selectedOption?.id !== option.id}
                     />
@@ -149,7 +161,7 @@ export const SingleSelectForm = ({
                 <SelectButton
                   key={option.id}
                   selected={selectedOption?.id === option.id}
-                  onClick={() => handleClick(option.id)}
+                  onClick={() => handleClick(option.id, option.name)}
                 >
                   {option.name}
                 </SelectButton>

@@ -14,11 +14,18 @@ import { Typography } from "../baseParts/Typography";
 
 type TProps = {
   readonly response: THearingFormShowResponse;
-  readonly onSubmit: (answer: TFormParams, nextFormId: number | null) => void;
+  readonly onSubmit: (
+    answer: AnsweredHearing,
+    nextFormId: number | null
+  ) => void;
   readonly onCancel: () => void;
 };
-
-type TSelectedOption = TOptionParams;
+type texts = {
+  id: number;
+  text: string;
+  name: string;
+};
+type TSelectedOption = TOptionParams & { readonly name: string };
 
 export const MultipleSelectForm = ({
   response,
@@ -31,7 +38,11 @@ export const MultipleSelectForm = ({
     setSelectedOptions([]);
   }, [response]);
 
-  const handleClick = (optionId: number, isSingleAnswer: boolean) => {
+  const handleClick = (
+    optionId: number,
+    isSingleAnswer: boolean,
+    name: string
+  ) => {
     const selectedOptionIds = selectedOptions.map((option) => option.id);
 
     if (selectedOptionIds.includes(optionId)) {
@@ -46,14 +57,16 @@ export const MultipleSelectForm = ({
       const newSelectedOptions = selectedOptions.filter((s) =>
         someAnswerNum.includes(s.id)
       );
-      setSelectedOptions([...newSelectedOptions, { id: optionId }]);
+      setSelectedOptions([...newSelectedOptions, { id: optionId, name }]);
     }
   };
 
   const handleSubmit = () => {
     const answer: AnsweredHearing = {
       id: response.id,
+      title: response.title,
       options: selectedOptions,
+      categoryName: response.categoryName,
     };
     const nextFormId =
       selectedOptions.length > 1
@@ -63,9 +76,17 @@ export const MultipleSelectForm = ({
     if (nextFormId !== undefined) onSubmit(answer, nextFormId);
   };
 
-  const handleChangeText = (id: number, text: string) => {
+  const handleChangeText = ({
+    id,
+    text,
+    name,
+  }: {
+    id: number;
+    text: string;
+    name: string;
+  }) => {
     const newSelectedOptions = selectedOptions.filter((o) => o.id !== id);
-    setSelectedOptions([...newSelectedOptions, { id, text }]);
+    setSelectedOptions([...newSelectedOptions, { id, text, name }]);
   };
 
   const validateNextButton = (): boolean => {
@@ -100,7 +121,7 @@ export const MultipleSelectForm = ({
                       .map((option) => option.id)
                       .includes(option.id)}
                     onClick={() =>
-                      handleClick(option.id, option.isSingleAnswer)
+                      handleClick(option.id, option.isSingleAnswer, option.name)
                     }
                   >
                     {option.name}
@@ -113,7 +134,11 @@ export const MultipleSelectForm = ({
                       ""
                     }
                     onChange={(event) =>
-                      handleChangeText(option.id, event.target.value as string)
+                      handleChangeText({
+                        id: option.id,
+                        text: event.target.value as string,
+                        name: option.name,
+                      })
                     }
                     disabled={
                       !selectedOptions
@@ -128,7 +153,9 @@ export const MultipleSelectForm = ({
                   selected={selectedOptions
                     .map((option) => option.id)
                     .includes(option.id)}
-                  onClick={() => handleClick(option.id, option.isSingleAnswer)}
+                  onClick={() =>
+                    handleClick(option.id, option.isSingleAnswer, option.name)
+                  }
                   className={option.isSingleAnswer ? "mb-7" : ""}
                 >
                   {option.name}
