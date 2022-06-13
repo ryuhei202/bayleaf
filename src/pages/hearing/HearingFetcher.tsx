@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { Loader } from "semantic-ui-react";
-import { TFormParams } from "../../api/charts/TFormParams";
-import { useChartCreate } from "../../api/charts/useChartCreate";
 import { useHearingFormsShow } from "../../api/hearingForms/useHearingFormsShow";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { Button } from "../../components/baseParts/Button";
@@ -13,6 +11,7 @@ import { SingleSelectForm } from "../../components/hearing/SingleSelectForm";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { PLANS } from "../../models/shared/TPlans";
 import { useHearingFetchHandler } from "./handler/useHearingFetchHandler";
+import { HearingPostSuccess } from "./HearingPostSuccess";
 
 type TProps = {
   readonly member: TMembersIndexResponse;
@@ -54,7 +53,8 @@ export const HearingFetcher = ({ member }: TProps) => {
     handleSubmitComplete,
     handleCancelFinalConfirm,
     handleClickReset,
-    isLoading,
+    isPostLoading,
+    isPostSuccess,
   } = useHearingFetchHandler({
     memberId: member.id,
     firstAnsweredHearings,
@@ -66,8 +66,13 @@ export const HearingFetcher = ({ member }: TProps) => {
     setSecondAnsweredHearings,
   });
 
-  if (hearingFormError)
+  if (hearingFormError) {
     return <ErrorMessage message={hearingFormError.message} />;
+  }
+
+  if (isPostSuccess) {
+    return <HearingPostSuccess />;
+  }
 
   if (nextFormId === null && firstAnsweredHearings.length <= 0) {
     return (
@@ -94,21 +99,24 @@ export const HearingFetcher = ({ member }: TProps) => {
             <Button
               variant="primary"
               onClick={handleSubmitComplete}
-              disabled={isLoading}
+              disabled={isPostLoading}
+              border={true}
             >
               ヒアリングを完了する
             </Button>
             <Button
-              variant="primary"
               onClick={handleCancelFinalConfirm}
-              disabled={isLoading}
+              disabled={isPostLoading}
+              variant="default"
+              disableElevation
+              border
             >
               ひとつ前に戻る
             </Button>
             <Button
-              variant="primary"
+              variant="text"
               onClick={handleClickReset}
-              disabled={isLoading}
+              disabled={isPostLoading}
             >
               最初からやり直す
             </Button>

@@ -25,7 +25,7 @@ export const HearingAnswerConfirm = ({
           ))}
         </div>
       </div>
-      <FooterWrapper className="px-3 py-4">{footer}</FooterWrapper>
+      <FooterWrapper className="px-3 py-4 fixed">{footer}</FooterWrapper>
     </Page>
   );
 };

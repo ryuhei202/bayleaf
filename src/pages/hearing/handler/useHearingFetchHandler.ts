@@ -38,7 +38,8 @@ type THearingFetchHandler = {
   readonly handleCancelFinalConfirm: () => void;
   readonly handleClickReset: () => void;
   readonly handleSubmitComplete: () => void;
-  readonly isLoading: boolean;
+  readonly isPostLoading: boolean;
+  readonly isPostSuccess: boolean;
 };
 
 type TArgs = {
@@ -66,7 +67,11 @@ export const useHearingFetchHandler = ({
   setCurrentAnswerNumber,
   setSecondAnsweredHearings,
 }: TArgs): THearingFetchHandler => {
-  const { mutate, isLoading } = useChartCreate();
+  const {
+    mutate,
+    isLoading: isPostLoading,
+    isSuccess: isPostSuccess,
+  } = useChartCreate();
   const handleClickFirstNext = () => {
     setNextFormId(HEARING_FORM.FIRST);
   };
@@ -214,7 +219,7 @@ export const useHearingFetchHandler = ({
     if (currentAnswerNumber === 1) {
       removeLastAnswer(firstAnsweredHearings, 1);
     } else {
-      removeLastAnswer(secondAnsweredHearings, 1);
+      removeLastAnswer(secondAnsweredHearings, 2);
     }
   };
 
@@ -284,6 +289,7 @@ export const useHearingFetchHandler = ({
     handleCancelFinalConfirm,
     handleClickReset,
     handleSubmitComplete,
-    isLoading,
+    isPostLoading,
+    isPostSuccess,
   };
 };

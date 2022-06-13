@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { TFormParams } from "../../api/charts/TFormParams";
 import { TOptionParams } from "../../api/charts/TOptionParams";
 import { THearingFormShowResponse } from "../../api/hearingForms/THearingFormShowResponse";
 import { AnsweredHearing } from "../../pages/hearing/HearingFetcher";
@@ -19,11 +18,6 @@ type TProps = {
     nextFormId: number | null
   ) => void;
   readonly onCancel: () => void;
-};
-type texts = {
-  id: number;
-  text: string;
-  name: string;
 };
 type TSelectedOption = TOptionParams & { readonly name: string };
 
@@ -98,7 +92,7 @@ export const MultipleSelectForm = ({
       .map((r) => r.id);
     return selectedOptions.some(
       (option) =>
-        requiredTextOptionIds.includes(option.id) && option.text == undefined
+        requiredTextOptionIds.includes(option.id) && option.text === undefined
     );
   };
 
