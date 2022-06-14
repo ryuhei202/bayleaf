@@ -44,6 +44,7 @@ export const DetailedConsultContainer = ({
               (item) => item.imagePaths.original
             ),
           })}
+          onCancel={onCancel}
         />
       );
   }

@@ -6,7 +6,7 @@ export const useImageUploadHandler = () => {
   const [imageData, setImageData] = useState<string | null>(null);
   const [preUploadImage, setPreUploadImage] = useState<string | null>(null);
 
-  const onChangeFile: ChangeEventHandler<HTMLInputElement> = (event) => {
+  const handleChangeFile: ChangeEventHandler<HTMLInputElement> = (event) => {
     const files = event.target.files;
 
     if (files && files[0]) {
@@ -22,5 +22,5 @@ export const useImageUploadHandler = () => {
     }
   };
 
-  return { imageFileName, imageData, preUploadImage, onChangeFile };
+  return { imageFileName, imageData, preUploadImage, handleChangeFile };
 };
