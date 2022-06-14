@@ -36,7 +36,12 @@ export const DetailedConsultContainer = ({
     case ConsultChoice.SCENE:
       return <SceneConsultContainer items={coordinate.items} />;
     case ConsultChoice.CONBINATION:
-      return <CombinationConsultContainer items={coordinate.items} />;
+      return (
+        <CombinationConsultContainer
+          items={coordinate.items}
+          onCancel={onCancel}
+        />
+      );
     case ConsultChoice.CHECKOUTFIT:
       return (
         <WearingPhotoContainer
