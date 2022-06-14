@@ -20,6 +20,7 @@ type TProps = {
   ) => void;
   readonly onCancel: () => void;
   readonly beforeAnswerText?: TOptionParams[];
+  readonly memberId?: number;
 };
 
 type TSelectedOption = TOptionParams & { readonly name: string };
@@ -29,6 +30,7 @@ export const SingleSelectForm = ({
   onSubmit,
   onCancel,
   beforeAnswerText,
+  memberId,
 }: TProps) => {
   const [selectedOption, setSelectedOption] =
     useState<TSelectedOption | undefined>(undefined);
@@ -173,7 +175,11 @@ export const SingleSelectForm = ({
           <IconButton
             className="flex-none"
             onClick={onCancel}
-            GAEvent={{ action: "back_to_the_last", category: "hearing" }}
+            GAEvent={{
+              action: "back_to_the_last",
+              category: "hearing",
+              memberId,
+            }}
           >
             <ArrowIcon className="h-10 my-auto" />
           </IconButton>

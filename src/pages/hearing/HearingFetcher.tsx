@@ -110,7 +110,11 @@ export const HearingFetcher = ({ member }: TProps) => {
               variant="default"
               disableElevation
               border
-              GAEvent={{ action: "back_to_the_last", category: "hearing" }}
+              GAEvent={{
+                action: "back_to_the_last",
+                category: "hearing",
+                memberId: member.id,
+              }}
             >
               ひとつ前に戻る
             </Button>
@@ -121,6 +125,7 @@ export const HearingFetcher = ({ member }: TProps) => {
               GAEvent={{
                 action: "start_over",
                 category: "hearing",
+                memberId: member.id,
               }}
             >
               最初からやり直す
@@ -149,6 +154,7 @@ export const HearingFetcher = ({ member }: TProps) => {
         response={hearingFormData}
         onSubmit={handleSubmitForm}
         onCancel={handleCancelForm}
+        memberId={member.id}
       />
     );
   }
@@ -159,6 +165,7 @@ export const HearingFetcher = ({ member }: TProps) => {
       onSubmit={handleSubmitForm}
       onCancel={handleCancelForm}
       beforeAnswerText={getBeforeAnswerText(hearingFormData)}
+      memberId={member.id}
     />
   );
 };

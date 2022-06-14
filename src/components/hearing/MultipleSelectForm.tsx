@@ -18,6 +18,7 @@ type TProps = {
     nextFormId: number | null
   ) => void;
   readonly onCancel: () => void;
+  readonly memberId?: number;
 };
 type TSelectedOption = TOptionParams & { readonly name: string };
 
@@ -25,6 +26,7 @@ export const MultipleSelectForm = ({
   response,
   onSubmit,
   onCancel,
+  memberId,
 }: TProps) => {
   const [selectedOptions, setSelectedOptions] = useState<TSelectedOption[]>([]);
 
@@ -162,7 +164,11 @@ export const MultipleSelectForm = ({
           <IconButton
             className="flex-none"
             onClick={onCancel}
-            GAEvent={{ action: "back_to_the_last", category: "hearing" }}
+            GAEvent={{
+              action: "back_to_the_last",
+              category: "hearing",
+              memberId,
+            }}
           >
             <ArrowIcon className="h-10 my-auto" />
           </IconButton>
