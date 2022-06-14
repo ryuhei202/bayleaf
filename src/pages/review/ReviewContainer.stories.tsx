@@ -66,5 +66,3 @@ Default.args = {
   reviewReasonOptionResponses,
   coordinateResponses,
 };
-
-Default.decorators = [(Story) => <Story />];

@@ -32,5 +32,3 @@ export const Default = Template.bind({});
 Default.args = {
   selectedItem,
 };
-
-Default.decorators = [(Story) => <Story />];

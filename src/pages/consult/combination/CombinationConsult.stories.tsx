@@ -14,5 +14,3 @@ export const Default = Template.bind({});
 Default.args = {
   onClickNext: () => {},
 };
-
-Default.decorators = [(Story) => <Story />];

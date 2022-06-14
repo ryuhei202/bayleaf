@@ -43,5 +43,3 @@ Default.args = {
     { id: 3, name: "満足できなかった" },
   ],
 };
-
-Default.decorators = [(Story) => <Story />];
