@@ -36,7 +36,9 @@ export const DetailedConsultContainer = ({
         <AgeConsultContainer items={coordinate.items} onCancel={onCancel} />
       );
     case ConsultChoice.SCENE:
-      return <SceneConsultContainer items={coordinate.items} />;
+      return (
+        <SceneConsultContainer items={coordinate.items} onCancel={onCancel} />
+      );
     case ConsultChoice.CONBINATION:
       return (
         <CombinationConsultContainer

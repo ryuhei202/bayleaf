@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { Button } from "../../../components/baseParts/Button";
 import { TextAreaAlt } from "../../../components/baseParts/inputs/TextAreaAlt";
 import { Page } from "../../../components/baseParts/Page";
 import { PageHeader } from "../../../components/baseParts/PageHeader";
+import { CompleteButton } from "../../../components/baseParts/CompleteButton";
 
 type TProps = {
   readonly onSubmit: (freeText: string) => void;
+  readonly onCancel: () => void;
 };
-export const SceneDetailForm = ({ onSubmit }: TProps) => {
+export const SceneDetailForm = ({ onSubmit, onCancel }: TProps) => {
   const [freeText, setFreeText] = useState<string>("");
   return (
     <Page>
@@ -30,11 +31,13 @@ export const SceneDetailForm = ({ onSubmit }: TProps) => {
             placeholder="娘の参観日、レストランにデート"
           />
         </div>
-        <div className="flex flex-col space-y-1 px-5 py-3">
-          <Button onClick={() => onSubmit(freeText)} disabled={freeText === ""}>
-            完了
-          </Button>
-        </div>
+        <CompleteButton
+          onClickComplete={() => onSubmit(freeText)}
+          disabled={freeText === ""}
+          onClickBack={onCancel}
+        >
+          完了
+        </CompleteButton>
       </div>
     </Page>
   );
