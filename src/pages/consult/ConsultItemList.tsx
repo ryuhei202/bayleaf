@@ -1,19 +1,23 @@
 import React, { useState } from "react";
-import { Button } from "../../components/baseParts/Button";
 import { SelectButtonImage } from "../../components/baseParts/images/SelectButtonImage";
 import { Page } from "../../components/baseParts/Page";
 import { PageHeader } from "../../components/baseParts/PageHeader";
+import { CompleteButton } from "../../components/baseParts/CompleteButton";
 import { Typography } from "../../components/baseParts/Typography";
 import { TConsultingItem } from "../../models/consult/TConsultingItem";
 
 type TProps = {
   readonly items: TConsultingItem[];
   readonly title: React.ReactNode;
-  readonly setSelectedItems: React.Dispatch<
-    React.SetStateAction<TConsultingItem[]>
-  >;
+  readonly onClickNext: (items: TConsultingItem[]) => void;
+  readonly onCancel: () => void;
 };
-export const ConsultItemList = ({ items, title, setSelectedItems }: TProps) => {
+export const ConsultItemList = ({
+  items,
+  title,
+  onClickNext,
+  onCancel,
+}: TProps) => {
   const [checkedItems, setCheckedItems] = useState<TConsultingItem[]>([]);
   const handleChange = (item: TConsultingItem, checked: Boolean) => {
     if (checked) {
@@ -57,14 +61,13 @@ export const ConsultItemList = ({ items, title, setSelectedItems }: TProps) => {
             ))}
           </div>
         </div>
-        <div className="flex flex-col space-y-1 px-5 py-3">
-          <Button
-            onClick={() => setSelectedItems(checkedItems)}
-            disabled={checkedItems.length === 0}
-          >
-            次へ
-          </Button>
-        </div>
+        <CompleteButton
+          onClickComplete={() => onClickNext(checkedItems)}
+          onClickBack={onCancel}
+          disabled={checkedItems.length === 0}
+        >
+          次へ
+        </CompleteButton>
       </div>
     </Page>
   );

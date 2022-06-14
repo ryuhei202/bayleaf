@@ -20,6 +20,7 @@ export const ConsultOption = ({ coordinate }: TProps) => {
         <DetailedConsultContainer
           selectedConsultOption={selectedConsultOption}
           coordinate={coordinate}
+          onCancel={() => setSelectedConsultOption(undefined)}
         />
       ) : (
         <ConsultSelection onClickOption={setSelectedConsultOption} />

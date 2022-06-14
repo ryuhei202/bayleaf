@@ -14,15 +14,19 @@ import { WearingPhotoContainer } from "./WearingPhotoContainer";
 type TProps = {
   selectedConsultOption: ConsultChoiceType;
   coordinate: TCoordinateResponse;
+  onCancel: () => void;
 };
 
 export const DetailedConsultContainer = ({
   selectedConsultOption,
   coordinate,
+  onCancel,
 }: TProps) => {
   switch (selectedConsultOption) {
     case ConsultChoice.SIZE:
-      return <SizeConsultContainer items={coordinate.items} />;
+      return (
+        <SizeConsultContainer items={coordinate.items} onCancel={onCancel} />
+      );
     case ConsultChoice.DESIGN:
       return <DesignConsultContainer items={coordinate.items} />;
     case ConsultChoice.AGE:
