@@ -30,7 +30,9 @@ export const DetailedConsultContainer = ({
     case ConsultChoice.DESIGN:
       return <DesignConsultContainer items={coordinate.items} />;
     case ConsultChoice.AGE:
-      return <AgeConsultContainer items={coordinate.items} />;
+      return (
+        <AgeConsultContainer items={coordinate.items} onCancel={onCancel} />
+      );
     case ConsultChoice.SCENE:
       return <SceneConsultContainer items={coordinate.items} />;
     case ConsultChoice.CONBINATION:
