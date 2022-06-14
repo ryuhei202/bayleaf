@@ -28,7 +28,9 @@ export const DetailedConsultContainer = ({
         <SizeConsultContainer items={coordinate.items} onCancel={onCancel} />
       );
     case ConsultChoice.DESIGN:
-      return <DesignConsultContainer items={coordinate.items} />;
+      return (
+        <DesignConsultContainer items={coordinate.items} onCancel={onCancel} />
+      );
     case ConsultChoice.AGE:
       return (
         <AgeConsultContainer items={coordinate.items} onCancel={onCancel} />

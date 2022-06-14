@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react";
-import { Button } from "../../../components/baseParts/Button";
 import { ExpandableImage } from "../../../components/baseParts/images/ExpandableImage";
 import { TextAreaAlt } from "../../../components/baseParts/inputs/TextAreaAlt";
 import { Page } from "../../../components/baseParts/Page";
+import { CompleteButton } from "../../../components/baseParts/CompleteButton";
 import { Typography } from "../../../components/baseParts/Typography";
 import { TConsultingItem } from "../../../models/consult/TConsultingItem";
 
 type TProps = {
   selectedItem: TConsultingItem;
   onSubmit: (freeText: string) => void;
+  onCancel: () => void;
 };
-export const DesignDetailForm = ({ selectedItem, onSubmit }: TProps) => {
+export const DesignDetailForm = ({
+  selectedItem,
+  onSubmit,
+  onCancel,
+}: TProps) => {
   const [freeText, setFreeText] = useState<string>("");
 
   useEffect(() => {
@@ -45,11 +50,13 @@ export const DesignDetailForm = ({ selectedItem, onSubmit }: TProps) => {
             />
           </div>
         </div>
-        <div className="flex flex-col space-y-1 px-5 pb-3">
-          <Button onClick={() => onSubmit(freeText)} disabled={freeText === ""}>
-            次へ
-          </Button>
-        </div>
+        <CompleteButton
+          onClickComplete={() => onSubmit(freeText)}
+          onClickBack={onCancel}
+          disabled={freeText === ""}
+        >
+          次へ
+        </CompleteButton>
       </div>
     </Page>
   );
