@@ -69,7 +69,7 @@ export const Button = ({
   classes.push(border ? "border border-slate-700" : "");
 
   const handleClick = () => {
-    if (onClick === undefined) return;
+    if (onClick === undefined || isLoading || disabled) return;
     if (GAEvent !== undefined) {
       analyzeEvent(GAEvent);
     }
@@ -101,7 +101,7 @@ export const Button = ({
   return (
     <button
       className={`${className ?? ""} ${classes.join(" ")}`}
-      onClick={isLoading || disabled ? () => {} : handleClick}
+      onClick={handleClick}
     >
       <span className={isLoading ? "opacity-40" : ""}>{children}</span>
 
