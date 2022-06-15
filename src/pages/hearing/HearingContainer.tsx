@@ -47,6 +47,18 @@ export const HearingContainer = ({ member }: TProps) => {
     setSecondAnsweredHearings,
   });
 
+  if (member.isAlreadyHearing) {
+    return (
+      <Page>
+        <PageHeader
+          title="既に回答済みです。"
+          className="m-4"
+          subtitle="スタイリストが対応しますので、少々お待ちください。"
+        />
+      </Page>
+    );
+  }
+
   if (isPostSuccess) {
     return <HearingPostSuccess />;
   }
