@@ -1,17 +1,14 @@
 import liff from "@line/liff/dist/lib";
 import { TChartCreateRequest } from "../../../api/charts/TChartCreateRequest";
-import { TOptionParams } from "../../../api/charts/TOptionParams";
 import { useChartCreate } from "../../../api/charts/useChartCreate";
-import { THearingFormShowResponse } from "../../../api/hearingForms/THearingFormShowResponse";
 import { TOption } from "../../../api/hearingForms/TOption";
 import { THearingAnswer } from "../../../models/hearing/THearingAnswer";
 import { THearingConfirm } from "../../../models/hearing/THearingConfirm";
 import {
-  ESPECIALLY_CATEGORY,
   HEARING_FORM,
   SKIP_ANSWER_FORM,
 } from "../../../models/hearing/THearingForms";
-import { AnsweredHearing } from "../HearingFetcher";
+import { AnsweredHearing } from "../HearingFormFetcher";
 
 type THearingFetchHandler = {
   readonly handleClickFirstNext: () => void;
@@ -22,20 +19,18 @@ type THearingFetchHandler = {
     nextFormIdArg: number | null
   ) => void;
   readonly handleCancelForm: () => void;
-  readonly formattedResponseData: (
-    hearingFormData: THearingFormShowResponse
-  ) => THearingFormShowResponse;
-  readonly handleSkipForm: (
-    formId: number,
-    title: string,
-    option: TOption,
-    categoryName: string
-  ) => void;
-  readonly getBeforeAnswerText: (
-    hearingFormData: THearingFormShowResponse
-  ) => TOptionParams[] | undefined;
+  readonly handleSkipForm: ({
+    formId,
+    title,
+    option,
+    categoryName,
+  }: {
+    formId: number;
+    title: string;
+    option: TOption;
+    categoryName: string;
+  }) => void;
   readonly formattedConfirmAnswers: () => THearingAnswer[];
-  readonly handleCancelFinalConfirm: () => void;
   readonly handleClickReset: () => void;
   readonly handleSubmitComplete: () => void;
   readonly isPostLoading: boolean;
@@ -57,7 +52,7 @@ type TArgs = {
   readonly setCurrentAnswerNumber: React.Dispatch<React.SetStateAction<1 | 2>>;
 };
 
-export const useHearingFetchHandler = ({
+export const useHearingContainerHandler = ({
   memberId,
   firstAnsweredHearings,
   secondAnsweredHearings,
@@ -127,31 +122,18 @@ export const useHearingFetchHandler = ({
     setNextFormId(lastAnswerId ?? null);
   };
 
-  // 複数選択した後に1つ選択するものはレスポンスを整形してフォームに渡す
-  const formattedResponseData = (
-    hearingFormData: THearingFormShowResponse
-  ): THearingFormShowResponse => {
-    if (!isEspeciallyCategory(hearingFormData.categoryId)) {
-      return hearingFormData;
-    }
-    const optionIds =
-      currentAnswerNumber === 1
-        ? firstAnsweredHearings.slice(-1)[0].options.map((o) => o.id)
-        : secondAnsweredHearings.slice(-1)[0].options.map((o) => o.id);
-    const options = hearingFormData.options.filter((o) =>
-      optionIds.includes(o.id)
-    );
-
-    return { ...hearingFormData, options };
-  };
-
   // スキップメソッド
-  const handleSkipForm = (
-    formId: number,
-    title: string,
-    option: TOption,
-    categoryName: string
-  ) => {
+  const handleSkipForm = ({
+    formId,
+    title,
+    option,
+    categoryName,
+  }: {
+    formId: number;
+    title: string;
+    option: TOption;
+    categoryName: string;
+  }) => {
     setNextFormId(option.nextFormId);
     const answer = {
       id: formId,
@@ -163,22 +145,6 @@ export const useHearingFetchHandler = ({
       setFirstAnsweredHearings([...firstAnsweredHearings, answer]);
     } else {
       setSecondAnsweredHearings([...secondAnsweredHearings, answer]);
-    }
-  };
-
-  // その他のテキストを次のフォームに渡すためのメソッド
-  const getBeforeAnswerText = (
-    hearingFormData: THearingFormShowResponse
-  ): TOptionParams[] | undefined => {
-    if (!isEspeciallyCategory(hearingFormData.categoryId)) return undefined;
-    if (currentAnswerNumber === 1) {
-      return firstAnsweredHearings
-        .slice(-1)[0]
-        .options.filter((o) => isNotUndefinedtext(o));
-    } else {
-      return secondAnsweredHearings
-        .slice(-1)[0]
-        .options.filter((o) => isNotUndefinedtext(o));
     }
   };
 
@@ -215,14 +181,6 @@ export const useHearingFetchHandler = ({
     return formattedAnswer;
   };
 
-  const handleCancelFinalConfirm = () => {
-    if (currentAnswerNumber === 1) {
-      removeLastAnswer(firstAnsweredHearings, 1);
-    } else {
-      removeLastAnswer(secondAnsweredHearings, 2);
-    }
-  };
-
   const handleClickReset = () => {
     setNextFormId(null);
     setCurrentAnswerNumber(1);
@@ -255,19 +213,8 @@ export const useHearingFetchHandler = ({
       },
     });
   };
-
-  const isNotUndefinedtext = (
-    option: any
-  ): option is Required<TOptionParams> => {
-    return option.text !== undefined;
-  };
-
   const isSkip = (lastAnswerId?: number): boolean => {
     return Object.values(SKIP_ANSWER_FORM).some((f) => f === lastAnswerId);
-  };
-
-  const isEspeciallyCategory = (categoryId: number): boolean => {
-    return Object.values(ESPECIALLY_CATEGORY).some((c) => c === categoryId);
   };
 
   const getLastAnswerId = (
@@ -282,11 +229,8 @@ export const useHearingFetchHandler = ({
     handleCancelPremiumNext,
     handleSubmitForm,
     handleCancelForm,
-    formattedResponseData,
     handleSkipForm,
-    getBeforeAnswerText,
     formattedConfirmAnswers,
-    handleCancelFinalConfirm,
     handleClickReset,
     handleSubmitComplete,
     isPostLoading,
