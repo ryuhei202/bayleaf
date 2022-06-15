@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { TOptionParams } from "../../api/charts/TOptionParams";
 import { THearingFormShowResponse } from "../../api/hearingForms/THearingFormShowResponse";
 import { ESPECIALLY_CATEGORY } from "../../models/hearing/THearingForms";
-import { AnsweredHearing } from "../../pages/hearing/HearingFetcher";
+import { AnsweredHearing } from "../../pages/hearing/HearingFormFetcher";
 import { Button } from "../baseParts/Button";
 import { IconButton } from "../baseParts/IconButton";
 import { ArrowIcon } from "../baseParts/icons/ArrowIcon";
@@ -93,7 +93,7 @@ export const SingleSelectForm = ({
       .map((r) => r.id);
     return (
       requiredTextOptionIds.includes(selectedOption.id) &&
-      selectedOption.text == undefined
+      selectedOption.text === undefined
     );
   };
 
