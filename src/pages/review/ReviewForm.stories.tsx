@@ -1,5 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { TCoordinateItemResponse } from "../../api/coordinates/TCoordinateItemResponse";
+import { ITEM_TEST_IMAGE_URL } from "../../images/TestImageUrl";
 import { ReviewForm } from "./ReviewForm";
 
 export default {
@@ -17,16 +18,7 @@ const items: TCoordinateItemResponse[] = [...Array(4)].map(() => {
     id: 111111,
     isTops: true,
     cateSmallName: "シャツ",
-    imagePaths: {
-      thumb:
-        "https://stg.leeap.jp/files/preregistered_item/168/16899/large_thumb_IMG_3977.JPG",
-      original:
-        "https://stg.leeap.jp/files/preregistered_item/168/16899/large_thumb_IMG_3977.JPG",
-      largeThumb:
-        "https://stg.leeap.jp/files/preregistered_item/168/16899/large_thumb_IMG_3977.JPG",
-      large:
-        "https://stg.leeap.jp/files/preregistered_item/168/16899/large_IMG_3977.JPG",
-    },
+    imagePaths: ITEM_TEST_IMAGE_URL,
     color: "白",
   };
 });
