@@ -33,5 +33,3 @@ const selectedItem: TConsultingItem = {
 Default.args = {
   selectedItem,
 };
-
-Default.decorators = [(Story) => <Story />];

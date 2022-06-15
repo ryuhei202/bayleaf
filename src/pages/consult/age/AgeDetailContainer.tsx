@@ -9,16 +9,25 @@ import { AgeDetailSelection } from "./AgeDetailSelection";
 
 type TProps = {
   readonly selectedItems: TConsultingItem[];
+  readonly onCancel: () => void;
 };
 
-export const AgeDetailContainer = ({ selectedItems }: TProps) => {
+export const AgeDetailContainer = ({ selectedItems, onCancel }: TProps) => {
   const [answeredItems, setAnsweredItems] = useState<TAgeAnswer[]>([]);
+
+  const handleCancel = () => {
+    if (answeredItems.length === 0) onCancel();
+    const newAnsweredItems = [...answeredItems];
+    newAnsweredItems.pop();
+    setAnsweredItems(newAnsweredItems);
+  };
 
   if (answeredItems.length === selectedItems.length)
     return (
       <WearingPhotoContainer
         items={selectedItems}
         flexMessage={createAgeConsultFlexMessage(answeredItems)}
+        onCancel={handleCancel}
       />
     );
 
@@ -32,6 +41,7 @@ export const AgeDetailContainer = ({ selectedItems }: TProps) => {
           { item: currentItem, ageOption: ageOption },
         ]);
       }}
+      onCancel={handleCancel}
     />
   );
 };

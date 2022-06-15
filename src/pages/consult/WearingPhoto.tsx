@@ -7,6 +7,8 @@ import { PageHeader } from "../../components/baseParts/PageHeader";
 import { Typography } from "../../components/baseParts/Typography";
 import { TConsultingItem } from "../../models/consult/TConsultingItem";
 import PreviewWearing from "../../images/preview_wearing.png";
+import { IconButton } from "../../components/baseParts/IconButton";
+import { ArrowIcon } from "../../components/baseParts/icons/ArrowIcon";
 
 type TProps = {
   items: TConsultingItem[];
@@ -17,6 +19,7 @@ type TProps = {
   onSubmit: () => void;
   isLoading: boolean;
   onSkip: () => void;
+  onCancel: () => void;
 };
 
 export const WearingPhoto = ({
@@ -28,9 +31,13 @@ export const WearingPhoto = ({
   onSubmit,
   isLoading,
   onSkip,
+  onCancel,
 }: TProps) => {
   return (
     <div className="m-8">
+      <IconButton onClick={onCancel}>
+        <ArrowIcon className="h-10 my-auto" />
+      </IconButton>
       <PageHeader title="着用写真を送ってください" />
       <Typography className="my-6">
         以下のアイテムを着用している写真を送ってください。

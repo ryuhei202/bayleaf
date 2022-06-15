@@ -1,4 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { ITEM_TEST_IMAGE_URL } from "../../images/TestImageUrl";
 import { CoordinateItemImages } from "./CoordinateItemImages";
 
 export default {
@@ -18,10 +19,8 @@ const items = [...Array(4)].map(() => {
   return {
     caption: "シャツ",
     imagePaths: {
-      defaultPath:
-        "https://stg.leeap.jp/files/preregistered_item/168/16899/large_thumb_IMG_3977.JPG",
-      expandedPath:
-        "https://stg.leeap.jp/files/preregistered_item/168/16899/large_IMG_3977.JPG",
+      defaultPath: ITEM_TEST_IMAGE_URL.largeThumb,
+      expandedPath: ITEM_TEST_IMAGE_URL.large,
     },
   };
 });

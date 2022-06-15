@@ -10,8 +10,3 @@ const Template: ComponentStory<typeof SceneDetailForm> = (args) => (
   <SceneDetailForm {...args} />
 );
 export const Default = Template.bind({});
-Default.args = {
-  onSubmit: () => {},
-};
-
-Default.decorators = [(Story) => <Story />];

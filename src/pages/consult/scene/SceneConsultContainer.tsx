@@ -8,9 +8,10 @@ import { SceneDetailForm } from "./SceneDetailForm";
 
 type TProps = {
   readonly items: TConsultingItem[];
+  readonly onCancel: () => void;
 };
 
-export const SceneConsultContainer = ({ items }: TProps) => {
+export const SceneConsultContainer = ({ items, onCancel }: TProps) => {
   const { send, isSending, isError, isSuccess } = useConsultLineMessageSender();
 
   const getItemImageUrls = (): string[] => {
@@ -30,5 +31,5 @@ export const SceneConsultContainer = ({ items }: TProps) => {
   if (isSuccess) return <AfterConsultContainer />;
   if (isError) return <ErrorMessage message="予期せぬエラーが発生しました" />;
   if (isSending) return <Loader active />;
-  return <SceneDetailForm onSubmit={handleSubmit} />;
+  return <SceneDetailForm onSubmit={handleSubmit} onCancel={onCancel} />;
 };

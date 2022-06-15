@@ -14,23 +14,38 @@ import { WearingPhotoContainer } from "./WearingPhotoContainer";
 type TProps = {
   selectedConsultOption: ConsultChoiceType;
   coordinate: TCoordinateResponse;
+  onCancel: () => void;
 };
 
 export const DetailedConsultContainer = ({
   selectedConsultOption,
   coordinate,
+  onCancel,
 }: TProps) => {
   switch (selectedConsultOption) {
     case ConsultChoice.SIZE:
-      return <SizeConsultContainer items={coordinate.items} />;
+      return (
+        <SizeConsultContainer items={coordinate.items} onCancel={onCancel} />
+      );
     case ConsultChoice.DESIGN:
-      return <DesignConsultContainer items={coordinate.items} />;
+      return (
+        <DesignConsultContainer items={coordinate.items} onCancel={onCancel} />
+      );
     case ConsultChoice.AGE:
-      return <AgeConsultContainer items={coordinate.items} />;
+      return (
+        <AgeConsultContainer items={coordinate.items} onCancel={onCancel} />
+      );
     case ConsultChoice.SCENE:
-      return <SceneConsultContainer items={coordinate.items} />;
+      return (
+        <SceneConsultContainer items={coordinate.items} onCancel={onCancel} />
+      );
     case ConsultChoice.CONBINATION:
-      return <CombinationConsultContainer items={coordinate.items} />;
+      return (
+        <CombinationConsultContainer
+          items={coordinate.items}
+          onCancel={onCancel}
+        />
+      );
     case ConsultChoice.CHECKOUTFIT:
       return (
         <WearingPhotoContainer
@@ -40,6 +55,7 @@ export const DetailedConsultContainer = ({
               (item) => item.imagePaths.original
             ),
           })}
+          onCancel={onCancel}
         />
       );
   }

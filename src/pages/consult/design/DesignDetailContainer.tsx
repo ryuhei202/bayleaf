@@ -7,9 +7,10 @@ import { DesignDetailForm } from "./DesignDetailForm";
 
 type TProps = {
   selectedItems: TConsultingItem[];
+  onCancel: () => void;
 };
 
-export const DesignDetailContainer = ({ selectedItems }: TProps) => {
+export const DesignDetailContainer = ({ selectedItems, onCancel }: TProps) => {
   const [answeredItems, setAnsweredItems] = useState<TDesignAnswer[]>([]);
 
   const handleSubmit = (freeText: string) => {
@@ -22,17 +23,26 @@ export const DesignDetailContainer = ({ selectedItems }: TProps) => {
     ]);
   };
 
+  const handleCancel = () => {
+    if (answeredItems.length === 0) onCancel();
+    const newAnsweredItems = [...answeredItems];
+    newAnsweredItems.pop();
+    setAnsweredItems(newAnsweredItems);
+  };
+
   return (
     <>
       {selectedItems.length === answeredItems.length ? (
         <WearingPhotoContainer
           flexMessage={createDesignConsultFlexMessage(answeredItems)}
           items={selectedItems}
+          onCancel={handleCancel}
         />
       ) : (
         <DesignDetailForm
           selectedItem={selectedItems[answeredItems.length]}
           onSubmit={handleSubmit}
+          onCancel={handleCancel}
         />
       )}
     </>

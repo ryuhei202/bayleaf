@@ -25,5 +25,3 @@ Default.args = {
   btnText: "LINEへ戻る",
   onClick: () => {},
 };
-
-Default.decorators = [(Story) => <Story />];

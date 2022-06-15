@@ -28,7 +28,7 @@ export const ExpandableImage = ({
       <ImageAlt imageSrc={defaultImageSrc} onClick={handleClickDefaultImage} />
 
       {isExpanded ? (
-        <div className="fixed top-0 right-0 left-0 bottom-0 flex justify-center items-center flex-col">
+        <div className="fixed top-0 right-0 left-0 bottom-0 flex justify-center items-center flex-col z-50">
           <div
             className="absolute bg-black bg-opacity-40 w-full h-full -z-10"
             onClick={handleClickClose}
