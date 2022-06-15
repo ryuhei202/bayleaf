@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { CompleteButton } from "./CompleteButton";
 
 export default {
-  title: "BaseParts/PostButton",
+  title: "BaseParts/CompleteButton",
   component: CompleteButton,
 } as ComponentMeta<typeof CompleteButton>;
 
