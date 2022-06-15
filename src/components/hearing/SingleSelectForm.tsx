@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { TOptionParams } from "../../api/charts/TOptionParams";
 import { THearingFormShowResponse } from "../../api/hearingForms/THearingFormShowResponse";
-import { ESPECIALLY_CATEGORY } from "../../models/hearing/THearingForms";
+import {} from "../../models/hearing/THearingForms";
 import { AnsweredHearing } from "../../pages/hearing/HearingFormFetcher";
 import { Button } from "../baseParts/Button";
 import { IconButton } from "../baseParts/IconButton";
@@ -20,6 +20,7 @@ type TProps = {
   ) => void;
   readonly onCancel: () => void;
   readonly beforeAnswerText?: TOptionParams[];
+  readonly isEspeciallyCategory: boolean;
 };
 
 type TSelectedOption = TOptionParams & { readonly name: string };
@@ -29,6 +30,7 @@ export const SingleSelectForm = ({
   onSubmit,
   onCancel,
   beforeAnswerText,
+  isEspeciallyCategory,
 }: TProps) => {
   const [selectedOption, setSelectedOption] =
     useState<TSelectedOption | undefined>(undefined);
@@ -82,10 +84,7 @@ export const SingleSelectForm = ({
 
   const validateNextButton = (): boolean => {
     if (selectedOption === undefined) return true;
-    if (
-      Object.values(ESPECIALLY_CATEGORY).some((c) => c === response.categoryId)
-    )
-      return false;
+    if (isEspeciallyCategory) return false;
 
     // テキストが必要な選択肢でテキストが存在しない場合はtrueを返す
     const requiredTextOptionIds = response.options
@@ -109,9 +108,7 @@ export const SingleSelectForm = ({
           <div className="space-y-5">
             {response.options.map((option) =>
               option.isText ? (
-                Object.values(ESPECIALLY_CATEGORY).some(
-                  (c) => c === response.categoryId
-                ) ? (
+                isEspeciallyCategory ? (
                   <>
                     <SelectButton
                       key={option.id}

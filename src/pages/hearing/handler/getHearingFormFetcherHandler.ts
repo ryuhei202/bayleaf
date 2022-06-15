@@ -1,39 +1,30 @@
 import { TOptionParams } from "../../../api/charts/TOptionParams";
 import { THearingFormShowResponse } from "../../../api/hearingForms/THearingFormShowResponse";
-import { ESPECIALLY_CATEGORY } from "../../../models/hearing/THearingForms";
 import { AnsweredHearing } from "../HearingFormFetcher";
 
 type TArgs = {
-  readonly firstAnsweredHearings: AnsweredHearing[];
-  readonly secondAnsweredHearings: AnsweredHearing[];
-  readonly currentAnswerNumber: 1 | 2;
+  readonly previousAnsweredHearing?: AnsweredHearing;
 };
 
 type THearingFormFetcherHandler = {
   readonly formattedResponseData: (
     hearingFormData: THearingFormShowResponse
   ) => THearingFormShowResponse;
-  readonly getBeforeAnswerText: (
-    hearingFormData: THearingFormShowResponse
-  ) => TOptionParams[] | undefined;
+  readonly getBeforeAnswerText: () => TOptionParams[] | undefined;
+  readonly isEspeciallyCategory: boolean;
 };
 
 export const getHearingFormFetcherHandler = ({
-  firstAnsweredHearings,
-  secondAnsweredHearings,
-  currentAnswerNumber,
+  previousAnsweredHearing,
 }: TArgs): THearingFormFetcherHandler => {
   // 複数選択した後に1つ選択するものはレスポンスを整形してフォームに渡す
   const formattedResponseData = (
     hearingFormData: THearingFormShowResponse
   ): THearingFormShowResponse => {
-    if (!isEspeciallyCategory(hearingFormData.categoryId)) {
+    if (!(previousAnsweredHearing && isEspeciallyCategory)) {
       return hearingFormData;
     }
-    const optionIds =
-      currentAnswerNumber === 1
-        ? firstAnsweredHearings.slice(-1)[0].options.map((o) => o.id)
-        : secondAnsweredHearings.slice(-1)[0].options.map((o) => o.id);
+    const optionIds = previousAnsweredHearing.options.map((o) => o.id);
     const options = hearingFormData.options.filter((o) =>
       optionIds.includes(o.id)
     );
@@ -42,32 +33,24 @@ export const getHearingFormFetcherHandler = ({
   };
 
   // その他のテキストを次のフォームに渡すためのメソッド
-  const getBeforeAnswerText = (
-    hearingFormData: THearingFormShowResponse
-  ): TOptionParams[] | undefined => {
-    if (!isEspeciallyCategory(hearingFormData.categoryId)) return undefined;
-    if (currentAnswerNumber === 1) {
-      return firstAnsweredHearings
-        .slice(-1)[0]
-        .options.filter((o) => isNotUndefinedtext(o));
-    } else {
-      return secondAnsweredHearings
-        .slice(-1)[0]
-        .options.filter((o) => isNotUndefinedtext(o));
-    }
+  const getBeforeAnswerText = (): TOptionParams[] | undefined => {
+    if (!(previousAnsweredHearing && isEspeciallyCategory)) return undefined;
+    return previousAnsweredHearing.options.filter((o) => isNotUndefinedText(o));
   };
 
-  const isNotUndefinedtext = (
+  const isNotUndefinedText = (
     option: any
   ): option is Required<TOptionParams> => {
     return option.text !== undefined;
   };
-  const isEspeciallyCategory = (categoryId: number): boolean => {
-    return Object.values(ESPECIALLY_CATEGORY).some((c) => c === categoryId);
-  };
+
+  const isEspeciallyCategory: boolean =
+    previousAnsweredHearing !== undefined &&
+    previousAnsweredHearing.options.length > 1;
 
   return {
     formattedResponseData,
     getBeforeAnswerText,
+    isEspeciallyCategory,
   };
 };

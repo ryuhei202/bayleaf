@@ -10,7 +10,7 @@ import {
 } from "../../../models/hearing/THearingForms";
 import { AnsweredHearing } from "../HearingFormFetcher";
 
-type THearingFetchHandler = {
+type THearingContainerHandler = {
   readonly handleClickFirstNext: () => void;
   readonly handleClickPremiumNext: () => void;
   readonly handleCancelPremiumNext: () => void;
@@ -61,7 +61,7 @@ export const useHearingContainerHandler = ({
   setFirstAnsweredHearings,
   setCurrentAnswerNumber,
   setSecondAnsweredHearings,
-}: TArgs): THearingFetchHandler => {
+}: TArgs): THearingContainerHandler => {
   const {
     mutate,
     isLoading: isPostLoading,

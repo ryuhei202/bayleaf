@@ -86,9 +86,11 @@ export const HearingContainer = ({ member }: TProps) => {
       onCancelForm={handleCancelForm}
       onSkip={handleSkipForm}
       nextFormId={nextFormId}
-      firstAnsweredHearings={firstAnsweredHearings}
-      secondAnsweredHearings={secondAnsweredHearings}
-      currentAnswerNumber={currentAnswerNumber}
+      previousAnsweredHearing={
+        currentAnswerNumber === 1
+          ? firstAnsweredHearings.slice(-1)[0]
+          : secondAnsweredHearings.slice(-1)[0]
+      }
     />
   );
 };

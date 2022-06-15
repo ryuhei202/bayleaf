@@ -24,9 +24,7 @@ type TProps = {
     categoryName: string;
   }) => void;
   readonly nextFormId: number;
-  readonly firstAnsweredHearings: AnsweredHearing[];
-  readonly secondAnsweredHearings: AnsweredHearing[];
-  readonly currentAnswerNumber: 1 | 2;
+  readonly previousAnsweredHearing?: AnsweredHearing;
 };
 
 export type AnsweredHearing = {
@@ -45,18 +43,14 @@ export const HearingFormFetcher = ({
   onCancelForm,
   onSkip,
   nextFormId,
-  firstAnsweredHearings,
-  secondAnsweredHearings,
-  currentAnswerNumber,
+  previousAnsweredHearing,
 }: TProps) => {
   const { data: hearingFormData, error: hearingFormError } =
     useHearingFormsShow({ hearingFormId: nextFormId });
 
-  const { formattedResponseData, getBeforeAnswerText } =
+  const { formattedResponseData, getBeforeAnswerText, isEspeciallyCategory } =
     getHearingFormFetcherHandler({
-      firstAnsweredHearings,
-      secondAnsweredHearings,
-      currentAnswerNumber,
+      previousAnsweredHearing,
     });
 
   if (hearingFormError) {
@@ -90,7 +84,8 @@ export const HearingFormFetcher = ({
       response={formattedResponseData(hearingFormData)}
       onSubmit={onSubmitForm}
       onCancel={onCancelForm}
-      beforeAnswerText={getBeforeAnswerText(hearingFormData)}
+      beforeAnswerText={getBeforeAnswerText()}
+      isEspeciallyCategory={isEspeciallyCategory}
     />
   );
 };
