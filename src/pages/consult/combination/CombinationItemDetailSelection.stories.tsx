@@ -51,5 +51,3 @@ Default.args = {
   itemCategory: COMBINATION_ITEM_CATEGORY.TOPS,
   onSubmit: () => {},
 };
-
-Default.decorators = [(Story) => <Story />];

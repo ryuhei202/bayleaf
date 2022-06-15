@@ -11,10 +11,3 @@ const Template: ComponentStory<typeof CombinationItemCategorySelection> = (
 ) => <CombinationItemCategorySelection {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {
-  setCurrentFormType: () => {},
-  itemCategory: undefined,
-  setItemCategory: () => {},
-};
-
-Default.decorators = [(Story) => <Story />];

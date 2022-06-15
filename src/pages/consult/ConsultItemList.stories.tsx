@@ -56,7 +56,4 @@ Default.args = {
       気になりますか？
     </>
   ),
-  setSelectedItems: () => {},
 };
-
-Default.decorators = [(Story) => <Story />];

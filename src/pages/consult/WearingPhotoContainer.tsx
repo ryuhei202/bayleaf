@@ -21,17 +21,22 @@ import { WearingPhoto } from "./WearingPhoto";
 type TProps = {
   items: TConsultingItem[];
   flexMessage: string;
+  onCancel: () => void;
 };
 
-export const WearingPhotoContainer = ({ items, flexMessage }: TProps) => {
-  const { imageFileName, imageData, preUploadImage, onChangeFile } =
+export const WearingPhotoContainer = ({
+  items,
+  flexMessage,
+  onCancel,
+}: TProps) => {
+  const { imageFileName, imageData, preUploadImage, handleChangeFile } =
     useImageUploadHandler();
   const { mutate, isLoading } = useMemberPhotoCreate();
   const chartId = useContext(ConsultChartIdContext);
   const { send, isSending, isError, isSuccess } = useConsultLineMessageSender();
   const [isSkipped, setIsSkipped] = useState(false);
 
-  const onSubmit = () => {
+  const handleSubmit = () => {
     if (imageData && imageFileName) {
       const params: TMemberPhotoCreateParams = {
         image: {
@@ -52,7 +57,7 @@ export const WearingPhotoContainer = ({ items, flexMessage }: TProps) => {
     }
   };
 
-  const onSkip = () => {
+  const handleSkip = () => {
     setIsSkipped(true);
     send(flexMessage, true);
   };
@@ -68,10 +73,11 @@ export const WearingPhotoContainer = ({ items, flexMessage }: TProps) => {
         preUploadImage={preUploadImage ?? null}
         imageFileName={imageFileName ?? ""}
         imageData={imageData ?? ""}
-        onChangeFile={onChangeFile}
-        onSubmit={onSubmit}
+        onChangeFile={handleChangeFile}
+        onSubmit={handleSubmit}
         isLoading={isLoading}
-        onSkip={onSkip}
+        onSkip={handleSkip}
+        onCancel={onCancel}
       />
     </Page>
   );

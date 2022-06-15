@@ -8,8 +8,9 @@ import { SizeDetailSelection } from "./SizeDetailSelection";
 
 type TProps = {
   selectedItems: TConsultingItem[];
+  onCancel: () => void;
 };
-export const SizeDetailContainer = ({ selectedItems }: TProps) => {
+export const SizeDetailContainer = ({ selectedItems, onCancel }: TProps) => {
   const [answeredItems, setAnsweredItems] = useState<TSizeAnswer[]>([]);
 
   const handleSubmit = (
@@ -26,17 +27,26 @@ export const SizeDetailContainer = ({ selectedItems }: TProps) => {
     ]);
   };
 
+  const handleCancel = () => {
+    if (answeredItems.length === 0) onCancel();
+    const newAnsweredItems = [...answeredItems];
+    newAnsweredItems.pop();
+    setAnsweredItems(newAnsweredItems);
+  };
+
   return (
     <>
       {selectedItems.length === answeredItems.length ? (
         <WearingPhotoContainer
           items={selectedItems}
           flexMessage={createSizeConsultFlexMessage(answeredItems)}
+          onCancel={handleCancel}
         />
       ) : (
         <SizeDetailSelection
           selectedItem={selectedItems[answeredItems.length]}
           onSubmit={handleSubmit}
+          onCancel={handleCancel}
         />
       )}
     </>

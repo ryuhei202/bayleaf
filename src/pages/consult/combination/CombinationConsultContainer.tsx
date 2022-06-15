@@ -24,8 +24,10 @@ import { Loader } from "semantic-ui-react";
 
 type TProps = {
   readonly items: TConsultingItem[];
+  readonly onCancel: () => void;
 };
-export const CombinationConsultContainer = ({ items }: TProps) => {
+
+export const CombinationConsultContainer = ({ items, onCancel }: TProps) => {
   const [currentFormType, setCurrentFormType] = useState<TCombiantionForm>(
     COMBINATION_FORM.IMAGE_SEND
   );
@@ -62,6 +64,16 @@ export const CombinationConsultContainer = ({ items }: TProps) => {
     });
   };
 
+  const handleItemCategorySubmit = (itemCategory: TCombinationItemCategory) => {
+    setItemCategory(itemCategory);
+    setCurrentFormType(COMBINATION_FORM.ITEM_DETAIL);
+  };
+
+  const handleItemCategoryCancel = () => {
+    setItemCategory(undefined);
+    setCurrentFormType(COMBINATION_FORM.IMAGE_SEND);
+  };
+
   if (isSuccess) return <AfterConsultContainer />;
   if (isError) return <ErrorMessage message="予期せぬエラーが発生しました" />;
   if (isSending) return <Loader active />;
@@ -73,14 +85,15 @@ export const CombinationConsultContainer = ({ items }: TProps) => {
           onClickNext={() => setCurrentFormType(COMBINATION_FORM.ITEM_CATEGORY)}
           onSubmit={handleCombinationConsultSubmit}
           isLoading={isLoading}
+          onCancel={onCancel}
         />
       );
     case COMBINATION_FORM.ITEM_CATEGORY:
       return (
         <CombinationItemCategorySelection
-          setCurrentFormType={setCurrentFormType}
           itemCategory={itemCategory}
-          setItemCategory={setItemCategory}
+          onSubmit={handleItemCategorySubmit}
+          onCancel={handleItemCategoryCancel}
         />
       );
     case COMBINATION_FORM.ITEM_DETAIL:
@@ -90,6 +103,7 @@ export const CombinationConsultContainer = ({ items }: TProps) => {
           onSubmit={(personalItem) => {
             send(createFlexMessage(personalItem), false);
           }}
+          onCancel={() => setCurrentFormType(COMBINATION_FORM.ITEM_CATEGORY)}
         />
       );
     default:

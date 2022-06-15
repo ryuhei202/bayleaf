@@ -28,5 +28,3 @@ Default.args = {
   reviewReasonOptions,
   choicedReasonIds,
 };
-
-Default.decorators = [(Story) => <Story />];

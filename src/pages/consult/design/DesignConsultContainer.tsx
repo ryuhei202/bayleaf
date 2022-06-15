@@ -5,14 +5,18 @@ import { DesignDetailContainer } from "./DesignDetailContainer";
 
 type TProps = {
   readonly items: TConsultingItem[];
+  readonly onCancel: () => void;
 };
 
-export const DesignConsultContainer = ({ items }: TProps) => {
+export const DesignConsultContainer = ({ items, onCancel }: TProps) => {
   const [selectedItems, setSelectedItems] = useState<TConsultingItem[]>([]);
   return (
     <>
       {selectedItems.length ? (
-        <DesignDetailContainer selectedItems={selectedItems} />
+        <DesignDetailContainer
+          selectedItems={selectedItems}
+          onCancel={() => setSelectedItems([])}
+        />
       ) : (
         <ConsultItemList
           items={items}
@@ -23,7 +27,8 @@ export const DesignConsultContainer = ({ items }: TProps) => {
               気になりますか？
             </>
           }
-          setSelectedItems={setSelectedItems}
+          onClickNext={setSelectedItems}
+          onCancel={onCancel}
         />
       )}
     </>
