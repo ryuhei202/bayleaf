@@ -159,6 +159,7 @@ export const SingleSelectForm = ({
                   key={option.id}
                   selected={selectedOption?.id === option.id}
                   onClick={() => handleClick(option.id, option.name)}
+                  onSelectTransitionEnd={handleSubmit}
                 >
                   {option.name}
                 </SelectButton>
