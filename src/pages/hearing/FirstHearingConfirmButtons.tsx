@@ -31,7 +31,15 @@ export const FirstHearingConfirmButtons = ({
       >
         ひとつ前に戻る
       </Button>
-      <Button variant="text" onClick={onClickReset} disabled={isPostLoading}>
+      <Button
+        variant="text"
+        onClick={() => {
+          if (window.confirm("最初からやり直しますか？")) {
+            onClickReset();
+          }
+        }}
+        disabled={isPostLoading}
+      >
         最初からやり直す
       </Button>
     </>
