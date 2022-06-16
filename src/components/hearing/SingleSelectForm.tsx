@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { TOptionParams } from "../../api/charts/TOptionParams";
 import { THearingFormShowResponse } from "../../api/hearingForms/THearingFormShowResponse";
-import {} from "../../models/hearing/THearingForms";
 import { AnsweredHearing } from "../../pages/hearing/HearingContainer";
 import { Button } from "../baseParts/Button";
 import { IconButton } from "../baseParts/IconButton";
@@ -60,6 +59,7 @@ export const SingleSelectForm = ({
       if (nextFormId !== undefined) onSubmit(answer, nextFormId);
     }
   };
+
   const isSelectedOption = (
     selectedOption: any
   ): selectedOption is TSelectedOption => {

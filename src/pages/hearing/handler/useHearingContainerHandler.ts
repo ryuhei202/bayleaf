@@ -20,6 +20,7 @@ type THearingContainerHandler = {
   readonly handleSubmitComplete: () => void;
   readonly isPostLoading: boolean;
   readonly isPostSuccess: boolean;
+  readonly isPostError: boolean;
 };
 
 type TArgs = {
@@ -52,6 +53,7 @@ export const useHearingContainerHandler = ({
   const {
     mutate,
     isLoading: isPostLoading,
+    isError: isPostError,
     isSuccess: isPostSuccess,
   } = useChartCreate();
   const handleClickFirstNext = () => {
@@ -190,5 +192,6 @@ export const useHearingContainerHandler = ({
     handleSubmitComplete,
     isPostLoading,
     isPostSuccess,
+    isPostError,
   };
 };

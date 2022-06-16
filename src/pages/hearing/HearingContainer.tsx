@@ -8,6 +8,7 @@ import { HearingFormFetcher } from "./HearingFormFetcher";
 import { HearingPostSuccess } from "./HearingPostSuccess";
 import { useHearingContainerHandler } from "./handler/useHearingContainerHandler";
 import { FirstHearingConfirmButtons } from "./FirstHearingConfirmButtons";
+import { ErrorMessage } from "../../components/shared/ErrorMessage";
 
 type TProps = {
   readonly member: TMembersIndexResponse;
@@ -46,6 +47,7 @@ export const HearingContainer = ({ member }: TProps) => {
     handleClickReset,
     isPostLoading,
     isPostSuccess,
+    isPostError,
   } = useHearingContainerHandler({
     memberId: member.id,
     firstAnsweredHearings,
@@ -61,6 +63,8 @@ export const HearingContainer = ({ member }: TProps) => {
   if (isPostSuccess) {
     return <HearingPostSuccess />;
   }
+  if (isPostError)
+    return <ErrorMessage message="予期せぬエラーが発生しました" />;
 
   if (nextFormId === null) {
     if (firstAnsweredHearings.length <= 0) {
