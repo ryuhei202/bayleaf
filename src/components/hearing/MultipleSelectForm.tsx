@@ -158,7 +158,7 @@ export const MultipleSelectForm = ({
             )}
           </div>
         </div>
-        <div className="flex flex-row mb-10">
+        <div className="flex flex-row my-10">
           <IconButton className="flex-none" onClick={onCancel}>
             <ArrowIcon className="h-10 my-auto" />
           </IconButton>

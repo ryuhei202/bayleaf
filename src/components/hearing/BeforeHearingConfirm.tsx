@@ -1,4 +1,4 @@
-import { PLANS } from "../../models/shared/TPlans";
+import { M_PLAN_IDS } from "../../models/hearing/MPlanIds";
 import { Button } from "../baseParts/Button";
 import { Page } from "../baseParts/Page";
 import { PageHeader } from "../baseParts/PageHeader";
@@ -19,7 +19,7 @@ export const BeforeHearingConfirm = ({ onClick, planId }: TProps) => {
                 <>
                   ※全部で5~10問あります
                   <br />
-                  {planId === PLANS.PREMIUM
+                  {planId === M_PLAN_IDS.PREMIUM
                     ? "プレミアムプランのお客様は2回お答えください"
                     : ""}
                 </>

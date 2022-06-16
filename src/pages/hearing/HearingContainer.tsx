@@ -3,12 +3,12 @@ import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { BeforeHearingConfirm } from "../../components/hearing/BeforeHearingConfirm";
 import { HearingAnswerConfirm } from "../../components/hearing/HearingAnswerConfirm";
 import { PremiumPlanConfirm } from "../../components/hearing/PremiumPlanConfirm";
-import { PLANS } from "../../models/shared/TPlans";
 import { HearingFormFetcher } from "./HearingFormFetcher";
 import { HearingPostSuccess } from "./HearingPostSuccess";
 import { useHearingContainerHandler } from "./handler/useHearingContainerHandler";
 import { FirstHearingConfirmButtons } from "./FirstHearingConfirmButtons";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
+import { M_PLAN_IDS } from "../../models/hearing/MPlanIds";
 
 type TProps = {
   readonly member: TMembersIndexResponse;
@@ -75,7 +75,7 @@ export const HearingContainer = ({ member }: TProps) => {
         />
       );
     }
-    return member.mPlanId === PLANS.PREMIUM &&
+    return member.mPlanId === M_PLAN_IDS.PREMIUM &&
       secondAnsweredHearings.length <= 0 ? (
       <PremiumPlanConfirm
         onClick={handleClickPremiumNext}
