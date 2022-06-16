@@ -4,7 +4,7 @@ import { BeforeHearingConfirm } from "../../components/hearing/BeforeHearingConf
 import { HearingAnswerConfirm } from "../../components/hearing/HearingAnswerConfirm";
 import { PremiumPlanConfirm } from "../../components/hearing/PremiumPlanConfirm";
 import { PLANS } from "../../models/shared/TPlans";
-import { AnsweredHearing, HearingFormFetcher } from "./HearingFormFetcher";
+import { HearingFormFetcher } from "./HearingFormFetcher";
 import { HearingPostSuccess } from "./HearingPostSuccess";
 import { useHearingContainerHandler } from "./handler/useHearingContainerHandler";
 import { FirstHearingConfirmButtons } from "./FirstHearingConfirmButtons";
@@ -12,6 +12,18 @@ import { FirstHearingConfirmButtons } from "./FirstHearingConfirmButtons";
 type TProps = {
   readonly member: TMembersIndexResponse;
 };
+
+export type AnsweredHearing = {
+  readonly id: number;
+  readonly title: string;
+  readonly categoryName: string;
+  readonly options: {
+    id: number;
+    text?: string;
+    name: string;
+  }[];
+};
+
 export const HearingContainer = ({ member }: TProps) => {
   const [nextFormId, setNextFormId] = useState<number | null>(null);
   const [currentAnswerNumber, setCurrentAnswerNumber] = useState<1 | 2>(1);
@@ -21,6 +33,7 @@ export const HearingContainer = ({ member }: TProps) => {
   const [secondAnsweredHearings, setSecondAnsweredHearings] = useState<
     AnsweredHearing[]
   >([]);
+  const [isBackTransition, setIsBackTransition] = useState<boolean>(false);
 
   const {
     handleClickFirstNext,
@@ -28,7 +41,6 @@ export const HearingContainer = ({ member }: TProps) => {
     handleCancelPremiumNext,
     handleSubmitForm,
     handleCancelForm,
-    handleSkipForm,
     formattedConfirmAnswers,
     handleSubmitComplete,
     handleClickReset,
@@ -43,6 +55,7 @@ export const HearingContainer = ({ member }: TProps) => {
     setFirstAnsweredHearings,
     setCurrentAnswerNumber,
     setSecondAnsweredHearings,
+    setIsBackTransition,
   });
 
   if (isPostSuccess) {
@@ -84,13 +97,13 @@ export const HearingContainer = ({ member }: TProps) => {
     <HearingFormFetcher
       onSubmitForm={handleSubmitForm}
       onCancelForm={handleCancelForm}
-      onSkip={handleSkipForm}
       nextFormId={nextFormId}
       previousAnsweredHearing={
         currentAnswerNumber === 1
           ? firstAnsweredHearings.slice(-1)[0]
           : secondAnsweredHearings.slice(-1)[0]
       }
+      isBackTransition={isBackTransition}
     />
   );
 };

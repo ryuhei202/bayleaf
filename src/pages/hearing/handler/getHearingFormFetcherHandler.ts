@@ -1,6 +1,6 @@
 import { TOptionParams } from "../../../api/charts/TOptionParams";
 import { THearingFormShowResponse } from "../../../api/hearingForms/THearingFormShowResponse";
-import { AnsweredHearing } from "../HearingFormFetcher";
+import { AnsweredHearing } from "../HearingContainer";
 
 type TArgs = {
   readonly previousAnsweredHearing?: AnsweredHearing;

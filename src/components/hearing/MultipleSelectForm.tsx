@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { TOptionParams } from "../../api/charts/TOptionParams";
 import { THearingFormShowResponse } from "../../api/hearingForms/THearingFormShowResponse";
-import { AnsweredHearing } from "../../pages/hearing/HearingFormFetcher";
+import { AnsweredHearing } from "../../pages/hearing/HearingContainer";
 import { Button } from "../baseParts/Button";
 import { IconButton } from "../baseParts/IconButton";
 import { ArrowIcon } from "../baseParts/icons/ArrowIcon";
