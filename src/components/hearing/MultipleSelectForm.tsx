@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { TOptionParams } from "../../api/charts/TOptionParams";
 import { THearingFormShowResponse } from "../../api/hearingForms/THearingFormShowResponse";
-import { AnsweredHearing } from "../../pages/hearing/HearingFormFetcher";
+import { AnsweredHearing } from "../../pages/hearing/HearingContainer";
 import { Button } from "../baseParts/Button";
 import { IconButton } from "../baseParts/IconButton";
 import { ArrowIcon } from "../baseParts/icons/ArrowIcon";
@@ -158,7 +158,7 @@ export const MultipleSelectForm = ({
             )}
           </div>
         </div>
-        <div className="flex flex-row mb-10">
+        <div className="flex flex-row my-10">
           <IconButton className="flex-none" onClick={onCancel}>
             <ArrowIcon className="h-10 my-auto" />
           </IconButton>

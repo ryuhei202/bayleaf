@@ -1,16 +1,12 @@
 import liff from "@line/liff/dist/lib";
 import { TChartCreateRequest } from "../../../api/charts/TChartCreateRequest";
 import { useChartCreate } from "../../../api/charts/useChartCreate";
-import { TOption } from "../../../api/hearingForms/TOption";
 import { THearingAnswer } from "../../../models/hearing/THearingAnswer";
 import { THearingConfirm } from "../../../models/hearing/THearingConfirm";
-import {
-  HEARING_FORM,
-  SKIP_ANSWER_FORM,
-} from "../../../models/hearing/THearingForms";
-import { AnsweredHearing } from "../HearingFormFetcher";
+import { HEARING_FORM } from "../../../models/hearing/THearingForms";
+import { AnsweredHearing } from "../HearingContainer";
 
-type THearingFetchHandler = {
+type THearingContainerHandler = {
   readonly handleClickFirstNext: () => void;
   readonly handleClickPremiumNext: () => void;
   readonly handleCancelPremiumNext: () => void;
@@ -19,22 +15,12 @@ type THearingFetchHandler = {
     nextFormIdArg: number | null
   ) => void;
   readonly handleCancelForm: () => void;
-  readonly handleSkipForm: ({
-    formId,
-    title,
-    option,
-    categoryName,
-  }: {
-    formId: number;
-    title: string;
-    option: TOption;
-    categoryName: string;
-  }) => void;
   readonly formattedConfirmAnswers: () => THearingAnswer[];
   readonly handleClickReset: () => void;
   readonly handleSubmitComplete: () => void;
   readonly isPostLoading: boolean;
   readonly isPostSuccess: boolean;
+  readonly isPostError: boolean;
 };
 
 type TArgs = {
@@ -50,6 +36,7 @@ type TArgs = {
     React.SetStateAction<AnsweredHearing[]>
   >;
   readonly setCurrentAnswerNumber: React.Dispatch<React.SetStateAction<1 | 2>>;
+  readonly setIsBackTransition: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const useHearingContainerHandler = ({
@@ -61,10 +48,12 @@ export const useHearingContainerHandler = ({
   setFirstAnsweredHearings,
   setCurrentAnswerNumber,
   setSecondAnsweredHearings,
-}: TArgs): THearingFetchHandler => {
+  setIsBackTransition,
+}: TArgs): THearingContainerHandler => {
   const {
     mutate,
     isLoading: isPostLoading,
+    isError: isPostError,
     isSuccess: isPostSuccess,
   } = useChartCreate();
   const handleClickFirstNext = () => {
@@ -92,6 +81,7 @@ export const useHearingContainerHandler = ({
       setSecondAnsweredHearings([...secondAnsweredHearings, answer]);
     }
     setNextFormId(nextFormIdArg);
+    setIsBackTransition(false);
   };
 
   // 各フォームの戻るボタンをクリック
@@ -101,6 +91,7 @@ export const useHearingContainerHandler = ({
     } else {
       removeLastAnswer(secondAnsweredHearings, 2);
     }
+    setIsBackTransition(true);
   };
 
   // 答えの配列の最後を削除する
@@ -110,42 +101,12 @@ export const useHearingContainerHandler = ({
   ) => {
     let newAnswers = answeredHearings.slice(0, -1);
     let lastAnswerId = getLastAnswerId(answeredHearings);
-    if (isSkip(lastAnswerId)) {
-      lastAnswerId = getLastAnswerId(newAnswers);
-      newAnswers = newAnswers.slice(0, -1);
-    }
     if (answerNum === 1) {
       setFirstAnsweredHearings(newAnswers);
     } else {
       setSecondAnsweredHearings(newAnswers);
     }
     setNextFormId(lastAnswerId ?? null);
-  };
-
-  // スキップメソッド
-  const handleSkipForm = ({
-    formId,
-    title,
-    option,
-    categoryName,
-  }: {
-    formId: number;
-    title: string;
-    option: TOption;
-    categoryName: string;
-  }) => {
-    setNextFormId(option.nextFormId);
-    const answer = {
-      id: formId,
-      title,
-      options: [{ id: option.id, name: option.name }],
-      categoryName,
-    };
-    if (currentAnswerNumber === 1) {
-      setFirstAnsweredHearings([...firstAnsweredHearings, answer]);
-    } else {
-      setSecondAnsweredHearings([...secondAnsweredHearings, answer]);
-    }
   };
 
   // 確認画面へ渡すために答えた情報を整形する
@@ -213,9 +174,6 @@ export const useHearingContainerHandler = ({
       },
     });
   };
-  const isSkip = (lastAnswerId?: number): boolean => {
-    return Object.values(SKIP_ANSWER_FORM).some((f) => f === lastAnswerId);
-  };
 
   const getLastAnswerId = (
     answeredHearing: AnsweredHearing[]
@@ -229,11 +187,11 @@ export const useHearingContainerHandler = ({
     handleCancelPremiumNext,
     handleSubmitForm,
     handleCancelForm,
-    handleSkipForm,
     formattedConfirmAnswers,
     handleClickReset,
     handleSubmitComplete,
     isPostLoading,
     isPostSuccess,
+    isPostError,
   };
 };

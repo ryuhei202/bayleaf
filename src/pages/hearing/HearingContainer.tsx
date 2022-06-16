@@ -3,17 +3,30 @@ import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { BeforeHearingConfirm } from "../../components/hearing/BeforeHearingConfirm";
 import { HearingAnswerConfirm } from "../../components/hearing/HearingAnswerConfirm";
 import { PremiumPlanConfirm } from "../../components/hearing/PremiumPlanConfirm";
-import { PLANS } from "../../models/shared/TPlans";
-import { AnsweredHearing, HearingFormFetcher } from "./HearingFormFetcher";
+import { HearingFormFetcher } from "./HearingFormFetcher";
 import { HearingPostSuccess } from "./HearingPostSuccess";
 import { useHearingContainerHandler } from "./handler/useHearingContainerHandler";
 import { FirstHearingConfirmButtons } from "./FirstHearingConfirmButtons";
-import { PageHeader } from "../../components/baseParts/PageHeader";
+import { ErrorMessage } from "../../components/shared/ErrorMessage";
+import { M_PLAN_IDS } from "../../models/hearing/MPlanIds";
 import { Page } from "../../components/baseParts/Page";
+import { PageHeader } from "../../components/baseParts/PageHeader";
 
 type TProps = {
   readonly member: TMembersIndexResponse;
 };
+
+export type AnsweredHearing = {
+  readonly id: number;
+  readonly title: string;
+  readonly categoryName: string;
+  readonly options: {
+    id: number;
+    text?: string;
+    name: string;
+  }[];
+};
+
 export const HearingContainer = ({ member }: TProps) => {
   const [nextFormId, setNextFormId] = useState<number | null>(null);
   const [currentAnswerNumber, setCurrentAnswerNumber] = useState<1 | 2>(1);
@@ -23,6 +36,7 @@ export const HearingContainer = ({ member }: TProps) => {
   const [secondAnsweredHearings, setSecondAnsweredHearings] = useState<
     AnsweredHearing[]
   >([]);
+  const [isBackTransition, setIsBackTransition] = useState<boolean>(false);
 
   const {
     handleClickFirstNext,
@@ -30,12 +44,12 @@ export const HearingContainer = ({ member }: TProps) => {
     handleCancelPremiumNext,
     handleSubmitForm,
     handleCancelForm,
-    handleSkipForm,
     formattedConfirmAnswers,
     handleSubmitComplete,
     handleClickReset,
     isPostLoading,
     isPostSuccess,
+    isPostError,
   } = useHearingContainerHandler({
     memberId: member.id,
     firstAnsweredHearings,
@@ -45,6 +59,7 @@ export const HearingContainer = ({ member }: TProps) => {
     setFirstAnsweredHearings,
     setCurrentAnswerNumber,
     setSecondAnsweredHearings,
+    setIsBackTransition,
   });
 
   if (member.isAlreadyHearing) {
@@ -58,10 +73,12 @@ export const HearingContainer = ({ member }: TProps) => {
       </Page>
     );
   }
-
   if (isPostSuccess) {
     return <HearingPostSuccess />;
   }
+
+  if (isPostError)
+    return <ErrorMessage message="予期せぬエラーが発生しました" />;
 
   if (nextFormId === null) {
     if (firstAnsweredHearings.length <= 0) {
@@ -72,7 +89,7 @@ export const HearingContainer = ({ member }: TProps) => {
         />
       );
     }
-    return member.mPlanId === PLANS.PREMIUM &&
+    return member.mPlanId === M_PLAN_IDS.PREMIUM &&
       secondAnsweredHearings.length <= 0 ? (
       <PremiumPlanConfirm
         onClick={handleClickPremiumNext}
@@ -98,11 +115,13 @@ export const HearingContainer = ({ member }: TProps) => {
     <HearingFormFetcher
       onSubmitForm={handleSubmitForm}
       onCancelForm={handleCancelForm}
-      onSkip={handleSkipForm}
       nextFormId={nextFormId}
-      firstAnsweredHearings={firstAnsweredHearings}
-      secondAnsweredHearings={secondAnsweredHearings}
-      currentAnswerNumber={currentAnswerNumber}
+      previousAnsweredHearing={
+        currentAnswerNumber === 1
+          ? firstAnsweredHearings.slice(-1)[0]
+          : secondAnsweredHearings.slice(-1)[0]
+      }
+      isBackTransition={isBackTransition}
     />
   );
 };

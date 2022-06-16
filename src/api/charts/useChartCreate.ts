@@ -11,12 +11,13 @@ type TChartCreate = {
     unknown
   >;
   readonly isLoading: boolean;
+  readonly isError: boolean;
   readonly isSuccess: boolean;
 };
 
 export const useChartCreate = (): TChartCreate => {
-  const { mutate, isLoading, isSuccess } =
+  const { mutate, isLoading, isError, isSuccess } =
     usePostRequest<TChartCreateRequest>("charts");
 
-  return { mutate, isLoading, isSuccess };
+  return { mutate, isLoading, isError, isSuccess };
 };

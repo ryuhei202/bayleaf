@@ -1,10 +1,10 @@
 import { Loader } from "semantic-ui-react";
-import { TOption } from "../../api/hearingForms/TOption";
 import { useHearingFormsShow } from "../../api/hearingForms/useHearingFormsShow";
 import { MultipleSelectForm } from "../../components/hearing/MultipleSelectForm";
 import { SingleSelectForm } from "../../components/hearing/SingleSelectForm";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { getHearingFormFetcherHandler } from "./handler/getHearingFormFetcherHandler";
+import { AnsweredHearing } from "./HearingContainer";
 
 type TProps = {
   readonly onSubmitForm: (
@@ -12,51 +12,24 @@ type TProps = {
     nextFormIdArg: number | null
   ) => void;
   readonly onCancelForm: () => void;
-  readonly onSkip: ({
-    formId,
-    title,
-    option,
-    categoryName,
-  }: {
-    formId: number;
-    title: string;
-    option: TOption;
-    categoryName: string;
-  }) => void;
   readonly nextFormId: number;
-  readonly firstAnsweredHearings: AnsweredHearing[];
-  readonly secondAnsweredHearings: AnsweredHearing[];
-  readonly currentAnswerNumber: 1 | 2;
-};
-
-export type AnsweredHearing = {
-  readonly id: number;
-  readonly title: string;
-  readonly categoryName: string;
-  readonly options: {
-    id: number;
-    text?: string;
-    name: string;
-  }[];
+  readonly previousAnsweredHearing?: AnsweredHearing;
+  readonly isBackTransition?: boolean;
 };
 
 export const HearingFormFetcher = ({
   onSubmitForm,
   onCancelForm,
-  onSkip,
   nextFormId,
-  firstAnsweredHearings,
-  secondAnsweredHearings,
-  currentAnswerNumber,
+  previousAnsweredHearing,
+  isBackTransition,
 }: TProps) => {
   const { data: hearingFormData, error: hearingFormError } =
     useHearingFormsShow({ hearingFormId: nextFormId });
 
-  const { formattedResponseData, getBeforeAnswerText } =
+  const { formattedResponseData, getBeforeAnswerText, isEspeciallyCategory } =
     getHearingFormFetcherHandler({
-      firstAnsweredHearings,
-      secondAnsweredHearings,
-      currentAnswerNumber,
+      previousAnsweredHearing,
     });
 
   if (hearingFormError) {
@@ -67,12 +40,22 @@ export const HearingFormFetcher = ({
 
   // スキップ処理
   if (hearingFormData.options.length === 1) {
-    onSkip({
-      formId: hearingFormData.id,
-      title: hearingFormData.title,
-      option: hearingFormData.options[0],
-      categoryName: hearingFormData.categoryName,
-    });
+    isBackTransition
+      ? onCancelForm()
+      : onSubmitForm(
+          {
+            id: hearingFormData.id,
+            title: hearingFormData.title,
+            categoryName: hearingFormData.categoryName,
+            options: [
+              {
+                id: hearingFormData.options[0].id,
+                name: hearingFormData.options[0].name,
+              },
+            ],
+          },
+          hearingFormData.options[0].nextFormId
+        );
   }
 
   if (hearingFormData.multipleAnswerNextFormId !== null) {
@@ -90,7 +73,8 @@ export const HearingFormFetcher = ({
       response={formattedResponseData(hearingFormData)}
       onSubmit={onSubmitForm}
       onCancel={onCancelForm}
-      beforeAnswerText={getBeforeAnswerText(hearingFormData)}
+      beforeAnswerText={getBeforeAnswerText()}
+      isEspeciallyCategory={isEspeciallyCategory}
     />
   );
 };
