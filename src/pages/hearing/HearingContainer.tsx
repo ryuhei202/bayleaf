@@ -9,6 +9,8 @@ import { useHearingContainerHandler } from "./handler/useHearingContainerHandler
 import { FirstHearingConfirmButtons } from "./FirstHearingConfirmButtons";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { M_PLAN_IDS } from "../../models/hearing/MPlanIds";
+import { Page } from "../../components/baseParts/Page";
+import { PageHeader } from "../../components/baseParts/PageHeader";
 
 type TProps = {
   readonly member: TMembersIndexResponse;
@@ -60,9 +62,21 @@ export const HearingContainer = ({ member }: TProps) => {
     setIsBackTransition,
   });
 
+  if (member.isAlreadyHearing) {
+    return (
+      <Page>
+        <PageHeader
+          title="既に回答済みです。"
+          className="m-4"
+          subtitle="スタイリストが対応しますので、少々お待ちください。"
+        />
+      </Page>
+    );
+  }
   if (isPostSuccess) {
     return <HearingPostSuccess />;
   }
+
   if (isPostError)
     return <ErrorMessage message="予期せぬエラーが発生しました" />;
 
