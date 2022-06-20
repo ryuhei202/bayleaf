@@ -1,19 +1,12 @@
 import liff from "@line/liff/dist/lib";
 import { TChartCreateRequest } from "../../../api/charts/TChartCreateRequest";
-import { TOptionParams } from "../../../api/charts/TOptionParams";
 import { useChartCreate } from "../../../api/charts/useChartCreate";
-import { THearingFormShowResponse } from "../../../api/hearingForms/THearingFormShowResponse";
-import { TOption } from "../../../api/hearingForms/TOption";
 import { THearingAnswer } from "../../../models/hearing/THearingAnswer";
 import { THearingConfirm } from "../../../models/hearing/THearingConfirm";
-import {
-  ESPECIALLY_CATEGORY,
-  HEARING_FORM,
-  SKIP_ANSWER_FORM,
-} from "../../../models/hearing/THearingForms";
-import { AnsweredHearing } from "../HearingFetcher";
+import { HEARING_FORM } from "../../../models/hearing/THearingForms";
+import { AnsweredHearing } from "../HearingContainer";
 
-type THearingFetchHandler = {
+type THearingContainerHandler = {
   readonly handleClickFirstNext: () => void;
   readonly handleClickPremiumNext: () => void;
   readonly handleCancelPremiumNext: () => void;
@@ -22,24 +15,12 @@ type THearingFetchHandler = {
     nextFormIdArg: number | null
   ) => void;
   readonly handleCancelForm: () => void;
-  readonly formattedResponseData: (
-    hearingFormData: THearingFormShowResponse
-  ) => THearingFormShowResponse;
-  readonly handleSkipForm: (
-    formId: number,
-    title: string,
-    option: TOption,
-    categoryName: string
-  ) => void;
-  readonly getBeforeAnswerText: (
-    hearingFormData: THearingFormShowResponse
-  ) => TOptionParams[] | undefined;
   readonly formattedConfirmAnswers: () => THearingAnswer[];
-  readonly handleCancelFinalConfirm: () => void;
   readonly handleClickReset: () => void;
   readonly handleSubmitComplete: () => void;
   readonly isPostLoading: boolean;
   readonly isPostSuccess: boolean;
+  readonly isPostError: boolean;
 };
 
 type TArgs = {
@@ -55,9 +36,10 @@ type TArgs = {
     React.SetStateAction<AnsweredHearing[]>
   >;
   readonly setCurrentAnswerNumber: React.Dispatch<React.SetStateAction<1 | 2>>;
+  readonly setIsBackTransition: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const useHearingFetchHandler = ({
+export const useHearingContainerHandler = ({
   memberId,
   firstAnsweredHearings,
   secondAnsweredHearings,
@@ -66,10 +48,12 @@ export const useHearingFetchHandler = ({
   setFirstAnsweredHearings,
   setCurrentAnswerNumber,
   setSecondAnsweredHearings,
-}: TArgs): THearingFetchHandler => {
+  setIsBackTransition,
+}: TArgs): THearingContainerHandler => {
   const {
     mutate,
     isLoading: isPostLoading,
+    isError: isPostError,
     isSuccess: isPostSuccess,
   } = useChartCreate();
   const handleClickFirstNext = () => {
@@ -97,6 +81,7 @@ export const useHearingFetchHandler = ({
       setSecondAnsweredHearings([...secondAnsweredHearings, answer]);
     }
     setNextFormId(nextFormIdArg);
+    setIsBackTransition(false);
   };
 
   // 各フォームの戻るボタンをクリック
@@ -106,6 +91,7 @@ export const useHearingFetchHandler = ({
     } else {
       removeLastAnswer(secondAnsweredHearings, 2);
     }
+    setIsBackTransition(true);
   };
 
   // 答えの配列の最後を削除する
@@ -115,71 +101,12 @@ export const useHearingFetchHandler = ({
   ) => {
     let newAnswers = answeredHearings.slice(0, -1);
     let lastAnswerId = getLastAnswerId(answeredHearings);
-    if (isSkip(lastAnswerId)) {
-      lastAnswerId = getLastAnswerId(newAnswers);
-      newAnswers = newAnswers.slice(0, -1);
-    }
     if (answerNum === 1) {
       setFirstAnsweredHearings(newAnswers);
     } else {
       setSecondAnsweredHearings(newAnswers);
     }
     setNextFormId(lastAnswerId ?? null);
-  };
-
-  // 複数選択した後に1つ選択するものはレスポンスを整形してフォームに渡す
-  const formattedResponseData = (
-    hearingFormData: THearingFormShowResponse
-  ): THearingFormShowResponse => {
-    if (!isEspeciallyCategory(hearingFormData.categoryId)) {
-      return hearingFormData;
-    }
-    const optionIds =
-      currentAnswerNumber === 1
-        ? firstAnsweredHearings.slice(-1)[0].options.map((o) => o.id)
-        : secondAnsweredHearings.slice(-1)[0].options.map((o) => o.id);
-    const options = hearingFormData.options.filter((o) =>
-      optionIds.includes(o.id)
-    );
-
-    return { ...hearingFormData, options };
-  };
-
-  // スキップメソッド
-  const handleSkipForm = (
-    formId: number,
-    title: string,
-    option: TOption,
-    categoryName: string
-  ) => {
-    setNextFormId(option.nextFormId);
-    const answer = {
-      id: formId,
-      title,
-      options: [{ id: option.id, name: option.name }],
-      categoryName,
-    };
-    if (currentAnswerNumber === 1) {
-      setFirstAnsweredHearings([...firstAnsweredHearings, answer]);
-    } else {
-      setSecondAnsweredHearings([...secondAnsweredHearings, answer]);
-    }
-  };
-
-  // その他のテキストを次のフォームに渡すためのメソッド
-  const getBeforeAnswerText = (
-    hearingFormData: THearingFormShowResponse
-  ): TOptionParams[] | undefined => {
-    if (!isEspeciallyCategory(hearingFormData.categoryId)) return undefined;
-    if (currentAnswerNumber === 1) {
-      return firstAnsweredHearings
-        .slice(-1)[0]
-        .options.filter((o) => isNotUndefinedtext(o));
-    } else {
-      return secondAnsweredHearings
-        .slice(-1)[0]
-        .options.filter((o) => isNotUndefinedtext(o));
-    }
   };
 
   // 確認画面へ渡すために答えた情報を整形する
@@ -215,14 +142,6 @@ export const useHearingFetchHandler = ({
     return formattedAnswer;
   };
 
-  const handleCancelFinalConfirm = () => {
-    if (currentAnswerNumber === 1) {
-      removeLastAnswer(firstAnsweredHearings, 1);
-    } else {
-      removeLastAnswer(secondAnsweredHearings, 2);
-    }
-  };
-
   const handleClickReset = () => {
     setNextFormId(null);
     setCurrentAnswerNumber(1);
@@ -256,20 +175,6 @@ export const useHearingFetchHandler = ({
     });
   };
 
-  const isNotUndefinedtext = (
-    option: any
-  ): option is Required<TOptionParams> => {
-    return option.text !== undefined;
-  };
-
-  const isSkip = (lastAnswerId?: number): boolean => {
-    return Object.values(SKIP_ANSWER_FORM).some((f) => f === lastAnswerId);
-  };
-
-  const isEspeciallyCategory = (categoryId: number): boolean => {
-    return Object.values(ESPECIALLY_CATEGORY).some((c) => c === categoryId);
-  };
-
   const getLastAnswerId = (
     answeredHearing: AnsweredHearing[]
   ): number | undefined => {
@@ -282,14 +187,11 @@ export const useHearingFetchHandler = ({
     handleCancelPremiumNext,
     handleSubmitForm,
     handleCancelForm,
-    formattedResponseData,
-    handleSkipForm,
-    getBeforeAnswerText,
     formattedConfirmAnswers,
-    handleCancelFinalConfirm,
     handleClickReset,
     handleSubmitComplete,
     isPostLoading,
     isPostSuccess,
+    isPostError,
   };
 };

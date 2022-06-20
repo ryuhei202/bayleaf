@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { TOptionParams } from "../../api/charts/TOptionParams";
 import { THearingFormShowResponse } from "../../api/hearingForms/THearingFormShowResponse";
-import { ESPECIALLY_CATEGORY } from "../../models/hearing/THearingForms";
-import { AnsweredHearing } from "../../pages/hearing/HearingFetcher";
+import { AnsweredHearing } from "../../pages/hearing/HearingContainer";
 import { Button } from "../baseParts/Button";
 import { IconButton } from "../baseParts/IconButton";
 import { ArrowIcon } from "../baseParts/icons/ArrowIcon";
@@ -21,6 +20,7 @@ type TProps = {
   readonly onCancel: () => void;
   readonly beforeAnswerText?: TOptionParams[];
   readonly memberId?: number;
+  readonly isEspeciallyCategory: boolean;
 };
 
 type TSelectedOption = TOptionParams & { readonly name: string };
@@ -31,6 +31,7 @@ export const SingleSelectForm = ({
   onCancel,
   beforeAnswerText,
   memberId,
+  isEspeciallyCategory,
 }: TProps) => {
   const [selectedOption, setSelectedOption] =
     useState<TSelectedOption | undefined>(undefined);
@@ -60,6 +61,7 @@ export const SingleSelectForm = ({
       if (nextFormId !== undefined) onSubmit(answer, nextFormId);
     }
   };
+
   const isSelectedOption = (
     selectedOption: any
   ): selectedOption is TSelectedOption => {
@@ -84,10 +86,7 @@ export const SingleSelectForm = ({
 
   const validateNextButton = (): boolean => {
     if (selectedOption === undefined) return true;
-    if (
-      Object.values(ESPECIALLY_CATEGORY).some((c) => c === response.categoryId)
-    )
-      return false;
+    if (isEspeciallyCategory) return false;
 
     // テキストが必要な選択肢でテキストが存在しない場合はtrueを返す
     const requiredTextOptionIds = response.options
@@ -111,9 +110,7 @@ export const SingleSelectForm = ({
           <div className="space-y-5">
             {response.options.map((option) =>
               option.isText ? (
-                Object.values(ESPECIALLY_CATEGORY).some(
-                  (c) => c === response.categoryId
-                ) ? (
+                isEspeciallyCategory ? (
                   <>
                     <SelectButton
                       key={option.id}
@@ -164,6 +161,7 @@ export const SingleSelectForm = ({
                   key={option.id}
                   selected={selectedOption?.id === option.id}
                   onClick={() => handleClick(option.id, option.name)}
+                  onSelectTransitionEnd={handleSubmit}
                 >
                   {option.name}
                 </SelectButton>

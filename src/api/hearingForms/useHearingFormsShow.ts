@@ -6,15 +6,13 @@ type THearingFormShow = {
   readonly error: Error | null;
 };
 
-type THearingFormShowArgs = { hearingFormId: number | null };
+type THearingFormShowArgs = { hearingFormId: number };
 
 export const useHearingFormsShow = ({
   hearingFormId,
 }: THearingFormShowArgs): THearingFormShow => {
   const { data, error } = useGetRequest<THearingFormShowResponse>(
-    `hearing_forms/${hearingFormId}`,
-    undefined,
-    hearingFormId !== null
+    `hearing_forms/${hearingFormId}`
   );
 
   return {
