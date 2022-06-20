@@ -25,7 +25,7 @@ export const ConsultFetcher = ({ chartId }: TProps) => {
   if (coordinateError)
     return <ErrorMessage message={coordinateError.message} />;
 
-  if (!coordinateData) return <Loader />;
+  if (!coordinateData) return <Loader active />;
 
   if (coordinateData.coordinates.length === 0)
     return (

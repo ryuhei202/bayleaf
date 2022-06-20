@@ -36,7 +36,7 @@ export const Review = () => {
   if (chartIndexError)
     return <ErrorMessage message={chartIndexError.message} />;
 
-  if (!chartIndexData) return <Loader />;
+  if (!chartIndexData) return <Loader active />;
 
   if (chartIndexData.charts.length === 0)
     return (

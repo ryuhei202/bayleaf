@@ -12,7 +12,7 @@ export const useHearingFormsShow = ({
   hearingFormId,
 }: THearingFormShowArgs): THearingFormShow => {
   const { data, error } = useGetRequest<THearingFormShowResponse>(
-    `hearing_form/${hearingFormId}`
+    `hearing_forms/${hearingFormId}`
   );
 
   return {

@@ -118,7 +118,7 @@ Default.args = {
       ],
     },
   ],
-  Footer: (
+  footer: (
     <>
       <Button variant="primary">ヒアリング完了</Button>
       <Button variant="primary">前に戻る</Button>
