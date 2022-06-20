@@ -176,7 +176,7 @@ export const SingleSelectForm = ({
             GAEvent={{
               action: "back_to_the_last",
               category: "hearing",
-              memberId,
+              label: String(memberId),
             }}
           >
             <ArrowIcon className="h-10 my-auto" />

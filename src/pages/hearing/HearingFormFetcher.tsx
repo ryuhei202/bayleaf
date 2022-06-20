@@ -1,5 +1,6 @@
 import { Loader } from "semantic-ui-react";
 import { useHearingFormsShow } from "../../api/hearingForms/useHearingFormsShow";
+import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { MultipleSelectForm } from "../../components/hearing/MultipleSelectForm";
 import { SingleSelectForm } from "../../components/hearing/SingleSelectForm";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
@@ -15,6 +16,7 @@ type TProps = {
   readonly nextFormId: number;
   readonly previousAnsweredHearing?: AnsweredHearing;
   readonly isBackTransition?: boolean;
+  readonly member: TMembersIndexResponse;
 };
 
 export const HearingFormFetcher = ({
@@ -23,6 +25,7 @@ export const HearingFormFetcher = ({
   nextFormId,
   previousAnsweredHearing,
   isBackTransition,
+  member,
 }: TProps) => {
   const { data: hearingFormData, error: hearingFormError } =
     useHearingFormsShow({ hearingFormId: nextFormId });
@@ -64,6 +67,7 @@ export const HearingFormFetcher = ({
         response={hearingFormData}
         onSubmit={onSubmitForm}
         onCancel={onCancelForm}
+        memberId={member.id}
       />
     );
   }
@@ -75,6 +79,7 @@ export const HearingFormFetcher = ({
       onCancel={onCancelForm}
       beforeAnswerText={getBeforeAnswerText()}
       isEspeciallyCategory={isEspeciallyCategory}
+      memberId={member.id}
     />
   );
 };

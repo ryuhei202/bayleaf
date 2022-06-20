@@ -122,6 +122,7 @@ export const HearingContainer = ({ member }: TProps) => {
           : secondAnsweredHearings.slice(-1)[0]
       }
       isBackTransition={isBackTransition}
+      member={member}
     />
   );
 };
