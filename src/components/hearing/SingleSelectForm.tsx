@@ -58,6 +58,7 @@ export const SingleSelectForm = ({
       const nextFormId = response.options.find(
         (o) => o.id === selectedOption.id
       )?.nextFormId;
+      setSelectedOption(undefined);
       if (nextFormId !== undefined) onSubmit(answer, nextFormId);
     }
   };
@@ -93,8 +94,7 @@ export const SingleSelectForm = ({
       .filter((o) => o.isText)
       .map((r) => r.id);
     return (
-      requiredTextOptionIds.includes(selectedOption.id) &&
-      selectedOption.text === undefined
+      requiredTextOptionIds.includes(selectedOption.id) && !selectedOption.text
     );
   };
 
@@ -161,7 +161,10 @@ export const SingleSelectForm = ({
                   key={option.id}
                   selected={selectedOption?.id === option.id}
                   onClick={() => handleClick(option.id, option.name)}
-                  onSelectTransitionEnd={handleSubmit}
+                  onSelectTransitionEnd={() => {
+                    if (response.options.every((o) => !o.isText))
+                      handleSubmit();
+                  }}
                 >
                   {option.name}
                 </SelectButton>
@@ -176,19 +179,21 @@ export const SingleSelectForm = ({
             GAEvent={{
               action: "back_to_the_last",
               category: "hearing",
-              label: String(memberId),
+              label: memberId,
             }}
           >
             <ArrowIcon className="h-10 my-auto" />
           </IconButton>
-          <Button
-            disabled={validateNextButton()}
-            size="none"
-            className="grow ml-3"
-            onClick={handleSubmit}
-          >
-            <Typography className="my-auto">次へ</Typography>
-          </Button>
+          {response.options.some((o) => o.isText) && (
+            <Button
+              disabled={validateNextButton()}
+              size="none"
+              className="grow ml-3"
+              onClick={handleSubmit}
+            >
+              <Typography className="my-auto">次へ</Typography>
+            </Button>
+          )}
         </div>
       </div>
     </Page>
