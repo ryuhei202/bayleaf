@@ -61,7 +61,7 @@ export const HearingFormFetcher = ({
         );
   }
 
-  if (hearingFormData.multipleAnswerNextFormId !== null) {
+  if (hearingFormData.options.some((o) => !o.isSingleAnswer)) {
     return (
       <MultipleSelectForm
         response={hearingFormData}

@@ -167,7 +167,8 @@ export const SingleSelectForm = ({
                   }}
                   disabled={
                     selectedOption !== undefined &&
-                    selectedOption.id !== option.id
+                    selectedOption.id !== option.id &&
+                    response.options.every((o) => !o.isText)
                   }
                 >
                   {option.name}
