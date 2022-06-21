@@ -165,6 +165,10 @@ export const SingleSelectForm = ({
                     if (response.options.every((o) => !o.isText))
                       handleSubmit();
                   }}
+                  disabled={
+                    selectedOption !== undefined &&
+                    selectedOption.id !== option.id
+                  }
                 >
                   {option.name}
                 </SelectButton>
