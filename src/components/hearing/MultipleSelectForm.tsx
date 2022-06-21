@@ -93,8 +93,7 @@ export const MultipleSelectForm = ({
       .filter((o) => o.isText)
       .map((r) => r.id);
     return selectedOptions.some(
-      (option) =>
-        requiredTextOptionIds.includes(option.id) && option.text === undefined
+      (option) => requiredTextOptionIds.includes(option.id) && !option.text
     );
   };
 
@@ -167,7 +166,7 @@ export const MultipleSelectForm = ({
             GAEvent={{
               action: "back_to_the_last",
               category: "hearing",
-              label: String(memberId),
+              label: memberId,
             }}
           >
             <ArrowIcon className="h-10 my-auto" />
