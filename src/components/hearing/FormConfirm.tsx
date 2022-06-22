@@ -1,12 +1,12 @@
-import { THearingForm } from "../../models/hearing/THearingForm";
+import { TForm } from "../../api/hearings/TForm";
 import { TitledAnswer } from "./TitledAnswer";
 
 type TProps = {
-  form: THearingForm;
+  form: TForm;
 };
 
 export const FormConfirm = ({ form }: TProps) => {
-  const choice = form.optionName.join(" / ");
+  const choice = form.options.map((o) => o.name).join(" / ");
 
   return (
     <TitledAnswer titleText={form.title} choice={choice} className="pb-4" />

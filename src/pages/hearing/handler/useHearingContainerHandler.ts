@@ -1,8 +1,8 @@
 import liff from "@line/liff/dist/lib";
 import { TChartCreateRequest } from "../../../api/charts/TChartCreateRequest";
 import { useChartCreate } from "../../../api/charts/useChartCreate";
+import { TCategorizedForm } from "../../../api/hearings/TCategorizedForm";
 import { THearingAnswer } from "../../../models/hearing/THearingAnswer";
-import { THearingConfirm } from "../../../models/hearing/THearingConfirm";
 import { HEARING_FORM } from "../../../models/hearing/THearingForms";
 import { AnsweredHearing } from "../HearingContainer";
 
@@ -115,14 +115,19 @@ export const useHearingContainerHandler = ({
       .filter((h) => h.length !== 0)
       .map((answers) => {
         return {
-          answer: answers.reduce((answer: THearingConfirm[], value) => {
+          answer: answers.reduce((answer: TCategorizedForm[], value) => {
             let someCategory = answer.find(
               (h) => h.categoryName === value.categoryName
             );
             if (someCategory) {
               someCategory.forms.push({
                 title: value.title,
-                optionName: value.options.map((o) => o.name),
+                options: value.options.map((o) => {
+                  return {
+                    name: o.name,
+                    text: o.text ?? null,
+                  };
+                }),
               });
             } else {
               answer.push({
@@ -130,7 +135,12 @@ export const useHearingContainerHandler = ({
                 forms: [
                   {
                     title: value.title,
-                    optionName: value.options.map((o) => o.name),
+                    options: value.options.map((o) => {
+                      return {
+                        name: o.name,
+                        text: o.text ?? null,
+                      };
+                    }),
                   },
                 ],
               });
