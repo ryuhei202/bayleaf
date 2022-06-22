@@ -5,6 +5,7 @@ type TProps = {
   onChange: ChangeEventHandler<HTMLTextAreaElement>;
   className?: string;
   placeholder?: string;
+  disabled?: boolean;
 };
 
 export const TextAreaAlt = ({
@@ -12,6 +13,7 @@ export const TextAreaAlt = ({
   value,
   onChange,
   placeholder,
+  disabled = false,
 }: TProps) => {
   const classes = [
     "py-1",
@@ -29,6 +31,7 @@ export const TextAreaAlt = ({
       value={value}
       placeholder={placeholder}
       onChange={onChange}
+      disabled={disabled}
     ></textarea>
   );
 };

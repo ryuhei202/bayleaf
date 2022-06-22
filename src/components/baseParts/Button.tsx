@@ -1,5 +1,6 @@
 import React from "react";
 import { Loader } from "semantic-ui-react";
+import { analyzeEvent, TGAEvent } from "../../lib/gtag";
 
 type Props = {
   children?: React.ReactNode;
@@ -12,6 +13,7 @@ type Props = {
   size?: "small" | "medium" | "large" | "none";
   radius?: "small" | "large";
   isLoading?: boolean;
+  GAEvent?: TGAEvent;
 };
 
 export const Button = ({
@@ -25,6 +27,7 @@ export const Button = ({
   size,
   radius,
   isLoading,
+  GAEvent,
 }: Props) => {
   let classes: string[] = [
     "px-3",
@@ -65,8 +68,15 @@ export const Button = ({
 
   classes.push(border ? "border border-slate-700" : "");
 
+  const handleClick = () => {
+    if (onClick === undefined || isLoading || disabled) return;
+    if (GAEvent !== undefined) {
+      analyzeEvent(GAEvent);
+    }
+    onClick();
+  };
+
   if (disabled) {
-    onClick = () => {};
     classes.push("bg-neutral-300 text-neutral-500 shadow-none");
   } else {
     classes.push(
@@ -91,7 +101,7 @@ export const Button = ({
   return (
     <button
       className={`${className ?? ""} ${classes.join(" ")}`}
-      onClick={isLoading ? () => {} : onClick}
+      onClick={handleClick}
     >
       <span className={isLoading ? "opacity-40" : ""}>{children}</span>
 
