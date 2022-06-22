@@ -7,8 +7,17 @@ type TProps = {
 
 export const FormConfirm = ({ form }: TProps) => {
   const choice = form.options.map((o) => o.name).join(" / ");
+  const text = form.options
+    .filter((o) => o.text)
+    .map((o) => o.text)
+    .join(" / ");
 
   return (
-    <TitledAnswer titleText={form.title} choice={choice} className="pb-4" />
+    <TitledAnswer
+      titleText={form.title}
+      choice={choice}
+      text={text}
+      className="pb-4"
+    />
   );
 };
