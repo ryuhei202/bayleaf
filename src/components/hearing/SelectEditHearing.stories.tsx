@@ -1,22 +1,21 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { HearingAnswerConfirm } from "./HearingAnswerConfirm";
-import { Button } from "../baseParts/Button";
+import { SelectEditHearing } from "./SelectEditHearing";
 
 export default {
-  title: "Hearing/HearingAnswerConfirm",
-  component: HearingAnswerConfirm,
-} as ComponentMeta<typeof HearingAnswerConfirm>;
+  title: "Hearing/SelectEditHearing",
+  component: SelectEditHearing,
+} as ComponentMeta<typeof SelectEditHearing>;
 
-const Template: ComponentStory<typeof HearingAnswerConfirm> = (args) => (
-  <HearingAnswerConfirm {...args} />
+const Template: ComponentStory<typeof SelectEditHearing> = (args) => (
+  <SelectEditHearing {...args} />
 );
 
-export const Default = Template.bind({});
-Default.args = {
-  title: "内容を確認してください。",
-  confirmAnswers: [
+export const DefaultValues = Template.bind({});
+DefaultValues.args = {
+  hearings: [
     {
-      answer: [
+      coordinateId: 11111111111,
+      categorizedForms: [
         {
           categoryName: "シーン",
           forms: [
@@ -38,7 +37,7 @@ Default.args = {
               title: "どちらの場所で仕事をする時間が長いですか？",
               options: [
                 { name: "お客様・取引先", text: null },
-                { name: "お客様・取引先", text: null },
+                { name: "お客様・取引先", text: "ああああああ" },
               ],
             },
           ],
@@ -55,10 +54,7 @@ Default.args = {
             },
             {
               title: "中でも一番お会いする方を選択してください",
-              options: [
-                { name: "お客様・取引先", text: null },
-                { name: "お客様・取引先", text: null },
-              ],
+              options: [{ name: "お客様・取引先", text: null }],
             },
           ],
         },
@@ -84,7 +80,8 @@ Default.args = {
       ],
     },
     {
-      answer: [
+      coordinateId: 2222222222,
+      categorizedForms: [
         {
           categoryName: "シーン",
           forms: [
@@ -149,11 +146,4 @@ Default.args = {
       ],
     },
   ],
-  footer: (
-    <>
-      <Button variant="primary">ヒアリング完了</Button>
-      <Button variant="primary">前に戻る</Button>
-      <Button variant="primary">最初からやり直す</Button>
-    </>
-  ),
 };

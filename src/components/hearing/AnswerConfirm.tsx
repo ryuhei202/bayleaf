@@ -1,9 +1,9 @@
-import { THearingConfirm } from "../../models/hearing/THearingConfirm";
+import { TCategorizedForm } from "../../api/hearings/TCategorizedForm";
 import { Typography } from "../baseParts/Typography";
 import { CategoryConfirm } from "./CategoryConfirm";
 
 type TProps = {
-  readonly answer: THearingConfirm[];
+  readonly answer: TCategorizedForm[];
   readonly index: number;
 };
 
