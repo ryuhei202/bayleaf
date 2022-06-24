@@ -3,13 +3,9 @@ import { TChartCreateRequest } from "../../../api/charts/TChartCreateRequest";
 import { useChartCreate } from "../../../api/charts/useChartCreate";
 import { TCategorizedForm } from "../../../api/hearings/TCategorizedForm";
 import { THearingAnswer } from "../../../models/hearing/THearingAnswer";
-import { HEARING_FORM } from "../../../models/hearing/THearingForms";
-import { AnsweredHearing } from "../HearingContainer";
+import { AnsweredHearing } from "../aaaHearingContainer";
 
 type THearingContainerHandler = {
-  readonly handleClickFirstNext: () => void;
-  readonly handleClickPremiumNext: () => void;
-  readonly handleCancelPremiumNext: () => void;
   readonly handleSubmitForm: (
     answer: AnsweredHearing,
     nextFormIdArg: number | null
@@ -18,6 +14,10 @@ type THearingContainerHandler = {
   readonly formattedConfirmAnswers: () => THearingAnswer[];
   readonly handleClickReset: () => void;
   readonly handleSubmitComplete: () => void;
+  readonly removeLastAnswer: (
+    answeredHearings: AnsweredHearing[],
+    answerNum: number
+  ) => void;
   readonly isPostLoading: boolean;
   readonly isPostSuccess: boolean;
   readonly isPostError: boolean;
@@ -56,20 +56,6 @@ export const useHearingContainerHandler = ({
     isError: isPostError,
     isSuccess: isPostSuccess,
   } = useChartCreate();
-  const handleClickFirstNext = () => {
-    setNextFormId(HEARING_FORM.FIRST);
-  };
-
-  const handleClickPremiumNext = () => {
-    setCurrentAnswerNumber(2);
-    setNextFormId(HEARING_FORM.FIRST);
-  };
-
-  const handleCancelPremiumNext = () => {
-    setSecondAnsweredHearings([]);
-    setCurrentAnswerNumber(1);
-    removeLastAnswer(firstAnsweredHearings, 1);
-  };
 
   const handleSubmitForm = (
     answer: AnsweredHearing,
@@ -192,11 +178,9 @@ export const useHearingContainerHandler = ({
   };
 
   return {
-    handleClickFirstNext,
-    handleClickPremiumNext,
-    handleCancelPremiumNext,
     handleSubmitForm,
     handleCancelForm,
+    removeLastAnswer,
     formattedConfirmAnswers,
     handleClickReset,
     handleSubmitComplete,
