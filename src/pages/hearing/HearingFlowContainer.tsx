@@ -2,7 +2,7 @@ import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { Button } from "../../components/baseParts/Button";
 import { HearingAnswerConfirm } from "../../components/hearing/HearingAnswerConfirm";
 import { THearingAnswer } from "../../models/hearing/THearingAnswer";
-import { AnsweredHearing } from "./HearingContainer";
+import { AnsweredHearings } from "./HearingContainer";
 import { HearingFormFetcher } from "./HearingFormFetcher";
 
 type TProps = {
@@ -13,8 +13,8 @@ type TProps = {
   readonly confirmAnswers: THearingAnswer[];
   readonly nextFormId: number | null;
   readonly currentAnswerNumber: 1 | 2;
-  readonly firstAnsweredHearings: AnsweredHearing[];
-  readonly secondAnsweredHearings: AnsweredHearing[];
+  readonly firstAnsweredHearings: AnsweredHearings;
+  readonly secondAnsweredHearings: AnsweredHearings;
   readonly isBackTransition: boolean;
   readonly member: TMembersIndexResponse;
 };
@@ -32,7 +32,7 @@ export const HearingFlowContainer = ({
   isBackTransition,
   member,
 }: TProps) => {
-  if (nextFormId === null || firstAnsweredHearings.length <= 0) {
+  if (nextFormId === null || firstAnsweredHearings.forms.length <= 0) {
     return (
       <HearingAnswerConfirm
         title="前回のコーデ"
@@ -67,8 +67,8 @@ export const HearingFlowContainer = ({
       nextFormId={nextFormId}
       previousAnsweredHearing={
         currentAnswerNumber === 1
-          ? firstAnsweredHearings.slice(-1)[0]
-          : secondAnsweredHearings.slice(-1)[0]
+          ? firstAnsweredHearings.forms.slice(-1)[0]
+          : secondAnsweredHearings.forms.slice(-1)[0]
       }
       isBackTransition={isBackTransition}
       member={member}

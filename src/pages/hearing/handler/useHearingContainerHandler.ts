@@ -1,13 +1,13 @@
+import { AnsweredHearings, TAnsweredForm } from "./../HearingContainer";
 import liff from "@line/liff/dist/lib";
 import { TChartCreateRequest } from "../../../api/charts/TChartCreateRequest";
 import { useChartCreate } from "../../../api/charts/useChartCreate";
 import { TCategorizedForm } from "../../../api/hearings/TCategorizedForm";
 import { THearingAnswer } from "../../../models/hearing/THearingAnswer";
-import { AnsweredHearing } from "../aaaHearingContainer";
 
 type THearingContainerHandler = {
   readonly handleSubmitForm: (
-    answer: AnsweredHearing,
+    answer: TAnsweredForm,
     nextFormIdArg: number | null
   ) => void;
   readonly handleCancelForm: () => void;
@@ -15,7 +15,7 @@ type THearingContainerHandler = {
   readonly handleClickReset: () => void;
   readonly handleSubmitComplete: () => void;
   readonly removeLastAnswer: (
-    answeredHearings: AnsweredHearing[],
+    answeredHearings: TAnsweredForm[],
     answerNum: number
   ) => void;
   readonly isPostLoading: boolean;
@@ -25,15 +25,15 @@ type THearingContainerHandler = {
 
 type TArgs = {
   readonly memberId: number;
-  readonly firstAnsweredHearings: AnsweredHearing[];
-  readonly secondAnsweredHearings: AnsweredHearing[];
+  readonly firstAnsweredHearings: AnsweredHearings;
+  readonly secondAnsweredHearings: AnsweredHearings;
   readonly currentAnswerNumber: number;
   readonly setNextFormId: React.Dispatch<React.SetStateAction<number | null>>;
   readonly setFirstAnsweredHearings: React.Dispatch<
-    React.SetStateAction<AnsweredHearing[]>
+    React.SetStateAction<AnsweredHearings>
   >;
   readonly setSecondAnsweredHearings: React.Dispatch<
-    React.SetStateAction<AnsweredHearing[]>
+    React.SetStateAction<AnsweredHearings>
   >;
   readonly setCurrentAnswerNumber: React.Dispatch<React.SetStateAction<1 | 2>>;
   readonly setIsBackTransition: React.Dispatch<React.SetStateAction<boolean>>;
@@ -58,13 +58,17 @@ export const useHearingContainerHandler = ({
   } = useChartCreate();
 
   const handleSubmitForm = (
-    answer: AnsweredHearing,
+    answer: TAnsweredForm,
     nextFormIdArg: number | null
   ) => {
     if (currentAnswerNumber === 1) {
-      setFirstAnsweredHearings([...firstAnsweredHearings, answer]);
+      setFirstAnsweredHearings({
+        forms: [...firstAnsweredHearings?.forms, answer],
+      });
     } else {
-      setSecondAnsweredHearings([...secondAnsweredHearings, answer]);
+      setSecondAnsweredHearings({
+        forms: [...secondAnsweredHearings?.forms, answer],
+      });
     }
     setNextFormId(nextFormIdArg);
     setIsBackTransition(false);
@@ -73,31 +77,34 @@ export const useHearingContainerHandler = ({
   // 各フォームの戻るボタンをクリック
   const handleCancelForm = () => {
     if (currentAnswerNumber === 1) {
-      removeLastAnswer(firstAnsweredHearings, 1);
+      removeLastAnswer(firstAnsweredHearings.forms, 1);
     } else {
-      removeLastAnswer(secondAnsweredHearings, 2);
+      removeLastAnswer(secondAnsweredHearings.forms, 2);
     }
     setIsBackTransition(true);
   };
 
   // 答えの配列の最後を削除する
   const removeLastAnswer = (
-    answeredHearings: AnsweredHearing[],
+    answeredHearings: TAnsweredForm[],
     answerNum: number
   ) => {
     let newAnswers = answeredHearings.slice(0, -1);
     let lastAnswerId = getLastAnswerId(answeredHearings);
     if (answerNum === 1) {
-      setFirstAnsweredHearings(newAnswers);
+      setFirstAnsweredHearings({ forms: newAnswers });
     } else {
-      setSecondAnsweredHearings(newAnswers);
+      setSecondAnsweredHearings({ forms: newAnswers });
     }
     setNextFormId(lastAnswerId ?? null);
   };
 
   // 確認画面へ渡すために答えた情報を整形する
   const formattedConfirmAnswers = (): THearingAnswer[] => {
-    const formattedAnswer = [firstAnsweredHearings, secondAnsweredHearings]
+    const formattedAnswer = [
+      firstAnsweredHearings.forms,
+      secondAnsweredHearings.forms,
+    ]
       .filter((h) => h.length !== 0)
       .map((answers) => {
         return {
@@ -141,12 +148,12 @@ export const useHearingContainerHandler = ({
   const handleClickReset = () => {
     setNextFormId(null);
     setCurrentAnswerNumber(1);
-    setFirstAnsweredHearings([]);
-    setSecondAnsweredHearings([]);
+    setFirstAnsweredHearings({ forms: [] });
+    setSecondAnsweredHearings({ forms: [] });
   };
 
   const handleSubmitComplete = () => {
-    const hearings = [firstAnsweredHearings, secondAnsweredHearings]
+    const hearings = [firstAnsweredHearings.forms, secondAnsweredHearings.forms]
       .filter((f) => f.length !== 0)
       .map((hearings) => {
         return {
@@ -172,7 +179,7 @@ export const useHearingContainerHandler = ({
   };
 
   const getLastAnswerId = (
-    answeredHearing: AnsweredHearing[]
+    answeredHearing: TAnsweredForm[]
   ): number | undefined => {
     return answeredHearing.slice(-1)[0]?.id;
   };

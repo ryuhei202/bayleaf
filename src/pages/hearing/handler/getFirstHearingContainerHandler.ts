@@ -1,5 +1,5 @@
 import { HEARING_FORM } from "../../../models/hearing/THearingForms";
-import { AnsweredHearing } from "../HearingContainer";
+import { AnsweredHearings, TAnsweredForm } from "../HearingContainer";
 
 type THearingContainerHandler = {
   readonly handleClickFirstNext: () => void;
@@ -8,20 +8,19 @@ type THearingContainerHandler = {
 };
 
 type TArgs = {
-  readonly secondAnsweredHearings: AnsweredHearing[];
   readonly setNextFormId: React.Dispatch<React.SetStateAction<number | null>>;
   readonly setSecondAnsweredHearings: React.Dispatch<
-    React.SetStateAction<AnsweredHearing[]>
+    React.SetStateAction<AnsweredHearings>
   >;
   readonly setCurrentAnswerNumber: React.Dispatch<React.SetStateAction<1 | 2>>;
-  readonly firstAnsweredHearings: AnsweredHearing[];
+  readonly firstAnsweredHearings: AnsweredHearings;
   readonly removeLastAnswer: (
-    answeredHearings: AnsweredHearing[],
+    answeredHearings: TAnsweredForm[],
     answerNum: number
   ) => void;
 };
 
-export const FirstHearingContainerHandler = ({
+export const getFirstHearingContainerHandler = ({
   setNextFormId,
   setCurrentAnswerNumber,
   setSecondAnsweredHearings,
@@ -38,9 +37,9 @@ export const FirstHearingContainerHandler = ({
   };
 
   const handleCancelPremiumNext = () => {
-    setSecondAnsweredHearings([]);
+    setSecondAnsweredHearings({ forms: [] });
     setCurrentAnswerNumber(1);
-    removeLastAnswer(firstAnsweredHearings, 1);
+    removeLastAnswer(firstAnsweredHearings.forms, 1);
   };
 
   return {

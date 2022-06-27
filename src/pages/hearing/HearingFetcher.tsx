@@ -1,12 +1,15 @@
 import { Loader } from "semantic-ui-react";
 import { TChartResponse } from "../../api/charts/TChartResponse";
 import { useHearingIndex } from "../../api/hearings/useHearingIndex";
+import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
+import { HearingContainer } from "./HearingContainer";
 
 type TProps = {
+  readonly member: TMembersIndexResponse;
   readonly chart: TChartResponse;
 };
-export const HearingFetcher = ({ chart }: TProps) => {
+export const HearingFetcher = ({ member, chart }: TProps) => {
   const { data: hearingIndexData, error: hearingIndexError } = useHearingIndex({
     chartId: chart.id,
   });
@@ -16,9 +19,7 @@ export const HearingFetcher = ({ chart }: TProps) => {
 
   if (!hearingIndexData) return <Loader active />;
 
-  if (hearingIndexData.hearings.length <= 0) {
-    return <></>;
-  }
-
-  return <></>;
+  return (
+    <HearingContainer member={member} hearings={hearingIndexData.hearings} />
+  );
 };

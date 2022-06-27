@@ -1,22 +1,18 @@
 import { useState } from "react";
+import { THearing } from "../../api/hearings/THearing";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
-import { BeforeHearingConfirm } from "../../components/hearing/BeforeHearingConfirm";
-import { HearingAnswerConfirm } from "../../components/hearing/HearingAnswerConfirm";
-import { PremiumPlanConfirm } from "../../components/hearing/PremiumPlanConfirm";
-import { HearingFormFetcher } from "./HearingFormFetcher";
-import { HearingPostSuccess } from "./HearingPostSuccess";
-import { useHearingContainerHandler } from "./handler/useHearingContainerHandler";
-import { FirstHearingConfirmButtons } from "./FirstHearingConfirmButtons";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
-import { M_PLAN_IDS } from "../../models/hearing/MPlanIds";
-import { Page } from "../../components/baseParts/Page";
-import { PageHeader } from "../../components/baseParts/PageHeader";
+import { AfterSecondHearingContainer } from "./AfterSecondHearingContainer";
+import { FirstHearingContainer } from "./FirstHearingContainer";
+import { useHearingContainerHandler } from "./handler/useHearingContainerHandler";
+import { HearingPostSuccess } from "./HearingPostSuccess";
 
 type TProps = {
   readonly member: TMembersIndexResponse;
+  readonly hearings: THearing[];
 };
 
-export type AnsweredHearing = {
+export type TAnsweredForm = {
   readonly id: number;
   readonly title: string;
   readonly categoryName: string;
@@ -26,27 +22,30 @@ export type AnsweredHearing = {
     name: string;
   }[];
 };
+export type AnsweredHearings = {
+  readonly sameCoordinateId?: number;
+  readonly forms: TAnsweredForm[];
+};
 
-export const HearingContainer = ({ member }: TProps) => {
+export const HearingContainer = ({ member, hearings }: TProps) => {
   const [nextFormId, setNextFormId] = useState<number | null>(null);
   const [currentAnswerNumber, setCurrentAnswerNumber] = useState<1 | 2>(1);
-  const [firstAnsweredHearings, setFirstAnsweredHearings] = useState<
-    AnsweredHearing[]
-  >([]);
-  const [secondAnsweredHearings, setSecondAnsweredHearings] = useState<
-    AnsweredHearing[]
-  >([]);
+  const [firstAnsweredHearings, setFirstAnsweredHearings] =
+    useState<AnsweredHearings>({
+      forms: [],
+    });
+  const [secondAnsweredHearings, setSecondAnsweredHearings] =
+    useState<AnsweredHearings>({
+      forms: [],
+    });
   const [isBackTransition, setIsBackTransition] = useState<boolean>(false);
-
   const {
-    handleClickFirstNext,
-    handleClickPremiumNext,
-    handleCancelPremiumNext,
     handleSubmitForm,
     handleCancelForm,
     formattedConfirmAnswers,
     handleSubmitComplete,
     handleClickReset,
+    removeLastAnswer,
     isPostLoading,
     isPostSuccess,
     isPostError,
@@ -62,17 +61,6 @@ export const HearingContainer = ({ member }: TProps) => {
     setIsBackTransition,
   });
 
-  if (member.isAlreadyHearing) {
-    return (
-      <Page>
-        <PageHeader
-          title="既に回答済みです。"
-          className="m-4"
-          subtitle="スタイリストが対応しますので、少々お待ちください。"
-        />
-      </Page>
-    );
-  }
   if (isPostSuccess) {
     return <HearingPostSuccess />;
   }
@@ -80,49 +68,49 @@ export const HearingContainer = ({ member }: TProps) => {
   if (isPostError)
     return <ErrorMessage message="予期せぬエラーが発生しました" />;
 
-  if (nextFormId === null) {
-    if (firstAnsweredHearings.length <= 0) {
-      return (
-        <BeforeHearingConfirm
-          onClick={handleClickFirstNext}
-          planId={member.mPlanId}
-        />
-      );
-    }
-    return member.mPlanId === M_PLAN_IDS.PREMIUM &&
-      secondAnsweredHearings.length <= 0 ? (
-      <PremiumPlanConfirm
-        onClick={handleClickPremiumNext}
-        onCancel={handleCancelPremiumNext}
-      />
-    ) : (
-      <HearingAnswerConfirm
-        title="ヒアリング確認画面"
-        confirmAnswers={formattedConfirmAnswers()}
-        footer={
-          <FirstHearingConfirmButtons
-            onClickComplete={handleSubmitComplete}
-            onClickBack={handleCancelForm}
-            onClickReset={handleClickReset}
-            isPostLoading={isPostLoading}
-          />
-        }
+  if (hearings.length <= 0) {
+    return (
+      <FirstHearingContainer
+        member={member}
+        setNextFormId={setNextFormId}
+        setCurrentAnswerNumber={setCurrentAnswerNumber}
+        setSecondAnsweredHearings={setSecondAnsweredHearings}
+        firstAnsweredHearings={firstAnsweredHearings}
+        secondAnsweredHearings={secondAnsweredHearings}
+        removeLastAnswer={removeLastAnswer}
+        nextFormId={nextFormId}
+        formattedConfirmAnswers={formattedConfirmAnswers}
+        handleSubmitComplete={handleSubmitComplete}
+        handleCancelForm={handleCancelForm}
+        handleClickReset={handleClickReset}
+        isPostLoading={isPostLoading}
+        handleSubmitForm={handleSubmitForm}
+        currentAnswerNumber={currentAnswerNumber}
+        isBackTransition={isBackTransition}
       />
     );
   }
 
   return (
-    <HearingFormFetcher
-      onSubmitForm={handleSubmitForm}
-      onCancelForm={handleCancelForm}
-      nextFormId={nextFormId}
-      previousAnsweredHearing={
-        currentAnswerNumber === 1
-          ? firstAnsweredHearings.slice(-1)[0]
-          : secondAnsweredHearings.slice(-1)[0]
-      }
-      isBackTransition={isBackTransition}
-      member={member}
-    />
+    <></>
+    // <AfterSecondHearingContainer
+    //   hearings={hearings}
+    //   nextFormId={nextFormId}
+    //   setNextFormId={setNextFormId}
+    //   currentAnswerNumber={currentAnswerNumber}
+    //   setCurrentAnswerNumber={setCurrentAnswerNumber}
+    //   firstAnsweredHearings={firstAnsweredHearings}
+    //   setFirstAnsweredHearings={setFirstAnsweredHearings}
+    //   secondAnsweredHearings={secondAnsweredHearings}
+    //   setSecondAnsweredHearings={setSecondAnsweredHearings}
+    //   isBackTransition={isBackTransition}
+    //   setIsBackTransition={setIsBackTransition}
+    //   handleSubmitForm={handleSubmitForm}
+    //   handleCancelForm={handleCancelForm}
+    //   formattedConfirmAnswers={formattedConfirmAnswers}
+    //   handleSubmitComplete={handleSubmitComplete}
+    //   handleClickReset={handleClickReset}
+    //   isPostLoading={isPostLoading}
+    // />
   );
 };
