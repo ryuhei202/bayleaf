@@ -3,4 +3,5 @@ export type TChartResponse = {
   readonly rentalStartedAt: string;
   readonly itemImagePaths: string[];
   readonly planName: string;
+  readonly planId: number;
 };

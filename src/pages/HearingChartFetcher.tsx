@@ -34,7 +34,10 @@ export const HearingChartFetcher = ({ member }: TProps) => {
 
   if (!chartIndexData) return <Loader active />;
 
-  if (chartIndexData.charts.length <= 0) {
+  if (
+    chartIndexData.charts.length <= 0 ||
+    chartIndexData.charts[0].planId !== member.mPlanId
+  ) {
     return <FirstHearingContainer member={member} />;
   }
   return <HearingFetcher member={member} chart={chartIndexData.charts[0]} />;
