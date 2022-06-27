@@ -17,7 +17,7 @@ export const HearingAnswerConfirm = ({
 }: TProps) => {
   return (
     <Page>
-      <div className="px-2 mb-10 min-h-[calc(100vh-242px)]">
+      <div className="px-2 mb-10 min-h-[calc(100vh-190px)]">
         <PageHeader title={title} />
         <div className="mx-1.5">
           {confirmAnswers.map((confirmAnswer, index) => (
