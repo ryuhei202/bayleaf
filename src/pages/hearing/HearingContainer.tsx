@@ -1,10 +1,10 @@
 import { useState } from "react";
+import { useChartCreate } from "../../api/charts/useChartCreate";
 import { THearing } from "../../api/hearings/THearing";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { AfterSecondHearingContainer } from "./AfterSecondHearingContainer";
 import { FirstHearingContainer } from "./FirstHearingContainer";
-import { useHearingContainerHandler } from "./handler/useHearingContainerHandler";
 import { HearingPostSuccess } from "./HearingPostSuccess";
 
 type TProps = {
@@ -40,26 +40,11 @@ export const HearingContainer = ({ member, hearings }: TProps) => {
     });
   const [isBackTransition, setIsBackTransition] = useState<boolean>(false);
   const {
-    handleSubmitForm,
-    handleCancelForm,
-    formattedConfirmAnswers,
-    handleSubmitComplete,
-    handleClickReset,
-    removeLastAnswer,
-    isPostLoading,
-    isPostSuccess,
-    isPostError,
-  } = useHearingContainerHandler({
-    memberId: member.id,
-    firstAnsweredHearings,
-    secondAnsweredHearings,
-    currentAnswerNumber,
-    setNextFormId,
-    setFirstAnsweredHearings,
-    setCurrentAnswerNumber,
-    setSecondAnsweredHearings,
-    setIsBackTransition,
-  });
+    mutate,
+    isLoading: isPostLoading,
+    isError: isPostError,
+    isSuccess: isPostSuccess,
+  } = useChartCreate();
 
   if (isPostSuccess) {
     return <HearingPostSuccess />;
@@ -75,42 +60,35 @@ export const HearingContainer = ({ member, hearings }: TProps) => {
         setNextFormId={setNextFormId}
         setCurrentAnswerNumber={setCurrentAnswerNumber}
         setSecondAnsweredHearings={setSecondAnsweredHearings}
+        setFirstAnsweredHearings={setFirstAnsweredHearings}
+        setIsBackTransition={setIsBackTransition}
         firstAnsweredHearings={firstAnsweredHearings}
         secondAnsweredHearings={secondAnsweredHearings}
-        removeLastAnswer={removeLastAnswer}
         nextFormId={nextFormId}
-        formattedConfirmAnswers={formattedConfirmAnswers}
-        handleSubmitComplete={handleSubmitComplete}
-        handleCancelForm={handleCancelForm}
-        handleClickReset={handleClickReset}
         isPostLoading={isPostLoading}
-        handleSubmitForm={handleSubmitForm}
         currentAnswerNumber={currentAnswerNumber}
         isBackTransition={isBackTransition}
+        mutate={mutate}
       />
     );
   }
 
   return (
-    <></>
-    // <AfterSecondHearingContainer
-    //   hearings={hearings}
-    //   nextFormId={nextFormId}
-    //   setNextFormId={setNextFormId}
-    //   currentAnswerNumber={currentAnswerNumber}
-    //   setCurrentAnswerNumber={setCurrentAnswerNumber}
-    //   firstAnsweredHearings={firstAnsweredHearings}
-    //   setFirstAnsweredHearings={setFirstAnsweredHearings}
-    //   secondAnsweredHearings={secondAnsweredHearings}
-    //   setSecondAnsweredHearings={setSecondAnsweredHearings}
-    //   isBackTransition={isBackTransition}
-    //   setIsBackTransition={setIsBackTransition}
-    //   handleSubmitForm={handleSubmitForm}
-    //   handleCancelForm={handleCancelForm}
-    //   formattedConfirmAnswers={formattedConfirmAnswers}
-    //   handleSubmitComplete={handleSubmitComplete}
-    //   handleClickReset={handleClickReset}
-    //   isPostLoading={isPostLoading}
-    // />
+    <AfterSecondHearingContainer
+      hearings={hearings}
+      member={member}
+      nextFormId={nextFormId}
+      setNextFormId={setNextFormId}
+      currentAnswerNumber={currentAnswerNumber}
+      setCurrentAnswerNumber={setCurrentAnswerNumber}
+      firstAnsweredHearings={firstAnsweredHearings}
+      setFirstAnsweredHearings={setFirstAnsweredHearings}
+      secondAnsweredHearings={secondAnsweredHearings}
+      setSecondAnsweredHearings={setSecondAnsweredHearings}
+      isBackTransition={isBackTransition}
+      setIsBackTransition={setIsBackTransition}
+      isPostLoading={isPostLoading}
+      mutate={mutate}
+    />
   );
 };

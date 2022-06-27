@@ -1,18 +1,13 @@
-import { useState } from "react";
-import { Button } from "semantic-ui-react";
+import { AxiosResponse } from "axios";
+import { UseMutateFunction } from "react-query";
+import { TChartCreateRequest } from "../../api/charts/TChartCreateRequest";
 import { THearing } from "../../api/hearings/THearing";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { HearingAnswerConfirm } from "../../components/hearing/HearingAnswerConfirm";
-import { THearingAnswer } from "../../models/hearing/THearingAnswer";
-import {
-  HEARING_STATUS,
-  THearingStatus,
-} from "../../models/hearing/THearingStatus";
 import { FirstHearingConfirmButtons } from "./FirstHearingConfirmButtons";
 import { getAfterSecondHearingContainerHandler } from "./handler/getAfterSecondHearingContainerHandler";
-import { AnsweredHearings, TAnsweredForm } from "./HearingContainer";
+import { AnsweredHearings } from "./HearingContainer";
 import { HearingFlowContainer } from "./HearingFlowContainer";
-import { HearingFormFetcher } from "./HearingFormFetcher";
 
 type TProps = {
   readonly hearings: THearing[];
@@ -30,16 +25,14 @@ type TProps = {
     React.SetStateAction<AnsweredHearings>
   >;
   readonly isBackTransition: boolean;
-  readonly setIsBackTransition: React.Dispatch<React.SetStateAction<boolean>>;
-  readonly handleSubmitForm: (
-    answer: TAnsweredForm,
-    nextFormIdArg: number | null
-  ) => void;
-  readonly handleCancelForm: () => void;
-  readonly formattedConfirmAnswers: () => THearingAnswer[];
-  readonly handleClickReset: () => void;
-  readonly handleSubmitComplete: () => void;
   readonly isPostLoading: boolean;
+  readonly setIsBackTransition: React.Dispatch<React.SetStateAction<boolean>>;
+  readonly mutate: UseMutateFunction<
+    AxiosResponse<any, any>,
+    unknown,
+    TChartCreateRequest,
+    unknown
+  >;
 };
 
 export const AfterSecondHearingContainer = ({
@@ -55,55 +48,61 @@ export const AfterSecondHearingContainer = ({
   setSecondAnsweredHearings,
   isBackTransition,
   setIsBackTransition,
-  handleSubmitForm,
-  handleCancelForm,
-  formattedConfirmAnswers,
-  handleClickReset,
-  handleSubmitComplete,
   isPostLoading,
+  mutate,
 }: TProps) => {
-  const [sameCoordinateIds, setSameCoordinateIds] = useState<number[]>([]);
-  const [hearingStatus, setHearingStatus] = useState<THearingStatus>(
-    HEARING_STATUS.FIRST
-  );
+  const {
+    handleSubmitForm,
+    getAnsweredHearings,
+    handleCancelForm,
+    handleClickStart,
+    getPreviousAnswers,
+    handleClickReset,
+    handlePost,
+    getConfirmAnswers,
+  } = getAfterSecondHearingContainerHandler({
+    hearings,
+    currentAnswerNumber,
+    firstAnsweredHearings,
+    secondAnsweredHearings,
+    setNextFormId,
+    setFirstAnsweredHearings,
+    setSecondAnsweredHearings,
+    setIsBackTransition,
+    setCurrentAnswerNumber,
+  });
 
-  // const {
-  //   formattedPrivousHearing,
-  //   handleTransitionSleeveForm,
-  //   handleClickStart,
-  // } = getAfterSecondHearingContainerHandler({ hearings });
-
-  if (firstAnsweredHearings.forms.length > 0) {
+  if (
+    !!firstAnsweredHearings.sameCoordinateId ||
+    firstAnsweredHearings.forms.length <= 0
+  ) {
     return (
-      <HearingAnswerConfirm
-        title="ヒアリング確認画面"
-        confirmAnswers={formattedConfirmAnswers()}
-        footer={
-          <FirstHearingConfirmButtons
-            onClickComplete={handleSubmitComplete}
-            onClickBack={handleCancelForm}
-            onClickReset={handleClickReset}
-            isPostLoading={isPostLoading}
-          />
-        }
+      <HearingFlowContainer
+        onSubmitForm={handleSubmitForm}
+        onCancelForm={handleCancelForm}
+        onClickStart={handleClickStart}
+        onClickComplete={handlePost}
+        confirmAnswers={getPreviousAnswers()}
+        nextFormId={nextFormId}
+        answeredHearings={getAnsweredHearings()}
+        isBackTransition={isBackTransition}
+        member={member}
       />
     );
   }
 
   return (
-    // <HearingFlowContainer
-    //   handleSubmitForm={handleSubmitForm}
-    //   handleCancelForm={handleCancelForm}
-    //   handleTransitionSleeveForm={handleTransitionSleeveForm}
-    //   handleClickStart={handleClickStart}
-    //   confirmAnswers={confirmAnswers}
-    //   nextFormId={nextFormId}
-    //   currentAnswerNumber={currentAnswerNumber}
-    //   firstAnsweredHearings={firstAnsweredHearings}
-    //   secondAnsweredHearings={secondAnsweredHearings}
-    //   isBackTransition={isBackTransition}
-    //   member={member}
-    // />
-    <></>
+    <HearingAnswerConfirm
+      title="ヒアリング確認画面"
+      confirmAnswers={getConfirmAnswers()}
+      footer={
+        <FirstHearingConfirmButtons
+          onClickComplete={handlePost}
+          onClickBack={handleCancelForm}
+          onClickReset={handleClickReset}
+          isPostLoading={isPostLoading}
+        />
+      }
+    />
   );
 };
