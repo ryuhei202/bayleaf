@@ -8,6 +8,7 @@ import { AxiosResponse } from "axios";
 import { UseMutateFunction } from "react-query";
 import { TChartCreateRequest } from "../../../api/charts/TChartCreateRequest";
 import liff from "@line/liff/dist/lib";
+import { M_PLAN_IDS } from "../../../models/hearing/MPlanIds";
 
 type TAfterSecondHearingContainerHandler = {
   readonly handleClickStart: () => void;
@@ -21,10 +22,12 @@ type TAfterSecondHearingContainerHandler = {
     nextFormIdArg: number | null
   ) => void;
   readonly handleClickReset: () => void;
+  readonly handleClickBack: () => void;
   readonly handlePost: () => void;
   readonly getConfirmAnswers: () => THearingAnswer[];
   readonly handleClickSameHearing: () => void;
-  readonly isAnswered: (answeredHearings: AnsweredHearings) => boolean;
+  readonly shouldPremiumConfirmPage: () => boolean;
+  readonly isAnsweredAll: () => boolean;
 };
 
 type TArgs = {
@@ -196,6 +199,9 @@ export const getAfterSecondHearingContainerHandler = ({
     setSecondAnsweredHearings({ forms: [] });
   };
 
+  const handleClickBack = () => {
+    setCurrentAnswerNumber(1);
+  };
   // 確認画面へ渡すために答えた情報を整形する
   const getConfirmAnswers = (): THearingAnswer[] => {
     const formattedAnswer = [firstAnsweredHearings, secondAnsweredHearings]
@@ -269,6 +275,24 @@ export const getAfterSecondHearingContainerHandler = ({
     }
   };
 
+  const isAnsweredAll = (): boolean => {
+    return (
+      (member.mPlanId === M_PLAN_IDS.PREMIUM &&
+        isAnswered(secondAnsweredHearings)) ||
+      (member.mPlanId !== M_PLAN_IDS.PREMIUM &&
+        isAnswered(firstAnsweredHearings))
+    );
+  };
+
+  const shouldPremiumConfirmPage = (): boolean => {
+    return (
+      member.mPlanId === M_PLAN_IDS.PREMIUM &&
+      !isAnswered(secondAnsweredHearings) &&
+      isAnswered(firstAnsweredHearings) &&
+      currentAnswerNumber === 1
+    );
+  };
+
   const isAnswered = (answeredHearings: AnsweredHearings): boolean => {
     return (
       answeredHearings.forms.length > 0 || !!answeredHearings.sameCoordinateId
@@ -284,9 +308,11 @@ export const getAfterSecondHearingContainerHandler = ({
     getPreviousAnswers,
     handleSubmitForm,
     handleClickReset,
+    handleClickBack,
     handlePost,
     getConfirmAnswers,
     handleClickSameHearing,
-    isAnswered,
+    shouldPremiumConfirmPage,
+    isAnsweredAll,
   };
 };

@@ -13,10 +13,12 @@ type TProps = {
   readonly onCancelForm: () => void;
   readonly onClickSameHearing: () => void;
   readonly onClickStart: () => void;
+  readonly onClickBack: () => void;
   readonly confirmAnswers: THearingAnswer[];
   readonly answeredHearings: AnsweredHearings;
   readonly nextFormId: number | null;
   readonly isBackTransition: boolean;
+  readonly currentAnswerNumber: 1 | 2;
   readonly member: TMembersIndexResponse;
 };
 
@@ -24,11 +26,13 @@ export const HearingFlowContainer = ({
   onSubmitForm,
   onCancelForm,
   onClickStart,
+  onClickBack,
   onClickSameHearing,
   confirmAnswers,
   answeredHearings,
   nextFormId,
   isBackTransition,
+  currentAnswerNumber,
   member,
 }: TProps) => {
   if (nextFormId === null) {
@@ -53,6 +57,11 @@ export const HearingFlowContainer = ({
             >
               ヒアリングを開始する
             </Button>
+            {currentAnswerNumber === 2 && (
+              <Button variant="text" onClick={onClickBack}>
+                前に戻る
+              </Button>
+            )}
           </>
         }
       />

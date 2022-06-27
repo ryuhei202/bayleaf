@@ -5,7 +5,6 @@ import { THearing } from "../../api/hearings/THearing";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { HearingAnswerConfirm } from "../../components/hearing/HearingAnswerConfirm";
 import { PremiumPlanConfirm } from "../../components/hearing/PremiumPlanConfirm";
-import { M_PLAN_IDS } from "../../models/hearing/MPlanIds";
 import { FirstHearingConfirmButtons } from "./FirstHearingConfirmButtons";
 import { getAfterSecondHearingContainerHandler } from "./handler/getAfterSecondHearingContainerHandler";
 import { AnsweredHearings } from "./HearingContainer";
@@ -62,10 +61,12 @@ export const AfterSecondHearingContainer = ({
     handleClickStart,
     getPreviousAnswers,
     handleClickReset,
+    handleClickBack,
     handlePost,
     getConfirmAnswers,
     handleClickSameHearing,
-    isAnswered,
+    shouldPremiumConfirmPage,
+    isAnsweredAll,
   } = getAfterSecondHearingContainerHandler({
     member,
     hearings,
@@ -80,51 +81,42 @@ export const AfterSecondHearingContainer = ({
     mutate,
   });
 
-  if (nextFormId === null) {
-    if (
-      member.mPlanId === M_PLAN_IDS.PREMIUM &&
-      !isAnswered(secondAnsweredHearings) &&
-      isAnswered(firstAnsweredHearings) &&
-      currentAnswerNumber === 1
-    ) {
-      return (
-        <PremiumPlanConfirm
-          onClick={handleClickPremiumNext}
-          onCancel={handleCancelPremiumNext}
-        />
-      );
-    }
-    if (
-      (member.mPlanId === M_PLAN_IDS.PREMIUM &&
-        isAnswered(secondAnsweredHearings)) ||
-      (member.mPlanId !== M_PLAN_IDS.PREMIUM &&
-        isAnswered(firstAnsweredHearings))
-    ) {
-      return (
-        <HearingAnswerConfirm
-          title="ヒアリング確認画面"
-          confirmAnswers={getConfirmAnswers()}
-          footer={
-            <FirstHearingConfirmButtons
-              onClickComplete={handlePost}
-              onClickBack={handleCancelForm}
-              onClickReset={handleClickReset}
-              isPostLoading={isPostLoading}
-            />
-          }
-        />
-      );
-    }
+  if (shouldPremiumConfirmPage()) {
+    return (
+      <PremiumPlanConfirm
+        onClick={handleClickPremiumNext}
+        onCancel={handleCancelPremiumNext}
+      />
+    );
   }
+  if (isAnsweredAll()) {
+    return (
+      <HearingAnswerConfirm
+        title="ヒアリング確認画面"
+        confirmAnswers={getConfirmAnswers()}
+        footer={
+          <FirstHearingConfirmButtons
+            onClickComplete={handlePost}
+            onClickBack={handleCancelForm}
+            onClickReset={handleClickReset}
+            isPostLoading={isPostLoading}
+          />
+        }
+      />
+    );
+  }
+
   return (
     <HearingFlowContainer
       onSubmitForm={handleSubmitForm}
       onCancelForm={handleCancelForm}
       onClickStart={handleClickStart}
+      onClickBack={handleClickBack}
       onClickSameHearing={handleClickSameHearing}
       confirmAnswers={getPreviousAnswers()}
       nextFormId={nextFormId}
       answeredHearings={getAnsweredHearings()}
+      currentAnswerNumber={currentAnswerNumber}
       isBackTransition={isBackTransition}
       member={member}
     />
