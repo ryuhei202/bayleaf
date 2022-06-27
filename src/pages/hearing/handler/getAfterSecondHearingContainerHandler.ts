@@ -279,12 +279,11 @@ export const getAfterSecondHearingContainerHandler = ({
   };
 
   const isAnsweredAll = (): boolean => {
-    return (
-      (member.mPlanId === M_PLAN_IDS.PREMIUM &&
-        isAnswered(secondAnsweredHearings)) ||
-      (member.mPlanId !== M_PLAN_IDS.PREMIUM &&
-        isAnswered(firstAnsweredHearings))
-    );
+    if (member.mPlanId === M_PLAN_IDS.PREMIUM) {
+      return isAnswered(secondAnsweredHearings) && nextFormId === null;
+    } else {
+      return isAnswered(firstAnsweredHearings) && nextFormId === null;
+    }
   };
 
   const shouldPremiumConfirmPage = (): boolean => {
