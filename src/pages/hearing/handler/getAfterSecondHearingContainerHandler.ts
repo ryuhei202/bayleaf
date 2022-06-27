@@ -36,6 +36,7 @@ type TArgs = {
   readonly currentAnswerNumber: 1 | 2;
   readonly firstAnsweredHearings: AnsweredHearings;
   readonly secondAnsweredHearings: AnsweredHearings;
+  readonly nextFormId: number | null;
   readonly setNextFormId: React.Dispatch<React.SetStateAction<number | null>>;
   readonly setIsBackTransition: React.Dispatch<React.SetStateAction<boolean>>;
   readonly setFirstAnsweredHearings: React.Dispatch<
@@ -58,6 +59,7 @@ export const getAfterSecondHearingContainerHandler = ({
   currentAnswerNumber,
   firstAnsweredHearings,
   secondAnsweredHearings,
+  nextFormId,
   setNextFormId,
   setIsBackTransition,
   setFirstAnsweredHearings,
@@ -71,6 +73,10 @@ export const getAfterSecondHearingContainerHandler = ({
 
   const handleClickPremiumNext = () => {
     setCurrentAnswerNumber(2);
+  };
+
+  const handleClickBack = () => {
+    setCurrentAnswerNumber(1);
   };
 
   const handleCancelPremiumNext = () => {
@@ -199,9 +205,6 @@ export const getAfterSecondHearingContainerHandler = ({
     setSecondAnsweredHearings({ forms: [] });
   };
 
-  const handleClickBack = () => {
-    setCurrentAnswerNumber(1);
-  };
   // 確認画面へ渡すために答えた情報を整形する
   const getConfirmAnswers = (): THearingAnswer[] => {
     const formattedAnswer = [firstAnsweredHearings, secondAnsweredHearings]
@@ -289,6 +292,7 @@ export const getAfterSecondHearingContainerHandler = ({
       member.mPlanId === M_PLAN_IDS.PREMIUM &&
       !isAnswered(secondAnsweredHearings) &&
       isAnswered(firstAnsweredHearings) &&
+      nextFormId === null &&
       currentAnswerNumber === 1
     );
   };

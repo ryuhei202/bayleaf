@@ -4,6 +4,7 @@ import { TMembersIndexResponse } from "../api/members/TMembersIndexResponse";
 import { Page } from "../components/baseParts/Page";
 import { PageHeader } from "../components/baseParts/PageHeader";
 import { ErrorMessage } from "../components/shared/ErrorMessage";
+import { FirstHearingContainer } from "./hearing/FirstHearingContainer";
 import { HearingFetcher } from "./hearing/HearingFetcher";
 
 type TProps = {
@@ -34,7 +35,7 @@ export const HearingChartFetcher = ({ member }: TProps) => {
   if (!chartIndexData) return <Loader active />;
 
   if (chartIndexData.charts.length <= 0) {
-    return <></>;
+    return <FirstHearingContainer member={member} />;
   }
   return <HearingFetcher member={member} chart={chartIndexData.charts[0]} />;
 };

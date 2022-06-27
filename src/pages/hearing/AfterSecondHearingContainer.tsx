@@ -1,57 +1,40 @@
-import { AxiosResponse } from "axios";
-import { UseMutateFunction } from "react-query";
-import { TChartCreateRequest } from "../../api/charts/TChartCreateRequest";
+import { useState } from "react";
+import { useChartCreate } from "../../api/charts/useChartCreate";
 import { THearing } from "../../api/hearings/THearing";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { HearingAnswerConfirm } from "../../components/hearing/HearingAnswerConfirm";
 import { PremiumPlanConfirm } from "../../components/hearing/PremiumPlanConfirm";
+import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { FirstHearingConfirmButtons } from "./FirstHearingConfirmButtons";
 import { getAfterSecondHearingContainerHandler } from "./handler/getAfterSecondHearingContainerHandler";
 import { AnsweredHearings } from "./HearingContainer";
 import { HearingFlowContainer } from "./HearingFlowContainer";
+import { HearingPostSuccess } from "./HearingPostSuccess";
 
 type TProps = {
   readonly hearings: THearing[];
   readonly member: TMembersIndexResponse;
-  readonly nextFormId: number | null;
-  readonly setNextFormId: React.Dispatch<React.SetStateAction<number | null>>;
-  readonly currentAnswerNumber: 1 | 2;
-  readonly setCurrentAnswerNumber: React.Dispatch<React.SetStateAction<1 | 2>>;
-  readonly firstAnsweredHearings: AnsweredHearings;
-  readonly setFirstAnsweredHearings: React.Dispatch<
-    React.SetStateAction<AnsweredHearings>
-  >;
-  readonly secondAnsweredHearings: AnsweredHearings;
-  readonly setSecondAnsweredHearings: React.Dispatch<
-    React.SetStateAction<AnsweredHearings>
-  >;
-  readonly isBackTransition: boolean;
-  readonly isPostLoading: boolean;
-  readonly setIsBackTransition: React.Dispatch<React.SetStateAction<boolean>>;
-  readonly mutate: UseMutateFunction<
-    AxiosResponse<any, any>,
-    unknown,
-    TChartCreateRequest,
-    unknown
-  >;
 };
 
-export const AfterSecondHearingContainer = ({
-  hearings,
-  member,
-  nextFormId,
-  setNextFormId,
-  currentAnswerNumber,
-  setCurrentAnswerNumber,
-  firstAnsweredHearings,
-  setFirstAnsweredHearings,
-  secondAnsweredHearings,
-  setSecondAnsweredHearings,
-  isBackTransition,
-  setIsBackTransition,
-  isPostLoading,
-  mutate,
-}: TProps) => {
+export const AfterSecondHearingContainer = ({ hearings, member }: TProps) => {
+  const [nextFormId, setNextFormId] = useState<number | null>(null);
+  const [currentAnswerNumber, setCurrentAnswerNumber] = useState<1 | 2>(1);
+  const [firstAnsweredHearings, setFirstAnsweredHearings] =
+    useState<AnsweredHearings>({
+      forms: [],
+    });
+  const [secondAnsweredHearings, setSecondAnsweredHearings] =
+    useState<AnsweredHearings>({
+      forms: [],
+    });
+  const [isBackTransition, setIsBackTransition] = useState<boolean>(false);
+  const {
+    mutate,
+    isLoading: isPostLoading,
+    isError: isPostError,
+    isSuccess: isPostSuccess,
+  } = useChartCreate();
+
   const {
     handleSubmitForm,
     handleClickPremiumNext,
@@ -73,6 +56,7 @@ export const AfterSecondHearingContainer = ({
     currentAnswerNumber,
     firstAnsweredHearings,
     secondAnsweredHearings,
+    nextFormId,
     setNextFormId,
     setFirstAnsweredHearings,
     setSecondAnsweredHearings,
@@ -80,6 +64,13 @@ export const AfterSecondHearingContainer = ({
     setCurrentAnswerNumber,
     mutate,
   });
+
+  if (isPostSuccess) {
+    return <HearingPostSuccess />;
+  }
+
+  if (isPostError)
+    return <ErrorMessage message="予期せぬエラーが発生しました" />;
 
   if (shouldPremiumConfirmPage()) {
     return (
@@ -89,6 +80,7 @@ export const AfterSecondHearingContainer = ({
       />
     );
   }
+
   if (isAnsweredAll()) {
     return (
       <HearingAnswerConfirm
