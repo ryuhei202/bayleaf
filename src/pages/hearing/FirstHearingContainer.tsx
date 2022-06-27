@@ -6,7 +6,7 @@ import { HearingFormFetcher } from "./HearingFormFetcher";
 import { FirstHearingConfirmButtons } from "./FirstHearingConfirmButtons";
 import { M_PLAN_IDS } from "../../models/hearing/MPlanIds";
 import { getFirstHearingContainerHandler } from "./handler/getFirstHearingContainerHandler";
-import { AnsweredHearings, TAnsweredForm } from "./HearingContainer";
+import { AnsweredHearings } from "./HearingContainer";
 import { AxiosResponse } from "axios";
 import { UseMutateFunction } from "react-query";
 import { TChartCreateRequest } from "../../api/charts/TChartCreateRequest";

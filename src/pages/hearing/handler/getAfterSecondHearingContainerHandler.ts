@@ -4,16 +4,27 @@ import { THearing } from "../../../api/hearings/THearing";
 import { THearingAnswer } from "../../../models/hearing/THearingAnswer";
 import { AnsweredHearings, TAnsweredForm } from "../HearingContainer";
 import { TCategorizedForm } from "../../../api/hearings/TCategorizedForm";
-import { M_PLAN_IDS } from "../../../models/hearing/MPlanIds";
 import { AxiosResponse } from "axios";
 import { UseMutateFunction } from "react-query";
 import { TChartCreateRequest } from "../../../api/charts/TChartCreateRequest";
 import liff from "@line/liff/dist/lib";
 
 type TAfterSecondHearingContainerHandler = {
-  readonly formattedPreviousHearing: () => THearingAnswer[];
   readonly handleClickStart: () => void;
   readonly getPreviousAnswers: () => THearingAnswer[];
+  readonly handleCancelForm: () => void;
+  readonly handleClickPremiumNext: () => void;
+  readonly handleCancelPremiumNext: () => void;
+  readonly getAnsweredHearings: () => AnsweredHearings;
+  readonly handleSubmitForm: (
+    answer: TAnsweredForm,
+    nextFormIdArg: number | null
+  ) => void;
+  readonly handleClickReset: () => void;
+  readonly handlePost: () => void;
+  readonly getConfirmAnswers: () => THearingAnswer[];
+  readonly handleClickSameHearing: () => void;
+  readonly isAnswered: (answeredHearings: AnsweredHearings) => boolean;
 };
 
 type TArgs = {
@@ -50,7 +61,7 @@ export const getAfterSecondHearingContainerHandler = ({
   setSecondAnsweredHearings,
   setCurrentAnswerNumber,
   mutate,
-}: TArgs) => {
+}: TArgs): TAfterSecondHearingContainerHandler => {
   const handleClickStart = () => {
     setNextFormId(HEARING_FORM.FIRST);
   };
@@ -64,6 +75,7 @@ export const getAfterSecondHearingContainerHandler = ({
     setCurrentAnswerNumber(1);
     removeLastAnswer(firstAnsweredHearings.forms, 1);
   };
+
   const handleSubmitForm = (
     answer: TAnsweredForm,
     nextFormIdArg: number | null

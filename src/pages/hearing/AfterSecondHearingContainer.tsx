@@ -1,5 +1,4 @@
 import { AxiosResponse } from "axios";
-import { useState } from "react";
 import { UseMutateFunction } from "react-query";
 import { TChartCreateRequest } from "../../api/charts/TChartCreateRequest";
 import { THearing } from "../../api/hearings/THearing";
@@ -7,7 +6,6 @@ import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { HearingAnswerConfirm } from "../../components/hearing/HearingAnswerConfirm";
 import { PremiumPlanConfirm } from "../../components/hearing/PremiumPlanConfirm";
 import { M_PLAN_IDS } from "../../models/hearing/MPlanIds";
-import { THearingStatus } from "../../models/hearing/THearingStatus";
 import { FirstHearingConfirmButtons } from "./FirstHearingConfirmButtons";
 import { getAfterSecondHearingContainerHandler } from "./handler/getAfterSecondHearingContainerHandler";
 import { AnsweredHearings } from "./HearingContainer";
