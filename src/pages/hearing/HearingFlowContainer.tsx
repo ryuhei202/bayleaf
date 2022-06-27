@@ -11,7 +11,7 @@ type TProps = {
     nextFormIdArg: number | null
   ) => void;
   readonly onCancelForm: () => void;
-  readonly onClickComplete: () => void;
+  readonly onClickSameHearing: () => void;
   readonly onClickStart: () => void;
   readonly confirmAnswers: THearingAnswer[];
   readonly answeredHearings: AnsweredHearings;
@@ -24,21 +24,25 @@ export const HearingFlowContainer = ({
   onSubmitForm,
   onCancelForm,
   onClickStart,
-  onClickComplete,
+  onClickSameHearing,
   confirmAnswers,
   answeredHearings,
   nextFormId,
   isBackTransition,
   member,
 }: TProps) => {
-  if (nextFormId === null || answeredHearings.forms.length <= 0) {
+  if (nextFormId === null) {
     return (
       <HearingAnswerConfirm
         title="前回のコーデ"
         confirmAnswers={confirmAnswers}
         footer={
           <>
-            <Button variant="primary" onClick={onClickComplete} border={true}>
+            <Button
+              variant="primary"
+              onClick={onClickSameHearing}
+              border={true}
+            >
               前回と同じ内容でコーデを作る
             </Button>
             <Button

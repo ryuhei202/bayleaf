@@ -1,9 +1,13 @@
 import { AxiosResponse } from "axios";
+import { useState } from "react";
 import { UseMutateFunction } from "react-query";
 import { TChartCreateRequest } from "../../api/charts/TChartCreateRequest";
 import { THearing } from "../../api/hearings/THearing";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { HearingAnswerConfirm } from "../../components/hearing/HearingAnswerConfirm";
+import { PremiumPlanConfirm } from "../../components/hearing/PremiumPlanConfirm";
+import { M_PLAN_IDS } from "../../models/hearing/MPlanIds";
+import { THearingStatus } from "../../models/hearing/THearingStatus";
 import { FirstHearingConfirmButtons } from "./FirstHearingConfirmButtons";
 import { getAfterSecondHearingContainerHandler } from "./handler/getAfterSecondHearingContainerHandler";
 import { AnsweredHearings } from "./HearingContainer";
@@ -53,6 +57,8 @@ export const AfterSecondHearingContainer = ({
 }: TProps) => {
   const {
     handleSubmitForm,
+    handleClickPremiumNext,
+    handleCancelPremiumNext,
     getAnsweredHearings,
     handleCancelForm,
     handleClickStart,
@@ -60,7 +66,10 @@ export const AfterSecondHearingContainer = ({
     handleClickReset,
     handlePost,
     getConfirmAnswers,
+    handleClickSameHearing,
+    isAnswered,
   } = getAfterSecondHearingContainerHandler({
+    member,
     hearings,
     currentAnswerNumber,
     firstAnsweredHearings,
@@ -70,39 +79,56 @@ export const AfterSecondHearingContainer = ({
     setSecondAnsweredHearings,
     setIsBackTransition,
     setCurrentAnswerNumber,
+    mutate,
   });
 
-  if (
-    !!firstAnsweredHearings.sameCoordinateId ||
-    firstAnsweredHearings.forms.length <= 0
-  ) {
-    return (
-      <HearingFlowContainer
-        onSubmitForm={handleSubmitForm}
-        onCancelForm={handleCancelForm}
-        onClickStart={handleClickStart}
-        onClickComplete={handlePost}
-        confirmAnswers={getPreviousAnswers()}
-        nextFormId={nextFormId}
-        answeredHearings={getAnsweredHearings()}
-        isBackTransition={isBackTransition}
-        member={member}
-      />
-    );
-  }
-
-  return (
-    <HearingAnswerConfirm
-      title="ヒアリング確認画面"
-      confirmAnswers={getConfirmAnswers()}
-      footer={
-        <FirstHearingConfirmButtons
-          onClickComplete={handlePost}
-          onClickBack={handleCancelForm}
-          onClickReset={handleClickReset}
-          isPostLoading={isPostLoading}
+  if (nextFormId === null) {
+    if (
+      member.mPlanId === M_PLAN_IDS.PREMIUM &&
+      !isAnswered(secondAnsweredHearings) &&
+      isAnswered(firstAnsweredHearings) &&
+      currentAnswerNumber === 1
+    ) {
+      return (
+        <PremiumPlanConfirm
+          onClick={handleClickPremiumNext}
+          onCancel={handleCancelPremiumNext}
         />
-      }
+      );
+    }
+    if (
+      (member.mPlanId === M_PLAN_IDS.PREMIUM &&
+        isAnswered(secondAnsweredHearings)) ||
+      (member.mPlanId !== M_PLAN_IDS.PREMIUM &&
+        isAnswered(firstAnsweredHearings))
+    ) {
+      return (
+        <HearingAnswerConfirm
+          title="ヒアリング確認画面"
+          confirmAnswers={getConfirmAnswers()}
+          footer={
+            <FirstHearingConfirmButtons
+              onClickComplete={handlePost}
+              onClickBack={handleCancelForm}
+              onClickReset={handleClickReset}
+              isPostLoading={isPostLoading}
+            />
+          }
+        />
+      );
+    }
+  }
+  return (
+    <HearingFlowContainer
+      onSubmitForm={handleSubmitForm}
+      onCancelForm={handleCancelForm}
+      onClickStart={handleClickStart}
+      onClickSameHearing={handleClickSameHearing}
+      confirmAnswers={getPreviousAnswers()}
+      nextFormId={nextFormId}
+      answeredHearings={getAnsweredHearings()}
+      isBackTransition={isBackTransition}
+      member={member}
     />
   );
 };
