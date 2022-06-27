@@ -110,7 +110,6 @@ export const getAfterSecondHearingContainerHandler = ({
     }
   };
 
-  // 各フォームの戻るボタンをクリック
   const handleCancelForm = () => {
     if (currentAnswerNumber === 1) {
       removeLastAnswer(firstAnsweredHearings.forms, 1);
@@ -160,7 +159,6 @@ export const getAfterSecondHearingContainerHandler = ({
     }
   };
 
-  // 答えの配列の最後を削除する
   const removeLastAnswer = (
     answeredHearings: TAnsweredForm[],
     answerNum: number
@@ -205,17 +203,16 @@ export const getAfterSecondHearingContainerHandler = ({
     setSecondAnsweredHearings({ forms: [] });
   };
 
-  // 確認画面へ渡すために答えた情報を整形する
   const getConfirmAnswers = (): THearingAnswer[] => {
     const formattedAnswer = [firstAnsweredHearings, secondAnsweredHearings]
       .filter((h) => h.forms.length !== 0 || !!h.sameCoordinateId)
       .map((answers) => {
         if (answers.sameCoordinateId) {
-          return {
-            answer: hearings.find(
-              (h) => h.coordinateId === answers.sameCoordinateId
-            )?.categorizedForms as TCategorizedForm[],
-          };
+          const answer = hearings.find(
+            (h) => h.coordinateId === answers.sameCoordinateId
+          )?.categorizedForms;
+          if (answer === undefined) throw Error("予期せぬエラーが発生しました");
+          return { answer };
         } else if (answers.forms.length > 0) {
           return {
             answer: formattedConfirmAnswers(answers),
