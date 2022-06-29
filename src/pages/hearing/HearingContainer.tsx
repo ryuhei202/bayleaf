@@ -1,6 +1,6 @@
 import { THearing } from "../../api/hearings/THearing";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
-import { AfterSecondHearingContainer } from "./AfterSecondHearingContainer";
+import { ContinuedHearingContainer } from "./ContinuedHearingContainer";
 import { NewHearingContainer } from "./NewHearingContainer";
 
 type TProps = {
@@ -28,5 +28,5 @@ export const HearingContainer = ({ member, hearings }: TProps) => {
     return <NewHearingContainer member={member} />;
   }
 
-  return <AfterSecondHearingContainer hearings={hearings} member={member} />;
+  return <ContinuedHearingContainer hearings={hearings} member={member} />;
 };

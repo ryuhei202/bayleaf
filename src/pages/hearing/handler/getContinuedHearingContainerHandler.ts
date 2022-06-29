@@ -1,5 +1,5 @@
-import { TMembersIndexResponse } from "./../../../api/members/TMembersIndexResponse";
-import { HEARING_FORM } from "./../../../models/hearing/THearingForms";
+import { TMembersIndexResponse } from "../../../api/members/TMembersIndexResponse";
+import { HEARING_FORM } from "../../../models/hearing/THearingForms";
 import { THearing } from "../../../api/hearings/THearing";
 import { THearingAnswer } from "../../../models/hearing/THearingAnswer";
 import { AnsweredHearings, TAnsweredForm } from "../HearingContainer";
@@ -53,7 +53,7 @@ type TArgs = {
     unknown
   >;
 };
-export const getAfterSecondHearingContainerHandler = ({
+export const getContinuedHearingContainerHandler = ({
   member,
   hearings,
   currentAnswerNumber,

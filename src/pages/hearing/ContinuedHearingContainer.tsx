@@ -6,7 +6,7 @@ import { HearingAnswerConfirm } from "../../components/hearing/HearingAnswerConf
 import { PremiumPlanConfirm } from "../../components/hearing/PremiumPlanConfirm";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { FirstHearingConfirmButtons } from "./FirstHearingConfirmButtons";
-import { getAfterSecondHearingContainerHandler } from "./handler/getAfterSecondHearingContainerHandler";
+import { getContinuedHearingContainerHandler } from "./handler/getContinuedHearingContainerHandler";
 import { AnsweredHearings } from "./HearingContainer";
 import { HearingFlowContainer } from "./HearingFlowContainer";
 import { HearingPostSuccess } from "./HearingPostSuccess";
@@ -16,7 +16,7 @@ type TProps = {
   readonly member: TMembersIndexResponse;
 };
 
-export const AfterSecondHearingContainer = ({ hearings, member }: TProps) => {
+export const ContinuedHearingContainer = ({ hearings, member }: TProps) => {
   const [nextFormId, setNextFormId] = useState<number | null>(null);
   const [currentAnswerNumber, setCurrentAnswerNumber] = useState<1 | 2>(1);
   const [firstAnsweredHearings, setFirstAnsweredHearings] =
@@ -50,7 +50,7 @@ export const AfterSecondHearingContainer = ({ hearings, member }: TProps) => {
     handleClickSameHearing,
     shouldPremiumConfirmPage,
     isAnsweredAll,
-  } = getAfterSecondHearingContainerHandler({
+  } = getContinuedHearingContainerHandler({
     member,
     hearings,
     currentAnswerNumber,
