@@ -40,6 +40,7 @@ export const HearingFlowContainer = ({
       <HearingAnswerConfirm
         title="前回のヒアリング"
         confirmAnswers={confirmAnswers}
+        coordinateNum={currentAnswerNumber}
         footer={
           <>
             <Button
