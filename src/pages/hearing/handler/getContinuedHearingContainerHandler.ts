@@ -11,8 +11,10 @@ import liff from "@line/liff/dist/lib";
 import { M_PLAN_IDS } from "../../../models/hearing/MPlanIds";
 
 type TAfterSecondHearingContainerHandler = {
-  readonly handleClickStart: () => void;
+  readonly handleClickFormStart: () => void;
+  readonly handleClickHearingStart: () => void;
   readonly getPreviousAnswers: () => THearingAnswer[];
+  readonly handleClickBack: () => void;
   readonly handleCancelForm: () => void;
   readonly handleClickPremiumNext: () => void;
   readonly handleCancelPremiumNext: () => void;
@@ -22,7 +24,6 @@ type TAfterSecondHearingContainerHandler = {
     nextFormIdArg: number | null
   ) => void;
   readonly handleClickReset: () => void;
-  readonly handleClickBack: () => void;
   readonly handlePost: () => void;
   readonly getConfirmAnswers: () => THearingAnswer[];
   readonly handleClickSameHearing: () => void;
@@ -46,6 +47,7 @@ type TArgs = {
     React.SetStateAction<AnsweredHearings>
   >;
   readonly setCurrentAnswerNumber: React.Dispatch<React.SetStateAction<1 | 2>>;
+  readonly setIsHearingStarted: React.Dispatch<React.SetStateAction<boolean>>;
   readonly mutate: UseMutateFunction<
     AxiosResponse<any, any>,
     unknown,
@@ -65,18 +67,23 @@ export const getContinuedHearingContainerHandler = ({
   setFirstAnsweredHearings,
   setSecondAnsweredHearings,
   setCurrentAnswerNumber,
+  setIsHearingStarted,
   mutate,
 }: TArgs): TAfterSecondHearingContainerHandler => {
-  const handleClickStart = () => {
+  const handleClickFormStart = () => {
     setNextFormId(HEARING_FORM.FIRST);
   };
 
-  const handleClickPremiumNext = () => {
-    setCurrentAnswerNumber(2);
+  const handleClickHearingStart = () => {
+    setIsHearingStarted(true);
   };
 
   const handleClickBack = () => {
     setCurrentAnswerNumber(1);
+  };
+
+  const handleClickPremiumNext = () => {
+    setCurrentAnswerNumber(2);
   };
 
   const handleCancelPremiumNext = () => {
@@ -300,15 +307,16 @@ export const getContinuedHearingContainerHandler = ({
   };
 
   return {
-    handleClickStart,
+    handleClickFormStart,
+    handleClickHearingStart,
     handleCancelForm,
+    handleClickBack,
     handleClickPremiumNext,
     handleCancelPremiumNext,
     getAnsweredHearings,
     getPreviousAnswers,
     handleSubmitForm,
     handleClickReset,
-    handleClickBack,
     handlePost,
     getConfirmAnswers,
     handleClickSameHearing,

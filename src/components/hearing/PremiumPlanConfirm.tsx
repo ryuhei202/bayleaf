@@ -4,7 +4,7 @@ import { PageHeader } from "../baseParts/PageHeader";
 
 type TProps = {
   readonly onClick: () => void;
-  readonly onCancel: () => void;
+  readonly onCancel?: () => void;
 };
 export const PremiumPlanConfirm = ({ onClick, onCancel }: TProps) => {
   return (

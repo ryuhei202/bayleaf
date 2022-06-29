@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useChartCreate } from "../../api/charts/useChartCreate";
 import { THearing } from "../../api/hearings/THearing";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
+import { BeforeHearingConfirm } from "../../components/hearing/BeforeHearingConfirm";
 import { HearingAnswerConfirm } from "../../components/hearing/HearingAnswerConfirm";
 import { PremiumPlanConfirm } from "../../components/hearing/PremiumPlanConfirm";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
@@ -28,6 +29,7 @@ export const ContinuedHearingContainer = ({ hearings, member }: TProps) => {
       forms: [],
     });
   const [isBackTransition, setIsBackTransition] = useState<boolean>(false);
+  const [isHearingStarted, setIsHearingStarted] = useState<boolean>(false);
   const {
     mutate,
     isLoading: isPostLoading,
@@ -37,14 +39,15 @@ export const ContinuedHearingContainer = ({ hearings, member }: TProps) => {
 
   const {
     handleSubmitForm,
-    handleClickPremiumNext,
-    handleCancelPremiumNext,
     getAnsweredHearings,
     handleCancelForm,
-    handleClickStart,
+    handleClickBack,
+    handleClickFormStart,
+    handleClickHearingStart,
+    handleClickPremiumNext,
+    handleCancelPremiumNext,
     getPreviousAnswers,
     handleClickReset,
-    handleClickBack,
     handlePost,
     getConfirmAnswers,
     handleClickSameHearing,
@@ -62,6 +65,7 @@ export const ContinuedHearingContainer = ({ hearings, member }: TProps) => {
     setSecondAnsweredHearings,
     setIsBackTransition,
     setCurrentAnswerNumber,
+    setIsHearingStarted,
     mutate,
   });
 
@@ -71,6 +75,15 @@ export const ContinuedHearingContainer = ({ hearings, member }: TProps) => {
 
   if (isPostError)
     return <ErrorMessage message="予期せぬエラーが発生しました" />;
+
+  if (!isHearingStarted) {
+    return (
+      <BeforeHearingConfirm
+        onClick={handleClickHearingStart}
+        planId={member.mPlanId}
+      />
+    );
+  }
 
   if (shouldPremiumConfirmPage()) {
     return (
@@ -102,7 +115,7 @@ export const ContinuedHearingContainer = ({ hearings, member }: TProps) => {
     <HearingFlowContainer
       onSubmitForm={handleSubmitForm}
       onCancelForm={handleCancelForm}
-      onClickStart={handleClickStart}
+      onClickStart={handleClickFormStart}
       onClickBack={handleClickBack}
       onClickSameHearing={handleClickSameHearing}
       confirmAnswers={getPreviousAnswers()}
