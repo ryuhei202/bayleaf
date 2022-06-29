@@ -38,7 +38,7 @@ export const HearingFlowContainer = ({
   if (nextFormId === null) {
     return (
       <HearingAnswerConfirm
-        title="前回のコーデ"
+        title="前回のヒアリング"
         confirmAnswers={confirmAnswers}
         footer={
           <>
