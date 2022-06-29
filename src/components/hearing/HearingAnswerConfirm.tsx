@@ -7,12 +7,14 @@ import { AnswerConfirm } from "./AnswerConfirm";
 type TProps = {
   readonly title: string;
   readonly confirmAnswers: THearingAnswer[];
+  readonly coordinateNum?: number;
   readonly footer: JSX.Element;
 };
 
 export const HearingAnswerConfirm = ({
   title,
   confirmAnswers,
+  coordinateNum,
   footer,
 }: TProps) => {
   return (
@@ -21,7 +23,10 @@ export const HearingAnswerConfirm = ({
         <PageHeader title={title} />
         <div className="mx-1.5">
           {confirmAnswers.map((confirmAnswer, index) => (
-            <AnswerConfirm answer={confirmAnswer.answer} index={index} />
+            <AnswerConfirm
+              answer={confirmAnswer.answer}
+              coordinateNum={coordinateNum ?? index + 1}
+            />
           ))}
         </div>
       </div>

@@ -86,6 +86,7 @@ export const AfterSecondHearingContainer = ({ hearings, member }: TProps) => {
       <HearingAnswerConfirm
         title="ヒアリング確認画面"
         confirmAnswers={getConfirmAnswers()}
+        coordinateNum={currentAnswerNumber}
         footer={
           <FirstHearingConfirmButtons
             onClickComplete={handlePost}
