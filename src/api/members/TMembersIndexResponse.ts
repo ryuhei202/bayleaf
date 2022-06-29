@@ -3,5 +3,5 @@ export type TMembersIndexResponse = {
   readonly email: string;
   readonly nextPaymentDate: string;
   readonly mPlanId: number;
-  readonly isAlreadyHearing: boolean;
+  readonly isLatestChartDelivered: boolean;
 };

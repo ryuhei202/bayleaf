@@ -18,7 +18,7 @@ export const HearingChartFetcher = ({ member }: TProps) => {
     },
   });
 
-  if (member.isAlreadyHearing) {
+  if (!member.isLatestChartDelivered) {
     return (
       <Page>
         <PageHeader
