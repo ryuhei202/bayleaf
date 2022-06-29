@@ -156,7 +156,7 @@ export const MultipleSelectForm = ({
             )}
           </div>
         </div>
-        <div className="flex flex-row mb-10">
+        <div className="flex flex-row my-5">
           <IconButton
             className="flex-none"
             onClick={onCancel}
