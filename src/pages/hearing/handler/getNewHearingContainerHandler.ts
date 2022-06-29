@@ -47,7 +47,7 @@ type TArgs = {
   >;
 };
 
-export const getFirstHearingContainerHandler = ({
+export const getNewHearingContainerHandler = ({
   memberId,
   secondAnsweredHearings,
   currentAnswerNumber,

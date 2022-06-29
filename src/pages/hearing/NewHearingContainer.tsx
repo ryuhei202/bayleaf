@@ -5,7 +5,7 @@ import { PremiumPlanConfirm } from "../../components/hearing/PremiumPlanConfirm"
 import { HearingFormFetcher } from "./HearingFormFetcher";
 import { FirstHearingConfirmButtons } from "./FirstHearingConfirmButtons";
 import { M_PLAN_IDS } from "../../models/hearing/MPlanIds";
-import { getFirstHearingContainerHandler } from "./handler/getFirstHearingContainerHandler";
+import { getNewHearingContainerHandler } from "./handler/getNewHearingContainerHandler";
 import { AnsweredHearings } from "./HearingContainer";
 import { useState } from "react";
 import { useChartCreate } from "../../api/charts/useChartCreate";
@@ -16,7 +16,7 @@ type TProps = {
   readonly member: TMembersIndexResponse;
 };
 
-export const FirstHearingContainer = ({ member }: TProps) => {
+export const NewHearingContainer = ({ member }: TProps) => {
   const [nextFormId, setNextFormId] = useState<number | null>(null);
   const [currentAnswerNumber, setCurrentAnswerNumber] = useState<1 | 2>(1);
   const [firstAnsweredHearings, setFirstAnsweredHearings] =
@@ -44,7 +44,7 @@ export const FirstHearingContainer = ({ member }: TProps) => {
     formattedConfirmAnswers,
     handleClickReset,
     handleSubmitComplete,
-  } = getFirstHearingContainerHandler({
+  } = getNewHearingContainerHandler({
     memberId: member.id,
     secondAnsweredHearings,
     currentAnswerNumber,
