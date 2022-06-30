@@ -1,5 +1,4 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { BeforeHearingConfirm } from "./BeforeHearingConfirm";
 import { PremiumPlanConfirm } from "./PremiumPlanConfirm";
 
 export default {

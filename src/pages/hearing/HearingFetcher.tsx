@@ -3,6 +3,7 @@ import { TChartResponse } from "../../api/charts/TChartResponse";
 import { useHearingIndex } from "../../api/hearings/useHearingIndex";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
+import { sortHearings } from "../../models/hearing/THearingForms";
 import { HearingContainer } from "./HearingContainer";
 
 type TProps = {
@@ -20,6 +21,14 @@ export const HearingFetcher = ({ member, chart }: TProps) => {
   if (!hearingIndexData) return <Loader active />;
 
   return (
-    <HearingContainer member={member} hearings={hearingIndexData.hearings} />
+    <HearingContainer
+      member={member}
+      hearings={hearingIndexData.hearings.map((hearing) => {
+        return {
+          coordinateId: hearing.coordinateId,
+          categorizedForms: sortHearings(hearing.categorizedForms),
+        };
+      })}
+    />
   );
 };

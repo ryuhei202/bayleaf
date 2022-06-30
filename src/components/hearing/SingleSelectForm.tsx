@@ -50,6 +50,7 @@ export const SingleSelectForm = ({
         id: response.id,
         title: response.title,
         options: [selectedOption],
+        categoryId: response.categoryId,
         categoryName: response.categoryName,
       };
       const nextFormId = response.options.find(

@@ -1,22 +1,23 @@
+import { useState } from "react";
+import { useChartCreate } from "../../api/charts/useChartCreate";
+import { THearing } from "../../api/hearings/THearing";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { BeforeHearingConfirm } from "../../components/hearing/BeforeHearingConfirm";
 import { HearingAnswerConfirm } from "../../components/hearing/HearingAnswerConfirm";
 import { PremiumPlanConfirm } from "../../components/hearing/PremiumPlanConfirm";
-import { HearingFormFetcher } from "./HearingFormFetcher";
-import { FirstHearingConfirmButtons } from "./FirstHearingConfirmButtons";
-import { M_PLAN_IDS } from "../../models/hearing/MPlanIds";
-import { getFirstHearingContainerHandler } from "./handler/getFirstHearingContainerHandler";
-import { AnsweredHearings } from "./HearingContainer";
-import { useState } from "react";
-import { useChartCreate } from "../../api/charts/useChartCreate";
-import { HearingPostSuccess } from "./HearingPostSuccess";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
+import { FirstHearingConfirmButtons } from "./FirstHearingConfirmButtons";
+import { getContinuedHearingContainerHandler } from "./handler/getContinuedHearingContainerHandler";
+import { AnsweredHearings } from "./HearingContainer";
+import { HearingFlowContainer } from "./HearingFlowContainer";
+import { HearingPostSuccess } from "./HearingPostSuccess";
 
 type TProps = {
+  readonly hearings: THearing[];
   readonly member: TMembersIndexResponse;
 };
 
-export const FirstHearingContainer = ({ member }: TProps) => {
+export const ContinuedHearingContainer = ({ hearings, member }: TProps) => {
   const [nextFormId, setNextFormId] = useState<number | null>(null);
   const [currentAnswerNumber, setCurrentAnswerNumber] = useState<1 | 2>(1);
   const [firstAnsweredHearings, setFirstAnsweredHearings] =
@@ -28,6 +29,7 @@ export const FirstHearingContainer = ({ member }: TProps) => {
       forms: [],
     });
   const [isBackTransition, setIsBackTransition] = useState<boolean>(false);
+  const [isHearingStarted, setIsHearingStarted] = useState<boolean>(false);
   const {
     mutate,
     isLoading: isPostLoading,
@@ -36,24 +38,34 @@ export const FirstHearingContainer = ({ member }: TProps) => {
   } = useChartCreate();
 
   const {
-    handleClickFirstNext,
+    handleSubmitForm,
+    getAnsweredHearings,
+    handleCancelForm,
+    handleClickBack,
+    handleClickFormStart,
+    handleClickHearingStart,
     handleClickPremiumNext,
     handleCancelPremiumNext,
-    handleSubmitForm,
-    handleCancelForm,
-    formattedConfirmAnswers,
+    getPreviousAnswers,
     handleClickReset,
-    handleSubmitComplete,
-  } = getFirstHearingContainerHandler({
-    memberId: member.id,
-    secondAnsweredHearings,
+    handlePost,
+    getConfirmAnswers,
+    handleClickSameHearing,
+    shouldAnswerTwo,
+    isAnsweredAll,
+  } = getContinuedHearingContainerHandler({
+    member,
+    hearings,
     currentAnswerNumber,
+    firstAnsweredHearings,
+    secondAnsweredHearings,
+    nextFormId,
     setNextFormId,
-    setCurrentAnswerNumber,
     setFirstAnsweredHearings,
     setSecondAnsweredHearings,
     setIsBackTransition,
-    firstAnsweredHearings,
+    setCurrentAnswerNumber,
+    setIsHearingStarted,
     mutate,
   });
 
@@ -64,28 +76,32 @@ export const FirstHearingContainer = ({ member }: TProps) => {
   if (isPostError)
     return <ErrorMessage message="予期せぬエラーが発生しました" />;
 
-  if (nextFormId === null) {
-    if (firstAnsweredHearings.forms.length <= 0) {
-      return (
-        <BeforeHearingConfirm
-          onClick={handleClickFirstNext}
-          planId={member.mPlanId}
-        />
-      );
-    }
-    return member.mPlanId === M_PLAN_IDS.PREMIUM &&
-      secondAnsweredHearings.forms.length <= 0 ? (
+  if (!isHearingStarted) {
+    return (
+      <BeforeHearingConfirm
+        onClick={handleClickHearingStart}
+        planId={member.mPlanId}
+      />
+    );
+  }
+
+  if (shouldAnswerTwo()) {
+    return (
       <PremiumPlanConfirm
         onClick={handleClickPremiumNext}
         onCancel={handleCancelPremiumNext}
       />
-    ) : (
+    );
+  }
+
+  if (isAnsweredAll()) {
+    return (
       <HearingAnswerConfirm
         title="ヒアリング確認画面"
-        confirmAnswers={formattedConfirmAnswers()}
+        confirmAnswers={getConfirmAnswers()}
         footer={
           <FirstHearingConfirmButtons
-            onClickComplete={handleSubmitComplete}
+            onClickComplete={handlePost}
             onClickBack={handleCancelForm}
             onClickReset={handleClickReset}
             isPostLoading={isPostLoading}
@@ -96,15 +112,16 @@ export const FirstHearingContainer = ({ member }: TProps) => {
   }
 
   return (
-    <HearingFormFetcher
+    <HearingFlowContainer
       onSubmitForm={handleSubmitForm}
       onCancelForm={handleCancelForm}
+      onClickStart={handleClickFormStart}
+      onClickBack={handleClickBack}
+      onClickSameHearing={handleClickSameHearing}
+      confirmAnswers={getPreviousAnswers()}
       nextFormId={nextFormId}
-      previousAnsweredHearing={
-        currentAnswerNumber === 1
-          ? firstAnsweredHearings.forms.slice(-1)[0]
-          : secondAnsweredHearings.forms.slice(-1)[0]
-      }
+      answeredHearings={getAnsweredHearings()}
+      currentAnswerNumber={currentAnswerNumber}
       isBackTransition={isBackTransition}
       member={member}
     />

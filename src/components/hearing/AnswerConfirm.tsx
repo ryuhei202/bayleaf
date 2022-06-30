@@ -4,13 +4,16 @@ import { CategoryConfirm } from "./CategoryConfirm";
 
 type TProps = {
   readonly answer: TCategorizedForm[];
-  readonly index: number;
+  readonly coordinateNum: number;
 };
 
-export const AnswerConfirm = ({ answer, index }: TProps): JSX.Element => {
+export const AnswerConfirm = ({
+  answer,
+  coordinateNum,
+}: TProps): JSX.Element => {
   return (
     <>
-      <Typography className="text-lg mt-5 ">コーデ{index + 1}</Typography>
+      <Typography className="text-lg mt-5 ">コーデ{coordinateNum}</Typography>
       <div className="bg-white mt-3 rounded-md overflow-hidden">
         {answer.map((ans) => (
           <CategoryConfirm categoryName={ans.categoryName} forms={ans.forms} />

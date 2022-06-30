@@ -49,6 +49,7 @@ export const HearingFormFetcher = ({
           {
             id: hearingFormData.id,
             title: hearingFormData.title,
+            categoryId: hearingFormData.categoryId,
             categoryName: hearingFormData.categoryName,
             options: [
               {

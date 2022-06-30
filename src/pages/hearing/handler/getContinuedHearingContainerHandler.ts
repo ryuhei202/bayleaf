@@ -1,5 +1,8 @@
-import { TMembersIndexResponse } from "./../../../api/members/TMembersIndexResponse";
-import { HEARING_FORM } from "./../../../models/hearing/THearingForms";
+import { TMembersIndexResponse } from "../../../api/members/TMembersIndexResponse";
+import {
+  HEARING_FORM,
+  sortHearingConfirm,
+} from "../../../models/hearing/THearingForms";
 import { THearing } from "../../../api/hearings/THearing";
 import { THearingAnswer } from "../../../models/hearing/THearingAnswer";
 import { AnsweredHearings, TAnsweredForm } from "../HearingContainer";
@@ -11,8 +14,10 @@ import liff from "@line/liff/dist/lib";
 import { M_PLAN_IDS } from "../../../models/hearing/MPlanIds";
 
 type TAfterSecondHearingContainerHandler = {
-  readonly handleClickStart: () => void;
+  readonly handleClickFormStart: () => void;
+  readonly handleClickHearingStart: () => void;
   readonly getPreviousAnswers: () => THearingAnswer[];
+  readonly handleClickBack: () => void;
   readonly handleCancelForm: () => void;
   readonly handleClickPremiumNext: () => void;
   readonly handleCancelPremiumNext: () => void;
@@ -22,11 +27,10 @@ type TAfterSecondHearingContainerHandler = {
     nextFormIdArg: number | null
   ) => void;
   readonly handleClickReset: () => void;
-  readonly handleClickBack: () => void;
   readonly handlePost: () => void;
   readonly getConfirmAnswers: () => THearingAnswer[];
   readonly handleClickSameHearing: () => void;
-  readonly shouldPremiumConfirmPage: () => boolean;
+  readonly shouldAnswerTwo: () => boolean;
   readonly isAnsweredAll: () => boolean;
 };
 
@@ -46,6 +50,7 @@ type TArgs = {
     React.SetStateAction<AnsweredHearings>
   >;
   readonly setCurrentAnswerNumber: React.Dispatch<React.SetStateAction<1 | 2>>;
+  readonly setIsHearingStarted: React.Dispatch<React.SetStateAction<boolean>>;
   readonly mutate: UseMutateFunction<
     AxiosResponse<any, any>,
     unknown,
@@ -53,7 +58,7 @@ type TArgs = {
     unknown
   >;
 };
-export const getAfterSecondHearingContainerHandler = ({
+export const getContinuedHearingContainerHandler = ({
   member,
   hearings,
   currentAnswerNumber,
@@ -65,18 +70,23 @@ export const getAfterSecondHearingContainerHandler = ({
   setFirstAnsweredHearings,
   setSecondAnsweredHearings,
   setCurrentAnswerNumber,
+  setIsHearingStarted,
   mutate,
 }: TArgs): TAfterSecondHearingContainerHandler => {
-  const handleClickStart = () => {
+  const handleClickFormStart = () => {
     setNextFormId(HEARING_FORM.FIRST);
   };
 
-  const handleClickPremiumNext = () => {
-    setCurrentAnswerNumber(2);
+  const handleClickHearingStart = () => {
+    setIsHearingStarted(true);
   };
 
   const handleClickBack = () => {
     setCurrentAnswerNumber(1);
+  };
+
+  const handleClickPremiumNext = () => {
+    setCurrentAnswerNumber(2);
   };
 
   const handleCancelPremiumNext = () => {
@@ -242,20 +252,7 @@ export const getAfterSecondHearingContainerHandler = ({
           }),
         });
       } else {
-        answer.push({
-          categoryName: value.categoryName,
-          forms: [
-            {
-              title: value.title,
-              options: value.options.map((o) => {
-                return {
-                  name: o.name,
-                  text: o.text ?? null,
-                };
-              }),
-            },
-          ],
-        });
+        sortHearingConfirm(answer, value);
       }
       return answer;
     }, []);
@@ -283,7 +280,7 @@ export const getAfterSecondHearingContainerHandler = ({
     }
   };
 
-  const shouldPremiumConfirmPage = (): boolean => {
+  const shouldAnswerTwo = (): boolean => {
     return (
       member.mPlanId === M_PLAN_IDS.PREMIUM &&
       !isAnswered(secondAnsweredHearings) &&
@@ -300,19 +297,20 @@ export const getAfterSecondHearingContainerHandler = ({
   };
 
   return {
-    handleClickStart,
+    handleClickFormStart,
+    handleClickHearingStart,
     handleCancelForm,
+    handleClickBack,
     handleClickPremiumNext,
     handleCancelPremiumNext,
     getAnsweredHearings,
     getPreviousAnswers,
     handleSubmitForm,
     handleClickReset,
-    handleClickBack,
     handlePost,
     getConfirmAnswers,
     handleClickSameHearing,
-    shouldPremiumConfirmPage,
+    shouldAnswerTwo,
     isAnsweredAll,
   };
 };

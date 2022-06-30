@@ -18,6 +18,7 @@ Default.args = {
     {
       answer: [
         {
+          categoryId: 1,
           categoryName: "シーン",
           forms: [
             {
@@ -44,6 +45,7 @@ Default.args = {
           ],
         },
         {
+          categoryId: 2,
           categoryName: "相手",
           forms: [
             {
@@ -63,6 +65,7 @@ Default.args = {
           ],
         },
         {
+          categoryId: 3,
           categoryName: "相手の服装",
           forms: [
             {
@@ -86,6 +89,7 @@ Default.args = {
     {
       answer: [
         {
+          categoryId: 1,
           categoryName: "シーン",
           forms: [
             {
@@ -112,6 +116,7 @@ Default.args = {
           ],
         },
         {
+          categoryId: 2,
           categoryName: "相手",
           forms: [
             {
@@ -128,6 +133,7 @@ Default.args = {
           ],
         },
         {
+          categoryId: 3,
           categoryName: "相手の服装",
           forms: [
             {

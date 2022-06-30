@@ -1,3 +1,4 @@
+import { sortHearingConfirm } from "./../../../models/hearing/THearingForms";
 import liff from "@line/liff/dist/lib";
 import { AxiosResponse } from "axios";
 import { UseMutateFunction } from "react-query";
@@ -47,7 +48,7 @@ type TArgs = {
   >;
 };
 
-export const getFirstHearingContainerHandler = ({
+export const getNewHearingContainerHandler = ({
   memberId,
   secondAnsweredHearings,
   currentAnswerNumber,
@@ -140,20 +141,7 @@ export const getFirstHearingContainerHandler = ({
                 }),
               });
             } else {
-              answer.push({
-                categoryName: value.categoryName,
-                forms: [
-                  {
-                    title: value.title,
-                    options: value.options.map((o) => {
-                      return {
-                        name: o.name,
-                        text: o.text ?? null,
-                      };
-                    }),
-                  },
-                ],
-              });
+              sortHearingConfirm(answer, value);
             }
             return answer;
           }, []),

@@ -1,7 +1,7 @@
 import { THearing } from "../../api/hearings/THearing";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
-import { AfterSecondHearingContainer } from "./AfterSecondHearingContainer";
-import { FirstHearingContainer } from "./FirstHearingContainer";
+import { ContinuedHearingContainer } from "./ContinuedHearingContainer";
+import { NewHearingContainer } from "./NewHearingContainer";
 
 type TProps = {
   readonly member: TMembersIndexResponse;
@@ -11,6 +11,7 @@ type TProps = {
 export type TAnsweredForm = {
   readonly id: number;
   readonly title: string;
+  readonly categoryId: number;
   readonly categoryName: string;
   readonly options: {
     id: number;
@@ -25,8 +26,8 @@ export type AnsweredHearings = {
 
 export const HearingContainer = ({ member, hearings }: TProps) => {
   if (hearings.length <= 0) {
-    return <FirstHearingContainer member={member} />;
+    return <NewHearingContainer member={member} />;
   }
 
-  return <AfterSecondHearingContainer hearings={hearings} member={member} />;
+  return <ContinuedHearingContainer hearings={hearings} member={member} />;
 };
