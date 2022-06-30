@@ -59,6 +59,7 @@ export const MultipleSelectForm = ({
       id: response.id,
       title: response.title,
       options: selectedOptions,
+      categoryId: response.categoryId,
       categoryName: response.categoryName,
     };
     const nextFormId =

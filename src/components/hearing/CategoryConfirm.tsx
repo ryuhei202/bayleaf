@@ -2,7 +2,7 @@ import { TCategorizedForm } from "../../api/hearings/TCategorizedForm";
 import { Typography } from "../baseParts/Typography";
 import { FormConfirm } from "./FormConfirm";
 
-type TProps = TCategorizedForm;
+type TProps = Omit<TCategorizedForm, "categoryId">;
 
 export const CategoryConfirm = ({ categoryName, forms }: TProps) => {
   return (

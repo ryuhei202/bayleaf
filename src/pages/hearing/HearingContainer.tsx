@@ -11,6 +11,7 @@ type TProps = {
 export type TAnsweredForm = {
   readonly id: number;
   readonly title: string;
+  readonly categoryId: number;
   readonly categoryName: string;
   readonly options: {
     id: number;

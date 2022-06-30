@@ -1,5 +1,8 @@
 import { TMembersIndexResponse } from "../../../api/members/TMembersIndexResponse";
-import { HEARING_FORM } from "../../../models/hearing/THearingForms";
+import {
+  HEARING_FORM,
+  sortHearingConfirm,
+} from "../../../models/hearing/THearingForms";
 import { THearing } from "../../../api/hearings/THearing";
 import { THearingAnswer } from "../../../models/hearing/THearingAnswer";
 import { AnsweredHearings, TAnsweredForm } from "../HearingContainer";
@@ -27,7 +30,7 @@ type TAfterSecondHearingContainerHandler = {
   readonly handlePost: () => void;
   readonly getConfirmAnswers: () => THearingAnswer[];
   readonly handleClickSameHearing: () => void;
-  readonly shouldPremiumConfirmPage: () => boolean;
+  readonly shouldAnswerTwo: () => boolean;
   readonly isAnsweredAll: () => boolean;
 };
 
@@ -249,20 +252,7 @@ export const getContinuedHearingContainerHandler = ({
           }),
         });
       } else {
-        answer.push({
-          categoryName: value.categoryName,
-          forms: [
-            {
-              title: value.title,
-              options: value.options.map((o) => {
-                return {
-                  name: o.name,
-                  text: o.text ?? null,
-                };
-              }),
-            },
-          ],
-        });
+        sortHearingConfirm(answer, value);
       }
       return answer;
     }, []);
@@ -290,7 +280,7 @@ export const getContinuedHearingContainerHandler = ({
     }
   };
 
-  const shouldPremiumConfirmPage = (): boolean => {
+  const shouldAnswerTwo = (): boolean => {
     return (
       member.mPlanId === M_PLAN_IDS.PREMIUM &&
       !isAnswered(secondAnsweredHearings) &&
@@ -320,7 +310,7 @@ export const getContinuedHearingContainerHandler = ({
     handlePost,
     getConfirmAnswers,
     handleClickSameHearing,
-    shouldPremiumConfirmPage,
+    shouldAnswerTwo,
     isAnsweredAll,
   };
 };

@@ -51,7 +51,7 @@ export const ContinuedHearingContainer = ({ hearings, member }: TProps) => {
     handlePost,
     getConfirmAnswers,
     handleClickSameHearing,
-    shouldPremiumConfirmPage,
+    shouldAnswerTwo,
     isAnsweredAll,
   } = getContinuedHearingContainerHandler({
     member,
@@ -85,7 +85,7 @@ export const ContinuedHearingContainer = ({ hearings, member }: TProps) => {
     );
   }
 
-  if (shouldPremiumConfirmPage()) {
+  if (shouldAnswerTwo()) {
     return (
       <PremiumPlanConfirm
         onClick={handleClickPremiumNext}
