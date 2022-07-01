@@ -76,11 +76,7 @@ export const SingleSelectForm = ({
     name: string;
     text: string;
   }) => {
-    if (text === "") {
-      setSelectedOption(undefined);
-    } else {
-      setSelectedOption({ id, text, name });
-    }
+    setSelectedOption({ id, text, name });
   };
 
   const validateNextButton = (): boolean => {
