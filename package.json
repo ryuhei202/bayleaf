@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@line/liff": "^2.20.1",
+    "@line/liff-inspector": "^1.0.2",
     "@sentry/react": "^7.0.0",
     "@sentry/tracing": "^7.0.0",
     "@testing-library/jest-dom": "^5.16.4",

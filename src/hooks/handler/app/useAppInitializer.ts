@@ -3,6 +3,7 @@ import liff from "@line/liff";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { QueryClient } from "react-query";
 import * as Sentry from "@sentry/react";
+import LIFFInspectorPlugin from "@line/liff-inspector";
 
 export const useAppInitializer = () => {
   const [lineIdToken, setLineIdToken] = useState("");
@@ -40,8 +41,10 @@ export const useAppInitializer = () => {
   // LINEのログイン処理を行う
   useEffect(() => {
     if (location.pathname === "/") {
+      liff.use(new LIFFInspectorPlugin());
       liff.init({ liffId: `${process.env.REACT_APP_LIFF_ID}` });
     } else {
+      liff.use(new LIFFInspectorPlugin());
       liff.init({ liffId: `${process.env.REACT_APP_LIFF_ID}` }).then(() => {
         // ローカルで開発する場合、クエリパラメータにLINE IDを直書きすることでデバッグできます。
         // e.g) http://localhost:3001/advice?lineId=xxx
