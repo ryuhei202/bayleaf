@@ -44,19 +44,19 @@ export const HearingFlowContainer = ({
         footer={
           <>
             <Button
-              variant="primary"
-              onClick={onClickSameHearing}
-              border={true}
-            >
-              前回と同じ内容でコーデを作る
-            </Button>
-            <Button
               onClick={onClickStart}
-              variant="default"
+              variant="primary"
               disableElevation
               border
             >
               ヒアリングを開始する
+            </Button>
+            <Button
+              variant="default"
+              onClick={onClickSameHearing}
+              border={true}
+            >
+              前回と同じ内容でコーデを作る
             </Button>
             {currentAnswerNumber === 2 && (
               <Button variant="text" onClick={onClickBack}>
