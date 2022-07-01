@@ -18,49 +18,69 @@ Default.args = {
     {
       answer: [
         {
+          categoryId: 1,
           categoryName: "シーン",
           forms: [
             {
               title: "借りたコーデをどちらの予定で使いますか？",
-              optionName: ["特別な予定"],
+              options: [
+                { name: "お客様・取引先", text: null },
+                { name: "お客様・取引先", text: null },
+              ],
             },
             {
               title: "どちらをメインに使用しますか？",
-              optionName: ["プライベートメイン"],
+              options: [
+                { name: "お客様・取引先", text: null },
+                { name: "お客様・取引先", text: null },
+              ],
             },
             {
               title: "どちらの場所で仕事をする時間が長いですか？",
-              optionName: ["社内が長い"],
+              options: [
+                { name: "お客様・取引先", text: null },
+                { name: "お客様・取引先", text: null },
+              ],
             },
           ],
         },
         {
+          categoryId: 2,
           categoryName: "相手",
           forms: [
             {
               title: "普段のお仕事先で会う人を教えてください(オンライン含む)",
-              optionName: ["お客様・取引先", "同僚(上司、部下)"],
+              options: [
+                { name: "お客様・取引先", text: null },
+                { name: "お客様・取引先", text: null },
+              ],
             },
             {
               title: "中でも一番お会いする方を選択してください",
-              optionName: ["お客様・取引先"],
+              options: [
+                { name: "お客様・取引先", text: null },
+                { name: "お客様・取引先", text: null },
+              ],
             },
           ],
         },
         {
+          categoryId: 3,
           categoryName: "相手の服装",
           forms: [
             {
               title: "お客様や取引先の方はどんな服装をされていますか？",
-              optionName: [
-                "スーツ・ジャケットスタイル",
-                "シャツスタイル",
-                "私服、自由",
+              options: [
+                { name: "お客様・取引先", text: null },
+                { name: "お客様・取引先", text: null },
               ],
             },
             {
               title: "同じ部署の方はどのような服装が多いですか？",
-              optionName: ["シャツスタイル"],
+              options: [
+                { name: "お客様・取引先", text: null },
+                { name: "お客様・取引先", text: null },
+              ],
             },
           ],
         },
@@ -69,49 +89,66 @@ Default.args = {
     {
       answer: [
         {
+          categoryId: 1,
           categoryName: "シーン",
           forms: [
             {
               title: "借りたコーデをどちらの予定で使いますか？",
-              optionName: ["特別な予定"],
+              options: [
+                { name: "お客様・取引先", text: null },
+                { name: "お客様・取引先", text: null },
+              ],
             },
             {
               title: "どちらをメインに使用しますか？",
-              optionName: ["プライベートメイン"],
+              options: [
+                { name: "お客様・取引先", text: null },
+                { name: "お客様・取引先", text: null },
+              ],
             },
             {
               title: "どちらの場所で仕事をする時間が長いですか？",
-              optionName: ["社内が長い"],
+              options: [
+                { name: "お客様・取引先", text: null },
+                { name: "お客様・取引先", text: null },
+              ],
             },
           ],
         },
         {
+          categoryId: 2,
           categoryName: "相手",
           forms: [
             {
               title: "普段のお仕事先で会う人を教えてください(オンライン含む)",
-              optionName: ["お客様・取引先", "同僚(上司、部下)"],
+              options: [
+                { name: "お客様・取引先", text: null },
+                { name: "お客様・取引先", text: null },
+              ],
             },
             {
               title: "中でも一番お会いする方を選択してください",
-              optionName: ["お客様・取引先"],
+              options: [{ name: "お客様・取引先", text: null }],
             },
           ],
         },
         {
+          categoryId: 3,
           categoryName: "相手の服装",
           forms: [
             {
               title: "お客様や取引先の方はどんな服装をされていますか？",
-              optionName: [
-                "スーツ・ジャケットスタイル",
-                "シャツスタイル",
-                "私服、自由",
+              options: [
+                { name: "お客様・取引先", text: null },
+                { name: "お客様・取引先", text: null },
               ],
             },
             {
               title: "同じ部署の方はどのような服装が多いですか？",
-              optionName: ["シャツスタイル"],
+              options: [
+                { name: "お客様・取引先", text: null },
+                { name: "お客様・取引先", text: null },
+              ],
             },
           ],
         },

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { TOptionParams } from "../../api/charts/TOptionParams";
 import { THearingFormShowResponse } from "../../api/hearingForms/THearingFormShowResponse";
-import { AnsweredHearing } from "../../pages/hearing/HearingContainer";
+import { TAnsweredForm } from "../../pages/hearing/HearingContainer";
 import { Button } from "../baseParts/Button";
 import { IconButton } from "../baseParts/IconButton";
 import { ArrowIcon } from "../baseParts/icons/ArrowIcon";
@@ -13,10 +13,7 @@ import { Typography } from "../baseParts/Typography";
 
 type TProps = {
   readonly response: THearingFormShowResponse;
-  readonly onSubmit: (
-    answer: AnsweredHearing,
-    nextFormId: number | null
-  ) => void;
+  readonly onSubmit: (answer: TAnsweredForm, nextFormId: number | null) => void;
   readonly onCancel: () => void;
   readonly beforeAnswerText?: TOptionParams[];
   readonly memberId?: number;
@@ -49,10 +46,11 @@ export const SingleSelectForm = ({
   };
   const handleSubmit = () => {
     if (isSelectedOption(selectedOption)) {
-      const answer: AnsweredHearing = {
+      const answer: TAnsweredForm = {
         id: response.id,
         title: response.title,
         options: [selectedOption],
+        categoryId: response.categoryId,
         categoryName: response.categoryName,
       };
       const nextFormId = response.options.find(

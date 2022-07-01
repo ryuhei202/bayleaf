@@ -5,16 +5,16 @@ import { MultipleSelectForm } from "../../components/hearing/MultipleSelectForm"
 import { SingleSelectForm } from "../../components/hearing/SingleSelectForm";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { getHearingFormFetcherHandler } from "./handler/getHearingFormFetcherHandler";
-import { AnsweredHearing } from "./HearingContainer";
+import { TAnsweredForm } from "./HearingContainer";
 
 type TProps = {
   readonly onSubmitForm: (
-    answer: AnsweredHearing,
+    answer: TAnsweredForm,
     nextFormIdArg: number | null
   ) => void;
   readonly onCancelForm: () => void;
   readonly nextFormId: number;
-  readonly previousAnsweredHearing?: AnsweredHearing;
+  readonly previousAnsweredHearing?: TAnsweredForm;
   readonly isBackTransition?: boolean;
   readonly member: TMembersIndexResponse;
 };
@@ -49,6 +49,7 @@ export const HearingFormFetcher = ({
           {
             id: hearingFormData.id,
             title: hearingFormData.title,
+            categoryId: hearingFormData.categoryId,
             categoryName: hearingFormData.categoryName,
             options: [
               {

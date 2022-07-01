@@ -1,5 +1,5 @@
-import { THearingConfirm } from "./THearingConfirm";
+import { TCategorizedForm } from "../../api/hearings/TCategorizedForm";
 
 export type THearingAnswer = {
-  readonly answer: THearingConfirm[];
+  readonly answer: TCategorizedForm[];
 };

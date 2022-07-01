@@ -1,9 +1,9 @@
+import { TAnsweredForm } from "./../HearingContainer";
 import { TOptionParams } from "../../../api/charts/TOptionParams";
 import { THearingFormShowResponse } from "../../../api/hearingForms/THearingFormShowResponse";
-import { AnsweredHearing } from "../HearingContainer";
 
 type TArgs = {
-  readonly previousAnsweredHearing?: AnsweredHearing;
+  readonly previousAnsweredHearing?: TAnsweredForm;
 };
 
 type THearingFormFetcherHandler = {

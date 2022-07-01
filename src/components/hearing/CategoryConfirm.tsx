@@ -1,8 +1,8 @@
-import { THearingConfirm } from "../../models/hearing/THearingConfirm";
+import { TCategorizedForm } from "../../api/hearings/TCategorizedForm";
 import { Typography } from "../baseParts/Typography";
 import { FormConfirm } from "./FormConfirm";
 
-type TProps = THearingConfirm;
+type TProps = Omit<TCategorizedForm, "categoryId">;
 
 export const CategoryConfirm = ({ categoryName, forms }: TProps) => {
   return (
