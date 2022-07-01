@@ -6,6 +6,7 @@ import { AnswerConfirm } from "./AnswerConfirm";
 
 type TProps = {
   readonly title: string;
+  readonly subTitle?: string;
   readonly confirmAnswers: THearingAnswer[];
   readonly coordinateNum?: number;
   readonly footer: JSX.Element;
@@ -13,6 +14,7 @@ type TProps = {
 
 export const HearingAnswerConfirm = ({
   title,
+  subTitle,
   confirmAnswers,
   coordinateNum,
   footer,
@@ -20,7 +22,7 @@ export const HearingAnswerConfirm = ({
   return (
     <Page>
       <div className="px-2 mb-10 min-h-[calc(100vh-190px)]">
-        <PageHeader title={title} />
+        <PageHeader title={title} subtitle={subTitle ?? ""} />
         <div className="mx-1.5">
           {confirmAnswers.map((confirmAnswer, index) => (
             <AnswerConfirm
