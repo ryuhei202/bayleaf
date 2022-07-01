@@ -18,6 +18,17 @@ export const HearingChartFetcher = ({ member }: TProps) => {
     },
   });
 
+  if (!member.isLatestChartDelivered) {
+    return (
+      <Page>
+        <PageHeader
+          title="既に回答済みです。"
+          className="m-4"
+          subtitle="スタイリストが対応しますので、少々お待ちください。"
+        />
+      </Page>
+    );
+  }
   if (chartIndexError)
     return <ErrorMessage message={chartIndexError.message} />;
 
