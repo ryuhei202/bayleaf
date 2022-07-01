@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import liff from "@line/liff";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { QueryClient } from "react-query";
+import * as Sentry from "@sentry/react";
 
 export const useAppInitializer = () => {
   const [lineIdToken, setLineIdToken] = useState("");
@@ -51,6 +52,9 @@ export const useAppInitializer = () => {
             setLiffErrorMessage("LINE ID いれなさい");
           }
         } else {
+          liff.getProfile().then((profile) => {
+            Sentry.setUser({ id: profile.userId, name: profile.displayName });
+          });
           setLineIdToken(liff.getIDToken() ?? "");
           if (!liff.isInClient()) {
             setLiffErrorMessage("スマホのLINEアプリから開いてください。");
