@@ -41,10 +41,8 @@ export const useAppInitializer = () => {
   // LINEのログイン処理を行う
   useEffect(() => {
     if (location.pathname === "/") {
-      liff.use(new LIFFInspectorPlugin());
       liff.init({ liffId: `${process.env.REACT_APP_LIFF_ID}` });
     } else {
-      liff.use(new LIFFInspectorPlugin());
       liff.init({ liffId: `${process.env.REACT_APP_LIFF_ID}` }).then(() => {
         // ローカルで開発する場合、クエリパラメータにLINE IDを直書きすることでデバッグできます。
         // e.g) http://localhost:3001/advice?lineId=xxx
@@ -55,6 +53,9 @@ export const useAppInitializer = () => {
             setLiffErrorMessage("LINE ID いれなさい");
           }
         } else {
+          if (process.env.REACT_APP_ENV === "staging") {
+            liff.use(new LIFFInspectorPlugin());
+          }
           liff.getProfile().then((profile) => {
             Sentry.setUser({ id: profile.userId, name: profile.displayName });
           });
