@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
+import { HearingChartFetcher } from "../HearingChartFetcher";
 import { MemberListContainer } from "./MemberListContainer";
-import { ReferenceFetcher } from "./ReferenceFetcher";
 
 export const Hearing = () => {
   const [member, setMember] =
@@ -16,7 +16,7 @@ export const Hearing = () => {
       {member === undefined ? (
         <MemberListContainer setMember={setMember} />
       ) : (
-        <ReferenceFetcher member={member} />
+        <HearingChartFetcher member={member} />
       )}
     </>
   );

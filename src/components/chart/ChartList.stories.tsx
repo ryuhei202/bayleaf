@@ -27,6 +27,7 @@ const charts = [...Array(2)].map((): TChartResponse => {
       "https://stg.leeap.jp/files/preregistered_item/168/16899/large_thumb_IMG_3977.JPG",
     ],
     planName: "カジュアルプラン",
+    planId: 1,
   };
 });
 

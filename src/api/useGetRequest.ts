@@ -6,7 +6,8 @@ import { customAxios } from "./customAxios";
 
 export const useGetRequest = <TResponse, TParams = {}>(
   path: string,
-  params?: TParams
+  params?: TParams,
+  isEnabled?: boolean
 ): {
   data?: TResponse;
   error: Error | null;
@@ -32,6 +33,7 @@ export const useGetRequest = <TResponse, TParams = {}>(
       onError: (error) => {
         Sentry.captureException(error);
       },
+      enabled: isEnabled ?? true,
     }
   );
 
