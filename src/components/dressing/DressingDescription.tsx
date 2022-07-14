@@ -27,7 +27,7 @@ export const DressingDescription = ({
 
   return (
     <div>
-      <Typography size="sm">コーデの説明</Typography>
+      <Typography size="xl">コーデの説明</Typography>
       <div className="my-5">
         <CoordinateItemImages items={items} />
       </div>

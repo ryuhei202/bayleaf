@@ -2,6 +2,7 @@ import { Loader } from "semantic-ui-react";
 import { TChartResponse } from "../../api/charts/TChartResponse";
 import { useDressingsIndex } from "../../api/dressings/useDressingsIndex";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
+import { DressingPage } from "./DressingPage";
 
 type TProps = {
   readonly chart: TChartResponse;
@@ -28,5 +29,5 @@ export const DressingFetcher = ({ chart }: TProps) => {
     return <>何か欠けてるで</>;
   }
 
-  return <>a</>;
+  return <DressingPage dressings={dressingIndexData.dressings} />;
 };

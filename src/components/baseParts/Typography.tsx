@@ -3,7 +3,7 @@ import React from "react";
 type Props = {
   className?: string;
   children?: React.ReactNode;
-  size?: "2xl" | "sm" | "xs" | "base";
+  size?: "2xl" | "xl" | "sm" | "xs" | "base";
   color?: "primary" | "secondary" | "strong-gray" | "gray";
   weight?: "regular" | "medium" | "bold";
 };
@@ -22,6 +22,8 @@ export const Typography = ({
       switch (size) {
         case "2xl":
           return "text-2xl";
+        case "xl":
+          return "text-xl";
         case "sm":
           return "text-sm";
         case "xs":

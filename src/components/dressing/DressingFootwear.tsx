@@ -8,7 +8,7 @@ type TProps = {
 export const DressingFootwear = ({ footwear }: TProps) => {
   return (
     <div>
-      <Typography size="sm">コーデに合う靴</Typography>
+      <Typography size="xl">コーデに合う靴</Typography>
       <div className="flex items-center mt-5">
         <img
           src={`${process.env.REACT_APP_HOST_URL + footwear.imageFileName}`}
