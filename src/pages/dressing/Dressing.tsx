@@ -7,6 +7,7 @@ import { Typography } from "../../components/baseParts/Typography";
 import { ChartList } from "../../components/chart/ChartList";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { CHART_RENTAL_STATUS } from "../../models/chart/ChartRentalStatus";
+import { DressingFetcher } from "./DressingFetcher";
 
 export const Dressing = () => {
   const [selectedChart, setSelectedChart] =
@@ -45,7 +46,7 @@ export const Dressing = () => {
   return (
     <>
       {selectedChart ? (
-        <>a</>
+        <DressingFetcher chart={selectedChart} />
       ) : (
         <Page>
           <ChartList
