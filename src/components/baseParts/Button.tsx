@@ -5,7 +5,7 @@ import { analyzeEvent, TGAEvent } from "../../lib/gtag";
 type Props = {
   children?: React.ReactNode;
   className?: string;
-  onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   variant?: "default" | "primary" | "text";
   disabled?: boolean;
   disableElevation?: boolean;
