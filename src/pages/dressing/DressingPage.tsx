@@ -50,11 +50,11 @@ export const DressingPage = ({ dressings }: TProps) => {
     );
   return (
     <Page className="p-5">
-      <PageHeader
+      {/* <PageHeader
         title="着こなしページ"
         subtitle="服を着る時に是非参考にしてみてください！"
         className="mb-10"
-      />
+      /> */}
       <Tab.Group>
         {tabs}
         <Tab.Panels className="mt-10">

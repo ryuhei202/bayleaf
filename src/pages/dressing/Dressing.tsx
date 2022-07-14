@@ -34,14 +34,14 @@ export const Dressing = () => {
 
   if (!chartIndexData) return <Loader active />;
 
-  if (chartIndexData.charts.length === 0)
+  if (chartIndexData.charts.length === 0) {
+    window.location.href = "https://leeap.jp/rental/plan_check";
     return (
       <div className="flex justify-center items-center h-screen">
-        <Typography>
-          <>現在レンタル中のコーデはありません。</>
-        </Typography>
+        <Typography>リダイレクト中</Typography>
       </div>
     );
+  }
 
   return (
     <>

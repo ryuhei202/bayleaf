@@ -6,9 +6,9 @@ type TProps = {
 };
 export const DressingHearing = ({ hearings }: TProps) => {
   return (
-    <div className="bg-white p-3">
+    <div>
       <Typography size="xl">ヒアリング内容</Typography>
-      <div className="m-4">
+      <div className="m-3 bg-white p-3 shadow-sm">
         {hearings.map((h) => (
           <>
             <Typography size="xs" color="gray">

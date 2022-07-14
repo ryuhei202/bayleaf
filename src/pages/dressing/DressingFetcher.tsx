@@ -1,6 +1,7 @@
 import { Loader } from "semantic-ui-react";
 import { TChartResponse } from "../../api/charts/TChartResponse";
 import { useDressingsIndex } from "../../api/dressings/useDressingsIndex";
+import { Typography } from "../../components/baseParts/Typography";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { DressingPage } from "./DressingPage";
 
@@ -26,7 +27,12 @@ export const DressingFetcher = ({ chart }: TProps) => {
       dressingIndexData.dressings[0].footwear
     )
   ) {
-    return <>何か欠けてるで</>;
+    window.location.href = "https://leeap.jp/rental/plan_check";
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Typography>リダイレクト中</Typography>
+      </div>
+    );
   }
 
   return <DressingPage dressings={dressingIndexData.dressings} />;
