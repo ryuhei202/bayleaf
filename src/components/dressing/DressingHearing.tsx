@@ -6,7 +6,7 @@ type TProps = {
 };
 export const DressingHearing = ({ hearings }: TProps) => {
   return (
-    <div>
+    <div className="mb-16">
       <Typography size="xl">ヒアリング内容</Typography>
       <div className="m-3 bg-white p-3 shadow-sm">
         {hearings.map((h) => (

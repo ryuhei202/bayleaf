@@ -26,7 +26,7 @@ export const DressingDescription = ({
   });
 
   return (
-    <div>
+    <div className="mb-16">
       <Typography size="xl">コーデの説明</Typography>
       <div className="my-5">
         <CoordinateItemImages items={items} />

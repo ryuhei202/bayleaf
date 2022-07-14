@@ -1,12 +1,11 @@
 import { Tab } from "@headlessui/react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { TDressing } from "../../api/dressings/TDressing";
+import { TNonNullableDressing } from "../../api/dressings/TDressing";
 import { IdTokenContext, StylistIdContext } from "../../App";
 import { Button } from "../../components/baseParts/Button";
 import { Divider } from "../../components/baseParts/Divider";
 import { Page } from "../../components/baseParts/Page";
-import { PageHeader } from "../../components/baseParts/PageHeader";
 import { TabAlt } from "../../components/baseParts/tabs/TabAlt";
 import { DressingAdvice } from "../../components/dressing/DressingAdvice";
 import { DressingChangeItem } from "../../components/dressing/DressingChangeItem";
@@ -15,80 +14,45 @@ import { DressingFootwear } from "../../components/dressing/DressingFootwear";
 import { DressingHearing } from "../../components/dressing/DressingHearing";
 
 type TProps = {
-  readonly dressings: TDressing[];
+  readonly dressings: TNonNullableDressing[];
 };
-
-// 型TDressingを全てnot nullにする
-type RequiredNotNull<T> = {
-  [P in keyof T]: NonNullable<T[P]>;
-};
-type Ensure<T, K extends keyof T> = T & RequiredNotNull<Pick<T, K>>;
-type TNonNullableDressing = Ensure<
-  TDressing,
-  "categorizedForms" | "description" | "comment" | "footwear"
->;
 
 export const DressingPage = ({ dressings }: TProps) => {
   const idToken = useContext(IdTokenContext);
   const stylistId = useContext(StylistIdContext);
-  const tabs =
-    dressings.length > 1 ? (
-      <Tab.List>
-        {dressings.map((_, index) => (
-          <TabAlt
-            className={`w-1/${dressings.length}`}
-            disableElevation={true}
-            size="small"
-            radius="small"
-          >
-            コーデ{index + 1}
-          </TabAlt>
-        ))}
-      </Tab.List>
-    ) : (
-      <></>
-    );
+
   return (
-    <Page className="p-5">
-      {/* <PageHeader
-        title="着こなしページ"
-        subtitle="服を着る時に是非参考にしてみてください！"
-        className="mb-10"
-      /> */}
+    <Page className="p-5 pb-5">
       <Tab.Group>
-        {tabs}
+        {dressings.length > 1 ? (
+          <Tab.List className="w-full flex sticky top-0">
+            {dressings.map((_, index) => (
+              <TabAlt disableElevation={true} size="small" radius="small">
+                コーデ{index + 1}
+              </TabAlt>
+            ))}
+          </Tab.List>
+        ) : (
+          <></>
+        )}
         <Tab.Panels className="mt-10">
           {dressings.map((dressing) => (
             <Tab.Panel>
-              {dressing.categorizedForms && (
-                <DressingHearing hearings={dressing.categorizedForms} />
-              )}
-              <Divider className="mb-16" />
-              {dressing.description && dressing.comment && (
-                <DressingDescription
-                  description={dressing.description}
-                  comment={dressing.comment}
-                  coordinateItems={dressing.coordinateItems
-                    .filter((i) => !i.isChangeItem)
-                    .map((i) => i.item)}
-                />
-              )}
-              <Divider className="mb-16" />
+              <DressingHearing hearings={dressing.categorizedForms} />
+              <DressingDescription
+                description={dressing.description}
+                comment={dressing.comment}
+                coordinateItems={dressing.coordinateItems
+                  .filter((i) => !i.isChangeItem)
+                  .map((i) => i.item)}
+              />
               <DressingAdvice advices={dressing.advices} />
-              <Divider className="mb-16" />
-              {dressing.footwear && (
-                <DressingFootwear footwear={dressing.footwear} />
-              )}
-              <Divider className="mb-16" />
-              {dressing.coordinateItems.filter((i) => i.isChangeItem).length >
-                0 && (
-                <DressingChangeItem
-                  changeItems={dressing.coordinateItems
-                    .filter((i) => i.isChangeItem)
-                    .map((i) => i.item)}
-                />
-              )}
-              <Divider className="mb-16" />
+              <DressingFootwear footwear={dressing.footwear} />
+              <DressingChangeItem
+                changeItems={dressing.coordinateItems
+                  .filter((i) => i.isChangeItem)
+                  .map((i) => i.item)}
+              />
               <Button variant="primary">
                 <Link to={`/consult?lineId=${idToken}&stylistId=${stylistId}`}>
                   着こなしの相談をする

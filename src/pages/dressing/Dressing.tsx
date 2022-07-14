@@ -38,7 +38,7 @@ export const Dressing = () => {
     window.location.href = "https://leeap.jp/rental/plan_check";
     return (
       <div className="flex justify-center items-center h-screen">
-        <Typography>リダイレクト中</Typography>
+        <Typography>リダイレクト中...</Typography>
       </div>
     );
   }

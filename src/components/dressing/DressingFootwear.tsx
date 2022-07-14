@@ -7,7 +7,7 @@ type TProps = {
 
 export const DressingFootwear = ({ footwear }: TProps) => {
   return (
-    <div>
+    <div className="mb-16">
       <Typography size="xl">コーデに合う靴</Typography>
       <div className="flex items-center mt-5">
         <img
