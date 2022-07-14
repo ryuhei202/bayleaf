@@ -33,13 +33,18 @@ export const DressingPage = ({ dressings }: TProps) => {
   const stylistId = useContext(StylistIdContext);
   const tabs =
     dressings.length > 1 ? (
-      <>
-        (
+      <Tab.List>
         {dressings.map((_, index) => (
-          <TabAlt>コーデ{index + 1}</TabAlt>
+          <TabAlt
+            className={`w-1/${dressings.length}`}
+            disableElevation={true}
+            size="small"
+            radius="small"
+          >
+            コーデ{index + 1}
+          </TabAlt>
         ))}
-        )
-      </>
+      </Tab.List>
     ) : (
       <></>
     );
@@ -51,8 +56,8 @@ export const DressingPage = ({ dressings }: TProps) => {
         className="mb-10"
       />
       <Tab.Group>
-        <Tab.List>{tabs}</Tab.List>
-        <Tab.Panels>
+        {tabs}
+        <Tab.Panels className="mt-10">
           {dressings.map((dressing) => (
             <Tab.Panel>
               {dressing.categorizedForms && (
