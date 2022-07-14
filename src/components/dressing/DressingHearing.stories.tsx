@@ -13,26 +13,7 @@ const Template: ComponentStory<typeof DressingHearing> = (args) => (
 );
 
 export const Default = Template.bind({});
-const forms: TForm[] = [
-  {
-    title: "借りたコーデをどちらの予定で使いますか？",
-    options: [
-      {
-        name: "日常の予定",
-        text: null,
-      },
-    ],
-  },
-  {
-    title: "借りたコーデをどちらの予定で使いますか？",
-    options: [
-      {
-        name: "日常の予定",
-        text: null,
-      },
-    ],
-  },
-];
+
 const hearings = [
   {
     categoryId: 1,
@@ -81,3 +62,10 @@ const hearings = [
 Default.args = {
   hearings,
 };
+Default.decorators = [
+  (Story) => (
+    <div className="bg-slate-200 w-full p-3">
+      <Story />
+    </div>
+  ),
+];
