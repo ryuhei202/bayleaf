@@ -53,6 +53,9 @@ export const useAppInitializer = () => {
             setLiffErrorMessage("LINE ID いれなさい");
           }
         } else {
+          if (!liff.isInClient()) {
+            setLiffErrorMessage("スマホのLINEアプリから開いてください。");
+          }
           if (process.env.REACT_APP_ENV === "staging") {
             liff.use(new LIFFInspectorPlugin());
           }
@@ -60,9 +63,6 @@ export const useAppInitializer = () => {
             Sentry.setUser({ id: profile.userId, name: profile.displayName });
           });
           setLineIdToken(liff.getIDToken() ?? "");
-          if (!liff.isInClient()) {
-            setLiffErrorMessage("スマホのLINEアプリから開いてください。");
-          }
         }
       });
     }
