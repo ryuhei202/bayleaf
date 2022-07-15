@@ -1,8 +1,8 @@
 import { TDressingComment } from "../../api/dressings/TDressingComment";
 import { TDressingItem } from "../../api/dressings/TDressingItem";
+import { CoordinateItemImages } from "../baseParts/CoordinateItemImages";
 import { SpeechBalloon } from "../baseParts/SpeechBalloon";
 import { Typography } from "../baseParts/Typography";
-import { CoordinateItemImages } from "../review/CoordinateItemImages";
 
 type TProps = {
   readonly description: string;
