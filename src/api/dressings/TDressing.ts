@@ -6,7 +6,7 @@ import { TDressingFootwear } from "./TDressingFootwear";
 
 export type TDressing = {
   readonly coordinateId: number;
-  readonly categorizedForms: Omit<TCategorizedForm, "categoryId">[] | null;
+  readonly categorizedForms: TCategorizedForm[] | null;
   readonly description: string | null;
   readonly comment: TDressingComment | null;
   readonly advices: TDressingAdvice[];
