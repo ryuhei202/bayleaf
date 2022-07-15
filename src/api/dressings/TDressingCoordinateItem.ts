@@ -1,6 +1,6 @@
-import { TCoordinateItemResponse } from "../coordinates/TCoordinateItemResponse";
+import { TDressingItem } from "./TDressingItem";
 
 export type TDressingCoordinateItem = {
   readonly isChangeItem: boolean;
-  readonly items: TCoordinateItemResponse;
+  readonly item: TDressingItem;
 };
