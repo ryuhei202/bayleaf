@@ -53,7 +53,7 @@ export const DressingPage = ({ dressings }: TProps) => {
                   .map((i) => i.item)}
               />
               <Button variant="primary">
-                <Link to={`/consult?lineId=${idToken}&stylistId=${stylistId}`}>
+                <Link to={`/consult?stylistId=${stylistId}`}>
                   着こなしの相談をする
                 </Link>
               </Button>
