@@ -15,11 +15,26 @@ export const DressingHearing = ({ hearings }: TProps) => {
               {h.categoryName}
             </Typography>
             <div className="mx-2 my-1">
-              <Typography size="sm">
+              {h.forms
+                .sort((a, b) => {
+                  return a.options.length - b.options.length;
+                })
+                .map((f) =>
+                  f.options.length > 1 ? (
+                    <Typography size="xs" color="strong-gray">
+                      {f.options.map((o) => o.name).join(", ")}
+                    </Typography>
+                  ) : (
+                    <Typography size="sm" weight="bold">
+                      {f.options[0].name}
+                    </Typography>
+                  )
+                )}
+              {/* <Typography size="sm">
                 {h.forms
                   .map((f) => f.options.map((o) => o.name).join(", "))
                   .join(" / ")}
-              </Typography>
+              </Typography> */}
             </div>
           </>
         ))}

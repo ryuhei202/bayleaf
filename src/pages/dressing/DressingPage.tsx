@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { TNonNullableDressing } from "../../api/dressings/TDressing";
 import { IdTokenContext, StylistIdContext } from "../../App";
 import { Button } from "../../components/baseParts/Button";
-import { Divider } from "../../components/baseParts/Divider";
 import { Page } from "../../components/baseParts/Page";
 import { TabAlt } from "../../components/baseParts/tabs/TabAlt";
 import { DressingAdvice } from "../../components/dressing/DressingAdvice";
