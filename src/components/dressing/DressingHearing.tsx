@@ -30,11 +30,6 @@ export const DressingHearing = ({ hearings }: TProps) => {
                     </Typography>
                   )
                 )}
-              {/* <Typography size="sm">
-                {h.forms
-                  .map((f) => f.options.map((o) => o.name).join(", "))
-                  .join(" / ")}
-              </Typography> */}
             </div>
           </>
         ))}
