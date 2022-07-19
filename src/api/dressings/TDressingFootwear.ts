@@ -1,4 +1,4 @@
 export type TDressingFootwear = {
   readonly name: string;
-  readonly imageFileName: string;
+  readonly imagePath: string;
 };

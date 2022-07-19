@@ -16,8 +16,8 @@ export const DressingChangeItem = ({ changeItems }: TProps) => {
     };
   });
   return (
-    <div>
-      <Typography size="sm">チェンジアイテム</Typography>
+    <div className="mb-16">
+      <Typography size="xl">チェンジアイテム</Typography>
       <Typography size="xs" color="strong-gray" className="mt-2 ml-2">
         ※利用したいシーンに合うアイテムでありながら、別のコーデとして楽しめるアイテムです！
       </Typography>

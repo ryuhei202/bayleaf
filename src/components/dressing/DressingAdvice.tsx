@@ -7,8 +7,8 @@ type TProps = {
 };
 export const DressingAdvice = ({ advices }: TProps) => {
   return (
-    <div>
-      <Typography size="sm">コーデの着こなし方</Typography>
+    <div className="mb-16">
+      <Typography size="xl">コーデの着こなし方</Typography>
       <div className="mt-5">
         {advices.map((advice) => (
           <div className="flex items-center my-3">

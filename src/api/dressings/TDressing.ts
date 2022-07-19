@@ -13,3 +13,9 @@ export type TDressing = {
   readonly footwear: TDressingFootwear | null;
   readonly coordinateItems: TDressingCoordinateItem[];
 };
+
+// 型TDressingを全てnot nullにする
+type RequiredNotNull<T> = {
+  [P in keyof T]: NonNullable<T[P]>;
+};
+export type TNonNullableDressing = RequiredNotNull<TDressing>;
