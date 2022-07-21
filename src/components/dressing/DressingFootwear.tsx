@@ -11,7 +11,7 @@ export const DressingFootwear = ({ footwear }: TProps) => {
       <Typography size="xl">コーデに合う靴</Typography>
       <div className="flex items-center mt-5">
         <img
-          src={`${process.env.REACT_APP_HOST_URL + footwear.imageFileName}`}
+          src={`${process.env.REACT_APP_HOST_URL + footwear.imagePath}`}
           alt=""
           className="w-[20vw] rounded-md"
         />
