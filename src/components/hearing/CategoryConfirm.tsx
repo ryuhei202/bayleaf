@@ -7,7 +7,7 @@ type TProps = Omit<TCategorizedForm, "categoryId">;
 export const CategoryConfirm = ({ categoryName, forms }: TProps) => {
   return (
     <div className="">
-      <Typography className="bg-gray-300 mb-4 pl-4 py-1 text-lg">
+      <Typography className="bg-gray-200 mb-4 pl-4 py-1 text-lg">
         {categoryName}
       </Typography>
       <div className="mx-3">
