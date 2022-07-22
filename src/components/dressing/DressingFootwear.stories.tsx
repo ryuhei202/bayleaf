@@ -21,6 +21,6 @@ DefaultValues.decorators = [
 DefaultValues.args = {
   footwear: {
     name: "ネイビーのキャンバススニーカー",
-    imageFileName: "/images/favorite_shoes/1.jpg",
+    imagePath: "/images/favorite_shoes/1.jpg",
   },
 };
