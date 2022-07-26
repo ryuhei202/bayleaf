@@ -40,11 +40,11 @@ export const Review = () => {
 
   if (chartIndexData.charts.length === 0)
     return (
-      <div className="flex justify-center items-center h-screen">
+      <Page className="flex justify-center items-center">
         <Typography>
           <>レビュー対象のレンタルはありません。</>
         </Typography>
-      </div>
+      </Page>
     );
 
   return (
