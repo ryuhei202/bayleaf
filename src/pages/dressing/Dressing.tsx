@@ -7,23 +7,19 @@ import { Typography } from "../../components/baseParts/Typography";
 import { ChartList } from "../../components/chart/ChartList";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { CHART_RENTAL_STATUS } from "../../models/chart/ChartRentalStatus";
-import { ReviewSkipForm } from "./ReviewSkipForm";
+import { DressingFetcher } from "./DressingFetcher";
 
-export const Review = () => {
+export const Dressing = () => {
   const [selectedChart, setSelectedChart] =
     useState<TChartResponse | undefined>(undefined);
   const { data: chartIndexData, error: chartIndexError } = useChartIndex({
     params: {
-      rentalStatus: [
-        CHART_RENTAL_STATUS.WAIT_RENTAL_RETURN,
-        CHART_RENTAL_STATUS.WAIT_INSPECTION,
-        CHART_RENTAL_STATUS.WAIT_WAIT_REVIEW,
-      ],
+      rentalStatus: [CHART_RENTAL_STATUS.WAIT_RENTAL_RETURN],
     },
   });
 
   useEffect(() => {
-    document.title = `レビュー | leeap`;
+    document.title = `着こなしページ | leeap`;
   }, []);
 
   useEffect(() => {
@@ -38,19 +34,19 @@ export const Review = () => {
 
   if (!chartIndexData) return <Loader active />;
 
-  if (chartIndexData.charts.length === 0)
+  if (chartIndexData.charts.length === 0) {
+    window.location.href = "https://leeap.jp/rental/plan_check";
     return (
       <div className="flex justify-center items-center h-screen">
-        <Typography>
-          <>レビュー対象のレンタルはありません。</>
-        </Typography>
+        <Typography>リダイレクト中...</Typography>
       </div>
     );
+  }
 
   return (
     <>
       {selectedChart ? (
-        <ReviewSkipForm chartId={selectedChart.id} />
+        <DressingFetcher chart={selectedChart} />
       ) : (
         <Page>
           <ChartList
