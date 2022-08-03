@@ -35,6 +35,7 @@ export const DressingDescription = ({
         <div className="flex">
           <img
             src={`${process.env.REACT_APP_HOST_URL}${comment.stylistIcon}`}
+            alt="stylistIcon"
             className="rounded-full w-[25vw]"
           />
           <Typography size="xs" className="ml-3 my-2">
