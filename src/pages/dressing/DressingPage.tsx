@@ -17,7 +17,6 @@ type TProps = {
 };
 
 export const DressingPage = ({ dressings }: TProps) => {
-  const idToken = useContext(IdTokenContext);
   const stylistId = useContext(StylistIdContext);
 
   return (
