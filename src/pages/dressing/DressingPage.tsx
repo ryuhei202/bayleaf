@@ -2,7 +2,7 @@ import { Tab } from "@headlessui/react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { TNonNullableDressing } from "../../api/dressings/TDressing";
-import { IdTokenContext, StylistIdContext } from "../../App";
+import { StylistIdContext } from "../../App";
 import { Button } from "../../components/baseParts/Button";
 import { Page } from "../../components/baseParts/Page";
 import { TabAlt } from "../../components/baseParts/tabs/TabAlt";
