@@ -1,6 +1,6 @@
 import { ComponentProps } from "react";
 import { TCoordinateItemResponse } from "../../api/coordinates/TCoordinateItemResponse";
-import { CoordinateItemImages } from "./CoordinateItemImages";
+import { CoordinateItemImages } from "../baseParts/CoordinateItemImages";
 
 export const convertItemsToItemImagesProps = (
   itemResponses: TCoordinateItemResponse[]
