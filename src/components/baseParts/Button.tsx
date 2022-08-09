@@ -5,7 +5,7 @@ import { analyzeEvent, TGAEvent } from "../../lib/gtag";
 type Props = {
   children?: React.ReactNode;
   className?: string;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onClick?: () => void;
   variant?: "default" | "primary" | "text";
   disabled?: boolean;
   disableElevation?: boolean;
@@ -68,14 +68,12 @@ export const Button = ({
 
   classes.push(border ? "border border-slate-700" : "");
 
-  const handleClick = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  const handleClick = () => {
     if (onClick === undefined || isLoading || disabled) return;
     if (GAEvent !== undefined) {
       analyzeEvent(GAEvent);
     }
-    onClick(event);
+    onClick();
   };
 
   if (disabled) {

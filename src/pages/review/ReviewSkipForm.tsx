@@ -6,11 +6,11 @@ import { Page } from "../../components/baseParts/Page";
 import { PageHeader } from "../../components/baseParts/PageHeader";
 import { Typography } from "../../components/baseParts/Typography";
 import { convertItemsToItemImagesProps } from "../../components/review/convertItemsToItemImagesProps";
+import { CoordinateItemImages } from "../../components/review/CoordinateItemImages";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { ReviewFetcher } from "./ReviewFetcher";
 import { useReviewSkip } from "../../api/reviews/useReviewSkip";
 import liff from "@line/liff/dist/lib";
-import { CoordinateItemImages } from "../../components/baseParts/CoordinateItemImages";
 
 type TProps = {
   readonly chartId: number;
