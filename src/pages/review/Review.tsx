@@ -23,7 +23,7 @@ export const Review = () => {
   });
 
   useEffect(() => {
-    document.title = `レビュー | leeap`;
+    document.title = `leeap | レビュー`;
   }, []);
 
   useEffect(() => {

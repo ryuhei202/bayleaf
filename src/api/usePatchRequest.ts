@@ -12,7 +12,7 @@ export const usePatchRequest = <T>(path: string, params: T) => {
     path,
     () =>
       customAxios().patch(
-        `${process.env.REACT_APP_HOST_URL}/leeaf/${path}`,
+        `${process.env.REACT_APP_HOST_URL}/${path}`,
         {
           ...params,
           stylistId,
