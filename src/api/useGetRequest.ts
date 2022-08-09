@@ -19,7 +19,7 @@ export const useGetRequest = <TResponse, TParams = {}>(
     path,
     () =>
       customAxios()
-        .get(`${process.env.REACT_APP_HOST_URL}/${path}`, {
+        .get(`${process.env.REACT_APP_HOST_URL}/leeaf/${path}`, {
           headers: {
             Authorization: idToken,
           },
