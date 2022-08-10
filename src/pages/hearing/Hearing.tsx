@@ -8,7 +8,7 @@ export const Hearing = () => {
     useState<TMembersIndexResponse | undefined>(undefined);
 
   useEffect(() => {
-    document.title = "ヒアリング | leeap";
+    document.title = "ヒアリング | UWear";
   }, []);
 
   return (
