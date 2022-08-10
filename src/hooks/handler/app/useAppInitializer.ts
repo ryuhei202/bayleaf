@@ -53,14 +53,15 @@ export const useAppInitializer = () => {
             setLiffErrorMessage("LINE ID いれなさい");
           }
         } else {
-          if (process.env.REACT_APP_ENV === "staging") {
-            liff.use(new LIFFInspectorPlugin());
-          }
-          liff.getProfile().then((profile) => {
-            Sentry.setUser({ id: profile.userId, name: profile.displayName });
-          });
-          setLineIdToken(liff.getIDToken() ?? "");
-          if (!liff.isInClient()) {
+          if (liff.isInClient()) {
+            if (process.env.REACT_APP_ENV === "staging") {
+              liff.use(new LIFFInspectorPlugin());
+            }
+            liff.getProfile().then((profile) => {
+              Sentry.setUser({ id: profile.userId, name: profile.displayName });
+            });
+            setLineIdToken(liff.getIDToken() ?? "");
+          } else {
             setLiffErrorMessage("スマホのLINEアプリから開いてください。");
           }
         }
