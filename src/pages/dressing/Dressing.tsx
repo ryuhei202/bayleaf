@@ -35,7 +35,7 @@ export const Dressing = () => {
   if (!chartIndexData) return <Loader active />;
 
   if (chartIndexData.charts.length === 0) {
-    window.location.href = "https://leeap.jp/rental/plan_check";
+    window.location.href = `${process.env.REACT_APP_HOST_URL}/rental/plan_check`;
     return (
       <div className="flex justify-center items-center h-screen">
         <Typography>リダイレクト中...</Typography>
