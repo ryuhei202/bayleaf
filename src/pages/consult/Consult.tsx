@@ -20,7 +20,7 @@ export const Consult = () => {
   });
 
   useEffect(() => {
-    document.title = "着こなし相談 | leeap";
+    document.title = "着こなし相談 | UWear";
   }, []);
 
   useEffect(() => {
