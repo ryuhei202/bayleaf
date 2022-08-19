@@ -16,19 +16,16 @@
     "redirects": [
       {
         "source": "**",
-        "destination": "/index.html"
+        "destination": "/index.html",
+        "type": 301
       },
       {
         "source": "/",
         "destination": "/503.html",
         "type": 307
-      },
-      {
-        "source": "**/!(*.html|*.ico|*.png|*.jpg|*.txt|*.js|*.json|*.css)",
-        "destination": "/503.html",
-        "type": 307
       }
     ],
+
     "rewrites": [
       {
         "source": "**",
