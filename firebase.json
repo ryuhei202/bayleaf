@@ -15,17 +15,11 @@
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "redirects": [
       {
-        "source": "**",
-        "destination": "/index.html",
-        "type": 301
-      },
-      {
         "source": "/",
         "destination": "/503.html",
         "type": 307
       }
     ],
-
     "rewrites": [
       {
         "source": "**",
