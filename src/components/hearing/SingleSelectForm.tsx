@@ -93,8 +93,8 @@ export const SingleSelectForm = ({
   };
 
   return (
-    <Page className="px-5">
-      <div className="flex flex-col justify-between h-full">
+    <Page className="px-5 h-full min-h-screen">
+      <div className="flex flex-col justify-between h-full min-h-screen">
         <div>
           <PageHeader
             title={<>{response.title}</>}
