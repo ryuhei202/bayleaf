@@ -39,7 +39,7 @@ export const Typography = ({
     (() => {
       switch (color) {
         case "primary":
-          return "text-slate-700";
+          return "text-themeGray";
         case "secondary":
           return "text-slate-200";
         case "strong-gray":

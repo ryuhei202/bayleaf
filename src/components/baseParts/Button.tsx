@@ -85,7 +85,7 @@ export const Button = ({
       (() => {
         switch (variant) {
           case "primary":
-            return "bg-midnight text-slate-200 shadow-midnight/40 fill-midnight";
+            return "bg-themeGray text-slate-200 shadow-themeGray/40 fill-themeGray";
           case "text":
             return "text-slate-700";
           case "default":

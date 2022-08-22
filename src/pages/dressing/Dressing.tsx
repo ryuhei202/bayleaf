@@ -19,7 +19,7 @@ export const Dressing = () => {
   });
 
   useEffect(() => {
-    document.title = `着こなしページ | leeap`;
+    document.title = `着こなしページ | UWear`;
   }, []);
 
   useEffect(() => {

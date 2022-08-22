@@ -7,7 +7,7 @@ type Props = {
 
 export const Page = ({ children, className }: Props) => {
   return (
-    <div className={`overflow-auto h-screen bg-slate-200 ${className ?? ""}`}>
+    <div className={`overflow-auto h-screen bg-clay ${className ?? ""}`}>
       {children}
     </div>
   );
