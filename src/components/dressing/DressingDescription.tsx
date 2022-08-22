@@ -1,7 +1,6 @@
 import { TDressingComment } from "../../api/dressings/TDressingComment";
 import { TDressingItem } from "../../api/dressings/TDressingItem";
 import { CoordinateItemImages } from "../baseParts/CoordinateItemImages";
-import { SpeechBalloon } from "../baseParts/SpeechBalloon";
 import { Typography } from "../baseParts/Typography";
 
 type TProps = {
@@ -32,20 +31,23 @@ export const DressingDescription = ({
         <CoordinateItemImages items={items} />
       </div>
       <div className="mt-10">
-        <div className="flex">
+        <Typography size="xs" className="mx-2 my-2">
+          {description}
+        </Typography>
+        <div className="flex mt-10 space-x-3">
           <img
             src={`${process.env.REACT_APP_HOST_URL}${comment.stylistIcon}`}
             alt="stylistIcon"
-            className="rounded-full w-[25vw]"
+            className="rounded-full w-[15vw] h-[15vw] object-cover"
           />
-          <Typography size="xs" className="ml-3 my-2">
-            {description}
-          </Typography>
-        </div>
-        <div className="mt-3">
-          <SpeechBalloon arrowPlacement="top-left">
-            <Typography size="xs">{comment.text}</Typography>
-          </SpeechBalloon>
+          <div className="table w-full min-h-[15vw]">
+            <Typography
+              size="xs"
+              className="bg-white table-cell align-middle rounded-lg p-3"
+            >
+              {comment.text}
+            </Typography>
+          </div>
         </div>
       </div>
     </div>
