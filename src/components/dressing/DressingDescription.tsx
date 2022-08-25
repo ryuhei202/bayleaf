@@ -31,7 +31,7 @@ export const DressingDescription = ({
         <CoordinateItemImages items={items} />
       </div>
       <div className="mt-10">
-        <Typography size="xs" className="mx-2 my-2">
+        <Typography size="xs" className="mx-2 my-2 whitespace-pre-wrap">
           {description}
         </Typography>
         <div className="flex mt-10 space-x-3">
@@ -43,7 +43,7 @@ export const DressingDescription = ({
           <div className="table w-full min-h-[15vw]">
             <Typography
               size="xs"
-              className="bg-white table-cell align-middle rounded-lg p-3"
+              className="bg-white table-cell align-middle rounded-lg p-3 whitespace-pre-wrap"
             >
               {comment.text}
             </Typography>
