@@ -12,6 +12,7 @@ import { Consult } from "./pages/consult/Consult";
 import * as Sentry from "@sentry/react";
 import { BrowserTracing } from "@sentry/tracing";
 import { Dressing } from "./pages/dressing/Dressing";
+import { Dislike } from "./pages/dislike/Dislike";
 
 Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DSN,
@@ -37,6 +38,7 @@ function App() {
             <Route path="hearing" element={<Hearing />} />
             <Route path="consult" element={<Consult />} />
             <Route path="dressing" element={<Dressing />} />
+            <Route path="dislike" element={<Dislike />} />
           </Routes>
         </StylistIdContext.Provider>
       </IdTokenContext.Provider>
