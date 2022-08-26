@@ -31,9 +31,7 @@ export const DressingDescription = ({
         <CoordinateItemImages items={items} />
       </div>
       <div className="mt-10">
-        <Typography size="xs" className="mx-2 my-2">
-          {description}
-        </Typography>
+        <Typography className="mx-2 my-2">{description}</Typography>
         <div className="flex mt-10 space-x-3">
           <img
             src={`${process.env.REACT_APP_HOST_URL}${comment.stylistIcon}`}
@@ -41,10 +39,7 @@ export const DressingDescription = ({
             className="rounded-full w-[15vw] h-[15vw] object-cover"
           />
           <div className="table w-full min-h-[15vw]">
-            <Typography
-              size="xs"
-              className="bg-white table-cell align-middle rounded-lg p-3"
-            >
+            <Typography className="bg-white table-cell align-middle rounded-lg p-3">
               {comment.text}
             </Typography>
           </div>
