@@ -130,43 +130,37 @@ export const getContinuedHearingContainerHandler = ({
   };
 
   const handlePost = () => {
-    if (
-      window.confirm(
-        "次のコーディネートはこのヒアリングをもとに作成します。よろしいですか？"
-      )
-    ) {
-      const hearings = [firstAnsweredHearings, secondAnsweredHearings]
-        .filter((h) => h.forms.length !== 0 || !!h.sameCoordinateId)
-        .map((hearings) => {
-          if (hearings.sameCoordinateId) {
-            return {
-              sameCoordinateId: hearings.sameCoordinateId,
-            };
-          } else if (hearings.forms.length > 0) {
-            return {
-              forms: hearings.forms.map((hearing) => {
-                return {
-                  id: hearing.id,
-                  options: hearing.options.map((o) => {
-                    return { id: o.id, text: o.text };
-                  }),
-                };
-              }),
-            };
-          } else {
-            throw Error("予期せぬエラーが発生しました");
-          }
-        });
-      const params: TChartCreateRequest = {
-        memberId: member.id,
-        hearings,
-      };
-      mutate(params, {
-        onSuccess: () => {
-          liff.closeWindow();
-        },
+    const hearings = [firstAnsweredHearings, secondAnsweredHearings]
+      .filter((h) => h.forms.length !== 0 || !!h.sameCoordinateId)
+      .map((hearings) => {
+        if (hearings.sameCoordinateId) {
+          return {
+            sameCoordinateId: hearings.sameCoordinateId,
+          };
+        } else if (hearings.forms.length > 0) {
+          return {
+            forms: hearings.forms.map((hearing) => {
+              return {
+                id: hearing.id,
+                options: hearing.options.map((o) => {
+                  return { id: o.id, text: o.text };
+                }),
+              };
+            }),
+          };
+        } else {
+          throw Error("予期せぬエラーが発生しました");
+        }
       });
-    }
+    const params: TChartCreateRequest = {
+      memberId: member.id,
+      hearings,
+    };
+    mutate(params, {
+      onSuccess: () => {
+        liff.closeWindow();
+      },
+    });
   };
 
   const removeLastAnswer = (

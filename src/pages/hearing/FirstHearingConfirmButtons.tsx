@@ -14,12 +14,13 @@ export const FirstHearingConfirmButtons = ({
   onClickReset,
   isPostLoading,
 }: TProps) => {
-  const [isOpenReset, setIsOpenReset] = useState(false);
+  const [isOpenResetConfirm, setIsOpenResetConfirm] = useState(false);
+  const [isOpenCreateConfirm, setIsOpenCreateConfirm] = useState(false);
   return (
     <>
       <Button
         variant="primary"
-        onClick={onClickComplete}
+        onClick={() => setIsOpenCreateConfirm(true)}
         disabled={isPostLoading}
         border={true}
       >
@@ -36,20 +37,30 @@ export const FirstHearingConfirmButtons = ({
       </Button>
       <Button
         variant="text"
-        onClick={() => setIsOpenReset(true)}
+        onClick={() => setIsOpenResetConfirm(true)}
         disabled={isPostLoading}
       >
         最初からやり直す
       </Button>
       <ConfirmDialog
-        open={isOpenReset}
-        onClose={() => setIsOpenReset(false)}
+        open={isOpenResetConfirm}
+        onClose={() => setIsOpenResetConfirm(false)}
         title="最初からやり直しますか？"
         onClickOk={() => {
-          setIsOpenReset(false);
+          setIsOpenResetConfirm(false);
           onClickReset();
         }}
-        onClickCancel={() => setIsOpenReset(false)}
+        onClickCancel={() => setIsOpenResetConfirm(false)}
+      />
+      <ConfirmDialog
+        open={isOpenCreateConfirm}
+        onClose={() => setIsOpenCreateConfirm(false)}
+        title="次のコーディネートはこのヒアリングをもとに作成します。よろしいですか？"
+        onClickOk={() => {
+          setIsOpenCreateConfirm(false);
+          onClickComplete();
+        }}
+        onClickCancel={() => setIsOpenCreateConfirm(false)}
       />
     </>
   );
