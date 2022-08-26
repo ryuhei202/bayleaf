@@ -1,6 +1,7 @@
 import { TDressingAdvice } from "../../api/dressings/TDressingAdvice";
 import { Typography } from "../baseParts/Typography";
 import PreviewDefault from "../../../src/images/preview_default.png";
+import { ExpandableImage } from "../baseParts/images/ExpandableImage";
 
 type TProps = {
   readonly advices: TDressingAdvice[];
@@ -12,16 +13,20 @@ export const DressingAdvice = ({ advices }: TProps) => {
       <div className="mt-5">
         {advices.map((advice) => (
           <div className="flex items-center my-3">
-            <img
-              src={`${
+            <ExpandableImage
+              defaultImageSrc={`${
                 advice.imageFileName
                   ? process.env.REACT_APP_HOST_URL + advice.imageFileName
                   : PreviewDefault
               }`}
-              alt=""
+              ExpandedImageSrc={`${
+                advice.imageFileName
+                  ? process.env.REACT_APP_HOST_URL + advice.imageFileName
+                  : PreviewDefault
+              }`}
               className="w-[15vw]"
             />
-            <Typography size="xs" className="px-6">
+            <Typography className="px-4 w-[80vw]">
               {advice.description}
             </Typography>
           </div>
