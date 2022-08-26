@@ -16,7 +16,7 @@ export const CoordinateListButton = ({ index, coordinate, onClick }: Props) => {
 
       <div className="flex h-[100px] justify-center space-x-2 mt-4">
         {coordinate.items.map((item) => {
-          return <ImageAlt imageSrc={item.imagePaths.original} />;
+          return <ImageAlt imageSrc={item.imagePaths.thumb} />;
         })}
       </div>
     </Button>
