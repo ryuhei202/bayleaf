@@ -19,6 +19,9 @@ type TProps = {
 export const DressingPage = ({ dressings }: TProps) => {
   const stylistId = useContext(StylistIdContext);
 
+  const getChangeItems = (dressing: TNonNullableDressing) =>
+    dressing.coordinateItems.filter((i) => i.isChangeItem).map((i) => i.item);
+
   return (
     <Page className="p-5 pb-5">
       <Tab.Group>
@@ -46,11 +49,9 @@ export const DressingPage = ({ dressings }: TProps) => {
               />
               <DressingAdvice advices={dressing.advices} />
               <DressingFootwear footwear={dressing.footwear} />
-              <DressingChangeItem
-                changeItems={dressing.coordinateItems
-                  .filter((i) => i.isChangeItem)
-                  .map((i) => i.item)}
-              />
+              {getChangeItems(dressing).length > 0 && (
+                <DressingChangeItem changeItems={getChangeItems(dressing)} />
+              )}
               <Button variant="primary">
                 <Link to={`/consult?stylistId=${stylistId}`}>
                   着こなしの相談をする

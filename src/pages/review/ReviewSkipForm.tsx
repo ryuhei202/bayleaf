@@ -44,11 +44,11 @@ export const ReviewSkipForm = ({ chartId }: TProps) => {
 
   if (reviewTargetCoordinates.length === 0) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <Page className="flex justify-center items-center">
         <Typography>
           <>レビュー対象のコーデはありません。</>
         </Typography>
-      </div>
+      </Page>
     );
   }
 

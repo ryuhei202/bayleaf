@@ -15,7 +15,7 @@ export const Default = Template.bind({});
 export const Colored = Template.bind({});
 Colored.decorators = [
   (Story) => (
-    <div className="text-white bg-midnight w-fit">
+    <div className="text-white bg-themeGray w-fit">
       <Story />
     </div>
   ),

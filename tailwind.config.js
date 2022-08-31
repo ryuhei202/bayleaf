@@ -3,7 +3,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        midnight: "#00266F",
+        themeGray: "#475156",
+        clay: "#e8e7df",
       },
     },
     screens: {

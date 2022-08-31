@@ -1,6 +1,6 @@
-import { Dialog } from "@headlessui/react";
 import { useState } from "react";
 import { Button } from "../../components/baseParts/Button";
+import { ConfirmDialog } from "../../components/baseParts/ConfirmDialog";
 
 type TProps = {
   readonly onClickComplete: () => void;
@@ -14,12 +14,13 @@ export const FirstHearingConfirmButtons = ({
   onClickReset,
   isPostLoading,
 }: TProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenResetConfirm, setIsOpenResetConfirm] = useState(false);
+  const [isOpenCreateConfirm, setIsOpenCreateConfirm] = useState(false);
   return (
     <>
       <Button
         variant="primary"
-        onClick={onClickComplete}
+        onClick={() => setIsOpenCreateConfirm(true)}
         disabled={isPostLoading}
         border={true}
       >
@@ -36,34 +37,31 @@ export const FirstHearingConfirmButtons = ({
       </Button>
       <Button
         variant="text"
-        onClick={() => setIsOpen(true)}
+        onClick={() => setIsOpenResetConfirm(true)}
         disabled={isPostLoading}
       >
         最初からやり直す
       </Button>
-      <Dialog
-        open={isOpen}
-        onClose={() => setIsOpen(false)}
-        className="fixed inset-0 h-screen w-screen bg-black/50"
-      >
-        <Dialog.Panel className="fixed top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] bg-white w-[80vw] p-10 rounded-2xl max-w-[400px]">
-          <Dialog.Title className="pb-5 text-xl mb-5">最初からやり直しますか？</Dialog.Title>
-          <div className="space-y-3">
-            <Button
-              variant="primary"
-              onClick={() => {
-                setIsOpen(false);
-                onClickReset();
-              }}
-            >
-              OK
-            </Button>
-            <Button variant="default" onClick={() => setIsOpen(false)}>
-              キャンセル
-            </Button>
-          </div>
-        </Dialog.Panel>
-      </Dialog>
+      <ConfirmDialog
+        open={isOpenResetConfirm}
+        onClose={() => setIsOpenResetConfirm(false)}
+        title="最初からやり直しますか？"
+        onClickOk={() => {
+          setIsOpenResetConfirm(false);
+          onClickReset();
+        }}
+        onClickCancel={() => setIsOpenResetConfirm(false)}
+      />
+      <ConfirmDialog
+        open={isOpenCreateConfirm}
+        onClose={() => setIsOpenCreateConfirm(false)}
+        title="次のコーディネートはこのヒアリングをもとに作成します。よろしいですか？"
+        onClickOk={() => {
+          setIsOpenCreateConfirm(false);
+          onClickComplete();
+        }}
+        onClickCancel={() => setIsOpenCreateConfirm(false)}
+      />
     </>
   );
 };
