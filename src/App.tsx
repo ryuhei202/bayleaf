@@ -17,6 +17,7 @@ import { Dislike } from "./pages/dislike/Dislike";
 Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DSN,
   integrations: [new BrowserTracing()],
+  release: process.env.REACT_APP_VERSION,
   tracesSampleRate: 0,
   environment: process.env.REACT_APP_ENV,
 });
