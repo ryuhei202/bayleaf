@@ -22,7 +22,8 @@ pipelines:
       - step:
           name: Create Release in Sentry
           script:
-            - sentry-cli releases files `npx -c 'echo $npm_package_version'`.`git rev-parse --short HEAD` upload-sourcemaps ./build/ -o $REACT_APP_SENTRY_ORG -p $REACT_APP_SENTRY_PROJECT --auth-token $REACT_APP_SENTRY_AUTH_TOKEN
+            - yarn deploy-sentry-staging
+            - yarn upload-sourcemaps
     master:
       - step:
           name: Build
