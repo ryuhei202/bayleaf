@@ -37,8 +37,6 @@
     "start": "REACT_APP_VERSION=\"$npm_package_version.`git rev-parse --short HEAD`\" PORT=3001 react-scripts start",
     "build": "REACT_APP_VERSION=\"$npm_package_version.`git rev-parse --short HEAD`\" react-scripts build",
     "build:staging": "REACT_APP_VERSION=\"$npm_package_version.`git rev-parse --short HEAD`\" env-cmd -f .env.staging react-scripts build",
-    "deploy-sentry-staging": "sentry-cli releases deploys `npx -c 'echo $npm_package_version'`.`git rev-parse --short HEAD` new -e staging -o $REACT_APP_SENTRY_ORG -p $REACT_APP_SENTRY_PROJECT --auth-token $REACT_APP_SENTRY_AUTH_TOKEN",
-    "deploy-sentry-production": "sentry-cli releases deploys `npx -c 'echo $npm_package_version'`.`git rev-parse --short HEAD` new -e production -o $REACT_APP_SENTRY_ORG -p $REACT_APP_SENTRY_PROJECT --auth-token $REACT_APP_SENTRY_AUTH_TOKEN",
     "upload-sourcemaps": "sentry-cli releases files `npx -c 'echo $npm_package_version'`.`git rev-parse --short HEAD` upload-sourcemaps ./build/ -o $REACT_APP_SENTRY_ORG -p $REACT_APP_SENTRY_PROJECT --auth-token $REACT_APP_SENTRY_AUTH_TOKEN",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
