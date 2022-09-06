@@ -8,7 +8,6 @@ pipelines:
           script:
             - yarn install
             - REACT_APP_GA_TRACKING_ID=$REACT_APP_STAGING_GA_TRACKING_ID REACT_APP_LIFF_ID=$LIFF_ID_STAGING yarn build:staging
-            - ls
           artifacts:
             - build/**
       - step:
