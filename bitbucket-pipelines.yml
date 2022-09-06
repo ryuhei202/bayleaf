@@ -8,6 +8,8 @@ pipelines:
           script:
             - yarn install
             - REACT_APP_GA_TRACKING_ID=$REACT_APP_STAGING_GA_TRACKING_ID REACT_APP_LIFF_ID=$LIFF_ID_STAGING yarn build:staging
+            - yarn deploy-sentry-staging
+            - yarn upload-sourcemaps
           artifacts:
             - build/**
       - step:
@@ -19,11 +21,6 @@ pipelines:
                 FIREBASE_TOKEN: $FIREBASE_TOKEN
                 PROJECT_ID: "staging"
                 DEBUG: "true"
-      - step:
-          name: Create Release in Sentry
-          script:
-            - yarn deploy-sentry-staging
-            - yarn upload-sourcemaps
     master:
       - step:
           name: Build
