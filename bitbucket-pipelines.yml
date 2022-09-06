@@ -8,7 +8,6 @@ pipelines:
           script:
             - yarn install
             - REACT_APP_GA_TRACKING_ID=$REACT_APP_STAGING_GA_TRACKING_ID REACT_APP_LIFF_ID=$LIFF_ID_STAGING yarn build:staging
-            - ls
           artifacts:
             - build/**
       - step:
@@ -23,13 +22,7 @@ pipelines:
       - step:
           name: Create Release in Sentry
           script:
-            - pipe: sentryio/sentry-new-release:0.3.0
-              variables:
-                SENTRY_AUTH_TOKEN: $REACT_APP_SENTRY_AUTH_TOKEN
-                SENTRY_ORG: $REACT_APP_SENTRY_ORG
-                SENTRY_PROJECT: $REACT_APP_SENTRY_PROJECT
-                ENVIRONMENT: "staging"
-                DEBUG: "true"
+            - sentry-cli releases files `npx -c 'echo $npm_package_version'`.`git rev-parse --short HEAD` upload-sourcemaps ./build/ -o $REACT_APP_SENTRY_ORG -p $REACT_APP_SENTRY_PROJECT --auth-token $REACT_APP_SENTRY_AUTH_TOKEN
     master:
       - step:
           name: Build
