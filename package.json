@@ -6,6 +6,7 @@
     "@headlessui/react": "^1.6.6",
     "@line/liff": "^2.20.2",
     "@line/liff-inspector": "^1.0.2",
+    "@sentry/cli": "^2.5.2",
     "@sentry/react": "^7.0.0",
     "@sentry/tracing": "^7.0.0",
     "@testing-library/jest-dom": "^5.16.4",
