@@ -6,6 +6,7 @@
     "@headlessui/react": "^1.6.6",
     "@line/liff": "^2.20.2",
     "@line/liff-inspector": "^1.0.2",
+    "@sentry/cli": "^2.5.2",
     "@sentry/react": "^7.0.0",
     "@sentry/tracing": "^7.0.0",
     "@testing-library/jest-dom": "^5.16.4",
@@ -33,9 +34,10 @@
     "autoprefixer": "10.4.5"
   },
   "scripts": {
-    "start": "PORT=3001 react-scripts start",
-    "build": "react-scripts build",
-    "build:staging": "env-cmd -f .env.staging react-scripts build",
+    "start": "REACT_APP_VERSION=\"$npm_package_version.`git rev-parse --short HEAD`\" PORT=3001 react-scripts start",
+    "build": "REACT_APP_VERSION=\"$npm_package_version.`git rev-parse --short HEAD`\" react-scripts build",
+    "build:staging": "REACT_APP_VERSION=\"$npm_package_version.`git rev-parse --short HEAD`\" env-cmd -f .env.staging react-scripts build",
+    "upload-sourcemaps": "sentry-cli releases files `npx -c 'echo $npm_package_version'`.`git rev-parse --short HEAD` upload-sourcemaps ./build/ -o $REACT_APP_SENTRY_ORG -p $REACT_APP_SENTRY_PROJECT --auth-token $REACT_APP_SENTRY_AUTH_TOKEN",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
