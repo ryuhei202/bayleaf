@@ -5,7 +5,7 @@ import { usePostRequest } from "./../usePostRequest";
 
 type TChartCreate = {
   readonly mutate: UseMutateFunction<
-    AxiosResponse<any, any>,
+    void | AxiosResponse,
     unknown,
     TChartCreateRequest,
     unknown

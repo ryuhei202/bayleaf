@@ -8,10 +8,9 @@ export const usePatchRequest = <T>(path: string, params: T) => {
   const idToken = useContext(IdTokenContext);
   const stylistId = useContext(StylistIdContext);
 
-  const { mutate, isLoading } = useMutation(
-    path,
-    () =>
-      customAxios().patch(
+  const { mutate, isLoading } = useMutation(path, () =>
+    customAxios()
+      .patch(
         `${process.env.REACT_APP_HOST_URL}/leeaf/${path}`,
         {
           ...params,
@@ -22,12 +21,10 @@ export const usePatchRequest = <T>(path: string, params: T) => {
             Authorization: idToken,
           },
         }
-      ),
-    {
-      onError: (error) => {
-        Sentry.captureException(error);
-      },
-    }
+      )
+      .catch((e) => {
+        Sentry.captureException(e);
+      })
   );
 
   return { mutate, isLoading };

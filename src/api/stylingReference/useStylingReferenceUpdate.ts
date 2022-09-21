@@ -3,7 +3,7 @@ import { UseMutateFunction } from "react-query";
 import { usePatchRequest } from "../usePatchRequest";
 
 type StylingReferenceUpdate = {
-  readonly mutate: UseMutateFunction<AxiosResponse>;
+  readonly mutate: UseMutateFunction<void | AxiosResponse>;
   readonly isLoading: boolean;
 };
 
