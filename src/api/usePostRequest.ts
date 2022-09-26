@@ -30,7 +30,12 @@ export const usePostRequest = <T>(
         )
         .catch((e) => {
           Sentry.captureException(e);
-        })
+        }),
+    {
+      onError: (error) => {
+        Sentry.captureException(error);
+      },
+    }
   );
 
   return { mutate, mutateAsync, isLoading, isError, isSuccess };

@@ -33,6 +33,9 @@ export const useGetRequest = <TResponse, TParams = {}>(
           Sentry.captureException(e);
         }),
     {
+      onError: (error) => {
+        Sentry.captureException(error);
+      },
       enabled: isEnabled ?? true,
     }
   );
