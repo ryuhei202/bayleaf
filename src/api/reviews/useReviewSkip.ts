@@ -4,7 +4,7 @@ import { usePostRequest } from "../usePostRequest";
 
 type TReviewSkip = {
   readonly mutate: UseMutateFunction<
-    AxiosResponse,
+    void | AxiosResponse,
     unknown,
     TReviewSkipParams,
     unknown

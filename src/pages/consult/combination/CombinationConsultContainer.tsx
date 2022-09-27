@@ -56,7 +56,7 @@ export const CombinationConsultContainer = ({ items, onCancel }: TProps) => {
       },
     };
     await mutateAsync(params, {
-      onSuccess: (data: AxiosResponse<TMemberPhotoCreateResponse>) => {
+      onSuccess: (data: void | AxiosResponse<TMemberPhotoCreateResponse>) => {
         if (data && data.data) {
           send(createFlexMessage(), true, data.data.imagePaths);
         }

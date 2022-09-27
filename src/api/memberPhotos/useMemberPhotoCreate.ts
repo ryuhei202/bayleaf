@@ -6,13 +6,13 @@ import { usePostRequest } from "../usePostRequest";
 
 type TMemberPhotoCreate = {
   readonly mutate: UseMutateFunction<
-    AxiosResponse,
+    void | AxiosResponse,
     unknown,
     TMemberPhotoCreateParams,
     unknown
   >;
   readonly mutateAsync: UseMutateAsyncFunction<
-    AxiosResponse,
+    void | AxiosResponse,
     unknown,
     TMemberPhotoCreateParams,
     unknown

@@ -28,7 +28,10 @@ export const useGetRequest = <TResponse, TParams = {}>(
             stylistId,
           },
         })
-        .then((r) => r.data),
+        .then((r) => r.data)
+        .catch((e) => {
+          Sentry.captureException(e);
+        }),
     {
       onError: (error) => {
         Sentry.captureException(error);

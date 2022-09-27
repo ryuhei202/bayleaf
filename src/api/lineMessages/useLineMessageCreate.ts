@@ -4,7 +4,7 @@ import { usePostRequest } from "../usePostRequest";
 
 type TLineMessageCreate = {
   readonly mutate: UseMutateFunction<
-    AxiosResponse,
+    void | AxiosResponse,
     any,
     TLineMessageCreateParams,
     unknown

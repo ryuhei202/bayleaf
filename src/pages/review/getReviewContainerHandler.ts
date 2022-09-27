@@ -21,7 +21,7 @@ type TReviewContainerHandlerArgs = {
   setReviewFormData: (formData: TReviewFormData) => void;
   setSelectedCoordinateId: (id: number) => void;
   reviewMutate: UseMutateFunction<
-    AxiosResponse,
+    void | AxiosResponse,
     unknown,
     TReviewCreateParams,
     unknown

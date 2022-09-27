@@ -20,7 +20,7 @@ export const getReferenceContainerHandler = (
   modifiedChoices: TReferenceChoice[],
   setEditingCategory: (categoryId: number | undefined) => void,
   setModifiedChoices: (modifiedChoice: TReferenceChoice[]) => void,
-  mutate: UseMutateFunction<AxiosResponse>
+  mutate: UseMutateFunction<void | AxiosResponse>
 ): ReferenceContainerHandler => {
   const updateModifiedChoices = (choice: TReferenceChoice) => {
     const currentIndex = modifiedChoices.findIndex(

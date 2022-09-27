@@ -41,7 +41,7 @@ type TArgs = {
   readonly setCurrentAnswerNumber: React.Dispatch<React.SetStateAction<1 | 2>>;
   readonly setIsBackTransition: React.Dispatch<React.SetStateAction<boolean>>;
   readonly mutate: UseMutateFunction<
-    AxiosResponse<any, any>,
+    void | AxiosResponse,
     unknown,
     TChartCreateRequest,
     unknown
