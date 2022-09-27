@@ -4,7 +4,7 @@ import { usePostRequest } from "../usePostRequest";
 
 type TReviewCreate = {
   readonly mutate: UseMutateFunction<
-    AxiosResponse,
+    void | AxiosResponse,
     unknown,
     TReviewCreateParams,
     unknown

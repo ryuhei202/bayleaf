@@ -15,18 +15,22 @@ export const usePostRequest = <T>(
   const { mutate, mutateAsync, isLoading, isError, isSuccess } = useMutation(
     path,
     (params: T) =>
-      customAxios(preservedKeys).post(
-        `${process.env.REACT_APP_HOST_URL}/leeaf/${path}`,
-        {
-          ...params,
-          stylistId,
-        },
-        {
-          headers: {
-            Authorization: idToken,
+      customAxios(preservedKeys)
+        .post(
+          `${process.env.REACT_APP_HOST_URL}/leeaf/${path}`,
+          {
+            ...params,
+            stylistId,
           },
-        }
-      ),
+          {
+            headers: {
+              Authorization: idToken,
+            },
+          }
+        )
+        .catch((e) => {
+          Sentry.captureException(e);
+        }),
     {
       onError: (error) => {
         Sentry.captureException(error);

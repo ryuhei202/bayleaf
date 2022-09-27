@@ -11,18 +11,22 @@ export const usePatchRequest = <T>(path: string, params: T) => {
   const { mutate, isLoading } = useMutation(
     path,
     () =>
-      customAxios().patch(
-        `${process.env.REACT_APP_HOST_URL}/leeaf/${path}`,
-        {
-          ...params,
-          stylistId,
-        },
-        {
-          headers: {
-            Authorization: idToken,
+      customAxios()
+        .patch(
+          `${process.env.REACT_APP_HOST_URL}/leeaf/${path}`,
+          {
+            ...params,
+            stylistId,
           },
-        }
-      ),
+          {
+            headers: {
+              Authorization: idToken,
+            },
+          }
+        )
+        .catch((e) => {
+          Sentry.captureException(e);
+        }),
     {
       onError: (error) => {
         Sentry.captureException(error);

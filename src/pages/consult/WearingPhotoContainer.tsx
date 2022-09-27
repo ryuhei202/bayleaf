@@ -48,7 +48,7 @@ export const WearingPhotoContainer = ({
         },
       };
       mutate(params, {
-        onSuccess: (data: AxiosResponse<TMemberPhotoCreateResponse>) => {
+        onSuccess: (data: void | AxiosResponse<TMemberPhotoCreateResponse>) => {
           if (data && data.data) {
             send(flexMessage, true, data.data.imagePaths);
           }
