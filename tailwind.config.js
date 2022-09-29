@@ -5,6 +5,7 @@ module.exports = {
       colors: {
         themeGray: "#475156",
         clay: "#e8e7df",
+        red: "#cb5f58",
       },
     },
     screens: {
