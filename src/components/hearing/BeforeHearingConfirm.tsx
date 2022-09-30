@@ -26,6 +26,19 @@ export const BeforeHearingConfirm = ({ onClick, planId }: TProps) => {
               }
               className="mb-8"
             />
+            <p className="text-red">
+              プラン変更をご希望の方は、変更してから回答して頂きますようお願い致します
+            </p>
+            <p>
+              変更は
+              <a
+                className="underline"
+                href={`${process.env.REACT_APP_HOST_URL}/plan_change`}
+              >
+                こちら
+              </a>
+              から
+            </p>
           </div>
         </div>
         <div className="flex flex-col space-y-1 align-middle px-5 py-3 my-auto">
