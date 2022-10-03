@@ -29,7 +29,7 @@ export const HearingChartFetcher = ({ member }: TProps) => {
         <div>
           <Typography>
             返却が必要な洋服があります。 <br />
-            ご返却していただいた後にヒアリングに回答できます。 <br />
+            ご返却が確認でき次第ヒアリングに回答できます。 <br />
           </Typography>
           <Typography className="mt-4 text-xl">
             返却は
