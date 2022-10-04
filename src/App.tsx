@@ -46,7 +46,16 @@ function App() {
     </QueryClientProvider>
   );
   if (lineIdToken) {
-    return <Sentry.ErrorBoundary>{app}</Sentry.ErrorBoundary>;
+    return (
+      <Sentry.ErrorBoundary
+        fallback={
+          <ErrorMessage message="予期せぬエラーが発生いたしました。大変申し訳ございませんが、再度お願いいたします" />
+        }
+        showDialog
+      >
+        {app}
+      </Sentry.ErrorBoundary>
+    );
   }
   if (liffErrorMessage) {
     return <ErrorMessage message={liffErrorMessage} />;
