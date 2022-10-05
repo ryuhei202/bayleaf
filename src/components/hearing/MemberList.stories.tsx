@@ -19,6 +19,7 @@ Default.args = {
       nextPaymentDate: "2022/10/31",
       mPlanId: 1,
       isLatestChartDelivered: false,
+      isReturnRequired: false,
     },
     {
       id: 2,
@@ -26,6 +27,7 @@ Default.args = {
       nextPaymentDate: "2022/11/31",
       mPlanId: 3,
       isLatestChartDelivered: false,
+      isReturnRequired: false,
     },
     {
       id: 3,
@@ -33,6 +35,7 @@ Default.args = {
       nextPaymentDate: "2022/12/31",
       mPlanId: 3,
       isLatestChartDelivered: false,
+      isReturnRequired: false,
     },
   ],
 };

@@ -4,4 +4,5 @@ export type TMembersIndexResponse = {
   readonly nextPaymentDate: string;
   readonly mPlanId: number;
   readonly isLatestChartDelivered: boolean;
+  readonly isReturnRequired: boolean;
 };
