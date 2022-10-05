@@ -1,11 +1,12 @@
 import { useGetRequest } from "../useGetRequest";
 import { TReviewOptionIndexResponse } from "./TReviewOptionIndexResponse";
 
-type StylingReferenceShow = {
+type ReviewOptionIndex = {
   readonly data?: TReviewOptionIndexResponse;
   readonly error: Error | null;
 };
-export const useReviewOptionIndex = (): StylingReferenceShow => {
+
+export const useReviewOptionIndex = (): ReviewOptionIndex => {
   const { data, error } =
     useGetRequest<TReviewOptionIndexResponse>(`review_options`);
   return {
