@@ -6,22 +6,6 @@ type TProps = {
   readonly selectableDateTo: Date;
 };
 
-// const replaceDate = (date: Date) => {
-//   let month = "";
-//   let day = "";
-//   if (date.getMonth().toString().length == 1) {
-//     month = "0" + (date.getMonth() + 1).toString();
-//   } else {
-//     month = date.getMonth().toString();
-//   }
-//   if (date.getDay().toString().length == 1) {
-//     day = "0" + date.getDay().toString();
-//   } else {
-//     day = date.getDay().toString();
-//   }
-//   return `${date.getFullYear()}-${month}-${day}`;
-// };
-
 const replaceDate = (date: Date) => {
   const month = date.getMonth() + 1;
   console.log(
@@ -29,11 +13,6 @@ const replaceDate = (date: Date) => {
       date.getDate() < 10 ? "0" + date.getDate() : date.getDate()
     }`
   );
-  // date.setMonth(
-  //   date.getMonth() < 10
-  //     ? "0" + date.getMonth().toString()
-  //     : ate.getMonth().)
-  // );
   return `${date.getFullYear()}-${month < 10 ? "0" + month : month}-${
     date.getDate() < 10 ? "0" + date.getDate() : date.getDate()
   }`;
