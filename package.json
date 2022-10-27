@@ -41,7 +41,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "chromatic": "npx chromatic --project-token=79873a1eef8e"
   },
   "eslintConfig": {
     "extends": [
@@ -88,8 +89,11 @@
     "@storybook/react": "^6.5.12",
     "@tailwindcss/custom-forms": "^0.2.1",
     "autoprefixer": "10.4.12",
+    "chromatic": "^6.11.2",
     "postcss": "^8.4.17",
     "tailwindcss": "^3.0.24",
     "webpack": "^5.73.0"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "bayleaf@0.1.0"
 }
