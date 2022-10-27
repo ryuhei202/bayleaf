@@ -12,6 +12,7 @@ export type TChartIndexParams = {
   readonly limit?: number;
   readonly order?: "ASC" | "DESC";
   readonly isReturnRequired?: boolean;
+  readonly isHearingCompleted?: boolean;
 };
 
 type TChartIndexArgs = { params: TChartIndexParams };
