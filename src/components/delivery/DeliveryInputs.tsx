@@ -7,27 +7,26 @@ import { Typography } from "../baseParts/Typography";
 import { useEffect, useState } from "react";
 type TProps = {
   deliveryDateShowData: TChartDeliveryDateResponse;
-  isSelectableDatePresent: boolean;
-  isDiscountDatePresent: boolean;
 };
 
-export const DeliveryInputs = ({
-  deliveryDateShowData,
-  isSelectableDatePresent,
-  isDiscountDatePresent,
-}: TProps) => {
-  if (isSelectableDatePresent === false && isDiscountDatePresent === false) {
-    throw new Error("選択可能な日付がありません");
-  }
-  const allDateEnabled =
-    isSelectableDatePresent === true && isDiscountDatePresent === true;
+export const DeliveryInputs = ({ deliveryDateShowData }: TProps) => {
+  const isSelectableDatePresent =
+    deliveryDateShowData.selectableDatePeriod !== null;
+  const isDiscountDatePresent =
+    deliveryDateShowData.discountSelectableDatePeriod !== null;
 
   const [isDiscountEnabled, setIsDiscountDateEnabled] = useState(
     isDiscountDatePresent
   );
-
   const [isShortest, setIsShortest] = useState(true);
   const [selectedDate, setSelectedDate] = useState<string>("");
+  useEffect(() => {
+    setSelectedDate("");
+  }, [isDiscountEnabled]);
+
+  const allDateEnabled =
+    isSelectableDatePresent === true && isDiscountDatePresent === true;
+
   const switchDate = (data: TChartDeliveryDateResponse) => {
     const min = isDiscountEnabled
       ? (data.discountSelectableDatePeriod?.start as string)
@@ -38,10 +37,6 @@ export const DeliveryInputs = ({
 
     return { min, max };
   };
-
-  useEffect(() => {
-    setSelectedDate("");
-  }, [isDiscountEnabled]);
 
   console.log(
     `discount適用${isDiscountDatePresent}  通常日にち選択${isSelectableDatePresent} discountが適用できる？:${isDiscountEnabled} setされてる現在の日付:${selectedDate}`

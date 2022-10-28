@@ -17,18 +17,18 @@ export const DeliveryForm = ({ chartId, nextPaymentsDate }: Props) => {
   if (deliveryDateShowError)
     return <ErrorMessage message={deliveryDateShowError.message} />;
   if (!deliveryDateShowData) return <Loader active />;
+  const isSelectableDatePresent =
+    deliveryDateShowData.selectableDatePeriod !== null;
+  const isDiscountDatePresent =
+    deliveryDateShowData.discountSelectableDatePeriod !== null;
+  if (isSelectableDatePresent === false && isDiscountDatePresent === false) {
+    return <ErrorMessage message="選択可能な日付がありません" />;
+  }
+
   return (
     <div className="m-auto my-2">
       <div className="my-20">
-        <DeliveryInputs
-          deliveryDateShowData={deliveryDateShowData}
-          isSelectableDatePresent={
-            deliveryDateShowData.selectableDatePeriod != null
-          }
-          isDiscountDatePresent={
-            deliveryDateShowData.discountSelectableDatePeriod != null
-          }
-        />
+        <DeliveryInputs deliveryDateShowData={deliveryDateShowData} />
         <SelectButton selected={false}>確定する</SelectButton>
       </div>
     </div>
