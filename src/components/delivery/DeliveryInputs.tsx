@@ -1,4 +1,4 @@
-import { TChartDeliveryDateResponse } from "../../api/charts/TChartDeliveryDateResponse";
+import { TChartDeliveryDateResponse } from "../../api/deliveryDates/TChartDeliveryDateResponse";
 import { DatetimePicker } from "../baseParts/inputs/DatetimePicker";
 import { DropdownMenuAlt } from "../baseParts/inputs/DropdownMenuAlt";
 import { Toggle } from "../baseParts/inputs/Toggle";
