@@ -1,60 +1,66 @@
 import { TChartDeliveryDateResponse } from "../../api/charts/TChartDeliveryDateResponse";
-import { DELIVERY_TIMES } from "../../models/shared/TDeliveryTimes";
 import { DatetimePicker } from "../baseParts/inputs/DatetimePicker";
 import { DropdownMenuAlt } from "../baseParts/inputs/DropdownMenuAlt";
 import { Toggle } from "../baseParts/inputs/Toggle";
 import { SelectButton } from "../baseParts/SelectButton";
 import { Typography } from "../baseParts/Typography";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 type TProps = {
   deliveryDateShowData: TChartDeliveryDateResponse;
-  isSelectableDateEnabled: boolean;
-  isDiscountDateEnabled: boolean;
+  isSelectableDatePresent: boolean;
+  isDiscountDatePresent: boolean;
 };
 
 export const DeliveryInputs = ({
   deliveryDateShowData,
-  isSelectableDateEnabled,
-  isDiscountDateEnabled,
+  isSelectableDatePresent,
+  isDiscountDatePresent,
 }: TProps) => {
-  if (isSelectableDateEnabled == false && isDiscountDateEnabled == false) {
-    throw new Error("どっちもfalse");
+  if (isSelectableDatePresent === false && isDiscountDatePresent === false) {
+    throw new Error("選択可能な日付がありません");
   }
-  const onlySelectabled =
-    isSelectableDateEnabled == true && isDiscountDateEnabled == false;
-  const onlyDiscount =
-    isSelectableDateEnabled == false && isDiscountDateEnabled == true;
-  // どっちがfalseによってstateの初期値を変える。（どっちもtrueの場合以外はそもそも表示させない）
-  const [isDiscountDatePeriod, setIsDiscountDatePeriod] = useState(
-    onlyDiscount ? true : false
+  const allDateEnabled =
+    isSelectableDatePresent === true && isDiscountDatePresent === true;
+
+  const [isDiscountEnabled, setIsDiscountDateEnabled] = useState(
+    isDiscountDatePresent
   );
+
   const [isShortest, setIsShortest] = useState(true);
   const [selectedDate, setSelectedDate] = useState<string>("");
   const switchDate = (data: TChartDeliveryDateResponse) => {
-    const min = isDiscountDatePeriod
+    const min = isDiscountEnabled
       ? (data.discountSelectableDatePeriod?.start as string)
       : (data.selectableDatePeriod?.start as string);
-    const max = isDiscountDatePeriod
+    const max = isDiscountEnabled
       ? (data.discountSelectableDatePeriod?.end as string)
       : (data.selectableDatePeriod?.end as string);
 
     return { min, max };
   };
 
+  useEffect(() => {
+    setSelectedDate("");
+  }, [isDiscountEnabled]);
+
   console.log(
-    `discount適用${isDiscountDateEnabled}  通常日にち選択${isSelectableDateEnabled}`
+    `discount適用${isDiscountDatePresent}  通常日にち選択${isSelectableDatePresent} discountが適用できる？:${isDiscountEnabled} setされてる現在の日付:${selectedDate}`
   );
+  console.log(deliveryDateShowData.deliveryTimeOptions);
 
   return (
     <div>
       <div className="grid-cols-2 place-items-center justify-items-center my-10">
-        <div className="flex gap-3">
-          <Toggle
-            checked={isDiscountDatePeriod}
-            onChange={setIsDiscountDatePeriod}
-          />
-          <Typography>持ち続ける割引きを適用する</Typography>
-        </div>
+        {allDateEnabled && (
+          <div className="flex gap-3">
+            <Toggle
+              checked={isDiscountEnabled}
+              onChange={setIsDiscountDateEnabled}
+            />
+            <Typography>持ち続ける割引きを適用する</Typography>
+          </div>
+        )}
+
         <div className="flex gap-3 my-10">
           <SelectButton
             selected={isShortest}
@@ -80,18 +86,19 @@ export const DeliveryInputs = ({
             selectableDateFrom={switchDate(deliveryDateShowData).min}
             selectableDateTo={switchDate(deliveryDateShowData).max}
             currentDate={selectedDate}
-            setCurrentDate={() => setSelectedDate}
+            setCurrentDate={setSelectedDate}
           />
           <div className="my-5">
             <Typography color="strong-gray">時間指定</Typography>
+            {/* valueをデフォルトでselected_timesにしといてdeliveryTimeOptionsをstate管理する */}
             <DropdownMenuAlt
               value={"選択した画面" || ""}
               onChange={(event) => console.log("setState")}
               className="bg-clay"
             >
-              {Object.values(DELIVERY_TIMES).map((category) => (
-                <option key={category} value={category}>
-                  {category}
+              {deliveryDateShowData.deliveryTimeOptions.map((category) => (
+                <option key={category.id} value={category.name}>
+                  {category.name}
                 </option>
               ))}
             </DropdownMenuAlt>

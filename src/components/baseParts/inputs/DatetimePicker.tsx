@@ -1,11 +1,11 @@
-import { DropdownMenuAlt } from "./DropdownMenuAlt";
+import React from "react";
 import { Typography } from "../Typography";
-import { DELIVERY_TIMES } from "../../../models/shared/TDeliveryTimes";
+
 type TProps = {
   readonly selectableDateFrom: string;
   readonly selectableDateTo: string;
   readonly currentDate: string;
-  readonly setCurrentDate: () => void;
+  readonly setCurrentDate: (event: string) => void;
 };
 
 export const DatetimePicker = ({
@@ -20,8 +20,8 @@ export const DatetimePicker = ({
       <input
         className="border-2 border-themeGray resize-none py-1 w-full px-3 rounded-md bg-clay"
         type="date"
-        onChange={setCurrentDate}
-        defaultValue={currentDate}
+        onChange={(e) => setCurrentDate(e.target.value)}
+        value={currentDate}
         min={selectableDateFrom}
         max={selectableDateTo}
       />

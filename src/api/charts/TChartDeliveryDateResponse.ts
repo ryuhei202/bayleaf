@@ -1,6 +1,6 @@
 export type TChartDeliveryDateResponse = {
   date: string | null;
-  timeOptions: TtimeOptions[];
+  deliveryTimeOptions: TtimeOptions[];
   selectableDatePeriod: {
     start: string;
     end: string;

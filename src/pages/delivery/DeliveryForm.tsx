@@ -22,10 +22,10 @@ export const DeliveryForm = ({ chartId, nextPaymentsDate }: Props) => {
       <div className="my-20">
         <DeliveryInputs
           deliveryDateShowData={deliveryDateShowData}
-          isSelectableDateEnabled={
+          isSelectableDatePresent={
             deliveryDateShowData.selectableDatePeriod != null
           }
-          isDiscountDateEnabled={
+          isDiscountDatePresent={
             deliveryDateShowData.discountSelectableDatePeriod != null
           }
         />
