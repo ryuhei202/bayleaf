@@ -8,21 +8,21 @@ type TChartDeliveryDate = {
 
 type TArgs = {
   chartId: number;
-  delivery_date: string | null;
-  shipment_date: string | null;
+  deliveryDate: string | null;
+  shipmentDate: string | null;
   time: number;
 };
 type TParams = Omit<TArgs, "chartId">;
 
 export const useDeliveryDateUpdates = ({
   chartId,
-  delivery_date,
-  shipment_date,
+  deliveryDate,
+  shipmentDate,
   time,
 }: TArgs) => {
   const { mutate, isLoading } = usePatchRequest<TParams>(
     `/charts/${chartId}/delivery_date`,
-    { delivery_date, shipment_date, time }
+    { deliveryDate, shipmentDate, time }
   );
   return {
     mutate,

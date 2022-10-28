@@ -13,7 +13,6 @@ export const DeliveryForm = ({ chartId, nextPaymentsDate }: Props) => {
       chartId,
     });
 
-  console.log(deliveryDateShowData);
   if (deliveryDateShowError)
     return <ErrorMessage message={deliveryDateShowError.message} />;
   if (!deliveryDateShowData) return <Loader active />;
@@ -28,8 +27,11 @@ export const DeliveryForm = ({ chartId, nextPaymentsDate }: Props) => {
   return (
     <div className="m-auto my-2">
       <div className="my-20">
-        <DeliveryInputs deliveryDateShowData={deliveryDateShowData} />
-        <SelectButton selected={false}>確定する</SelectButton>
+        <DeliveryInputs
+          chartId={chartId}
+          deliveryDateShowData={deliveryDateShowData}
+          nextPaymentsDate={nextPaymentsDate}
+        />
       </div>
     </div>
   );

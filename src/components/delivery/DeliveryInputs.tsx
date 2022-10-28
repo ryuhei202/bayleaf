@@ -5,11 +5,19 @@ import { Toggle } from "../baseParts/inputs/Toggle";
 import { SelectButton } from "../baseParts/SelectButton";
 import { Typography } from "../baseParts/Typography";
 import { useEffect, useState } from "react";
+import { useDeliveryDateUpdates } from "../../api/deliveryDates/useDeliveryDateUpdate";
+import { Button } from "../baseParts/Button";
 type TProps = {
   deliveryDateShowData: TChartDeliveryDateResponse;
+  nextPaymentsDate: string;
+  chartId: number;
 };
 
-export const DeliveryInputs = ({ deliveryDateShowData }: TProps) => {
+export const DeliveryInputs = ({
+  deliveryDateShowData,
+  nextPaymentsDate,
+  chartId,
+}: TProps) => {
   const isSelectableDatePresent =
     deliveryDateShowData.selectableDatePeriod !== null;
   const isDiscountDatePresent =
@@ -19,10 +27,22 @@ export const DeliveryInputs = ({ deliveryDateShowData }: TProps) => {
     isDiscountDatePresent
   );
   const [isShortest, setIsShortest] = useState(true);
-  const [selectedDate, setSelectedDate] = useState<string>("");
+  const [selectedDate, setSelectedDate] = useState("");
+  const [time, setTime] = useState("7");
   useEffect(() => {
     setSelectedDate("");
   }, [isDiscountEnabled]);
+  const shortestDate = (): string => {
+    const today = new Date();
+    const paymentsDate = new Date(nextPaymentsDate);
+    return today < paymentsDate ? nextPaymentsDate : today.toLocaleDateString();
+  };
+  const { mutate, isLoading } = useDeliveryDateUpdates({
+    chartId,
+    deliveryDate: isShortest ? null : selectedDate,
+    shipmentDate: isShortest ? shortestDate() : null,
+    time: Number(time),
+  });
 
   const allDateEnabled =
     isSelectableDatePresent === true && isDiscountDatePresent === true;
@@ -37,11 +57,6 @@ export const DeliveryInputs = ({ deliveryDateShowData }: TProps) => {
 
     return { min, max };
   };
-
-  console.log(
-    `discount適用${isDiscountDatePresent}  通常日にち選択${isSelectableDatePresent} discountが適用できる？:${isDiscountEnabled} setされてる現在の日付:${selectedDate}`
-  );
-  console.log(deliveryDateShowData.deliveryTimeOptions);
 
   return (
     <div>
@@ -76,30 +91,36 @@ export const DeliveryInputs = ({ deliveryDateShowData }: TProps) => {
       </div>
 
       {!isShortest && (
-        <div>
-          <DatetimePicker
-            selectableDateFrom={switchDate(deliveryDateShowData).min}
-            selectableDateTo={switchDate(deliveryDateShowData).max}
-            currentDate={selectedDate}
-            setCurrentDate={setSelectedDate}
-          />
-          <div className="my-5">
-            <Typography color="strong-gray">時間指定</Typography>
-            {/* valueをデフォルトでselected_timesにしといてdeliveryTimeOptionsをstate管理する */}
-            <DropdownMenuAlt
-              value={"選択した画面" || ""}
-              onChange={(event) => console.log("setState")}
-              className="bg-clay"
-            >
-              {deliveryDateShowData.deliveryTimeOptions.map((category) => (
-                <option key={category.id} value={category.name}>
-                  {category.name}
-                </option>
-              ))}
-            </DropdownMenuAlt>
-          </div>
-        </div>
+        <DatetimePicker
+          selectableDateFrom={switchDate(deliveryDateShowData).min}
+          selectableDateTo={switchDate(deliveryDateShowData).max}
+          currentDate={selectedDate}
+          setCurrentDate={setSelectedDate}
+        />
       )}
+      <div className="my-5">
+        <Typography color="strong-gray">時間指定</Typography>
+        <DropdownMenuAlt
+          value={time}
+          onChange={(e) => {
+            setTime(e.target.value);
+          }}
+          className="bg-clay"
+        >
+          {deliveryDateShowData.deliveryTimeOptions.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
+        </DropdownMenuAlt>
+      </div>
+      <Button
+        onClick={() => mutate()}
+        isLoading={isLoading}
+        disabled={isShortest === false && selectedDate === ""}
+      >
+        確定する
+      </Button>
     </div>
   );
 };
