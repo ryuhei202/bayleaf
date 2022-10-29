@@ -18,14 +18,14 @@ export const DeliveryFetcher = ({
   if (deliveryDateShowError)
     return <ErrorMessage message={deliveryDateShowError.message} />;
   if (!deliveryDateShowData) return <Loader active />;
-  // === null なら trueで場合分けの方がわかりやすい？？？
+
   const isSelectableDatePresent =
-    deliveryDateShowData.selectableDatePeriod !== null;
+    deliveryDateShowData.selectableDatePeriod === null;
 
   const isDiscountDatePresent =
-    deliveryDateShowData.discountSelectableDatePeriod !== null;
+    deliveryDateShowData.discountSelectableDatePeriod === null;
 
-  if (isSelectableDatePresent === false && isDiscountDatePresent === false) {
+  if (isSelectableDatePresent && isDiscountDatePresent) {
     return <ErrorMessage message="選択可能な日付がありません" />;
   }
   return (
