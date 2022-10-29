@@ -1,7 +1,7 @@
 import { Switch } from "@headlessui/react";
 type TProps = {
   checked: boolean;
-  onChange: (isDiscountDatePeriod: boolean) => void;
+  onChange: (isChecked: boolean) => void;
 };
 
 export const Toggle = ({ checked, onChange }: TProps) => {
@@ -10,7 +10,7 @@ export const Toggle = ({ checked, onChange }: TProps) => {
       checked={checked}
       onChange={onChange}
       className={`${
-        checked ? "bg-themeGray" : "bg-clay"
+        checked ? "bg-themeGray" : "bg-neutral-300"
       } relative inline-flex h-6 w-11 items-center rounded-full `}
     >
       <span

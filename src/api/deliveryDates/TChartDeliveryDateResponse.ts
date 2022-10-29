@@ -3,9 +3,9 @@ export type TChartDeliveryDateResponse = {
     time: number;
     date: string | null;
   } | null;
-  memberDeliveryTime: string;
+  memberDeliveryTime: number;
   date: string | null;
-  deliveryTimeOptions: TtimeOptions[];
+  deliveryTimeOptions: TTimeOptions[];
   selectableDatePeriod: {
     start: string;
     end: string;
@@ -16,7 +16,7 @@ export type TChartDeliveryDateResponse = {
   } | null;
 };
 
-type TtimeOptions = {
+type TTimeOptions = {
   id: number;
   name: string;
 };
