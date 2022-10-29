@@ -1,4 +1,9 @@
 export type TChartDeliveryDateResponse = {
+  chartDeliveryTime: {
+    time: number;
+    date: string | null;
+  } | null;
+  memberDeliveryTime: string;
   date: string | null;
   deliveryTimeOptions: TtimeOptions[];
   selectableDatePeriod: {
