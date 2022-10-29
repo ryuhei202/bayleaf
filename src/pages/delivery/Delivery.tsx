@@ -5,8 +5,7 @@ import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { useEffect } from "react";
 import { Page } from "../../components/baseParts/Page";
 import { Typography } from "../../components/baseParts/Typography";
-import { DeliveryForm } from "./DeliveryForm";
-import { PageHeader } from "../../components/baseParts/PageHeader";
+import { DeliveryFetcher } from "./DeliveryFetcher";
 
 export const Delivery = () => {
   useEffect(() => {
@@ -43,15 +42,11 @@ export const Delivery = () => {
       </Page>
     );
   }
+
   return (
-    <div className="">
-      <Page className="p-5">
-        <PageHeader title="配送日程を選んでください"></PageHeader>
-        <DeliveryForm
-          chartId={chartIndexData.charts[0].id}
-          nextPaymentsDate={membersIndexData[0].nextPaymentDate}
-        />
-      </Page>
-    </div>
+    <DeliveryFetcher
+      chartIndexDataId={chartIndexData.charts[0].id}
+      nextPaymentDate={membersIndexData[0].nextPaymentDate}
+    />
   );
 };

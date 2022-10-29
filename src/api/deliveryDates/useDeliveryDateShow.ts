@@ -6,15 +6,16 @@ type TChartDeliveryDate = {
   readonly error: Error | null;
 };
 
-type TChartDeliveryDateParams = { chartId: number };
+type TChartDeliveryDateParams = {
+  chartId?: number;
+};
 
 export const useDeliveryDateShow = ({
   chartId,
 }: TChartDeliveryDateParams): TChartDeliveryDate => {
-  const { data, error } = useGetRequest<
-    TChartDeliveryDateResponse,
-    TChartDeliveryDateParams
-  >(`charts/${chartId}/delivery_date`);
+  const { data, error } = useGetRequest<TChartDeliveryDateResponse>(
+    `charts/${chartId}/delivery_date`
+  );
   return {
     data,
     error,

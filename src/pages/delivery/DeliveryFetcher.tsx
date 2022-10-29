@@ -1,33 +1,38 @@
-import { useDeliveryDateShow } from "../../api/deliveryDates/useDeliveryDateShow";
 import { Loader } from "semantic-ui-react";
+import { useDeliveryDateShow } from "../../api/deliveryDates/useDeliveryDateShow";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
-import { DeliveryInputs } from "../../components/delivery/DeliveryInputs";
-type Props = {
-  chartId: number;
-  nextPaymentsDate: string;
+import { DeliveryPageContainer } from "./DeliveryPageContainer";
+type TProps = {
+  chartIndexDataId: number;
+  nextPaymentDate: string;
 };
-export const DeliveryForm = ({ chartId, nextPaymentsDate }: Props) => {
+
+export const DeliveryFetcher = ({
+  chartIndexDataId,
+  nextPaymentDate,
+}: TProps) => {
   const { data: deliveryDateShowData, error: deliveryDateShowError } =
     useDeliveryDateShow({
-      chartId,
+      chartId: chartIndexDataId,
     });
-
   if (deliveryDateShowError)
     return <ErrorMessage message={deliveryDateShowError.message} />;
   if (!deliveryDateShowData) return <Loader active />;
+  // === null なら trueで場合分けの方がわかりやすい？？？
   const isSelectableDatePresent =
     deliveryDateShowData.selectableDatePeriod !== null;
+
   const isDiscountDatePresent =
     deliveryDateShowData.discountSelectableDatePeriod !== null;
+
   if (isSelectableDatePresent === false && isDiscountDatePresent === false) {
     return <ErrorMessage message="選択可能な日付がありません" />;
   }
-
   return (
-    <DeliveryInputs
-      chartId={chartId}
+    <DeliveryPageContainer
+      chartId={chartIndexDataId}
       deliveryDateShowData={deliveryDateShowData}
-      nextPaymentsDate={nextPaymentsDate}
+      nextPaymentsDate={nextPaymentDate}
     />
   );
 };
