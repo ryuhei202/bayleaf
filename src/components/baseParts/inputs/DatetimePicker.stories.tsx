@@ -15,8 +15,8 @@ const DateFrom = new Date(2022, 10 - 1, 5);
 const DateTo = new Date(2022, 11 - 1, 20);
 
 Default.args = {
-  selectableDateFrom: DateFrom,
-  selectableDateTo: DateTo,
+  selectableDateFrom: "2022/11/14",
+  selectableDateTo: "2022/11/30",
 };
 Default.decorators = [
   (Story) => (
