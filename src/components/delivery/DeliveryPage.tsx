@@ -78,7 +78,7 @@ export const DeliveryPage = ({
           {isDiscountSelectable ? (
             <div className="flex gap-3">
               <Toggle checked={isDiscountEnabled} onChange={onDiscountChange} />
-              <Typography>持ち続ける割引きを適用する</Typography>
+              <Typography>持ち続ける割引を適用する</Typography>
             </div>
           ) : (
             isDiscountEnabled && (

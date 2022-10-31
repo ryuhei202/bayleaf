@@ -1,5 +1,5 @@
 import { DeliveryPage } from "../../components/delivery/DeliveryPage";
-import { useDeliveryDateUpdates } from "../../api/deliveryDates/useDeliveryDateUpdate";
+import { useDeliveryDateUpdate } from "../../api/deliveryDates/useDeliveryDateUpdate";
 import { TChartDeliveryDateResponse } from "../../api/deliveryDates/TChartDeliveryDateResponse";
 import { useState } from "react";
 
@@ -42,7 +42,7 @@ export const DeliveryPageContainer = ({
     max: selectableDateRange.min,
   };
 
-  const { mutate, isLoading } = useDeliveryDateUpdates({
+  const { mutate, isLoading } = useDeliveryDateUpdate({
     chartId,
     deliveryDate: isShortest ? null : selectedDate,
     shipmentDate: isShortest ? shortestDateRange.min : null,
