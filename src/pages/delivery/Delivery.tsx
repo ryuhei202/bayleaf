@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { Page } from "../../components/baseParts/Page";
 import { Typography } from "../../components/baseParts/Typography";
 import { DeliveryFetcher } from "./DeliveryFetcher";
+import { CHART_RENTAL_STATUS } from "../../models/chart/ChartRentalStatus";
 
 export const Delivery = () => {
   useEffect(() => {
@@ -13,7 +14,7 @@ export const Delivery = () => {
   }, []);
   const { data: chartIndexData, error: chartIndexError } = useChartIndex({
     params: {
-      rentalStatus: [1],
+      rentalStatus: [CHART_RENTAL_STATUS.WAIT_HEARING],
       isHearingCompleted: true,
       limit: 1,
       order: "DESC",
