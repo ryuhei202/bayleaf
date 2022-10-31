@@ -11,9 +11,6 @@ const Template: ComponentStory<typeof DatetimePicker> = (args) => (
 );
 
 export const Default = Template.bind({});
-const DateFrom = new Date(2022, 10 - 1, 5);
-const DateTo = new Date(2022, 11 - 1, 20);
-
 Default.args = {
   selectableDateFrom: "2022/11/14",
   selectableDateTo: "2022/11/30",

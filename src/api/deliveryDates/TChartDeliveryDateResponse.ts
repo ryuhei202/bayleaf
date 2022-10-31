@@ -16,7 +16,7 @@ export type TChartDeliveryDateResponse = {
   } | null;
 };
 
-type TTimeOptions = {
+export type TTimeOptions = {
   id: number;
   name: string;
 };

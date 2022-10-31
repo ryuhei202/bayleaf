@@ -8,7 +8,7 @@ type TArgs = {
 };
 type TParams = Omit<TArgs, "chartId">;
 
-export const useDeliveryDateUpdates = ({
+export const useDeliveryDateUpdate = ({
   chartId,
   deliveryDate,
   shipmentDate,
