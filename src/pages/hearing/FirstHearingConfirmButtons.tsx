@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "../../components/baseParts/Button";
-import { ConfirmDialog } from "../../components/baseParts/ConfirmDialog";
+import { ConfirmDialog } from "../../components/baseParts/dialogs/ConfirmDialog";
 
 type TProps = {
   readonly onClickComplete: () => void;
