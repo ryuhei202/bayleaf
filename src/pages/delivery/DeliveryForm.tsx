@@ -1,7 +1,6 @@
 import { useDeliveryDateShow } from "../../api/deliveryDates/useDeliveryDateShow";
 import { Loader } from "semantic-ui-react";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
-import { SelectButton } from "../../components/baseParts/SelectButton";
 import { DeliveryInputs } from "../../components/delivery/DeliveryInputs";
 type Props = {
   chartId: number;
@@ -25,14 +24,10 @@ export const DeliveryForm = ({ chartId, nextPaymentsDate }: Props) => {
   }
 
   return (
-    <div className="m-auto my-2">
-      <div className="my-20">
-        <DeliveryInputs
-          chartId={chartId}
-          deliveryDateShowData={deliveryDateShowData}
-          nextPaymentsDate={nextPaymentsDate}
-        />
-      </div>
-    </div>
+    <DeliveryInputs
+      chartId={chartId}
+      deliveryDateShowData={deliveryDateShowData}
+      nextPaymentsDate={nextPaymentsDate}
+    />
   );
 };

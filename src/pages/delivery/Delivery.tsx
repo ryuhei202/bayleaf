@@ -24,8 +24,8 @@ export const Delivery = () => {
 
   if (chartIndexError)
     return <ErrorMessage message={chartIndexError.message} />;
-  if (!chartIndexData) return <Loader active />;
-  if (!(membersIndexData?.length == 1)) {
+  if (!chartIndexData || !membersIndexData) return <Loader active />;
+  if (membersIndexData.length !== 1) {
     return (
       <Page className="flex justify-center items-center">
         <Typography>

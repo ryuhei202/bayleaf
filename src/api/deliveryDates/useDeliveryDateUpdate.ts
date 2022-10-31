@@ -1,10 +1,4 @@
 import { usePatchRequest } from "../usePatchRequest";
-import { TChartDeliveryDateResponse } from "./TChartDeliveryDateResponse";
-
-type TChartDeliveryDate = {
-  readonly data?: TChartDeliveryDateResponse;
-  readonly error: Error | null;
-};
 
 type TArgs = {
   chartId: number;
