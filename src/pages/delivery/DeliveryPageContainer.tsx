@@ -2,6 +2,8 @@ import { DeliveryPage } from "../../components/delivery/DeliveryPage";
 import { useDeliveryDateUpdate } from "../../api/deliveryDates/useDeliveryDateUpdate";
 import { TChartDeliveryDateResponse } from "../../api/deliveryDates/TChartDeliveryDateResponse";
 import { useState } from "react";
+import { AlertDialog } from "../../components/baseParts/dialogs/AlertDialog";
+import { useQueryClient } from "react-query";
 
 type Props = {
   chartId: number;
@@ -22,6 +24,7 @@ export const DeliveryPageContainer = ({
     deliveryDateShowData.chartDeliveryTime?.time.toString() ??
       deliveryDateShowData.memberDeliveryTime.toString()
   );
+  const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState(false);
 
   const selectableDateRange = isDiscountEnabled
     ? {
@@ -41,7 +44,7 @@ export const DeliveryPageContainer = ({
         : nextPaymentsDate,
     max: selectableDateRange.min,
   };
-
+  const queryClient = useQueryClient();
   const { mutate, isLoading } = useDeliveryDateUpdate({
     chartId,
     deliveryDate: isShortest ? null : selectedDate,
@@ -54,25 +57,53 @@ export const DeliveryPageContainer = ({
     deliveryDateShowData.discountSelectableDatePeriod !== null;
 
   return (
-    <DeliveryPage
-      chartDeliveryTime={deliveryDateShowData.chartDeliveryTime}
-      deliveryTimeOptions={deliveryDateShowData.deliveryTimeOptions}
-      isDiscountSelectable={isDiscountSelectable}
-      onDiscountChange={(isChecked) => {
-        setIsDiscountDateEnabled(isChecked);
-        setSelectedDate("");
-      }}
-      isDiscountEnabled={isDiscountEnabled}
-      isShortest={isShortest}
-      onSelectShortest={setIsShortest}
-      shortestDateRange={shortestDateRange}
-      selectableDateRange={selectableDateRange}
-      selectedDate={selectedDate}
-      onSelectDate={setSelectedDate}
-      selectedDeliveryTime={time}
-      onSelectDeliveryTime={setTime}
-      onSubmit={mutate}
-      isLoading={isLoading}
-    />
+    <>
+      <DeliveryPage
+        chartDeliveryTime={deliveryDateShowData.chartDeliveryTime}
+        deliveryTimeOptions={deliveryDateShowData.deliveryTimeOptions}
+        isDiscountSelectable={isDiscountSelectable}
+        onDiscountChange={(isChecked) => {
+          setIsDiscountDateEnabled(isChecked);
+          setSelectedDate("");
+        }}
+        isDiscountEnabled={isDiscountEnabled}
+        isShortest={isShortest}
+        onSelectShortest={setIsShortest}
+        shortestDateRange={shortestDateRange}
+        selectableDateRange={selectableDateRange}
+        selectedDate={selectedDate}
+        onSelectDate={setSelectedDate}
+        selectedDeliveryTime={time}
+        onSelectDeliveryTime={setTime}
+        onSubmit={() =>
+          mutate(undefined, {
+            onSuccess: () => {
+              queryClient
+                .invalidateQueries(`charts/${chartId}/delivery_date`)
+                .then(() => setIsSuccessDialogOpen(true));
+            },
+          })
+        }
+        isLoading={isLoading}
+      />
+      <AlertDialog
+        open={isSuccessDialogOpen}
+        title="以下の内容で配送日時を指定しました"
+        description={
+          <>
+            配送希望日：
+            {deliveryDateShowData.chartDeliveryTime?.date ?? "最短日"}
+            <br></br>
+            配送希望時間：
+            {deliveryDateShowData.deliveryTimeOptions.find(
+              (option) =>
+                option.id === deliveryDateShowData.chartDeliveryTime?.time
+            )?.name ?? "指定無し"}
+          </>
+        }
+        onClickOk={() => setIsSuccessDialogOpen(false)}
+        onClose={() => setIsSuccessDialogOpen(false)}
+      ></AlertDialog>
+    </>
   );
 };

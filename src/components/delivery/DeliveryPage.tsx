@@ -54,7 +54,7 @@ export const DeliveryPage = ({
   isLoading,
 }: TProps) => {
   return (
-    <Page className="p-5">
+    <Page className="px-5">
       <PageHeader title="配送日程を選んでください"></PageHeader>
       <div>
         {chartDeliveryTime !== null && (
@@ -136,14 +136,15 @@ export const DeliveryPage = ({
             ))}
           </DropdownMenuAlt>
         </div>
-        <Button
-          onClick={onSubmit}
-          isLoading={isLoading}
-          disabled={isShortest === false && selectedDate === ""}
-        >
-          確定する
-        </Button>
       </div>
+      <Button
+        onClick={onSubmit}
+        isLoading={isLoading}
+        disabled={isShortest === false && selectedDate === ""}
+        className="mt-10"
+      >
+        確定する
+      </Button>
     </Page>
   );
 };
