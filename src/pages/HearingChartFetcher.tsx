@@ -36,6 +36,7 @@ export const HearingChartFetcher = ({ member }: TProps) => {
             <a
               href={`${process.env.REACT_APP_HOST_URL}/return/select_reserve_target`}
               target="_blank"
+              rel="noreferrer"
               className="underline"
             >
               こちら

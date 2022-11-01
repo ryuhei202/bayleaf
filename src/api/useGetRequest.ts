@@ -31,6 +31,7 @@ export const useGetRequest = <TResponse, TParams = {}>(
         .then((r) => r.data)
         .catch((e) => {
           Sentry.captureException(e);
+          throw new Error(e.response.data.message);
         }),
     {
       onError: (error) => {

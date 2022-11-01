@@ -1,5 +1,5 @@
 import { Dialog } from "@headlessui/react";
-import { Button } from "./Button";
+import { Button } from "../Button";
 
 type TProps = {
   readonly open: boolean;
