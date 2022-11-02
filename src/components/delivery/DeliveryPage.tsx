@@ -107,8 +107,8 @@ export const DeliveryPage = ({
           <>
             <Typography color="strong-gray">配送予定期間</Typography>
             <Typography color="strong-gray">
-              {new Date(shortestDateRange.min).toLocaleDateString()}〜
-              {new Date(shortestDateRange.max).toLocaleDateString()}
+              {new Date(shortestDateRange.min).toLocaleDateString("ja-JP")}〜
+              {new Date(shortestDateRange.max).toLocaleDateString("ja-JP")}
             </Typography>
           </>
         ) : (

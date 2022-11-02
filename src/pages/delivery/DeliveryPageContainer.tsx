@@ -36,7 +36,7 @@ export const DeliveryPageContainer = ({
         max: deliveryDateShowData.selectableDatePeriod?.end as string,
       };
 
-  const today = new Date().toLocaleDateString();
+  const today = new Date().toLocaleDateString("ja-JP");
   const shortestDateRange = {
     min:
       new Date(nextPaymentsDate) > new Date(selectableDateRange.max)
