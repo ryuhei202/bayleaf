@@ -8,6 +8,7 @@ import { Button } from "../baseParts/Button";
 import { Paper } from "../baseParts/Paper";
 import { Page } from "../baseParts/Page";
 import { PageHeader } from "../baseParts/PageHeader";
+import liff from "@line/liff/dist/lib";
 
 type TProps = {
   chartDeliveryTime: {
@@ -53,6 +54,12 @@ export const DeliveryPage = ({
   onSubmit,
   isLoading,
 }: TProps) => {
+  const selectableDates = new Array<string>();
+  let currentDate = new Date(selectableDateRange.min);
+  while (currentDate <= new Date(selectableDateRange.max)) {
+    selectableDates.push(currentDate.toLocaleDateString("ja-JP"));
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
   return (
     <Page className="px-5">
       <PageHeader title="配送日程を選んでください"></PageHeader>
@@ -107,19 +114,33 @@ export const DeliveryPage = ({
           <>
             <Typography color="strong-gray">配送予定期間</Typography>
             <Typography color="strong-gray">
-              {new Date(shortestDateRange.min).toLocaleDateString()}〜
-              {new Date(shortestDateRange.max).toLocaleDateString()}
+              {new Date(shortestDateRange.min).toLocaleDateString("ja-JP")}〜
+              {new Date(shortestDateRange.max).toLocaleDateString("ja-JP")}
             </Typography>
           </>
         ) : (
           <>
             <Typography color="strong-gray">配送希望日</Typography>
-            <DatetimePicker
-              selectableDateFrom={selectableDateRange.min}
-              selectableDateTo={selectableDateRange.max}
-              currentDate={selectedDate}
-              onChangeDate={onSelectDate}
-            />
+            {liff.getOS() === "ios" ? (
+              <DropdownMenuAlt
+                value={selectedDate}
+                onChange={(event) => onSelectDate(event.target.value)}
+                placeholder="希望日を選択してください"
+              >
+                {selectableDates.map((selectableDate) => (
+                  <option key={selectableDate} value={selectableDate}>
+                    {selectableDate}
+                  </option>
+                ))}
+              </DropdownMenuAlt>
+            ) : (
+              <DatetimePicker
+                selectableDateFrom={selectableDateRange.min}
+                selectableDateTo={selectableDateRange.max}
+                currentDate={selectedDate}
+                onChangeDate={onSelectDate}
+              />
+            )}
           </>
         )}
         <div className="my-5">
@@ -127,7 +148,6 @@ export const DeliveryPage = ({
           <DropdownMenuAlt
             value={selectedDeliveryTime}
             onChange={(event) => onSelectDeliveryTime(event.target.value)}
-            className="bg-clay"
           >
             {deliveryTimeOptions.map((category) => (
               <option key={category.id} value={category.id}>
