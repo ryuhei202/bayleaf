@@ -16,7 +16,11 @@ export const DeliveryPageContainer = ({
   nextPaymentsDate,
 }: Props) => {
   const [isDiscountEnabled, setIsDiscountDateEnabled] = useState(
-    deliveryDateShowData.discountSelectableDatePeriod !== null
+    deliveryDateShowData.discountSelectableDatePeriod !== null &&
+      Math.ceil(
+        (new Date(nextPaymentsDate).getTime() - new Date().getTime()) /
+          (1000 * 3600 * 24)
+      ) < 15 // 決済日まで15日以下の場合、割引が選択された状態をデフォルトにする
   );
   const [isShortest, setIsShortest] = useState(true);
   const [selectedDate, setSelectedDate] = useState("");
