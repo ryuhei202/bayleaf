@@ -11,6 +11,8 @@ export type TChartIndexParams = {
   readonly rentalStatus?: CHART_RENTAL_STATUS[];
   readonly limit?: number;
   readonly order?: "ASC" | "DESC";
+  readonly isReturnRequired?: boolean;
+  readonly isHearingCompleted?: boolean;
 };
 
 type TChartIndexArgs = { params: TChartIndexParams };
