@@ -40,16 +40,16 @@ export const DeliveryPageContainer = ({
         max: deliveryDateShowData.selectableDatePeriod?.end as string,
       };
 
-  const getTwoDaysLater = (): string => {
+  const getOneDayLater = (): string => {
     const date = new Date();
-    date.setDate(date.getDate() + 2);
+    date.setDate(date.getDate() + 1);
     return date.toLocaleDateString("ja-JP");
   };
 
   const shortestDateRange = {
     min:
       new Date(nextPaymentsDate) > new Date(selectableDateRange.max)
-        ? getTwoDaysLater()
+        ? getOneDayLater()
         : nextPaymentsDate,
     max: selectableDateRange.min,
   };
