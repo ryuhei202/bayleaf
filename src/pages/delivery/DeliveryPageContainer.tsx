@@ -134,7 +134,7 @@ export const DeliveryPageContainer = ({
             )?.name ?? "指定無し"}
           </>
         }
-        onClickOk={() => setIsSuccessDialogOpen(false)}
+        onClickOk={() => liff.closeWindow()}
         onClose={() => setIsSuccessDialogOpen(false)}
       ></AlertDialog>
     </>
