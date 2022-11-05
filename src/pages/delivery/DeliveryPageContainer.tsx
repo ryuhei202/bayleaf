@@ -1,19 +1,28 @@
+import { useState } from "react";
+import liff from "@line/liff/dist/lib";
+
 import { DeliveryPage } from "../../components/delivery/DeliveryPage";
 import { useDeliveryDateUpdate } from "../../api/deliveryDates/useDeliveryDateUpdate";
 import { TChartDeliveryDateResponse } from "../../api/deliveryDates/TChartDeliveryDateResponse";
-import { useState } from "react";
 import { AlertDialog } from "../../components/baseParts/dialogs/AlertDialog";
 import { useQueryClient } from "react-query";
+import { Page } from "../../components/baseParts/Page";
+import { PageHeader } from "../../components/baseParts/PageHeader";
+import { SelectedDeliveryDate } from "../../components/delivery/SelectedDeliveryDate";
+import { Paper } from "../../components/baseParts/Paper";
 
 type Props = {
   chartId: number;
   deliveryDateShowData: TChartDeliveryDateResponse;
   nextPaymentsDate: string;
+  isReadOnly: boolean;
 };
+
 export const DeliveryPageContainer = ({
   chartId,
   deliveryDateShowData,
   nextPaymentsDate,
+  isReadOnly,
 }: Props) => {
   const [isDiscountEnabled, setIsDiscountDateEnabled] = useState(
     deliveryDateShowData.discountSelectableDatePeriod !== null &&
@@ -65,6 +74,21 @@ export const DeliveryPageContainer = ({
     deliveryDateShowData.selectableDatePeriod !== null &&
     deliveryDateShowData.discountSelectableDatePeriod !== null;
 
+  if (isReadOnly)
+    return (
+      <Page className="px-5">
+        <PageHeader title="下記の日時で配送致します" />
+        <Paper className="mt-10">
+          {deliveryDateShowData.chartDeliveryTime !== null && (
+            <SelectedDeliveryDate
+              selectedDeliveryDate={deliveryDateShowData.chartDeliveryTime}
+              timeOptions={deliveryDateShowData.deliveryTimeOptions}
+            />
+          )}
+        </Paper>
+      </Page>
+    );
+
   return (
     <>
       <DeliveryPage
@@ -110,7 +134,7 @@ export const DeliveryPageContainer = ({
             )?.name ?? "指定無し"}
           </>
         }
-        onClickOk={() => setIsSuccessDialogOpen(false)}
+        onClickOk={() => liff.closeWindow()}
         onClose={() => setIsSuccessDialogOpen(false)}
       ></AlertDialog>
     </>

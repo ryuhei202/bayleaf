@@ -14,7 +14,12 @@ export const Delivery = () => {
   }, []);
   const { data: chartIndexData, error: chartIndexError } = useChartIndex({
     params: {
-      rentalStatus: [CHART_RENTAL_STATUS.WAIT_HEARING],
+      rentalStatus: [
+        CHART_RENTAL_STATUS.WAIT_HEARING,
+        CHART_RENTAL_STATUS.WAIT_COORDE_REGIST,
+        CHART_RENTAL_STATUS.WAIT_DELIVERY,
+        CHART_RENTAL_STATUS.WAIT_RENTAL_RETURN,
+      ],
       isHearingCompleted: true,
       limit: 1,
       order: "DESC",
@@ -47,6 +52,7 @@ export const Delivery = () => {
   return (
     <DeliveryFetcher
       chartIndexDataId={chartIndexData.charts[0].id}
+      rentalStatus={chartIndexData.charts[0].rentalStatus}
       nextPaymentDate={membersIndexData[0].nextPaymentDate}
     />
   );

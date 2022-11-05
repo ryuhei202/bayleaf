@@ -18,6 +18,7 @@ export const Default = Template.bind({});
 const charts = [...Array(2)].map((): TChartResponse => {
   return {
     id: 1,
+    rentalStatus: 4,
     rentalStartedAt: "2022/03/12",
     itemImagePaths: [
       "https://stg.leeap.jp/files/preregistered_item/168/16899/large_thumb_IMG_3977.JPG",

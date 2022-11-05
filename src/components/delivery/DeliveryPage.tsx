@@ -9,6 +9,7 @@ import { Paper } from "../baseParts/Paper";
 import { Page } from "../baseParts/Page";
 import { PageHeader } from "../baseParts/PageHeader";
 import liff from "@line/liff/dist/lib";
+import { SelectedDeliveryDate } from "./SelectedDeliveryDate";
 
 type TProps = {
   chartDeliveryTime: {
@@ -69,16 +70,10 @@ export const DeliveryPage = ({
             <Typography size="xl" className="mb-2">
               指定中の配送日時
             </Typography>
-            <Typography>
-              配送希望日：
-              {chartDeliveryTime.date ?? "最短日"}
-            </Typography>
-            <Typography>
-              配送希望時間：
-              {deliveryTimeOptions.find(
-                (option) => option.id === chartDeliveryTime?.time
-              )?.name ?? "指定無し"}
-            </Typography>
+            <SelectedDeliveryDate
+              selectedDeliveryDate={chartDeliveryTime}
+              timeOptions={deliveryTimeOptions}
+            />
           </Paper>
         )}
         <div className="mb-4 mt-10">
