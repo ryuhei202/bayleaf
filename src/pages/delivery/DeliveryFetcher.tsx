@@ -1,14 +1,17 @@
 import { Loader } from "semantic-ui-react";
 import { useDeliveryDateShow } from "../../api/deliveryDates/useDeliveryDateShow";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
+import { CHART_RENTAL_STATUS } from "../../models/chart/ChartRentalStatus";
 import { DeliveryPageContainer } from "./DeliveryPageContainer";
 type TProps = {
   chartIndexDataId: number;
+  rentalStatus: number;
   nextPaymentDate: string;
 };
 
 export const DeliveryFetcher = ({
   chartIndexDataId,
+  rentalStatus,
   nextPaymentDate,
 }: TProps) => {
   const { data: deliveryDateShowData, error: deliveryDateShowError } =
@@ -33,6 +36,11 @@ export const DeliveryFetcher = ({
       chartId={chartIndexDataId}
       deliveryDateShowData={deliveryDateShowData}
       nextPaymentsDate={nextPaymentDate}
+      isReadOnly={[
+        CHART_RENTAL_STATUS.WAIT_COORDE_REGIST,
+        CHART_RENTAL_STATUS.WAIT_DELIVERY,
+        CHART_RENTAL_STATUS.WAIT_RENTAL_RETURN,
+      ].includes(rentalStatus)}
     />
   );
 };
