@@ -13,6 +13,7 @@ import * as Sentry from "@sentry/react";
 import { BrowserTracing } from "@sentry/tracing";
 import { Dressing } from "./pages/dressing/Dressing";
 import { Dislike } from "./pages/dislike/Dislike";
+import { Delivery } from "./pages/delivery/Delivery";
 
 Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DSN,
@@ -40,13 +41,23 @@ function App() {
             <Route path="consult" element={<Consult />} />
             <Route path="dressing" element={<Dressing />} />
             <Route path="dislike" element={<Dislike />} />
+            <Route path="delivery" element={<Delivery />} />
           </Routes>
         </StylistIdContext.Provider>
       </IdTokenContext.Provider>
     </QueryClientProvider>
   );
   if (lineIdToken) {
-    return <Sentry.ErrorBoundary>{app}</Sentry.ErrorBoundary>;
+    return (
+      <Sentry.ErrorBoundary
+        fallback={
+          <ErrorMessage message="予期せぬエラーが発生いたしました。大変申し訳ございませんが、再度お願いいたします" />
+        }
+        showDialog
+      >
+        {app}
+      </Sentry.ErrorBoundary>
+    );
   }
   if (liffErrorMessage) {
     return <ErrorMessage message={liffErrorMessage} />;
