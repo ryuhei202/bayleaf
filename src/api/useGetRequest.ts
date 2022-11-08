@@ -31,6 +31,15 @@ export const useGetRequest = <TResponse, TParams = {}>(
         .then((r) => r.data)
         .catch((e) => {
           Sentry.captureException(e);
+          if (e.response.data === undefined) {
+            throw new Error("予期せぬエラーが発生しました");
+          }
+          // メンテナンス時にレスポンスとしてstatusCode：503を返すようにnginx.confに設定している
+          if (e.response.data.statusCode === 503) {
+            throw new Error(
+              "メンテナンス中です。メンテナンスが終わるまでしばらくお待ちください。"
+            );
+          }
           throw new Error(e.response.data.message);
         }),
     {
