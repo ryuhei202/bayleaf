@@ -30,18 +30,15 @@ export const useGetRequest = <TResponse, TParams = {}>(
         })
         .then((r) => r.data)
         .catch((e) => {
+          if (
+            e.response?.data?.message !== undefined &&
+            e.response.data.message !== ""
+          ) {
+            throw new Error(e.response.data.message);
+          }
+
           Sentry.captureException(e);
-          if (e.response.status === 503) {
-            throw new Error(
-              "メンテナンス中です。メンテナンスが終わるまでしばらくお待ちください。"
-            );
-          }
-
-          if (e.response.data === undefined) {
-            throw new Error("予期せぬエラーが発生しました");
-          }
-
-          throw new Error(e.response.data.message);
+          throw new Error("予期せぬエラーが発生しました");
         }),
     {
       enabled: isEnabled ?? true,
