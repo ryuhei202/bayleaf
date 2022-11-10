@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { TabAlt } from "./TabAlt";
 
 export default {
-  title: "Tabs/Tab",
+  title: "BaseParts/Tabs/Tab",
   component: TabAlt,
 } as ComponentMeta<typeof TabAlt>;
 
