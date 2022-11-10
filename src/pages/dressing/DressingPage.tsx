@@ -28,7 +28,12 @@ export const DressingPage = ({ dressings }: TProps) => {
         {dressings.length > 1 ? (
           <Tab.List className="w-full flex sticky top-0">
             {dressings.map((_, index) => (
-              <TabAlt disableElevation={true} size="small" radius="small">
+              <TabAlt
+                disableElevation={true}
+                size="small"
+                radius="small"
+                key={index}
+              >
                 コーデ{index + 1}
               </TabAlt>
             ))}
@@ -37,8 +42,8 @@ export const DressingPage = ({ dressings }: TProps) => {
           <></>
         )}
         <Tab.Panels className="mt-10">
-          {dressings.map((dressing) => (
-            <Tab.Panel>
+          {dressings.map((dressing, index) => (
+            <Tab.Panel key={index}>
               <DressingHearing hearings={dressing.categorizedForms} />
               <DressingDescription
                 description={dressing.description}

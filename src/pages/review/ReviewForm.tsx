@@ -30,17 +30,16 @@ export const ReviewForm = ({ coordinate, reviewOptions, onSubmit }: Props) => {
           />
         </div>
         <div className="flex flex-col space-y-3 bg-white p-5">
-          {reviewOptions.map((option) => {
-            return (
-              <Button
-                onClick={() => onSubmit(option.id)}
-                border
-                disableElevation
-              >
-                {option.name}
-              </Button>
-            );
-          })}
+          {reviewOptions.map((option) => (
+            <Button
+              onClick={() => onSubmit(option.id)}
+              border
+              disableElevation
+              key={option.id}
+            >
+              {option.name}
+            </Button>
+          ))}
         </div>
       </div>
     </Page>

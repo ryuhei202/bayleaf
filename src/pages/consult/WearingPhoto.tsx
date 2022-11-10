@@ -47,7 +47,7 @@ export const WearingPhoto = ({
 
       <div className="flex h-[150px] justify-center space-x-3 mt-4">
         {items.map((item) => {
-          return <ImageAlt imageSrc={item.imagePaths.large} />;
+          return <ImageAlt imageSrc={item.imagePaths.large} key={item.id} />;
         })}
       </div>
       <hr className="border-none h-1 bg-gray-400 my-5" />

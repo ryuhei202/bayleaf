@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Loader } from "semantic-ui-react";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { useMembersIndex } from "../../api/members/useMembersIndex";
@@ -11,14 +12,13 @@ type Props = {
 
 export const MemberListContainer = ({ setMember }: Props) => {
   const { data, error } = useMembersIndex();
+  useEffect(() => {
+    if (data?.length === 1) setMember(data[0]);
+  }, [data, setMember]);
 
+  if (error) return <ErrorMessage message={error.message} />;
   if (!data) return <Loader active />;
   if (data?.length <= 0)
     return <Typography className="m-4">ユーザーが存在しません</Typography>;
-
-  if (error) return <ErrorMessage message={error.message} />;
-  if (data.length === 1) {
-    setMember(data[0]);
-  }
   return <MemberList data={data} setMember={setMember} />;
 };

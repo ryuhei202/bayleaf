@@ -23,9 +23,9 @@ export const ItemPartSizeSelectButtons = ({
   return (
     <div className="px-6 flex mt-4 justify-center">
       <Typography className="flex-1 mt-auto mb-auto">{item.part}</Typography>
-      {Object.values(item.buttonType).map((buttonType) => (
+      {Object.values(item.buttonType).map((buttonType, index) => (
         <SelectButton
-          key={item.part}
+          key={index}
           className="flex-1	 rounded-sm duration-75"
           selected={isSelected(item.part, buttonType)}
           onClick={() => onPartChanged(item.part, buttonType)}

@@ -11,8 +11,8 @@ export const DressingAdvice = ({ advices }: TProps) => {
     <div className="mb-16">
       <Typography size="xl">コーデの着こなし方</Typography>
       <div className="mt-5">
-        {advices.map((advice) => (
-          <div className="flex items-center my-3">
+        {advices.map((advice, index) => (
+          <div className="flex items-center my-3" key={index}>
             <ExpandableImage
               defaultImageSrc={`${
                 advice.imageFileName
