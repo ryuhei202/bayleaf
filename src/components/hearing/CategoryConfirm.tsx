@@ -11,8 +11,8 @@ export const CategoryConfirm = ({ categoryName, forms }: TProps) => {
         {categoryName}
       </Typography>
       <div className="mx-3">
-        {forms.map((form) => (
-          <FormConfirm form={form} />
+        {forms.map((form, index) => (
+          <FormConfirm form={form} key={index} />
         ))}
       </div>
     </div>

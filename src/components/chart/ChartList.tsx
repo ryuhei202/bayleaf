@@ -10,7 +10,11 @@ export const ChartList = ({ chartResponses, onClickChart }: Props) => {
   return (
     <div className="flex flex-col space-y-4">
       {chartResponses.map((chart) => (
-        <ChartListButton chart={chart} onClick={() => onClickChart(chart)} />
+        <ChartListButton
+          chart={chart}
+          onClick={() => onClickChart(chart)}
+          key={chart.id}
+        />
       ))}
     </div>
   );
