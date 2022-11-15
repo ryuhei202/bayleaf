@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { TCoordinateResponse } from "../../api/coordinates/TCoordinateResponse";
+import { TCoordinateResponse } from "../../../api/coordinates/TCoordinateResponse";
 
 import { CoordinateList } from "./CoordinateList";
 
