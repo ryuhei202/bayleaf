@@ -43,11 +43,12 @@ export const AgeDetailSelection = ({
         </div>
         <Typography className="text-xl">気になる点を教えてください</Typography>
         <div className="mt-8">
-          {Object.values(AGE_CHOICES).map((choice) => (
+          {Object.values(AGE_CHOICES).map((choice, index) => (
             <Button
               className="my-3"
               variant="primary"
               onClick={() => onSelect(choice)}
+              key={index}
             >
               {choice}
             </Button>

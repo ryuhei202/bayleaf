@@ -15,8 +15,12 @@ export const AnswerConfirm = ({
     <>
       <Typography className="text-lg mt-5 ">コーデ{coordinateNum}</Typography>
       <div className="bg-white mt-3 rounded-md overflow-hidden">
-        {answer.map((ans) => (
-          <CategoryConfirm categoryName={ans.categoryName} forms={ans.forms} />
+        {answer.map((ans, index) => (
+          <CategoryConfirm
+            categoryName={ans.categoryName}
+            forms={ans.forms}
+            key={index}
+          />
         ))}
       </div>
     </>

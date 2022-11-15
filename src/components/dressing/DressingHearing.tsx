@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { TCategorizedForm } from "../../api/hearings/TCategorizedForm";
 import { Typography } from "../baseParts/Typography";
 
@@ -9,8 +10,8 @@ export const DressingHearing = ({ hearings }: TProps) => {
     <div className="mb-16">
       <Typography size="xl">ヒアリング内容</Typography>
       <div className="m-3 bg-white p-3 shadow-sm">
-        {hearings.map((h) => (
-          <>
+        {hearings.map((h, index) => (
+          <Fragment key={index}>
             <Typography size="xs" color="gray">
               {h.categoryName}
             </Typography>
@@ -19,19 +20,19 @@ export const DressingHearing = ({ hearings }: TProps) => {
                 .sort((a, b) => {
                   return a.options.length - b.options.length;
                 })
-                .map((f) =>
+                .map((f, formIndex) =>
                   f.options.length > 1 ? (
-                    <Typography size="xs" color="strong-gray">
+                    <Typography size="xs" color="strong-gray" key={formIndex}>
                       {f.options.map((o) => o.name).join(", ")}
                     </Typography>
                   ) : (
-                    <Typography size="sm" weight="bold">
+                    <Typography size="sm" weight="bold" key={formIndex}>
                       {f.options[0].name}
                     </Typography>
                   )
                 )}
             </div>
-          </>
+          </Fragment>
         ))}
       </div>
     </div>

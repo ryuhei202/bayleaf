@@ -54,21 +54,20 @@ export const ReviewReasonForm = ({
             className="mb-8"
           />
           <div className="flex flex-col space-y-3">
-            {reviewReasonOptions.map((option) => {
-              return (
-                <Button
-                  onClick={() => onClickReasonOption(option.id)}
-                  size="small"
-                  variant={
-                    choicedReasonIds.includes(option.id) ? "primary" : "default"
-                  }
-                  border
-                  disableElevation
-                >
-                  {option.name}
-                </Button>
-              );
-            })}
+            {reviewReasonOptions.map((option) => (
+              <Button
+                onClick={() => onClickReasonOption(option.id)}
+                size="small"
+                variant={
+                  choicedReasonIds.includes(option.id) ? "primary" : "default"
+                }
+                border
+                disableElevation
+                key={option.id}
+              >
+                {option.name}
+              </Button>
+            ))}
 
             <div>
               <Typography className="mb-2" size="sm" color="primary">

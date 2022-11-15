@@ -28,6 +28,7 @@ export const HearingAnswerConfirm = ({
             <AnswerConfirm
               answer={confirmAnswer.answer}
               coordinateNum={coordinateNum ?? index + 1}
+              key={index}
             />
           ))}
         </div>

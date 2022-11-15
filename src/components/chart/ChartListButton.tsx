@@ -20,8 +20,8 @@ export const ChartListButton = ({ chart, onClick }: Props) => {
       </Typography>
 
       <div className="flex h-[100px] justify-center space-x-2 mt-4">
-        {chart.itemImagePaths.map((iamgePath) => {
-          return <ImageAlt imageSrc={iamgePath} />;
+        {chart.itemImagePaths.map((iamgePath, index) => {
+          return <ImageAlt imageSrc={iamgePath} key={index} />;
         })}
       </div>
     </Button>

@@ -30,13 +30,17 @@ export const useGetRequest = <TResponse, TParams = {}>(
         })
         .then((r) => r.data)
         .catch((e) => {
+          if (
+            e.response?.data?.message !== undefined &&
+            e.response.data.message !== ""
+          ) {
+            throw new Error(e.response.data.message);
+          }
+
           Sentry.captureException(e);
-          throw new Error(e.response.data.message);
+          throw new Error("予期せぬエラーが発生しました");
         }),
     {
-      onError: (error) => {
-        Sentry.captureException(error);
-      },
       enabled: isEnabled ?? true,
     }
   );
