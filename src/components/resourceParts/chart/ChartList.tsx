@@ -1,4 +1,4 @@
-import { TChartResponse } from "../../api/charts/TChartResponse";
+import { TChartResponse } from "../../../api/charts/TChartResponse";
 import { ChartListButton } from "./ChartListButton";
 
 type Props = {
