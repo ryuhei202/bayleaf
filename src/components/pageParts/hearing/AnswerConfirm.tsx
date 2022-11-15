@@ -1,5 +1,5 @@
-import { TCategorizedForm } from "../../api/hearings/TCategorizedForm";
-import { Typography } from "../baseParts/Typography";
+import { TCategorizedForm } from "../../../api/hearings/TCategorizedForm";
+import { Typography } from "../../baseParts/Typography";
 import { CategoryConfirm } from "./CategoryConfirm";
 
 type TProps = {

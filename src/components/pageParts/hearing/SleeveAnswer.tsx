@@ -1,4 +1,4 @@
-import { TStylingReferenceShowResponse } from "../../api/stylingReference/TStylingReferenceShowResponse";
+import { TStylingReferenceShowResponse } from "../../../api/stylingReference/TStylingReferenceShowResponse";
 import { EditableLayout } from "./EditableLayout";
 import { TitledAnswer } from "./TitledAnswer";
 
