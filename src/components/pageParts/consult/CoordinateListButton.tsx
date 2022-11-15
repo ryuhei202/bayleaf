@@ -1,7 +1,7 @@
-import { TCoordinateResponse } from "../../api/coordinates/TCoordinateResponse";
-import { Button } from "../baseParts/Button";
-import { ImageAlt } from "../baseParts/images/ImageAlt";
-import { Typography } from "../baseParts/Typography";
+import { TCoordinateResponse } from "../../../api/coordinates/TCoordinateResponse";
+import { Button } from "../../baseParts/Button";
+import { ImageAlt } from "../../baseParts/images/ImageAlt";
+import { Typography } from "../../baseParts/Typography";
 
 type Props = {
   index: number;

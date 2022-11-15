@@ -1,5 +1,5 @@
-import { TCoordinateResponse } from "../../api/coordinates/TCoordinateResponse";
-import { Typography } from "../baseParts/Typography";
+import { TCoordinateResponse } from "../../../api/coordinates/TCoordinateResponse";
+import { Typography } from "../../baseParts/Typography";
 import { CoordinateListButton } from "./CoordinateListButton";
 
 type TProps = {
