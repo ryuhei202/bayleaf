@@ -6,11 +6,11 @@ import { StylistIdContext } from "../../App";
 import { Button } from "../../components/baseParts/Button";
 import { Page } from "../../components/baseParts/Page";
 import { TabAlt } from "../../components/baseParts/tabs/TabAlt";
-import { DressingAdvice } from "../../components/dressing/DressingAdvice";
-import { DressingChangeItem } from "../../components/dressing/DressingChangeItem";
-import { DressingDescription } from "../../components/dressing/DressingDescription";
-import { DressingFootwear } from "../../components/dressing/DressingFootwear";
-import { DressingHearing } from "../../components/dressing/DressingHearing";
+import { DressingAdvice } from "../../components/pageParts/dressing/DressingAdvice";
+import { DressingChangeItem } from "../../components/pageParts/dressing/DressingChangeItem";
+import { DressingDescription } from "../../components/pageParts/dressing/DressingDescription";
+import { DressingFootwear } from "../../components/pageParts/dressing/DressingFootwear";
+import { DressingHearing } from "../../components/pageParts/dressing/DressingHearing";
 
 type TProps = {
   readonly dressings: TNonNullableDressing[];

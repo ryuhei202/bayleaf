@@ -1,6 +1,6 @@
-import { TDressingFootwear } from "../../api/dressings/TDressingFootwear";
-import { ExpandableImage } from "../baseParts/images/ExpandableImage";
-import { Typography } from "../baseParts/Typography";
+import { TDressingFootwear } from "../../../api/dressings/TDressingFootwear";
+import { ExpandableImage } from "../../baseParts/images/ExpandableImage";
+import { Typography } from "../../baseParts/Typography";
 
 type TProps = {
   readonly footwear: TDressingFootwear;
