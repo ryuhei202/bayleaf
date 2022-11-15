@@ -1,3 +1,4 @@
+import { Loader } from "semantic-ui-react";
 import { TCoordinateResponse } from "../../api/coordinates/TCoordinateResponse";
 import { TReviewOptionResponse } from "../../api/reviews/TReviewOptionResponse";
 import { useSimplifiedHearingShow } from "../../api/simplifiedHearings/useSimplifiedHearingShow";
@@ -20,7 +21,7 @@ export const ReviewForm = ({ coordinate, reviewOptions, onSubmit }: Props) => {
     useSimplifiedHearingShow({
       coordinateId: coordinate.id,
     });
-
+  if (!simplifiedHearing) return <Loader active />;
   if (simplifiedHearingError)
     return <ErrorMessage message={simplifiedHearingError.message} />;
   return (
