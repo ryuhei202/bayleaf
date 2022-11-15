@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { TChartResponse } from "../../api/charts/TChartResponse";
+import { TChartResponse } from "../../../api/charts/TChartResponse";
 import { ChartList } from "./ChartList";
 
 export default {
