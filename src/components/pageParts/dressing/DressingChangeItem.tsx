@@ -1,6 +1,6 @@
-import { TDressingItem } from "../../api/dressings/TDressingItem";
-import { CoordinateItemImages } from "../baseParts/CoordinateItemImages";
-import { Typography } from "../baseParts/Typography";
+import { TDressingItem } from "../../../api/dressings/TDressingItem";
+import { CoordinateItemImages } from "../../baseParts/CoordinateItemImages";
+import { Typography } from "../../baseParts/Typography";
 
 type TProps = {
   readonly changeItems: TDressingItem[];

@@ -1,7 +1,7 @@
-import { TDressingComment } from "../../api/dressings/TDressingComment";
-import { TDressingItem } from "../../api/dressings/TDressingItem";
-import { CoordinateItemImages } from "../baseParts/CoordinateItemImages";
-import { Typography } from "../baseParts/Typography";
+import { TDressingComment } from "../../../api/dressings/TDressingComment";
+import { TDressingItem } from "../../../api/dressings/TDressingItem";
+import { CoordinateItemImages } from "../../baseParts/CoordinateItemImages";
+import { Typography } from "../../baseParts/Typography";
 
 type TProps = {
   readonly description: string;
