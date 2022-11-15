@@ -1,6 +1,6 @@
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { Button } from "../../components/baseParts/Button";
-import { HearingAnswerConfirm } from "../../components/hearing/HearingAnswerConfirm";
+import { HearingAnswerConfirm } from "../../components/pageParts/hearing/HearingAnswerConfirm";
 import { THearingAnswer } from "../../models/hearing/THearingAnswer";
 import { AnsweredHearings, TAnsweredForm } from "./HearingContainer";
 import { HearingFormFetcher } from "./HearingFormFetcher";

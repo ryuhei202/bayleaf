@@ -1,7 +1,7 @@
-import { THearingAnswer } from "../../models/hearing/THearingAnswer";
-import { FooterWrapper } from "../baseParts/FooterWrapper";
-import { Page } from "../baseParts/Page";
-import { PageHeader } from "../baseParts/PageHeader";
+import { THearingAnswer } from "../../../models/hearing/THearingAnswer";
+import { FooterWrapper } from "../../baseParts/FooterWrapper";
+import { Page } from "../../baseParts/Page";
+import { PageHeader } from "../../baseParts/PageHeader";
 import { AnswerConfirm } from "./AnswerConfirm";
 
 type TProps = {

@@ -1,4 +1,4 @@
-import { TForm } from "../../api/hearings/TForm";
+import { TForm } from "../../../api/hearings/TForm";
 import { TitledAnswer } from "./TitledAnswer";
 
 type TProps = {

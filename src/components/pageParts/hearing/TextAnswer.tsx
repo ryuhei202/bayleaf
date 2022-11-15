@@ -1,5 +1,5 @@
-import { TStylingReferenceShowResponse } from "../../api/stylingReference/TStylingReferenceShowResponse";
-import { Typography } from "../baseParts/Typography";
+import { TStylingReferenceShowResponse } from "../../../api/stylingReference/TStylingReferenceShowResponse";
+import { Typography } from "../../baseParts/Typography";
 
 type Props = {
   readonly titleText: string;

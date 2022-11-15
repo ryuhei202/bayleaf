@@ -1,9 +1,9 @@
-import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
-import { Button } from "../baseParts/Button";
-import { CoworkerIcon } from "../baseParts/icons/CoworkerIcon";
-import { Page } from "../baseParts/Page";
-import { PageHeader } from "../baseParts/PageHeader";
-import { Typography } from "../baseParts/Typography";
+import { TMembersIndexResponse } from "../../../api/members/TMembersIndexResponse";
+import { Button } from "../../baseParts/Button";
+import { CoworkerIcon } from "../../baseParts/icons/CoworkerIcon";
+import { Page } from "../../baseParts/Page";
+import { PageHeader } from "../../baseParts/PageHeader";
+import { Typography } from "../../baseParts/Typography";
 
 type Props = {
   readonly data: TMembersIndexResponse[];

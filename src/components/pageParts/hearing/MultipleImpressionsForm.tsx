@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { ReferenceOptions } from "../../models/hearing/ReferenceOptions";
-import { Button } from "../baseParts/Button";
-import { IconButton } from "../baseParts/IconButton";
-import { ArrowIcon } from "../baseParts/icons/ArrowIcon";
-import { Page } from "../baseParts/Page";
-import { PageHeader } from "../baseParts/PageHeader";
-import { SelectButton } from "../baseParts/SelectButton";
-import { Typography } from "../baseParts/Typography";
+import { ReferenceOptions } from "../../../models/hearing/ReferenceOptions";
+import { Button } from "../../baseParts/Button";
+import { IconButton } from "../../baseParts/IconButton";
+import { ArrowIcon } from "../../baseParts/icons/ArrowIcon";
+import { Page } from "../../baseParts/Page";
+import { PageHeader } from "../../baseParts/PageHeader";
+import { SelectButton } from "../../baseParts/SelectButton";
+import { Typography } from "../../baseParts/Typography";
 
 type Props = {
   defaultValues?: number[];
