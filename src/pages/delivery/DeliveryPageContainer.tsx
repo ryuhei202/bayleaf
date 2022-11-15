@@ -1,14 +1,14 @@
 import { useState } from "react";
 import liff from "@line/liff/dist/lib";
 
-import { DeliveryPage } from "../../components/delivery/DeliveryPage";
+import { DeliveryPage } from "../../components/pageParts/delivery/DeliveryPage";
 import { useDeliveryDateUpdate } from "../../api/deliveryDates/useDeliveryDateUpdate";
 import { TChartDeliveryDateResponse } from "../../api/deliveryDates/TChartDeliveryDateResponse";
 import { AlertDialog } from "../../components/baseParts/dialogs/AlertDialog";
 import { useQueryClient } from "react-query";
 import { Page } from "../../components/baseParts/Page";
 import { PageHeader } from "../../components/baseParts/PageHeader";
-import { SelectedDeliveryDate } from "../../components/delivery/SelectedDeliveryDate";
+import { SelectedDeliveryDate } from "../../components/pageParts/delivery/SelectedDeliveryDate";
 import { Paper } from "../../components/baseParts/Paper";
 
 type Props = {
