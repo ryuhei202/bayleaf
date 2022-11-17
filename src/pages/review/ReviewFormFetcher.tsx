@@ -1,0 +1,61 @@
+import { TCoordinateResponse } from "../../api/coordinates/TCoordinateResponse";
+import { TReviewOptionResponse } from "../../api/reviews/TReviewOptionResponse";
+import { TSimplifiedHearingShowResponse } from "../../api/simplifiedHearings/TSimplifiedHearingShowResponse";
+import { Button } from "../../components/baseParts/Button";
+import { CoordinateItemImages } from "../../components/baseParts/CoordinateItemImages";
+import { Page } from "../../components/baseParts/Page";
+import { PageHeader } from "../../components/baseParts/PageHeader";
+import { convertItemsToItemImagesProps } from "../../components/pageParts/review/convertItemsToItemImagesProps";
+import { SimpifiedHearing } from "../../components/resourceParts/simplifiedHearing/SimpifiedHearing";
+
+type TProps = {
+  readonly coordinate: TCoordinateResponse;
+  readonly reviewOptions: TReviewOptionResponse[];
+  readonly simplifiedHearing: TSimplifiedHearingShowResponse;
+  readonly onSubmit: (choicedReviewOptionId: number) => void;
+};
+
+export const ReviewFormFetcher = ({
+  coordinate,
+  reviewOptions,
+  simplifiedHearing,
+  onSubmit,
+}: TProps) => {
+  return (
+    <Page>
+      <div className="flex flex-col justify-between h-full">
+        <div className="px-5">
+          <PageHeader
+            title={
+              <>
+                今回のコーデはお使いの場所でご利用して、ご満足いただけましたでしょうか?
+              </>
+            }
+            className="mb-16"
+          />
+          <CoordinateItemImages
+            {...convertItemsToItemImagesProps(coordinate.items)}
+          />
+        </div>
+        <SimpifiedHearing
+          title="今回のコーデ情報"
+          target={simplifiedHearing?.target as string}
+          scene={simplifiedHearing?.scene as string}
+          impression={simplifiedHearing?.impression as string}
+        />
+        <div className="flex flex-col space-y-3 bg-white p-5">
+          {reviewOptions.map((option) => (
+            <Button
+              onClick={() => onSubmit(option.id)}
+              border
+              disableElevation
+              key={option.id}
+            >
+              {option.name}
+            </Button>
+          ))}
+        </div>
+      </div>
+    </Page>
+  );
+};
