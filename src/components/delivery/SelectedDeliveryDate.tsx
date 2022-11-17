@@ -1,5 +1,5 @@
 import { TTimeOptions } from "../../api/deliveryDates/TChartDeliveryDateResponse";
-import { Typography } from "../baseParts/Typography";
+import { Typography } from "../baseParts/legacy/Typography";
 
 type TProps = {
   selectedDeliveryDate: {

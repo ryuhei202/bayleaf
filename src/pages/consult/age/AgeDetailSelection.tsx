@@ -1,9 +1,9 @@
-import { Button } from "../../../components/baseParts/Button";
-import { IconButton } from "../../../components/baseParts/IconButton";
-import { ArrowIcon } from "../../../components/baseParts/icons/ArrowIcon";
-import { ExpandableImage } from "../../../components/baseParts/images/ExpandableImage";
-import { Page } from "../../../components/baseParts/Page";
-import { Typography } from "../../../components/baseParts/Typography";
+import { Button } from "../../../components/baseParts/legacy/Button";
+import { IconButton } from "../../../components/baseParts/legacy/IconButton";
+import { ArrowIcon } from "../../../components/baseParts/legacy/icons/ArrowIcon";
+import { ExpandableImage } from "../../../components/baseParts/legacy/images/ExpandableImage";
+import { Page } from "../../../components/baseParts/legacy/Page";
+import { Typography } from "../../../components/baseParts/legacy/Typography";
 import {
   AGE_CHOICES,
   TAGE_CHOICES,

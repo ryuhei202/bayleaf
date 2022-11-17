@@ -2,7 +2,7 @@ import { Loader } from "semantic-ui-react";
 import { TChartResponse } from "../../api/charts/TChartResponse";
 import { TNonNullableDressing } from "../../api/dressings/TDressing";
 import { useDressingsIndex } from "../../api/dressings/useDressingsIndex";
-import { Typography } from "../../components/baseParts/Typography";
+import { Typography } from "../../components/baseParts/legacy/Typography";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { DressingPage } from "./DressingPage";
 

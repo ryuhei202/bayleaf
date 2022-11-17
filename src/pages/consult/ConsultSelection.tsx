@@ -1,5 +1,5 @@
-import { Button } from "../../components/baseParts/Button";
-import { Typography } from "../../components/baseParts/Typography";
+import { Button } from "../../components/baseParts/legacy/Button";
+import { Typography } from "../../components/baseParts/legacy/Typography";
 import {
   ConsultChoice,
   ConsultChoiceType,

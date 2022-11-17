@@ -1,7 +1,7 @@
 import { TDressingAdvice } from "../../api/dressings/TDressingAdvice";
-import { Typography } from "../baseParts/Typography";
+import { Typography } from "../baseParts/legacy/Typography";
 import PreviewDefault from "../../../src/images/preview_default.png";
-import { ExpandableImage } from "../baseParts/images/ExpandableImage";
+import { ExpandableImage } from "../baseParts/legacy/images/ExpandableImage";
 
 type TProps = {
   readonly advices: TDressingAdvice[];

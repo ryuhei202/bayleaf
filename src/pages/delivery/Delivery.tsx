@@ -3,8 +3,8 @@ import { useMembersIndex } from "../../api/members/useMembersIndex";
 import { Loader } from "semantic-ui-react";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { useEffect } from "react";
-import { Page } from "../../components/baseParts/Page";
-import { Typography } from "../../components/baseParts/Typography";
+import { Page } from "../../components/baseParts/legacy/Page";
+import { Typography } from "../../components/baseParts/legacy/Typography";
 import { DeliveryFetcher } from "./DeliveryFetcher";
 import { CHART_RENTAL_STATUS } from "../../models/chart/ChartRentalStatus";
 
