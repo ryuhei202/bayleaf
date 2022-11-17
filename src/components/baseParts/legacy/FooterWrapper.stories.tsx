@@ -4,7 +4,7 @@ import { Button } from "./Button";
 import { FooterWrapper } from "./FooterWrapper";
 
 export default {
-  title: "baseParts/FooterWrapper",
+  title: "BaseParts/Legacy/FooterWrapper",
   component: FooterWrapper,
 } as ComponentMeta<typeof FooterWrapper>;
 

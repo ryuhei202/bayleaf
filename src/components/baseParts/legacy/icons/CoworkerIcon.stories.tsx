@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { CoworkerIcon } from "./CoworkerIcon";
 
 export default {
-  title: "BaseParts/Icons/CoworkerIcon",
+  title: "BaseParts/Legacy/Icons/CoworkerIcon",
   component: CoworkerIcon,
 } as ComponentMeta<typeof CoworkerIcon>;
 

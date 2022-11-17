@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ExpandableImage } from "./ExpandableImage";
 
 export default {
-  title: "BaseParts/Images/ExpandableImage",
+  title: "BaseParts/Legacy/Images/ExpandableImage",
   component: ExpandableImage,
   argTypes: {
     onClick: { action: "clicked" },

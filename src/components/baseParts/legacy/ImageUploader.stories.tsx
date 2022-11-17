@@ -4,7 +4,7 @@ import { ImageUploader } from "./ImageUploader";
 import DefaultSrc from "../../images/preview_default.png";
 
 export default {
-  title: "baseParts/ImageUploader",
+  title: "BaseParts/Legacy/ImageUploader",
   component: ImageUploader,
 } as ComponentMeta<typeof ImageUploader>;
 

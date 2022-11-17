@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { EditButton } from "./EditButton";
 
 export default {
-  title: "BaseParts/EditButton",
+  title: "BaseParts/Legacy/EditButton",
   component: EditButton,
 } as ComponentMeta<typeof EditButton>;
 

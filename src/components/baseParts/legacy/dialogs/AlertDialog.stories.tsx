@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { AlertDialog } from "./AlertDialog";
 
 export default {
-  title: "BaseParts/Dialogs/AlertDialog",
+  title: "BaseParts/Legacy/Dialogs/AlertDialog",
   component: AlertDialog,
   argTypes: {
     onClickOk: {

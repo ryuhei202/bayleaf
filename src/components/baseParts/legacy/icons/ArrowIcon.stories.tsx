@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ArrowIcon } from "./ArrowIcon";
 
 export default {
-  title: "BaseParts/Icons/ArrowIcon",
+  title: "BaseParts/Legacy/Icons/ArrowIcon",
   component: ArrowIcon,
 } as ComponentMeta<typeof ArrowIcon>;
 

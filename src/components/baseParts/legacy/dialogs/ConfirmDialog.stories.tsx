@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ConfirmDialog } from "./ConfirmDialog";
 
 export default {
-  title: "BaseParts/Dialogs/ConfirmDialog",
+  title: "BaseParts/Legacy/Dialogs/ConfirmDialog",
   component: ConfirmDialog,
   argTypes: {
     onClickOk: {

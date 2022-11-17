@@ -4,7 +4,7 @@ import { CoworkerIcon } from "./icons/CoworkerIcon";
 import { Typography } from "./Typography";
 
 export default {
-  title: "BaseParts/Button",
+  title: "BaseParts/Legacy/Button",
   component: Button,
   argTypes: {
     onClick: { action: "clicked" },

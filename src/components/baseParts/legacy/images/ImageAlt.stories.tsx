@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ImageAlt } from "./ImageAlt";
 
 export default {
-  title: "BaseParts/Images/ImageAlt",
+  title: "BaseParts/Legacy/Images/ImageAlt",
   component: ImageAlt,
   argTypes: {
     onClick: { action: "clicked" },

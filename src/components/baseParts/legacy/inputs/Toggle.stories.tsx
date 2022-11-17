@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { Toggle } from "./Toggle";
 
 export default {
-  title: "BaseParts/Inputs/Toggle",
+  title: "BaseParts/Legacy/Inputs/Toggle",
   component: Toggle,
   argTypes: {
     setState: { action: "clicked" },

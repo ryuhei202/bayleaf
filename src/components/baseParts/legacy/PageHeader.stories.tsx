@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { PageHeader } from "./PageHeader";
 
 export default {
-  title: "BaseParts/PageHeader",
+  title: "BaseParts/Legacy/PageHeader",
   component: PageHeader,
 } as ComponentMeta<typeof PageHeader>;
 

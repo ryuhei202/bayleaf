@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { LongSleeveIcon } from "./LongSleeveIcon";
 
 export default {
-  title: "BaseParts/Icons/LongSleeveIcon",
+  title: "BaseParts/Legacy/Icons/LongSleeveIcon",
   component: LongSleeveIcon,
 } as ComponentMeta<typeof LongSleeveIcon>;
 

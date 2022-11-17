@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { SelectButtonImage } from "./SelectButtonImage";
 
 export default {
-  title: "BaseParts/Images/SelectButtonImage",
+  title: "BaseParts/Legacy/Images/SelectButtonImage",
   component: SelectButtonImage,
 } as ComponentMeta<typeof SelectButtonImage>;
 

@@ -5,7 +5,7 @@ import { SpeechBalloon } from "./SpeechBalloon";
 import { Typography } from "./Typography";
 
 export default {
-  title: "BaseParts/SpeechBalloon",
+  title: "BaseParts/Legacy/SpeechBalloon",
   component: SpeechBalloon,
 } as ComponentMeta<typeof SpeechBalloon>;
 

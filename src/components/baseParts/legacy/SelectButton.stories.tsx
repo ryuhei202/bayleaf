@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { SelectButton } from "./SelectButton";
 
 export default {
-  title: "BaseParts/SelectButton",
+  title: "BaseParts/Legacy/SelectButton",
   component: SelectButton,
 } as ComponentMeta<typeof SelectButton>;
 

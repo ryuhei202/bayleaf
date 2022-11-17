@@ -5,7 +5,7 @@ import { Paper } from "./Paper";
 import { Typography } from "./Typography";
 
 export default {
-  title: "BaseParts/Paper",
+  title: "BaseParts/Legacy/Paper",
   component: Paper,
 } as ComponentMeta<typeof Paper>;
 

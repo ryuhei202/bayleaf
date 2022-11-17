@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { Typography } from "./Typography";
 
 export default {
-  title: "BaseParts/Typography",
+  title: "BaseParts/Legacy/Typography",
   component: Typography,
 } as ComponentMeta<typeof Typography>;
 

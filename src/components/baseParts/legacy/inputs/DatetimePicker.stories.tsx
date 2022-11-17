@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { DatetimePicker } from "./DatetimePicker";
 
 export default {
-  title: "BaseParts/inputs/DatetimePicker",
+  title: "BaseParts/Legacy/inputs/DatetimePicker",
   component: DatetimePicker,
 } as ComponentMeta<typeof DatetimePicker>;
 

@@ -3,7 +3,7 @@ import { Page } from "./Page";
 import { PageHeader } from "./PageHeader";
 
 export default {
-  title: "BaseParts/Page",
+  title: "BaseParts/Legacy/Page",
   component: Page,
 } as ComponentMeta<typeof Page>;
 

@@ -3,7 +3,7 @@ import { ITEM_TEST_IMAGE_URL } from "../../../images/TestImageUrl";
 import { CoordinateItemImages } from "./CoordinateItemImages";
 
 export default {
-  title: "Review/CoordinateItemImages",
+  title: "BaseParts/Legacy/CoordinateItemImages",
   component: CoordinateItemImages,
   argTypes: {
     onClick: { action: "clicked" },

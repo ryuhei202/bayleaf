@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { TextAreaAlt } from "./TextAreaAlt";
 
 export default {
-  title: "BaseParts/Inputs/TextAreaAlt",
+  title: "BaseParts/Legacy/Inputs/TextAreaAlt",
   component: TextAreaAlt,
   argTypes: {
     onClick: { action: "clicked" },

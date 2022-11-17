@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { DropdownMenuAlt } from "./DropdownMenuAlt";
 
 export default {
-  title: "BaseParts/inputs/DropdownMenuAlt",
+  title: "BaseParts/Legacy/inputs/DropdownMenuAlt",
   component: DropdownMenuAlt,
 } as ComponentMeta<typeof DropdownMenuAlt>;
 

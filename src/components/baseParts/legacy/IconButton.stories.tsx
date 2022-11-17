@@ -3,7 +3,7 @@ import { IconButton } from "./IconButton";
 import { ArrowIcon } from "./icons/ArrowIcon";
 
 export default {
-  title: "BaseParts/IconButton",
+  title: "BaseParts/Legacy/IconButton",
   component: IconButton,
   argTypes: {
     onClick: { action: "clicked" },
