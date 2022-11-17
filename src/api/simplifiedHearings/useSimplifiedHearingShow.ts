@@ -13,7 +13,7 @@ export const useSimplifiedHearingShow = ({
   coordinateId,
 }: TSimplifiedHearingParams): TSimplifiedHearing => {
   const { data, error } = useGetRequest<TSimplifiedHearingShowResponse>(
-    `coordinates/${coordinateId}/simplified_hearings`
+    `coordinates/${coordinateId}/simplified_hearing`
   );
   return {
     data,
