@@ -37,12 +37,15 @@ export const ReviewFormFetcher = ({
             {...convertItemsToItemImagesProps(coordinate.items)}
           />
         </div>
-        <SimpifiedHearing
-          title="今回のコーデ情報"
-          target={simplifiedHearing?.target as string}
-          scene={simplifiedHearing?.scene as string}
-          impression={simplifiedHearing?.impression as string}
-        />
+        {simplifiedHearing && (
+          <SimpifiedHearing
+            title="今回のコーデ情報"
+            target={simplifiedHearing.target}
+            scene={simplifiedHearing.scene}
+            impression={simplifiedHearing.impression}
+          />
+        )}
+
         <div className="flex flex-col space-y-3 bg-white p-5">
           {reviewOptions.map((option) => (
             <Button
