@@ -17,6 +17,8 @@ export const SimpifiedHearing = ({
     { question: "使いたいシーン", answer: scene },
     { question: "与えたい印象", answer: impression },
   ];
+  if (target === "") return <></>;
+
   return (
     <div className=" m-5 bg-white p-5">
       <Typography className="mb-5" size="xl">
