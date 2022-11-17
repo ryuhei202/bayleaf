@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { ExpandableImage } from "../../../components/baseParts/images/ExpandableImage";
-import { TextAreaAlt } from "../../../components/baseParts/inputs/TextAreaAlt";
-import { Page } from "../../../components/baseParts/Page";
-import { CompleteButton } from "../../../components/baseParts/CompleteButton";
-import { Typography } from "../../../components/baseParts/Typography";
+import { ExpandableImage } from "../../../components/baseParts/legacy/images/ExpandableImage";
+import { TextAreaAlt } from "../../../components/baseParts/legacy/inputs/TextAreaAlt";
+import { Page } from "../../../components/baseParts/legacy/Page";
+import { CompleteButton } from "../../../components/baseParts/legacy/CompleteButton";
+import { Typography } from "../../../components/baseParts/legacy/Typography";
 import { RELATION_PART_AND_BUTTON_TYPE } from "../../../models/consult/RelationPartAndButtonType";
 import {
   ITEM_LENGTH_BUTTON,

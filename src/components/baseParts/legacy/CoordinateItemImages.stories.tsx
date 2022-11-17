@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { ITEM_TEST_IMAGE_URL } from "../../images/TestImageUrl";
+import { ITEM_TEST_IMAGE_URL } from "../../../images/TestImageUrl";
 import { CoordinateItemImages } from "./CoordinateItemImages";
 
 export default {

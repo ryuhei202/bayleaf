@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { Loader } from "semantic-ui-react";
-import { Button } from "../../components/baseParts/Button";
+import { Button } from "../../components/baseParts/legacy/Button";
 import { useCoordinateIndex } from "../../api/coordinates/useCoordinateIndex";
-import { Page } from "../../components/baseParts/Page";
-import { PageHeader } from "../../components/baseParts/PageHeader";
-import { Typography } from "../../components/baseParts/Typography";
+import { Page } from "../../components/baseParts/legacy/Page";
+import { PageHeader } from "../../components/baseParts/legacy/PageHeader";
+import { Typography } from "../../components/baseParts/legacy/Typography";
 import { convertItemsToItemImagesProps } from "../../components/review/convertItemsToItemImagesProps";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { ReviewFetcher } from "./ReviewFetcher";
 import { useReviewSkip } from "../../api/reviews/useReviewSkip";
 import liff from "@line/liff/dist/lib";
-import { CoordinateItemImages } from "../../components/baseParts/CoordinateItemImages";
+import { CoordinateItemImages } from "../../components/baseParts/legacy/CoordinateItemImages";
 
 type TProps = {
   readonly chartId: number;

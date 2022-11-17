@@ -1,6 +1,6 @@
 import React from "react";
 import { Loader } from "semantic-ui-react";
-import { analyzeEvent, TGAEvent } from "../../lib/gtag";
+import { analyzeEvent, TGAEvent } from "../../../lib/gtag";
 
 type Props = {
   children?: React.ReactNode;

@@ -3,7 +3,7 @@ import { Loader } from "semantic-ui-react";
 import { TChartResponse } from "../../api/charts/TChartResponse";
 import { useHearingIndex } from "../../api/hearings/useHearingIndex";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
-import { Button } from "../../components/baseParts/Button";
+import { Button } from "../../components/baseParts/legacy/Button";
 import { HearingAnswerConfirm } from "../../components/hearing/HearingAnswerConfirm";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { sortHearings } from "../../models/hearing/THearingForms";

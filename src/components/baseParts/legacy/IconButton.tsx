@@ -1,5 +1,5 @@
 import React from "react";
-import { analyzeEvent, TGAEvent } from "../../lib/gtag";
+import { analyzeEvent, TGAEvent } from "../../../lib/gtag";
 
 type Props = {
   children?: React.ReactNode;

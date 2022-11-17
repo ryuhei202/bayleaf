@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { TCoordinateResponse } from "../../api/coordinates/TCoordinateResponse";
-import { Page } from "../../components/baseParts/Page";
+import { Page } from "../../components/baseParts/legacy/Page";
 import { ConsultChoiceType } from "../../models/consult/choice/ConsultChoice";
 import { ConsultSelection } from "./ConsultSelection";
 import { DetailedConsultContainer } from "./DetailedConsultContainer";

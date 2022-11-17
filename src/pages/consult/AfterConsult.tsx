@@ -1,7 +1,7 @@
-import { Button } from "../../components/baseParts/Button";
-import { Page } from "../../components/baseParts/Page";
-import { PageHeader } from "../../components/baseParts/PageHeader";
-import { Typography } from "../../components/baseParts/Typography";
+import { Button } from "../../components/baseParts/legacy/Button";
+import { Page } from "../../components/baseParts/legacy/Page";
+import { PageHeader } from "../../components/baseParts/legacy/PageHeader";
+import { Typography } from "../../components/baseParts/legacy/Typography";
 
 type TProps = {
   readonly title: React.ReactNode;

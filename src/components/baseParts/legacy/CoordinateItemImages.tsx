@@ -1,5 +1,5 @@
-import { ExpandableImage } from "../baseParts/images/ExpandableImage";
-import { Typography } from "../baseParts/Typography";
+import { ExpandableImage } from "./images/ExpandableImage";
+import { Typography } from "./Typography";
 
 type TProps = {
   items: {

@@ -1,14 +1,14 @@
 import { ChangeEventHandler } from "react";
 
-import { Button } from "../../components/baseParts/Button";
-import { ImageAlt } from "../../components/baseParts/images/ImageAlt";
-import { ImageUploader } from "../../components/baseParts/ImageUploader";
-import { PageHeader } from "../../components/baseParts/PageHeader";
-import { Typography } from "../../components/baseParts/Typography";
+import { Button } from "../../components/baseParts/legacy/Button";
+import { ImageAlt } from "../../components/baseParts/legacy/images/ImageAlt";
+import { ImageUploader } from "../../components/baseParts/legacy/ImageUploader";
+import { PageHeader } from "../../components/baseParts/legacy/PageHeader";
+import { Typography } from "../../components/baseParts/legacy/Typography";
 import { TConsultingItem } from "../../models/consult/TConsultingItem";
 import PreviewWearing from "../../images/preview_wearing.png";
-import { IconButton } from "../../components/baseParts/IconButton";
-import { ArrowIcon } from "../../components/baseParts/icons/ArrowIcon";
+import { IconButton } from "../../components/baseParts/legacy/IconButton";
+import { ArrowIcon } from "../../components/baseParts/legacy/icons/ArrowIcon";
 
 type TProps = {
   items: TConsultingItem[];

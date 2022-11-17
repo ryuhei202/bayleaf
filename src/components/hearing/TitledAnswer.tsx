@@ -1,4 +1,4 @@
-import { Typography } from "../baseParts/Typography";
+import { Typography } from "../baseParts/legacy/Typography";
 
 type Props = {
   readonly titleText: string;
