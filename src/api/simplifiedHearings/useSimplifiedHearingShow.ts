@@ -3,6 +3,7 @@ import { TSimplifiedHearingShowResponse } from "./TSimplifiedHearingShowResponse
 type TSimplifiedHearing = {
   readonly data?: TSimplifiedHearingShowResponse;
   readonly error: Error | null;
+  readonly isLoading?: boolean;
 };
 
 type TSimplifiedHearingParams = {
@@ -12,11 +13,13 @@ type TSimplifiedHearingParams = {
 export const useSimplifiedHearingShow = ({
   coordinateId,
 }: TSimplifiedHearingParams): TSimplifiedHearing => {
-  const { data, error } = useGetRequest<TSimplifiedHearingShowResponse>(
-    `coordinates/${coordinateId}/simplified_hearing`
-  );
+  const { data, error, isLoading } =
+    useGetRequest<TSimplifiedHearingShowResponse>(
+      `coordinates/${coordinateId}/simplified_hearing`
+    );
   return {
     data,
     error,
+    isLoading,
   };
 };
