@@ -13,6 +13,13 @@
       }
     ],
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "redirects": [
+      {
+        "source": "/",
+        "destination": "/503.html",
+        "type": 307
+      }
+    ],
     "rewrites": [
       {
         "source": "**",
