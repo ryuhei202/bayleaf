@@ -8,30 +8,17 @@ import { Typography } from "../../components/baseParts/legacy/Typography";
 import { convertItemsToItemImagesProps } from "../../components/review/convertItemsToItemImagesProps";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { ReviewFetcher } from "./ReviewFetcher";
-import { useReviewSkip } from "../../api/reviews/useReviewSkip";
-import liff from "@line/liff/dist/lib";
 import { CoordinateItemImages } from "../../components/baseParts/legacy/CoordinateItemImages";
 
 type TProps = {
   readonly chartId: number;
 };
 
-export const ReviewSkipForm = ({ chartId }: TProps) => {
+export const ReviewStartPage = ({ chartId }: TProps) => {
   const [isWantReview, setIsWantReview] = useState<boolean>(false);
   const { data: coordinateData, error: coordinateError } = useCoordinateIndex({
     chartId,
   });
-  const { mutate: mutateReviewSkip } = useReviewSkip();
-  const onClickSkipButton = () => {
-    mutateReviewSkip(
-      { chartId },
-      {
-        onSuccess: () => {
-          liff.closeWindow();
-        },
-      }
-    );
-  };
 
   if (coordinateError)
     return <ErrorMessage message={coordinateError.message} />;
@@ -39,7 +26,7 @@ export const ReviewSkipForm = ({ chartId }: TProps) => {
   if (!coordinateData) return <Loader active />;
 
   const reviewTargetCoordinates = coordinateData.coordinates.filter(
-    (c) => !c.isReviewedOrSkipped
+    (c) => !c.isReviewed
   );
 
   if (reviewTargetCoordinates.length === 0) {
@@ -94,9 +81,6 @@ export const ReviewSkipForm = ({ chartId }: TProps) => {
                 disableElevation
               >
                 レビューを回答する
-              </Button>
-              <Button onClick={onClickSkipButton} variant="text">
-                レビューに回答せずに進める
               </Button>
             </div>
           </div>
