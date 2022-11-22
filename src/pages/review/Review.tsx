@@ -7,7 +7,7 @@ import { Typography } from "../../components/baseParts/legacy/Typography";
 import { ChartList } from "../../components/chart/ChartList";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { CHART_RENTAL_STATUS } from "../../models/chart/ChartRentalStatus";
-import { ReviewSkipForm } from "./ReviewSkipForm";
+import { ReviewStartPage } from "./ReviewStartPage";
 
 export const Review = () => {
   const [selectedChart, setSelectedChart] =
@@ -46,7 +46,7 @@ export const Review = () => {
   return (
     <>
       {selectedChart ? (
-        <ReviewSkipForm chartId={selectedChart.id} />
+        <ReviewStartPage chartId={selectedChart.id} />
       ) : (
         <Page>
           <ChartList
