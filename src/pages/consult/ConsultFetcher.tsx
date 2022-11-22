@@ -4,7 +4,7 @@ import { Loader } from "semantic-ui-react";
 
 import { TCoordinateResponse } from "../../api/coordinates/TCoordinateResponse";
 import { useCoordinateIndex } from "../../api/coordinates/useCoordinateIndex";
-import { Typography } from "../../components/baseParts/Typography";
+import { Typography } from "../../components/baseParts/legacy/Typography";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { ConsultOption } from "./ConsultOption";
 import { CoordinateListContainer } from "./CoordinateListContainer";

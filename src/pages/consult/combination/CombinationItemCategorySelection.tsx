@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { DropdownMenuAlt } from "../../../components/baseParts/inputs/DropdownMenuAlt";
-import { Page } from "../../../components/baseParts/Page";
-import { PageHeader } from "../../../components/baseParts/PageHeader";
-import { CompleteButton } from "../../../components/baseParts/CompleteButton";
-import { Typography } from "../../../components/baseParts/Typography";
+import { DropdownMenuAlt } from "../../../components/baseParts/legacy/inputs/DropdownMenuAlt";
+import { Page } from "../../../components/baseParts/legacy/Page";
+import { PageHeader } from "../../../components/baseParts/legacy/PageHeader";
+import { CompleteButton } from "../../../components/baseParts/legacy/CompleteButton";
+import { Typography } from "../../../components/baseParts/legacy/Typography";
 import {
   COMBINATION_ITEM_CATEGORY,
   TCombinationItemCategory,

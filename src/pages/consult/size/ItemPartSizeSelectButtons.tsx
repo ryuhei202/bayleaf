@@ -1,5 +1,5 @@
-import { SelectButton } from "../../../components/baseParts/SelectButton";
-import { Typography } from "../../../components/baseParts/Typography";
+import { SelectButton } from "../../../components/baseParts/legacy/SelectButton";
+import { Typography } from "../../../components/baseParts/legacy/Typography";
 import { TBottoms, TTops } from "../../../models/consult/SizePart";
 import {
   ITEM_LENGTH_BUTTON,

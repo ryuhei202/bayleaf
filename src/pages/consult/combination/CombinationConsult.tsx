@@ -1,9 +1,9 @@
-import { Button } from "../../../components/baseParts/Button";
-import { IconButton } from "../../../components/baseParts/IconButton";
-import { ArrowIcon } from "../../../components/baseParts/icons/ArrowIcon";
-import { ImageUploader } from "../../../components/baseParts/ImageUploader";
-import { Page } from "../../../components/baseParts/Page";
-import { PageHeader } from "../../../components/baseParts/PageHeader";
+import { Button } from "../../../components/baseParts/legacy/Button";
+import { IconButton } from "../../../components/baseParts/legacy/IconButton";
+import { ArrowIcon } from "../../../components/baseParts/legacy/icons/ArrowIcon";
+import { ImageUploader } from "../../../components/baseParts/legacy/ImageUploader";
+import { Page } from "../../../components/baseParts/legacy/Page";
+import { PageHeader } from "../../../components/baseParts/legacy/PageHeader";
 import { useImageUploadHandler } from "../../../hooks/handler/image/useImageUploadHandler";
 import PreviewDefault from "../../../images/preview_default.png";
 

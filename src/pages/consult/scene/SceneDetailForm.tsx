@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { TextAreaAlt } from "../../../components/baseParts/inputs/TextAreaAlt";
-import { Page } from "../../../components/baseParts/Page";
-import { PageHeader } from "../../../components/baseParts/PageHeader";
-import { CompleteButton } from "../../../components/baseParts/CompleteButton";
+import { TextAreaAlt } from "../../../components/baseParts/legacy/inputs/TextAreaAlt";
+import { Page } from "../../../components/baseParts/legacy/Page";
+import { PageHeader } from "../../../components/baseParts/legacy/PageHeader";
+import { CompleteButton } from "../../../components/baseParts/legacy/CompleteButton";
 
 type TProps = {
   readonly onSubmit: (freeText: string) => void;

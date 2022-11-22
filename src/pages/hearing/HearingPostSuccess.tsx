@@ -1,5 +1,5 @@
-import { Page } from "../../components/baseParts/Page";
-import { PageHeader } from "../../components/baseParts/PageHeader";
+import { Page } from "../../components/baseParts/legacy/Page";
+import { PageHeader } from "../../components/baseParts/legacy/PageHeader";
 
 export const HearingPostSuccess = () => {
   return (

@@ -26,7 +26,7 @@ const items: TCoordinateItemResponse[] = [...Array(4)].map(() => {
 Default.args = {
   coordinate: {
     id: 10,
-    isReviewedOrSkipped: false,
+    isReviewed: false,
     items,
   },
   reviewOptions: [

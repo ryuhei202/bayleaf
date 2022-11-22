@@ -19,7 +19,7 @@ export const Default = Template.bind({});
 const coordinates: TCoordinateResponse[] = [
   {
     id: 3,
-    isReviewedOrSkipped: false,
+    isReviewed: false,
     items: [
       {
         id: 111111,

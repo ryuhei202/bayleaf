@@ -1,13 +1,13 @@
 import { TTimeOptions } from "../../api/deliveryDates/TChartDeliveryDateResponse";
-import { DatetimePicker } from "../baseParts/inputs/DatetimePicker";
-import { DropdownMenuAlt } from "../baseParts/inputs/DropdownMenuAlt";
-import { Toggle } from "../baseParts/inputs/Toggle";
-import { SelectButton } from "../baseParts/SelectButton";
-import { Typography } from "../baseParts/Typography";
-import { Button } from "../baseParts/Button";
-import { Paper } from "../baseParts/Paper";
-import { Page } from "../baseParts/Page";
-import { PageHeader } from "../baseParts/PageHeader";
+import { DatetimePicker } from "../baseParts/legacy/inputs/DatetimePicker";
+import { DropdownMenuAlt } from "../baseParts/legacy/inputs/DropdownMenuAlt";
+import { Toggle } from "../baseParts/legacy/inputs/Toggle";
+import { SelectButton } from "../baseParts/legacy/SelectButton";
+import { Typography } from "../baseParts/legacy/Typography";
+import { Button } from "../baseParts/legacy/Button";
+import { Paper } from "../baseParts/legacy/Paper";
+import { Page } from "../baseParts/legacy/Page";
+import { PageHeader } from "../baseParts/legacy/PageHeader";
 import liff from "@line/liff/dist/lib";
 import { SelectedDeliveryDate } from "./SelectedDeliveryDate";
 

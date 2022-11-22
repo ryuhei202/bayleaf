@@ -8,7 +8,7 @@ import {
   TMemberPhotoCreateResponse,
   useMemberPhotoCreate,
 } from "../../api/memberPhotos/useMemberPhotoCreate";
-import { Page } from "../../components/baseParts/Page";
+import { Page } from "../../components/baseParts/legacy/Page";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { useImageUploadHandler } from "../../hooks/handler/image/useImageUploadHandler";
 import { MEMBER_PHOTO_CATEGORY_ID } from "../../models/consult/MemberPhotoCategoryId";
