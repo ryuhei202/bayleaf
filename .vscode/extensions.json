@@ -2,6 +2,8 @@
   "recommendations": [
     "esbenp.prettier-vscode",
     "msjsdiag.debugger-for-chrome",
-    "bradlc.vscode-tailwindcss"
+    "bradlc.vscode-tailwindcss",
+    "orta.vscode-jest",
+    "andys8.jest-snippets"
   ]
 }
