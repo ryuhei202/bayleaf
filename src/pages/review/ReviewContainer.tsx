@@ -6,7 +6,7 @@ import { REVIEW_FORM_TYPE } from "../../models/review/ReviewFormType";
 import { TReviewFormData } from "../../models/review/TReviewFormData";
 import { getReviewContainerHandler } from "./getReviewContainerHandler";
 import { getReviewContainerPresenter } from "./getReviewContainerPresenter";
-import { ReviewForm } from "./ReviewForm";
+import { ReviewForm } from "./ReviewFormFetcher";
 import { ReviewReasonForm } from "./ReviewReasonForm";
 
 type Props = {
