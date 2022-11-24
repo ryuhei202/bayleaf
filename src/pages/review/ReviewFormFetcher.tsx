@@ -3,7 +3,7 @@ import { TCoordinateResponse } from "../../api/coordinates/TCoordinateResponse";
 import { TReviewOptionResponse } from "../../api/reviews/TReviewOptionResponse";
 import { useSimplifiedHearingShow } from "../../api/simplifiedHearings/useSimplifiedHearingShow";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
-import { ReviewFormFetcher } from "./ReviewForm";
+import { ReviewForm } from "./ReviewForm";
 
 type Props = {
   readonly coordinate: TCoordinateResponse;
@@ -11,7 +11,11 @@ type Props = {
   readonly onSubmit: (choicedReviewOptionId: number) => void;
 };
 
-export const ReviewForm = ({ coordinate, reviewOptions, onSubmit }: Props) => {
+export const ReviewFormFetcher = ({
+  coordinate,
+  reviewOptions,
+  onSubmit,
+}: Props) => {
   const { data: simplifiedHearing, error: simplifiedHearingError } =
     useSimplifiedHearingShow({
       coordinateId: coordinate.id,
@@ -20,9 +24,9 @@ export const ReviewForm = ({ coordinate, reviewOptions, onSubmit }: Props) => {
     return <ErrorMessage message={simplifiedHearingError.message} />;
   if (simplifiedHearing === undefined) return <Loader active />;
   return (
-    <ReviewFormFetcher
+    <ReviewForm
       coordinate={coordinate}
-      simplifiedHearing={simplifiedHearing ?? null}
+      simplifiedHearing={simplifiedHearing}
       reviewOptions={reviewOptions}
       onSubmit={onSubmit}
     />

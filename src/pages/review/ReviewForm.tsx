@@ -15,7 +15,7 @@ type TProps = {
   readonly onSubmit: (choicedReviewOptionId: number) => void;
 };
 
-export const ReviewFormFetcher = ({
+export const ReviewForm = ({
   coordinate,
   reviewOptions,
   simplifiedHearing,
