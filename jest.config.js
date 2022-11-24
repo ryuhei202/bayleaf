@@ -1,13 +1,12 @@
+const esmPackages = ["promise-polyfill"];
 const config = {
   testEnvironment: "jsdom",
-  // moduleDirectories: ["node_modules", "<rootDir>/"],
+  moduleDirectories: ["node_modules", "<rootDir>/"],
   testMatch: ["**/*.test.js", "**/*.test.ts", "**/*.test.tsx"],
   extensionsToTreatAsEsm: [".ts", ".tsx"],
   testPathIgnorePatterns: ["<rootDir>/node_modules/"],
   transformIgnorePatterns: [
-    "node_modules/(?![@line|promise-polyfill|jest-cli]).+\\.js$",
-    "node_modules/(?![@line|promise-polyfill|jest-cli]).+\\.ts$",
-    "node_modules/(?![@line|promise-polyfill|jest-cli]).+\\.tsx$",
+    `<rootDir>/node_modules/(?!(${esmPackages.join("|")})/)`,
   ],
   moduleDirectories: ["node_modules", "<rootDir>/"],
   moduleNameMapper: {
@@ -16,7 +15,7 @@ const config = {
     "\\.(css|scss)$": "<rootDir>/src/mocks/styleMock.js",
   },
   transform: {
-    ".+\\.tsx?$": [
+    "^.+\\.(t|j)sx?$": [
       "@swc/jest",
       {
         sourceMaps: true,
