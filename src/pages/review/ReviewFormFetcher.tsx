@@ -12,16 +12,13 @@ type Props = {
 };
 
 export const ReviewForm = ({ coordinate, reviewOptions, onSubmit }: Props) => {
-  const {
-    data: simplifiedHearing,
-    error: simplifiedHearingError,
-    isLoading,
-  } = useSimplifiedHearingShow({
-    coordinateId: coordinate.id,
-  });
+  const { data: simplifiedHearing, error: simplifiedHearingError } =
+    useSimplifiedHearingShow({
+      coordinateId: coordinate.id,
+    });
   if (simplifiedHearingError)
     return <ErrorMessage message={simplifiedHearingError.message} />;
-  if (isLoading) return <Loader active />;
+  if (simplifiedHearing === undefined) return <Loader active />;
   return (
     <ReviewFormFetcher
       coordinate={coordinate}
