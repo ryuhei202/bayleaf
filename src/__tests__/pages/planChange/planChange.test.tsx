@@ -69,9 +69,108 @@ describe("PlanChange.tsx", () => {
 });
 
 describe("PlanSelectingContainer.tsx", () => {
-  test("ローディングがある", () => {});
-  test("[初回ユーザー] && [停止じゃない] && [カルテがない場合]はプラン選択ページへ", () => {});
-  test("[初回ユーザー]でない場合はエラー", () => {});
-  test("[停止ユーザー]の場合はエラー", () => {});
-  test("[カルテがある場合]はエラー", () => {});
+  server.use(
+    ChartIndexMock({
+      status: 200,
+      response: {
+        charts: [],
+      },
+    })
+  );
+  server.use(
+    MemberIndexMock({
+      status: 200,
+      response: {
+        id: 1,
+        email: "kiizan@example.com",
+        nextPaymentDate: "11-1",
+        mPlanId: 1,
+        isLatestChartDelivered: true,
+        isReturnRequired: false,
+        // is_first_time: true
+        // is_suspend: false
+      },
+    })
+  );
+  test("ローディングがある", () => {
+    // const { container } = render(<PlanSelecting />, {
+    //   wrapper: queryWrapper,
+    // });
+    // expect(container.getElementsByClassName("ui active loader").length).toEqual(
+    //   1
+    // );
+  });
+  test("[初回ユーザー] && [停止じゃない] && [カルテがない場合]はプラン選択ページへ", () => {
+    // const { container } = render(<PlanSelecting />, {
+    //   wrapper: queryWrapper,
+    // });
+    // expect(container.getElementsByClassName("ui active loader").length).toEqual(
+    //   1
+    // );
+  });
+  test("[初回ユーザー]でない場合はエラー", () => {
+    server.use(
+      MemberIndexMock({
+        status: 200,
+        response: {
+          id: 1,
+          email: "kiizan@example.com",
+          nextPaymentDate: "11-1",
+          mPlanId: 1,
+          isLatestChartDelivered: true,
+          isReturnRequired: false,
+          // is_first_time: false
+          // is_suspend: false
+        },
+      })
+    );
+    // const { container } = render(<PlanChange />, {
+    //   wrapper: queryWrapper,
+    // });
+    // await waitFor(() => screen.getByText("予期せぬエラーが発生しました"));
+  });
+  test("[停止ユーザー]の場合はエラー", () => {
+    server.use(
+      MemberIndexMock({
+        status: 200,
+        response: {
+          id: 1,
+          email: "kiizan@example.com",
+          nextPaymentDate: "11-1",
+          mPlanId: 1,
+          isLatestChartDelivered: true,
+          isReturnRequired: false,
+          // is_first_time: false
+          // is_suspend: true
+        },
+      })
+    );
+    // const { container } = render(<PlanChange />, {
+    //   wrapper: queryWrapper,
+    // });
+    // await waitFor(() => screen.getByText("予期せぬエラーが発生しました"));
+  });
+  test("[カルテがある場合]はエラー", () => {
+    server.use(
+      ChartIndexMock({
+        status: 200,
+        response: {
+          charts: [
+            {
+              id: 1,
+              rentalStatus: 4,
+              rentalStartedAt: "2022-1-11",
+              itemImagePaths: ["", ""],
+              planName: "プレミアム",
+              planId: 1,
+            },
+          ],
+        },
+      })
+    );
+    // const { container } = render(<PlanChange />, {
+    //   wrapper: queryWrapper,
+    // });
+    // await waitFor(() => screen.getByText("予期せぬエラーが発生しました"));
+  });
 });
