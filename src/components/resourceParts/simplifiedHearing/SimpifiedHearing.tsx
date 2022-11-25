@@ -13,9 +13,9 @@ export const SimpifiedHearing = ({
   impression,
 }: TProps) => {
   const hearings = [
-    { question: "意識する相手", ans: target },
-    { question: "使いたいシーン", ans: scene },
-    { question: "与えたい印象", ans: impression },
+    { question: "意識する相手", answer: target },
+    { question: "使いたいシーン", answer: scene },
+    { question: "与えたい印象", answer: impression },
   ];
   if (target === "") return <></>;
 
@@ -27,9 +27,9 @@ export const SimpifiedHearing = ({
       <div>
         {hearings.map((hearing) => {
           return (
-            <div className="py-3">
+            <div className="py-3" key={hearing.question}>
               <Typography>{hearing.question}</Typography>
-              <p className="py-1 font-thin">・{hearing.ans}</p>
+              <p className="py-1 font-thin">・{hearing.answer}</p>
             </div>
           );
         })}

@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { TCoordinateItemResponse } from "../../api/coordinates/TCoordinateItemResponse";
 import { ITEM_TEST_IMAGE_URL } from "../../images/TestImageUrl";
-import { ReviewForm } from "./ReviewForm";
+import { ReviewForm } from "./ReviewFormFetcher";
 
 export default {
   title: "Review/ReviewForm",
