@@ -4,7 +4,7 @@ import { Button } from "../../components/baseParts/Button";
 import { CoordinateItemImages } from "../../components/baseParts/CoordinateItemImages";
 import { Page } from "../../components/baseParts/Page";
 import { PageHeader } from "../../components/baseParts/PageHeader";
-import { convertItemsToItemImagesProps } from "../../components/review/convertItemsToItemImagesProps";
+import { convertItemsToItemImagesProps } from "../../components/pageParts/review/convertItemsToItemImagesProps";
 
 type Props = {
   readonly coordinate: TCoordinateResponse;

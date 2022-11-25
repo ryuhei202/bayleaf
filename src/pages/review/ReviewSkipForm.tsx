@@ -5,7 +5,7 @@ import { useCoordinateIndex } from "../../api/coordinates/useCoordinateIndex";
 import { Page } from "../../components/baseParts/Page";
 import { PageHeader } from "../../components/baseParts/PageHeader";
 import { Typography } from "../../components/baseParts/Typography";
-import { convertItemsToItemImagesProps } from "../../components/review/convertItemsToItemImagesProps";
+import { convertItemsToItemImagesProps } from "../../components/pageParts/review/convertItemsToItemImagesProps";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { ReviewFetcher } from "./ReviewFetcher";
 import { useReviewSkip } from "../../api/reviews/useReviewSkip";

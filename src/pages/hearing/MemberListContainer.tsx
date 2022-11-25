@@ -3,7 +3,7 @@ import { Loader } from "semantic-ui-react";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { useMembersIndex } from "../../api/members/useMembersIndex";
 import { Typography } from "../../components/baseParts/Typography";
-import { MemberList } from "../../components/hearing/MemberList";
+import { MemberList } from "../../components/pageParts/hearing/MemberList";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 
 type Props = {
