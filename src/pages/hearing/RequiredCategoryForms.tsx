@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Loader } from "semantic-ui-react";
-import { BusinessSleeveForm } from "../../components/hearing/BusinessSleeveForm";
-import { CasualSleeveForm } from "../../components/hearing/CasualSleeveForm";
-import { TargetForm } from "../../components/hearing/TargetForm";
+import { BusinessSleeveForm } from "../../components/pageParts/hearing/BusinessSleeveForm";
+import { CasualSleeveForm } from "../../components/pageParts/hearing/CasualSleeveForm";
+import { TargetForm } from "../../components/pageParts/hearing/TargetForm";
 import { REFERENCE_CATEGORY_IDS } from "../../models/hearing/ReferenceCategorieIds";
 import { TReferenceChoice } from "../../models/hearing/TReferenceChoice";
 import { ImpressionForm } from "./ImpressionForm";
