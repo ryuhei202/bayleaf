@@ -14,6 +14,8 @@ const config = {
       "<rootDir>/src/mocks/fileMock.js",
     "\\.(css|scss)$": "<rootDir>/src/mocks/styleMock.js",
   },
+  setupFilesAfterEnv: ["./jest.setup.js"],
+
   transform: {
     "^.+\\.(t|j)sx?$": [
       "@swc/jest",
