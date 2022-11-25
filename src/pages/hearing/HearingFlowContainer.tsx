@@ -1,5 +1,5 @@
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
-import { Button } from "../../components/baseParts/Button";
+import { Button } from "../../components/baseParts/legacy/Button";
 import { HearingAnswerConfirm } from "../../components/pageParts/hearing/HearingAnswerConfirm";
 import { THearingAnswer } from "../../models/hearing/THearingAnswer";
 import { AnsweredHearings, TAnsweredForm } from "./HearingContainer";

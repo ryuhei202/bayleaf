@@ -1,4 +1,4 @@
-import { EditButton } from "../../baseParts/EditButton";
+import { EditButton } from "../../baseParts/legacy/EditButton";
 
 type Props = {
   readonly children: React.ReactNode;

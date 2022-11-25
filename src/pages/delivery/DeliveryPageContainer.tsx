@@ -4,12 +4,12 @@ import liff from "@line/liff/dist/lib";
 import { DeliveryPage } from "../../components/pageParts/delivery/DeliveryPage";
 import { useDeliveryDateUpdate } from "../../api/deliveryDates/useDeliveryDateUpdate";
 import { TChartDeliveryDateResponse } from "../../api/deliveryDates/TChartDeliveryDateResponse";
-import { AlertDialog } from "../../components/baseParts/dialogs/AlertDialog";
+import { AlertDialog } from "../../components/baseParts/legacy/dialogs/AlertDialog";
 import { useQueryClient } from "react-query";
-import { Page } from "../../components/baseParts/Page";
-import { PageHeader } from "../../components/baseParts/PageHeader";
+import { Page } from "../../components/baseParts/legacy/Page";
+import { PageHeader } from "../../components/baseParts/legacy/PageHeader";
 import { SelectedDeliveryDate } from "../../components/pageParts/delivery/SelectedDeliveryDate";
-import { Paper } from "../../components/baseParts/Paper";
+import { Paper } from "../../components/baseParts/legacy/Paper";
 
 type Props = {
   chartId: number;

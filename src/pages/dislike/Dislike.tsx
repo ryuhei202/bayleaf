@@ -1,11 +1,11 @@
 import liff from "@line/liff/dist/lib";
 import { useEffect, useState } from "react";
 import { useDislikeCreate } from "../../api/dislikes/useDislikeCreate";
-import { Button } from "../../components/baseParts/Button";
-import { Page } from "../../components/baseParts/Page";
-import { PageHeader } from "../../components/baseParts/PageHeader";
-import { SelectButton } from "../../components/baseParts/SelectButton";
-import { Typography } from "../../components/baseParts/Typography";
+import { Button } from "../../components/baseParts/legacy/Button";
+import { Page } from "../../components/baseParts/legacy/Page";
+import { PageHeader } from "../../components/baseParts/legacy/PageHeader";
+import { SelectButton } from "../../components/baseParts/legacy/SelectButton";
+import { Typography } from "../../components/baseParts/legacy/Typography";
 
 const DISLIKE_OPTIONS = [
   "細かいチェック柄",

@@ -6,7 +6,7 @@ import { REVIEW_FORM_TYPE } from "../../models/review/ReviewFormType";
 import { TReviewFormData } from "../../models/review/TReviewFormData";
 import { getReviewContainerHandler } from "./getReviewContainerHandler";
 import { getReviewContainerPresenter } from "./getReviewContainerPresenter";
-import { ReviewForm } from "./ReviewFormFetcher";
+import { ReviewFormFetcher } from "./ReviewFormFetcher";
 import { ReviewReasonForm } from "./ReviewReasonForm";
 
 type Props = {
@@ -65,7 +65,7 @@ export const ReviewContainer = ({
   switch (presenter.currentFormType()) {
     case REVIEW_FORM_TYPE.REVIEW:
       return (
-        <ReviewForm
+        <ReviewFormFetcher
           coordinate={presenter.selectedCoordinate()}
           reviewOptions={reviewOptionResponses}
           onSubmit={handler.handleReviewFormSubmit}

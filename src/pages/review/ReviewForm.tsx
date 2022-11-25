@@ -1,10 +1,10 @@
 import { TCoordinateResponse } from "../../api/coordinates/TCoordinateResponse";
 import { TReviewOptionResponse } from "../../api/reviews/TReviewOptionResponse";
 import { TSimplifiedHearingShowResponse } from "../../api/simplifiedHearings/TSimplifiedHearingShowResponse";
-import { Button } from "../../components/baseParts/Button";
-import { CoordinateItemImages } from "../../components/baseParts/CoordinateItemImages";
-import { Page } from "../../components/baseParts/Page";
-import { PageHeader } from "../../components/baseParts/PageHeader";
+import { Button } from "../../components/baseParts/legacy/Button";
+import { CoordinateItemImages } from "../../components/baseParts/legacy/CoordinateItemImages";
+import { Page } from "../../components/baseParts/legacy/Page";
+import { PageHeader } from "../../components/baseParts/legacy/PageHeader";
 import { convertItemsToItemImagesProps } from "../../components/pageParts/review/convertItemsToItemImagesProps";
 import { SimpifiedHearing } from "../../components/resourceParts/simplifiedHearing/SimpifiedHearing";
 

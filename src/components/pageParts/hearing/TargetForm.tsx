@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { Button } from "../../baseParts/Button";
-import { IconButton } from "../../baseParts/IconButton";
-import { ArrowIcon } from "../../baseParts/icons/ArrowIcon";
-import { CoworkerIcon } from "../../baseParts/icons/CoworkerIcon";
-import { FamilyIcon } from "../../baseParts/icons/FamilyIcon";
-import { FriendIcon } from "../../baseParts/icons/FriendIcon";
-import { PartnerIcon } from "../../baseParts/icons/PartnerIcon";
-import { Page } from "../../baseParts/Page";
-import { PageHeader } from "../../baseParts/PageHeader";
-import { SelectButton } from "../../baseParts/SelectButton";
-import { Typography } from "../../baseParts/Typography";
+import { Button } from "../../baseParts/legacy/Button";
+import { IconButton } from "../../baseParts/legacy/IconButton";
+import { ArrowIcon } from "../../baseParts/legacy/icons/ArrowIcon";
+import { CoworkerIcon } from "../../baseParts/legacy/icons/CoworkerIcon";
+import { FamilyIcon } from "../../baseParts/legacy/icons/FamilyIcon";
+import { FriendIcon } from "../../baseParts/legacy/icons/FriendIcon";
+import { PartnerIcon } from "../../baseParts/legacy/icons/PartnerIcon";
+import { Page } from "../../baseParts/legacy/Page";
+import { PageHeader } from "../../baseParts/legacy/PageHeader";
+import { SelectButton } from "../../baseParts/legacy/SelectButton";
+import { Typography } from "../../baseParts/legacy/Typography";
 import { ReferenceOptions } from "../../../models/hearing/ReferenceOptions";
 
 type Props = {

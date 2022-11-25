@@ -1,7 +1,7 @@
 import { M_PLAN_IDS } from "../../../models/hearing/MPlanIds";
-import { Button } from "../../baseParts/Button";
-import { Page } from "../../baseParts/Page";
-import { PageHeader } from "../../baseParts/PageHeader";
+import { Button } from "../../baseParts/legacy/Button";
+import { Page } from "../../baseParts/legacy/Page";
+import { PageHeader } from "../../baseParts/legacy/PageHeader";
 
 type TProps = {
   readonly onClick: () => void;

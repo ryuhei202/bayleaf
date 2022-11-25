@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { TCategorizedForm } from "../../../api/hearings/TCategorizedForm";
-import { Typography } from "../../baseParts/Typography";
+import { Typography } from "../../baseParts/legacy/Typography";
 
 type TProps = {
   readonly hearings: TCategorizedForm[];

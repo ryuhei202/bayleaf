@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Loader } from "semantic-ui-react";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { useMembersIndex } from "../../api/members/useMembersIndex";
-import { Typography } from "../../components/baseParts/Typography";
+import { Typography } from "../../components/baseParts/legacy/Typography";
 import { MemberList } from "../../components/pageParts/hearing/MemberList";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 

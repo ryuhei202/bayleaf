@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { TCoordinateItemResponse } from "../../api/coordinates/TCoordinateItemResponse";
 import { ITEM_TEST_IMAGE_URL } from "../../images/TestImageUrl";
-import { ReviewForm } from "./ReviewFormFetcher";
+import { ReviewForm } from "./ReviewForm";
 
 export default {
   title: "Review/ReviewForm",
@@ -26,7 +26,7 @@ const items: TCoordinateItemResponse[] = [...Array(4)].map(() => {
 Default.args = {
   coordinate: {
     id: 10,
-    isReviewedOrSkipped: false,
+    isReviewed: false,
     items,
   },
   reviewOptions: [

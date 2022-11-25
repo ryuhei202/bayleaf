@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { HearingAnswerConfirm } from "./HearingAnswerConfirm";
-import { Button } from "../../baseParts/Button";
+import { Button } from "../../baseParts/legacy/Button";
 
 export default {
   title: "Hearing/HearingAnswerConfirm",

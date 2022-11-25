@@ -1,9 +1,9 @@
 import { TStylingReferenceShowResponse } from "../../../api/stylingReference/TStylingReferenceShowResponse";
-import { Button } from "../../baseParts/Button";
-import { Divider } from "../../baseParts/Divider";
-import { PageHeader } from "../../baseParts/PageHeader";
-import { Paper } from "../../baseParts/Paper";
-import { Typography } from "../../baseParts/Typography";
+import { Button } from "../../baseParts/legacy/Button";
+import { Divider } from "../../baseParts/legacy/Divider";
+import { PageHeader } from "../../baseParts/legacy/PageHeader";
+import { Paper } from "../../baseParts/legacy/Paper";
+import { Typography } from "../../baseParts/legacy/Typography";
 import { ImpressionsAnswer } from "./ImpressionsAnswer";
 import { SleeveAnswer } from "./SleeveAnswer";
 import { TargetAnswer } from "./TargetAnswer";

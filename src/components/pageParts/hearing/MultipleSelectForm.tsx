@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { TOptionParams } from "../../../api/charts/TOptionParams";
 import { THearingFormShowResponse } from "../../../api/hearingForms/THearingFormShowResponse";
 import { TAnsweredForm } from "../../../pages/hearing/HearingContainer";
-import { Button } from "../../baseParts/Button";
-import { IconButton } from "../../baseParts/IconButton";
-import { ArrowIcon } from "../../baseParts/icons/ArrowIcon";
-import { TextAreaAlt } from "../../baseParts/inputs/TextAreaAlt";
-import { Page } from "../../baseParts/Page";
-import { PageHeader } from "../../baseParts/PageHeader";
-import { SelectButton } from "../../baseParts/SelectButton";
-import { Typography } from "../../baseParts/Typography";
+import { Button } from "../../baseParts/legacy/Button";
+import { IconButton } from "../../baseParts/legacy/IconButton";
+import { ArrowIcon } from "../../baseParts/legacy/icons/ArrowIcon";
+import { TextAreaAlt } from "../../baseParts/legacy/inputs/TextAreaAlt";
+import { Page } from "../../baseParts/legacy/Page";
+import { PageHeader } from "../../baseParts/legacy/PageHeader";
+import { SelectButton } from "../../baseParts/legacy/SelectButton";
+import { Typography } from "../../baseParts/legacy/Typography";
 
 type TProps = {
   readonly response: THearingFormShowResponse;

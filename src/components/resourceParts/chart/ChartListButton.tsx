@@ -1,7 +1,7 @@
 import { TChartResponse } from "../../../api/charts/TChartResponse";
-import { Button } from "../../baseParts/Button";
-import { ImageAlt } from "../../baseParts/images/ImageAlt";
-import { Typography } from "../../baseParts/Typography";
+import { Button } from "../../baseParts/legacy/Button";
+import { ImageAlt } from "../../baseParts/legacy/images/ImageAlt";
+import { Typography } from "../../baseParts/legacy/Typography";
 
 type Props = {
   chart: TChartResponse;
