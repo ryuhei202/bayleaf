@@ -4,7 +4,7 @@ import { TChartResponse } from "../../api/charts/TChartResponse";
 import { useHearingIndex } from "../../api/hearings/useHearingIndex";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { Button } from "../../components/baseParts/legacy/Button";
-import { HearingAnswerConfirm } from "../../components/hearing/HearingAnswerConfirm";
+import { HearingAnswerConfirm } from "../../components/pageParts/hearing/HearingAnswerConfirm";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { sortHearings } from "../../models/hearing/THearingForms";
 import { HearingContainer } from "./HearingContainer";
