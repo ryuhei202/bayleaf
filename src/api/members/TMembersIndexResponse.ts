@@ -5,4 +5,6 @@ export type TMembersIndexResponse = {
   readonly mPlanId: number;
   readonly isLatestChartDelivered: boolean;
   readonly isReturnRequired: boolean;
+  readonly isFirstTime: boolean;
+  readonly isSuspend: boolean;
 };
