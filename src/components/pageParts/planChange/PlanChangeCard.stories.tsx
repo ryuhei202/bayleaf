@@ -21,17 +21,14 @@ const Template: ComponentStory<typeof PlanChangeCard> = (args) => (
 export const Light = Template.bind({});
 Light.args = {
   plan: LIGHT_PLAN,
-  disabled: false,
 };
 
 export const Standard = Template.bind({});
 Standard.args = {
   plan: STANDARD_PLAN,
-  disabled: false,
 };
 
 export const Premium = Template.bind({});
 Premium.args = {
   plan: PREMIUM_PLAN,
-  disabled: false,
 };

@@ -5,7 +5,6 @@ import DIGONAL_LINE_IMAGE from "../../../images/icons/diagonal-line.svg";
 
 type TProps = {
   plan: TPlan;
-  disabled: boolean;
 };
 const rowClassName = (index: number, length: number) => {
   let classes = [];
@@ -18,13 +17,9 @@ const rowClassName = (index: number, length: number) => {
   return classes.join(" ");
 };
 
-export const PlanChangeCard = ({ plan, disabled }: TProps) => {
+export const PlanChangeCard = ({ plan }: TProps) => {
   return (
-    <div
-      className={`text-themeGray duration-1000 font-medium ${
-        disabled ? "opacity-20" : ""
-      }`}
-    >
+    <div className="text-themeGray duration-1000 font-medium">
       <div className="border-solid border border-themeGray rounded-md mx-3 bg-clay">
         <div>
           <p className="text-center text-[5vw] my-6">
