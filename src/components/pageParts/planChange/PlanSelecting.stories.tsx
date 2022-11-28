@@ -16,6 +16,5 @@ const Template: ComponentStory<typeof PlanSelecting> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  memberId: 1111111,
   planId: M_PLAN_IDS.LIGHT,
 };
