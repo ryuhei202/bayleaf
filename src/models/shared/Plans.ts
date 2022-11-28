@@ -1,13 +1,15 @@
-import { TAX } from "../shared/Tax";
+import { TAX } from "./Tax";
 
 export const M_PLAN_IDS = {
   CASUAL: 1,
   BUSINESS: 3,
+  LIGHT: 11,
+  SRTANDARD: 12,
   PREMIUM: 13,
 } as const;
 
 export const LIGHT_PLAN = {
-  id: 11,
+  id: M_PLAN_IDS.LIGHT,
   jpName: "ライト",
   enName: "light",
   price: {
@@ -21,7 +23,7 @@ export const LIGHT_PLAN = {
 } as const;
 
 export const STANDARD_PLAN = {
-  id: 12,
+  id: M_PLAN_IDS.SRTANDARD,
   jpName: "スタンダード",
   enName: "standard",
   price: {
@@ -43,7 +45,7 @@ export const STANDARD_PLAN = {
 };
 
 export const PREMIUM_PLAN = {
-  id: 13,
+  id: M_PLAN_IDS.PREMIUM,
   jpName: "プレミアム",
   enName: "premium",
   price: {

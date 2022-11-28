@@ -1,5 +1,5 @@
 import React from "react";
-import { TPlan } from "../../../models/hearing/MPlanIds";
+import { TPlan } from "../../../models/shared/Plans";
 import { Cloths } from "./Cloths";
 import DIGONAL_LINE_IMAGE from "../../../images/icons/diagonal-line.svg";
 

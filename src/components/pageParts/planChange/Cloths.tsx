@@ -2,7 +2,7 @@ import {
   LIGHT_PLAN,
   PREMIUM_PLAN,
   STANDARD_PLAN,
-} from "../../../models/hearing/MPlanIds";
+} from "../../../models/shared/Plans";
 import FIRST_CLOTH from "../../../images/icons/cloths/1.svg";
 import SECOND_CLOTH from "../../../images/icons/cloths/2.svg";
 import THIRD_CLOTH from "../../../images/icons/cloths/3.svg";

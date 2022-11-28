@@ -3,7 +3,7 @@ import {
   LIGHT_PLAN,
   PREMIUM_PLAN,
   STANDARD_PLAN,
-} from "../../../models/hearing/MPlanIds";
+} from "../../../models/shared/Plans";
 import { PlanChangeCard } from "./PlanChangeCard";
 
 export default {

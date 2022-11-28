@@ -1,4 +1,4 @@
-import { M_PLAN_IDS } from "../../../models/hearing/MPlanIds";
+import { M_PLAN_IDS } from "../../../models/shared/Plans";
 import { Button } from "../../baseParts/legacy/Button";
 import { Page } from "../../baseParts/legacy/Page";
 import { PageHeader } from "../../baseParts/legacy/PageHeader";
