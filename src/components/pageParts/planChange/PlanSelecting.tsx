@@ -9,11 +9,11 @@ import { TabMenu } from "../../baseParts/TabMenu";
 import { PlanChangePanel } from "./PlanChangePanel";
 
 type TProps = {
-  readonly memberId: number;
   readonly planId: number;
   readonly onSubmit: (planId: number) => void;
+  readonly isLoading: boolean;
 };
-export const PlanSelecting = ({ memberId, planId, onSubmit }: TProps) => {
+export const PlanSelecting = ({ planId, onSubmit, isLoading }: TProps) => {
   const CURRENT_PLAN_TEXT = "現在ご契約のプランです";
   const SELECTABLE_PLAN_TEXT = {
     BUTTON: "このプランに変更する",
@@ -43,6 +43,7 @@ export const PlanSelecting = ({ memberId, planId, onSubmit }: TProps) => {
                   : SELECTABLE_PLAN_TEXT.BUTTON
               }
               onSubmit={() => onSubmit(LIGHT_PLAN.id)}
+              isLoading={isLoading}
             />
           </Tab.Panel>
           <Tab.Panel>
@@ -60,6 +61,7 @@ export const PlanSelecting = ({ memberId, planId, onSubmit }: TProps) => {
                   : SELECTABLE_PLAN_TEXT.BUTTON
               }
               onSubmit={() => onSubmit(STANDARD_PLAN.id)}
+              isLoading={isLoading}
             />
           </Tab.Panel>
           <Tab.Panel>
@@ -77,6 +79,7 @@ export const PlanSelecting = ({ memberId, planId, onSubmit }: TProps) => {
                   : SELECTABLE_PLAN_TEXT.BUTTON
               }
               onSubmit={() => onSubmit(PREMIUM_PLAN.id)}
+              isLoading={isLoading}
             />
           </Tab.Panel>
         </Tab.Panels>
