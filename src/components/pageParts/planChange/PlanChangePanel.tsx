@@ -8,6 +8,7 @@ type TProps = {
   text: string;
   buttonText: string;
   onSubmit: () => void;
+  isLoading: boolean;
 };
 
 export const PlanChangePanel = ({
@@ -16,6 +17,7 @@ export const PlanChangePanel = ({
   text,
   buttonText,
   onSubmit,
+  isLoading,
 }: TProps) => {
   return (
     <>
@@ -26,6 +28,7 @@ export const PlanChangePanel = ({
         size="large"
         className="mt-8"
         disabled={currentPlanId == plan.id}
+        isLoading={isLoading}
         onClick={onSubmit}
       >
         {buttonText}
