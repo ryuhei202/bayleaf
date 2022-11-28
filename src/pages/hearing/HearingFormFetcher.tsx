@@ -1,8 +1,8 @@
 import { Loader } from "semantic-ui-react";
 import { useHearingFormsShow } from "../../api/hearingForms/useHearingFormsShow";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
-import { MultipleSelectForm } from "../../components/hearing/MultipleSelectForm";
-import { SingleSelectForm } from "../../components/hearing/SingleSelectForm";
+import { MultipleSelectForm } from "../../components/pageParts/hearing/MultipleSelectForm";
+import { SingleSelectForm } from "../../components/pageParts/hearing/SingleSelectForm";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { getHearingFormFetcherHandler } from "./handler/getHearingFormFetcherHandler";
 import { TAnsweredForm } from "./HearingContainer";
