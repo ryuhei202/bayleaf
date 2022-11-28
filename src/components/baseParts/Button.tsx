@@ -57,7 +57,7 @@ export const Button = ({
         case "none":
           return "py-0";
         case "large":
-          return "py-6";
+          return "py-5";
         case "small":
           return "py-2";
         case "medium":
@@ -96,7 +96,7 @@ export const Button = ({
   };
 
   if (disabled) {
-    classes.push("bg-neutral-300 text-neutral-500 shadow-none");
+    classes.push("bg-[#C7C9C4] text-clay shadow-none");
   } else {
     classes.push(
       (() => {
