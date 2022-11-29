@@ -1,6 +1,6 @@
 import { TCoordinateResponse } from "../../api/coordinates/TCoordinateResponse";
 import { Page } from "../../components/baseParts/legacy/Page";
-import { CoordinateList } from "../../components/consult/CoordinateList";
+import { CoordinateList } from "../../components/pageParts/consult/CoordinateList";
 
 type TProps = {
   coordinates: TCoordinateResponse[];
