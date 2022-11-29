@@ -7,9 +7,9 @@ import { PlanSelecting } from "../../components/pageParts/planChange/PlanSelecti
 
 type TProps = {
   readonly memberData: TMembersIndexResponse;
-  readonly chartData: TChartIndexResponse;
+  readonly chartsData: TChartIndexResponse;
 };
-export const PlanSelectingContainer = ({ memberData, chartData }: TProps) => {
+export const PlanSelectingContainer = ({ memberData, chartsData }: TProps) => {
   const { mutate, isLoading } = useMembersPreMemberPlanChange({
     memberId: memberData.id,
   });
@@ -26,7 +26,7 @@ export const PlanSelectingContainer = ({ memberData, chartData }: TProps) => {
   if (
     !memberData.isFirstTime ||
     memberData.isSuspend ||
-    chartData.charts.length <= 0
+    chartsData.charts.length > 0
   ) {
     window.location.href = `${process.env.REACT_APP_HOST_URL}/plan_change`;
     return (
