@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 import { ImageUploader } from "./ImageUploader";
-import DefaultSrc from "../../images/preview_default.png";
+import DefaultSrc from "../../../images/preview_default.png";
 
 export default {
   title: "BaseParts/Legacy/ImageUploader",
