@@ -6,10 +6,9 @@ type Props = {
   children?: React.ReactNode;
   className?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  variant?: "default" | "primary" | "text";
+  variant?: "default" | "light" | "line";
   disabled?: boolean;
   disableElevation?: boolean;
-  border?: boolean;
   size?: "small" | "medium" | "large" | "none";
   radius?: "small" | "large";
   isLoading?: boolean;
@@ -22,8 +21,7 @@ export const Button = ({
   onClick,
   variant,
   disabled,
-  disableElevation,
-  border,
+  disableElevation = true,
   size,
   radius,
   isLoading,
@@ -83,8 +81,6 @@ export const Button = ({
   );
   spanClasses.push(isLoading ? "opacity-40" : "");
 
-  classes.push(border ? "border border-slate-700" : "");
-
   const handleClick = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
@@ -101,19 +97,19 @@ export const Button = ({
     classes.push(
       (() => {
         switch (variant) {
-          case "primary":
-            return "bg-themeGray text-slate-200 shadow-themeGray/40 fill-themeGray";
-          case "text":
-            return "text-slate-700";
+          case "light":
+            return "bg-white text-themeGray fill-white";
+          case "line":
+            return "text-themeGray border border-[#C8C9C3] border-[2px]";
           case "default":
           default:
-            return "bg-white text-slate-700 fill-white";
+            return "bg-themeGray text-white shadow-themeGray/40 fill-themeGray";
         }
       })()
     );
 
     classes.push(
-      variant === "text" || disableElevation ? "shadow-none" : "shadow-md"
+      variant === "line" || disableElevation ? "shadow-none" : "shadow-md"
     );
   }
 
@@ -126,7 +122,7 @@ export const Button = ({
 
       {isLoading ? (
         <div className="absolute flex justify-center items-center inset-0">
-          <Loader size="mini" inline active inverted={variant === "primary"} />
+          <Loader size="mini" inline active inverted={variant === "light"} />
         </div>
       ) : (
         <></>
