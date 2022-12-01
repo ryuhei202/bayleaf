@@ -3,7 +3,7 @@ import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 
 type TProps = {
   status: number;
-  response?: TMembersIndexResponse;
+  response?: TMembersIndexResponse[];
 };
 
 export const MemberIndexMock = ({ status, response }: TProps) => {

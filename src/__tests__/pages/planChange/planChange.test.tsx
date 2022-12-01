@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { PlanSelecting } from "../../../components/pageParts/planChange/PlanSelecting";
 import { ChartIndexMock } from "../../../mocks/charts/ChartIndexMock";
 import { MemberIndexMock } from "../../../mocks/members/MemberIndexMock";
@@ -9,71 +9,125 @@ import { createQueryWrapper } from "../../utils/reactQuery";
 
 const { queryWrapper } = createQueryWrapper();
 describe("PlanChange.tsx", () => {
-  server.use(
-    ChartIndexMock({
-      status: 200,
-      response: {
-        charts: [
-          {
-            id: 1,
-            rentalStatus: 4,
-            rentalStartedAt: "2022-1-11",
-            itemImagePaths: ["", ""],
-            planName: "プレミアム",
-            planId: 1,
-          },
-        ],
-      },
-    })
-  );
-
-  server.use(
-    MemberIndexMock({
-      status: 200,
-      response: {
-        id: 1,
-        email: "kiizan@example.com",
-        nextPaymentDate: "11-1",
-        mPlanId: 1,
-        isLatestChartDelivered: true,
-        isReturnRequired: false,
-        isFirstTime: true,
-        isSuspend: false,
-      },
-    })
-  );
-
   test("メンバー情報とヒアリング済みカルテのFetch完了でコンテナ層に移動", async () => {
-    await waitFor(() =>
-      render(<PlanChange />, {
-        wrapper: queryWrapper,
+    server.use(
+      ChartIndexMock({
+        status: 200,
+        response: {
+          charts: [],
+        },
       })
     );
-    // waitFor(() =>
-    //   expect(
-    //     container.getElementsByClassName("ui active loader").length
-    //   ).toEqual(1)
-    // );
+    server.use(
+      MemberIndexMock({
+        status: 200,
+        response: [
+          {
+            id: 1,
+            email: "kiizan@example.com",
+            nextPaymentDate: "11-1",
+            mPlanId: 1,
+            isLatestChartDelivered: true,
+            isReturnRequired: false,
+            isFirstTime: true,
+            isSuspend: false,
+          },
+        ],
+      })
+    );
+    const { findByText } = render(<PlanChange />, {
+      wrapper: queryWrapper,
+    });
+
+    expect(await findByText("ライト")).toBeInTheDocument();
+    expect(await findByText("スタンダード")).toBeInTheDocument();
+    expect(await findByText("プレミアム")).toBeInTheDocument();
+    expect(await findByText("このプランに変更する")).toBeInTheDocument();
   });
-  // test("メンバー情報のみのFetch完了だとエラー", async () => {
-  //   server.use(MemberIndexMock({ status: 500 }));
-  //   render(<PlanChange />, { wrapper: queryWrapper });
-  //   await waitFor(() => screen.getByText("予期せぬエラーが発生しました"));
-  // });
-  // test("ヒアリング済みカルテのみのFetch完了だとエラー", async () => {
-  //   server.use(ChartIndexMock({ status: 500 }));
-  //   render(<PlanChange />, { wrapper: queryWrapper });
-  //   await waitFor(() => screen.getByText("予期せぬエラーが発生しました"));
-  // });
-  // test("メンバー情報とヒアリング済みカルテの両方がFetchができない場合はエラー", async () => {
-  //   server.use(ChartIndexMock({ status: 500 }));
-  //   server.use(MemberIndexMock({ status: 500 }));
-  //   render(<PlanChange />, { wrapper: queryWrapper });
-  //   await waitFor(() => screen.getByText("予期せぬエラーが発生しました"));
-  // });
+
+  test("GET /chartsがエラーの場合、バリデーションをする", async () => {
+    server.use(
+      ChartIndexMock({
+        status: 200,
+        response: {
+          charts: [],
+        },
+      })
+    );
+    server.use(MemberIndexMock({ status: 500 }));
+    const { findByText } = render(<PlanChange />, { wrapper: queryWrapper });
+    expect(
+      await findByText("予期せぬエラーが発生しました")
+    ).toBeInTheDocument();
+  });
+
+  test("GET /membersがエラーの場合、バリデーションをする", async () => {
+    server.use(
+      ChartIndexMock({
+        status: 200,
+        response: {
+          charts: [],
+        },
+      })
+    );
+    server.use(MemberIndexMock({ status: 500 }));
+    const { findByText } = render(<PlanChange />, { wrapper: queryWrapper });
+    expect(
+      await findByText("予期せぬエラーが発生しました")
+    ).toBeInTheDocument();
+  });
+
+  test("GET _membersとGET /charts両方500エラーの場合、バリデーションをする", async () => {
+    server.use(ChartIndexMock({ status: 500 }));
+    server.use(MemberIndexMock({ status: 500 }));
+    const { findByText } = render(<PlanChange />, { wrapper: queryWrapper });
+    expect(
+      await findByText("予期せぬエラーが発生しました")
+    ).toBeInTheDocument();
+  });
+
+  test("ユーザーが複数いる場合、バリデーションをする", async () => {
+    server.use(
+      ChartIndexMock({
+        status: 200,
+        response: {
+          charts: [],
+        },
+      })
+    );
+    server.use(
+      MemberIndexMock({
+        status: 200,
+        response: [
+          {
+            id: 1,
+            email: "kiizan@example.com",
+            nextPaymentDate: "11-1",
+            mPlanId: 1,
+            isLatestChartDelivered: true,
+            isReturnRequired: false,
+            isFirstTime: true,
+            isSuspend: false,
+          },
+          {
+            id: 3,
+            email: "kiizan+2@example.com",
+            nextPaymentDate: "11-1",
+            mPlanId: 1,
+            isLatestChartDelivered: true,
+            isReturnRequired: false,
+            isFirstTime: true,
+            isSuspend: false,
+          },
+        ],
+      })
+    );
+    const { findByText } = render(<PlanChange />, { wrapper: queryWrapper });
+    expect(await findByText("ユーザーが複数人います。")).toBeInTheDocument();
+  });
 });
 
-describe.only("PlanSelectingContainer.tsx", () => {
+describe("PlanSelectingContainer.tsx", () => {
   beforeEach(() =>
     Object.defineProperty(window, "location", {
       value: {
@@ -81,6 +135,7 @@ describe.only("PlanSelectingContainer.tsx", () => {
       },
     })
   );
+
   server.use(
     ChartIndexMock({
       status: 200,
@@ -90,16 +145,18 @@ describe.only("PlanSelectingContainer.tsx", () => {
   server.use(
     MemberIndexMock({
       status: 200,
-      response: {
-        id: 1,
-        email: "kiizan@example.com",
-        nextPaymentDate: "11-1",
-        mPlanId: 1,
-        isLatestChartDelivered: true,
-        isReturnRequired: false,
-        isFirstTime: true,
-        isSuspend: false,
-      },
+      response: [
+        {
+          id: 1,
+          email: "kiizan@example.com",
+          nextPaymentDate: "11-1",
+          mPlanId: 1,
+          isLatestChartDelivered: true,
+          isReturnRequired: false,
+          isFirstTime: true,
+          isSuspend: false,
+        },
+      ],
     })
   );
   test("ローディングがある", () => {
@@ -111,6 +168,7 @@ describe.only("PlanSelectingContainer.tsx", () => {
       1
     );
   });
+
   test("[初回ユーザー] && [停止じゃない] && [カルテがない場合]はプラン選択ページへ", async () => {
     render(
       <PlanSelectingContainer

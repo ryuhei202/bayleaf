@@ -5,7 +5,7 @@ import { Dressing } from "../../../pages/dressing/Dressing";
 import { createQueryWrapper } from "../../utils/reactQuery";
 const { queryWrapper } = createQueryWrapper();
 
-describe.only("dressing", () => {
+describe("dressing", () => {
   test("ローディング中が表示されているか", async () => {
     waitFor(() =>
       server.use(ChartIndexMock({ status: 200, response: { charts: [] } }))
