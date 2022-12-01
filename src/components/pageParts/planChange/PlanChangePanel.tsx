@@ -22,7 +22,6 @@ export const PlanChangePanel = ({
       <Typography className="text-center py-8">{text}</Typography>
       <PlanChangeCard plan={plan} />
       <Button
-        variant="primary"
         size="large"
         className="mt-8"
         disabled={currentPlanId == plan.id}

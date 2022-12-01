@@ -27,7 +27,7 @@ export const PlanSelecting = ({ memberId, planId, onSubmit }: TProps) => {
           <TabMenu className="font-semibold w-1/3">スタンダード</TabMenu>
           <TabMenu className="font-semibold w-1/3">プレミアム</TabMenu>
         </Tab.List>
-        <Tab.Panels className="w-[95%] m-auto">
+        <Tab.Panels className="w-[90%] m-auto">
           <Tab.Panel>
             <PlanChangePanel
               currentPlanId={planId}
