@@ -1,5 +1,4 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { rest } from "msw";
 import { ChartIndexMock } from "../../../mocks/charts/ChartIndexMock";
 import { server } from "../../../mocks/server";
 import { Dressing } from "../../../pages/dressing/Dressing";
@@ -7,23 +6,34 @@ import { createQueryWrapper } from "../../utils/reactQuery";
 const { queryWrapper } = createQueryWrapper();
 
 describe.only("dressing", () => {
-  test("ローディング中が表示されているか", () => {
-    server.use(ChartIndexMock({ status: 200, response: { charts: [] } }));
+  test("ローディング中が表示されているか", async () => {
+    waitFor(() =>
+      server.use(ChartIndexMock({ status: 200, response: { charts: [] } }))
+    );
 
     const { container } = render(<Dressing />, {
       wrapper: queryWrapper,
     });
-    expect(container.getElementsByClassName("ui active loader").length).toEqual(
-      1
+    await waitFor(() =>
+      expect(
+        container.getElementsByClassName("ui active loader").length
+      ).toEqual(1)
     );
   });
 
   test("ローディング後のテスト", async () => {
-    server.use(ChartIndexMock({ status: 200, response: { charts: [] } }));
-
-    render(<Dressing />, {
-      wrapper: queryWrapper,
+    Object.defineProperty(window, "location", {
+      value: {
+        href: "http://example.com",
+      },
     });
+    server.use(ChartIndexMock({ status: 200, response: { charts: [] } }));
+    waitFor(() =>
+      render(<Dressing />, {
+        wrapper: queryWrapper,
+      })
+    );
+
     await waitFor(() => screen.getByText("リダイレクト中..."));
   });
 
@@ -46,10 +56,7 @@ describe.only("dressing", () => {
         },
       })
     );
-    const { container, debug } = render(<Dressing />, {
-      wrapper: queryWrapper,
-    });
-    // await waitFor(() => screen.getByText("リダイレクト中..."));
-    debug();
+    render(<Dressing />, { wrapper: queryWrapper });
+    await waitFor(() => screen.getByText("リダイレクト中..."));
   });
 });
