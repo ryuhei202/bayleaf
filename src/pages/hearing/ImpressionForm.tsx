@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { MultipleImpressionsForm } from "../../components/hearing/MultipleImpressionsForm";
-import { PrimaryImpressionForm } from "../../components/hearing/PrimaryImpressionForm";
+import { MultipleImpressionsForm } from "../../components/pageParts/hearing/MultipleImpressionsForm";
+import { PrimaryImpressionForm } from "../../components/pageParts/hearing/PrimaryImpressionForm";
 import { REFERENCE_CATEGORY_IDS } from "../../models/hearing/ReferenceCategorieIds";
 import { TReferenceChoice } from "../../models/hearing/TReferenceChoice";
 

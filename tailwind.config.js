@@ -2,6 +2,9 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        lora: ["Lora"],
+      },
       colors: {
         themeGray: "#475156",
         clay: "#e8e7df",

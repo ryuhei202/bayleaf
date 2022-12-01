@@ -1,10 +1,10 @@
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
-import { BeforeHearingConfirm } from "../../components/hearing/BeforeHearingConfirm";
-import { HearingAnswerConfirm } from "../../components/hearing/HearingAnswerConfirm";
-import { PremiumPlanConfirm } from "../../components/hearing/PremiumPlanConfirm";
+import { BeforeHearingConfirm } from "../../components/pageParts/hearing/BeforeHearingConfirm";
+import { HearingAnswerConfirm } from "../../components/pageParts/hearing/HearingAnswerConfirm";
+import { PremiumPlanConfirm } from "../../components/pageParts/hearing/PremiumPlanConfirm";
 import { HearingFormFetcher } from "./HearingFormFetcher";
 import { FirstHearingConfirmButtons } from "./FirstHearingConfirmButtons";
-import { M_PLAN_IDS } from "../../models/hearing/MPlanIds";
+import { M_PLAN_IDS } from "../../models/shared/Plans";
 import { getNewHearingContainerHandler } from "./handler/getNewHearingContainerHandler";
 import { AnsweredHearings } from "./HearingContainer";
 import { useState } from "react";

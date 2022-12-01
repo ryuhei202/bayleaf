@@ -10,12 +10,13 @@ export const useGetRequest = <TResponse, TParams = {}>(
   isEnabled?: boolean
 ): {
   data?: TResponse;
+  isLoading?: boolean;
   error: Error | null;
 } => {
   const idToken = useContext(IdTokenContext);
   const stylistId = useContext(StylistIdContext);
 
-  const { data, error } = useQuery<TResponse, Error>(
+  const { data, error, isLoading } = useQuery<TResponse, Error>(
     path,
     () =>
       customAxios()
@@ -48,5 +49,6 @@ export const useGetRequest = <TResponse, TParams = {}>(
   return {
     data,
     error,
+    isLoading,
   };
 };
