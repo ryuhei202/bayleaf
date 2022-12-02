@@ -71,3 +71,16 @@ export type TPlan =
   | typeof LIGHT_PLAN
   | typeof STANDARD_PLAN
   | typeof PREMIUM_PLAN;
+
+export const findPlanById = (planId: number): TPlan => {
+  if (planId === LIGHT_PLAN.id) {
+    return LIGHT_PLAN;
+  }
+  if (planId === STANDARD_PLAN.id) {
+    return STANDARD_PLAN;
+  }
+  if (planId === PREMIUM_PLAN.id) {
+    return PREMIUM_PLAN;
+  }
+  throw Error("存在しないプランです");
+};
