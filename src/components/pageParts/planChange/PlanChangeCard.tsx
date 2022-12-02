@@ -20,7 +20,7 @@ const rowClassName = (index: number, length: number) => {
 export const PlanChangeCard = ({ plan }: TProps) => {
   return (
     <div className="text-themeGray duration-1000 font-medium">
-      <div className="border-solid border border-themeGray rounded-md mx-3 bg-clay">
+      <div className="border-solid border border-themeGray rounded-md bg-clay">
         <div>
           <p className="text-center text-[5vw] my-6">
             月額
