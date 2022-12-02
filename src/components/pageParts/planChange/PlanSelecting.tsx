@@ -28,11 +28,11 @@ export const PlanSelecting = ({
     TOP: "こちらのプランに変更いただけます",
   } as const;
   return (
-    <Page className="justify-center items-center text-themeGray p-3">
+    <Page className="flex flex-col h-full min-h-screen justify-between items-center text-themeGray p-3">
       {selectedPlanName && (
         <AlertDialog
           open={!!selectedPlanName}
-          title={`${selectedPlanName}}プランに変更しました`}
+          title={`${selectedPlanName}プランに変更しました`}
           onClose={() => {
             liff.closeWindow();
           }}
@@ -42,12 +42,12 @@ export const PlanSelecting = ({
         />
       )}
       <Tab.Group>
-        <Tab.List className="flex w-full">
+        <Tab.List className="flex w-full mt-6">
           <TabMenu className="font-semibold w-1/3">ライト</TabMenu>
           <TabMenu className="font-semibold w-1/3">スタンダード</TabMenu>
           <TabMenu className="font-semibold w-1/3">プレミアム</TabMenu>
         </Tab.List>
-        <Tab.Panels className="w-[90%] m-auto">
+        <Tab.Panels className="w-[90%] pb-12">
           <Tab.Panel>
             <PlanChangePanel
               currentPlanId={planId}

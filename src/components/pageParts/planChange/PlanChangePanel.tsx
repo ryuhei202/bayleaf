@@ -26,7 +26,7 @@ export const PlanChangePanel = ({
       <Button
         size="large"
         className="mt-8"
-        disabled={currentPlanId == plan.id}
+        disabled={currentPlanId === plan.id}
         isLoading={isLoading}
         onClick={onSubmit}
       >
