@@ -6,7 +6,7 @@ type TProps = {
   response?: TMembersIndexResponse[];
 };
 
-export const MemberIndexMock = ({ status, response }: TProps) => {
+export const getMemberIndexMock = ({ status, response }: TProps) => {
   return rest.get(
     `${process.env.REACT_APP_HOST_URL}/leeaf/members`,
     (req, res, ctx) => {

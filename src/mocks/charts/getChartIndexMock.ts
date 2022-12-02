@@ -6,7 +6,7 @@ type TProps = {
   response?: TChartIndexResponse;
 };
 
-export const ChartIndexMock = ({ status, response }: TProps) => {
+export const getChartIndexMock = ({ status, response }: TProps) => {
   return rest.get(
     `${process.env.REACT_APP_HOST_URL}/leeaf/charts`,
     (req, res, ctx) => {
