@@ -53,12 +53,12 @@ export const PlanSelecting = ({
               currentPlanId={planId}
               plan={LIGHT_PLAN}
               text={
-                planId == LIGHT_PLAN.id
+                planId === LIGHT_PLAN.id
                   ? CURRENT_PLAN_TEXT
                   : SELECTABLE_PLAN_TEXT.TOP
               }
               buttonText={
-                planId == LIGHT_PLAN.id
+                planId === LIGHT_PLAN.id
                   ? CURRENT_PLAN_TEXT
                   : SELECTABLE_PLAN_TEXT.BUTTON
               }
@@ -71,12 +71,12 @@ export const PlanSelecting = ({
               currentPlanId={planId}
               plan={STANDARD_PLAN}
               text={
-                planId == STANDARD_PLAN.id
+                planId === STANDARD_PLAN.id
                   ? CURRENT_PLAN_TEXT
                   : SELECTABLE_PLAN_TEXT.TOP
               }
               buttonText={
-                planId == STANDARD_PLAN.id
+                planId === STANDARD_PLAN.id
                   ? CURRENT_PLAN_TEXT
                   : SELECTABLE_PLAN_TEXT.BUTTON
               }
@@ -89,12 +89,12 @@ export const PlanSelecting = ({
               currentPlanId={planId}
               plan={PREMIUM_PLAN}
               text={
-                planId == PREMIUM_PLAN.id
+                planId === PREMIUM_PLAN.id
                   ? CURRENT_PLAN_TEXT
                   : SELECTABLE_PLAN_TEXT.TOP
               }
               buttonText={
-                planId == PREMIUM_PLAN.id
+                planId === PREMIUM_PLAN.id
                   ? CURRENT_PLAN_TEXT
                   : SELECTABLE_PLAN_TEXT.BUTTON
               }
