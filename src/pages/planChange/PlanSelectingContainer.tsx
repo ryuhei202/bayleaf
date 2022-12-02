@@ -1,15 +1,17 @@
-import liff from "@line/liff/dist/lib";
+import { useState } from "react";
 import { TChartIndexResponse } from "../../api/charts/TChartIndexResponse";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { useMembersPreMemberPlanChange } from "../../api/members/useMembersPreMemberPlanChange";
 import { Typography } from "../../components/baseParts/legacy/Typography";
 import { PlanSelecting } from "../../components/pageParts/planChange/PlanSelecting";
+import { findPlanById } from "../../models/shared/Plans";
 
 type TProps = {
   readonly memberData: TMembersIndexResponse;
   readonly chartsData: TChartIndexResponse;
 };
 export const PlanSelectingContainer = ({ memberData, chartsData }: TProps) => {
+  const [selectedPlanName, setSelectedPlanName] = useState<string>();
   const { mutate, isLoading } = useMembersPreMemberPlanChange({
     memberId: memberData.id,
   });
@@ -18,7 +20,7 @@ export const PlanSelectingContainer = ({ memberData, chartsData }: TProps) => {
       { planId },
       {
         onSuccess: () => {
-          liff.closeWindow();
+          setSelectedPlanName(findPlanById(planId).jpName);
         },
       }
     );
@@ -41,6 +43,7 @@ export const PlanSelectingContainer = ({ memberData, chartsData }: TProps) => {
       planId={memberData.mPlanId}
       onSubmit={handleSubmit}
       isLoading={isLoading}
+      selectedPlanName={selectedPlanName}
     />
   );
 };
