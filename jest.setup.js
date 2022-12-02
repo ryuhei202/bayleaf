@@ -4,8 +4,6 @@
 // learn more: https://github.com/testing-library/jest-dom
 import "@testing-library/jest-dom";
 import { cleanup } from "@testing-library/react";
-
-// src/setupTests.js
 import { server } from "./src/mocks/server";
 // Establish API mocking before all tests.
 beforeAll(() => server.listen());
@@ -14,6 +12,7 @@ beforeAll(() => server.listen());
 // so they don't affect other tests.
 afterEach(() => {
   server.resetHandlers();
+  // 毎テスト終了時にDOMをunmountする
   cleanup();
 });
 
