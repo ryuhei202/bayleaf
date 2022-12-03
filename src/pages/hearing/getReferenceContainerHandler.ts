@@ -1,6 +1,3 @@
-import liff from "@line/liff/dist/lib";
-import { AxiosResponse } from "axios";
-import { UseMutateFunction } from "react-query";
 import { TStylingReferenceShowResponse } from "../../api/stylingReference/TStylingReferenceShowResponse";
 import { REFERENCE_CATEGORY_IDS } from "../../models/hearing/ReferenceCategorieIds";
 import { TReferenceChoice } from "../../models/hearing/TReferenceChoice";
@@ -19,8 +16,7 @@ export const getReferenceContainerHandler = (
   stylingReference: TStylingReferenceShowResponse[],
   modifiedChoices: TReferenceChoice[],
   setEditingCategory: (categoryId: number | undefined) => void,
-  setModifiedChoices: (modifiedChoice: TReferenceChoice[]) => void,
-  mutate: UseMutateFunction<void | AxiosResponse>
+  setModifiedChoices: (modifiedChoice: TReferenceChoice[]) => void
 ): ReferenceContainerHandler => {
   const updateModifiedChoices = (choice: TReferenceChoice) => {
     const currentIndex = modifiedChoices.findIndex(
@@ -74,24 +70,7 @@ export const getReferenceContainerHandler = (
     });
   };
 
-  const handleDocumentSubmit = (isSkipingHearing: boolean) => {
-    mutate(undefined, {
-      onSuccess: () => {
-        liff
-          .sendMessages([
-            {
-              type: "text",
-              text: isSkipingHearing
-                ? "前回と同じ内容でコーデを作る"
-                : "スタイリストと相談してからコーデを作る",
-            },
-          ])
-          .then(() => {
-            liff.closeWindow();
-          });
-      },
-    });
-  };
+  const handleDocumentSubmit = (isSkipingHearing: boolean) => {};
 
   const handleRequiredFormsSubmit = (choices: TReferenceChoice[]) => {
     setModifiedChoices(choices);

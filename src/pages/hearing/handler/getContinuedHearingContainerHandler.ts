@@ -11,7 +11,7 @@ import { AxiosResponse } from "axios";
 import { UseMutateFunction } from "react-query";
 import { TChartCreateRequest } from "../../../api/charts/TChartCreateRequest";
 import liff from "@line/liff/dist/lib";
-import { M_PLAN_IDS } from "../../../models/hearing/MPlanIds";
+import { M_PLAN_IDS } from "../../../models/shared/Plans";
 
 type TAfterSecondHearingContainerHandler = {
   readonly handleClickFormStart: () => void;

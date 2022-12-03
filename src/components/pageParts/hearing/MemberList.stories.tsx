@@ -20,6 +20,8 @@ Default.args = {
       mPlanId: 1,
       isLatestChartDelivered: false,
       isReturnRequired: false,
+      isFirstTime: false,
+      isSuspend: false,
     },
     {
       id: 2,
@@ -28,6 +30,8 @@ Default.args = {
       mPlanId: 3,
       isLatestChartDelivered: false,
       isReturnRequired: false,
+      isFirstTime: false,
+      isSuspend: false,
     },
     {
       id: 3,
@@ -36,6 +40,8 @@ Default.args = {
       mPlanId: 3,
       isLatestChartDelivered: false,
       isReturnRequired: false,
+      isFirstTime: false,
+      isSuspend: false,
     },
   ],
 };
