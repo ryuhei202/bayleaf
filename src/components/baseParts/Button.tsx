@@ -64,21 +64,6 @@ export const Button = ({
       }
     })()
   );
-  spanClasses.push(
-    (() => {
-      switch (size) {
-        case "none":
-          return "text-sm";
-        case "large":
-          return "text-xl";
-        case "small":
-          return "text-base";
-        case "medium":
-        default:
-          return "text-lg";
-      }
-    })()
-  );
   spanClasses.push(isLoading ? "opacity-40" : "");
 
   const handleClick = (
@@ -118,7 +103,7 @@ export const Button = ({
       className={`${className ?? ""} ${classes.join(" ")}`}
       onClick={handleClick}
     >
-      <span className={`${spanClasses.join(" ")}`}>{children}</span>
+      <span className={`text-sm ${spanClasses.join(" ")}`}>{children}</span>
 
       {isLoading ? (
         <div className="absolute flex justify-center items-center inset-0">
