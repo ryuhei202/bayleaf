@@ -27,7 +27,7 @@ export const ConfirmDialog = ({
       onClose={onClose}
       className="fixed inset-0 h-screen w-screen bg-black/50"
     >
-      <Dialog.Panel className="fixed bottom-0 left-1/2 translate-x-[-50%] bg-white w-screen px-10 py-6 rounded-t-2xl text-themeGray text-center">
+      <Dialog.Panel className="fixed bottom-0 left-1/2 translate-x-[-50%] bg-[#F6F6F6] w-screen px-10 py-6 rounded-t-2xl text-themeGray text-center">
         <Dialog.Title className="pb-5 font-bold">{title}</Dialog.Title>
         <Dialog.Description className="mb-7 text-xs">
           {description}
