@@ -34,6 +34,7 @@ export const PlanChangeCard = ({ plan }: TProps) => {
                 href={`${process.env.REACT_APP_SIRNIGHT_URL}/news/cro5lzty_e72/`}
                 className="text-themeGray font-normal underline decoration-from-font underline-offset-2"
                 target="_blank"
+                rel="noreferrer"
               >
                 継続割引について
               </a>
