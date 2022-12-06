@@ -1,7 +1,7 @@
 import { REFERENCE_CATEGORY_IDS } from "./../../models/hearing/ReferenceCategorieIds";
 import { TStylingReferenceShowResponse } from "../../api/stylingReference/TStylingReferenceShowResponse";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
-import { M_PLAN_IDS } from "../../models/hearing/MPlanIds";
+import { M_PLAN_IDS } from "../../models/shared/Plans";
 import { ReferenceOptions } from "../../models/hearing/ReferenceOptions";
 import { TReferenceChoice } from "../../models/hearing/TReferenceChoice";
 

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { TStylingReferenceShowResponse } from "../../api/stylingReference/TStylingReferenceShowResponse";
-import { useStylingReferenceUpdate } from "../../api/stylingReference/useStylingReferenceUpdate";
 import { BusinessSleeveForm } from "../../components/pageParts/hearing/BusinessSleeveForm";
 import { ReferenceDocument } from "../../components/pageParts/hearing/ReferenceDocument";
 import { CasualSleeveForm } from "../../components/pageParts/hearing/CasualSleeveForm";
@@ -24,16 +23,11 @@ export const ReferenceContainer = ({ member, stylingReference }: Props) => {
   );
   const [editingCategory, setEditingCategory] =
     useState<number | undefined>(undefined);
-  const { mutate } = useStylingReferenceUpdate(
-    modifiedChoices.flatMap((choice) => choice.optionIds),
-    member.id
-  );
   const handler = getReferenceContainerHandler(
     stylingReference,
     modifiedChoices,
     setEditingCategory,
-    setModifiedChoices,
-    mutate
+    setModifiedChoices
   );
   const presenter = getReferenceContainerPresenter(
     stylingReference,

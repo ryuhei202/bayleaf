@@ -19,7 +19,7 @@ export const AlertDialog = ({
     <Dialog
       open={open}
       onClose={onClose}
-      className="fixed inset-0 h-screen w-screen bg-black/50"
+      className="fixed inset-0 h-screen w-screen bg-black/50 z-20"
     >
       <Dialog.Panel className="fixed top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] bg-white w-[80vw] p-10 rounded-2xl max-w-[400px]">
         <Dialog.Title className="text-xl mb-5">{title}</Dialog.Title>
