@@ -3,7 +3,9 @@ import { usePatchRequest } from "../usePatchRequest";
 type TArgs = {
   memberId: number;
 };
-type TParams = Omit<TArgs, "memberId">;
+type TParams = {
+  planId: number;
+};
 
 export const useMembersPreMemberPlanChange = ({ memberId }: TArgs) => {
   const { mutate, isLoading } = usePatchRequest<TParams>(

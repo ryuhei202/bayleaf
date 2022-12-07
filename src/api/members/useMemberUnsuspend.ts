@@ -3,7 +3,9 @@ import { usePatchRequest } from "../usePatchRequest";
 type TArgs = {
   memberId: number;
 };
-type TParams = TArgs;
+type TParams = {
+  planId: number;
+};
 
 export const useMembersUnsuspend = ({ memberId }: TArgs) => {
   const { mutate, isLoading } = usePatchRequest<TParams>(
