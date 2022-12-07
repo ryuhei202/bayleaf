@@ -23,7 +23,7 @@
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-query": "^3.39.1",
-    "react-router-dom": "6.4.3",
+    "react-router-dom": "6.4.4",
     "react-scripts": "5.0.1",
     "sb": "^6.5.13",
     "semantic-ui-react": "^2.1.3",
@@ -42,7 +42,8 @@
     "test:debug": "jest",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "chromatic": "source .env.development.local && npx chromatic --project-token=$CHROMATIC_TOKEN --exit-zero-on-changes"
   },
   "eslintConfig": {
     "extends": [

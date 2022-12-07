@@ -29,6 +29,7 @@ pipelines:
             - REACT_APP_GA_TRACKING_ID=$REACT_APP_GA_TRACKING_ID REACT_APP_LIFF_ID=$LIFF_ID_PRODUCTION yarn build
             - REACT_APP_SENTRY_ORG=$REACT_APP_SENTRY_ORG REACT_APP_SENTRY_PROJECT=$REACT_APP_SENTRY_PROJECT REACT_APP_SENTRY_AUTH_TOKEN=$REACT_APP_SENTRY_AUTH_TOKEN yarn upload-sourcemaps
             - find ./build -name *.map -delete
+            - npx chromatic --project-token=$CHROMATIC_TOKEN --exit-zero-on-changes
           artifacts:
             - build/**
       - step:
