@@ -73,12 +73,12 @@ const HogePiyo = "HOGE";
 
 ```ts
 // Good
-const TMember = { id: number, name: string };
+type TMember = { id: number; name: string };
 
 // Bad
-const t_member = { id: number, name: string };
-const tMember = { id: number, name: string };
-const Member = { id: number, name: string };
+type t_member = { id: number; name: string };
+type tMember = { id: number; name: string };
+type Member = { id: number; name: string };
 ```
 
 #### ファイル名
@@ -116,6 +116,8 @@ hoge_piyo.tsx
 // Bad
 <Button onClick={setNumber} />;
 <Button click={handleClick} />;
+<Button handleClick={handleClick} />;
+<Button setNumber={setNumber} />;
 ```
 
 ### キーワード引数
