@@ -15,7 +15,7 @@ type TProps = {
   readonly isLoading: boolean;
   readonly selectedPlan?: TPlan;
   readonly onSubmit: () => void;
-  readonly onPlanSelect: (planId: number) => void;
+  readonly onPlanSelect: ({ planId }: { planId: number }) => void;
   readonly onCancel: () => void;
 };
 
@@ -66,7 +66,7 @@ export const PlanSelectingForUnsuspend = ({
                   : TOP_TEXT.ANOTHER_PLAN
               }
               buttonText="プランを再開する"
-              onSubmit={() => onPlanSelect(LIGHT_PLAN.id)}
+              onSubmit={() => onPlanSelect({ planId: LIGHT_PLAN.id })}
               isLoading={isLoading}
             />
           </Tab.Panel>
@@ -79,7 +79,7 @@ export const PlanSelectingForUnsuspend = ({
                   : TOP_TEXT.ANOTHER_PLAN
               }
               buttonText="プランを再開する"
-              onSubmit={() => onPlanSelect(STANDARD_PLAN.id)}
+              onSubmit={() => onPlanSelect({ planId: STANDARD_PLAN.id })}
               isLoading={isLoading}
             />
           </Tab.Panel>
@@ -92,7 +92,7 @@ export const PlanSelectingForUnsuspend = ({
                   : TOP_TEXT.ANOTHER_PLAN
               }
               buttonText="プランを再開する"
-              onSubmit={() => onPlanSelect(PREMIUM_PLAN.id)}
+              onSubmit={() => onPlanSelect({ planId: PREMIUM_PLAN.id })}
               isLoading={isLoading}
             />
           </Tab.Panel>
