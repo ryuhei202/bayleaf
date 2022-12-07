@@ -1,11 +1,11 @@
 import { Loader } from "semantic-ui-react";
-import { useChartIndex } from "../api/charts/useChartIndex";
-import { TMembersIndexResponse } from "../api/members/TMembersIndexResponse";
-import { ErrorMessage } from "../components/shared/ErrorMessage";
-import { NewHearingContainer } from "./hearing/NewHearingContainer";
-import { HearingFetcher } from "./hearing/HearingFetcher";
-import { Page } from "../components/baseParts/legacy/Page";
-import { Typography } from "../components/baseParts/legacy/Typography";
+import { useChartIndex } from "../../api/charts/useChartIndex";
+import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
+import { ErrorMessage } from "../../components/shared/ErrorMessage";
+import { NewHearingContainer } from "./NewHearingContainer";
+import { HearingFetcher } from "./HearingFetcher";
+import { Page } from "../../components/baseParts/legacy/Page";
+import { Typography } from "../../components/baseParts/legacy/Typography";
 
 type TProps = {
   readonly member: TMembersIndexResponse;
