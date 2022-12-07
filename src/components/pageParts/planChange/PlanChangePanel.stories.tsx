@@ -16,7 +16,6 @@ const Template: ComponentStory<typeof PlanChangePanel> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  currentPlanId: LIGHT_PLAN.id,
   plan: LIGHT_PLAN,
   text: "現在ご契約のプランです",
   buttonText: "現在ご契約のプランです",
