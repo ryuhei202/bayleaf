@@ -45,6 +45,7 @@ export const PlanSelectingForUnsuspend = ({
               次回決済日: 次回出荷日
             </>
           }
+          isLoading={isLoading}
           onClickOk={onSubmit}
           onClose={onCancel}
           onClickCancel={onCancel}
