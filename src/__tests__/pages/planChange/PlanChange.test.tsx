@@ -24,6 +24,8 @@ describe("PlanChange.tsx", () => {
             isReturnRequired: false,
             isFirstTime: true,
             isSuspend: false,
+            isPaymentError: false,
+            rentalRemainingNum: 1,
           },
         ],
       })
@@ -51,6 +53,8 @@ describe("PlanChange.tsx", () => {
             isReturnRequired: false,
             isFirstTime: true,
             isSuspend: false,
+            isPaymentError: false,
+            rentalRemainingNum: 1,
           },
         ],
       })
@@ -94,6 +98,8 @@ describe("PlanChange.tsx", () => {
             isReturnRequired: false,
             isFirstTime: true,
             isSuspend: false,
+            isPaymentError: false,
+            rentalRemainingNum: 1,
           },
           {
             id: 3,
@@ -104,6 +110,8 @@ describe("PlanChange.tsx", () => {
             isReturnRequired: false,
             isFirstTime: true,
             isSuspend: false,
+            isPaymentError: false,
+            rentalRemainingNum: 1,
           },
         ],
       })
