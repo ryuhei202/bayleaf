@@ -7,6 +7,7 @@ type TProps = {
   readonly description?: React.ReactNode;
   readonly okBtnText?: string;
   readonly cancelBtnText?: string;
+  readonly isLoading?: boolean;
   readonly onClickOk: () => void;
   readonly onClickCancel: () => void;
   readonly onClose: () => void;
@@ -17,6 +18,7 @@ export const ConfirmDialog = ({
   description,
   okBtnText,
   cancelBtnText,
+  isLoading,
   onClickOk,
   onClickCancel,
   onClose,
@@ -25,7 +27,7 @@ export const ConfirmDialog = ({
     <Dialog
       open={open}
       onClose={onClose}
-      className="fixed inset-0 h-screen w-screen bg-black/50"
+      className="fixed inset-0 h-screen w-screen bg-black/50 z-20"
     >
       <Dialog.Panel className="fixed bottom-0 left-1/2 translate-x-[-50%] bg-[#F6F6F6] w-screen px-10 py-6 rounded-t-2xl text-themeGray text-center">
         <Dialog.Title className="pb-5 font-bold">{title}</Dialog.Title>
@@ -36,11 +38,17 @@ export const ConfirmDialog = ({
           <Button
             variant="line"
             onClick={onClickCancel}
+            isLoading={isLoading}
             className="mx-2 w-[70%]"
           >
             {cancelBtnText ?? "キャンセル"}
           </Button>
-          <Button variant="default" onClick={onClickOk} className="mx-2">
+          <Button
+            variant="default"
+            onClick={onClickOk}
+            disabled={isLoading}
+            className="mx-2"
+          >
             {okBtnText ?? "OK"}
           </Button>
         </div>

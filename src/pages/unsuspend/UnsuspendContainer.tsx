@@ -1,6 +1,5 @@
 import liff from "@line/liff/dist/lib";
-import { useCallback } from "@storybook/addons";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { useMembersUnsuspend } from "../../api/members/useMemberUnsuspend";
 import { PlanSelectingForUnsuspend } from "../../components/pageParts/unsuspend/PlanSelectingForUnsuspend";
@@ -33,7 +32,7 @@ export const UnsuspendContainer = ({ memberData }: TProps) => {
 
   const handleCancel = useCallback(() => {
     setSelectedPlan(undefined);
-  });
+  }, []);
   return (
     <PlanSelectingForUnsuspend
       planId={memberData.mPlanId}
