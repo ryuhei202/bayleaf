@@ -3,6 +3,7 @@ import { TOptionParams } from "../../../api/charts/TOptionParams";
 import { THearingFormShowResponse } from "../../../api/hearingForms/THearingFormShowResponse";
 import { TAnsweredForm } from "../../../pages/hearing/HearingContainer";
 import { Button } from "../../baseParts/legacy/Button";
+import { FooterWrapper } from "../../baseParts/legacy/FooterWrapper";
 import { IconButton } from "../../baseParts/legacy/IconButton";
 import { ArrowIcon } from "../../baseParts/legacy/icons/ArrowIcon";
 import { TextAreaAlt } from "../../baseParts/legacy/inputs/TextAreaAlt";
@@ -93,9 +94,9 @@ export const SingleSelectForm = ({
   };
 
   return (
-    <Page className="px-5 h-full min-h-screen">
-      <div className="flex flex-col justify-between h-full min-h-screen">
-        <div>
+    <Page className="h-screen">
+      <div className="flex flex-col justify-between h-screen">
+        <div className="px-5 pb-5">
           <PageHeader
             title={<>{response.title}</>}
             subtitle="※一つ選んでください"
@@ -171,29 +172,31 @@ export const SingleSelectForm = ({
             )}
           </div>
         </div>
-        <div className="flex flex-row mb-10">
-          <IconButton
-            className="flex-none"
-            onClick={onCancel}
-            GAEvent={{
-              action: "back_to_the_last",
-              category: "hearing",
-              label: memberId,
-            }}
-          >
-            <ArrowIcon className="h-10 my-auto" />
-          </IconButton>
-          {response.options.some((o) => o.isText) && (
-            <Button
-              disabled={validateNextButton()}
-              size="none"
-              className="grow ml-3"
-              onClick={handleSubmit}
+        <FooterWrapper className="px-3 py-4">
+          <div className="flex flex-row">
+            <IconButton
+              className="flex-none"
+              onClick={onCancel}
+              GAEvent={{
+                action: "back_to_the_last",
+                category: "hearing",
+                label: memberId,
+              }}
             >
-              <Typography className="my-auto">次へ</Typography>
-            </Button>
-          )}
-        </div>
+              <ArrowIcon className="h-10 my-auto" />
+            </IconButton>
+            {response.options.some((o) => o.isText) && (
+              <Button
+                disabled={validateNextButton()}
+                size="none"
+                className="grow ml-3"
+                onClick={handleSubmit}
+              >
+                <Typography className="my-auto">次へ</Typography>
+              </Button>
+            )}
+          </div>
+        </FooterWrapper>
       </div>
     </Page>
   );
