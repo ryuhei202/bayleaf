@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
-import { HearingChartFetcher } from "../HearingChartFetcher";
+import { HearingChartFetcher } from "./HearingChartFetcher";
 import { MemberListContainer } from "./MemberListContainer";
 
 export const Hearing = () => {

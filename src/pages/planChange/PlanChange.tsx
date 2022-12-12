@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Loader } from "semantic-ui-react";
 import { useChartIndex } from "../../api/charts/useChartIndex";
 import { useMembersIndex } from "../../api/members/useMembersIndex";
@@ -7,6 +8,9 @@ import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { PlanSelectingContainer } from "./PlanSelectingContainer";
 
 export const PlanChange = () => {
+  useEffect(() => {
+    document.title = "プラン選択 | UWear";
+  }, []);
   const { data: membersData, error: membersError } = useMembersIndex();
   const { data: chartsData, error: chartsError } = useChartIndex({
     params: {

@@ -15,6 +15,7 @@ import { Dressing } from "./pages/dressing/Dressing";
 import { Dislike } from "./pages/dislike/Dislike";
 import { Delivery } from "./pages/delivery/Delivery";
 import { PlanChange } from "./pages/planChange/PlanChange";
+import { Unsuspend } from "./pages/unsuspend/Unsuspend";
 
 Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DSN,
@@ -44,6 +45,7 @@ function App() {
             <Route path="dislike" element={<Dislike />} />
             <Route path="delivery" element={<Delivery />} />
             <Route path="plan_change" element={<PlanChange />} />
+            <Route path="unsuspend" element={<Unsuspend />} />
           </Routes>
         </StylistIdContext.Provider>
       </IdTokenContext.Provider>

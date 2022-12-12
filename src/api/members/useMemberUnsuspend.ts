@@ -7,9 +7,9 @@ type TParams = {
   planId: number;
 };
 
-export const useMembersPreMemberPlanChange = ({ memberId }: TArgs) => {
+export const useMembersUnsuspend = ({ memberId }: TArgs) => {
   const { mutate, isLoading } = usePatchRequest<TParams>(
-    `/members/${memberId}/pre_member_plan_change`
+    `/members/${memberId}/unsuspend`
   );
   return {
     mutate,

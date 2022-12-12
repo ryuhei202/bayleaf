@@ -22,6 +22,8 @@ Default.args = {
       isReturnRequired: false,
       isFirstTime: false,
       isSuspend: false,
+      isPaymentError: false,
+      rentalRemainingNum: 0,
     },
     {
       id: 2,
@@ -32,6 +34,8 @@ Default.args = {
       isReturnRequired: false,
       isFirstTime: false,
       isSuspend: false,
+      isPaymentError: false,
+      rentalRemainingNum: 0,
     },
     {
       id: 3,
@@ -42,6 +46,8 @@ Default.args = {
       isReturnRequired: false,
       isFirstTime: false,
       isSuspend: false,
+      isPaymentError: false,
+      rentalRemainingNum: 0,
     },
   ],
 };
