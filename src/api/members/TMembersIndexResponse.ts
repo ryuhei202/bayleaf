@@ -7,4 +7,6 @@ export type TMembersIndexResponse = {
   readonly isReturnRequired: boolean;
   readonly isFirstTime: boolean;
   readonly isSuspend: boolean;
+  readonly isPaymentError: boolean;
+  readonly rentalRemainingNum: number;
 };

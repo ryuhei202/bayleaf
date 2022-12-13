@@ -3,21 +3,21 @@ import { Button } from "../../baseParts/Button";
 import { Typography } from "../../baseParts/legacy/Typography";
 import { PlanChangeCard } from "./PlanChangeCard";
 type TProps = {
-  currentPlanId: number;
   plan: TPlan;
-  text: string;
+  text: React.ReactNode;
   buttonText: string;
   onSubmit: () => void;
   isLoading: boolean;
+  disabled?: boolean;
 };
 
 export const PlanChangePanel = ({
-  currentPlanId,
   plan,
   text,
   buttonText,
   onSubmit,
   isLoading,
+  disabled,
 }: TProps) => {
   return (
     <>
@@ -26,7 +26,7 @@ export const PlanChangePanel = ({
       <Button
         size="large"
         className="mt-8"
-        disabled={currentPlanId === plan.id}
+        disabled={disabled}
         isLoading={isLoading}
         onClick={onSubmit}
       >

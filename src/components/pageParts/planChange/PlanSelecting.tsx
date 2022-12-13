@@ -50,7 +50,6 @@ export const PlanSelecting = ({
         <Tab.Panels className="w-[90%] pb-12">
           <Tab.Panel>
             <PlanChangePanel
-              currentPlanId={planId}
               plan={LIGHT_PLAN}
               text={
                 planId === LIGHT_PLAN.id
@@ -62,13 +61,13 @@ export const PlanSelecting = ({
                   ? CURRENT_PLAN_TEXT
                   : SELECTABLE_PLAN_TEXT.BUTTON
               }
+              disabled={planId === LIGHT_PLAN.id}
               onSubmit={() => onSubmit(LIGHT_PLAN.id)}
               isLoading={isLoading}
             />
           </Tab.Panel>
           <Tab.Panel>
             <PlanChangePanel
-              currentPlanId={planId}
               plan={STANDARD_PLAN}
               text={
                 planId === STANDARD_PLAN.id
@@ -80,13 +79,13 @@ export const PlanSelecting = ({
                   ? CURRENT_PLAN_TEXT
                   : SELECTABLE_PLAN_TEXT.BUTTON
               }
+              disabled={planId === STANDARD_PLAN.id}
               onSubmit={() => onSubmit(STANDARD_PLAN.id)}
               isLoading={isLoading}
             />
           </Tab.Panel>
           <Tab.Panel>
             <PlanChangePanel
-              currentPlanId={planId}
               plan={PREMIUM_PLAN}
               text={
                 planId === PREMIUM_PLAN.id
@@ -98,6 +97,7 @@ export const PlanSelecting = ({
                   ? CURRENT_PLAN_TEXT
                   : SELECTABLE_PLAN_TEXT.BUTTON
               }
+              disabled={planId === PREMIUM_PLAN.id}
               onSubmit={() => onSubmit(PREMIUM_PLAN.id)}
               isLoading={isLoading}
             />
