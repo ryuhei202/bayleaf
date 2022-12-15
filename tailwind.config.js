@@ -9,6 +9,7 @@ module.exports = {
         themeGray: "#475156",
         clay: "#e8e7df",
         red: "#cb5f58",
+        gray: "#979B9A",
       },
     },
     screens: {
