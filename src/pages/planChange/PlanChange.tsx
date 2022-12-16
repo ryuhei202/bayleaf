@@ -5,7 +5,7 @@ import { useMembersIndex } from "../../api/members/useMembersIndex";
 import { Page } from "../../components/baseParts/legacy/Page";
 import { Typography } from "../../components/baseParts/legacy/Typography";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
-import { PlanSelectingContainer } from "./PlanSelectingContainer";
+import { PlanSelectingForPreMemberContainer } from "./PlanSelectingForPreMemberContainer";
 
 export const PlanChange = () => {
   useEffect(() => {
@@ -34,7 +34,7 @@ export const PlanChange = () => {
   }
 
   return (
-    <PlanSelectingContainer
+    <PlanSelectingForPreMemberContainer
       memberData={membersData[0]}
       chartsData={chartsData}
     />

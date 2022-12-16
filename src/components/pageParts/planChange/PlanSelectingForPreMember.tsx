@@ -16,7 +16,7 @@ type TProps = {
   readonly isLoading: boolean;
   readonly selectedPlanName?: string;
 };
-export const PlanSelecting = ({
+export const PlanSelectingForPreMember = ({
   planId,
   onSubmit,
   isLoading,

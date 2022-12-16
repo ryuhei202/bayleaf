@@ -3,14 +3,17 @@ import { TChartIndexResponse } from "../../api/charts/TChartIndexResponse";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { useMembersPreMemberPlanChange } from "../../api/members/useMembersPreMemberPlanChange";
 import { Typography } from "../../components/baseParts/legacy/Typography";
-import { PlanSelecting } from "../../components/pageParts/planChange/PlanSelecting";
+import { PlanSelectingForPreMember } from "../../components/pageParts/planChange/PlanSelectingForPreMember";
 import { findPlanById } from "../../models/shared/Plans";
 
 type TProps = {
   readonly memberData: TMembersIndexResponse;
   readonly chartsData: TChartIndexResponse;
 };
-export const PlanSelectingContainer = ({ memberData, chartsData }: TProps) => {
+export const PlanSelectingForPreMemberContainer = ({
+  memberData,
+  chartsData,
+}: TProps) => {
   const [selectedPlanName, setSelectedPlanName] = useState<string>();
   const { mutate, isLoading } = useMembersPreMemberPlanChange({
     memberId: memberData.id,
@@ -39,7 +42,7 @@ export const PlanSelectingContainer = ({ memberData, chartsData }: TProps) => {
   }
 
   return (
-    <PlanSelecting
+    <PlanSelectingForPreMember
       planId={memberData.mPlanId}
       onSubmit={handleSubmit}
       isLoading={isLoading}

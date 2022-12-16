@@ -1,17 +1,17 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { M_PLAN_IDS } from "../../../models/shared/Plans";
-import { PlanSelecting } from "./PlanSelecting";
+import { PlanSelectingForPreMember } from "./PlanSelectingForPreMember";
 
 export default {
   title: "PageParts/PlanChange/PlanSelecting",
-  component: PlanSelecting,
+  component: PlanSelectingForPreMember,
   onSubmit: {
     action: "onSubmit",
   },
-} as ComponentMeta<typeof PlanSelecting>;
+} as ComponentMeta<typeof PlanSelectingForPreMember>;
 
-const Template: ComponentStory<typeof PlanSelecting> = (args) => (
-  <PlanSelecting {...args} />
+const Template: ComponentStory<typeof PlanSelectingForPreMember> = (args) => (
+  <PlanSelectingForPreMember {...args} />
 );
 
 export const Default = Template.bind({});
