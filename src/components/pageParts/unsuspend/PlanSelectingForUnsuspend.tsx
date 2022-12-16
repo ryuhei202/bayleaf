@@ -5,6 +5,7 @@ import {
   STANDARD_PLAN,
   TPlan,
 } from "../../../models/shared/Plans";
+import { Button } from "../../baseParts/Button";
 import { ConfirmDialog } from "../../baseParts/dialogs/ConfirmDialog";
 import { Page } from "../../baseParts/legacy/Page";
 import { TabMenu } from "../../baseParts/TabMenu";
@@ -66,10 +67,16 @@ export const PlanSelectingForUnsuspend = ({
                   ? TOP_TEXT.CURRENT_PLAN
                   : TOP_TEXT.ANOTHER_PLAN
               }
-              buttonText="プランを再開する"
-              onSubmit={() => onPlanSelect({ planId: LIGHT_PLAN.id })}
-              isLoading={isLoading}
-            />
+            >
+              <Button
+                size="large"
+                className="mt-8"
+                isLoading={isLoading}
+                onClick={() => onPlanSelect({ planId: LIGHT_PLAN.id })}
+              >
+                プランを再開する
+              </Button>
+            </PlanChangePanel>
           </Tab.Panel>
           <Tab.Panel>
             <PlanChangePanel
@@ -79,10 +86,16 @@ export const PlanSelectingForUnsuspend = ({
                   ? TOP_TEXT.CURRENT_PLAN
                   : TOP_TEXT.ANOTHER_PLAN
               }
-              buttonText="プランを再開する"
-              onSubmit={() => onPlanSelect({ planId: STANDARD_PLAN.id })}
-              isLoading={isLoading}
-            />
+            >
+              <Button
+                size="large"
+                className="mt-8"
+                isLoading={isLoading}
+                onClick={() => onPlanSelect({ planId: STANDARD_PLAN.id })}
+              >
+                プランを再開する
+              </Button>
+            </PlanChangePanel>
           </Tab.Panel>
           <Tab.Panel>
             <PlanChangePanel
@@ -92,10 +105,16 @@ export const PlanSelectingForUnsuspend = ({
                   ? TOP_TEXT.CURRENT_PLAN
                   : TOP_TEXT.ANOTHER_PLAN
               }
-              buttonText="プランを再開する"
-              onSubmit={() => onPlanSelect({ planId: PREMIUM_PLAN.id })}
-              isLoading={isLoading}
-            />
+            >
+              <Button
+                size="large"
+                className="mt-8"
+                isLoading={isLoading}
+                onClick={() => onPlanSelect({ planId: PREMIUM_PLAN.id })}
+              >
+                プランを再開する
+              </Button>
+            </PlanChangePanel>
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
