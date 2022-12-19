@@ -1,5 +1,4 @@
 import { TPlan } from "../../../models/shared/Plans";
-import { Button } from "../../baseParts/Button";
 import { Typography } from "../../baseParts/legacy/Typography";
 import { PlanChangeCard } from "./PlanChangeCard";
 type TProps = {
@@ -27,6 +26,7 @@ export const PlanChangePanel = ({ plan, text, children }: TProps) => {
             <a
               href={`${process.env.REACT_APP_SIRNIGHT_URL}/faq/payment#fc24azedyv`}
               target="_blank"
+              rel="noreferrer"
               className="underline underline-offset-2"
             >
               こちら
@@ -41,6 +41,7 @@ export const PlanChangePanel = ({ plan, text, children }: TProps) => {
             <a
               href={`${process.env.REACT_APP_SIRNIGHT_URL}/faq/point#vvrhq78wzg`}
               target="_blank"
+              rel="noreferrer"
               className="underline underline-offset-2"
             >
               こちら
