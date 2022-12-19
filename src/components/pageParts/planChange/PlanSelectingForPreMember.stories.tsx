@@ -3,7 +3,7 @@ import { M_PLAN_IDS } from "../../../models/shared/Plans";
 import { PlanSelectingForPreMember } from "./PlanSelectingForPreMember";
 
 export default {
-  title: "PageParts/PlanChange/PlanSelecting",
+  title: "PageParts/PlanChange/PlanSelectingForPreMember",
   component: PlanSelectingForPreMember,
   onSubmit: {
     action: "onSubmit",
