@@ -6,7 +6,15 @@ export const M_PLAN_IDS = {
   LIGHT: 11,
   SRTANDARD: 12,
   PREMIUM: 13,
-} as const;
+};
+
+export type TPlanIds = typeof M_PLAN_IDS[keyof typeof M_PLAN_IDS];
+
+export const UWEAR_PLAN_IDS = [
+  M_PLAN_IDS.LIGHT,
+  M_PLAN_IDS.SRTANDARD,
+  M_PLAN_IDS.PREMIUM,
+] as const;
 
 export const LIGHT_PLAN = {
   id: M_PLAN_IDS.LIGHT,
