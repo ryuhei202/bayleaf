@@ -14,49 +14,47 @@ type TProps = {
   readonly onClose: () => void;
 };
 
-export const ConfirmDialog = React.memo(
-  ({
-    open,
-    title,
-    description,
-    okBtnText,
-    cancelBtnText,
-    isLoading,
-    onClickOk,
-    onClickCancel,
-    onClose,
-  }: TProps) => {
-    return (
-      <Dialog
-        open={open}
-        onClose={onClose}
-        className="fixed inset-0 h-screen w-screen bg-black/50 z-20"
-      >
-        <Dialog.Panel className="fixed bottom-0 left-1/2 translate-x-[-50%] bg-[#F6F6F6] w-screen px-10 py-6 rounded-t-2xl text-themeGray text-center">
-          <Dialog.Title className="pb-5 font-bold">{title}</Dialog.Title>
-          <Dialog.Description className="mb-7 text-xs">
-            {description}
-          </Dialog.Description>
-          <div className="flex mb-7">
-            <Button
-              variant="line"
-              onClick={onClickCancel}
-              isLoading={isLoading}
-              className="mx-2 w-[70%]"
-            >
-              {cancelBtnText ?? "キャンセル"}
-            </Button>
-            <Button
-              variant="default"
-              onClick={onClickOk}
-              disabled={isLoading}
-              className="mx-2"
-            >
-              {okBtnText ?? "OK"}
-            </Button>
-          </div>
-        </Dialog.Panel>
-      </Dialog>
-    );
-  }
-);
+export const ConfirmDialog = ({
+  open,
+  title,
+  description,
+  okBtnText,
+  cancelBtnText,
+  isLoading,
+  onClickOk,
+  onClickCancel,
+  onClose,
+}: TProps) => {
+  return (
+    <Dialog
+      open={open}
+      onClose={onClose}
+      className="fixed inset-0 h-screen w-screen bg-black/50 z-20"
+    >
+      <Dialog.Panel className="fixed bottom-0 left-1/2 translate-x-[-50%] bg-[#F6F6F6] w-screen px-10 py-6 rounded-t-2xl text-themeGray text-center">
+        <Dialog.Title className="pb-5 font-bold">{title}</Dialog.Title>
+        <Dialog.Description className="mb-7 text-xs">
+          {description}
+        </Dialog.Description>
+        <div className="flex mb-7">
+          <Button
+            variant="line"
+            onClick={onClickCancel}
+            isLoading={isLoading}
+            className="mx-2 w-[70%]"
+          >
+            {cancelBtnText ?? "キャンセル"}
+          </Button>
+          <Button
+            variant="default"
+            onClick={onClickOk}
+            disabled={isLoading}
+            className="mx-2"
+          >
+            {okBtnText ?? "OK"}
+          </Button>
+        </div>
+      </Dialog.Panel>
+    </Dialog>
+  );
+};
