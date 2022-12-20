@@ -1,4 +1,5 @@
 import { Tab } from "@headlessui/react";
+import liff from "@line/liff/dist/lib";
 import { TMembersIndexResponse } from "../../../api/members/TMembersIndexResponse";
 import {
   findPlanById,
@@ -9,6 +10,7 @@ import {
 } from "../../../models/shared/Plans";
 import { Button } from "../../baseParts/Button";
 import { CheckBox } from "../../baseParts/checkbox/CheckBox";
+import { AlertDialog } from "../../baseParts/dialogs/AlertDialog";
 import { ConfirmDialog } from "../../baseParts/dialogs/ConfirmDialog";
 import { Page } from "../../baseParts/legacy/Page";
 import { TabMenu } from "../../baseParts/TabMenu";
@@ -19,6 +21,7 @@ type TProps = {
   readonly isLoading: boolean;
   readonly selectedPlan?: TPlan;
   readonly isNextPayment: boolean;
+  readonly isCompleted: boolean;
   readonly onSubmit: () => void;
   readonly onPlanSelect: ({ planId }: { planId: number }) => void;
   readonly onCancel: () => void;
@@ -30,6 +33,7 @@ export const PlanSelecting = ({
   isLoading,
   selectedPlan,
   isNextPayment,
+  isCompleted,
   onSubmit,
   onCancel,
   onPlanSelect,
@@ -53,6 +57,33 @@ export const PlanSelecting = ({
 
   return (
     <Page className="flex flex-col h-full min-h-screen justify-between items-center text-themeGray p-3">
+      <AlertDialog
+        open={isCompleted && !!selectedPlan}
+        title={
+          isNextPayment
+            ? "プラン変更予約が完了しました"
+            : "プラン変更が完了しました"
+        }
+        description={
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-24 h-24 text-[#659B5E]"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        }
+        onClick={() => liff.closeWindow()}
+        onClose={() => liff.closeWindow()}
+        okBtnText="閉じる"
+      />
       {selectedPlan && (
         <ConfirmDialog
           open={!!selectedPlan}

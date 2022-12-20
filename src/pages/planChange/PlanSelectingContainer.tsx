@@ -12,6 +12,7 @@ type TProps = {
 export const PlanSelectingContainer = ({ memberData }: TProps) => {
   const [selectedPlan, setSelectedPlan] = useState<TPlan>();
   const [isNextPayment, setIsNextPayment] = useState<boolean>(true);
+  const [isCompleted, setIsCompleted] = useState<boolean>(false);
   const { mutate, isLoading } = useMembersPlanChange({
     memberId: memberData.id,
   });
@@ -22,7 +23,7 @@ export const PlanSelectingContainer = ({ memberData }: TProps) => {
       { planId: selectedPlan.id, isNextPayment },
       {
         onSuccess: () => {
-          liff.closeWindow();
+          setIsCompleted(true);
         },
       }
     );
@@ -47,6 +48,7 @@ export const PlanSelectingContainer = ({ memberData }: TProps) => {
       selectedPlan={selectedPlan}
       isLoading={isLoading}
       isNextPayment={isNextPayment}
+      isCompleted={isCompleted}
       onSubmit={handleSubmit}
       onCancel={handleCancel}
       onPlanSelect={handlePlanSelect}
