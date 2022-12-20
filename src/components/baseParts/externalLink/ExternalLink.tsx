@@ -11,9 +11,11 @@ export const ExternalLink = ({ children, href, className }: TProps) => {
       href={href}
       target="_blank"
       rel="noreferrer"
-      className={`underline underline-offset-2 ${className}`}
+      className={`underline underline-offset-2 text-themeGray ${
+        className ?? ""
+      }`}
     >
-      <div className="flex items-center font-light text-themeGray">
+      <div className="flex items-center font-light">
         {children}
         <img src={ARROW} alt="arrow" className="ml-1 w-4 h-4" />
       </div>
