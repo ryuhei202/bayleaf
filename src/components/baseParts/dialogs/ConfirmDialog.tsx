@@ -1,5 +1,4 @@
 import { Dialog } from "@headlessui/react";
-import React from "react";
 import { Button } from "../Button";
 
 type TProps = {
@@ -13,7 +12,6 @@ type TProps = {
   readonly onClickCancel: () => void;
   readonly onClose: () => void;
 };
-
 export const ConfirmDialog = ({
   open,
   title,
