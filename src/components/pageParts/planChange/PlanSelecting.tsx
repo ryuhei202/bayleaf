@@ -12,6 +12,7 @@ import { Button } from "../../baseParts/Button";
 import { CheckBox } from "../../baseParts/checkbox/CheckBox";
 import { AlertDialog } from "../../baseParts/dialogs/AlertDialog";
 import { ConfirmDialog } from "../../baseParts/dialogs/ConfirmDialog";
+import { CheckIcon } from "../../baseParts/icons/CheckIcon";
 import { Page } from "../../baseParts/legacy/Page";
 import { TabMenu } from "../../baseParts/TabMenu";
 import { PlanChangePanel } from "./PlanChangePanel";
@@ -55,85 +56,83 @@ export const PlanSelecting = ({
     );
   };
 
+  const getDialogDescription = ({
+    selectedPlan,
+  }: {
+    selectedPlan: TPlan;
+  }): React.ReactNode => {
+    return isNextPayment ? (
+      <>
+        プラン変更適用日（決済日）： {memberData.nextPaymentDate}
+        <br />
+        次回発送日: {memberData.nextPaymentDate}以降
+        <br />
+        {`料金: ¥${selectedPlan.price.withTax}(税込)`}
+        <br />※ 次回決済日に料金が発生します（詳しくは
+        <a
+          href={`${process.env.REACT_APP_SIRNIGHT_URL}/faq/plan#r31rwhb07dy`}
+          target="_blank"
+          rel="noreferrer"
+          className="underline"
+        >
+          こちら
+        </a>
+        ）
+      </>
+    ) : (
+      <>
+        プラン変更適用日（決済日）: 本日
+        <br />
+        次回発送日: 準備でき次第配送
+        <br />
+        {`料金: ¥${
+          getDiffPrice({ selectedPlan }) <= 0
+            ? 0
+            : getDiffPrice({ selectedPlan })
+        }(税込)`}
+        <br />※
+        プラン変更が反映された日から1ヶ月後が次回決済日となり、プラン変更後の月額料金をお支払い頂きます（詳しくは
+        <a
+          href={`${process.env.REACT_APP_SIRNIGHT_URL}/faq/plan#r31rwhb07dy`}
+          target="_blank"
+          rel="noreferrer"
+          className="underline"
+        >
+          こちら
+        </a>
+        ）
+      </>
+    );
+  };
+
   return (
     <Page className="flex flex-col h-full min-h-screen justify-between items-center text-themeGray p-3">
-      <AlertDialog
-        open={isCompleted && !!selectedPlan}
-        title={
-          isNextPayment
-            ? "プラン変更予約が完了しました"
-            : "プラン変更が完了しました"
-        }
-        description={
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-24 h-24 text-[#659B5E]"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-        }
-        onClick={() => liff.closeWindow()}
-        onClose={() => liff.closeWindow()}
-        okBtnText="閉じる"
-      />
       {selectedPlan && (
-        <ConfirmDialog
-          open={!!selectedPlan}
-          title={`${selectedPlan.jpName}プランで再開しますか？`}
-          description={
-            isNextPayment ? (
-              <>
-                プラン変更適用日: 次回決済日
-                <br />
-                次回発送日: 次回決済日以降
-                <br />
-                {`料金: ${selectedPlan.price.withTax}(税込)`}
-                <br />※ 次回決済日に料金が発生します。（詳しくは
-                <a
-                  href={`${process.env.REACT_APP_SIRNIGHT_URL}/faq/plan#r31rwhb07dy`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  こちら
-                </a>
-                ）
-              </>
-            ) : (
-              <>
-                プラン変更適用日: 本日
-                <br />
-                次回発送日: 本日以降
-                <br />
-                {`料金: ${
-                  getDiffPrice({ selectedPlan }) <= 0
-                    ? 0
-                    : getDiffPrice({ selectedPlan })
-                }(税込)`}
-                <br />※ 本日料金が発生します。（詳しくは
-                <a
-                  href={`${process.env.REACT_APP_SIRNIGHT_URL}/faq/plan#r31rwhb07dy`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  こちら
-                </a>
-                ）
-              </>
-            )
-          }
-          isLoading={isLoading}
-          onClickOk={onSubmit}
-          onClose={onCancel}
-          onClickCancel={onCancel}
-        />
+        <>
+          <ConfirmDialog
+            open={!!selectedPlan}
+            title={`${selectedPlan.jpName}プランに変更しますか？`}
+            okBtnText="変更する"
+            cancelBtnText="変更しない"
+            description={getDialogDescription({ selectedPlan })}
+            isLoading={isLoading}
+            onClickOk={onSubmit}
+            onClose={onCancel}
+            onClickCancel={onCancel}
+          />
+          <AlertDialog
+            open={isCompleted && !!selectedPlan}
+            title={
+              isNextPayment
+                ? "プラン変更予約が完了しました"
+                : "プラン変更が完了しました"
+            }
+            description={<CheckIcon />}
+            onClick={() => liff.closeWindow()}
+            onClose={() => liff.closeWindow()}
+            okBtnText="閉じる"
+          />
+        </>
       )}
       <Tab.Group>
         <Tab.List className="flex w-full mt-6">
@@ -175,7 +174,7 @@ export const PlanSelecting = ({
           </Tab.Panel>
           <Tab.Panel>
             <PlanChangePanel
-              plan={LIGHT_PLAN}
+              plan={STANDARD_PLAN}
               text={
                 memberData.mPlanId === STANDARD_PLAN.id
                   ? TOP_TEXT.CURRENT_PLAN
@@ -206,7 +205,7 @@ export const PlanSelecting = ({
           </Tab.Panel>
           <Tab.Panel>
             <PlanChangePanel
-              plan={LIGHT_PLAN}
+              plan={PREMIUM_PLAN}
               text={
                 memberData.mPlanId === PREMIUM_PLAN.id
                   ? TOP_TEXT.CURRENT_PLAN

@@ -1,13 +1,27 @@
-import { createMemoryHistory } from "@remix-run/router";
 import { render, screen, waitFor } from "@testing-library/react";
+import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import { getChartIndexMock } from "../../../mocks/charts/getChartIndexMock";
 import { getMemberIndexMock } from "../../../mocks/members/getMemberIndexMock";
 import { server } from "../../../mocks/server";
-import { M_PLAN_IDS, PREMIUM_PLAN } from "../../../models/shared/Plans";
+import {
+  LIGHT_PLAN,
+  M_PLAN_IDS,
+  PREMIUM_PLAN,
+} from "../../../models/shared/Plans";
 import { PlanChange } from "../../../pages/planChange/PlanChange";
 import { createQueryWrapper } from "../../utils/MockProvider";
 
 const { queryWrapper } = createQueryWrapper();
+
+const router = createMemoryRouter(
+  [
+    {
+      path: "/plan_change",
+      element: <PlanChange />,
+    },
+  ],
+  { initialEntries: ["/plan_change"] }
+);
 
 describe("PlanChange.tsx", () => {
   test("初回ユーザーの場合、PlanSelectingForPreMemberContainerに遷移", async () => {
@@ -31,7 +45,9 @@ describe("PlanChange.tsx", () => {
         ],
       })
     );
-    render(<PlanChange />, { wrapper: queryWrapper });
+    render(<RouterProvider router={router} />, {
+      wrapper: queryWrapper,
+    });
 
     expect(
       await screen.findByTestId("PlanSelectingForPreMemberContainer")
@@ -59,8 +75,57 @@ describe("PlanChange.tsx", () => {
         ],
       })
     );
-    render(<PlanChange />, { wrapper: queryWrapper });
+    render(<RouterProvider router={router} />, {
+      wrapper: queryWrapper,
+    });
 
+    expect(
+      await screen.findByTestId("PlanSelectingContainer")
+    ).toBeInTheDocument();
+  });
+
+  test("UWearレンタル中ユーザーの場合、PlanSelectingContainerに遷移", async () => {
+    server.use(
+      getChartIndexMock({
+        status: 200,
+        response: {
+          charts: [
+            {
+              id: 1,
+              rentalStatus: 4,
+              rentalStartedAt: "2022/03/12",
+              itemImagePaths: [
+                "https://stg.leeap.jp/files/preregistered_item/168/16899/large_thumb_IMG_3977.JPG",
+              ],
+              planName: `${LIGHT_PLAN.jpName}プラン`,
+              planId: M_PLAN_IDS.LIGHT,
+            },
+          ],
+        },
+      })
+    );
+    server.use(
+      getMemberIndexMock({
+        status: 200,
+        response: [
+          {
+            id: 1,
+            email: "stg-replication@kiizan-kiizan.co,jp",
+            nextPaymentDate: "2022-11-1",
+            mPlanId: M_PLAN_IDS.LIGHT,
+            isLatestChartDelivered: true,
+            isReturnRequired: false,
+            isFirstTime: false,
+            isSuspend: false,
+            isPaymentError: false,
+            rentalRemainingNum: 1,
+          },
+        ],
+      })
+    );
+    render(<RouterProvider router={router} />, {
+      wrapper: queryWrapper,
+    });
     expect(
       await screen.findByTestId("PlanSelectingContainer")
     ).toBeInTheDocument();
@@ -105,7 +170,9 @@ describe("PlanChange.tsx", () => {
         ],
       })
     );
-    render(<PlanChange />, { wrapper: queryWrapper });
+    render(<RouterProvider router={router} />, {
+      wrapper: queryWrapper,
+    });
 
     expect(
       await screen.findByTestId("PlanSelectingContainer")
@@ -145,40 +212,11 @@ describe("PlanChange.tsx", () => {
         ],
       })
     );
-    render(<PlanChange />, { wrapper: queryWrapper });
-    expect(
-      await screen.findByText("ユーザーが複数人います。")
-    ).toBeInTheDocument();
-  });
+    render(<RouterProvider router={router} />, {
+      wrapper: queryWrapper,
+    });
 
-  test("決済エラー停止ユーザーの場合、バリデーションメッセージを表示する", async () => {
-    server.use(getChartIndexMock({ status: 200, response: { charts: [] } }));
-    server.use(
-      getMemberIndexMock({
-        status: 200,
-        response: [
-          {
-            id: 1,
-            email: "stg-replication@kiizan-kiizan.co,jp",
-            nextPaymentDate: "2022-11-1",
-            mPlanId: PREMIUM_PLAN.id,
-            isLatestChartDelivered: true,
-            isReturnRequired: false,
-            isFirstTime: false,
-            isSuspend: true,
-            isPaymentError: true,
-            rentalRemainingNum: 1,
-          },
-        ],
-      })
-    );
-    render(<PlanChange />, { wrapper: queryWrapper });
-
-    expect(
-      await screen.findByText(
-        "決済エラーステータスのため、プラン変更できません"
-      )
-    ).toBeInTheDocument();
+    expect(await screen.findByTestId("isMultpleMembers")).toBeInTheDocument();
   });
 
   test("旧プラン利用でレンタル中ユーザーの場合、バリデーションメッセージを表示する", async () => {
@@ -213,17 +251,19 @@ describe("PlanChange.tsx", () => {
             isLatestChartDelivered: true,
             isReturnRequired: false,
             isFirstTime: false,
-            isSuspend: true,
-            isPaymentError: true,
+            isSuspend: false,
+            isPaymentError: false,
             rentalRemainingNum: 1,
           },
         ],
       })
     );
-    render(<PlanChange />, { wrapper: queryWrapper });
+    render(<RouterProvider router={router} />, {
+      wrapper: queryWrapper,
+    });
 
     expect(
-      await screen.findByText("レンタル中のため、プラン変更できません")
+      await screen.findByTestId("isStatusNotRentable")
     ).toBeInTheDocument();
   });
 
@@ -266,15 +306,78 @@ describe("PlanChange.tsx", () => {
         ],
       })
     );
-    render(<PlanChange />, { wrapper: queryWrapper });
-
+    render(<RouterProvider router={router} />, {
+      wrapper: queryWrapper,
+    });
     expect(
-      await screen.findByText("コーデ作成中のため、プラン変更できません")
+      await screen.findByTestId("isFirstUserPreparingCoordinate")
     ).toBeInTheDocument();
   });
 
+  test("GET /chartsが500エラーの場合、バリデーションをする", async () => {
+    server.use(getChartIndexMock({ status: 500 }));
+    server.use(getMemberIndexMock({ status: 200, response: [] }));
+    render(<RouterProvider router={router} />, {
+      wrapper: queryWrapper,
+    });
+    expect(
+      await screen.findByText("予期せぬエラーが発生しました")
+    ).toBeInTheDocument();
+  });
+
+  test("GET /membersが500エラーの場合、バリデーションをする", async () => {
+    server.use(getChartIndexMock({ status: 200, response: { charts: [] } }));
+    server.use(getMemberIndexMock({ status: 500 }));
+    render(<RouterProvider router={router} />, {
+      wrapper: queryWrapper,
+    });
+    expect(
+      await screen.findByText("予期せぬエラーが発生しました")
+    ).toBeInTheDocument();
+  });
+
+  test("GET /membersとGET /charts両方500エラーの場合、バリデーションをする", async () => {
+    server.use(getChartIndexMock({ status: 500 }));
+    server.use(getMemberIndexMock({ status: 500 }));
+    render(<RouterProvider router={router} />, {
+      wrapper: queryWrapper,
+    });
+    expect(
+      await screen.findByText("予期せぬエラーが発生しました")
+    ).toBeInTheDocument();
+  });
+
+  test("決済エラー停止ユーザーの場合、バリデーションメッセージを表示する", async () => {
+    server.use(getChartIndexMock({ status: 200, response: { charts: [] } }));
+    server.use(
+      getMemberIndexMock({
+        status: 200,
+        response: [
+          {
+            id: 1,
+            email: "stg-replication@kiizan-kiizan.co,jp",
+            nextPaymentDate: "2022-11-1",
+            mPlanId: PREMIUM_PLAN.id,
+            isLatestChartDelivered: true,
+            isReturnRequired: false,
+            isFirstTime: false,
+            isSuspend: true,
+            isPaymentError: true,
+            rentalRemainingNum: 1,
+          },
+        ],
+      })
+    );
+    render(<RouterProvider router={router} />, {
+      wrapper: queryWrapper,
+    });
+
+    await waitFor(() => {
+      expect(router.state.location.pathname).toEqual("/unsuspend");
+    });
+  });
+
   test("停止ユーザーの場合、Unsuspend.tsxにリダイレクトする", async () => {
-    const history = createMemoryHistory({ initialEntries: ["/plan_change"] });
     server.use(getChartIndexMock({ status: 200, response: { charts: [] } }));
     server.use(
       getMemberIndexMock({
@@ -295,37 +398,12 @@ describe("PlanChange.tsx", () => {
         ],
       })
     );
-    render(<PlanChange />, { wrapper: queryWrapper });
+    render(<RouterProvider router={router} />, {
+      wrapper: queryWrapper,
+    });
 
     await waitFor(() => {
-      expect(history.location.pathname).toEqual("/unsuspend");
+      expect(router.state.location.pathname).toEqual("/unsuspend");
     });
-  });
-
-  test("GET /chartsが500エラーの場合、バリデーションをする", async () => {
-    server.use(getChartIndexMock({ status: 500 }));
-    server.use(getMemberIndexMock({ status: 200, response: [] }));
-    render(<PlanChange />, { wrapper: queryWrapper });
-    expect(
-      await screen.findByText("予期せぬエラーが発生しました")
-    ).toBeInTheDocument();
-  });
-
-  test("GET /membersが500エラーの場合、バリデーションをする", async () => {
-    server.use(getChartIndexMock({ status: 200, response: { charts: [] } }));
-    server.use(getMemberIndexMock({ status: 500 }));
-    render(<PlanChange />, { wrapper: queryWrapper });
-    expect(
-      await screen.findByText("予期せぬエラーが発生しました")
-    ).toBeInTheDocument();
-  });
-
-  test("GET /membersとGET /charts両方500エラーの場合、バリデーションをする", async () => {
-    server.use(getChartIndexMock({ status: 500 }));
-    server.use(getMemberIndexMock({ status: 500 }));
-    render(<PlanChange />, { wrapper: queryWrapper });
-    expect(
-      await screen.findByText("予期せぬエラーが発生しました")
-    ).toBeInTheDocument();
   });
 });

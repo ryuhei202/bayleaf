@@ -1,4 +1,3 @@
-import liff from "@line/liff/dist/lib";
 import { useCallback, useState } from "react";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { useMembersPlanChange } from "../../api/members/useMembersPlanChange";
@@ -38,9 +37,9 @@ export const PlanSelectingContainer = ({ memberData }: TProps) => {
     setSelectedPlan(plan);
   };
 
-  const handleTimingChange = useCallback(() => {
+  const handleTimingChange = () => {
     setIsNextPayment(!isNextPayment);
-  }, []);
+  };
 
   return (
     <PlanSelecting
