@@ -3,7 +3,11 @@ import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import { getChartIndexMock } from "../../../mocks/charts/getChartIndexMock";
 import { getMemberIndexMock } from "../../../mocks/members/getMemberIndexMock";
 import { server } from "../../../mocks/server";
-import { M_PLAN_IDS, PREMIUM_PLAN } from "../../../models/shared/Plans";
+import {
+  LIGHT_PLAN,
+  M_PLAN_IDS,
+  PREMIUM_PLAN,
+} from "../../../models/shared/Plans";
 import { PlanChange } from "../../../pages/planChange/PlanChange";
 import { createQueryWrapper } from "../../utils/MockProvider";
 
@@ -75,6 +79,53 @@ describe("PlanChange.tsx", () => {
       wrapper: queryWrapper,
     });
 
+    expect(
+      await screen.findByTestId("PlanSelectingContainer")
+    ).toBeInTheDocument();
+  });
+
+  test("UWearレンタル中ユーザーの場合、PlanSelectingContainerに遷移", async () => {
+    server.use(
+      getChartIndexMock({
+        status: 200,
+        response: {
+          charts: [
+            {
+              id: 1,
+              rentalStatus: 4,
+              rentalStartedAt: "2022/03/12",
+              itemImagePaths: [
+                "https://stg.leeap.jp/files/preregistered_item/168/16899/large_thumb_IMG_3977.JPG",
+              ],
+              planName: `${LIGHT_PLAN.jpName}プラン`,
+              planId: M_PLAN_IDS.LIGHT,
+            },
+          ],
+        },
+      })
+    );
+    server.use(
+      getMemberIndexMock({
+        status: 200,
+        response: [
+          {
+            id: 1,
+            email: "stg-replication@kiizan-kiizan.co,jp",
+            nextPaymentDate: "2022-11-1",
+            mPlanId: M_PLAN_IDS.LIGHT,
+            isLatestChartDelivered: true,
+            isReturnRequired: false,
+            isFirstTime: false,
+            isSuspend: false,
+            isPaymentError: false,
+            rentalRemainingNum: 1,
+          },
+        ],
+      })
+    );
+    render(<RouterProvider router={router} />, {
+      wrapper: queryWrapper,
+    });
     expect(
       await screen.findByTestId("PlanSelectingContainer")
     ).toBeInTheDocument();
