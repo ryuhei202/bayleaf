@@ -1,55 +1,45 @@
 import { Tab } from "@headlessui/react";
+import liff from "@line/liff/dist/lib";
 import {
   LIGHT_PLAN,
   PREMIUM_PLAN,
   STANDARD_PLAN,
-  TPlan,
 } from "../../../models/shared/Plans";
 import { Button } from "../../baseParts/Button";
-import { ConfirmDialog } from "../../baseParts/dialogs/ConfirmDialog";
+import { AlertDialog } from "../../baseParts/legacy/dialogs/AlertDialog";
 import { Page } from "../../baseParts/legacy/Page";
 import { TabMenu } from "../../baseParts/TabMenu";
-import { PlanChangePanel } from "../planChange/PlanChangePanel";
+import { PlanChangePanel } from "./PlanChangePanel";
 
 type TProps = {
   readonly planId: number;
+  readonly onSubmit: (planId: number) => void;
   readonly isLoading: boolean;
-  readonly selectedPlan?: TPlan;
-  readonly onSubmit: () => void;
-  readonly onPlanSelect: ({ planId }: { planId: number }) => void;
-  readonly onCancel: () => void;
+  readonly selectedPlanName?: string;
 };
-
-export const PlanSelectingForUnsuspend = ({
+export const PlanSelectingForPreMember = ({
   planId,
-  isLoading,
-  selectedPlan,
   onSubmit,
-  onPlanSelect,
-  onCancel,
+  isLoading,
+  selectedPlanName,
 }: TProps) => {
-  const TOP_TEXT = {
-    CURRENT_PLAN: <span className="text-red">現在停止中のプランです</span>,
-    ANOTHER_PLAN: "こちらのプランに変更いただけます",
+  const CURRENT_PLAN_TEXT = "現在ご契約のプランです";
+  const SELECTABLE_PLAN_TEXT = {
+    BUTTON: "このプランに変更する",
+    TOP: "こちらのプランに変更いただけます",
   } as const;
-
   return (
     <Page className="flex flex-col h-full min-h-screen justify-between items-center text-themeGray p-3">
-      {selectedPlan && (
-        <ConfirmDialog
-          open={!!selectedPlan}
-          title={`${selectedPlan.jpName}プランで再開しますか？`}
-          description={
-            <>
-              {`料金: ${selectedPlan.price.withTax}(税込)`}
-              <br />
-              次回決済日: 次回出荷日
-            </>
-          }
-          isLoading={isLoading}
-          onClickOk={onSubmit}
-          onClose={onCancel}
-          onClickCancel={onCancel}
+      {selectedPlanName && (
+        <AlertDialog
+          open={!!selectedPlanName}
+          title={`${selectedPlanName}プランに変更しました`}
+          onClose={() => {
+            liff.closeWindow();
+          }}
+          onClickOk={() => {
+            liff.closeWindow();
+          }}
         />
       )}
       <Tab.Group>
@@ -64,17 +54,20 @@ export const PlanSelectingForUnsuspend = ({
               plan={LIGHT_PLAN}
               text={
                 planId === LIGHT_PLAN.id
-                  ? TOP_TEXT.CURRENT_PLAN
-                  : TOP_TEXT.ANOTHER_PLAN
+                  ? CURRENT_PLAN_TEXT
+                  : SELECTABLE_PLAN_TEXT.TOP
               }
             >
               <Button
                 size="large"
                 className="mt-8"
+                disabled={planId === LIGHT_PLAN.id}
                 isLoading={isLoading}
-                onClick={() => onPlanSelect({ planId: LIGHT_PLAN.id })}
+                onClick={() => onSubmit(LIGHT_PLAN.id)}
               >
-                プランを再開する
+                {planId === LIGHT_PLAN.id
+                  ? CURRENT_PLAN_TEXT
+                  : SELECTABLE_PLAN_TEXT.BUTTON}
               </Button>
             </PlanChangePanel>
           </Tab.Panel>
@@ -83,17 +76,20 @@ export const PlanSelectingForUnsuspend = ({
               plan={STANDARD_PLAN}
               text={
                 planId === STANDARD_PLAN.id
-                  ? TOP_TEXT.CURRENT_PLAN
-                  : TOP_TEXT.ANOTHER_PLAN
+                  ? CURRENT_PLAN_TEXT
+                  : SELECTABLE_PLAN_TEXT.TOP
               }
             >
               <Button
                 size="large"
                 className="mt-8"
+                disabled={planId === STANDARD_PLAN.id}
                 isLoading={isLoading}
-                onClick={() => onPlanSelect({ planId: STANDARD_PLAN.id })}
+                onClick={() => onSubmit(STANDARD_PLAN.id)}
               >
-                プランを再開する
+                {planId === STANDARD_PLAN.id
+                  ? CURRENT_PLAN_TEXT
+                  : SELECTABLE_PLAN_TEXT.BUTTON}
               </Button>
             </PlanChangePanel>
           </Tab.Panel>
@@ -102,17 +98,20 @@ export const PlanSelectingForUnsuspend = ({
               plan={PREMIUM_PLAN}
               text={
                 planId === PREMIUM_PLAN.id
-                  ? TOP_TEXT.CURRENT_PLAN
-                  : TOP_TEXT.ANOTHER_PLAN
+                  ? CURRENT_PLAN_TEXT
+                  : SELECTABLE_PLAN_TEXT.TOP
               }
             >
               <Button
                 size="large"
                 className="mt-8"
+                disabled={planId === PREMIUM_PLAN.id}
                 isLoading={isLoading}
-                onClick={() => onPlanSelect({ planId: PREMIUM_PLAN.id })}
+                onClick={() => onSubmit(PREMIUM_PLAN.id)}
               >
-                プランを再開する
+                {planId === PREMIUM_PLAN.id
+                  ? CURRENT_PLAN_TEXT
+                  : SELECTABLE_PLAN_TEXT.BUTTON}
               </Button>
             </PlanChangePanel>
           </Tab.Panel>

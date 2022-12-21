@@ -1,45 +1,138 @@
 import { Tab } from "@headlessui/react";
 import liff from "@line/liff/dist/lib";
+import { TMembersIndexResponse } from "../../../api/members/TMembersIndexResponse";
 import {
+  findPlanById,
   LIGHT_PLAN,
   PREMIUM_PLAN,
   STANDARD_PLAN,
+  TPlan,
 } from "../../../models/shared/Plans";
-import { AlertDialog } from "../../baseParts/legacy/dialogs/AlertDialog";
+import { Button } from "../../baseParts/Button";
+import { CheckBox } from "../../baseParts/checkbox/CheckBox";
+import { AlertDialog } from "../../baseParts/dialogs/AlertDialog";
+import { ConfirmDialog } from "../../baseParts/dialogs/ConfirmDialog";
+import { CheckIcon } from "../../baseParts/icons/CheckIcon";
 import { Page } from "../../baseParts/legacy/Page";
 import { TabMenu } from "../../baseParts/TabMenu";
 import { PlanChangePanel } from "./PlanChangePanel";
 
 type TProps = {
-  readonly planId: number;
-  readonly onSubmit: (planId: number) => void;
+  readonly memberData: TMembersIndexResponse;
   readonly isLoading: boolean;
-  readonly selectedPlanName?: string;
+  readonly selectedPlan?: TPlan;
+  readonly isNextPayment: boolean;
+  readonly isCompleted: boolean;
+  readonly onSubmit: () => void;
+  readonly onPlanSelect: ({ planId }: { planId: number }) => void;
+  readonly onCancel: () => void;
+  readonly onTimingChange: () => void;
 };
+
 export const PlanSelecting = ({
-  planId,
-  onSubmit,
+  memberData,
   isLoading,
-  selectedPlanName,
+  selectedPlan,
+  isNextPayment,
+  isCompleted,
+  onSubmit,
+  onCancel,
+  onPlanSelect,
+  onTimingChange,
 }: TProps) => {
-  const CURRENT_PLAN_TEXT = "現在ご契約のプランです";
-  const SELECTABLE_PLAN_TEXT = {
-    BUTTON: "このプランに変更する",
-    TOP: "こちらのプランに変更いただけます",
+  const TOP_TEXT = {
+    CURRENT_PLAN: "現在ご契約のプランです",
+    ANOTHER_PLAN: "こちらのプランに変更いただけます",
   } as const;
+  const BUTTON_TEXT = {
+    CURRENT_PLAN: "現在ご契約のプランです",
+    ANOTHER_PLAN: "このプランに変更する",
+  } as const;
+
+  const getDiffPrice = ({ selectedPlan }: { selectedPlan: TPlan }) => {
+    return (
+      selectedPlan.price.withTax -
+      findPlanById(memberData.mPlanId).price.withTax
+    );
+  };
+
+  const getDialogDescription = ({
+    selectedPlan,
+  }: {
+    selectedPlan: TPlan;
+  }): React.ReactNode => {
+    return isNextPayment ? (
+      <>
+        プラン変更適用日（決済日）： {memberData.nextPaymentDate}
+        <br />
+        次回発送日: {memberData.nextPaymentDate}以降
+        <br />
+        {`料金: ¥${selectedPlan.price.withTax}(税込)`}
+        <br />※ 次回決済日に料金が発生します（詳しくは
+        <a
+          href={`${process.env.REACT_APP_SIRNIGHT_URL}/faq/plan#r31rwhb07dy`}
+          target="_blank"
+          rel="noreferrer"
+          className="underline"
+        >
+          こちら
+        </a>
+        ）
+      </>
+    ) : (
+      <>
+        プラン変更適用日（決済日）: 本日
+        <br />
+        次回発送日: 準備でき次第配送
+        <br />
+        {`料金: ¥${
+          getDiffPrice({ selectedPlan }) <= 0
+            ? 0
+            : getDiffPrice({ selectedPlan })
+        }(税込)`}
+        <br />※
+        プラン変更が反映された日から1ヶ月後が次回決済日となり、プラン変更後の月額料金をお支払い頂きます（詳しくは
+        <a
+          href={`${process.env.REACT_APP_SIRNIGHT_URL}/faq/plan#r31rwhb07dy`}
+          target="_blank"
+          rel="noreferrer"
+          className="underline"
+        >
+          こちら
+        </a>
+        ）
+      </>
+    );
+  };
+
   return (
     <Page className="flex flex-col h-full min-h-screen justify-between items-center text-themeGray p-3">
-      {selectedPlanName && (
-        <AlertDialog
-          open={!!selectedPlanName}
-          title={`${selectedPlanName}プランに変更しました`}
-          onClose={() => {
-            liff.closeWindow();
-          }}
-          onClickOk={() => {
-            liff.closeWindow();
-          }}
-        />
+      {selectedPlan && (
+        <>
+          <ConfirmDialog
+            open={!!selectedPlan}
+            title={`${selectedPlan.jpName}プランに変更しますか？`}
+            okBtnText="変更する"
+            cancelBtnText="変更しない"
+            description={getDialogDescription({ selectedPlan })}
+            isLoading={isLoading}
+            onClickOk={onSubmit}
+            onClose={onCancel}
+            onClickCancel={onCancel}
+          />
+          <AlertDialog
+            open={isCompleted && !!selectedPlan}
+            title={
+              isNextPayment
+                ? "プラン変更予約が完了しました"
+                : "プラン変更が完了しました"
+            }
+            description={<CheckIcon />}
+            onClick={() => liff.closeWindow()}
+            onClose={() => liff.closeWindow()}
+            okBtnText="閉じる"
+          />
+        </>
       )}
       <Tab.Group>
         <Tab.List className="flex w-full mt-6">
@@ -52,55 +145,94 @@ export const PlanSelecting = ({
             <PlanChangePanel
               plan={LIGHT_PLAN}
               text={
-                planId === LIGHT_PLAN.id
-                  ? CURRENT_PLAN_TEXT
-                  : SELECTABLE_PLAN_TEXT.TOP
+                memberData.mPlanId === LIGHT_PLAN.id
+                  ? TOP_TEXT.CURRENT_PLAN
+                  : TOP_TEXT.ANOTHER_PLAN
               }
-              buttonText={
-                planId === LIGHT_PLAN.id
-                  ? CURRENT_PLAN_TEXT
-                  : SELECTABLE_PLAN_TEXT.BUTTON
-              }
-              disabled={planId === LIGHT_PLAN.id}
-              onSubmit={() => onSubmit(LIGHT_PLAN.id)}
-              isLoading={isLoading}
-            />
+            >
+              {memberData.rentalRemainingNum > 0 && (
+                <CheckBox
+                  className="mt-4"
+                  checked={!isNextPayment}
+                  onChange={onTimingChange}
+                >
+                  即時でプラン変更をする
+                </CheckBox>
+              )}
+              <Button
+                size="large"
+                className="mt-4"
+                isLoading={isLoading}
+                disabled={memberData.mPlanId === LIGHT_PLAN.id}
+                onClick={() => onPlanSelect({ planId: LIGHT_PLAN.id })}
+              >
+                {memberData.mPlanId === LIGHT_PLAN.id
+                  ? BUTTON_TEXT.CURRENT_PLAN
+                  : BUTTON_TEXT.ANOTHER_PLAN}
+              </Button>
+            </PlanChangePanel>
           </Tab.Panel>
           <Tab.Panel>
             <PlanChangePanel
               plan={STANDARD_PLAN}
               text={
-                planId === STANDARD_PLAN.id
-                  ? CURRENT_PLAN_TEXT
-                  : SELECTABLE_PLAN_TEXT.TOP
+                memberData.mPlanId === STANDARD_PLAN.id
+                  ? TOP_TEXT.CURRENT_PLAN
+                  : TOP_TEXT.ANOTHER_PLAN
               }
-              buttonText={
-                planId === STANDARD_PLAN.id
-                  ? CURRENT_PLAN_TEXT
-                  : SELECTABLE_PLAN_TEXT.BUTTON
-              }
-              disabled={planId === STANDARD_PLAN.id}
-              onSubmit={() => onSubmit(STANDARD_PLAN.id)}
-              isLoading={isLoading}
-            />
+            >
+              {memberData.rentalRemainingNum > 0 && (
+                <CheckBox
+                  className="mt-4"
+                  checked={!isNextPayment}
+                  onChange={onTimingChange}
+                >
+                  即時でプラン変更をする
+                </CheckBox>
+              )}
+              <Button
+                size="large"
+                className="mt-4"
+                isLoading={isLoading}
+                disabled={memberData.mPlanId === STANDARD_PLAN.id}
+                onClick={() => onPlanSelect({ planId: STANDARD_PLAN.id })}
+              >
+                {memberData.mPlanId === STANDARD_PLAN.id
+                  ? BUTTON_TEXT.CURRENT_PLAN
+                  : BUTTON_TEXT.ANOTHER_PLAN}
+              </Button>
+            </PlanChangePanel>
           </Tab.Panel>
           <Tab.Panel>
             <PlanChangePanel
               plan={PREMIUM_PLAN}
               text={
-                planId === PREMIUM_PLAN.id
-                  ? CURRENT_PLAN_TEXT
-                  : SELECTABLE_PLAN_TEXT.TOP
+                memberData.mPlanId === PREMIUM_PLAN.id
+                  ? TOP_TEXT.CURRENT_PLAN
+                  : TOP_TEXT.ANOTHER_PLAN
               }
-              buttonText={
-                planId === PREMIUM_PLAN.id
-                  ? CURRENT_PLAN_TEXT
-                  : SELECTABLE_PLAN_TEXT.BUTTON
-              }
-              disabled={planId === PREMIUM_PLAN.id}
-              onSubmit={() => onSubmit(PREMIUM_PLAN.id)}
-              isLoading={isLoading}
-            />
+            >
+              {memberData.rentalRemainingNum > 0 && (
+                <CheckBox
+                  className="mt-4"
+                  checked={!isNextPayment}
+                  onChange={onTimingChange}
+                >
+                  即時でプラン変更をする
+                </CheckBox>
+              )}
+              <Button
+                size="large"
+                className="mt-4"
+                isLoading={isLoading}
+                disabled={memberData.mPlanId === PREMIUM_PLAN.id}
+                onClick={() => onPlanSelect({ planId: PREMIUM_PLAN.id })}
+              >
+                {memberData.mPlanId === PREMIUM_PLAN.id
+                  ? BUTTON_TEXT.CURRENT_PLAN
+                  : BUTTON_TEXT.ANOTHER_PLAN}
+              </Button>
+            </PlanChangePanel>
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
