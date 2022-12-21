@@ -29,6 +29,7 @@ export const getPlanChangeValidater = ({
     membersData[0].isFirstTime &&
     chartsData.charts.some((c) =>
       [
+        CHART_RENTAL_STATUS.WAIT_HEARING,
         CHART_RENTAL_STATUS.WAIT_COORDE_REGIST,
         CHART_RENTAL_STATUS.WAIT_DELIVERY,
       ].includes(c.rentalStatus)
