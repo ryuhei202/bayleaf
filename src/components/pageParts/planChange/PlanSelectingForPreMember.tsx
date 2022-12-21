@@ -5,6 +5,7 @@ import {
   PREMIUM_PLAN,
   STANDARD_PLAN,
 } from "../../../models/shared/Plans";
+import { Button } from "../../baseParts/Button";
 import { AlertDialog } from "../../baseParts/legacy/dialogs/AlertDialog";
 import { Page } from "../../baseParts/legacy/Page";
 import { TabMenu } from "../../baseParts/TabMenu";
@@ -56,15 +57,19 @@ export const PlanSelectingForPreMember = ({
                   ? CURRENT_PLAN_TEXT
                   : SELECTABLE_PLAN_TEXT.TOP
               }
-              buttonText={
-                planId === LIGHT_PLAN.id
+            >
+              <Button
+                size="large"
+                className="mt-8"
+                disabled={planId === LIGHT_PLAN.id}
+                isLoading={isLoading}
+                onClick={() => onSubmit(LIGHT_PLAN.id)}
+              >
+                {planId === LIGHT_PLAN.id
                   ? CURRENT_PLAN_TEXT
-                  : SELECTABLE_PLAN_TEXT.BUTTON
-              }
-              disabled={planId === LIGHT_PLAN.id}
-              onSubmit={() => onSubmit(LIGHT_PLAN.id)}
-              isLoading={isLoading}
-            />
+                  : SELECTABLE_PLAN_TEXT.BUTTON}
+              </Button>
+            </PlanChangePanel>
           </Tab.Panel>
           <Tab.Panel>
             <PlanChangePanel
@@ -74,15 +79,19 @@ export const PlanSelectingForPreMember = ({
                   ? CURRENT_PLAN_TEXT
                   : SELECTABLE_PLAN_TEXT.TOP
               }
-              buttonText={
-                planId === STANDARD_PLAN.id
+            >
+              <Button
+                size="large"
+                className="mt-8"
+                disabled={planId === STANDARD_PLAN.id}
+                isLoading={isLoading}
+                onClick={() => onSubmit(STANDARD_PLAN.id)}
+              >
+                {planId === STANDARD_PLAN.id
                   ? CURRENT_PLAN_TEXT
-                  : SELECTABLE_PLAN_TEXT.BUTTON
-              }
-              disabled={planId === STANDARD_PLAN.id}
-              onSubmit={() => onSubmit(STANDARD_PLAN.id)}
-              isLoading={isLoading}
-            />
+                  : SELECTABLE_PLAN_TEXT.BUTTON}
+              </Button>
+            </PlanChangePanel>
           </Tab.Panel>
           <Tab.Panel>
             <PlanChangePanel
@@ -92,15 +101,19 @@ export const PlanSelectingForPreMember = ({
                   ? CURRENT_PLAN_TEXT
                   : SELECTABLE_PLAN_TEXT.TOP
               }
-              buttonText={
-                planId === PREMIUM_PLAN.id
+            >
+              <Button
+                size="large"
+                className="mt-8"
+                disabled={planId === PREMIUM_PLAN.id}
+                isLoading={isLoading}
+                onClick={() => onSubmit(PREMIUM_PLAN.id)}
+              >
+                {planId === PREMIUM_PLAN.id
                   ? CURRENT_PLAN_TEXT
-                  : SELECTABLE_PLAN_TEXT.BUTTON
-              }
-              disabled={planId === PREMIUM_PLAN.id}
-              onSubmit={() => onSubmit(PREMIUM_PLAN.id)}
-              isLoading={isLoading}
-            />
+                  : SELECTABLE_PLAN_TEXT.BUTTON}
+              </Button>
+            </PlanChangePanel>
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>

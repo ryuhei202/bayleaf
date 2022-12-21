@@ -31,7 +31,7 @@ export const PlanChangeCard = ({ plan }: TProps) => {
             <p className="text-[4vw] text-[#979B9A] font-lora">
               {`¥${plan.price.withoutTax.toLocaleString()}（税抜） `}
               <a
-                href={`${process.env.REACT_APP_SIRNIGHT_URL}/news/cro5lzty_e72/`}
+                href={`${process.env.REACT_APP_SIRNIGHT_URL}/faq/payment#fc24azedyv`}
                 className="text-themeGray font-normal underline decoration-from-font underline-offset-2"
                 target="_blank"
                 rel="noreferrer"
