@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
-import { Loader } from "semantic-ui-react";
 import { useChartIndex } from "../../api/charts/useChartIndex";
 import { useMembersIndex } from "../../api/members/useMembersIndex";
 import { ExternalLink } from "../../components/baseParts/externalLink/ExternalLink";
 import { Typography } from "../../components/baseParts/legacy/Typography";
+import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { PlanChangeWithValidation } from "../../components/pageParts/planChange/PlanChangeWithValidation";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { PlanSelectingContainer } from "./PlanSelectingContainer";
@@ -25,7 +25,7 @@ export const PlanChange = () => {
   if (membersError) return <ErrorMessage message={membersError.message} />;
   if (chartsError) return <ErrorMessage message={chartsError.message} />;
 
-  if (!membersData || !chartsData) return <Loader active />;
+  if (!membersData || !chartsData) return <LoaderPage />;
 
   const {
     isStatusNotRentable,

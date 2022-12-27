@@ -1,5 +1,5 @@
-import { Loader } from "semantic-ui-react";
 import { useDeliveryDateShow } from "../../api/deliveryDates/useDeliveryDateShow";
+import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { CHART_RENTAL_STATUS } from "../../models/chart/ChartRentalStatus";
 import { DeliveryPageContainer } from "./DeliveryPageContainer";
@@ -20,7 +20,7 @@ export const DeliveryFetcher = ({
     });
   if (deliveryDateShowError)
     return <ErrorMessage message={deliveryDateShowError.message} />;
-  if (!deliveryDateShowData) return <Loader active />;
+  if (!deliveryDateShowData) return <LoaderPage />;
 
   const isSelectableDatePresent =
     deliveryDateShowData.selectableDatePeriod === null;

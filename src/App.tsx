@@ -1,7 +1,6 @@
 import { createContext } from "react";
 import "./App.css";
 import { useAppInitializer } from "./hooks/handler/app/useAppInitializer";
-import { Loader } from "semantic-ui-react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import { ErrorMessage } from "./components/shared/ErrorMessage";
@@ -16,6 +15,7 @@ import { Dislike } from "./pages/dislike/Dislike";
 import { Delivery } from "./pages/delivery/Delivery";
 import { PlanChange } from "./pages/planChange/PlanChange";
 import { Unsuspend } from "./pages/unsuspend/Unsuspend";
+import { LoaderPage } from "./components/baseParts/pages/LoaderPage";
 
 Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DSN,
@@ -66,7 +66,7 @@ function App() {
   if (liffErrorMessage) {
     return <ErrorMessage message={liffErrorMessage} />;
   }
-  return <Loader active>ログイン中</Loader>;
+  return <LoaderPage caption="ログイン中" />;
 }
 
 export default App;

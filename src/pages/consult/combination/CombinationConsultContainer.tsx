@@ -20,7 +20,7 @@ import { CombinationItemCategorySelection } from "./CombinationItemCategorySelec
 import { CombinationItemDetailSelection } from "./CombinationItemDetailSelection";
 import { useConsultLineMessageSender } from "../useConsultLineMessageSender";
 import { ErrorMessage } from "../../../components/shared/ErrorMessage";
-import { Loader } from "semantic-ui-react";
+import { LoaderPage } from "../../../components/baseParts/pages/LoaderPage";
 
 type TProps = {
   readonly items: TConsultingItem[];
@@ -76,7 +76,7 @@ export const CombinationConsultContainer = ({ items, onCancel }: TProps) => {
 
   if (isSuccess) return <AfterConsultContainer />;
   if (isError) return <ErrorMessage message="予期せぬエラーが発生しました" />;
-  if (isSending) return <Loader active />;
+  if (isSending) return <LoaderPage />;
 
   switch (currentFormType) {
     case COMBINATION_FORM.IMAGE_SEND:

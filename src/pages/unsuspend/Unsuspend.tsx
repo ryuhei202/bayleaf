@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { Loader } from "semantic-ui-react";
 import { useMembersIndex } from "../../api/members/useMembersIndex";
 import { Page } from "../../components/baseParts/legacy/Page";
 import { Typography } from "../../components/baseParts/legacy/Typography";
+import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { UnsuspendContainer } from "./UnsuspendContainer";
 
@@ -15,7 +15,7 @@ export const Unsuspend = () => {
 
   if (membersError) return <ErrorMessage message={membersError.message} />;
 
-  if (!membersData) return <Loader active />;
+  if (!membersData) return <LoaderPage />;
 
   if (membersData.length > 1) {
     return (

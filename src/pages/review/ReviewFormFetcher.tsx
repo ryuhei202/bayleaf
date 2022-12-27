@@ -1,7 +1,7 @@
-import { Loader } from "semantic-ui-react";
 import { TCoordinateResponse } from "../../api/coordinates/TCoordinateResponse";
 import { TReviewOptionResponse } from "../../api/reviews/TReviewOptionResponse";
 import { useSimplifiedHearingShow } from "../../api/simplifiedHearings/useSimplifiedHearingShow";
+import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { ReviewForm } from "./ReviewForm";
 
@@ -22,7 +22,7 @@ export const ReviewFormFetcher = ({
     });
   if (simplifiedHearingError)
     return <ErrorMessage message={simplifiedHearingError.message} />;
-  if (simplifiedHearing === undefined) return <Loader active />;
+  if (simplifiedHearing === undefined) return <LoaderPage />;
   return (
     <ReviewForm
       coordinate={coordinate}

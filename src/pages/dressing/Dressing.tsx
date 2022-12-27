@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { Loader } from "semantic-ui-react";
 import { TChartResponse } from "../../api/charts/TChartResponse";
 import { useChartIndex } from "../../api/charts/useChartIndex";
 import { Page } from "../../components/baseParts/legacy/Page";
 import { Typography } from "../../components/baseParts/legacy/Typography";
+import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { ChartList } from "../../components/resourceParts/chart/ChartList";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { CHART_RENTAL_STATUS } from "../../models/chart/ChartRentalStatus";
@@ -33,7 +33,7 @@ export const Dressing = () => {
   if (chartIndexError)
     return <ErrorMessage message={chartIndexError.message} />;
 
-  if (!chartIndexData) return <Loader active />;
+  if (!chartIndexData) return <LoaderPage />;
 
   if (chartIndexData.charts.length === 0) {
     window.location.href = `${process.env.REACT_APP_HOST_URL}/rental/plan_check`;

@@ -1,4 +1,4 @@
-import { Loader } from "semantic-ui-react";
+import { LoaderPage } from "../../../components/baseParts/pages/LoaderPage";
 import { ErrorMessage } from "../../../components/shared/ErrorMessage";
 import { TConsultingItem } from "../../../models/consult/TConsultingItem";
 import { AfterConsultContainer } from "../AfterConsultContainer";
@@ -30,6 +30,6 @@ export const SceneConsultContainer = ({ items, onCancel }: TProps) => {
 
   if (isSuccess) return <AfterConsultContainer />;
   if (isError) return <ErrorMessage message="予期せぬエラーが発生しました" />;
-  if (isSending) return <Loader active />;
+  if (isSending) return <LoaderPage />;
   return <SceneDetailForm onSubmit={handleSubmit} onCancel={onCancel} />;
 };

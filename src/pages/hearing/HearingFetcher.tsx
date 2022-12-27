@@ -1,9 +1,9 @@
 import liff from "@line/liff/dist/lib";
-import { Loader } from "semantic-ui-react";
 import { TChartResponse } from "../../api/charts/TChartResponse";
 import { useHearingIndex } from "../../api/hearings/useHearingIndex";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { Button } from "../../components/baseParts/legacy/Button";
+import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { HearingAnswerConfirm } from "../../components/pageParts/hearing/HearingAnswerConfirm";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { sortHearings } from "../../models/hearing/THearingForms";
@@ -21,7 +21,7 @@ export const HearingFetcher = ({ member, chart }: TProps) => {
   if (hearingIndexError)
     return <ErrorMessage message={hearingIndexError.message} />;
 
-  if (!hearingIndexData) return <Loader active />;
+  if (!hearingIndexData) return <LoaderPage />;
 
   if (!member.isLatestChartDelivered) {
     return (

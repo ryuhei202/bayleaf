@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Loader } from "semantic-ui-react";
 import { Button } from "../../components/baseParts/legacy/Button";
 import { useCoordinateIndex } from "../../api/coordinates/useCoordinateIndex";
 import { Page } from "../../components/baseParts/legacy/Page";
@@ -9,6 +8,7 @@ import { convertItemsToItemImagesProps } from "../../components/pageParts/review
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { ReviewFetcher } from "./ReviewFetcher";
 import { CoordinateItemImages } from "../../components/baseParts/legacy/CoordinateItemImages";
+import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 
 type TProps = {
   readonly chartId: number;
@@ -23,7 +23,7 @@ export const ReviewStartPage = ({ chartId }: TProps) => {
   if (coordinateError)
     return <ErrorMessage message={coordinateError.message} />;
 
-  if (!coordinateData) return <Loader active />;
+  if (!coordinateData) return <LoaderPage />;
 
   const reviewTargetCoordinates = coordinateData.coordinates.filter(
     (c) => !c.isReviewed

@@ -1,6 +1,6 @@
-import { Loader } from "semantic-ui-react";
 import { useHearingFormsShow } from "../../api/hearingForms/useHearingFormsShow";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
+import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { MultipleSelectForm } from "../../components/pageParts/hearing/MultipleSelectForm";
 import { SingleSelectForm } from "../../components/pageParts/hearing/SingleSelectForm";
 import { ErrorMessage } from "../../components/shared/ErrorMessage";
@@ -39,7 +39,7 @@ export const HearingFormFetcher = ({
     return <ErrorMessage message={hearingFormError.message} />;
   }
 
-  if (!hearingFormData) return <Loader active />;
+  if (!hearingFormData) return <LoaderPage />;
 
   // スキップ処理
   if (hearingFormData.options.length === 1) {
