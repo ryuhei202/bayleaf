@@ -19,8 +19,8 @@ import { CombinationConsult } from "./CombinationConsult";
 import { CombinationItemCategorySelection } from "./CombinationItemCategorySelection";
 import { CombinationItemDetailSelection } from "./CombinationItemDetailSelection";
 import { useConsultLineMessageSender } from "../useConsultLineMessageSender";
-import { ErrorMessage } from "../../../components/shared/ErrorMessage";
 import { LoaderPage } from "../../../components/baseParts/pages/LoaderPage";
+import { ErrorPage } from "../../../components/baseParts/pages/ErrorPage";
 
 type TProps = {
   readonly items: TConsultingItem[];
@@ -75,7 +75,7 @@ export const CombinationConsultContainer = ({ items, onCancel }: TProps) => {
   };
 
   if (isSuccess) return <AfterConsultContainer />;
-  if (isError) return <ErrorMessage message="予期せぬエラーが発生しました" />;
+  if (isError) return <ErrorPage message="予期せぬエラーが発生しました" />;
   if (isSending) return <LoaderPage />;
 
   switch (currentFormType) {

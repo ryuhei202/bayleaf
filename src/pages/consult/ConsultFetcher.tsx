@@ -3,8 +3,8 @@ import { useState } from "react";
 import { TCoordinateResponse } from "../../api/coordinates/TCoordinateResponse";
 import { useCoordinateIndex } from "../../api/coordinates/useCoordinateIndex";
 import { Typography } from "../../components/baseParts/legacy/Typography";
+import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
-import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { ConsultOption } from "./ConsultOption";
 import { CoordinateListContainer } from "./CoordinateListContainer";
 
@@ -21,8 +21,7 @@ export const ConsultFetcher = ({ chartId }: TProps) => {
   const { data: coordinateData, error: coordinateError } = useCoordinateIndex({
     chartId,
   });
-  if (coordinateError)
-    return <ErrorMessage message={coordinateError.message} />;
+  if (coordinateError) return <ErrorPage message={coordinateError.message} />;
 
   if (!coordinateData) return <LoaderPage />;
 

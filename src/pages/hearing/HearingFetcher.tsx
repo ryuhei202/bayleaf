@@ -3,9 +3,9 @@ import { TChartResponse } from "../../api/charts/TChartResponse";
 import { useHearingIndex } from "../../api/hearings/useHearingIndex";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { Button } from "../../components/baseParts/legacy/Button";
+import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { HearingAnswerConfirm } from "../../components/pageParts/hearing/HearingAnswerConfirm";
-import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { sortHearings } from "../../models/hearing/THearingForms";
 import { HearingContainer } from "./HearingContainer";
 
@@ -19,7 +19,7 @@ export const HearingFetcher = ({ member, chart }: TProps) => {
   });
 
   if (hearingIndexError)
-    return <ErrorMessage message={hearingIndexError.message} />;
+    return <ErrorPage message={hearingIndexError.message} />;
 
   if (!hearingIndexData) return <LoaderPage />;
 

@@ -2,8 +2,8 @@ import { TChartResponse } from "../../api/charts/TChartResponse";
 import { TNonNullableDressing } from "../../api/dressings/TDressing";
 import { useDressingsIndex } from "../../api/dressings/useDressingsIndex";
 import { Typography } from "../../components/baseParts/legacy/Typography";
+import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
-import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { DressingPage } from "./DressingPage";
 
 type TProps = {
@@ -14,7 +14,7 @@ export const DressingFetcher = ({ chart }: TProps) => {
     useDressingsIndex({ chartId: chart.id });
 
   if (dressingIndexError)
-    return <ErrorMessage message={dressingIndexError.message} />;
+    return <ErrorPage message={dressingIndexError.message} />;
 
   if (!dressingIndexData) return <LoaderPage />;
 

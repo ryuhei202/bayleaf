@@ -3,9 +3,9 @@ import { TChartResponse } from "../../api/charts/TChartResponse";
 import { useChartIndex } from "../../api/charts/useChartIndex";
 import { Page } from "../../components/baseParts/legacy/Page";
 import { Typography } from "../../components/baseParts/legacy/Typography";
+import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { ChartList } from "../../components/resourceParts/chart/ChartList";
-import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { CHART_RENTAL_STATUS } from "../../models/chart/ChartRentalStatus";
 import { ConsultFetcher } from "./ConsultFetcher";
 
@@ -30,8 +30,7 @@ export const Consult = () => {
       setSelectedChart(chartIndexData.charts[0]);
   }, [chartIndexData]);
 
-  if (chartIndexError)
-    return <ErrorMessage message={chartIndexError.message} />;
+  if (chartIndexError) return <ErrorPage message={chartIndexError.message} />;
 
   if (!chartIndexData) return <LoaderPage />;
 

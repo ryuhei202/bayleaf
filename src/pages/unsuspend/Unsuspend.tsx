@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { useMembersIndex } from "../../api/members/useMembersIndex";
 import { Page } from "../../components/baseParts/legacy/Page";
 import { Typography } from "../../components/baseParts/legacy/Typography";
+import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
-import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { UnsuspendContainer } from "./UnsuspendContainer";
 
 export const Unsuspend = () => {
@@ -13,7 +13,7 @@ export const Unsuspend = () => {
     document.title = "停止再開 | UWear";
   }, []);
 
-  if (membersError) return <ErrorMessage message={membersError.message} />;
+  if (membersError) return <ErrorPage message={membersError.message} />;
 
   if (!membersData) return <LoaderPage />;
 

@@ -1,11 +1,11 @@
 import { useChartIndex } from "../../api/charts/useChartIndex";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
-import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { NewHearingContainer } from "./NewHearingContainer";
 import { HearingFetcher } from "./HearingFetcher";
 import { Page } from "../../components/baseParts/legacy/Page";
 import { Typography } from "../../components/baseParts/legacy/Typography";
 import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
+import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 
 type TProps = {
   readonly member: TMembersIndexResponse;
@@ -18,8 +18,7 @@ export const HearingChartFetcher = ({ member }: TProps) => {
     },
   });
 
-  if (chartIndexError)
-    return <ErrorMessage message={chartIndexError.message} />;
+  if (chartIndexError) return <ErrorPage message={chartIndexError.message} />;
 
   if (!chartIndexData) return <LoaderPage />;
 
