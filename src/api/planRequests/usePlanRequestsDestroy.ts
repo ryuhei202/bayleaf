@@ -6,7 +6,7 @@ type TArgs = {
 
 export const usePlanRequestsDestroy = ({ memberId }: TArgs) => {
   const { mutate, isLoading } = useDeleteRequest(
-    `members/${memberId}/planRequest`
+    `members/${memberId}/plan_request`
   );
   return {
     mutate,
