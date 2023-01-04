@@ -9,6 +9,7 @@ module.exports = {
         themeGray: "#475156",
         clay: "#e8e7df",
         red: "#cb5f58",
+        gray: "#979B9A",
       },
     },
     screens: {
@@ -16,5 +17,4 @@ module.exports = {
     },
   },
   plugins: [require("@tailwindcss/custom-forms")],
-  important: true, // semantic-uiに上書きされてしまうので、tailwindcssを最優先にする
 };

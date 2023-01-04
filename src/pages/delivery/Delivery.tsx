@@ -1,12 +1,12 @@
 import { useChartIndex } from "../../api/charts/useChartIndex";
 import { useMembersIndex } from "../../api/members/useMembersIndex";
-import { Loader } from "semantic-ui-react";
-import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { useEffect } from "react";
 import { Page } from "../../components/baseParts/legacy/Page";
 import { Typography } from "../../components/baseParts/legacy/Typography";
 import { DeliveryFetcher } from "./DeliveryFetcher";
 import { CHART_RENTAL_STATUS } from "../../models/chart/ChartRentalStatus";
+import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
+import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 
 export const Delivery = () => {
   useEffect(() => {
@@ -27,9 +27,8 @@ export const Delivery = () => {
   });
   const { data: membersIndexData } = useMembersIndex();
 
-  if (chartIndexError)
-    return <ErrorMessage message={chartIndexError.message} />;
-  if (!chartIndexData || !membersIndexData) return <Loader active />;
+  if (chartIndexError) return <ErrorPage message={chartIndexError.message} />;
+  if (!chartIndexData || !membersIndexData) return <LoaderPage />;
   if (membersIndexData.length !== 1) {
     return (
       <Page className="flex justify-center items-center">

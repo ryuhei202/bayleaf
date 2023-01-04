@@ -45,7 +45,7 @@ export const Typography = ({
         case "strong-gray":
           return "text-neutral-800";
         case "gray":
-          return "text-neutral-600";
+          return "text-gray";
         default:
           return "text-current";
       }

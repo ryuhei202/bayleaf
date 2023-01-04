@@ -1,7 +1,7 @@
-import { Loader } from "semantic-ui-react";
 import { TCoordinateResponse } from "../../api/coordinates/TCoordinateResponse";
 import { useReviewOptionIndex } from "../../api/reviews/useReviewOptionIndex";
-import { ErrorMessage } from "../../components/shared/ErrorMessage";
+import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
+import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { ReviewContainer } from "./ReviewContainer";
 
 type TProps = {
@@ -13,9 +13,9 @@ export const ReviewFetcher = ({ coordinates }: TProps) => {
     useReviewOptionIndex();
 
   if (reviewOptionError)
-    return <ErrorMessage message={reviewOptionError.message} />;
+    return <ErrorPage message={reviewOptionError.message} />;
 
-  if (!coordinates || !reviewOptionData) return <Loader active />;
+  if (!coordinates || !reviewOptionData) return <LoaderPage />;
 
   return (
     <ReviewContainer

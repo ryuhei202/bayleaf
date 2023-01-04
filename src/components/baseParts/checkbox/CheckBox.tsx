@@ -1,5 +1,4 @@
 type TProps = {
-  readonly id: string;
   readonly checked?: boolean;
   readonly onChange: () => void;
   readonly children: React.ReactNode;
@@ -14,7 +13,7 @@ export const CheckBox = ({
 }: TProps) => {
   return (
     <div className={`text-themeGray ${className ?? ""}`}>
-      <label className="flex flex-row items-center">
+      <label className="flex flex-row items-center justify-center">
         <input
           type="checkbox"
           checked={checked}

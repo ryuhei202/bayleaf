@@ -1,6 +1,6 @@
-import { Loader } from "semantic-ui-react";
 import { useDeliveryDateShow } from "../../api/deliveryDates/useDeliveryDateShow";
-import { ErrorMessage } from "../../components/shared/ErrorMessage";
+import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
+import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { CHART_RENTAL_STATUS } from "../../models/chart/ChartRentalStatus";
 import { DeliveryPageContainer } from "./DeliveryPageContainer";
 type TProps = {
@@ -19,8 +19,8 @@ export const DeliveryFetcher = ({
       chartId: chartIndexDataId,
     });
   if (deliveryDateShowError)
-    return <ErrorMessage message={deliveryDateShowError.message} />;
-  if (!deliveryDateShowData) return <Loader active />;
+    return <ErrorPage message={deliveryDateShowError.message} />;
+  if (!deliveryDateShowData) return <LoaderPage />;
 
   const isSelectableDatePresent =
     deliveryDateShowData.selectableDatePeriod === null;
@@ -29,7 +29,7 @@ export const DeliveryFetcher = ({
     deliveryDateShowData.discountSelectableDatePeriod === null;
 
   if (isSelectableDatePresent && isDiscountDatePresent) {
-    return <ErrorMessage message="選択可能な日付がありません" />;
+    return <ErrorPage message="選択可能な日付がありません" />;
   }
   return (
     <DeliveryPageContainer

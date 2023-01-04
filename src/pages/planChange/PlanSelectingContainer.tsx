@@ -1,49 +1,57 @@
-import { useState } from "react";
-import { TChartIndexResponse } from "../../api/charts/TChartIndexResponse";
+import { useCallback, useState } from "react";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
-import { useMembersPreMemberPlanChange } from "../../api/members/useMembersPreMemberPlanChange";
-import { Typography } from "../../components/baseParts/legacy/Typography";
+import { useMembersPlanChange } from "../../api/members/useMembersPlanChange";
 import { PlanSelecting } from "../../components/pageParts/planChange/PlanSelecting";
-import { findPlanById } from "../../models/shared/Plans";
+import { findPlanById, TPlan } from "../../models/shared/Plans";
 
 type TProps = {
   readonly memberData: TMembersIndexResponse;
-  readonly chartsData: TChartIndexResponse;
 };
-export const PlanSelectingContainer = ({ memberData, chartsData }: TProps) => {
-  const [selectedPlanName, setSelectedPlanName] = useState<string>();
-  const { mutate, isLoading } = useMembersPreMemberPlanChange({
+
+export const PlanSelectingContainer = ({ memberData }: TProps) => {
+  const [selectedPlan, setSelectedPlan] = useState<TPlan>();
+  const [isNextPayment, setIsNextPayment] = useState<boolean>(true);
+  const [isCompleted, setIsCompleted] = useState<boolean>(false);
+  const { mutate, isLoading } = useMembersPlanChange({
     memberId: memberData.id,
   });
-  const handleSubmit = (planId: number) => {
+
+  const handleSubmit = () => {
+    if (!selectedPlan) return;
     mutate(
-      { planId },
+      { planId: selectedPlan.id, isNextPayment },
       {
         onSuccess: () => {
-          setSelectedPlanName(findPlanById(planId).jpName);
+          setIsCompleted(true);
         },
       }
     );
   };
-  if (
-    !memberData.isFirstTime ||
-    memberData.isSuspend ||
-    chartsData.charts.length > 0
-  ) {
-    window.location.href = `${process.env.REACT_APP_HOST_URL}/plan_change`;
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <Typography>リダイレクト中...</Typography>
-      </div>
-    );
-  }
+
+  const handleCancel = useCallback(() => {
+    setSelectedPlan(undefined);
+  }, []);
+
+  const handlePlanSelect = ({ planId }: { planId: number }) => {
+    const plan = findPlanById(planId);
+    setSelectedPlan(plan);
+  };
+
+  const handleTimingChange = () => {
+    setIsNextPayment(!isNextPayment);
+  };
 
   return (
     <PlanSelecting
-      planId={memberData.mPlanId}
-      onSubmit={handleSubmit}
+      memberData={memberData}
+      selectedPlan={selectedPlan}
       isLoading={isLoading}
-      selectedPlanName={selectedPlanName}
+      isNextPayment={isNextPayment}
+      isCompleted={isCompleted}
+      onSubmit={handleSubmit}
+      onCancel={handleCancel}
+      onPlanSelect={handlePlanSelect}
+      onTimingChange={handleTimingChange}
     />
   );
 };

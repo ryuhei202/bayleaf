@@ -3,7 +3,7 @@ import { usePatchRequest } from "../usePatchRequest";
 type TArgs = {
   chartId: number;
   deliveryDate: string | null;
-  shipmentDate: string | null;
+  shipmentDate: { min: string; max: string } | null;
   time: number;
 };
 type TParams = Omit<TArgs, "chartId">;

@@ -18,5 +18,5 @@ export const Default = Template.bind({});
 Default.args = {
   plan: LIGHT_PLAN,
   text: "現在ご契約のプランです",
-  buttonText: "現在ご契約のプランです",
+  children: <>テスト</>,
 };

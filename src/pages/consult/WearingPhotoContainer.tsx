@@ -1,15 +1,14 @@
 import { AxiosResponse } from "axios";
 import { useContext } from "react";
 import { useState } from "react";
-import { Loader } from "semantic-ui-react";
-
 import {
   TMemberPhotoCreateParams,
   TMemberPhotoCreateResponse,
   useMemberPhotoCreate,
 } from "../../api/memberPhotos/useMemberPhotoCreate";
 import { Page } from "../../components/baseParts/legacy/Page";
-import { ErrorMessage } from "../../components/shared/ErrorMessage";
+import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
+import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { useImageUploadHandler } from "../../hooks/handler/image/useImageUploadHandler";
 import { MEMBER_PHOTO_CATEGORY_ID } from "../../models/consult/MemberPhotoCategoryId";
 import { TConsultingItem } from "../../models/consult/TConsultingItem";
@@ -64,8 +63,8 @@ export const WearingPhotoContainer = ({
 
   if (isSuccess)
     return <AfterConsultContainer displayUploadGuide={isSkipped} />;
-  if (isError) return <ErrorMessage message="予期せぬエラーが発生しました" />;
-  if (isSending) return <Loader active />;
+  if (isError) return <ErrorPage message="予期せぬエラーが発生しました" />;
+  if (isSending) return <LoaderPage />;
   return (
     <Page>
       <WearingPhoto
