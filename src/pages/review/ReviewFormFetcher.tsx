@@ -1,7 +1,6 @@
 import { TCoordinateResponse } from "../../api/coordinates/TCoordinateResponse";
 import { TReviewOptionResponse } from "../../api/reviews/TReviewOptionResponse";
 import { useSimplifiedHearingShow } from "../../api/simplifiedHearings/useSimplifiedHearingShow";
-import { Message } from "../../components/baseParts/messages/Message";
 import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { ReviewForm } from "./ReviewForm";
