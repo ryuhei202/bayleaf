@@ -1,6 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { Button } from "./Button";
-import { Typography } from "./legacy/Typography";
 
 export default {
   title: "BaseParts/Button",

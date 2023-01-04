@@ -1,5 +1,4 @@
 import React from "react";
-import { Loader } from "semantic-ui-react";
 import { analyzeEvent, TGAEvent } from "../../lib/gtag";
 
 type Props = {
@@ -106,9 +105,7 @@ export const Button = ({
       <span className={`text-sm ${spanClasses.join(" ")}`}>{children}</span>
 
       {isLoading ? (
-        <div className="absolute flex justify-center items-center inset-0 z-10">
-          <Loader size="mini" inline active inverted={variant === "light"} />
-        </div>
+        <div className="absolute flex justify-center items-center inset-0 z-10"></div>
       ) : (
         <></>
       )}

@@ -2,10 +2,10 @@ import { useState } from "react";
 import { useChartCreate } from "../../api/charts/useChartCreate";
 import { THearing } from "../../api/hearings/THearing";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
+import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { BeforeHearingConfirm } from "../../components/pageParts/hearing/BeforeHearingConfirm";
 import { HearingAnswerConfirm } from "../../components/pageParts/hearing/HearingAnswerConfirm";
 import { PremiumPlanConfirm } from "../../components/pageParts/hearing/PremiumPlanConfirm";
-import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { FirstHearingConfirmButtons } from "./FirstHearingConfirmButtons";
 import { getContinuedHearingContainerHandler } from "./handler/getContinuedHearingContainerHandler";
 import { AnsweredHearings } from "./HearingContainer";
@@ -73,8 +73,7 @@ export const ContinuedHearingContainer = ({ hearings, member }: TProps) => {
     return <HearingPostSuccess />;
   }
 
-  if (isPostError)
-    return <ErrorMessage message="予期せぬエラーが発生しました" />;
+  if (isPostError) return <ErrorPage message="予期せぬエラーが発生しました" />;
 
   if (!isHearingStarted) {
     return (
