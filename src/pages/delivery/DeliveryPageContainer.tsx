@@ -66,7 +66,7 @@ export const DeliveryPageContainer = ({
   const { mutate, isLoading } = useDeliveryDateUpdate({
     chartId,
     deliveryDate: isShortest ? null : selectedDate,
-    shipmentDate: isShortest ? shortestDateRange.min : null,
+    shipmentDate: isShortest ? shortestDateRange : null,
     time: Number(time),
   });
 
