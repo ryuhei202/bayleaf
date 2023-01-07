@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ITEM_TEST_IMAGE_URL } from "../../../images/TestImageUrl";
 import { ItemCard } from "./ItemCard";
 export default {
-  title: "BaseParts/ItemCard",
+  title: "resourceParts/item/ItemCard",
   component: ItemCard,
   argTypes: {
     onClick: { action: "clicked" },
