@@ -7,6 +7,13 @@ export default {
   argTypes: {
     onClick: { action: "clicked" },
   },
+  decorators: [
+    (Story) => (
+      <div className="m-1">
+        <Story />
+      </div>
+    ),
+  ],
 } as ComponentMeta<typeof ItemCard>;
 
 const Template: ComponentStory<typeof ItemCard> = (args) => (

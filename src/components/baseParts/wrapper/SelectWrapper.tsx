@@ -5,7 +5,7 @@ type TProps = {
   children: ReactNode;
 };
 
-export const ItemCardWrapper = ({ visible, children }: TProps) => {
+export const SelectWrapper = ({ visible, children }: TProps) => {
   return (
     <div>
       {visible ? (
