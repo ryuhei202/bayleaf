@@ -37,7 +37,7 @@ export const WideItemCard = ({
 
   return (
     <div className="flex justify-evenly gap-1" onClick={changeItem}>
-      <div className="py-5 bg-white rounded-md mx-5 w-full text-center grid grid-cols-2">
+      <div className="p-5 bg-white rounded-md w-full text-center grid grid-cols-2 gap-5">
         <div className="text-center">
           <ExpandableImage
             className="max-h-[150px]"
