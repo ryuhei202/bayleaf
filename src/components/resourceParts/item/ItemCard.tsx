@@ -1,5 +1,6 @@
 import { ExpandableImage } from "../../baseParts/legacy/images/ExpandableImage";
 import { Typography } from "../../baseParts/legacy/Typography";
+import { ItemPrice } from "./ItemPrice";
 
 type TProps = {
   id?: number;
@@ -58,29 +59,14 @@ export const ItemCard = ({
         >
           {colorName}
         </Typography>
-        {originPrice !== undefined &&
-        price !== undefined &&
+        {price !== undefined &&
+        originPrice !== undefined &&
         discountRate !== undefined ? (
-          <div className="my-6">
-            <Typography size="xs" weight="regular">
-              UWear価格
-            </Typography>
-            <Typography size="sm" weight="medium">
-              {price}円
-            </Typography>
-            <Typography size="xs" color="primary" weight="medium">
-              ({discountRate}%OFF)
-            </Typography>
-            <Typography size="xs" weight="regular" className="my-2">
-              ↑
-            </Typography>
-            <Typography size="xs" weight="regular">
-              新品参考価格
-            </Typography>
-            <Typography size="sm" weight="medium">
-              {originPrice}円
-            </Typography>
-          </div>
+          <ItemPrice
+            price={price}
+            discountRate={discountRate}
+            originPrice={originPrice}
+          />
         ) : (
           <></>
         )}
