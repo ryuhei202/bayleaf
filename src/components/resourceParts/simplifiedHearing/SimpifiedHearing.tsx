@@ -1,39 +1,45 @@
 import { Typography } from "../../baseParts/legacy/Typography";
 
 type TProps = {
-  title: string;
   target: string;
   scene: string;
   impression: string;
 };
 export const SimpifiedHearing = ({
-  title,
   target,
   scene,
   impression,
 }: TProps) => {
   const hearings = [
-    { question: "意識する相手", answer: target },
-    { question: "使いたいシーン", answer: scene },
-    { question: "与えたい印象", answer: impression },
+    { question: "誰と", answer: target },
+    { question: "利用シーン", answer: scene },
+    { question: "見せたい印象", answer: impression },
   ];
   if (target === "") return <></>;
 
   return (
-    <div className=" m-5 bg-white p-5">
-      <Typography className="mb-5" size="xl">
-        {title}
-      </Typography>
-      <div>
-        {hearings.map((hearing) => {
-          return (
-            <div className="py-3" key={hearing.question}>
-              <Typography>{hearing.question}</Typography>
-              <p className="py-1 font-thin">・{hearing.answer}</p>
+    <div className=" m-5 border-2 border-dashed border-themeGray">
+      {hearings.map((hearing, index) => {
+        return (
+          <div
+            className={`py-5 grid grid-cols-3 place-content-center justify-items-center ${
+              index !== hearings.length - 1
+                ? "border-b-2 border-dashed border-themeGray"
+                : ""
+            }`}
+            key={hearing.question}
+          >
+            <div className="flex items-center">
+              <Typography weight="regular" color="primary" size="sm">
+                {hearing.question}
+              </Typography>
             </div>
-          );
-        })}
-      </div>
+            <div className="col-span-2 justify-self-start flex items-center">
+              <Typography>{hearing.answer}</Typography>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };
