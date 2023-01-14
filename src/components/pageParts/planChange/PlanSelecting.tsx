@@ -17,8 +17,14 @@ import { Page } from "../../baseParts/legacy/Page";
 import { TabMenu } from "../../baseParts/TabMenu";
 import { PlanChangePanel } from "./PlanChangePanel";
 
+type TPlanSelectingMemberInfo = {
+  readonly mPlanId: number;
+  readonly nextPaymentDate: string;
+  readonly rentalRemainingNum: number;
+};
+
 type TProps = {
-  readonly memberData: TMembersIndexResponse;
+  readonly memberData: TPlanSelectingMemberInfo;
   readonly isLoading: boolean;
   readonly selectedPlan?: TPlan;
   readonly isNextPayment: boolean;
@@ -110,7 +116,7 @@ export const PlanSelecting = ({
       {selectedPlan && (
         <>
           <ConfirmDialog
-            open={!!selectedPlan}
+            open={selectedPlan != undefined}
             title={`${selectedPlan.jpName}プランに変更しますか？`}
             okBtnText="変更する"
             cancelBtnText="変更しない"
@@ -121,7 +127,7 @@ export const PlanSelecting = ({
             onClickCancel={onCancel}
           />
           <AlertDialog
-            open={isCompleted && !!selectedPlan}
+            open={isCompleted && selectedPlan != undefined}
             title={
               isNextPayment
                 ? "プラン変更予約が完了しました"
