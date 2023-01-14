@@ -1,7 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { findPlanById, M_PLAN_IDS } from "../../../models/shared/Plans";
+import { findPlanById } from "../../../models/shared/Plans";
 import { PlanSelecting } from "./PlanSelecting";
-import { PlanSelectingForPreMember } from "./PlanSelectingForPreMember";
 
 export default {
   title: "PageParts/PlanChange/PlanSelecting",

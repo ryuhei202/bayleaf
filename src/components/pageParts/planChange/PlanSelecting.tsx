@@ -1,6 +1,6 @@
 import { Tab } from "@headlessui/react";
 import liff from "@line/liff/dist/lib";
-import { TMembersIndexResponse } from "../../../api/members/TMembersIndexResponse";
+import { useState } from "react";
 import {
   findPlanById,
   LIGHT_PLAN,
@@ -15,6 +15,7 @@ import { ConfirmDialog } from "../../baseParts/dialogs/ConfirmDialog";
 import { CheckIcon } from "../../baseParts/icons/CheckIcon";
 import { Page } from "../../baseParts/legacy/Page";
 import { TabMenu } from "../../baseParts/TabMenu";
+import { CancelActionText } from "../../baseParts/text/CancelActionText";
 import { PlanChangePanel } from "./PlanChangePanel";
 
 type TPlanSelectingMemberInfo = {
@@ -34,6 +35,7 @@ type TProps = {
   readonly onPlanSelect: ({ planId }: { planId: number }) => void;
   readonly onCancel: () => void;
   readonly onTimingChange: () => void;
+  readonly onCancelPlanChange: () => void;
 };
 
 export const PlanSelecting = ({
@@ -46,6 +48,7 @@ export const PlanSelecting = ({
   onCancel,
   onPlanSelect,
   onTimingChange,
+  onCancelPlanChange,
 }: TProps) => {
   const TOP_TEXT = {
     CURRENT_PLAN: "現在ご契約のプランです",
@@ -57,6 +60,8 @@ export const PlanSelecting = ({
     ANOTHER_PLAN: "このプランに変更する",
     REQUESTED_PLAN: "このプランに変更予定です",
   } as const;
+
+  const [isOpenCancelDialog, setIsOpenCancelDialog] = useState<boolean>(false);
 
   const getDiffPrice = ({ selectedPlan }: { selectedPlan: TPlan }) => {
     return (
@@ -119,7 +124,14 @@ export const PlanSelecting = ({
       case memberData.mPlanId:
         return TOP_TEXT.CURRENT_PLAN;
       case memberData.requestedPlanId:
-        return TOP_TEXT.REQUESTED_PLAN;
+        return (
+          <>
+            <p>こちらのプランに変更予定です</p>
+            <CancelActionText onClick={() => setIsOpenCancelDialog(true)}>
+              プラン変更予約を取り消す
+            </CancelActionText>
+          </>
+        );
       default:
         return TOP_TEXT.ANOTHER_PLAN;
     }
@@ -138,6 +150,22 @@ export const PlanSelecting = ({
 
   return (
     <Page className="flex flex-col h-full min-h-screen justify-between items-center text-themeGray p-3">
+      <ConfirmDialog
+        open={isOpenCancelDialog}
+        title="プラン変更予約を取り消しますか？"
+        onClickOk={onCancelPlanChange}
+        onClickCancel={() => setIsOpenCancelDialog(false)}
+        onClose={() => setIsOpenCancelDialog(false)}
+        description={
+          <p>
+            プラン変更予約を取り消した場合、
+            <br />
+            再度ヒアリングに答えていただく必要があります。
+          </p>
+        }
+        okBtnText="はい"
+        cancelBtnText="いいえ"
+      ></ConfirmDialog>
       {selectedPlan && (
         <>
           <ConfirmDialog
