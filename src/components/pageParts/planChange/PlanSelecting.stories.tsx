@@ -34,3 +34,13 @@ PlanSelecetd.args = {
   selectedPlan: findPlanById(12),
   isCompleted: false,
 };
+
+export const PlanRequested = Template.bind({});
+PlanRequested.args = {
+  memberData: {
+    mPlanId: 11,
+    nextPaymentDate: "2023/1/14",
+    rentalRemainingNum: 1,
+    requestedPlanId: 12,
+  },
+};
