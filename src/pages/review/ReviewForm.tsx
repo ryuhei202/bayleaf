@@ -39,7 +39,6 @@ export const ReviewForm = ({
         </div>
         {simplifiedHearing && (
           <SimpifiedHearing
-            title="今回のコーデ情報"
             target={simplifiedHearing.target}
             scene={simplifiedHearing.scene}
             impression={simplifiedHearing.impression}
