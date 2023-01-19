@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { M_PLAN_IDS } from "../../../models/shared/Plans";
 import { Button } from "../../baseParts/legacy/Button";
 import { Page } from "../../baseParts/legacy/Page";
@@ -31,12 +32,9 @@ export const BeforeHearingConfirm = ({ onClick, planId }: TProps) => {
             </p>
             <p>
               変更は
-              <a
-                className="underline"
-                href={`${process.env.REACT_APP_HOST_URL}/plan_change`}
-              >
+              <Link to={`/plan_change`} className="underline">
                 こちら
-              </a>
+              </Link>
               から
             </p>
           </div>
