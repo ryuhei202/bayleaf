@@ -10,6 +10,7 @@ module.exports = {
         clay: "#e8e7df",
         red: "#cb5f58",
         gray: "#979B9A",
+        white: "#F6F6F6",
       },
     },
     screens: {

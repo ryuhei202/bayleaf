@@ -14,7 +14,7 @@ export const AnswerConfirm = ({
   return (
     <>
       <Typography className="text-lg mt-5 ">コーデ{coordinateNum}</Typography>
-      <div className="bg-white mt-3 rounded-md overflow-hidden">
+      <div className="bg-white mt-3 rounded-md overflow-hidden px-4 py-4">
         {answer.map((ans, index) => (
           <CategoryConfirm
             categoryName={ans.categoryName}

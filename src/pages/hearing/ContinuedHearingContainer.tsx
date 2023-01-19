@@ -6,7 +6,7 @@ import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { BeforeHearingConfirm } from "../../components/pageParts/hearing/BeforeHearingConfirm";
 import { HearingAnswerConfirm } from "../../components/pageParts/hearing/HearingAnswerConfirm";
 import { PremiumPlanConfirm } from "../../components/pageParts/hearing/PremiumPlanConfirm";
-import { FirstHearingConfirmButtons } from "./FirstHearingConfirmButtons";
+import { FirstHearingConfirmButtons } from "../../components/resourceParts/hearing/FirstHearingConfirmButtons";
 import { getContinuedHearingContainerHandler } from "./handler/getContinuedHearingContainerHandler";
 import { AnsweredHearings } from "./HearingContainer";
 import { HearingFlowContainer } from "./HearingFlowContainer";
