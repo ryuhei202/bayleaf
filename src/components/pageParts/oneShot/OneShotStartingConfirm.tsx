@@ -25,20 +25,41 @@ export const OneShotStartingConfirm = ({
   const formatJaDate = ({ date }: { date: Date }): string => {
     return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
   };
-
+  const wearingDate = (): Date => {
+    const date = new Date(deliveryDate);
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate() - 2);
+  };
+  const returnDate = (): Date => {
+    const date = new Date(deliveryDate);
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate() + 2);
+  };
   return (
     <Page>
       <div className="px-4 mb-10 min-h-[calc(100vh-190px)]">
-        <PageHeader title="入力の確認" />
+        <PageHeader
+          title="入力の確認"
+          subtitle="この内容をもとにコーデを作成します"
+        />
         <div className="mx-1.5">
           <div className="bg-white mt-3 rounded-md overflow-hidden px-4 py-4">
+            <Typography color="primary" size="2xl" className="mb-6">
+              受け取り日
+            </Typography>
+            <Typography color="primary" className="mx-3 mb-4">
+              {formatJaDate({ date: wearingDate() })}
+            </Typography>
             <Typography color="primary" size="2xl" className="mb-6">
               ご利用日
             </Typography>
             <Typography color="primary" className="mx-3 mb-4">
               {formatJaDate({ date: new Date(deliveryDate) })}
             </Typography>
-            <Typography color="gray" className="mx-3 mb-4"></Typography>
+            <Typography color="primary" size="2xl" className="mb-6">
+              返却期限
+            </Typography>
+            <Typography color="primary" className="mx-3 mb-4">
+              {formatJaDate({ date: returnDate() })}
+            </Typography>
           </div>
           {confirmAnswers.map((confirmAnswer, index) => (
             <AnswerConfirm
@@ -55,6 +76,7 @@ export const OneShotStartingConfirm = ({
           onClickBack={handleCancelForm}
           onClickReset={handleClickReset}
           isPostLoading={isPostLoading}
+          completeButtonText="単発利用を開始する"
         />
       </FooterWrapper>
     </Page>

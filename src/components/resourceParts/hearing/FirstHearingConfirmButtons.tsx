@@ -7,12 +7,14 @@ type TProps = {
   readonly onClickBack: () => void;
   readonly onClickReset: () => void;
   readonly isPostLoading: boolean;
+  readonly completeButtonText?: string;
 };
 export const FirstHearingConfirmButtons = ({
   onClickComplete,
   onClickBack,
   onClickReset,
   isPostLoading,
+  completeButtonText,
 }: TProps) => {
   const [isOpenResetConfirm, setIsOpenResetConfirm] = useState(false);
   const [isOpenCreateConfirm, setIsOpenCreateConfirm] = useState(false);
@@ -24,7 +26,7 @@ export const FirstHearingConfirmButtons = ({
         disabled={isPostLoading}
         border={true}
       >
-        ヒアリングを完了する
+        {completeButtonText || "ヒアリングを完了する"}
       </Button>
       <Button
         onClick={onClickBack}
