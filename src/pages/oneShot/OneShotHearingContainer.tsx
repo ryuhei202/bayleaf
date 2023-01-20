@@ -1,4 +1,3 @@
-import { useEffect } from "@storybook/addons";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { BeforeHearingConfirm } from "../../components/pageParts/hearing/BeforeHearingConfirm";
 import { AnsweredHearings, TAnsweredForm } from "../hearing/HearingContainer";
@@ -9,13 +8,12 @@ type TProps = {
   readonly nextFormId: number | null;
   readonly answeredHearings: AnsweredHearings;
   readonly isBackTransition: boolean;
-  readonly handleClickFirstNext: () => void;
-  readonly handleSubmitForm: (
+  readonly onClickFirstNext: () => void;
+  readonly onSubmitForm: (
     answer: TAnsweredForm,
     nextFormIdArg: number | null
   ) => void;
-  readonly handleCancelForm: () => void;
-  readonly handleChangeStep: () => void;
+  readonly onCancelForm: () => void;
 };
 
 export const OneShotHearingContainer = ({
@@ -23,21 +21,14 @@ export const OneShotHearingContainer = ({
   nextFormId,
   answeredHearings,
   isBackTransition,
-  handleClickFirstNext,
-  handleSubmitForm,
-  handleCancelForm,
-  handleChangeStep,
+  onClickFirstNext,
+  onSubmitForm,
+  onCancelForm,
 }: TProps) => {
-  useEffect(() => {
-    const isEndHearing =
-      nextFormId === null && answeredHearings.forms.length <= 0;
-    if (isEndHearing) handleChangeStep;
-  }, [answeredHearings, nextFormId]);
-
   if (nextFormId === null) {
     return (
       <BeforeHearingConfirm
-        onClick={handleClickFirstNext}
+        onClick={onClickFirstNext}
         planId={member.mPlanId}
       />
     );
@@ -45,8 +36,8 @@ export const OneShotHearingContainer = ({
 
   return (
     <HearingFormFetcher
-      onSubmitForm={handleSubmitForm}
-      onCancelForm={handleCancelForm}
+      onSubmitForm={onSubmitForm}
+      onCancelForm={onCancelForm}
       nextFormId={nextFormId}
       previousAnsweredHearing={answeredHearings.forms.slice(-1)[0]}
       isBackTransition={isBackTransition}
