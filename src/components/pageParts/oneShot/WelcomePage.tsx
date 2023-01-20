@@ -5,6 +5,7 @@ import DiagonalLineIcon from "../../../images/icons/diagonal-line.svg";
 import { Button } from "../../baseParts/Button";
 import { Page } from "../../baseParts/legacy/Page";
 import { Typography } from "../../baseParts/legacy/Typography";
+import { ScheduleDiagram } from "./ScheduleDiagram";
 
 type TProps = {
   readonly onClickStart: () => void;
@@ -28,10 +29,9 @@ export const WelcomePage = ({ onClickStart }: TProps) => {
         <div className="bg-themeGray text-clay text-center text-[4vw] py-1">
           レンタル期間
         </div>
-        <p className="text-center text-[5vw] my-6">
-          <span className="text-[10vw] font-lora">4</span> 泊
-          <span className="text-[10vw] font-lora ml-1">5</span> 日
-        </p>
+        <div className="w-full p-4">
+          <ScheduleDiagram />
+        </div>
         <div className="bg-themeGray text-clay text-center text-[4vw] py-1">
           服の枚数
         </div>
