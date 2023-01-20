@@ -19,7 +19,9 @@ export const SelectWrapper = ({ visible, children }: TProps) => {
           {children}
         </div>
       ) : (
-        <>{children}</>
+        <div className="border-2 border-transparent relative rounded-md">
+          {children}
+        </div>
       )}
     </div>
   );

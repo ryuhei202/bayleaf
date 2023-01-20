@@ -79,10 +79,12 @@ Default.decorators = [
 
 WideCard.decorators = [
   (Story) => (
-    <>
-      <Story />
-      <Story />
-      <Story />
-    </>
+    <div className="bg-clay p-10">
+      <div className="flex flex-col gap-10">
+        <Story />
+        <Story />
+        <Story />
+      </div>
+    </div>
   ),
 ];
