@@ -14,6 +14,7 @@ type TProps = {
   selectItem?: (item: number[]) => void;
 };
 
+// TODO: childrenを受け取りアイテムに表示する内容は使う側で決める
 export const ItemCard = ({
   id,
   price,
