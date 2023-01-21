@@ -41,7 +41,7 @@ export const OneShotStartingConfirm = ({
           subtitle="この内容をもとにコーデを作成します"
         />
         <div className="mx-1.5">
-          <div className="bg-white mt-3 rounded-md overflow-hidden px-4 py-4">
+          <div className="bg-lightBeige mt-3 rounded-md overflow-hidden px-4 py-4">
             <Typography color="primary" size="2xl" className="mb-6">
               受け取り日
             </Typography>
