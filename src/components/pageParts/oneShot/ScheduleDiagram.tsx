@@ -3,10 +3,10 @@ import WearIcon from "../../../images/icons/wear.svg";
 
 type TProps = {
   readonly wearDate?: string;
+  readonly className?: string;
 };
 
-export const ScheduleDiagram = ({ wearDate }: TProps) => {
-  console.log(wearDate);
+export const ScheduleDiagram = ({ wearDate, className }: TProps) => {
   const getDateString = (daysDifference: number) => {
     if (wearDate === undefined) return "";
 
@@ -16,7 +16,9 @@ export const ScheduleDiagram = ({ wearDate }: TProps) => {
   };
 
   return (
-    <div className="w-full grid grid-cols-5 text-center text-xs bg-white">
+    <div
+      className={`w-full grid grid-cols-5 text-center text-[2vw] bg-white ${className}`}
+    >
       <div className="border-r py-2">お届け日</div>
       <div className="bg-lightBeige border-r"></div>
       <div className="border-r py-2">利用日</div>
