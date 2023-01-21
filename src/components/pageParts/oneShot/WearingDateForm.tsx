@@ -1,15 +1,14 @@
-import liff from "@line/liff/dist/lib";
 import { Button } from "../../baseParts/Button";
 import { DatetimePicker } from "../../baseParts/legacy/inputs/DatetimePicker";
-import { DropdownMenuAlt } from "../../baseParts/legacy/inputs/DropdownMenuAlt";
 import { Page } from "../../baseParts/legacy/Page";
 import { Typography } from "../../baseParts/legacy/Typography";
+import { ScheduleDiagram } from "./ScheduleDiagram";
 
 type TProps = {
   readonly selectedDate: string;
   readonly earliestDate: string;
   readonly onSelect: (wearingDate: string) => void;
-  readonly onSubmit: (wearingDate: string) => void;
+  readonly onSubmit: () => void;
 };
 
 export const WearingDateForm = ({
@@ -18,45 +17,33 @@ export const WearingDateForm = ({
   onSelect,
   onSubmit,
 }: TProps) => {
-  const selectableDates = new Array<string>();
   const lastDate = new Date(earliestDate);
   lastDate.setDate(lastDate.getDate() + 30);
-  const currentDate = new Date(earliestDate);
-  while (currentDate <= lastDate) {
-    selectableDates.push(currentDate.toLocaleDateString("ja-JP"));
-    currentDate.setDate(currentDate.getDate() + 1);
-  }
 
   return (
     <Page className="flex flex-col h-full min-h-screen justify-between items-center text-themeGray p-3">
-      <Typography size="2xl" className="text-center mt-8">
-        単発レンタルを開始する
-      </Typography>
-      {liff.getOS() === "ios" ? (
-        <DropdownMenuAlt
-          value={selectedDate}
-          onChange={(event) => onSelect(event.target.value)}
-          placeholder="希望日を選択してください"
-        >
-          {selectableDates.map((selectableDate) => (
-            <option key={selectableDate} value={selectableDate}>
-              {selectableDate}
-            </option>
-          ))}
-        </DropdownMenuAlt>
-      ) : (
+      <div>
+        <Typography size="2xl" className="text-center my-8">
+          利用日を選択してください
+        </Typography>
+        <ScheduleDiagram
+          wearDate={selectedDate !== "" ? selectedDate : undefined}
+          className="mb-8"
+        />
         <DatetimePicker
-          selectableDateFrom={earliestDate}
+          selectableDateFrom={new Date(earliestDate).toLocaleDateString(
+            "ja-JP"
+          )}
           selectableDateTo={lastDate.toLocaleDateString("ja-JP")}
           currentDate={selectedDate}
           onChangeDate={onSelect}
         />
-      )}
+      </div>
       <Button
         size="large"
         className="mt-4"
         disabled={selectedDate === ""}
-        onClick={() => onSubmit(selectedDate)}
+        onClick={onSubmit}
       >
         利用日を確定する
       </Button>

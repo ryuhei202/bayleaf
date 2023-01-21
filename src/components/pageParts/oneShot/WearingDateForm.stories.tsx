@@ -17,5 +17,11 @@ const Template: ComponentStory<typeof WearingDateForm> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   earliestDate: "2023-02-05",
+  selectedDate: "",
+};
+
+export const DateSelected = Template.bind({});
+DateSelected.args = {
+  earliestDate: "2023-02-05",
   selectedDate: "2023-02-16",
 };
