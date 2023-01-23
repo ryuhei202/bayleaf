@@ -1,14 +1,13 @@
 import { TTimeOptions } from "../../../api/deliveryDates/TChartDeliveryDateResponse";
+import { Button } from "../../baseParts/legacy/Button";
 import { DatetimePicker } from "../../baseParts/legacy/inputs/DatetimePicker";
 import { DropdownMenuAlt } from "../../baseParts/legacy/inputs/DropdownMenuAlt";
 import { Toggle } from "../../baseParts/legacy/inputs/Toggle";
-import { SelectButton } from "../../baseParts/legacy/SelectButton";
-import { Typography } from "../../baseParts/legacy/Typography";
-import { Button } from "../../baseParts/legacy/Button";
-import { Paper } from "../../baseParts/legacy/Paper";
 import { Page } from "../../baseParts/legacy/Page";
 import { PageHeader } from "../../baseParts/legacy/PageHeader";
-import liff from "@line/liff/dist/lib";
+import { Paper } from "../../baseParts/legacy/Paper";
+import { SelectButton } from "../../baseParts/legacy/SelectButton";
+import { Typography } from "../../baseParts/legacy/Typography";
 import { SelectedDeliveryDate } from "./SelectedDeliveryDate";
 
 type TProps = {
@@ -55,12 +54,6 @@ export const DeliveryPage = ({
   onSubmit,
   isLoading,
 }: TProps) => {
-  const selectableDates = new Array<string>();
-  let currentDate = new Date(selectableDateRange.min);
-  while (currentDate <= new Date(selectableDateRange.max)) {
-    selectableDates.push(currentDate.toLocaleDateString("ja-JP"));
-    currentDate.setDate(currentDate.getDate() + 1);
-  }
   return (
     <Page className="px-5">
       <PageHeader title="配送日程を選んでください"></PageHeader>
@@ -116,26 +109,12 @@ export const DeliveryPage = ({
         ) : (
           <>
             <Typography color="strong-gray">配送希望日</Typography>
-            {liff.getOS() === "ios" ? (
-              <DropdownMenuAlt
-                value={selectedDate}
-                onChange={(event) => onSelectDate(event.target.value)}
-                placeholder="希望日を選択してください"
-              >
-                {selectableDates.map((selectableDate) => (
-                  <option key={selectableDate} value={selectableDate}>
-                    {selectableDate}
-                  </option>
-                ))}
-              </DropdownMenuAlt>
-            ) : (
-              <DatetimePicker
-                selectableDateFrom={selectableDateRange.min}
-                selectableDateTo={selectableDateRange.max}
-                currentDate={selectedDate}
-                onChangeDate={onSelectDate}
-              />
-            )}
+            <DatetimePicker
+              selectableDateFrom={selectableDateRange.min}
+              selectableDateTo={selectableDateRange.max}
+              currentDate={selectedDate}
+              onChangeDate={onSelectDate}
+            />
           </>
         )}
         <div className="my-5">
