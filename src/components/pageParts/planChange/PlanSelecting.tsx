@@ -1,6 +1,6 @@
 import { Tab } from "@headlessui/react";
 import liff from "@line/liff/dist/lib";
-import { TMembersIndexResponse } from "../../../api/members/TMembersIndexResponse";
+import { useState } from "react";
 import {
   findPlanById,
   LIGHT_PLAN,
@@ -15,10 +15,18 @@ import { ConfirmDialog } from "../../baseParts/dialogs/ConfirmDialog";
 import { CheckIcon } from "../../baseParts/icons/CheckIcon";
 import { Page } from "../../baseParts/legacy/Page";
 import { TabMenu } from "../../baseParts/TabMenu";
+import { CancelActionText } from "../../baseParts/text/CancelActionText";
 import { PlanChangePanel } from "./PlanChangePanel";
 
+type TPlanSelectingMemberInfo = {
+  readonly mPlanId: number;
+  readonly nextPaymentDate: string;
+  readonly rentalRemainingNum: number;
+  readonly requestedPlanId?: number;
+};
+
 type TProps = {
-  readonly memberData: TMembersIndexResponse;
+  readonly memberData: TPlanSelectingMemberInfo;
   readonly isLoading: boolean;
   readonly selectedPlan?: TPlan;
   readonly isNextPayment: boolean;
@@ -27,6 +35,7 @@ type TProps = {
   readonly onPlanSelect: ({ planId }: { planId: number }) => void;
   readonly onCancel: () => void;
   readonly onTimingChange: () => void;
+  readonly onCancelPlanChange: () => void;
 };
 
 export const PlanSelecting = ({
@@ -39,15 +48,20 @@ export const PlanSelecting = ({
   onCancel,
   onPlanSelect,
   onTimingChange,
+  onCancelPlanChange,
 }: TProps) => {
   const TOP_TEXT = {
     CURRENT_PLAN: "現在ご契約のプランです",
     ANOTHER_PLAN: "こちらのプランに変更いただけます",
+    REQUESTED_PLAN: "こちらのプランに変更予定です",
   } as const;
   const BUTTON_TEXT = {
     CURRENT_PLAN: "現在ご契約のプランです",
     ANOTHER_PLAN: "このプランに変更する",
+    REQUESTED_PLAN: "このプランに変更予定です",
   } as const;
+
+  const [isOpenCancelDialog, setIsOpenCancelDialog] = useState<boolean>(false);
 
   const getDiffPrice = ({ selectedPlan }: { selectedPlan: TPlan }) => {
     return (
@@ -105,12 +119,57 @@ export const PlanSelecting = ({
     );
   };
 
+  const getTopText = (planId: number) => {
+    switch (planId) {
+      case memberData.mPlanId:
+        return TOP_TEXT.CURRENT_PLAN;
+      case memberData.requestedPlanId:
+        return (
+          <>
+            <p>こちらのプランに変更予定です</p>
+            <CancelActionText onClick={() => setIsOpenCancelDialog(true)}>
+              プラン変更予約を取り消す
+            </CancelActionText>
+          </>
+        );
+      default:
+        return TOP_TEXT.ANOTHER_PLAN;
+    }
+  };
+
+  const getButtonText = (planId: number) => {
+    switch (planId) {
+      case memberData.mPlanId:
+        return BUTTON_TEXT.CURRENT_PLAN;
+      case memberData.requestedPlanId:
+        return BUTTON_TEXT.REQUESTED_PLAN;
+      default:
+        return BUTTON_TEXT.ANOTHER_PLAN;
+    }
+  };
+
   return (
     <Page className="flex flex-col h-full min-h-screen justify-between items-center text-themeGray p-3">
+      <ConfirmDialog
+        open={isOpenCancelDialog}
+        title="プラン変更予約を取り消しますか？"
+        onClickOk={onCancelPlanChange}
+        onClickCancel={() => setIsOpenCancelDialog(false)}
+        onClose={() => setIsOpenCancelDialog(false)}
+        description={
+          <p>
+            プラン変更予約を取り消した場合、
+            <br />
+            再度ヒアリングに答えていただく必要があります。
+          </p>
+        }
+        okBtnText="はい"
+        cancelBtnText="いいえ"
+      />
       {selectedPlan && (
         <>
           <ConfirmDialog
-            open={!!selectedPlan}
+            open={selectedPlan !== undefined}
             title={`${selectedPlan.jpName}プランに変更しますか？`}
             okBtnText="変更する"
             cancelBtnText="変更しない"
@@ -121,7 +180,7 @@ export const PlanSelecting = ({
             onClickCancel={onCancel}
           />
           <AlertDialog
-            open={isCompleted && !!selectedPlan}
+            open={isCompleted && selectedPlan !== undefined}
             title={
               isNextPayment
                 ? "プラン変更予約が完了しました"
@@ -142,14 +201,7 @@ export const PlanSelecting = ({
         </Tab.List>
         <Tab.Panels className="w-[90%] pb-12">
           <Tab.Panel>
-            <PlanChangePanel
-              plan={LIGHT_PLAN}
-              text={
-                memberData.mPlanId === LIGHT_PLAN.id
-                  ? TOP_TEXT.CURRENT_PLAN
-                  : TOP_TEXT.ANOTHER_PLAN
-              }
-            >
+            <PlanChangePanel plan={LIGHT_PLAN} text={getTopText(LIGHT_PLAN.id)}>
               {memberData.rentalRemainingNum > 0 && (
                 <CheckBox
                   className="mt-4"
@@ -163,23 +215,20 @@ export const PlanSelecting = ({
                 size="large"
                 className="mt-4"
                 isLoading={isLoading}
-                disabled={memberData.mPlanId === LIGHT_PLAN.id}
+                disabled={
+                  memberData.mPlanId === LIGHT_PLAN.id ||
+                  memberData.requestedPlanId === LIGHT_PLAN.id
+                }
                 onClick={() => onPlanSelect({ planId: LIGHT_PLAN.id })}
               >
-                {memberData.mPlanId === LIGHT_PLAN.id
-                  ? BUTTON_TEXT.CURRENT_PLAN
-                  : BUTTON_TEXT.ANOTHER_PLAN}
+                {getButtonText(LIGHT_PLAN.id)}
               </Button>
             </PlanChangePanel>
           </Tab.Panel>
           <Tab.Panel>
             <PlanChangePanel
               plan={STANDARD_PLAN}
-              text={
-                memberData.mPlanId === STANDARD_PLAN.id
-                  ? TOP_TEXT.CURRENT_PLAN
-                  : TOP_TEXT.ANOTHER_PLAN
-              }
+              text={getTopText(STANDARD_PLAN.id)}
             >
               {memberData.rentalRemainingNum > 0 && (
                 <CheckBox
@@ -194,23 +243,20 @@ export const PlanSelecting = ({
                 size="large"
                 className="mt-4"
                 isLoading={isLoading}
-                disabled={memberData.mPlanId === STANDARD_PLAN.id}
+                disabled={
+                  memberData.mPlanId === STANDARD_PLAN.id ||
+                  memberData.requestedPlanId === STANDARD_PLAN.id
+                }
                 onClick={() => onPlanSelect({ planId: STANDARD_PLAN.id })}
               >
-                {memberData.mPlanId === STANDARD_PLAN.id
-                  ? BUTTON_TEXT.CURRENT_PLAN
-                  : BUTTON_TEXT.ANOTHER_PLAN}
+                {getButtonText(STANDARD_PLAN.id)}
               </Button>
             </PlanChangePanel>
           </Tab.Panel>
           <Tab.Panel>
             <PlanChangePanel
               plan={PREMIUM_PLAN}
-              text={
-                memberData.mPlanId === PREMIUM_PLAN.id
-                  ? TOP_TEXT.CURRENT_PLAN
-                  : TOP_TEXT.ANOTHER_PLAN
-              }
+              text={getTopText(PREMIUM_PLAN.id)}
             >
               {memberData.rentalRemainingNum > 0 && (
                 <CheckBox
@@ -225,12 +271,13 @@ export const PlanSelecting = ({
                 size="large"
                 className="mt-4"
                 isLoading={isLoading}
-                disabled={memberData.mPlanId === PREMIUM_PLAN.id}
+                disabled={
+                  memberData.mPlanId === PREMIUM_PLAN.id ||
+                  memberData.requestedPlanId === PREMIUM_PLAN.id
+                }
                 onClick={() => onPlanSelect({ planId: PREMIUM_PLAN.id })}
               >
-                {memberData.mPlanId === PREMIUM_PLAN.id
-                  ? BUTTON_TEXT.CURRENT_PLAN
-                  : BUTTON_TEXT.ANOTHER_PLAN}
+                {getButtonText(PREMIUM_PLAN.id)}
               </Button>
             </PlanChangePanel>
           </Tab.Panel>
