@@ -63,7 +63,6 @@ export const PlanSelectingContainer = ({ memberData }: TProps) => {
           mPlanId: memberData.mPlanId,
           nextPaymentDate: memberData.nextPaymentDate,
           rentalRemainingNum: memberData.rentalRemainingNum,
-          // requestedPlanId : memberData.requestedPlanId === null ? undefined: memberData.requestedPlanId
           requestedPlanId: memberData.requestedPlanId ?? undefined,
         }}
         selectedPlan={selectedPlan}
