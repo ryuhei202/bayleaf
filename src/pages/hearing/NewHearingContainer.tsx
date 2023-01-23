@@ -5,7 +5,7 @@ import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { BeforeHearingConfirm } from "../../components/pageParts/hearing/BeforeHearingConfirm";
 import { HearingAnswerConfirm } from "../../components/pageParts/hearing/HearingAnswerConfirm";
 import { PremiumPlanConfirm } from "../../components/pageParts/hearing/PremiumPlanConfirm";
-import { FirstHearingConfirmButtons } from "../../components/resourceParts/hearing/FirstHearingConfirmButtons";
+import { HearingConfirmButtons } from "../../components/resourceParts/hearing/HearingConfirmButtons";
 import { M_PLAN_IDS } from "../../models/shared/Plans";
 import { getNewHearingContainerHandler } from "./handler/getNewHearingContainerHandler";
 import { AnsweredHearings } from "./HearingContainer";
@@ -42,7 +42,6 @@ export const NewHearingContainer = ({ member }: TProps) => {
     handleSubmitForm,
     handleCancelForm,
     formattedConfirmAnswers,
-    handleClickReset,
     handleSubmitComplete,
   } = getNewHearingContainerHandler({
     memberId: member.id,
@@ -83,10 +82,9 @@ export const NewHearingContainer = ({ member }: TProps) => {
         title="ヒアリング確認画面"
         confirmAnswers={formattedConfirmAnswers()}
         footer={
-          <FirstHearingConfirmButtons
+          <HearingConfirmButtons
             onClickComplete={handleSubmitComplete}
             onClickBack={handleCancelForm}
-            onClickReset={handleClickReset}
             isPostLoading={isPostLoading}
           />
         }
