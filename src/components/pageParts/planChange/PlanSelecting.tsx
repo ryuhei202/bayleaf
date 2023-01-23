@@ -27,10 +27,12 @@ type TPlanSelectingMemberInfo = {
 
 type TProps = {
   readonly memberData: TPlanSelectingMemberInfo;
-  readonly isLoading: boolean;
+  readonly isPlanChangeLoading: boolean;
+  readonly isRequestDestroyLoading: boolean;
   readonly selectedPlan?: TPlan;
   readonly isNextPayment: boolean;
   readonly isCompleted: boolean;
+  readonly isCancelCompleted: boolean;
   readonly onSubmit: () => void;
   readonly onPlanSelect: ({ planId }: { planId: number }) => void;
   readonly onCancel: () => void;
@@ -40,10 +42,12 @@ type TProps = {
 
 export const PlanSelecting = ({
   memberData,
-  isLoading,
+  isPlanChangeLoading,
+  isRequestDestroyLoading,
   selectedPlan,
   isNextPayment,
   isCompleted,
+  isCancelCompleted,
   onSubmit,
   onCancel,
   onPlanSelect,
@@ -126,7 +130,8 @@ export const PlanSelecting = ({
       case memberData.requestedPlanId:
         return (
           <>
-            <p>こちらのプランに変更予定です</p>
+            こちらのプランに変更予定です
+            <br />
             <CancelActionText onClick={() => setIsOpenCancelDialog(true)}>
               プラン変更予約を取り消す
             </CancelActionText>
@@ -153,18 +158,27 @@ export const PlanSelecting = ({
       <ConfirmDialog
         open={isOpenCancelDialog}
         title="プラン変更予約を取り消しますか？"
+        isLoading={isRequestDestroyLoading}
         onClickOk={onCancelPlanChange}
         onClickCancel={() => setIsOpenCancelDialog(false)}
         onClose={() => setIsOpenCancelDialog(false)}
         description={
-          <p>
+          <>
             プラン変更予約を取り消した場合、
             <br />
             再度ヒアリングに答えていただく必要があります。
-          </p>
+          </>
         }
         okBtnText="はい"
         cancelBtnText="いいえ"
+      />
+      <AlertDialog
+        open={isCancelCompleted}
+        title={"変更予約を取り消しました"}
+        description={<CheckIcon />}
+        onClick={() => liff.closeWindow()}
+        onClose={() => liff.closeWindow()}
+        okBtnText="閉じる"
       />
       {selectedPlan && (
         <>
@@ -174,7 +188,7 @@ export const PlanSelecting = ({
             okBtnText="変更する"
             cancelBtnText="変更しない"
             description={getDialogDescription({ selectedPlan })}
-            isLoading={isLoading}
+            isLoading={isPlanChangeLoading}
             onClickOk={onSubmit}
             onClose={onCancel}
             onClickCancel={onCancel}
@@ -214,7 +228,7 @@ export const PlanSelecting = ({
               <Button
                 size="large"
                 className="mt-4"
-                isLoading={isLoading}
+                isLoading={isPlanChangeLoading}
                 disabled={
                   memberData.mPlanId === LIGHT_PLAN.id ||
                   memberData.requestedPlanId === LIGHT_PLAN.id
@@ -242,7 +256,7 @@ export const PlanSelecting = ({
               <Button
                 size="large"
                 className="mt-4"
-                isLoading={isLoading}
+                isLoading={isPlanChangeLoading}
                 disabled={
                   memberData.mPlanId === STANDARD_PLAN.id ||
                   memberData.requestedPlanId === STANDARD_PLAN.id
@@ -270,7 +284,7 @@ export const PlanSelecting = ({
               <Button
                 size="large"
                 className="mt-4"
-                isLoading={isLoading}
+                isLoading={isPlanChangeLoading}
                 disabled={
                   memberData.mPlanId === PREMIUM_PLAN.id ||
                   memberData.requestedPlanId === PREMIUM_PLAN.id
