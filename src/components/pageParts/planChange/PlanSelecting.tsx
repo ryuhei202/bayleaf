@@ -165,11 +165,11 @@ export const PlanSelecting = ({
         }
         okBtnText="はい"
         cancelBtnText="いいえ"
-      ></ConfirmDialog>
+      />
       {selectedPlan && (
         <>
           <ConfirmDialog
-            open={selectedPlan != undefined}
+            open={selectedPlan !== undefined}
             title={`${selectedPlan.jpName}プランに変更しますか？`}
             okBtnText="変更する"
             cancelBtnText="変更しない"
@@ -180,7 +180,7 @@ export const PlanSelecting = ({
             onClickCancel={onCancel}
           />
           <AlertDialog
-            open={isCompleted && selectedPlan != undefined}
+            open={isCompleted && selectedPlan !== undefined}
             title={
               isNextPayment
                 ? "プラン変更予約が完了しました"
