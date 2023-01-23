@@ -171,7 +171,7 @@ export const PlanSelecting = ({
         }
         okBtnText="はい"
         cancelBtnText="いいえ"
-      ></ConfirmDialog>
+      />
       <AlertDialog
         open={isCancelCompleted}
         title={"変更予約を取り消しました"}

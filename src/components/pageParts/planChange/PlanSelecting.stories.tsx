@@ -23,8 +23,8 @@ Default.args = {
   },
 };
 
-export const PlanSelecetd = Template.bind({});
-PlanSelecetd.args = {
+export const PlanSelected = Template.bind({});
+PlanSelected.args = {
   memberData: {
     mPlanId: 11,
     nextPaymentDate: "2023/1/14",
