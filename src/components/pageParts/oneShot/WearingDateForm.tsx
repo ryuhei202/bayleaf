@@ -7,7 +7,7 @@ import { ScheduleDiagram } from "./ScheduleDiagram";
 type TProps = {
   readonly selectedDate: string;
   readonly earliestDate: string;
-  readonly onSelect: (wearingDate: string) => void;
+  readonly onSelect: (deliveryDate: string) => void;
   readonly onSubmit: () => void;
 };
 
@@ -31,10 +31,8 @@ export const WearingDateForm = ({
           className="mb-8"
         />
         <DatetimePicker
-          selectableDateFrom={new Date(earliestDate).toLocaleDateString(
-            "ja-JP"
-          )}
-          selectableDateTo={lastDate.toLocaleDateString("ja-JP")}
+          selectableDateFrom={earliestDate}
+          selectableDateTo={lastDate.toISOString().split("T")[0]}
           currentDate={selectedDate}
           onChangeDate={onSelect}
         />
