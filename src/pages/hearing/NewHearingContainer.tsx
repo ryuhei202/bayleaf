@@ -14,9 +14,10 @@ import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 
 type TProps = {
   readonly member: TMembersIndexResponse;
+  readonly nextPlanId: number;
 };
 
-export const NewHearingContainer = ({ member }: TProps) => {
+export const NewHearingContainer = ({ member, nextPlanId }: TProps) => {
   const [nextFormId, setNextFormId] = useState<number | null>(null);
   const [currentAnswerNumber, setCurrentAnswerNumber] = useState<1 | 2>(1);
   const [firstAnsweredHearings, setFirstAnsweredHearings] =
@@ -68,11 +69,11 @@ export const NewHearingContainer = ({ member }: TProps) => {
       return (
         <BeforeHearingConfirm
           onClick={handleClickFirstNext}
-          planId={member.mPlanId}
+          planId={nextPlanId}
         />
       );
     }
-    return member.mPlanId === M_PLAN_IDS.PREMIUM &&
+    return nextPlanId === M_PLAN_IDS.PREMIUM &&
       secondAnsweredHearings.forms.length <= 0 ? (
       <PremiumPlanConfirm
         onClick={handleClickPremiumNext}

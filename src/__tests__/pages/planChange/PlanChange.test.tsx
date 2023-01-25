@@ -41,6 +41,7 @@ describe("PlanChange.tsx", () => {
             isSuspend: false,
             isPaymentError: false,
             rentalRemainingNum: 1,
+            requestedPlanId: null,
           },
         ],
       })
@@ -71,6 +72,7 @@ describe("PlanChange.tsx", () => {
             isSuspend: false,
             isPaymentError: false,
             rentalRemainingNum: 1,
+            requestedPlanId: null,
           },
         ],
       })
@@ -119,6 +121,7 @@ describe("PlanChange.tsx", () => {
             isSuspend: false,
             isPaymentError: false,
             rentalRemainingNum: 1,
+            requestedPlanId: null,
           },
         ],
       })
@@ -166,6 +169,7 @@ describe("PlanChange.tsx", () => {
             isSuspend: false,
             isPaymentError: false,
             rentalRemainingNum: 1,
+            requestedPlanId: null,
           },
         ],
       })
@@ -196,6 +200,7 @@ describe("PlanChange.tsx", () => {
             isSuspend: false,
             isPaymentError: false,
             rentalRemainingNum: 1,
+            requestedPlanId: null,
           },
           {
             id: 3,
@@ -208,6 +213,7 @@ describe("PlanChange.tsx", () => {
             isSuspend: false,
             isPaymentError: false,
             rentalRemainingNum: 1,
+            requestedPlanId: null,
           },
         ],
       })
@@ -254,6 +260,7 @@ describe("PlanChange.tsx", () => {
             isSuspend: false,
             isPaymentError: false,
             rentalRemainingNum: 1,
+            requestedPlanId: null,
           },
         ],
       })
@@ -302,6 +309,7 @@ describe("PlanChange.tsx", () => {
             isSuspend: false,
             isPaymentError: false,
             rentalRemainingNum: 1,
+            requestedPlanId: null,
           },
         ],
       })
@@ -364,6 +372,7 @@ describe("PlanChange.tsx", () => {
             isSuspend: true,
             isPaymentError: true,
             rentalRemainingNum: 1,
+            requestedPlanId: null,
           },
         ],
       })
@@ -394,6 +403,7 @@ describe("PlanChange.tsx", () => {
             isSuspend: true,
             isPaymentError: false,
             rentalRemainingNum: 1,
+            requestedPlanId: null,
           },
         ],
       })
