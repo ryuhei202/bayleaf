@@ -1,10 +1,8 @@
 import { createContext } from "react";
 import "./App.css";
 import { useAppInitializer } from "./hooks/handler/app/useAppInitializer";
-import { Loader } from "semantic-ui-react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-import { ErrorMessage } from "./components/shared/ErrorMessage";
 import { Hearing } from "./pages/hearing/Hearing";
 import { QueryClientProvider } from "react-query";
 import { Review } from "./pages/review/Review";
@@ -16,6 +14,8 @@ import { Dislike } from "./pages/dislike/Dislike";
 import { Delivery } from "./pages/delivery/Delivery";
 import { PlanChange } from "./pages/planChange/PlanChange";
 import { Unsuspend } from "./pages/unsuspend/Unsuspend";
+import { LoaderPage } from "./components/baseParts/pages/LoaderPage";
+import { ErrorPage } from "./components/baseParts/pages/ErrorPage";
 
 Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DSN,
@@ -55,7 +55,7 @@ function App() {
     return (
       <Sentry.ErrorBoundary
         fallback={
-          <ErrorMessage message="予期せぬエラーが発生いたしました。大変申し訳ございませんが、再度お願いいたします" />
+          <ErrorPage message="予期せぬエラーが発生いたしました。大変申し訳ございませんが、再度お願いいたします" />
         }
         showDialog
       >
@@ -64,9 +64,9 @@ function App() {
     );
   }
   if (liffErrorMessage) {
-    return <ErrorMessage message={liffErrorMessage} />;
+    return <ErrorPage message={liffErrorMessage} />;
   }
-  return <Loader active>ログイン中</Loader>;
+  return <LoaderPage caption="ログイン中" />;
 }
 
 export default App;

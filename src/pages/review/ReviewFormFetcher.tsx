@@ -1,8 +1,8 @@
-import { Loader } from "semantic-ui-react";
 import { TCoordinateResponse } from "../../api/coordinates/TCoordinateResponse";
 import { TReviewOptionResponse } from "../../api/reviews/TReviewOptionResponse";
 import { useSimplifiedHearingShow } from "../../api/simplifiedHearings/useSimplifiedHearingShow";
-import { ErrorMessage } from "../../components/shared/ErrorMessage";
+import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
+import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { ReviewForm } from "./ReviewForm";
 
 type Props = {
@@ -21,8 +21,8 @@ export const ReviewFormFetcher = ({
       coordinateId: coordinate.id,
     });
   if (simplifiedHearingError)
-    return <ErrorMessage message={simplifiedHearingError.message} />;
-  if (simplifiedHearing === undefined) return <Loader active />;
+    return <ErrorPage message={simplifiedHearingError.message} />;
+  if (simplifiedHearing === undefined) return <LoaderPage />;
   return (
     <ReviewForm
       coordinate={coordinate}

@@ -10,7 +10,7 @@ import { AnsweredHearings } from "./HearingContainer";
 import { useState } from "react";
 import { useChartCreate } from "../../api/charts/useChartCreate";
 import { HearingPostSuccess } from "./HearingPostSuccess";
-import { ErrorMessage } from "../../components/shared/ErrorMessage";
+import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 
 type TProps = {
   readonly member: TMembersIndexResponse;
@@ -62,8 +62,7 @@ export const NewHearingContainer = ({ member, nextPlanId }: TProps) => {
     return <HearingPostSuccess />;
   }
 
-  if (isPostError)
-    return <ErrorMessage message="予期せぬエラーが発生しました" />;
+  if (isPostError) return <ErrorPage message="予期せぬエラーが発生しました" />;
 
   if (nextFormId === null) {
     if (firstAnsweredHearings.forms.length <= 0) {

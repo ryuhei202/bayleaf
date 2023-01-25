@@ -1,9 +1,9 @@
-import { Loader } from "semantic-ui-react";
 import { TChartResponse } from "../../api/charts/TChartResponse";
 import { TNonNullableDressing } from "../../api/dressings/TDressing";
 import { useDressingsIndex } from "../../api/dressings/useDressingsIndex";
 import { Typography } from "../../components/baseParts/legacy/Typography";
-import { ErrorMessage } from "../../components/shared/ErrorMessage";
+import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
+import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { DressingPage } from "./DressingPage";
 
 type TProps = {
@@ -14,9 +14,9 @@ export const DressingFetcher = ({ chart }: TProps) => {
     useDressingsIndex({ chartId: chart.id });
 
   if (dressingIndexError)
-    return <ErrorMessage message={dressingIndexError.message} />;
+    return <ErrorPage message={dressingIndexError.message} />;
 
-  if (!dressingIndexData) return <Loader active />;
+  if (!dressingIndexData) return <LoaderPage />;
 
   // リリース直後には着こなしページに必要な情報がまだ存在しない可能性があるため、
   // 以下のどれかが欠けている場合はマイページの着こなしに遷移するようにする

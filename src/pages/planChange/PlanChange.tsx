@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
-import { Loader } from "semantic-ui-react";
 import { useChartIndex } from "../../api/charts/useChartIndex";
 import { useMembersIndex } from "../../api/members/useMembersIndex";
 import { Typography } from "../../components/baseParts/legacy/Typography";
+import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
+import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { ExternalLink } from "../../components/baseParts/text/ExternalLink";
 import { PlanChangeWithValidation } from "../../components/pageParts/planChange/PlanChangeWithValidation";
-import { ErrorMessage } from "../../components/shared/ErrorMessage";
 import { PlanSelectingContainer } from "./PlanSelectingContainer";
 import { PlanSelectingForPreMemberContainer } from "./PlanSelectingForPreMemberContainer";
 import { getPlanChangeValidater } from "./validater/getPlanChangeValidater";
@@ -22,10 +22,10 @@ export const PlanChange = () => {
     },
   });
 
-  if (membersError) return <ErrorMessage message={membersError.message} />;
-  if (chartsError) return <ErrorMessage message={chartsError.message} />;
+  if (membersError) return <ErrorPage message={membersError.message} />;
+  if (chartsError) return <ErrorPage message={chartsError.message} />;
 
-  if (!membersData || !chartsData) return <Loader active />;
+  if (!membersData || !chartsData) return <LoaderPage />;
 
   const {
     isStatusNotRentable,

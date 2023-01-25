@@ -1,7 +1,7 @@
 import React from "react";
+import DIGONAL_LINE_IMAGE from "../../../images/icons/diagonal-line.svg";
 import { TPlan } from "../../../models/shared/Plans";
 import { Cloths } from "./Cloths";
-import DIGONAL_LINE_IMAGE from "../../../images/icons/diagonal-line.svg";
 
 type TProps = {
   plan: TPlan;
@@ -24,12 +24,11 @@ export const PlanChangeCard = ({ plan }: TProps) => {
         <div>
           <p className="text-center text-[5vw] my-6">
             月額
-            <span className="text-[10vw] ml-2 font-lora">{`¥${plan.price.withTax.toLocaleString()}`}</span>
-            （税込）
+            <span className="text-[10vw] ml-2 font-lora">{`¥${plan.price.withoutTax.toLocaleString()}`}</span>
           </p>
           <div className="flex flex-wrap justify-center space-x-3 mb-6">
-            <p className="text-[4vw] text-[#979B9A] font-lora">
-              {`¥${plan.price.withoutTax.toLocaleString()}（税抜） `}
+            <p className="text-[4vw]">
+              {`(税込 ¥${plan.price.withTax.toLocaleString()}) `}
               <a
                 href={`${process.env.REACT_APP_SIRNIGHT_URL}/faq/payment#fc24azedyv`}
                 className="text-themeGray font-normal underline decoration-from-font underline-offset-2"

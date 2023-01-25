@@ -1,6 +1,6 @@
-import { Loader } from "semantic-ui-react";
+import { LoaderPage } from "../components/baseParts/pages/LoaderPage";
 
 const Home = () => {
-  return <Loader inline="centered">ログイン中</Loader>;
+  return <LoaderPage caption="ログイン中" />;
 };
 export default Home;

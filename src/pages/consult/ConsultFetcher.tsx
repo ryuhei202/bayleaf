@@ -1,11 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import { Loader } from "semantic-ui-react";
-
 import { TCoordinateResponse } from "../../api/coordinates/TCoordinateResponse";
 import { useCoordinateIndex } from "../../api/coordinates/useCoordinateIndex";
 import { Typography } from "../../components/baseParts/legacy/Typography";
-import { ErrorMessage } from "../../components/shared/ErrorMessage";
+import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
+import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { ConsultOption } from "./ConsultOption";
 import { CoordinateListContainer } from "./CoordinateListContainer";
 
@@ -22,10 +21,9 @@ export const ConsultFetcher = ({ chartId }: TProps) => {
   const { data: coordinateData, error: coordinateError } = useCoordinateIndex({
     chartId,
   });
-  if (coordinateError)
-    return <ErrorMessage message={coordinateError.message} />;
+  if (coordinateError) return <ErrorPage message={coordinateError.message} />;
 
-  if (!coordinateData) return <Loader active />;
+  if (!coordinateData) return <LoaderPage />;
 
   if (coordinateData.coordinates.length === 0)
     return (

@@ -16,7 +16,6 @@ const Template: ComponentStory<typeof SimpifiedHearing> = (args) => (
 export const Default = Template.bind({});
 
 Default.args = {
-  title: "今回のコーデ情報",
   target: "恋人",
   scene: "ショッピング、外食",
   impression: "清潔感",
