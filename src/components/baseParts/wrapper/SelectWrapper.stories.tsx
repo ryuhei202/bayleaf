@@ -1,6 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ITEM_TEST_IMAGE_URL } from "../../../images/TestImageUrl";
 import { ItemCard } from "../../resourceParts/item/ItemCard";
+import { ItemPrice } from "../../resourceParts/item/ItemPrice";
 import { WideItemCard } from "../../resourceParts/item/WideItemCard";
 import { SelectWrapper } from "./SelectWrapper";
 export default {
@@ -56,12 +57,11 @@ WideCard.args = {
       categoryName={itemCard.categoryName}
       colorName={itemCard.colorName}
       id={1}
-      price={12000}
-      originPrice={15000}
-      discountRate={20}
       selectedItems={[]}
       selectItem={() => {}}
-    />
+    >
+      <ItemPrice price={10} originPrice={20} discountRate={30} />
+    </WideItemCard>
   ),
 };
 
