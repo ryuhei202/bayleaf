@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ITEM_TEST_IMAGE_URL } from "../../../images/TestImageUrl";
 import { ItemCard } from "./ItemCard";
 export default {
-  title: "resourceParts/item/ItemCard",
+  title: "resourceParts/item/ItemPrice",
   component: ItemCard,
   argTypes: {
     onClick: { action: "clicked" },
@@ -29,6 +29,9 @@ Default.args = {
   },
   categoryName: "シャツ",
   colorName: "オレンジ",
+  price: 12000,
+  originPrice: 15000,
+  discountRate: 20,
 };
 
 Default.decorators = [
