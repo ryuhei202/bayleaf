@@ -1,9 +1,9 @@
+import * as Sentry from "@sentry/react";
+import { PreservedKeysCondition } from "axios-case-converter";
 import { useContext } from "react";
 import { useMutation } from "react-query";
-import * as Sentry from "@sentry/react";
 import { IdTokenContext, StylistIdContext } from "../App";
 import { customAxios } from "./customAxios";
-import { PreservedKeysCondition } from "axios-case-converter";
 
 export const usePostRequest = <T>(
   path: string,
@@ -12,9 +12,8 @@ export const usePostRequest = <T>(
   const idToken = useContext(IdTokenContext);
   const stylistId = useContext(StylistIdContext);
 
-  const { mutate, mutateAsync, isLoading, isError, isSuccess } = useMutation(
-    path,
-    (params: T) =>
+  const { mutate, mutateAsync, isLoading, isError, isSuccess, error } =
+    useMutation(path, (params: T) =>
       customAxios(preservedKeys)
         .post(
           `${process.env.REACT_APP_HOST_URL}/leeaf/${path}`,
@@ -29,14 +28,25 @@ export const usePostRequest = <T>(
           }
         )
         .catch((e) => {
-          Sentry.captureException(e);
-        }),
-    {
-      onError: (error) => {
-        Sentry.captureException(error);
-      },
-    }
-  );
+          if (
+            e.response?.data?.message !== undefined &&
+            e.response.data.message !== ""
+          ) {
+            throw new Error(e.response.data.message);
+          }
 
-  return { mutate, mutateAsync, isLoading, isError, isSuccess };
+          console.log(e);
+          Sentry.captureException(e);
+          throw new Error("予期せぬエラーが発生しました");
+        })
+    );
+
+  return {
+    mutate,
+    mutateAsync,
+    isLoading,
+    isError,
+    isSuccess,
+    error: error as Error | null,
+  };
 };

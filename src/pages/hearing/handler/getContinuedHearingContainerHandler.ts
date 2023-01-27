@@ -1,17 +1,17 @@
+import liff from "@line/liff/dist/lib";
+import { AxiosResponse } from "axios";
+import { UseMutateFunction } from "react-query";
+import { TChartCreateRequest } from "../../../api/charts/TChartCreateRequest";
+import { TCategorizedForm } from "../../../api/hearings/TCategorizedForm";
+import { THearing } from "../../../api/hearings/THearing";
 import { TMembersIndexResponse } from "../../../api/members/TMembersIndexResponse";
+import { THearingAnswer } from "../../../models/hearing/THearingAnswer";
 import {
   HEARING_FORM,
   sortHearingConfirm,
 } from "../../../models/hearing/THearingForms";
-import { THearing } from "../../../api/hearings/THearing";
-import { THearingAnswer } from "../../../models/hearing/THearingAnswer";
-import { AnsweredHearings, TAnsweredForm } from "../HearingContainer";
-import { TCategorizedForm } from "../../../api/hearings/TCategorizedForm";
-import { AxiosResponse } from "axios";
-import { UseMutateFunction } from "react-query";
-import { TChartCreateRequest } from "../../../api/charts/TChartCreateRequest";
-import liff from "@line/liff/dist/lib";
 import { M_PLAN_IDS } from "../../../models/shared/Plans";
+import { AnsweredHearings, TAnsweredForm } from "../HearingContainer";
 
 type TAfterSecondHearingContainerHandler = {
   readonly handleClickFormStart: () => void;
@@ -26,7 +26,6 @@ type TAfterSecondHearingContainerHandler = {
     answer: TAnsweredForm,
     nextFormIdArg: number | null
   ) => void;
-  readonly handleClickReset: () => void;
   readonly handlePost: () => void;
   readonly getConfirmAnswers: () => THearingAnswer[];
   readonly handleClickSameHearing: () => void;
@@ -199,14 +198,6 @@ export const getContinuedHearingContainerHandler = ({
       ];
     }
   };
-
-  const handleClickReset = () => {
-    setNextFormId(null);
-    setCurrentAnswerNumber(1);
-    setFirstAnsweredHearings({ forms: [] });
-    setSecondAnsweredHearings({ forms: [] });
-  };
-
   const getConfirmAnswers = (): THearingAnswer[] => {
     const formattedAnswer = [firstAnsweredHearings, secondAnsweredHearings]
       .filter((h) => h.forms.length !== 0 || !!h.sameCoordinateId)
@@ -300,7 +291,6 @@ export const getContinuedHearingContainerHandler = ({
     getAnsweredHearings,
     getPreviousAnswers,
     handleSubmitForm,
-    handleClickReset,
     handlePost,
     getConfirmAnswers,
     handleClickSameHearing,

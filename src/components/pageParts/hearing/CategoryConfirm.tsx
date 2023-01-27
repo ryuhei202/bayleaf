@@ -6,11 +6,11 @@ type TProps = Omit<TCategorizedForm, "categoryId">;
 
 export const CategoryConfirm = ({ categoryName, forms }: TProps) => {
   return (
-    <div className="">
-      <Typography className="bg-gray-200 mb-4 pl-4 py-1 text-lg">
+    <div>
+      <Typography color="primary" size="2xl" className="mb-6">
         {categoryName}
       </Typography>
-      <div className="mx-3">
+      <div className="mx-3 mb-4">
         {forms.map((form, index) => (
           <FormConfirm form={form} key={index} />
         ))}
