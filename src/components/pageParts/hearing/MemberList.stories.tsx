@@ -24,6 +24,7 @@ Default.args = {
       isSuspend: false,
       isPaymentError: false,
       rentalRemainingNum: 0,
+      requestedPlanId: null,
     },
     {
       id: 2,
@@ -36,6 +37,7 @@ Default.args = {
       isSuspend: false,
       isPaymentError: false,
       rentalRemainingNum: 0,
+      requestedPlanId: null,
     },
     {
       id: 3,
@@ -48,6 +50,7 @@ Default.args = {
       isSuspend: false,
       isPaymentError: false,
       rentalRemainingNum: 0,
+      requestedPlanId: null,
     },
   ],
 };

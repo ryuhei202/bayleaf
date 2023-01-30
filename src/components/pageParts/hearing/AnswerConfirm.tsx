@@ -4,7 +4,7 @@ import { CategoryConfirm } from "./CategoryConfirm";
 
 type TProps = {
   readonly answer: TCategorizedForm[];
-  readonly coordinateNum: number;
+  readonly coordinateNum?: number;
 };
 
 export const AnswerConfirm = ({
@@ -13,8 +13,10 @@ export const AnswerConfirm = ({
 }: TProps): JSX.Element => {
   return (
     <>
-      <Typography className="text-lg mt-5 ">コーデ{coordinateNum}</Typography>
-      <div className="bg-white mt-3 rounded-md overflow-hidden">
+      {coordinateNum && (
+        <Typography className="text-lg mt-5 ">コーデ{coordinateNum}</Typography>
+      )}
+      <div className="bg-white mt-3 rounded-md overflow-hidden px-4 py-4">
         {answer.map((ans, index) => (
           <CategoryConfirm
             categoryName={ans.categoryName}

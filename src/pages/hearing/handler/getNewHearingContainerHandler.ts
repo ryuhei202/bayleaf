@@ -1,4 +1,3 @@
-import { sortHearingConfirm } from "./../../../models/hearing/THearingForms";
 import liff from "@line/liff/dist/lib";
 import { AxiosResponse } from "axios";
 import { UseMutateFunction } from "react-query";
@@ -7,6 +6,7 @@ import { TCategorizedForm } from "../../../api/hearings/TCategorizedForm";
 import { THearingAnswer } from "../../../models/hearing/THearingAnswer";
 import { HEARING_FORM } from "../../../models/hearing/THearingForms";
 import { AnsweredHearings, TAnsweredForm } from "../HearingContainer";
+import { sortHearingConfirm } from "./../../../models/hearing/THearingForms";
 
 type THearingContainerHandler = {
   readonly handleClickFirstNext: () => void;
@@ -18,7 +18,6 @@ type THearingContainerHandler = {
   ) => void;
   readonly handleCancelForm: () => void;
   readonly formattedConfirmAnswers: () => THearingAnswer[];
-  readonly handleClickReset: () => void;
   readonly handleSubmitComplete: () => void;
   readonly removeLastAnswer: (
     answeredHearings: TAnsweredForm[],
@@ -150,13 +149,6 @@ export const getNewHearingContainerHandler = ({
     return formattedAnswer;
   };
 
-  const handleClickReset = () => {
-    setNextFormId(null);
-    setCurrentAnswerNumber(1);
-    setFirstAnsweredHearings({ forms: [] });
-    setSecondAnsweredHearings({ forms: [] });
-  };
-
   const handleSubmitComplete = () => {
     const hearings = [firstAnsweredHearings.forms, secondAnsweredHearings.forms]
       .filter((f) => f.length !== 0)
@@ -197,7 +189,6 @@ export const getNewHearingContainerHandler = ({
     handleCancelForm,
     removeLastAnswer,
     formattedConfirmAnswers,
-    handleClickReset,
     handleSubmitComplete,
   };
 };
