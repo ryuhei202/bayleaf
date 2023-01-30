@@ -29,15 +29,16 @@ Default.args = {
   },
   categoryName: "シャツ",
   colorName: "オレンジ",
-  price: 12000,
-  originPrice: 15000,
-  discountRate: 20,
 };
 
 Default.decorators = [
-  (Story) => (
+  (WideItemCard) => (
     <div className="bg-clay w-full p-2">
-      <Story />
+      <WideItemCard>
+        <div>
+          <p>text</p>
+        </div>
+      </WideItemCard>
     </div>
   ),
 ];

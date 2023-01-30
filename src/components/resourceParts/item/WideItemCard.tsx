@@ -1,28 +1,24 @@
+import { ReactNode } from "react";
 import { ExpandableImage } from "../../baseParts/legacy/images/ExpandableImage";
 import { Typography } from "../../baseParts/legacy/Typography";
-import { ItemPrice } from "./ItemPrice";
 
 type TProps = {
   id?: number;
-  price?: number;
-  originPrice?: number;
-  discountRate?: number;
   imagePaths: { defaultPath: string; expandedPath: string };
   categoryName?: string;
   colorName?: string;
   selectedItems?: number[];
+  children: ReactNode;
   selectItem?: (item: number[]) => void;
 };
-// TODO: childrenを受け取りアイテムに表示する内容は使う側で決める
+
 export const WideItemCard = ({
   id,
-  price,
-  originPrice,
-  discountRate,
   imagePaths,
   categoryName,
   colorName,
   selectedItems,
+  children,
   selectItem,
 }: TProps) => {
   const isProcessPresent = selectedItems && selectItem && id;
@@ -62,19 +58,7 @@ export const WideItemCard = ({
             {colorName}
           </Typography>
         </div>
-        <div className="place-self-center">
-          {price !== undefined &&
-          originPrice !== undefined &&
-          discountRate !== undefined ? (
-            <ItemPrice
-              price={price}
-              discountRate={discountRate}
-              originPrice={originPrice}
-            />
-          ) : (
-            <></>
-          )}
-        </div>
+        <div className="place-self-center">{children}</div>
       </div>
     </div>
   );
