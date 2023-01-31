@@ -1,4 +1,5 @@
-import React from "react";
+import liff from "@line/liff/dist/lib";
+import { DropdownMenuAlt } from "./DropdownMenuAlt";
 
 type TProps = {
   readonly selectableDateFrom: string;
@@ -13,7 +14,24 @@ export const DatetimePicker = ({
   currentDate,
   onChangeDate,
 }: TProps) => {
-  return (
+  const selectableDates = new Array<string>();
+  let date = new Date(selectableDateFrom);
+  while (date <= new Date(selectableDateTo)) {
+    selectableDates.push(date.toLocaleDateString("ja-JP"));
+    date.setDate(date.getDate() + 1);
+  }
+  return liff.getOS() === "ios" ? (
+    <DropdownMenuAlt
+      value={currentDate}
+      onChange={(event) => onChangeDate(event.target.value)}
+    >
+      {selectableDates.map((selectableDate) => (
+        <option key={selectableDate} value={selectableDate}>
+          {selectableDate}
+        </option>
+      ))}
+    </DropdownMenuAlt>
+  ) : (
     <input
       className="border-2 border-themeGray resize-none py-1 w-full px-3 rounded-md bg-clay"
       type="date"

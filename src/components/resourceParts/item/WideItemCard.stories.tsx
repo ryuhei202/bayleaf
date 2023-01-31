@@ -1,9 +1,9 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ITEM_TEST_IMAGE_URL } from "../../../images/TestImageUrl";
-import { ItemCard } from "./ItemCard";
+import { WideItemCard } from "./WideItemCard";
 export default {
-  title: "resourceParts/item/ItemCard",
-  component: ItemCard,
+  title: "resourceParts/item/WideItemCard",
+  component: WideItemCard,
   argTypes: {
     onClick: { action: "clicked" },
   },
@@ -14,10 +14,10 @@ export default {
       </div>
     ),
   ],
-} as ComponentMeta<typeof ItemCard>;
+} as ComponentMeta<typeof WideItemCard>;
 
-const Template: ComponentStory<typeof ItemCard> = (args) => (
-  <ItemCard {...args} />
+const Template: ComponentStory<typeof WideItemCard> = (args) => (
+  <WideItemCard {...args} />
 );
 
 export const Default = Template.bind({});
@@ -29,6 +29,9 @@ Default.args = {
   },
   categoryName: "シャツ",
   colorName: "オレンジ",
+  price: 12000,
+  originPrice: 15000,
+  discountRate: 20,
 };
 
 Default.decorators = [

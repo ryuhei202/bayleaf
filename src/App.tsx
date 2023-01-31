@@ -1,21 +1,22 @@
-import { createContext } from "react";
-import "./App.css";
-import { useAppInitializer } from "./hooks/handler/app/useAppInitializer";
-import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import { Hearing } from "./pages/hearing/Hearing";
-import { QueryClientProvider } from "react-query";
-import { Review } from "./pages/review/Review";
-import { Consult } from "./pages/consult/Consult";
 import * as Sentry from "@sentry/react";
 import { BrowserTracing } from "@sentry/tracing";
-import { Dressing } from "./pages/dressing/Dressing";
-import { Dislike } from "./pages/dislike/Dislike";
-import { Delivery } from "./pages/delivery/Delivery";
-import { PlanChange } from "./pages/planChange/PlanChange";
-import { Unsuspend } from "./pages/unsuspend/Unsuspend";
-import { LoaderPage } from "./components/baseParts/pages/LoaderPage";
+import { createContext } from "react";
+import { QueryClientProvider } from "react-query";
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
 import { ErrorPage } from "./components/baseParts/pages/ErrorPage";
+import { LoaderPage } from "./components/baseParts/pages/LoaderPage";
+import { useAppInitializer } from "./hooks/handler/app/useAppInitializer";
+import { Consult } from "./pages/consult/Consult";
+import { Delivery } from "./pages/delivery/Delivery";
+import { Dislike } from "./pages/dislike/Dislike";
+import { Dressing } from "./pages/dressing/Dressing";
+import { Hearing } from "./pages/hearing/Hearing";
+import Home from "./pages/Home";
+import { OneShot } from "./pages/oneShot/OneShot";
+import { PlanChange } from "./pages/planChange/PlanChange";
+import { Review } from "./pages/review/Review";
+import { Unsuspend } from "./pages/unsuspend/Unsuspend";
 
 Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DSN,
@@ -46,6 +47,7 @@ function App() {
             <Route path="delivery" element={<Delivery />} />
             <Route path="plan_change" element={<PlanChange />} />
             <Route path="unsuspend" element={<Unsuspend />} />
+            <Route path="one_shot" element={<OneShot />} />
           </Routes>
         </StylistIdContext.Provider>
       </IdTokenContext.Provider>

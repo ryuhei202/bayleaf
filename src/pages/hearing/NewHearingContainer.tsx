@@ -1,22 +1,23 @@
+import { useState } from "react";
+import { useChartCreate } from "../../api/charts/useChartCreate";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
+import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { BeforeHearingConfirm } from "../../components/pageParts/hearing/BeforeHearingConfirm";
 import { HearingAnswerConfirm } from "../../components/pageParts/hearing/HearingAnswerConfirm";
 import { PremiumPlanConfirm } from "../../components/pageParts/hearing/PremiumPlanConfirm";
-import { HearingFormFetcher } from "./HearingFormFetcher";
-import { FirstHearingConfirmButtons } from "./FirstHearingConfirmButtons";
+import { HearingConfirmButtons } from "../../components/resourceParts/hearing/HearingConfirmButtons";
 import { M_PLAN_IDS } from "../../models/shared/Plans";
 import { getNewHearingContainerHandler } from "./handler/getNewHearingContainerHandler";
 import { AnsweredHearings } from "./HearingContainer";
-import { useState } from "react";
-import { useChartCreate } from "../../api/charts/useChartCreate";
+import { HearingFormFetcher } from "./HearingFormFetcher";
 import { HearingPostSuccess } from "./HearingPostSuccess";
-import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 
 type TProps = {
   readonly member: TMembersIndexResponse;
+  readonly nextPlanId: number;
 };
 
-export const NewHearingContainer = ({ member }: TProps) => {
+export const NewHearingContainer = ({ member, nextPlanId }: TProps) => {
   const [nextFormId, setNextFormId] = useState<number | null>(null);
   const [currentAnswerNumber, setCurrentAnswerNumber] = useState<1 | 2>(1);
   const [firstAnsweredHearings, setFirstAnsweredHearings] =
@@ -42,7 +43,6 @@ export const NewHearingContainer = ({ member }: TProps) => {
     handleSubmitForm,
     handleCancelForm,
     formattedConfirmAnswers,
-    handleClickReset,
     handleSubmitComplete,
   } = getNewHearingContainerHandler({
     memberId: member.id,
@@ -68,11 +68,11 @@ export const NewHearingContainer = ({ member }: TProps) => {
       return (
         <BeforeHearingConfirm
           onClick={handleClickFirstNext}
-          planId={member.mPlanId}
+          planId={nextPlanId}
         />
       );
     }
-    return member.mPlanId === M_PLAN_IDS.PREMIUM &&
+    return nextPlanId === M_PLAN_IDS.PREMIUM &&
       secondAnsweredHearings.forms.length <= 0 ? (
       <PremiumPlanConfirm
         onClick={handleClickPremiumNext}
@@ -83,10 +83,9 @@ export const NewHearingContainer = ({ member }: TProps) => {
         title="ヒアリング確認画面"
         confirmAnswers={formattedConfirmAnswers()}
         footer={
-          <FirstHearingConfirmButtons
+          <HearingConfirmButtons
             onClickComplete={handleSubmitComplete}
             onClickBack={handleCancelForm}
-            onClickReset={handleClickReset}
             isPostLoading={isPostLoading}
           />
         }
