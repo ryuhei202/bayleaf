@@ -1,13 +1,20 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { PurchaseItemInfo } from "./PurchaseItemInfo";
+import { PurchaseItemCard } from "./PurchaseItemCard";
 
 export default {
-  title: "resourceParts/item/PurchaseItemInfo",
-  component: PurchaseItemInfo,
-} as ComponentMeta<typeof PurchaseItemInfo>;
+  title: "resourceParts/item/PurchaseItemCard",
+  component: PurchaseItemCard,
+  decorators: [
+    (Story) => (
+      <div className="m-1 p-2 bg-clay">
+        <Story />
+      </div>
+    ),
+  ],
+} as ComponentMeta<typeof PurchaseItemCard>;
 
-const Template: ComponentStory<typeof PurchaseItemInfo> = (args) => (
-  <PurchaseItemInfo {...args} />
+const Template: ComponentStory<typeof PurchaseItemCard> = (args) => (
+  <PurchaseItemCard {...args} />
 );
 
 export const DefaultValues = Template.bind({});
