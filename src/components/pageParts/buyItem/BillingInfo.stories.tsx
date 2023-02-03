@@ -23,4 +23,5 @@ DefaultValues.args = {
   discountedPrice: 48500,
   grantedPoint: 4350,
   possesedPoint: 8000,
+  selectedPoint: 600,
 };
