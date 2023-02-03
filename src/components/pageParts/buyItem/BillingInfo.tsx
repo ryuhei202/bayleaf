@@ -15,29 +15,18 @@ export const BillingInfo = ({
   possesedPoint,
 }: TProps) => {
   const [selectedPoint, setSelectedPoint] = useState<number>(0);
-  const [pointEnterDisabled, setPointEnterDisabled] = useState<boolean>(true);
   const [pointWarningDisplay, setPointWarningDisplay] = useState<boolean>(true);
-  const handleChange = (e) => {
-    if (e.target.value >= 0 && e.target.value < possesedPoint) {
+  const handleChange = (e: any) => {
+    if (e.target.value >= 0 && e.target.value <= possesedPoint) {
       setSelectedPoint(() => e.target.value);
+      setPointWarningDisplay(true);
     } else {
-      setPointWarningDisplay(!pointWarningDisplay);
-      // alert(`0pt~${possesedPoint}の範囲で選択してください`);
+      setPointWarningDisplay(false);
     }
-  };
-  const switchInputPoint = (e) => {
-    if (e.target.checked === true) {
-      setPointEnterDisabled(!pointEnterDisabled);
-    } else {
-      setSelectedPoint(0);
-      setPointEnterDisabled(!pointEnterDisabled);
-    }
-    // alert(e.target.checked);
   };
   return (
     <div className="bg-white">
       <div className="border-dashed border-b-[1px] py-8 flex justify-around">
-        {/* アイテム合計 */}
         <Typography className="text-center" color="strong-gray">
           アイテム合計
         </Typography>
@@ -52,16 +41,8 @@ export const BillingInfo = ({
       </div>
 
       <div className="border-dashed border-b-[1px] py-8 flex justify-around">
-        {/* /利用するポイント */}
         <Typography className="text-center" color="strong-gray">
-          <label>
-            <input
-              type="checkbox"
-              className="mr-1 align-middle"
-              onClick={switchInputPoint}
-            ></input>
-            <span className="">ポイントを利用する</span>
-          </label>
+          <span className="">ポイントを利用する</span>
         </Typography>
         <div className="">
           <Typography className="text-right" color="strong-gray">
@@ -69,7 +50,6 @@ export const BillingInfo = ({
               className="border rounded mr-0.5 w-3/4 "
               value={selectedPoint}
               onChange={handleChange}
-              disabled={pointEnterDisabled}
               type="number"
               min="0"
               max={possesedPoint}
@@ -98,8 +78,6 @@ export const BillingInfo = ({
       </div>
 
       <div className="border-dashed border-b-[1px] py-8 flex justify-around">
-        {/* 請求金額 */}
-
         <Typography className="text-center" color="strong-gray">
           ご請求額
         </Typography>
