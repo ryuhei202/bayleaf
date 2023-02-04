@@ -3,8 +3,6 @@ import { ExpandableImage } from "../../baseParts/legacy/images/ExpandableImage";
 
 type TProps = {
   imagePaths: { defaultPath: string; expandedPath: string };
-  categoryName?: string;
-  colorName?: string;
   children: ReactNode;
 };
 
