@@ -54,11 +54,6 @@ WideCard.args = {
         defaultPath: itemCard.imagePaths.defaultPath,
         expandedPath: itemCard.imagePaths.expandedPath,
       }}
-      categoryName={itemCard.categoryName}
-      colorName={itemCard.colorName}
-      id={1}
-      selectedItems={[]}
-      selectItem={() => {}}
     >
       <ItemPrice price={10} originPrice={20} discountRate={30} />
     </WideItemCard>

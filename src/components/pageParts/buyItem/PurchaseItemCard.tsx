@@ -23,11 +23,7 @@ export const PurchaseItemCard = ({
   price,
 }: TProps) => {
   return (
-    <WideItemCard
-      imagePaths={imagePaths}
-      categoryName={category}
-      colorName={color}
-    >
+    <WideItemCard imagePaths={imagePaths}>
       <div className="h-full flex flex-col justify-around">
         <div>
           <Typography className=" text-left " color="strong-gray" size="xl">
