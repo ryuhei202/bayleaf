@@ -2,7 +2,8 @@ import { Button } from "../../../components/baseParts/Button";
 import { SelectWrapper } from "../../../components/baseParts/wrapper/SelectWrapper";
 import { PurchaseItemCard } from "../../../components/pageParts/buyItem/PurchaseItemCard";
 
-type TSelectedItem = {
+type TItem = {
+  imagePaths: { defaultPath: string; expandedPath: string };
   brand: string;
   category: string;
   color: string;
@@ -13,35 +14,42 @@ type TSelectedItem = {
 };
 
 type TProps = {
-  itemIds: number[];
-  selectedItems: TSelectedItem[];
-  setSelectItems: (selectedItem: TSelectedItem) => void;
+  rentalItem: TItem[];
+  isSelectedOrNot: boolean;
 };
 
-export const BuyItemSelect = ({
-  itemIds,
-  selectedItems,
-  setSelectItems,
-}: TProps) => {
+export const BuyItemSelect = ({ rentalItem, isSelectedOrNot }: TProps) => {
   return (
-    <div>
-      レンタルアイテムの購入
-      <SelectWrapper visible={false}>
-        <PurchaseItemCard
-          imagePaths={{
-            defaultPath: "",
-            expandedPath: "",
-          }}
-          brand={""}
-          category={""}
-          color={""}
-          discountRate={0}
-          point={0}
-          discountedPrice={0}
-          price={0}
-        ></PurchaseItemCard>
-      </SelectWrapper>
-      <Button>確認画面へ</Button>
+    <div className="">
+      <div className="m-8 text-center text-neutral-500">
+        レンタルアイテムの購入
+      </div>
+      <div>
+        {rentalItem.map((item: TItem) => {
+          return (
+            <div className="mx-2 my-12">
+              <SelectWrapper visible={isSelectedOrNot}>
+                <PurchaseItemCard
+                  imagePaths={{
+                    defaultPath: item.imagePaths.defaultPath,
+                    expandedPath: item.imagePaths.expandedPath,
+                  }}
+                  brand={item.brand}
+                  category={item.category}
+                  color={item.color}
+                  discountRate={item.discountRate}
+                  point={item.point}
+                  discountedPrice={item.discountedPrice}
+                  price={item.price}
+                ></PurchaseItemCard>
+              </SelectWrapper>
+            </div>
+          );
+        })}
+      </div>
+      <div className="text-center mt-20 mb-16">
+        <Button className="w-1/2 i">確認画面へ</Button>
+      </div>
     </div>
   );
 };
