@@ -1,3 +1,4 @@
+import { Button } from "../../../components/baseParts/Button";
 import { SelectWrapper } from "../../../components/baseParts/wrapper/SelectWrapper";
 import { PurchaseItemCard } from "../../../components/pageParts/buyItem/PurchaseItemCard";
 
@@ -22,23 +23,25 @@ export const BuyItemSelect = ({
   selectedItems,
   setSelectItems,
 }: TProps) => {
-  return;
-  <div>
-    レンタルアイテムの購入
-    <SelectWrapper visible={false} children={undefined}>
-      <PurchaseItemCard
-        imagePaths={{
-          defaultPath: "",
-          expandedPath: "",
-        }}
-        brand={""}
-        category={""}
-        color={""}
-        discountRate={0}
-        point={0}
-        discountedPrice={0}
-        price={0}
-      ></PurchaseItemCard>
-    </SelectWrapper>
-  </div>;
+  return (
+    <div>
+      レンタルアイテムの購入
+      <SelectWrapper visible={false}>
+        <PurchaseItemCard
+          imagePaths={{
+            defaultPath: "",
+            expandedPath: "",
+          }}
+          brand={""}
+          category={""}
+          color={""}
+          discountRate={0}
+          point={0}
+          discountedPrice={0}
+          price={0}
+        ></PurchaseItemCard>
+      </SelectWrapper>
+      <Button>確認画面へ</Button>
+    </div>
+  );
 };
