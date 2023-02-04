@@ -19,7 +19,6 @@ export const BillingInfo = ({
 }: TProps) => {
   const isWarnigOrNot = (): boolean => {
     return selectedPoint >= 0 && selectedPoint <= possesedPoint;
-    return true;
   };
 
   return (
