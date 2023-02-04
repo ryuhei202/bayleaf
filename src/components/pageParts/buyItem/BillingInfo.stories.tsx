@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { BillingInfo } from "./BillingInfo";
 
 export default {
-  title: "resourceParts/item/BillingInfo",
+  title: "resourceParts/buyItem/BillingInfo",
   component: BillingInfo,
   decorators: [
     (Story) => (

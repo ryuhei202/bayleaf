@@ -17,7 +17,7 @@ export const BillingInfo = ({
   selectedPoint,
   onChange,
 }: TProps) => {
-  const isWarnigOrNot = (): boolean => {
+  const isSelectedPointValid = (): boolean => {
     return selectedPoint >= 0 && selectedPoint <= possesedPoint;
   };
 
@@ -56,7 +56,7 @@ export const BillingInfo = ({
           </Typography>
           <Typography
             className={`text-right leading-5 text-[1px] ${
-              isWarnigOrNot() ? "hidden" : ""
+              isSelectedPointValid() ? "hidden" : ""
             }`}
             color="red"
           >
