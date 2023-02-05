@@ -138,7 +138,7 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
           confirmAnswer={categorizeHearingAnswers()}
           wearingDate={wearingDate}
           isPostLoading={isPostLoading}
-          handleSubmitComplete={() => {
+          onSubmit={() => {
             mutate(
               {
                 memberId: memberData.id,
@@ -154,7 +154,7 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
               }
             );
           }}
-          handleCancelForm={() => {
+          onCancelForm={() => {
             handleHearingCancel();
             setStep("hearing");
           }}
