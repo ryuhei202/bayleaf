@@ -27,12 +27,6 @@ export const WelcomePage = ({ onClickStart }: TProps) => {
           <span className="text-[4vw]">(税込 ¥5478)</span>
         </p>
         <div className="bg-themeGray text-clay text-center text-[4vw] py-1">
-          レンタル期間
-        </div>
-        <div className="w-full p-4">
-          <ScheduleDiagram />
-        </div>
-        <div className="bg-themeGray text-clay text-center text-[4vw] py-1">
           服の枚数
         </div>
         <div className="flex justify-center">
@@ -61,19 +55,21 @@ export const WelcomePage = ({ onClickStart }: TProps) => {
           </p>
         </div>
         <div className="bg-themeGray text-clay text-center text-[4vw] py-1">
+          レンタル期間
+        </div>
+        <div className="w-full p-4">
+          <ScheduleDiagram />
+        </div>
+        <div className="bg-themeGray text-clay text-center text-[4vw] py-1">
           ポイント
         </div>
         <p className="text-center text-[5vw] my-5">
           <span className="text-[10vw] font-lora">300</span>ポイント付与
           <br />
-          <span className="text-[4vw]">
+          <span className="text-[3vw]">
             *ポイントはアイテム購入にご利用できます
           </span>
         </p>
-        <div className="bg-themeGray text-clay text-center text-[4vw] py-1">
-          決済タイミング
-        </div>
-        <p className="text-center text-[5vw] my-5">コーデを出荷時に決済</p>
       </div>
       <Button size="large" className="mt-4" onClick={onClickStart}>
         利用を開始

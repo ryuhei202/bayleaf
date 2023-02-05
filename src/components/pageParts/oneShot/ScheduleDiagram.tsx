@@ -17,7 +17,7 @@ export const ScheduleDiagram = ({ wearDate, className }: TProps) => {
 
   return (
     <div
-      className={`w-full grid grid-cols-5 text-center text-[2vw] bg-white ${className}`}
+      className={`w-full grid grid-cols-5 text-center text-[3vw] bg-white ${className}`}
     >
       <div className="border-r py-2">お届け日</div>
       <div className="bg-lightBeige border-r"></div>
@@ -33,7 +33,7 @@ export const ScheduleDiagram = ({ wearDate, className }: TProps) => {
           <div className="pb-2">{getDateString(2)}</div>
         </>
       )}
-      <div className="bg-themeGray col-span-5 text-clay rounded-full">
+      <div className="bg-themeGray col-span-5 text-clay rounded-full text-[5vw]">
         ４泊５日
       </div>
       <div className="border-r flex justify-center">
