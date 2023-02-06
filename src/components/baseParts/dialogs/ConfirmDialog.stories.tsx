@@ -34,11 +34,13 @@ export const Unsuspend = Template.bind({});
 Unsuspend.args = {
   title: "スタンダードプランで再開しますか？",
   description: (
-    <span>
-      料金: 7480円(税込)
-      <br />
-      次回決済日: 次回出荷日
-    </span>
+    <>
+      <p className="mb-1 text-lg">決済日: 本日</p>
+      <p className="mb-4 text-lg">料金: ¥5,200(税込)</p>
+      <p>
+        前回停止された際に料金をお支払い後洋服を借りずに停止されたため、前回プランから差額を差し引いた金額をお支払いいただいております。
+      </p>
+    </>
   ),
   open: true,
   okBtnText: "再開する",
