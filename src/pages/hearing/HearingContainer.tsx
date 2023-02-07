@@ -26,7 +26,12 @@ export type AnsweredHearings = {
 
 export const HearingContainer = ({ member, hearings }: TProps) => {
   if (hearings.length <= 0) {
-    return <NewHearingContainer member={member} />;
+    return (
+      <NewHearingContainer
+        member={member}
+        nextPlanId={member.requestedPlanId ?? member.mPlanId}
+      />
+    );
   }
 
   return <ContinuedHearingContainer hearings={hearings} member={member} />;

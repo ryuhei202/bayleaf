@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ExternalLink } from "./ExternalLink";
 
 export default {
-  title: "BaseParts/ExternalLink",
+  title: "BaseParts/text/ExternalLink",
   component: ExternalLink,
 } as ComponentMeta<typeof ExternalLink>;
 

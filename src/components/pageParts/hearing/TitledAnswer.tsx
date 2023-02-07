@@ -9,15 +9,17 @@ type Props = {
 export const TitledAnswer = ({ titleText, choice, className, text }: Props) => {
   return (
     <div className={className ?? ""}>
-      <Typography color="primary" size="sm" className="mb-3">
+      <Typography color="gray" size="xs" className="mb-2">
         {titleText}
       </Typography>
-      <Typography color="strong-gray">{choice}</Typography>
-      {text && (
-        <Typography size="sm" color="strong-gray" className="mt-2">
-          テキスト: {text}
-        </Typography>
-      )}
+      <div className="mb-4">
+        <Typography color="primary">{choice}</Typography>
+        {text && (
+          <Typography color="primary" className="mt-2">
+            {text}
+          </Typography>
+        )}
+      </div>
     </div>
   );
 };

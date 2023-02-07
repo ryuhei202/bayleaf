@@ -9,4 +9,5 @@ export type TMembersIndexResponse = {
   readonly isSuspend: boolean;
   readonly isPaymentError: boolean;
   readonly rentalRemainingNum: number;
+  readonly requestedPlanId: number | null;
 };
