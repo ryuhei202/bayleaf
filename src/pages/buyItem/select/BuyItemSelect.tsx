@@ -1,46 +1,46 @@
+import { TChartItemsIndexResponse } from "../../../api/chartItems/useChartItemsIndex";
 import { Button } from "../../../components/baseParts/Button";
 import { SelectWrapper } from "../../../components/baseParts/wrapper/SelectWrapper";
 import { PurchaseItemCard } from "../../../components/pageParts/buyItem/PurchaseItemCard";
 
-type TItem = {
-  imagePaths: { defaultPath: string; expandedPath: string };
-  brand: string;
-  category: string;
-  color: string;
-  discountRate: number;
-  point: number;
-  discountedPrice: number;
-  price: number;
-};
-
 type TProps = {
-  rentalItem: TItem[];
-  isSelectedOrNot: boolean;
+  selectedChartItemIds: number[];
+  chartItemsData: TChartItemsIndexResponse[];
+  onSelectChartItemIds: (chartItemId: number) => void;
 };
 
-export const BuyItemSelect = ({ rentalItem, isSelectedOrNot }: TProps) => {
+export const BuyItemSelect = ({
+  selectedChartItemIds,
+  chartItemsData,
+  onSelectChartItemIds,
+}: TProps) => {
   return (
     <div className="">
       <div className="m-8 text-center text-neutral-500">
         レンタルアイテムの購入
       </div>
       <div>
-        {rentalItem.map((item: TItem) => {
+        {chartItemsData.map((chartItem: TChartItemsIndexResponse) => {
           return (
-            <div className="mx-2 my-12">
-              <SelectWrapper visible={isSelectedOrNot}>
+            <div
+              className="mx-2 my-12"
+              onChange={() => onSelectChartItemIds(chartItem.id)}
+            >
+              <SelectWrapper
+                visible={selectedChartItemIds.includes(chartItem.id)}
+              >
                 <PurchaseItemCard
                   imagePaths={{
-                    defaultPath: item.imagePaths.defaultPath,
-                    expandedPath: item.imagePaths.expandedPath,
+                    defaultPath: chartItem.imagePaths[0],
+                    expandedPath: chartItem.imagePaths[1],
                   }}
-                  brand={item.brand}
-                  category={item.category}
-                  color={item.color}
-                  discountRate={item.discountRate}
-                  point={item.point}
-                  discountedPrice={item.discountedPrice}
-                  price={item.price}
+                  brand={chartItem.brandName}
+                  category={chartItem.categoryName}
+                  color={chartItem.colorName}
+                  discountRate={chartItem.discountRate}
+                  point={chartItem.point}
+                  discountedPrice={chartItem.priceTaxIn}
+                  price={chartItem.referencePriceTaxIn}
                 ></PurchaseItemCard>
               </SelectWrapper>
             </div>
