@@ -1,9 +1,9 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { BuyItemSelect } from "../select/BuyItemSelect";
+import { BuyItemConfirm } from "./BuyItemConfirm";
 
 export default {
   title: "pageParts/buyItem/confirm/BuyItemConfirm",
-  component: BuyItemSelect,
+  component: BuyItemConfirm,
   decorators: [
     (Story) => (
       <div className="m-1 p-2 bg-clay">
@@ -11,15 +11,15 @@ export default {
       </div>
     ),
   ],
-} as ComponentMeta<typeof BuyItemSelect>;
+} as ComponentMeta<typeof BuyItemConfirm>;
 
-const Template: ComponentStory<typeof BuyItemSelect> = (args) => (
-  <BuyItemSelect {...args} />
+const Template: ComponentStory<typeof BuyItemConfirm> = (args) => (
+  <BuyItemConfirm {...args} />
 );
 
 export const DefaultValues = Template.bind({});
 DefaultValues.args = {
-  rentalItem: [
+  selectedItems: [
     {
       imagePaths: {
         defaultPath:

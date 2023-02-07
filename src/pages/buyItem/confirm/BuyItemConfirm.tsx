@@ -1,4 +1,3 @@
-import { ChangeEvent } from "react";
 import { Button } from "../../../components/baseParts/Button";
 import { BillingInfo } from "../../../components/pageParts/buyItem/BillingInfo";
 import { PurchaseItemCard } from "../../../components/pageParts/buyItem/PurchaseItemCard";
@@ -45,19 +44,15 @@ export const BuyItemConfirm = ({ selectedItems }: TProps) => {
           );
         })}
       </div>
+      <BillingInfo
+        price={0}
+        discountedPrice={0}
+        grantedPoint={0}
+        possesedPoint={0}
+        selectedPoint={0}
+        onChange={() => {}}
+      ></BillingInfo>
 
-      <div>
-        <BillingInfo
-          price={0}
-          discountedPrice={0}
-          grantedPoint={0}
-          possesedPoint={0}
-          selectedPoint={0}
-          onChange={function (e: ChangeEvent<HTMLInputElement>): void {
-            throw new Error("Function not implemented.");
-          }}
-        ></BillingInfo>
-      </div>
       <div className="text-center mt-20 mb-16">
         <Button className="w-1/2 i">購入する</Button>
       </div>
