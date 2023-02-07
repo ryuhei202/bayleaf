@@ -27,8 +27,6 @@ Default.args = {
     defaultPath: ITEM_TEST_IMAGE_URL.largeThumb,
     expandedPath: ITEM_TEST_IMAGE_URL.large,
   },
-  categoryName: "シャツ",
-  colorName: "オレンジ",
 };
 
 Default.decorators = [

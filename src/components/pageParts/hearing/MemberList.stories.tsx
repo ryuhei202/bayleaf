@@ -25,6 +25,7 @@ Default.args = {
       isPaymentError: false,
       rentalRemainingNum: 0,
       requestedPlanId: null,
+      point: 600,
     },
     {
       id: 2,
@@ -38,6 +39,7 @@ Default.args = {
       isPaymentError: false,
       rentalRemainingNum: 0,
       requestedPlanId: null,
+      point: 600,
     },
     {
       id: 3,
@@ -51,6 +53,7 @@ Default.args = {
       isPaymentError: false,
       rentalRemainingNum: 0,
       requestedPlanId: null,
+      point: 600,
     },
   ],
 };

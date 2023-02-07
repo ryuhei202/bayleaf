@@ -1,5 +1,5 @@
-import { TMembersIndexResponse } from "./TMembersIndexResponse";
 import { useGetRequest } from "../useGetRequest";
+import { TMembersIndexResponse } from "./TMembersIndexResponse";
 
 type MembersIndex = {
   readonly data?: TMembersIndexResponse[];
