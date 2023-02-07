@@ -15,12 +15,13 @@ type TItem = {
 
 type TProps = {
   selectedItems: TItem[];
-  totalPrice: () => number;
-  totalDiscountedPrice: () => number;
-  totalGrantedPoint: () => number;
+  totalPrice: number;
+  totalDiscountedPrice: number;
+  totalGrantedPoint: number;
   possesedPoint: number;
   selectedPoint: number;
   onChange: () => number;
+  onClick: () => void;
 };
 
 export const BuyItemConfirm = ({
@@ -31,6 +32,7 @@ export const BuyItemConfirm = ({
   possesedPoint,
   selectedPoint,
   onChange,
+  onClick,
 }: TProps) => {
   return (
     <div className="">
@@ -59,16 +61,18 @@ export const BuyItemConfirm = ({
         })}
       </div>
       <BillingInfo
-        price={totalPrice()}
-        discountedPrice={totalDiscountedPrice()}
-        grantedPoint={totalGrantedPoint()}
+        price={totalPrice}
+        discountedPrice={totalDiscountedPrice}
+        grantedPoint={totalGrantedPoint}
         possesedPoint={possesedPoint}
         selectedPoint={selectedPoint}
         onChange={onChange}
       ></BillingInfo>
 
       <div className="text-center mt-20 mb-16">
-        <Button className="w-1/2 i">購入する</Button>
+        <Button className="w-1/2 i" onClick={onClick}>
+          購入する
+        </Button>
       </div>
     </div>
   );
