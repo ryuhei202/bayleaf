@@ -10,4 +10,5 @@ export type TMembersIndexResponse = {
   readonly isPaymentError: boolean;
   readonly rentalRemainingNum: number;
   readonly requestedPlanId: number | null;
+  readonly point: number;
 };
