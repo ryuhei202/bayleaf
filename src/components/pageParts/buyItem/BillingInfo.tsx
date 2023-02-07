@@ -29,10 +29,10 @@ export const BillingInfo = ({
         </div>
         <div className="w-1/2 pr-6">
           <Typography className="line-through" color="strong-gray">
-            ¥{discountedPrice.toLocaleString()}
+            ¥{price.toLocaleString()}
           </Typography>
           <Typography className="" color="red">
-            ¥{price.toLocaleString()}
+            ¥{discountedPrice.toLocaleString()}
           </Typography>
         </div>
       </div>
