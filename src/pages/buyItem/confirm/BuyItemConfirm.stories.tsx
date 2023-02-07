@@ -66,4 +66,9 @@ DefaultValues.args = {
       price: 15000,
     },
   ],
+  totalPrice: () => 42900,
+  totalDiscountedPrice: () => 40000,
+  totalGrantedPoint: () => 4350,
+  possesedPoint: 8000,
+  selectedPoint: 600,
 };

@@ -15,9 +15,23 @@ type TItem = {
 
 type TProps = {
   selectedItems: TItem[];
+  totalPrice: () => number;
+  totalDiscountedPrice: () => number;
+  totalGrantedPoint: () => number;
+  possesedPoint: number;
+  selectedPoint: number;
+  onChange: () => number;
 };
 
-export const BuyItemConfirm = ({ selectedItems }: TProps) => {
+export const BuyItemConfirm = ({
+  selectedItems,
+  totalPrice,
+  totalDiscountedPrice,
+  totalGrantedPoint,
+  possesedPoint,
+  selectedPoint,
+  onChange,
+}: TProps) => {
   return (
     <div className="">
       <div className="m-8 text-center text-neutral-500">
@@ -45,12 +59,12 @@ export const BuyItemConfirm = ({ selectedItems }: TProps) => {
         })}
       </div>
       <BillingInfo
-        price={0}
-        discountedPrice={0}
-        grantedPoint={0}
-        possesedPoint={0}
-        selectedPoint={0}
-        onChange={() => {}}
+        price={totalPrice()}
+        discountedPrice={totalDiscountedPrice()}
+        grantedPoint={totalGrantedPoint()}
+        possesedPoint={possesedPoint}
+        selectedPoint={selectedPoint}
+        onChange={onChange}
       ></BillingInfo>
 
       <div className="text-center mt-20 mb-16">
