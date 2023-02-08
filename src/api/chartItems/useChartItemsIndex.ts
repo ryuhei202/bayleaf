@@ -3,11 +3,16 @@ export type TChartItemsIndexResponse = {
   readonly id: number;
   readonly itemStatus: number;
   readonly brandName: string;
-  readonly imagePaths: string[];
+  readonly imagePaths: {
+    original: string;
+    large: string;
+    largeThumb: string | null;
+    thumb: string;
+  };
   readonly categoryName: string;
   readonly colorName: string;
-  readonly referencePriceTaxIn: number;
-  readonly priceTaxIn: number;
+  readonly price: number;
+  readonly discountedPrice: number;
   readonly point: number;
   readonly locationId: number | null;
   readonly discountRate: number;

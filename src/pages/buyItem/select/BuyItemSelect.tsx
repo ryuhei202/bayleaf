@@ -4,18 +4,25 @@ import { SelectWrapper } from "../../../components/baseParts/wrapper/SelectWrapp
 import { PurchaseItemCard } from "../../../components/pageParts/buyItem/PurchaseItemCard";
 
 type TProps = {
-  selectedChartItemIds: number[];
+  selectedChartItems: TChartItemsIndexResponse[];
   chartItemsData: TChartItemsIndexResponse[];
-  onSelectChartItemIds: (chartItemId: number) => void;
+  onSelectChartItems: (chartItemId: number) => void;
+  onClickConfirm: () => void;
 };
 
 export const BuyItemSelect = ({
-  selectedChartItemIds,
+  selectedChartItems,
   chartItemsData,
-  onSelectChartItemIds,
+  onSelectChartItems,
+  onClickConfirm,
 }: TProps) => {
+  const isVisible = (chartItemId: number) => {
+    const selectedChartItemsIds = selectedChartItems.map((item) => item.id);
+    return selectedChartItemsIds.includes(chartItemId);
+  };
+
   return (
-    <div className="">
+    <div className="text-center mx-4">
       <div className="m-8 text-center text-neutral-500">
         レンタルアイテムの購入
       </div>
@@ -23,33 +30,35 @@ export const BuyItemSelect = ({
         {chartItemsData.map((chartItem: TChartItemsIndexResponse) => {
           return (
             <div
-              className="mx-2 my-12"
-              onChange={() => onSelectChartItemIds(chartItem.id)}
+              className="mx-2 my-6"
+              onClick={() => onSelectChartItems(chartItem.id)}
             >
-              <SelectWrapper
-                visible={selectedChartItemIds.includes(chartItem.id)}
-              >
+              <SelectWrapper visible={isVisible(chartItem.id)}>
                 <PurchaseItemCard
                   imagePaths={{
-                    defaultPath: chartItem.imagePaths[0],
-                    expandedPath: chartItem.imagePaths[1],
+                    defaultPath: chartItem.imagePaths.thumb,
+                    expandedPath: chartItem.imagePaths.large,
                   }}
                   brand={chartItem.brandName}
                   category={chartItem.categoryName}
                   color={chartItem.colorName}
                   discountRate={chartItem.discountRate}
                   point={chartItem.point}
-                  discountedPrice={chartItem.priceTaxIn}
-                  price={chartItem.referencePriceTaxIn}
+                  discountedPrice={chartItem.discountedPrice}
+                  price={chartItem.price}
                 ></PurchaseItemCard>
               </SelectWrapper>
             </div>
           );
         })}
       </div>
-      <div className="text-center mt-20 mb-16">
-        <Button className="w-1/2 i">確認画面へ</Button>
-      </div>
+      <Button
+        className="w-1/2 text-center mt-8 mb-16"
+        onClick={onClickConfirm}
+        disabled={selectedChartItems.length === 0}
+      >
+        確認画面へ
+      </Button>
     </div>
   );
 };

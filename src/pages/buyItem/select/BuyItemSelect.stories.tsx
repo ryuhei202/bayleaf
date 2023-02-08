@@ -19,20 +19,49 @@ const Template: ComponentStory<typeof BuyItemSelect> = (args) => (
 
 export const DefaultValues = Template.bind({});
 DefaultValues.args = {
-  selectedChartItemIds: [1, 2],
+  selectedChartItems: [
+    {
+      id: 1,
+      itemStatus: 1,
+      brandName: "leeap original",
+      imagePaths: {
+        original:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_thumb_IMG_3977.jpeg",
+        large:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
+        largeThumb:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
+        thumb:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
+      },
+      categoryName: "ジャケット",
+      colorName: "ブラック",
+      price: 15000,
+      discountedPrice: 12000,
+      point: 864,
+      locationId: 1,
+      discountRate: 20,
+    },
+  ],
   chartItemsData: [
     {
       id: 1,
       itemStatus: 1,
       brandName: "leeap original",
-      imagePaths: [
-        "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_thumb_IMG_3977.jpeg",
-        "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
-      ],
+      imagePaths: {
+        original:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_thumb_IMG_3977.jpeg",
+        large:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
+        largeThumb:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
+        thumb:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
+      },
       categoryName: "ジャケット",
       colorName: "ブラック",
-      referencePriceTaxIn: 15000,
-      priceTaxIn: 12000,
+      price: 15000,
+      discountedPrice: 12000,
       point: 864,
       locationId: 1,
       discountRate: 20,
@@ -41,14 +70,20 @@ DefaultValues.args = {
       id: 2,
       itemStatus: 1,
       brandName: "leeap original",
-      imagePaths: [
-        "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_thumb_IMG_3977.jpeg",
-        "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
-      ],
+      imagePaths: {
+        original:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_thumb_IMG_3977.jpeg",
+        large:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
+        largeThumb:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
+        thumb:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
+      },
       categoryName: "ジャケット",
       colorName: "ブラック",
-      referencePriceTaxIn: 15000,
-      priceTaxIn: 12000,
+      price: 15000,
+      discountedPrice: 12000,
       point: 864,
       locationId: 1,
       discountRate: 20,
@@ -57,14 +92,20 @@ DefaultValues.args = {
       id: 3,
       itemStatus: 1,
       brandName: "leeap original",
-      imagePaths: [
-        "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_thumb_IMG_3977.jpeg",
-        "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
-      ],
+      imagePaths: {
+        original:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_thumb_IMG_3977.jpeg",
+        large:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
+        largeThumb:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
+        thumb:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
+      },
       categoryName: "ジャケット",
       colorName: "ブラック",
-      referencePriceTaxIn: 15000,
-      priceTaxIn: 12000,
+      price: 15000,
+      discountedPrice: 12000,
       point: 864,
       locationId: 1,
       discountRate: 80,

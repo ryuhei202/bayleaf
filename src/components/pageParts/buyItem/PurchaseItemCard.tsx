@@ -10,6 +10,7 @@ type TProps = {
   point: number;
   discountedPrice: number;
   price: number;
+  className?: string;
 };
 
 export const PurchaseItemCard = ({
@@ -21,9 +22,10 @@ export const PurchaseItemCard = ({
   point,
   discountedPrice,
   price,
+  className,
 }: TProps) => {
   return (
-    <WideItemCard imagePaths={imagePaths}>
+    <WideItemCard imagePaths={imagePaths} className={className}>
       <div className="h-full flex flex-col justify-around">
         <div>
           <Typography className=" text-left " color="strong-gray" size="xl">
