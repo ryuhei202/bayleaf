@@ -52,16 +52,17 @@ export const PlanSelectingForUnsuspend = ({
         <p className="mb-1 text-lg">決済日: 本日</p>
         <p className="mb-4 text-lg">{`料金: ¥${getDiffPrice({
           selectedPlan,
-        })}(税込)`}</p>
+        }).toLocaleString()}(税込)`}</p>
         <p>
           前回停止された際に料金をお支払い後洋服を借りずに停止されたため、前回プランから差額を差し引いた金額をお支払いいただいております。
         </p>
       </>
     ) : (
       <>
-        {`料金: ${selectedPlan.price.withTax}(税込)`}
-        <br />
-        次回決済日: 次回出荷日
+        <p className="mb-1 text-lg">次回決済日: 次回出荷日</p>
+        <p className="mb-4 text-lg">
+          {`料金: ${selectedPlan.price.withTax.toLocaleString()}(税込)`}
+        </p>
       </>
     );
   };

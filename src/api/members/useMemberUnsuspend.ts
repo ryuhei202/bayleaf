@@ -9,7 +9,7 @@ type TParams = {
 
 export const useMembersUnsuspend = ({ memberId }: TArgs) => {
   const { mutate, isLoading, error } = usePatchRequest<TParams>(
-    `/members/${memberId}/unsuspend`
+    `members/${memberId}/unsuspend`
   );
   return {
     mutate,
