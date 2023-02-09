@@ -35,7 +35,6 @@ export const usePostRequest = <T>(
             throw new Error(e.response.data.message);
           }
 
-          console.log(e);
           Sentry.captureException(e);
           throw new Error("予期せぬエラーが発生しました");
         })

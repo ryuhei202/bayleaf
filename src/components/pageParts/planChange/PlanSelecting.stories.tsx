@@ -21,6 +21,7 @@ Default.args = {
     nextPaymentDate: "2023/1/14",
     rentalRemainingNum: 1,
   },
+  isCancelCompleted: false,
 };
 
 export const PlanSelected = Template.bind({});
@@ -32,6 +33,7 @@ PlanSelected.args = {
   },
   selectedPlan: findPlanById(12),
   isCompleted: false,
+  isCancelCompleted: false,
 };
 
 export const PlanRequested = Template.bind({});
@@ -42,4 +44,5 @@ PlanRequested.args = {
     rentalRemainingNum: 1,
     requestedPlanId: 12,
   },
+  isCancelCompleted: false,
 };

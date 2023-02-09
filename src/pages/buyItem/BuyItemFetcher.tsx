@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   TChartItemsIndexResponse,
   useChartItemsIndex
 } from "../../api/chartItems/useChartItemsIndex";
 import { useChartBuyItems } from "../../api/charts/useChartBuyItems";
+import { AlertDialog } from "../../components/baseParts/dialogs/AlertDialog";
+import { CheckIcon } from "../../components/baseParts/icons/CheckIcon";
 import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { BuyItemConfirm } from "./confirm/BuyItemConfirm";
@@ -24,10 +27,13 @@ export const BuyItemFetcher = ({ chartId, possesedPoint }: TProps) => {
   const [selectedChartItems, setSelectedChartItems] = useState<
     TChartItemsIndexResponse[]
   >([]);
-  const { mutate, isLoading, isError } = useChartBuyItems({ chartId });
+  const [isCompleted, setIsCompleted] = useState<boolean>(false);
+  const { mutate, isLoading: isBuyItemLoading, error: buyItemsError } = useChartBuyItems({ chartId });
+  const navigate = useNavigate();
 
   if (chartItemsError) return <ErrorPage message={chartItemsError.message} />;
   if (!chartItemsData) return <LoaderPage />;
+  if (buyItemsError) return <ErrorPage message={buyItemsError.message} />;
 
   const isNumber = (chartItemId: unknown): chartItemId is number => {
     return typeof chartItemId === "number";
@@ -106,9 +112,14 @@ export const BuyItemFetcher = ({ chartId, possesedPoint }: TProps) => {
               chartItemIds: getItemIds(),
               totalPrice: getTotalDiscountedPrice(),
               usedPoint: selectedPoint,
-            } )
+            },{
+              onSuccess: () => {
+                setIsCompleted(true)
+              }
+            }
+             )
           }}
-          isPurchaseButtonDisabled={selectedPoint > possesedPoint}
+          isPurchaseButtonDisabled={selectedPoint > possesedPoint || isBuyItemLoading}
         />
       ) : (
         <BuyItemSelect
@@ -118,6 +129,16 @@ export const BuyItemFetcher = ({ chartId, possesedPoint }: TProps) => {
           onClickConfirm={() => setIsConfirm(true)}
         />
       )}
+      <AlertDialog
+            open={isCompleted}
+            title={
+              'アイテム購入が完了しました'
+            }
+            description={<CheckIcon />}
+            onClick={() => navigate(0)}
+            onClose={() => navigate(0)}
+            okBtnText="閉じる"
+          />
     </>
   );
 };
