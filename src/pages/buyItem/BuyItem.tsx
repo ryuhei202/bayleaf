@@ -18,5 +18,13 @@ export const BuyItem = () => {
   if (chartError) return <ErrorPage message={chartError.message} />;
   if (!membersData || !chartData) return <LoaderPage />;
 
-  return <BuyItemFetcher chartId={chartData.charts[0].id} />;
+  if (chartData.charts.length == 0) {
+    return <ErrorPage message={'レンタル中のアイテムが存在しません'} />;
+  }
+
+  if(membersData.length == 2 || membersData.length == 0) {
+    return <ErrorPage message={'一つのアカウントを指定してください'} />;
+  }
+
+  return <BuyItemFetcher chartId={chartData.charts[0].id} possesedPoint={membersData[0].point} />;
 };

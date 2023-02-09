@@ -6,7 +6,7 @@ type TProps = {
   grantedPoint: number;
   possesedPoint: number;
   selectedPoint: number;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (selectedPoint: number) => void;
 };
 
 export const BillingInfo = ({
@@ -46,7 +46,7 @@ export const BillingInfo = ({
             <input
               className="border rounded mr-0.5 w-1/2 text-right"
               value={selectedPoint}
-              onChange={onChange}
+              onChange={(e) => onChange(Number(e.target.value))}
               type="number"
               min="0"
               max={possesedPoint}

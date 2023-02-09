@@ -7,7 +7,7 @@ import "./App.css";
 import { ErrorPage } from "./components/baseParts/pages/ErrorPage";
 import { LoaderPage } from "./components/baseParts/pages/LoaderPage";
 import { useAppInitializer } from "./hooks/handler/app/useAppInitializer";
-import { BuyItem } from "./pages/buyItem/ BuyItem";
+import { BuyItem } from "./pages/buyItem/BuyItem";
 import { Consult } from "./pages/consult/Consult";
 import { Delivery } from "./pages/delivery/Delivery";
 import { Dislike } from "./pages/dislike/Dislike";

@@ -10,8 +10,9 @@ type TProps = {
   totalGrantedPoint: number;
   possesedPoint: number;
   selectedPoint: number;
-  onChange: () => number;
+  onChange: (selectedPoint: number) => void;
   onClick: () => void;
+  isPurchaseButtonDisabled: boolean;
 };
 
 export const BuyItemConfirm = ({
@@ -23,6 +24,7 @@ export const BuyItemConfirm = ({
   selectedPoint,
   onChange,
   onClick,
+  isPurchaseButtonDisabled,
 }: TProps) => {
   return (
     <div className="mx-4">
@@ -57,7 +59,7 @@ export const BuyItemConfirm = ({
       ></BillingInfo>
 
       <div className="text-center mt-20 mb-16">
-        <Button className="w-1/2 i" onClick={onClick}>
+        <Button className="w-1/2 i" onClick={onClick} disabled={isPurchaseButtonDisabled}>
           購入する
         </Button>
       </div>

@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { BuyItem } from "./ BuyItem";
+import { BuyItem } from "./BuyItem";
 
 export default {
   title: "pageParts/buyItem/BuyItem",

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {
   TChartItemsIndexResponse,
-  useChartItemsIndex,
+  useChartItemsIndex
 } from "../../api/chartItems/useChartItemsIndex";
 import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
@@ -10,13 +10,12 @@ import { BuyItemSelect } from "./select/BuyItemSelect";
 
 export type TProps = {
   chartId: number;
+  possesedPoint: number;
 };
 
-export const BuyItemFetcher = ({ chartId }: TProps) => {
+export const BuyItemFetcher = ({ chartId, possesedPoint }: TProps) => {
   const [isConfirm, setIsConfirm] = useState<boolean>(false);
-  // const handleChangeIsConfirm = () => {
-  //   setIsConfirm(!isConfirm);
-  // };
+  const [selectedPoint, setSelectedPoint] = useState<number>(0);
   const { data: chartItemsData, error: chartItemsError } = useChartItemsIndex({
     chartId,
   });
@@ -52,22 +51,50 @@ export const BuyItemFetcher = ({ chartId }: TProps) => {
     }
   };
 
+  const getTotalPrice = () => {
+    let initialValue = 0
+    const totalPrice = selectedChartItems.reduce(
+      (accumulator, selectedChartItem) => accumulator + selectedChartItem.price,
+      initialValue
+    );
+    return totalPrice;
+  }
+
+  const getTotalDiscountedPrice = () => {
+    let initialValue = 0
+    const totalDiscountedPrice = selectedChartItems.reduce(
+      (accumulator, selectedChartItem) => accumulator + selectedChartItem.discountedPrice,
+      initialValue
+    );
+    return totalDiscountedPrice;
+  }
+
+  const getTotalGrantedPoint = () => {
+    let initialValue = 0
+    const totalGrantedPoint = selectedChartItems.reduce(
+      (accumulator, selectedChartItem) => accumulator + selectedChartItem.point,
+      initialValue
+    );
+    return totalGrantedPoint;
+  }
+
   return (
     <>
       {isConfirm ? (
         <BuyItemConfirm
           selectedItems={selectedChartItems}
-          totalPrice={0}
-          totalDiscountedPrice={0}
-          totalGrantedPoint={0}
-          possesedPoint={0}
-          selectedPoint={0}
-          onChange={function (): number {
-            throw new Error("Function not implemented.");
+          totalPrice={getTotalPrice()}
+          totalDiscountedPrice={getTotalDiscountedPrice()}
+          totalGrantedPoint={getTotalGrantedPoint()}
+          possesedPoint={possesedPoint}
+          selectedPoint={selectedPoint}
+          onChange={(selectedPoint) => {
+            setSelectedPoint(selectedPoint)
           }}
           onClick={function (): void {
             throw new Error("Function not implemented.");
           }}
+          isPurchaseButtonDisabled={selectedPoint > possesedPoint}
         />
       ) : (
         <BuyItemSelect
