@@ -38,6 +38,7 @@ export const UnsuspendContainer = ({ memberData }: TProps) => {
       planId={memberData.mPlanId}
       isLoading={isLoading}
       selectedPlan={selectedPlan}
+      isRentalRemained={memberData.rentalRemainingNum > 0}
       onSubmit={handleSubmit}
       onPlanSelect={handlePlanSelect}
       onCancel={handleCancel}
