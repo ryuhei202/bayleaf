@@ -17,23 +17,28 @@ export const Unsuspend = () => {
 
   if (!membersData) return <LoaderPage />;
 
+  if (membersData.length === 0)
+    return (
+      <div data-testid="ValidationForNotExistingMember">
+        <Page className="flex justify-center items-center">
+          <Typography>ユーザーが存在しません</Typography>
+        </Page>
+      </div>
+    );
+
   if (membersData.length > 1) {
     return (
       <div data-testid="ValidationForMultpleMember">
         <Page className="flex justify-center items-center">
           <Typography>
-            <>ユーザーが複数人います。マイページから再開をお願いいたします</>
+            ユーザーが複数人います。マイページから再開をお願いいたします
           </Typography>
         </Page>
       </div>
     );
   }
 
-  if (
-    !membersData[0].isSuspend ||
-    membersData[0].isPaymentError ||
-    membersData[0].rentalRemainingNum > 0
-  ) {
+  if (!membersData[0].isSuspend || membersData[0].isPaymentError) {
     window.location.assign(`${process.env.REACT_APP_HOST_URL}/unsuspend`);
     return (
       <div className="flex justify-center items-center h-screen">
