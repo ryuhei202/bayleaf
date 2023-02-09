@@ -1,7 +1,7 @@
 import { useGetRequest } from "../useGetRequest";
 export type TChartItemsIndexResponse = {
   readonly id: number;
-  readonly itemStatus: number;
+  readonly isPurchased: number;
   readonly brandName: string;
   readonly imagePaths: {
     original: string;

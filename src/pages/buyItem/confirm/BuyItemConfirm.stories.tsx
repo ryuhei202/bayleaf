@@ -22,7 +22,7 @@ DefaultValues.args = {
   selectedItems: [
     {
       id: 1,
-      itemStatus: 1,
+      isPurchased: 2,
       brandName: "leeap original",
       imagePaths: {
         original:
