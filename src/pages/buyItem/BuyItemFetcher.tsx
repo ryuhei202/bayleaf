@@ -3,10 +3,12 @@ import {
   TChartItemsIndexResponse,
   useChartItemsIndex
 } from "../../api/chartItems/useChartItemsIndex";
+import { useChartBuyItems } from "../../api/charts/useChartBuyItems";
 import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { BuyItemConfirm } from "./confirm/BuyItemConfirm";
 import { BuyItemSelect } from "./select/BuyItemSelect";
+
 
 export type TProps = {
   chartId: number;
@@ -22,6 +24,7 @@ export const BuyItemFetcher = ({ chartId, possesedPoint }: TProps) => {
   const [selectedChartItems, setSelectedChartItems] = useState<
     TChartItemsIndexResponse[]
   >([]);
+  const { mutate, isLoading, isError } = useChartBuyItems({ chartId });
 
   if (chartItemsError) return <ErrorPage message={chartItemsError.message} />;
   if (!chartItemsData) return <LoaderPage />;
@@ -78,6 +81,13 @@ export const BuyItemFetcher = ({ chartId, possesedPoint }: TProps) => {
     return totalGrantedPoint;
   }
 
+  const getItemIds = () => {
+    let itemIds = selectedChartItems.map(
+      (selectedItem) => selectedItem.id
+    );
+    return itemIds;
+  }
+
   return (
     <>
       {isConfirm ? (
@@ -91,8 +101,12 @@ export const BuyItemFetcher = ({ chartId, possesedPoint }: TProps) => {
           onChange={(selectedPoint) => {
             setSelectedPoint(selectedPoint)
           }}
-          onClick={function (): void {
-            throw new Error("Function not implemented.");
+          onClick={() => {
+            mutate({
+              chartItemIds: getItemIds(),
+              totalPrice: getTotalDiscountedPrice(),
+              usedPoint: selectedPoint,
+            } )
           }}
           isPurchaseButtonDisabled={selectedPoint > possesedPoint}
         />
