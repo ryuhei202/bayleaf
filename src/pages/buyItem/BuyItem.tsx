@@ -10,7 +10,8 @@ export const BuyItem = () => {
 
   const { data: chartData, error: chartError } = useChartIndex({
     params: {
-      rentalStatus: [CHART_RENTAL_STATUS.WAIT_RENTAL_RETURN],
+      rentalStatus: [CHART_RENTAL_STATUS.WAIT_RENTAL_RETURN , CHART_RENTAL_STATUS.WAIT_INSPECTION],
+
     },
   });
 

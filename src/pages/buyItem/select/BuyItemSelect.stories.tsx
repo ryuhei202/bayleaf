@@ -22,7 +22,8 @@ DefaultValues.args = {
   selectedChartItems: [
     {
       id: 1,
-      isPurchased: 2,
+      isPurchased: true,
+      isBuyable: true,
       brandName: "leeap original",
       imagePaths: {
         original:
@@ -46,7 +47,8 @@ DefaultValues.args = {
   chartItemsData: [
     {
       id: 1,
-      isPurchased: 2,
+      isPurchased: true,
+      isBuyable: true,
       brandName: "leeap original",
       imagePaths: {
         original:
@@ -68,7 +70,8 @@ DefaultValues.args = {
     },
     {
       id: 2,
-      isPurchased: 2,
+      isPurchased: true,
+      isBuyable: true,
       brandName: "leeap original",
       imagePaths: {
         original:
@@ -90,7 +93,8 @@ DefaultValues.args = {
     },
     {
       id: 3,
-      isPurchased: 2,
+      isPurchased: true,
+      isBuyable: true,
       brandName: "leeap original",
       imagePaths: {
         original:
