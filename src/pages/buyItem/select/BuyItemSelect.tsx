@@ -35,7 +35,7 @@ export const BuyItemSelect = ({
               return (
                 <div className="my-6 relative">
                   <PurchaseItemCard
-                    className="brightness-50"
+                    className="brightness-50 pointer-events-none"
                     imagePaths={{
                       defaultPath: chartItem.imagePaths.large,
                       expandedPath: chartItem.imagePaths.large,
