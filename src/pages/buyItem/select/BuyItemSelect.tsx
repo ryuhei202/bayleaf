@@ -23,19 +23,19 @@ export const BuyItemSelect = ({
   };
 
   return (
-    <div className="text-center mx-4">
-      <div className="m-8 text-center text-neutral-500">
+    <div className="text-center px-6 pb-16 bg-clay">
+      <div className="p-8 text-center text-themeGray">
         レンタルアイテムの購入
       </div>
       <div>
         {chartItemsData.map((chartItem: TChartItemsIndexResponse) => {
           if (chartItem.isPurchased || !chartItem.isBuyable) {
             return (
-              <div className="mx-2 my-6 relative">
+              <div className="my-6 relative">
                 <PurchaseItemCard
                   className="brightness-50"
                   imagePaths={{
-                    defaultPath: chartItem.imagePaths.thumb,
+                    defaultPath: chartItem.imagePaths.large,
                     expandedPath: chartItem.imagePaths.large,
                   }}
                   brand={chartItem.brandName}
@@ -45,7 +45,7 @@ export const BuyItemSelect = ({
                   point={chartItem.point}
                   discountedPrice={chartItem.discountedPrice}
                   price={chartItem.price}
-                ></PurchaseItemCard>
+                />
                 <Typography
                   className="absolute top-1/2 text-center w-full align-top -translate-y-1/2"
                   size="2xl"
@@ -59,13 +59,13 @@ export const BuyItemSelect = ({
           } else {
             return (
               <div
-                className="mx-2 my-6"
+                className="my-6"
                 onClick={() => onSelectChartItems(chartItem.id)}
               >
                 <SelectWrapper visible={isVisible(chartItem.id)}>
                   <PurchaseItemCard
                     imagePaths={{
-                      defaultPath: chartItem.imagePaths.thumb,
+                      defaultPath: chartItem.imagePaths.large,
                       expandedPath: chartItem.imagePaths.large,
                     }}
                     brand={chartItem.brandName}
@@ -75,7 +75,7 @@ export const BuyItemSelect = ({
                     point={chartItem.point}
                     discountedPrice={chartItem.discountedPrice}
                     price={chartItem.price}
-                  ></PurchaseItemCard>
+                  />
                 </SelectWrapper>
               </div>
             );
@@ -83,7 +83,7 @@ export const BuyItemSelect = ({
         })}
       </div>
       <Button
-        className="w-1/2 text-center mt-8 mb-16"
+        className="mt-8"
         onClick={onClickConfirm}
         disabled={selectedChartItems.length === 0}
       >

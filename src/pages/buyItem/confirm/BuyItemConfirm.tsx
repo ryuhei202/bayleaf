@@ -27,15 +27,15 @@ export const BuyItemConfirm = ({
   isPurchaseButtonDisabled,
 }: TProps) => {
   return (
-    <div className="mx-4">
-      <div className="m-8 text-center text-neutral-500">
+    <div className="px-6 pb-16 bg-clay">
+      <div className="p-8 text-center text-themeGray">
         レンタル中アイテムの購入確認画面
       </div>
       <div>
         {selectedItems.map((item: TChartItemsIndexResponse) => (
           <PurchaseItemCard
             imagePaths={{
-              defaultPath: item.imagePaths.thumb,
+              defaultPath: item.imagePaths.large,
               expandedPath: item.imagePaths.large,
             }}
             brand={item.brandName}
@@ -56,10 +56,10 @@ export const BuyItemConfirm = ({
         possesedPoint={possesedPoint}
         selectedPoint={selectedPoint}
         onChange={onChange}
-      ></BillingInfo>
+      />
 
-      <div className="text-center mt-20 mb-16">
-        <Button className="w-1/2 i" onClick={onClick} disabled={isPurchaseButtonDisabled}>
+      <div className="text-center mt-20">
+        <Button onClick={onClick} disabled={isPurchaseButtonDisabled}>
           購入する
         </Button>
       </div>

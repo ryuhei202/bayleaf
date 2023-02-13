@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   TChartItemsIndexResponse,
-  useChartItemsIndex
+  useChartItemsIndex,
 } from "../../api/chartItems/useChartItemsIndex";
 import { useChartBuyItems } from "../../api/charts/useChartBuyItems";
 import { AlertDialog } from "../../components/baseParts/dialogs/AlertDialog";
@@ -11,7 +11,6 @@ import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { BuyItemConfirm } from "./confirm/BuyItemConfirm";
 import { BuyItemSelect } from "./select/BuyItemSelect";
-
 
 export type TProps = {
   chartId: number;
@@ -28,71 +27,70 @@ export const BuyItemFetcher = ({ chartId, possesedPoint }: TProps) => {
     TChartItemsIndexResponse[]
   >([]);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
-  const { mutate, isLoading: isBuyItemLoading, error: buyItemsError } = useChartBuyItems({ chartId });
+  const {
+    mutate,
+    isLoading: isBuyItemLoading,
+    error: buyItemsError,
+  } = useChartBuyItems({ chartId });
   const navigate = useNavigate();
 
   if (chartItemsError) return <ErrorPage message={chartItemsError.message} />;
   if (!chartItemsData) return <LoaderPage />;
   if (buyItemsError) return <ErrorPage message={buyItemsError.message} />;
 
-  const isNumber = (chartItemId: unknown): chartItemId is number => {
-    return typeof chartItemId === "number";
+  const isNotUndefined = (
+    targetChartItem: unknown
+  ): targetChartItem is TChartItemsIndexResponse => {
+    return targetChartItem !== undefined;
   };
+
   const handeleSelectChartItems = (chartItemId: number) => {
     const selectedChartItemsIds = selectedChartItems.map((item) => item.id);
-    const targetChartItem = chartItemsData.find(
-      (chartItem) => chartItem.id === chartItemId
-    );
-    const targetChartItemId = targetChartItem?.id;
-    if (isNumber(targetChartItemId)) {
-      if (selectedChartItemsIds.includes(targetChartItemId)) {
-        const newSelectedChartItems = selectedChartItems.filter(
-          (item) => item.id !== chartItemId
-        );
-        setSelectedChartItems(newSelectedChartItems);
-      } else {
-        const newSelectedChartItems = [
-          ...selectedChartItems,
-          targetChartItem as TChartItemsIndexResponse,
-        ];
+    if (selectedChartItemsIds.includes(chartItemId)) {
+      const newSelectedChartItems = selectedChartItems.filter(
+        (item) => item.id !== chartItemId
+      );
+      setSelectedChartItems(newSelectedChartItems);
+    } else {
+      const targetChartItem = chartItemsData.find((c) => c.id === chartItemId);
+      if (isNotUndefined(targetChartItem)) {
+        const newSelectedChartItems = [...selectedChartItems, targetChartItem];
         setSelectedChartItems(newSelectedChartItems);
       }
     }
   };
 
   const getTotalPrice = () => {
-    let initialValue = 0
+    let initialValue = 0;
     const totalPrice = selectedChartItems.reduce(
       (accumulator, selectedChartItem) => accumulator + selectedChartItem.price,
       initialValue
     );
     return totalPrice;
-  }
+  };
 
   const getTotalDiscountedPrice = () => {
-    let initialValue = 0
+    let initialValue = 0;
     const totalDiscountedPrice = selectedChartItems.reduce(
-      (accumulator, selectedChartItem) => accumulator + selectedChartItem.discountedPrice,
+      (accumulator, selectedChartItem) =>
+        accumulator + selectedChartItem.discountedPrice,
       initialValue
     );
     return totalDiscountedPrice;
-  }
+  };
 
   const getTotalGrantedPoint = () => {
-    let initialValue = 0
+    let initialValue = 0;
     const totalGrantedPoint = selectedChartItems.reduce(
       (accumulator, selectedChartItem) => accumulator + selectedChartItem.point,
       initialValue
     );
     return totalGrantedPoint;
-  }
+  };
 
   const getItemIds = () => {
-    let itemIds = selectedChartItems.map(
-      (selectedItem) => selectedItem.id
-    );
-    return itemIds;
-  }
+    return selectedChartItems.map((selectedItem) => selectedItem.id);
+  };
 
   return (
     <>
@@ -105,21 +103,25 @@ export const BuyItemFetcher = ({ chartId, possesedPoint }: TProps) => {
           possesedPoint={possesedPoint}
           selectedPoint={selectedPoint}
           onChange={(selectedPoint) => {
-            setSelectedPoint(selectedPoint)
+            setSelectedPoint(selectedPoint);
           }}
           onClick={() => {
-            mutate({
-              chartItemIds: getItemIds(),
-              totalPrice: getTotalDiscountedPrice(),
-              usedPoint: selectedPoint,
-            },{
-              onSuccess: () => {
-                setIsCompleted(true)
+            mutate(
+              {
+                chartItemIds: getItemIds(),
+                totalPrice: getTotalDiscountedPrice(),
+                usedPoint: selectedPoint,
+              },
+              {
+                onSuccess: () => {
+                  setIsCompleted(true);
+                },
               }
-            }
-             )
+            );
           }}
-          isPurchaseButtonDisabled={selectedPoint > possesedPoint || isBuyItemLoading}
+          isPurchaseButtonDisabled={
+            selectedPoint > possesedPoint || isBuyItemLoading
+          }
         />
       ) : (
         <BuyItemSelect
@@ -130,15 +132,13 @@ export const BuyItemFetcher = ({ chartId, possesedPoint }: TProps) => {
         />
       )}
       <AlertDialog
-            open={isCompleted}
-            title={
-              'アイテム購入が完了しました'
-            }
-            description={<CheckIcon />}
-            onClick={() => navigate(0)}
-            onClose={() => navigate(0)}
-            okBtnText="閉じる"
-          />
+        open={isCompleted}
+        title={"アイテム購入が完了しました"}
+        description={<CheckIcon />}
+        onClick={() => navigate(0)}
+        onClose={() => navigate(0)}
+        okBtnText="閉じる"
+      />
     </>
   );
 };
