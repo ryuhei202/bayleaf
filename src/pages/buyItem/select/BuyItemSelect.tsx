@@ -33,7 +33,7 @@ export const BuyItemSelect = ({
           {chartItemsData.map((chartItem: TChartItemsIndexResponse) => {
             if (chartItem.isPurchased || !chartItem.isBuyable) {
               return (
-                <div className="my-6 relative w-full">
+                <div className="my-6 relative">
                   <PurchaseItemCard
                     className="brightness-50 pointer-events-none"
                     imagePaths={{
