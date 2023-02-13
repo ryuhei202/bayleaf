@@ -42,6 +42,7 @@ export const BillingInfo = ({
             <input
               className="border rounded mr-0.5 w-1/2 text-right"
               value={selectedPoint}
+              type="number"
               onChange={(e) => onChange(Number(e.target.value))}
             />
             pt
