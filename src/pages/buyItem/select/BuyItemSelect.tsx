@@ -1,55 +1,94 @@
 import { TChartItemsIndexResponse } from "../../../api/chartItems/useChartItemsIndex";
 import { Button } from "../../../components/baseParts/Button";
+import { Typography } from "../../../components/baseParts/legacy/Typography";
 import { SelectWrapper } from "../../../components/baseParts/wrapper/SelectWrapper";
 import { PurchaseItemCard } from "../../../components/pageParts/buyItem/PurchaseItemCard";
 
 type TProps = {
-  selectedChartItemIds: number[];
+  selectedChartItems: TChartItemsIndexResponse[];
   chartItemsData: TChartItemsIndexResponse[];
-  onSelectChartItemIds: (chartItemId: number) => void;
+  onSelectChartItems: (chartItemId: number) => void;
+  onClickConfirm: () => void;
 };
 
 export const BuyItemSelect = ({
-  selectedChartItemIds,
+  selectedChartItems,
   chartItemsData,
-  onSelectChartItemIds,
+  onSelectChartItems,
+  onClickConfirm,
 }: TProps) => {
+  const isVisible = (chartItemId: number) => {
+    const selectedChartItemsIds = selectedChartItems.map((item) => item.id);
+    return selectedChartItemsIds.includes(chartItemId);
+  };
+
   return (
-    <div className="">
+    <div className="text-center mx-4">
       <div className="m-8 text-center text-neutral-500">
         レンタルアイテムの購入
       </div>
       <div>
         {chartItemsData.map((chartItem: TChartItemsIndexResponse) => {
-          return (
-            <div
-              className="mx-2 my-12"
-              onChange={() => onSelectChartItemIds(chartItem.id)}
-            >
-              <SelectWrapper
-                visible={selectedChartItemIds.includes(chartItem.id)}
-              >
-                <PurchaseItemCard
-                  imagePaths={{
-                    defaultPath: chartItem.imagePaths[0],
-                    expandedPath: chartItem.imagePaths[1],
-                  }}
-                  brand={chartItem.brandName}
-                  category={chartItem.categoryName}
-                  color={chartItem.colorName}
-                  discountRate={chartItem.discountRate}
-                  point={chartItem.point}
-                  discountedPrice={chartItem.priceTaxIn}
-                  price={chartItem.referencePriceTaxIn}
-                ></PurchaseItemCard>
-              </SelectWrapper>
+          console.log(chartItem);
+
+          return ((chartItem.isPurchased) ?
+            <div className="mx-2 my-6 relative">
+              <PurchaseItemCard
+                className="brightness-50"
+                imagePaths={{
+                  defaultPath: chartItem.imagePaths.thumb,
+                  expandedPath: chartItem.imagePaths.large,
+                }}
+                brand={chartItem.brandName}
+                category={chartItem.categoryName}
+                color={chartItem.colorName}
+                discountRate={chartItem.discountRate}
+                point={chartItem.point}
+                discountedPrice={chartItem.discountedPrice}
+                price={chartItem.price}
+              ></PurchaseItemCard>
+              <Typography
+               className="absolute top-1/2 text-center w-full align-top -translate-y-1/2"
+               size="2xl"
+               color="white"
+               weight="bold"
+               >
+                購入済み
+               </Typography>
             </div>
-          );
+            
+          :
+              <div
+                className="mx-2 my-6"
+                onClick={() => onSelectChartItems(chartItem.id)}
+              >
+                <SelectWrapper visible={isVisible(chartItem.id)}>
+                  <PurchaseItemCard
+                    imagePaths={{
+                      defaultPath: chartItem.imagePaths.thumb,
+                      expandedPath: chartItem.imagePaths.large,
+                    }}
+                    brand={chartItem.brandName}
+                    category={chartItem.categoryName}
+                    color={chartItem.colorName}
+                    discountRate={chartItem.discountRate}
+                    point={chartItem.point}
+                    discountedPrice={chartItem.discountedPrice}
+                    price={chartItem.price}
+                  ></PurchaseItemCard>
+                </SelectWrapper>
+              </div>
+            
+          )
         })}
       </div>
-      <div className="text-center mt-20 mb-16">
-        <Button className="w-1/2 i">確認画面へ</Button>
-      </div>
+      <Button
+        className="w-1/2 text-center mt-8 mb-16"
+        onClick={onClickConfirm}
+        disabled={selectedChartItems.length === 0}
+      >
+        確認画面へ
+      </Button>
     </div>
   );
 };

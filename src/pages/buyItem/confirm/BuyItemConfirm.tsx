@@ -1,27 +1,18 @@
+import { TChartItemsIndexResponse } from "../../../api/chartItems/useChartItemsIndex";
 import { Button } from "../../../components/baseParts/Button";
 import { BillingInfo } from "../../../components/pageParts/buyItem/BillingInfo";
 import { PurchaseItemCard } from "../../../components/pageParts/buyItem/PurchaseItemCard";
 
-type TItem = {
-  imagePaths: { defaultPath: string; expandedPath: string };
-  brand: string;
-  category: string;
-  color: string;
-  discountRate: number;
-  point: number;
-  discountedPrice: number;
-  price: number;
-};
-
 type TProps = {
-  selectedItems: TItem[];
+  selectedItems: TChartItemsIndexResponse[];
   totalPrice: number;
   totalDiscountedPrice: number;
   totalGrantedPoint: number;
   possesedPoint: number;
   selectedPoint: number;
-  onChange: () => number;
+  onChange: (selectedPoint: number) => void;
   onClick: () => void;
+  isPurchaseButtonDisabled: boolean;
 };
 
 export const BuyItemConfirm = ({
@@ -33,32 +24,30 @@ export const BuyItemConfirm = ({
   selectedPoint,
   onChange,
   onClick,
+  isPurchaseButtonDisabled,
 }: TProps) => {
   return (
-    <div className="">
+    <div className="mx-4">
       <div className="m-8 text-center text-neutral-500">
         レンタル中アイテムの購入確認画面
       </div>
       <div>
-        {selectedItems.map((item: TItem) => {
-          return (
-            <div className="mx-2 my-12">
-              <PurchaseItemCard
-                imagePaths={{
-                  defaultPath: item.imagePaths.defaultPath,
-                  expandedPath: item.imagePaths.expandedPath,
-                }}
-                brand={item.brand}
-                category={item.category}
-                color={item.color}
-                discountRate={item.discountRate}
-                point={item.point}
-                discountedPrice={item.discountedPrice}
-                price={item.price}
-              ></PurchaseItemCard>
-            </div>
-          );
-        })}
+        {selectedItems.map((item: TChartItemsIndexResponse) => (
+          <PurchaseItemCard
+            imagePaths={{
+              defaultPath: item.imagePaths.thumb,
+              expandedPath: item.imagePaths.large,
+            }}
+            brand={item.brandName}
+            category={item.categoryName}
+            color={item.colorName}
+            discountRate={item.discountRate}
+            point={item.point}
+            discountedPrice={item.discountedPrice}
+            price={item.price}
+            className="my-6"
+          />
+        ))}
       </div>
       <BillingInfo
         price={totalPrice}
@@ -70,7 +59,7 @@ export const BuyItemConfirm = ({
       ></BillingInfo>
 
       <div className="text-center mt-20 mb-16">
-        <Button className="w-1/2 i" onClick={onClick}>
+        <Button className="w-1/2 i" onClick={onClick} disabled={isPurchaseButtonDisabled}>
           購入する
         </Button>
       </div>

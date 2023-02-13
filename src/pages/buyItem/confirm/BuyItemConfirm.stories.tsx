@@ -21,49 +21,26 @@ export const DefaultValues = Template.bind({});
 DefaultValues.args = {
   selectedItems: [
     {
+      id: 1,
+      isPurchased: 2,
+      brandName: "leeap original",
       imagePaths: {
-        defaultPath:
+        original:
           "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_thumb_IMG_3977.jpeg",
-        expandedPath:
+        large:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
+        largeThumb:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
+        thumb:
           "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
       },
-      brand: "leeap original",
-      category: "ジャケット",
-      color: "ブラック",
-      discountRate: 20,
-      point: 864,
-      discountedPrice: 12000,
+      categoryName: "ジャケット",
+      colorName: "ブラック",
       price: 15000,
-    },
-    {
-      imagePaths: {
-        defaultPath:
-          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_thumb_IMG_3977.jpeg",
-        expandedPath:
-          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
-      },
-      brand: "leeap original",
-      category: "ジャケット",
-      color: "ブラック",
-      discountRate: 20,
-      point: 864,
       discountedPrice: 12000,
-      price: 15000,
-    },
-    {
-      imagePaths: {
-        defaultPath:
-          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_thumb_IMG_3977.jpeg",
-        expandedPath:
-          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
-      },
-      brand: "leeap original",
-      category: "ジャケット",
-      color: "ブラック",
-      discountRate: 20,
       point: 864,
-      discountedPrice: 12000,
-      price: 15000,
+      locationId: 1,
+      discountRate: 20,
     },
   ],
   totalPrice: 42900,
