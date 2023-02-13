@@ -1,7 +1,7 @@
 import { useGetRequest } from "../useGetRequest";
 export type TChartItemsIndexResponse = {
   readonly id: number;
-  readonly isPurchased: number;
+  readonly isPurchased: boolean;
   readonly brandName: string;
   readonly imagePaths: {
     original: string;
@@ -16,6 +16,7 @@ export type TChartItemsIndexResponse = {
   readonly point: number;
   readonly locationId: number | null;
   readonly discountRate: number;
+  readonly isBuyable: boolean;
 };
 
 type TArgs = {

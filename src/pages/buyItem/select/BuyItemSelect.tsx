@@ -29,35 +29,35 @@ export const BuyItemSelect = ({
       </div>
       <div>
         {chartItemsData.map((chartItem: TChartItemsIndexResponse) => {
-          console.log(chartItem);
-
-          return ((chartItem.isPurchased) ?
-            <div className="mx-2 my-6 relative">
-              <PurchaseItemCard
-                className="brightness-50"
-                imagePaths={{
-                  defaultPath: chartItem.imagePaths.thumb,
-                  expandedPath: chartItem.imagePaths.large,
-                }}
-                brand={chartItem.brandName}
-                category={chartItem.categoryName}
-                color={chartItem.colorName}
-                discountRate={chartItem.discountRate}
-                point={chartItem.point}
-                discountedPrice={chartItem.discountedPrice}
-                price={chartItem.price}
-              ></PurchaseItemCard>
-              <Typography
-               className="absolute top-1/2 text-center w-full align-top -translate-y-1/2"
-               size="2xl"
-               color="white"
-               weight="bold"
-               >
-                購入済み
-               </Typography>
-            </div>
-            
-          :
+          if (chartItem.isPurchased || !chartItem.isBuyable) {
+            return (
+              <div className="mx-2 my-6 relative">
+                <PurchaseItemCard
+                  className="brightness-50"
+                  imagePaths={{
+                    defaultPath: chartItem.imagePaths.thumb,
+                    expandedPath: chartItem.imagePaths.large,
+                  }}
+                  brand={chartItem.brandName}
+                  category={chartItem.categoryName}
+                  color={chartItem.colorName}
+                  discountRate={chartItem.discountRate}
+                  point={chartItem.point}
+                  discountedPrice={chartItem.discountedPrice}
+                  price={chartItem.price}
+                ></PurchaseItemCard>
+                <Typography
+                  className="absolute top-1/2 text-center w-full align-top -translate-y-1/2"
+                  size="2xl"
+                  color="white"
+                  weight="bold"
+                >
+                  {chartItem.isPurchased ? "購入済み" : "購入不可"}
+                </Typography>
+              </div>
+            );
+          } else {
+            return (
               <div
                 className="mx-2 my-6"
                 onClick={() => onSelectChartItems(chartItem.id)}
@@ -78,8 +78,8 @@ export const BuyItemSelect = ({
                   ></PurchaseItemCard>
                 </SelectWrapper>
               </div>
-            
-          )
+            );
+          }
         })}
       </div>
       <Button
