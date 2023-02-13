@@ -31,10 +31,7 @@ export const PurchaseItemCard = ({
           <Typography className="text-left" color="strong-gray" size="xl">
             {brand}
           </Typography>
-          <Typography
-            className="leading-3 text-left text-[0.2rem]"
-            color="gray"
-          >
+          <Typography className="leading-3 text-left" size="xs" color="gray">
             {category}/{color}
           </Typography>
         </div>
@@ -48,7 +45,7 @@ export const PurchaseItemCard = ({
           </Typography>
           <Typography className="leading-3 text-left" color="red">
             ￥{discountedPrice.toLocaleString()}
-            <span className="text-xs">(税込 {discountRate}%OFF)</span>
+            <span className="text-xs">(税込 {discountRate}OFF)</span>
           </Typography>
         </div>
         <div>
