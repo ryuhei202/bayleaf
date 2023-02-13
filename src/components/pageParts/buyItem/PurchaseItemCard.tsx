@@ -28,7 +28,7 @@ export const PurchaseItemCard = ({
     <WideItemCard imagePaths={imagePaths} className={className}>
       <div className="h-full flex flex-col justify-around">
         <div>
-          <Typography className=" text-left " color="strong-gray" size="xl">
+          <Typography className="text-left" color="strong-gray" size="xl">
             {brand}
           </Typography>
           <Typography

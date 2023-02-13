@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "../Button";
 import { ImageAlt } from "./ImageAlt";
 
@@ -6,12 +6,14 @@ type TProps = {
   defaultImageSrc: string;
   ExpandedImageSrc: string;
   className?: string;
+  defaultImageClassName?: string;
 };
 
 export const ExpandableImage = ({
   defaultImageSrc,
   ExpandedImageSrc,
   className,
+  defaultImageClassName,
 }: TProps) => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
@@ -24,9 +26,12 @@ export const ExpandableImage = ({
   };
 
   return (
-    <div className={`${className ?? ""} h-full`}>
-      <ImageAlt imageSrc={defaultImageSrc} onClick={handleClickDefaultImage} />
-
+    <div className={`h-full ${className ?? ""}`}>
+      <ImageAlt
+        imageSrc={defaultImageSrc}
+        onClick={handleClickDefaultImage}
+        className={defaultImageClassName}
+      />
       {isExpanded ? (
         <div className="fixed top-0 right-0 left-0 bottom-0 flex justify-center items-center flex-col z-50">
           <div
