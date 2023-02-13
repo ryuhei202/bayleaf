@@ -17,10 +17,6 @@ export const BillingInfo = ({
   selectedPoint,
   onChange,
 }: TProps) => {
-  const isSelectedPointValid = (): boolean => {
-    return selectedPoint >= 0 && selectedPoint <= possesedPoint;
-  };
-
   return (
     <div className="bg-white flex flex-col">
       <div className="border-dashed border-b-[1px] py-8 items-center flex text-right">
@@ -31,7 +27,7 @@ export const BillingInfo = ({
           <Typography className="line-through" color="strong-gray">
             ¥{price.toLocaleString()}
           </Typography>
-          <Typography className="" color="red">
+          <Typography color="red">
             ¥{discountedPrice.toLocaleString()}
           </Typography>
         </div>
@@ -47,20 +43,8 @@ export const BillingInfo = ({
               className="border rounded mr-0.5 w-1/2 text-right"
               value={selectedPoint}
               onChange={(e) => onChange(Number(e.target.value))}
-              type="number"
-              min="0"
-              max={possesedPoint}
-              step="100"
-            ></input>
+            />
             pt
-          </Typography>
-          <Typography
-            className={`text-right leading-5 text-[1px] ${
-              isSelectedPointValid() ? "hidden" : ""
-            }`}
-            color="red"
-          >
-            ※0pt~{possesedPoint}ptの範囲で選択してください
           </Typography>
           <Typography
             className="text-right leading-5"
@@ -77,7 +61,7 @@ export const BillingInfo = ({
           ご請求額
         </Typography>
         <Typography className="w-1/2 pr-6" color="strong-gray">
-          ¥{(price - selectedPoint).toLocaleString()}
+          ¥{(discountedPrice - selectedPoint).toLocaleString()}
         </Typography>
       </div>
 

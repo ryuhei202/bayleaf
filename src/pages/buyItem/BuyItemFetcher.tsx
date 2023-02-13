@@ -92,6 +92,14 @@ export const BuyItemFetcher = ({ chartId, possesedPoint }: TProps) => {
     return selectedChartItems.map((selectedItem) => selectedItem.id);
   };
 
+  const isValidPurchased = (): boolean => {
+    const isAvailablePoints =
+      possesedPoint > getTotalDiscountedPrice()
+        ? getTotalDiscountedPrice() < selectedPoint
+        : possesedPoint < selectedPoint;
+    return isAvailablePoints || isBuyItemLoading;
+  };
+
   return (
     <>
       {isConfirm ? (
@@ -103,14 +111,23 @@ export const BuyItemFetcher = ({ chartId, possesedPoint }: TProps) => {
           possesedPoint={possesedPoint}
           selectedPoint={selectedPoint}
           onChange={(selectedPoint) => {
-            setSelectedPoint(selectedPoint);
+            const newSelectedPoint =
+              selectedPoint >= getTotalDiscountedPrice()
+                ? getTotalDiscountedPrice()
+                : selectedPoint;
+
+            setSelectedPoint(
+              newSelectedPoint > possesedPoint
+                ? possesedPoint
+                : newSelectedPoint
+            );
           }}
           onClick={() => {
             mutate(
               {
                 chartItemIds: getItemIds(),
                 totalPrice: getTotalDiscountedPrice(),
-                usedPoint: selectedPoint,
+                usingPoint: selectedPoint,
               },
               {
                 onSuccess: () => {
@@ -119,9 +136,8 @@ export const BuyItemFetcher = ({ chartId, possesedPoint }: TProps) => {
               }
             );
           }}
-          isPurchaseButtonDisabled={
-            selectedPoint > possesedPoint || isBuyItemLoading
-          }
+          onCancel={() => setIsConfirm(false)}
+          isPurchaseButtonDisabled={isValidPurchased()}
         />
       ) : (
         <BuyItemSelect

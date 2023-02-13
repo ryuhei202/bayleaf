@@ -1,5 +1,8 @@
 import { TChartItemsIndexResponse } from "../../../api/chartItems/useChartItemsIndex";
 import { Button } from "../../../components/baseParts/Button";
+import { FooterWrapper } from "../../../components/baseParts/legacy/FooterWrapper";
+import { IconButton } from "../../../components/baseParts/legacy/IconButton";
+import { ArrowIcon } from "../../../components/baseParts/legacy/icons/ArrowIcon";
 import { BillingInfo } from "../../../components/pageParts/buyItem/BillingInfo";
 import { PurchaseItemCard } from "../../../components/pageParts/buyItem/PurchaseItemCard";
 
@@ -12,6 +15,7 @@ type TProps = {
   selectedPoint: number;
   onChange: (selectedPoint: number) => void;
   onClick: () => void;
+  onCancel: () => void;
   isPurchaseButtonDisabled: boolean;
 };
 
@@ -24,45 +28,52 @@ export const BuyItemConfirm = ({
   selectedPoint,
   onChange,
   onClick,
+  onCancel,
   isPurchaseButtonDisabled,
 }: TProps) => {
   return (
-    <div className="px-6 pb-16 bg-clay">
-      <div className="p-8 text-center text-themeGray">
-        レンタル中アイテムの購入確認画面
+    <div className="bg-clay">
+      <div className="px-6 py-6">
+        <div className="p-8 text-center text-themeGray">
+          レンタル中アイテムの購入確認画面
+        </div>
+        <div>
+          {selectedItems.map((item: TChartItemsIndexResponse) => (
+            <PurchaseItemCard
+              imagePaths={{
+                defaultPath: item.imagePaths.large,
+                expandedPath: item.imagePaths.large,
+              }}
+              brand={item.brandName}
+              category={item.categoryName}
+              color={item.colorName}
+              discountRate={item.discountRate}
+              point={item.point}
+              discountedPrice={item.discountedPrice}
+              price={item.price}
+              className="my-6"
+            />
+          ))}
+        </div>
+        <BillingInfo
+          price={totalPrice}
+          discountedPrice={totalDiscountedPrice}
+          grantedPoint={totalGrantedPoint}
+          possesedPoint={possesedPoint}
+          selectedPoint={selectedPoint}
+          onChange={onChange}
+        />
       </div>
-      <div>
-        {selectedItems.map((item: TChartItemsIndexResponse) => (
-          <PurchaseItemCard
-            imagePaths={{
-              defaultPath: item.imagePaths.large,
-              expandedPath: item.imagePaths.large,
-            }}
-            brand={item.brandName}
-            category={item.categoryName}
-            color={item.colorName}
-            discountRate={item.discountRate}
-            point={item.point}
-            discountedPrice={item.discountedPrice}
-            price={item.price}
-            className="my-6"
-          />
-        ))}
-      </div>
-      <BillingInfo
-        price={totalPrice}
-        discountedPrice={totalDiscountedPrice}
-        grantedPoint={totalGrantedPoint}
-        possesedPoint={possesedPoint}
-        selectedPoint={selectedPoint}
-        onChange={onChange}
-      />
-
-      <div className="text-center mt-20">
-        <Button onClick={onClick} disabled={isPurchaseButtonDisabled}>
-          購入する
-        </Button>
-      </div>
+      <FooterWrapper className="px-3 py-4">
+        <div className="flex flex-row text-center">
+          <IconButton className="flex-none" onClick={onCancel}>
+            <ArrowIcon className="h-10 my-auto" />
+          </IconButton>
+          <Button onClick={onClick} disabled={isPurchaseButtonDisabled}>
+            購入する
+          </Button>
+        </div>
+      </FooterWrapper>
     </div>
   );
 };
