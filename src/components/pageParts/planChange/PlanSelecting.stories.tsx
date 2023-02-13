@@ -22,6 +22,7 @@ Default.args = {
     rentalRemainingNum: 1,
   },
   isCancelCompleted: false,
+  isCompleted: false,
 };
 
 export const PlanSelected = Template.bind({});
@@ -32,8 +33,8 @@ PlanSelected.args = {
     rentalRemainingNum: 1,
   },
   selectedPlan: findPlanById(12),
-  isCompleted: false,
   isCancelCompleted: false,
+  isCompleted: false,
 };
 
 export const PlanRequested = Template.bind({});
@@ -44,5 +45,7 @@ PlanRequested.args = {
     rentalRemainingNum: 1,
     requestedPlanId: 12,
   },
+  selectedPlan: findPlanById(12),
   isCancelCompleted: false,
+  isCompleted: true,
 };

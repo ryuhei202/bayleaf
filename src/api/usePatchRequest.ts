@@ -12,7 +12,7 @@ export const usePatchRequest = <T>(path: string, params?: T) => {
     ...params,
     stylistId,
   };
-  const { mutate, isLoading } = useMutation(path, (lateParams?: T) =>
+  const { mutate, isLoading, error } = useMutation(path, (lateParams?: T) =>
     customAxios()
       .patch(
         `${process.env.REACT_APP_HOST_URL}/leeaf/${path}`,
@@ -36,5 +36,5 @@ export const usePatchRequest = <T>(path: string, params?: T) => {
       })
   );
 
-  return { mutate, isLoading };
+  return { mutate, isLoading, error: error as Error | null };
 };

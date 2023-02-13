@@ -15,7 +15,6 @@ export const Dressing = () => {
   const { data: chartIndexData, error: chartIndexError } = useChartIndex({
     params: {
       rentalStatus: [CHART_RENTAL_STATUS.WAIT_RENTAL_RETURN],
-      isReturnRequired: false,
     },
   });
 
