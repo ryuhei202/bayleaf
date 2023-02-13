@@ -1,5 +1,6 @@
 import { Tab } from "@headlessui/react";
 import {
+  findPlanById,
   LIGHT_PLAN,
   PREMIUM_PLAN,
   STANDARD_PLAN,
@@ -15,6 +16,7 @@ type TProps = {
   readonly planId: number;
   readonly isLoading: boolean;
   readonly selectedPlan?: TPlan;
+  readonly isRentalRemained: boolean;
   readonly onSubmit: () => void;
   readonly onPlanSelect: ({ planId }: { planId: number }) => void;
   readonly onCancel: () => void;
@@ -24,6 +26,7 @@ export const PlanSelectingForUnsuspend = ({
   planId,
   isLoading,
   selectedPlan,
+  isRentalRemained,
   onSubmit,
   onPlanSelect,
   onCancel,
@@ -33,19 +36,44 @@ export const PlanSelectingForUnsuspend = ({
     ANOTHER_PLAN: "こちらのプランに変更いただけます",
   } as const;
 
+  const getDiffPrice = ({ selectedPlan }: { selectedPlan: TPlan }): number => {
+    const diffPrice =
+      selectedPlan.price.withTax - findPlanById(planId).price.withTax;
+    return diffPrice > 0 ? diffPrice : 0;
+  };
+
+  const getDialogDescription = ({
+    selectedPlan,
+  }: {
+    selectedPlan: TPlan;
+  }): React.ReactNode => {
+    return isRentalRemained ? (
+      <>
+        <p className="mb-1 text-lg">決済日: 本日</p>
+        <p className="mb-4 text-lg">{`料金: ¥${getDiffPrice({
+          selectedPlan,
+        }).toLocaleString()}(税込)`}</p>
+        <p>
+          前回停止された際に料金をお支払い後洋服を借りずに停止されたため、前回プランから差額を差し引いた金額をお支払いいただいております。
+        </p>
+      </>
+    ) : (
+      <>
+        <p className="mb-1 text-lg">次回決済日: 次回出荷日</p>
+        <p className="mb-4 text-lg">
+          {`料金: ${selectedPlan.price.withTax.toLocaleString()}(税込)`}
+        </p>
+      </>
+    );
+  };
+
   return (
     <Page className="flex flex-col h-full min-h-screen justify-between items-center text-themeGray p-3">
       {selectedPlan && (
         <ConfirmDialog
           open={!!selectedPlan}
           title={`${selectedPlan.jpName}プランで再開しますか？`}
-          description={
-            <>
-              {`料金: ${selectedPlan.price.withTax}(税込)`}
-              <br />
-              次回決済日: 次回出荷日
-            </>
-          }
+          description={getDialogDescription({ selectedPlan })}
           isLoading={isLoading}
           onClickOk={onSubmit}
           onClose={onCancel}
