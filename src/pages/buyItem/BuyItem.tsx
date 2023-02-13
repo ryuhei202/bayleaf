@@ -10,8 +10,7 @@ import { CHART_RENTAL_STATUS } from "../../models/chart/ChartRentalStatus";
 import { BuyItemFetcher } from "./BuyItemFetcher";
 
 export const BuyItem = () => {
-  const [selectedChart, setSelectedChart] =
-    useState<TChartResponse | undefined>(undefined);
+  const [selectedChart, setSelectedChart] = useState<TChartResponse>();
 
   const { data: membersData, error: membersError } = useMembersIndex();
 
@@ -50,7 +49,7 @@ export const BuyItem = () => {
     <>
       {selectedChart ? (
         <BuyItemFetcher
-          chartId={chartData.charts[0].id}
+          chartId={selectedChart.id}
           possesedPoint={membersData[0].point}
         />
       ) : (
