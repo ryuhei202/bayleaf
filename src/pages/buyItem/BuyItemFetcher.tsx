@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   TChartItemsIndexResponse,
@@ -33,6 +33,11 @@ export const BuyItemFetcher = ({ chartId, possesedPoint }: TProps) => {
     error: buyItemsError,
   } = useChartBuyItems({ chartId });
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    setSelectedPoint(0);
+  }, [isConfirm]);
 
   if (chartItemsError) return <ErrorPage message={chartItemsError.message} />;
   if (!chartItemsData) return <LoaderPage />;
