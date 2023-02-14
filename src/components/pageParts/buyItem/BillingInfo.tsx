@@ -41,7 +41,7 @@ export const BillingInfo = ({
           <Typography className="text-right" color="strong-gray">
             <input
               className="border rounded mr-0.5 w-1/2 text-right"
-              value={selectedPoint}
+              value={selectedPoint.toString()}
               type="number"
               onChange={(e) => onChange(Number(e.target.value))}
             />
