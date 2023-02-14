@@ -69,7 +69,7 @@ describe("Unsuspend.tsx", () => {
       );
     });
   });
-  test("レンタル残数1ユーザーはマイページにリダイレクトされる", async () => {
+  test("レンタル残数1ユーザーはマイページにリダイレクトされずUnsuspendContainer.tsxが表示される", async () => {
     server.use(
       getMemberIndexMock({
         status: 200,
@@ -93,11 +93,7 @@ describe("Unsuspend.tsx", () => {
 
     render(<Unsuspend />, { wrapper: queryWrapper });
 
-    await waitFor(() => {
-      expect(location.assign).toBeCalledWith(
-        `${process.env.REACT_APP_HOST_URL}/unsuspend`
-      );
-    });
+    expect(await screen.findByTestId("UnsuspendContainer")).toBeInTheDocument();
   });
   test("アクティブユーザーはマイページにリダイレクトされる", async () => {
     server.use(
@@ -128,6 +124,21 @@ describe("Unsuspend.tsx", () => {
         `${process.env.REACT_APP_HOST_URL}/unsuspend`
       );
     });
+  });
+
+  test("ユーザーが存在しない場合はバリデーションをする", async () => {
+    server.use(
+      getMemberIndexMock({
+        status: 200,
+        response: [],
+      })
+    );
+
+    render(<Unsuspend />, { wrapper: queryWrapper });
+
+    expect(
+      await screen.findByTestId("ValidationForNotExistingMember")
+    ).toBeInTheDocument();
   });
 
   test("ユーザーが複数人いる場合はバリデーションをする", async () => {

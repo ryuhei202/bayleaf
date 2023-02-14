@@ -7,6 +7,7 @@ import "./App.css";
 import { ErrorPage } from "./components/baseParts/pages/ErrorPage";
 import { LoaderPage } from "./components/baseParts/pages/LoaderPage";
 import { useAppInitializer } from "./hooks/handler/app/useAppInitializer";
+import { BuyItem } from "./pages/buyItem/BuyItem";
 import { Consult } from "./pages/consult/Consult";
 import { Delivery } from "./pages/delivery/Delivery";
 import { Dislike } from "./pages/dislike/Dislike";
@@ -48,6 +49,7 @@ function App() {
             <Route path="plan_change" element={<PlanChange />} />
             <Route path="unsuspend" element={<Unsuspend />} />
             <Route path="one_shot" element={<OneShot />} />
+            <Route path="buy_items" element={<BuyItem />} />
           </Routes>
         </StylistIdContext.Provider>
       </IdTokenContext.Provider>

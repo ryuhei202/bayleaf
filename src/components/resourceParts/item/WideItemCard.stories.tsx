@@ -27,17 +27,16 @@ Default.args = {
     defaultPath: ITEM_TEST_IMAGE_URL.largeThumb,
     expandedPath: ITEM_TEST_IMAGE_URL.large,
   },
-  categoryName: "シャツ",
-  colorName: "オレンジ",
-  price: 12000,
-  originPrice: 15000,
-  discountRate: 20,
 };
 
 Default.decorators = [
-  (Story) => (
+  (WideItemCard) => (
     <div className="bg-clay w-full p-2">
-      <Story />
+      <WideItemCard>
+        <div>
+          <p>text</p>
+        </div>
+      </WideItemCard>
     </div>
   ),
 ];
