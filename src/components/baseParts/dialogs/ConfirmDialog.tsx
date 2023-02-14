@@ -31,7 +31,7 @@ export const ConfirmDialog = ({
     >
       <Dialog.Panel className="fixed h-fit bottom-0 left-1/2 translate-x-[-50%] bg-[#F6F6F6] w-screen px-10 py-6 rounded-t-2xl text-themeGray text-center pb-7">
         <Dialog.Title className="pb-5 font-bold">{title}</Dialog.Title>
-        <Dialog.Description className="h-full text-xs" as="div">
+        <Dialog.Description className="h-fit text-xs" as="div">
           <div className="mb-7">{description}</div>
           <div className="flex">
             <Button
