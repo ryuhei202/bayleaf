@@ -8,7 +8,7 @@ type TProps = {
 
 export const DressingFootwear = ({ footwear }: TProps) => {
   return (
-    <div className="mb-16">
+    <div className="mb-12">
       <Typography size="xl">コーデに合う靴</Typography>
       <div className="flex items-center mt-5">
         <ExpandableImage
@@ -22,6 +22,9 @@ export const DressingFootwear = ({ footwear }: TProps) => {
         />
         <Typography className="px-6">{footwear.name}</Typography>
       </div>
+      <Typography size="xs" color="strong-gray" className="mt-4 ml-2">
+        ※お持ちの靴と合うか確認したい場合は、スタイリストまでお持ちの靴のお写真をお送りください。
+      </Typography>
     </div>
   );
 };

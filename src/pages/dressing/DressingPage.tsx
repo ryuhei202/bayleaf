@@ -54,14 +54,21 @@ export const DressingPage = ({ dressings }: TProps) => {
               />
               <DressingAdvice advices={dressing.advices} />
               <DressingFootwear footwear={dressing.footwear} />
-              {getChangeItems(dressing).length > 0 && (
-                <DressingChangeItem changeItems={getChangeItems(dressing)} />
-              )}
-              <Button variant="primary">
+              <Button className="mb-16" variant="primary">
                 <Link to={`/consult?stylistId=${stylistId}`}>
                   着こなしの相談をする
                 </Link>
               </Button>
+              {getChangeItems(dressing).length > 0 && (
+                <>
+                  <DressingChangeItem changeItems={getChangeItems(dressing)} />
+                  <Button variant="primary">
+                    <Link to={`/consult?stylistId=${stylistId}`}>
+                      着こなしの相談をする
+                    </Link>
+                  </Button>
+                </>
+              )}
             </Tab.Panel>
           ))}
         </Tab.Panels>
