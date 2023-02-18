@@ -119,7 +119,7 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
     case "hearing":
       return nextFormId === null ? (
         <StartHearingPage
-          onClick={() => setNextFormId(HEARING_FORM.FIRST)}
+          onClick={() => setNextFormId(HEARING_FORM.ONE_SHOT_FIRST)}
           onCancel={() => setStep("dateSelecting")}
         />
       ) : (
