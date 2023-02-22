@@ -1,8 +1,6 @@
+import { TMemberPaymentsIndexResponse } from "../../../api/memberPayments/useMemberPaymentsIndex";
 import { Typography } from "../../baseParts/legacy/Typography";
-<<<<<<< Updated upstream
 import { PaymentHistoryListItem } from "./PaymentHistoryListItem";
-=======
->>>>>>> Stashed changes
 
 type TProps = {
   memberPayments: [];
@@ -15,7 +13,6 @@ export const PaymentHistoryList = ({
 }: TProps) => {
   return (
     <div>
-<<<<<<< Updated upstream
       <div className="flex">
         <Typography>日付</Typography>
         <Typography>区分</Typography>
@@ -37,11 +34,10 @@ export const PaymentHistoryList = ({
     </div>
   );
 };
-=======
       <div>
-<Typography>
-  
-</Typography>
+        <Typography>
+          
+        </Typography>
       </div>
       {memberPayments.map((memberPayment: TMemberPaymentsIndexResponse) => {
         return (
@@ -51,4 +47,3 @@ export const PaymentHistoryList = ({
     </div>
   );
 };
->>>>>>> Stashed changes
