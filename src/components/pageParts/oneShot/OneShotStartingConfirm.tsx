@@ -5,6 +5,7 @@ import { FooterWrapper } from "../../baseParts/legacy/FooterWrapper";
 import { Page } from "../../baseParts/legacy/Page";
 import { PageHeader } from "../../baseParts/legacy/PageHeader";
 import { Typography } from "../../baseParts/legacy/Typography";
+import { Loader } from "../../baseParts/loaders/Loader";
 import { HearingConfirmButtons } from "../../resourceParts/hearing/HearingConfirmButtons";
 import { AnswerConfirm } from "../hearing/AnswerConfirm";
 import { ScheduleDiagram } from "./ScheduleDiagram";
@@ -54,16 +55,28 @@ export const OneShotStartingConfirm = ({
         title="支払手続き"
         isLoading={isPostLoading}
         description={
-          <>
-            <b>
-              支払金額：¥5478(税込)
+          isPostLoading ? (
+            <Loader
+              caption={
+                <>
+                  決済処理中
+                  <br />
+                  画面を閉じないでください
+                </>
+              }
+            />
+          ) : (
+            <>
+              <b>
+                支払金額：¥5478(税込)
+                <br />
+                付与ポイント：300ポイント
+              </b>
               <br />
-              付与ポイント：300ポイント
-            </b>
-            <br />
-            <br />
-            上記金額のお支払いが完了後、スタイリストから改めて『詳しくヒアリング』します。
-          </>
+              <br />
+              上記金額のお支払いが完了後、スタイリストから改めて『詳しくヒアリング』します。
+            </>
+          )
         }
         onClickOk={onSubmit}
         onClickCancel={() => setIsConfirmDialogOpen(false)}

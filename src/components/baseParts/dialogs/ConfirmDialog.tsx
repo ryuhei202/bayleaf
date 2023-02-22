@@ -26,7 +26,7 @@ export const ConfirmDialog = ({
   return (
     <Dialog
       open={open}
-      onClose={onClose}
+      onClose={isLoading ? () => undefined : onClose}
       className="fixed inset-0 h-screen w-screen bg-black/50 z-20"
     >
       <Dialog.Panel className="fixed h-fit bottom-0 left-1/2 translate-x-[-50%] bg-[#F6F6F6] w-screen px-10 py-6 rounded-t-2xl text-themeGray text-center pb-7">

@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useChartCreate } from "../../api/charts/useChartCreate";
 import { TCategorizedForm } from "../../api/hearings/TCategorizedForm";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
+import { AlertDialog } from "../../components/baseParts/dialogs/AlertDialog";
+import { CheckIcon } from "../../components/baseParts/icons/CheckIcon";
 import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { OneShotStartingConfirm } from "../../components/pageParts/oneShot/OneShotStartingConfirm";
 import { StartHearingPage } from "../../components/pageParts/oneShot/StartHearingPage";
@@ -30,6 +32,7 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
   });
   const [nextFormId, setNextFormId] = useState<number | null>(null);
   const [isBackTransition, setIsBackTransition] = useState<boolean>(false);
+  const [isPostComplete, setIsPostComplete] = useState(false);
   const {
     mutate,
     isLoading: isPostLoading,
@@ -119,7 +122,7 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
     case "hearing":
       return nextFormId === null ? (
         <StartHearingPage
-          onClick={() => setNextFormId(HEARING_FORM.FIRST)}
+          onClick={() => setNextFormId(HEARING_FORM.ONE_SHOT_FIRST)}
           onCancel={() => setStep("dateSelecting")}
         />
       ) : (
@@ -134,31 +137,41 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
       );
     case "confirm":
       return (
-        <OneShotStartingConfirm
-          confirmAnswer={categorizeHearingAnswers()}
-          wearingDate={wearingDate}
-          isPostLoading={isPostLoading}
-          onSubmit={() => {
-            mutate(
-              {
-                memberId: memberData.id,
-                deliveryDate: getDeliveryDate().toLocaleDateString("ja-JP"),
-                hearings: [
-                  {
-                    forms: answeredHearings.forms,
-                  },
-                ],
-              },
-              {
-                onSuccess: () => liff.closeWindow(),
-              }
-            );
-          }}
-          onCancelForm={() => {
-            handleHearingCancel();
-            setStep("hearing");
-          }}
-        />
+        <>
+          <OneShotStartingConfirm
+            confirmAnswer={categorizeHearingAnswers()}
+            wearingDate={wearingDate}
+            isPostLoading={isPostLoading}
+            onSubmit={() => {
+              mutate(
+                {
+                  memberId: memberData.id,
+                  deliveryDate: getDeliveryDate().toLocaleDateString("ja-JP"),
+                  hearings: [
+                    {
+                      forms: answeredHearings.forms,
+                    },
+                  ],
+                },
+                {
+                  onSuccess: () => setIsPostComplete(true),
+                }
+              );
+            }}
+            onCancelForm={() => {
+              handleHearingCancel();
+              setStep("hearing");
+            }}
+          />
+          <AlertDialog
+            open={isPostComplete}
+            title="お支払いが完了しました"
+            description={<CheckIcon />}
+            onClick={() => liff.closeWindow()}
+            onClose={() => liff.closeWindow()}
+            okBtnText="閉じる"
+          ></AlertDialog>
+        </>
       );
   }
   return <></>;
