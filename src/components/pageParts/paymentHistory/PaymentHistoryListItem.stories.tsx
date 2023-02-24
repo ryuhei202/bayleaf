@@ -20,7 +20,7 @@ const Template: ComponentStory<typeof PaymentHistoryListItem> = (args) => (
 export const DefaultValues = Template.bind({});
 DefaultValues.args = {
   priceTaxIn: 10000,
-  memberPaymentId: 5,
+  memberPaymentId: "453453",
   paymentDate: "2022年5月24日",
   paymentTypeName: "月額利用",
 };

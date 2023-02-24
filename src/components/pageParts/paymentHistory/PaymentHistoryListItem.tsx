@@ -3,10 +3,11 @@ import { Typography } from "../../baseParts/legacy/Typography";
 
 type TProps = {
   priceTaxIn: number;
-  memberPaymentId: number;
+  memberPaymentId: string;
   paymentDate: string;
   paymentTypeName: string;
-  onClickReceiptButton: (memberPaymentId: number) => void;
+  isAvailableReceipt: boolean;
+  onClickReceiptButton: (memberPaymentId: string) => void;
 };
 
 export const PaymentHistoryListItem = ({
@@ -14,30 +15,32 @@ export const PaymentHistoryListItem = ({
   memberPaymentId,
   paymentDate,
   paymentTypeName,
+  isAvailableReceipt,
   onClickReceiptButton,
 }: TProps) => {
   return (
-    <div className="bg-white flex justify-center items-center h-12">
-      <div className="mx-2">
+    <div className="bg-white flex justify-self-start items-center h-12 mb-1">
+      <div className="basis-1/4">
         <Typography color="strong-gray" size="xs">
           {paymentDate}
         </Typography>
       </div>
-      <div className="mx-2">
+      <div className="basis-1/4">
         <Typography color="strong-gray" size="xs">
           {paymentTypeName}
         </Typography>
       </div>
-      <div className="mx-2">
+      <div className="basis-1/4">
         <Typography color="strong-gray" size="xs">
-          {priceTaxIn}円
+          {priceTaxIn.toLocaleString()}円
         </Typography>
       </div>
-      <div className="mx-2">
+      <div className="basis-1/4">
         <Button
           onClick={() => onClickReceiptButton(memberPaymentId)}
           variant="line"
           size="small"
+          disabled={!isAvailableReceipt}
           className=""
         >
           <Typography color="strong-gray" size="xs">
