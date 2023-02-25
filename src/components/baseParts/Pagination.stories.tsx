@@ -1,23 +1,23 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { Pagenation } from "./Pagination";
+import { Pagination } from "./Pagination";
 
 export default {
-  title: "BaseParts/Pagenation",
-  component: Pagenation,
+  title: "BaseParts/Pagination",
+  component: Pagination,
   argTypes: {
     onClick: { action: "clicked" },
   },
-} as ComponentMeta<typeof Pagenation>;
+} as ComponentMeta<typeof Pagination>;
 
-const Template: ComponentStory<typeof Pagenation> = (args) => (
-  <Pagenation {...args} />
+const Template: ComponentStory<typeof Pagination> = (args) => (
+  <Pagination {...args} />
 );
 
 export const Default = Template.bind({});
 Default.args = {
-  count: 10,
+  maxPage: 10,
   currentPage: 1,
-  onClick: () => {},
+  onClickPagination: () => {},
 };
 
 Default.decorators = [
