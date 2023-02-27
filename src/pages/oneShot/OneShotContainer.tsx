@@ -16,7 +16,7 @@ import {
   sortHearingConfirm,
 } from "../../models/hearing/THearingForms";
 import { AnsweredHearings, TAnsweredForm } from "../hearing/HearingContainer";
-import { HearingFormFetcher } from "../hearing/HearingFormFetcher";
+import { OneShotHearingContainer } from "./OneShotHearingContainer";
 
 type TProps = {
   readonly memberData: TMembersIndexResponse;
@@ -126,7 +126,7 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
           onCancel={() => setStep("dateSelecting")}
         />
       ) : (
-        <HearingFormFetcher
+        <OneShotHearingContainer
           onSubmitForm={handleHearingSubmit}
           onCancelForm={handleHearingCancel}
           nextFormId={nextFormId}
