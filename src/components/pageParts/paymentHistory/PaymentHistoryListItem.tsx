@@ -41,7 +41,6 @@ export const PaymentHistoryListItem = ({
           variant="line"
           size="small"
           disabled={!isAvailableReceipt}
-          className=""
         >
           <Typography color="strong-gray" size="xs">
             領収書を発行
