@@ -13,11 +13,16 @@ export const Pagination = ({
   currentPage,
   onClickPagination,
 }: TProps) => {
+  const isBackDisabled = currentPage <= 1;
+  const isNextDisabled = currentPage >= maxPage;
   return (
     <div className="flex justify-around items-center">
       <Button
-        className="rounded-[44px] bg-[#D8D8D2] w-[44px] h-[44px] relative"
-        onClick={() => onClickPagination(currentPage)}
+        className={`rounded-[44px]  w-[44px] h-[44px] relative ${
+          isBackDisabled ? "bg-[#D8D8D2]" : "bg-[#F4F3EF]"
+        }`}
+        onClick={() => onClickPagination(currentPage - 1)}
+        disabled={isBackDisabled}
       >
         <BackIcon className="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]"></BackIcon>
       </Button>
@@ -28,7 +33,13 @@ export const Pagination = ({
           {maxPage}
         </div>
       </div>
-      <Button className="rounded-[44px] bg-[#D8D8D2] w-[44px] h-[44px] relative">
+      <Button
+        className={`rounded-[44px] w-[44px] h-[44px] relative ${
+          isNextDisabled ? "bg-[#D8D8D2]" : "bg-[#F4F3EF]"
+        }`}
+        onClick={() => onClickPagination(currentPage + 1)}
+        disabled={isNextDisabled}
+      >
         <NextIcon className="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]"></NextIcon>
       </Button>
     </div>
