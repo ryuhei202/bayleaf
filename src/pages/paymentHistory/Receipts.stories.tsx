@@ -21,7 +21,7 @@ export const DefaultValues = Template.bind({});
 DefaultValues.args = {
   receiptCreatedAt: "2022-02-25",
   memberPaymentId: 12344,
-  useingPoint: 3000,
+  usingPoint: 3000,
   receiptDetails: [
     {
       title: "Levi'sジーンズ",

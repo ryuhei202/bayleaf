@@ -9,7 +9,7 @@ type TProps = {
   //追加しなければいけないProps
   memberPaymentId: number;
   receiptCreatedAt: string;
-  useingPoint: number;
+  usingPoint: number;
   //ここまで
   receiptDetails: TReceiptDetails;
   cardBrand: string;
@@ -36,7 +36,7 @@ export const Receipts = ({
   receiptDetails,
   cardBrand,
   cardNumber,
-  useingPoint,
+  usingPoint,
 }: TProps) => {
   const date = new Date(receiptCreatedAt);
 
@@ -81,7 +81,7 @@ export const Receipts = ({
                 <span className="font-bold">
                   ご請求額 : ¥
                   {(
-                    getTotalPrice(receiptDetails) - useingPoint
+                    getTotalPrice(receiptDetails) - usingPoint
                   ).toLocaleString()}
                 </span>
               </table>
@@ -130,27 +130,24 @@ export const Receipts = ({
                 {cardBrand ?? "-"} | {cardNumber ?? "-"}
               </div>
               <div className="float-left w-2/5 text-right">
-                {/* 合計を計算する関数を書きまーす */}
                 商品の小計 : ¥{getTotalPrice(receiptDetails).toLocaleString()}
                 <br />
                 -----
                 <br />
-                {/* ご利用ぽいんとがpropsに必要ですねーい */}
-                ご利用ポイント : {useingPoint}
+                ご利用ポイント : {usingPoint}
                 <br /> -----
                 <br />
                 <span className="font-bold">
-                  {/* 商品の小計 - ご利用ポイント */}
                   ご請求額 : ¥
                   {(
-                    getTotalPrice(receiptDetails) - useingPoint
+                    getTotalPrice(receiptDetails) - usingPoint
                   ).toLocaleString()}
                 </span>
               </div>
             </div>
           </div>
           {/* div5 */}
-          <div className="mt-[30px] text-[10px]">© {year} Uwear</div>
+          <div className="mt-[10px] text-[10px]">© {year} Uwear</div>
         </div>
       </Page>
     </Document>
