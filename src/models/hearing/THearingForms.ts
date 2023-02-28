@@ -4,6 +4,7 @@ import { TAnsweredForm } from "../../pages/hearing/HearingContainer";
 export const HEARING_FORM = {
   FIRST: 1,
   ONE_SHOT_FIRST: 3,
+  AVOID_ITEM: 36,
 } as const;
 
 export const HEARING_CATEGORY = {
