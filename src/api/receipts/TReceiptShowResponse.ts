@@ -1,4 +1,4 @@
-export type TReceiptResponse = {
+export type TReceiptShowResponse = {
   receiptDetails: {
     readonly title: string;
     readonly priceTaxIn: number;
