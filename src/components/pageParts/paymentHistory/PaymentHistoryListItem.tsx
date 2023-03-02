@@ -36,7 +36,7 @@ export const PaymentHistoryListItem = ({
             size="small"
           >
             <Typography color="strong-gray" size="xs">
-              領収書を発行
+              領収書
             </Typography>
           </Button>
         ) : (
