@@ -4,7 +4,14 @@ type Props = {
   className?: string;
   children?: React.ReactNode;
   size?: "2xl" | "xl" | "sm" | "xs" | "base";
-  color?: "primary" | "secondary" | "strong-gray" | "gray" | "red" | "white";
+  color?:
+    | "primary"
+    | "secondary"
+    | "strong-gray"
+    | "gray"
+    | "theme-gray"
+    | "red"
+    | "white";
   weight?: "regular" | "medium" | "bold";
 };
 
@@ -46,6 +53,8 @@ export const Typography = ({
           return "text-neutral-500";
         case "gray":
           return "text-gray";
+        case "theme-gray":
+          return "text-themeGray";
         case "red":
           return "text-red";
         case "white":
