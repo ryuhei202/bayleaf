@@ -18,7 +18,7 @@ export const Pagination = ({
   const isBackDisabled = currentPage <= 1;
   const isNextDisabled = currentPage >= maxPage;
   return (
-    <div className={`flex justify-around items-center ${className}`}>
+    <div className={`flex justify-around items-center ${className ?? ""}`}>
       <Button
         className={`rounded-[44px]  w-[44px] h-[44px] relative ${
           isBackDisabled ? "bg-[#D8D8D2]" : "bg-[#F4F3EF]"

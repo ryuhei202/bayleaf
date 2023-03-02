@@ -20,7 +20,7 @@ DefaultValues.args = {
   maxPage: 10,
   paymentData: [
     {
-      paymentId: "weiru",
+      paymentId: "12345",
       priceTaxIn: 10000,
       memberPaymentId: 5,
       paymentDate: "2022年5月24日",
@@ -28,7 +28,7 @@ DefaultValues.args = {
       isAvailableReceipt: true,
     },
     {
-      paymentId: "weiru",
+      paymentId: "12345",
       priceTaxIn: 10000,
       memberPaymentId: 5,
       paymentDate: "2022年5月24日",
@@ -36,7 +36,7 @@ DefaultValues.args = {
       isAvailableReceipt: true,
     },
     {
-      paymentId: "weiru",
+      paymentId: "12345",
       priceTaxIn: 10000,
       memberPaymentId: 5,
       paymentDate: "2022年5月24日",
@@ -44,7 +44,7 @@ DefaultValues.args = {
       isAvailableReceipt: true,
     },
     {
-      paymentId: "weiru",
+      paymentId: "12345",
       priceTaxIn: 10000,
       memberPaymentId: 5,
       paymentDate: "2022年5月24日",
@@ -52,7 +52,7 @@ DefaultValues.args = {
       isAvailableReceipt: true,
     },
     {
-      paymentId: "weiru",
+      paymentId: "12345",
       priceTaxIn: 10000,
       memberPaymentId: 5,
       paymentDate: "2022年5月24日",
@@ -60,7 +60,7 @@ DefaultValues.args = {
       isAvailableReceipt: true,
     },
     {
-      paymentId: "weiru",
+      paymentId: "12345",
       priceTaxIn: 10000,
       memberPaymentId: 5,
       paymentDate: "2022年5月24日",
@@ -68,7 +68,7 @@ DefaultValues.args = {
       isAvailableReceipt: true,
     },
     {
-      paymentId: "weiru",
+      paymentId: "12345",
       priceTaxIn: 10000,
       memberPaymentId: 5,
       paymentDate: "2022年5月24日",
@@ -76,7 +76,7 @@ DefaultValues.args = {
       isAvailableReceipt: true,
     },
     {
-      paymentId: "weiru",
+      paymentId: "12345",
       priceTaxIn: 10000,
       memberPaymentId: 5,
       paymentDate: "2022年5月24日",

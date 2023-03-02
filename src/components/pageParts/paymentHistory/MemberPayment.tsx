@@ -1,11 +1,11 @@
 import { Typography } from "../../baseParts/legacy/Typography";
 import { Pagination } from "../../baseParts/Pagination";
-import { PaymentHistoryList, TMemberPayments } from "./PaymentHistoryList";
+import { PaymentHistoryList } from "./PaymentHistoryList";
 type TProps = {
   currentPage: number;
   onClickPagenation: (page: number) => void;
   maxPage: number;
-  paymentData: TMemberPayments[];
+  paymentData: TMemberPayment[];
   nextPaymentDate: string;
   onClickReceiptButton: (memberPaymentId: number) => void;
 };
@@ -18,24 +18,45 @@ export const MemberPayment = ({
   onClickReceiptButton,
 }: TProps) => {
   return (
-    <div>
-      <Typography weight="regular" size="xl" className="ml-4">
+    <>
+      <Typography
+        weight="regular"
+        size="xl"
+        color="theme-gray"
+        className="ml-4"
+      >
         決済履歴
       </Typography>
-      <div className="border-[0.5px] border-gray my-2"></div>
-      <Typography weight="regular" size="base" className="ml-2 mb-4">
-        次回決済予定日: 　　　　　{nextPaymentDate}
-      </Typography>
+      <div className="border-[0.5px] border-gray my-2" />
+      <div className="flex">
+        <Typography
+          weight="regular"
+          size="base"
+          color="theme-gray"
+          className="ml-2 mb-4 basis-3/5"
+        >
+          次回決済予定日:
+        </Typography>
+        <Typography
+          weight="regular"
+          size="base"
+          color="theme-gray"
+          className="ml-2 mb-4  basis-2/5"
+        >
+          {nextPaymentDate}
+        </Typography>
+      </div>
+
       <PaymentHistoryList
         memberPayments={paymentData}
         onClickReceiptButton={onClickReceiptButton}
-      ></PaymentHistoryList>
+      />
       <Pagination
         maxPage={maxPage}
         currentPage={currentPage}
         onClickPagination={onClickPagenation}
         className="mt-6"
-      ></Pagination>
-    </div>
+      />
+    </>
   );
 };
