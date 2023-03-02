@@ -11,7 +11,7 @@ export type TMemberPayments = {
 };
 
 type TProps = {
-  memberPayments: TMemberPayments;
+  memberPayments: TMemberPayments[];
   onClickReceiptButton: (memberPaymentId: number) => void;
 };
 
