@@ -17,7 +17,6 @@ const Template: ComponentStory<typeof MemberPayment> = (args) => (
 export const DefaultValues = Template.bind({});
 DefaultValues.args = {
   currentPage: 2,
-  onClickPagenation: () => alert("次のページに進む"),
   maxPage: 10,
   paymentData: [
     {
@@ -86,5 +85,4 @@ DefaultValues.args = {
     },
   ],
   nextPaymentDate: "2023年3月25日",
-  onClickReceiptButton: () => alert("領収書を表示"),
 };
