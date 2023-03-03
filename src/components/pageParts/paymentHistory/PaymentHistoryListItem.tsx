@@ -1,9 +1,8 @@
 import { Button } from "../../baseParts/Button";
 import { Typography } from "../../baseParts/legacy/Typography";
-import { TMemberPayments } from "./PaymentHistoryList";
 
 type TProps = {
-  memberPayment: TMemberPayments;
+  memberPayment: TMemberPayment;
   onClickReceiptButton: (memberPaymentId: number) => void;
 };
 
@@ -31,11 +30,11 @@ export const PaymentHistoryListItem = ({
       <div className="basis-1/4">
         {memberPayment.isAvailableReceipt ? (
           <Button
-            onClick={() => onClickReceiptButton(memberPayment.memberPaymentId)}
+            onClick={() => onClickReceiptButton(memberPayment.id)}
             variant="line"
             size="small"
           >
-            <Typography color="strong-gray" size="xs">
+            <Typography color="strong-gray" className="text-[1px]">
               領収書を発行
             </Typography>
           </Button>
