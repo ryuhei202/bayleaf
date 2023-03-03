@@ -1,8 +1,9 @@
 import { Typography } from "../../baseParts/legacy/Typography";
 import { PaymentHistoryListItem } from "./PaymentHistoryListItem";
 
-export type TMemberPayments = {
-  readonly memberPaymentId: number;
+export type TMemberPayment = {
+  readonly id: number;
+  readonly point: number;
   readonly paymentId: string;
   readonly priceTaxIn: number;
   readonly paymentTypeName: string;
@@ -11,7 +12,7 @@ export type TMemberPayments = {
 };
 
 type TProps = {
-  memberPayments: TMemberPayments;
+  memberPayments: TMemberPayment[];
   onClickReceiptButton: (memberPaymentId: number) => void;
 };
 
@@ -39,7 +40,7 @@ export const PaymentHistoryList = ({
         </div>
       </div>
       <div>
-        {memberPayments.map((memberPayment: TMemberPayments) => {
+        {memberPayments.map((memberPayment: TMemberPayment) => {
           return (
             <PaymentHistoryListItem
               memberPayment={memberPayment}
