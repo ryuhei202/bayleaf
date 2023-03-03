@@ -1,5 +1,6 @@
 import { Button } from "../../baseParts/Button";
 import { Typography } from "../../baseParts/legacy/Typography";
+import { TMemberPayment } from "./PaymentHistoryList";
 
 type TProps = {
   memberPayment: TMemberPayment;
