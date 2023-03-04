@@ -6,7 +6,7 @@ type TReceiptDetails = {
 }[];
 
 type TProps = {
-  memberPaymentId: number;
+  memberPaymentId: string;
   receiptCreatedAt: string;
   usingPoint: number;
   receiptDetails: TReceiptDetails;
