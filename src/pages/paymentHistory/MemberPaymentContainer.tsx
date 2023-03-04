@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import ReactToPrint from "react-to-print";
 import { useMemberPaymentsIndex } from "../../api/memberPayments/useMemberPaymentsIndex";
 import { useReceiptShow } from "../../api/receipts/useReceiptShow";
 import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
@@ -11,15 +12,20 @@ type TProps = {
 };
 
 export const MemberPaymentContainer = ({ nextPaymentDate }: TProps) => {
+  const componentRef = useRef(null);
   const [selectedPage, setSelectedPage] = useState<number>(1);
   const [isClickedReceiptButton, setIsClickedReceiptButton] =
     useState<boolean>(false);
-  const [memberPaymentId, setMemberPaymentId] = useState<number>();
+  const [memberPaymentId, setMemberPaymentId] = useState<number>(0);
 
   const { data: memberPaymentsData, error: memberPaymentError } =
     useMemberPaymentsIndex({
       params: { limit: 10, offset: (selectedPage - 1) * 10, order: "desc" },
     });
+
+  const { data: receiptData, error: receiptError } = useReceiptShow({
+    memberPaymentId: memberPaymentId,
+  });
 
   const handleClickPagination = (page: number) => {
     setSelectedPage(page);
@@ -41,17 +47,18 @@ export const MemberPaymentContainer = ({ nextPaymentDate }: TProps) => {
   if (memberPaymentError)
     return <ErrorPage message={memberPaymentError.message} />;
   if (!memberPaymentsData) return <LoaderPage />;
-  if (isClickedReceiptButton && memberPaymentId) {
-    const { data: receiptData, error: receiptError } = useReceiptShow({
-      memberPaymentId: memberPaymentId,
-    });
 
+  if (isClickedReceiptButton) {
     if (receiptError) return <ErrorPage message={receiptError.message} />;
     if (!receiptData) return <LoaderPage />;
     return (
       <div onClick={handleClickCloseReceipt}>
+        <ReactToPrint
+          trigger={() => <button>プリントアウト！</button>}
+          content={() => componentRef.current}
+        />
         <Receipts
-          onClick={handleClickNoAction}
+          onClick={() => handleClickNoAction}
           memberPaymentId={
             memberPaymentsData.memberPayments[memberPaymentId].paymentId
           }
@@ -62,6 +69,7 @@ export const MemberPaymentContainer = ({ nextPaymentDate }: TProps) => {
           receiptDetails={receiptData.receiptDetails}
           cardBrand={receiptData.cardBrand}
           cardNumber={receiptData.cardNumber}
+          ref={componentRef}
         />
         ;
       </div>

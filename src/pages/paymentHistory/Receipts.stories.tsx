@@ -20,7 +20,7 @@ const Template: ComponentStory<typeof Receipts> = (args) => (
 export const DefaultValues = Template.bind({});
 DefaultValues.args = {
   receiptCreatedAt: "2022-02-25",
-  memberPaymentId: 12344,
+  memberPaymentId: "12344",
   usingPoint: 3000,
   receiptDetails: [
     {
