@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { useMemberPaymentsIndex } from "../../../api/memberPayments/useMemberPaymentsIndex";
-import { useReceiptShow } from "../../../api/receipts/useReceiptShow";
-import { ErrorPage } from "../../baseParts/pages/ErrorPage";
-import { LoaderPage } from "../../baseParts/pages/LoaderPage";
-import { MemberPayment } from "./MemberPayment";
+import { useMemberPaymentsIndex } from "../../api/memberPayments/useMemberPaymentsIndex";
+import { useReceiptShow } from "../../api/receipts/useReceiptShow";
+import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
+import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
+import { MemberPayment } from "../../components/pageParts/paymentHistory/MemberPayment";
+import { Receipts } from "./Receipt";
 
 type TProps = {
   nextPaymentDate: string;
@@ -49,7 +50,7 @@ export const MemberPaymentContainer = ({ nextPaymentDate }: TProps) => {
     if (!receiptData) return <LoaderPage />;
     return (
       <div onClick={handleClickCloseReceipt}>
-        <Receiots
+        <Receipts
           onClick={handleClickNoAction}
           memberPaymentId={
             memberPaymentsData.memberPayments[memberPaymentId].paymentId
