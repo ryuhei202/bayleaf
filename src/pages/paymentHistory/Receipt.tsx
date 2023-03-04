@@ -12,6 +12,7 @@ type TProps = {
   receiptDetails: TReceiptDetails;
   cardBrand: string;
   cardNumber: string;
+  onClick: () => void;
 };
 export const Receipts = React.forwardRef<HTMLDivElement, TProps>(
   (
@@ -22,6 +23,7 @@ export const Receipts = React.forwardRef<HTMLDivElement, TProps>(
       cardBrand,
       cardNumber,
       usingPoint,
+      onClick,
     },
     ref
   ) => {
@@ -41,7 +43,11 @@ export const Receipts = React.forwardRef<HTMLDivElement, TProps>(
     };
 
     return (
-      <div className="text-[1px] flex flex-col text-center w-90 p-5" ref={ref}>
+      <div
+        className="text-[1px] flex flex-col text-center w-90 p-5"
+        ref={ref}
+        onClick={() => onClick}
+      >
         <div>
           <div className="">
             発行日 : <span>{formattedDate}</span>
