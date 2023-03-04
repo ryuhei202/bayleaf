@@ -1,4 +1,4 @@
-import { Document, Page, StyleSheet } from "@react-pdf/renderer";
+import React from "react";
 
 type TReceiptDetails = {
   title: string;
@@ -6,150 +6,126 @@ type TReceiptDetails = {
 }[];
 
 type TProps = {
-  //追加しなければいけないProps
   memberPaymentId: number;
   receiptCreatedAt: string;
   usingPoint: number;
-  //ここまで
   receiptDetails: TReceiptDetails;
   cardBrand: string;
   cardNumber: string;
 };
+export const Receipts = React.forwardRef<HTMLDivElement, TProps>(
+  (
+    {
+      memberPaymentId,
+      receiptCreatedAt,
+      receiptDetails,
+      cardBrand,
+      cardNumber,
+      usingPoint,
+    },
+    ref
+  ) => {
+    const date = new Date(receiptCreatedAt);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
 
-// Create styles
-const styles = StyleSheet.create({
-  page: {
-    flexDirection: "row",
-    backgroundColor: "#E4E4E4",
-  },
-  section: {
-    margin: 10,
-    padding: 10,
-    flexGrow: 1,
-  },
-});
+    const formattedDate = `${year}年${month}月${day}日`;
 
-// Create Document Component
-export const Receipts = ({
-  memberPaymentId,
-  receiptCreatedAt,
-  receiptDetails,
-  cardBrand,
-  cardNumber,
-  usingPoint,
-}: TProps) => {
-  const date = new Date(receiptCreatedAt);
+    const getTotalPrice = (receiptDetails: TReceiptDetails) => {
+      let totalPrice = 0;
+      receiptDetails.map((receipt) => {
+        totalPrice += receipt.priceTaxIn;
+      });
+      return totalPrice;
+    };
 
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
+    return (
+      <div className="text-[1px] flex flex-col text-center w-90 p-5" ref={ref}>
+        <div>
+          <div className="">
+            発行日 : <span>{formattedDate}</span>
+          </div>
+          <h2 className="text-[14px] font-bold">{`領収書　(注文番号 :${memberPaymentId})`}</h2>
+          <div className="underline text-[#428bca]">印刷してご利用ください</div>
+        </div>
 
-  const formattedDate = `${year}年${month}月${day}日`;
+        <div className="mt-5">
+          <div className="w-1/2 float-left text-left">
+            <table>
+              <span className="font-bold">注文日 </span>
+              <span>: {formattedDate} </span>
+              <br />
+              <span className="font-bold">注文番号 </span>
+              <span> : {memberPaymentId} </span>
+              <br />
+              <span className="font-bold">
+                ご請求額 : ¥
+                {(getTotalPrice(receiptDetails) - usingPoint).toLocaleString()}
+              </span>
+            </table>
+          </div>
+          <div className="w-1/2 float-left font-bold text-right underline">
+            　　　　　　　　　　　　様
+          </div>
+        </div>
+        <br />
 
-  const getTotalPrice = (receiptDetails: TReceiptDetails) => {
-    let totalPrice = 0;
-    receiptDetails.map((receipt) => {
-      totalPrice += receipt.priceTaxIn;
-    });
-    return totalPrice;
-  };
-
-  return (
-    <Document>
-      <Page size="A4" style={styles.page}>
-        <div className="text-[1px] flex flex-col text-center w-90">
-          {/* div1 */}
+        <div className="">
+          <h2 className="text-[12px] font-bold mb-1">支払い内容</h2>
           <div>
-            <div className="">
-              発行日 : <span>{formattedDate}</span>
+            <div className="float-left w-3/5 text-left">
+              <span className="font-bold">注文商品</span>
             </div>
-            <h2 className="text-[14px] font-bold">{`領収書　(注文番号 :${memberPaymentId})`}</h2>
-            <div className="underline text-[#428bca]">
-              印刷してご利用ください
+            <div className="float-left w-2/5 text-right">
+              <span className="font-bold">価格</span>
             </div>
           </div>
-          {/* div2 */}
-          <div className="">
-            <div className="w-1/2 float-left text-left">
-              <table>
-                <span className="font-bold">注文日 </span>
-                <span>: {formattedDate} </span>
-                <br />
-                <span className="font-bold">注文番号 </span>
-                <span> : {memberPaymentId} </span>
-                <br />
-                <span className="font-bold">
-                  ご請求額 : ¥
-                  {(
-                    getTotalPrice(receiptDetails) - usingPoint
-                  ).toLocaleString()}
-                </span>
-              </table>
-            </div>
-            <div className="w-1/2 float-left font-bold text-right underline">
-              　　　　　　　　　　　　様
-            </div>
+          <div>
+            {receiptDetails.map((receipt, index) => {
+              return (
+                <div className="" key={index}>
+                  <div className="float-left w-3/5 text-left mb-2">
+                    {receipt.title}
+                  </div>
+                  <div className="float-left w-2/5 text-right">
+                    ¥{receipt.priceTaxIn.toLocaleString()}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <div>
+          <h2 className="text-[12px] font-bold mb-1">支払い情報</h2>
+          <div className="float-left text-left">
+            <span className="font-bold">支払い方法 (クレジットカード)</span>
           </div>
           <br />
-          {/* div3 */}
-          <div className="">
-            <h2 className="text-[12px] font-bold mb-1">支払い内容</h2>
-            <div>
-              <div className="float-left w-3/5 text-left">
-                <span className="font-bold">注文商品</span>
-              </div>
-              <div className="float-left w-2/5 text-right">
-                <span className="font-bold">価格</span>
-              </div>
-            </div>
-            <div>
-              {receiptDetails.map((receipt, index) => {
-                return (
-                  <div className="" key={index}>
-                    <div className="float-left w-3/5 text-left mb-2">
-                      {receipt.title}
-                    </div>
-                    <div className="float-left w-2/5 text-right">
-                      ¥{receipt.priceTaxIn.toLocaleString()}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-          {/* div4 */}
-          <div>
-            <h2 className="text-[12px] font-bold mb-1">支払い情報</h2>
-            <div className="float-left text-left">
-              <span className="font-bold">支払い方法 (クレジットカード)</span>
-            </div>
-            <br />
 
-            <div>
-              <div className="float-left w-3/5 text-left">
-                {cardBrand ?? "-"} | {cardNumber ?? "-"}
-              </div>
-              <div className="float-left w-2/5 text-right">
-                商品の小計 : ¥{getTotalPrice(receiptDetails).toLocaleString()}
-                <br />
-                -----
-                <br />
-                ご利用ポイント : {usingPoint}
-                <br /> -----
-                <br />
-                <span className="font-bold">
-                  ご請求額 : ¥
-                  {(
-                    getTotalPrice(receiptDetails) - usingPoint
-                  ).toLocaleString()}
-                </span>
-              </div>
+          <div>
+            <div className="float-left w-3/5 text-left">
+              {cardBrand ?? "-"} | {cardNumber ?? "-"}
+            </div>
+            <div className="float-left w-2/5 text-right">
+              商品の小計 : ¥{getTotalPrice(receiptDetails).toLocaleString()}
+              <br />
+              -----
+              <br />
+              ご利用ポイント : {usingPoint}
+              <br /> -----
+              <br />
+              <span className="font-bold">
+                ご請求額 : ¥
+                {(getTotalPrice(receiptDetails) - usingPoint).toLocaleString()}
+              </span>
             </div>
           </div>
-          {/* div5 */}
-          <div className="mt-[10px] text-[10px]">© {year} Uwear</div>
         </div>
-      </Page>
-    </Document>
-  );
-};
+
+        <div className="mt-[10px] text-[10px]">© {year} Uwear</div>
+      </div>
+    );
+  }
+);
