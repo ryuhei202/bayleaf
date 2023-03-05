@@ -100,10 +100,10 @@ export const PlanChangeCard = ({ plan }: TProps) => {
               {plan.isJacketAvailable && (
                 <>
                   <span className="text-gray mx-1">＋</span>
-                  <div className="flex flex-col text-xs text-left">
-                    <p>ジャケット or</p>
-                    <p>ライトアウター</p>
-                  </div>
+                  <span className="flex flex-col text-xs text-left">
+                    <span>ジャケット or</span>
+                    <span>ライトアウター</span>
+                  </span>
                   <span className="font-lora text-2xl mr-[1vw] sm:mr-1 ml-1">
                     1
                   </span>
