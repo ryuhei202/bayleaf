@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { TOptionParams } from "../../../api/charts/TOptionParams";
 import { THearingFormShowResponse } from "../../../api/hearingForms/THearingFormShowResponse";
 import { TAnsweredForm } from "../../../pages/hearing/HearingContainer";
@@ -108,9 +108,8 @@ export const MultipleSelectForm = ({
           <div className="space-y-5">
             {response.options.map((option) =>
               option.isText ? (
-                <>
+                <Fragment key={option.id}>
                   <SelectButton
-                    key={option.id}
                     selected={selectedOptions
                       .map((option) => option.id)
                       .includes(option.id)}
@@ -140,7 +139,7 @@ export const MultipleSelectForm = ({
                         .includes(option.id)
                     }
                   />
-                </>
+                </Fragment>
               ) : (
                 <SelectButton
                   key={option.id}
