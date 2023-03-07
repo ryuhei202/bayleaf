@@ -6555,14 +6555,14 @@ chownr@^2.0.0:
   resolved "https://registry.yarnpkg.com/chownr/-/chownr-2.0.0.tgz#15bfbe53d2eab4cf70f18a8cd68ebe5b3cb1dece"
   integrity sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==
 
-chromatic@^6.11.4:
-  version "6.15.0"
-  resolved "https://registry.yarnpkg.com/chromatic/-/chromatic-6.15.0.tgz#0a1c82a5576ca418bc70ad2a915bcdda3607d22c"
-  integrity sha512-cdB9ar8zLLpqJHgHH70iWnNXdd4pGCXCqZwSz/z35gNuftlJZKQJewOUnLUe9Mu6pdxKCS/aKVPfpDwzdWvslQ==
+chromatic@^6.17.1:
+  version "6.17.1"
+  resolved "https://registry.yarnpkg.com/chromatic/-/chromatic-6.17.1.tgz#6327fa9df683232bbb09a0f318ea656cc3c3ca8a"
+  integrity sha512-CKCIV+QiNsQUHaZu2uQkm9A140Fd9sPgf61IsbJCwPspb97tHxs6hbqzf1QjaJJL37G6UqR3u12bzPld7JB96w==
   dependencies:
     "@discoveryjs/json-ext" "^0.5.7"
     "@types/webpack-env" "^1.17.0"
-    snyk-nodejs-lockfile-parser "^1.43.1"
+    snyk-nodejs-lockfile-parser "^1.47.4"
 
 chrome-trace-event@^1.0.2:
   version "1.0.3"
@@ -15745,10 +15745,10 @@ snyk-config@^5.0.0:
     lodash.merge "^4.6.2"
     minimist "^1.2.5"
 
-snyk-nodejs-lockfile-parser@^1.43.1:
-  version "1.46.0"
-  resolved "https://registry.yarnpkg.com/snyk-nodejs-lockfile-parser/-/snyk-nodejs-lockfile-parser-1.46.0.tgz#5c779bfc8f6a54eb669dd4781a3283ccd5b2b5dc"
-  integrity sha512-6DzkLYb26qzowTwhUOnJMswPQ3g0CTZ/YkcCPSZLVLv/leErIHrqIG5CHQMdM0xbGYCnqTM+YNTf36Hb1cw5fg==
+snyk-nodejs-lockfile-parser@^1.47.4:
+  version "1.48.0"
+  resolved "https://registry.yarnpkg.com/snyk-nodejs-lockfile-parser/-/snyk-nodejs-lockfile-parser-1.48.0.tgz#8b8576131fec3081dc22f59c4728014bc57e87aa"
+  integrity sha512-kq4gVwL5V0SUatDxyyzbptKkaX4Ew9N3ZDNR5r7sqBRparY+U+xGuYBhTaJdweBUD+jkvs7rKO1JV1h0Z8c2ew==
   dependencies:
     "@snyk/dep-graph" "^2.3.0"
     "@snyk/graphlib" "2.1.9-patch.3"
@@ -15760,6 +15760,7 @@ snyk-nodejs-lockfile-parser@^1.43.1:
     lodash.flatmap "^4.5.0"
     lodash.isempty "^4.4.0"
     lodash.topairs "^4.3.0"
+    micromatch "^4.0.5"
     semver "^7.3.5"
     snyk-config "^5.0.0"
     tslib "^1.9.3"

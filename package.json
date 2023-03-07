@@ -91,7 +91,7 @@
     "@swc/jest": "^0.2.23",
     "@tailwindcss/custom-forms": "^0.2.1",
     "autoprefixer": "10.4.13",
-    "chromatic": "^6.11.4",
+    "chromatic": "^6.17.1",
     "jest": "^29.3.1",
     "jest-environment-jsdom": "^29.3.1",
     "msw": "^1.0.0",
