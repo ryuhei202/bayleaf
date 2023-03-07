@@ -52,6 +52,7 @@ export const BuyItemConfirm = ({
               discountedPrice={item.discountedPrice}
               price={item.price}
               className="my-6"
+              key={item.id}
             />
           ))}
         </div>

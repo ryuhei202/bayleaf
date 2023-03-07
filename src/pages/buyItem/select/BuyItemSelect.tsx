@@ -30,12 +30,40 @@ export const BuyItemSelect = ({
           レンタルアイテムの購入
         </div>
         <div>
-          {chartItemsData.map((chartItem: TChartItemsIndexResponse) => {
-            if (chartItem.isPurchased || !chartItem.isBuyable) {
-              return (
-                <div className="my-6 relative">
+          {chartItemsData.map((chartItem: TChartItemsIndexResponse) =>
+            chartItem.isPurchased || !chartItem.isBuyable ? (
+              <div className="my-6 relative" key={chartItem.id}>
+                <PurchaseItemCard
+                  className="brightness-50 pointer-events-none"
+                  imagePaths={{
+                    defaultPath: chartItem.imagePaths.large,
+                    expandedPath: chartItem.imagePaths.large,
+                  }}
+                  brand={chartItem.brandName}
+                  category={chartItem.categoryName}
+                  color={chartItem.colorName}
+                  discountRate={chartItem.discountRate}
+                  point={chartItem.point}
+                  discountedPrice={chartItem.discountedPrice}
+                  price={chartItem.price}
+                />
+                <Typography
+                  className="absolute top-1/2 text-center w-full align-top -translate-y-1/2"
+                  size="2xl"
+                  color="white"
+                  weight="bold"
+                >
+                  {chartItem.isPurchased ? "購入済み" : "購入不可"}
+                </Typography>
+              </div>
+            ) : (
+              <div
+                className="my-6"
+                onClick={() => onSelectChartItems(chartItem.id)}
+                key={chartItem.id}
+              >
+                <SelectWrapper visible={isVisible(chartItem.id)}>
                   <PurchaseItemCard
-                    className="brightness-50 pointer-events-none"
                     imagePaths={{
                       defaultPath: chartItem.imagePaths.large,
                       expandedPath: chartItem.imagePaths.large,
@@ -48,41 +76,10 @@ export const BuyItemSelect = ({
                     discountedPrice={chartItem.discountedPrice}
                     price={chartItem.price}
                   />
-                  <Typography
-                    className="absolute top-1/2 text-center w-full align-top -translate-y-1/2"
-                    size="2xl"
-                    color="white"
-                    weight="bold"
-                  >
-                    {chartItem.isPurchased ? "購入済み" : "購入不可"}
-                  </Typography>
-                </div>
-              );
-            } else {
-              return (
-                <div
-                  className="my-6"
-                  onClick={() => onSelectChartItems(chartItem.id)}
-                >
-                  <SelectWrapper visible={isVisible(chartItem.id)}>
-                    <PurchaseItemCard
-                      imagePaths={{
-                        defaultPath: chartItem.imagePaths.large,
-                        expandedPath: chartItem.imagePaths.large,
-                      }}
-                      brand={chartItem.brandName}
-                      category={chartItem.categoryName}
-                      color={chartItem.colorName}
-                      discountRate={chartItem.discountRate}
-                      point={chartItem.point}
-                      discountedPrice={chartItem.discountedPrice}
-                      price={chartItem.price}
-                    />
-                  </SelectWrapper>
-                </div>
-              );
-            }
-          })}
+                </SelectWrapper>
+              </div>
+            )
+          )}
         </div>
       </div>
       <FooterWrapper className="px-3 py-4">
