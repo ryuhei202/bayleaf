@@ -1,6 +1,9 @@
-import { Typography } from "../../baseParts/legacy/Typography";
-import { Pagination } from "../../baseParts/Pagination";
-import { PaymentHistoryList, TMemberPayment } from "./PaymentHistoryList";
+import { Typography } from "../../components/baseParts/legacy/Typography";
+import { Pagination } from "../../components/baseParts/Pagination";
+import {
+  PaymentHistoryList,
+  TMemberPayment,
+} from "../../components/pageParts/paymentHistory/PaymentHistoryList";
 type TProps = {
   currentPage: number;
   onClickPagenation: (page: number) => void;
