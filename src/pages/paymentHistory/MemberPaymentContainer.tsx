@@ -1,21 +1,20 @@
+import { Dialog } from "@headlessui/react";
 import { useRef, useState } from "react";
 import ReactToPrint from "react-to-print";
 import { useMemberPaymentsIndex } from "../../api/memberPayments/useMemberPaymentsIndex";
 import { useReceiptShow } from "../../api/receipts/useReceiptShow";
 import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
-import { MemberPayment } from "../../components/pageParts/paymentHistory/MemberPayment";
+import { MemberPayment } from "./MemberPayment";
 import { Receipts } from "./Receipt";
 
 type TProps = {
   nextPaymentDate: string;
 };
-
 export const MemberPaymentContainer = ({ nextPaymentDate }: TProps) => {
   const componentRef = useRef(null);
   const [selectedPage, setSelectedPage] = useState<number>(1);
-  const [isClickedReceiptButton, setIsClickedReceiptButton] =
-    useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [memberPaymentId, setMemberPaymentId] = useState<number>(0);
 
   const { data: memberPaymentsData, error: memberPaymentError } =
@@ -31,34 +30,25 @@ export const MemberPaymentContainer = ({ nextPaymentDate }: TProps) => {
     setSelectedPage(page);
   };
 
-  const handleClickCloseReceipt = () => {
-    setIsClickedReceiptButton(false);
-  };
-
-  const handleClickNoAction = (e: React.MouseEvent<HTMLInputElement>) => {
-    e.stopPropagation();
-  };
-
   const handleClickReceiptButton = (memberPaymentId: number) => {
     setMemberPaymentId(memberPaymentId);
-    setIsClickedReceiptButton(true);
+    setIsOpen(true);
   };
 
   if (memberPaymentError)
     return <ErrorPage message={memberPaymentError.message} />;
   if (!memberPaymentsData) return <LoaderPage />;
 
-  if (isClickedReceiptButton) {
+  const getPanel = () => {
     if (receiptError) return <ErrorPage message={receiptError.message} />;
     if (!receiptData) return <LoaderPage />;
     return (
-      <div onClick={handleClickCloseReceipt}>
+      <div>
         <ReactToPrint
           trigger={() => <button>プリントアウト！</button>}
           content={() => componentRef.current}
         />
         <Receipts
-          onClick={() => handleClickNoAction}
           memberPaymentId={
             memberPaymentsData.memberPayments[memberPaymentId].paymentId
           }
@@ -66,18 +56,21 @@ export const MemberPaymentContainer = ({ nextPaymentDate }: TProps) => {
             memberPaymentsData.memberPayments[memberPaymentId].paymentDate
           }
           usingPoint={memberPaymentsData.memberPayments[memberPaymentId].point}
-          receiptDetails={receiptData.receiptDetails}
-          cardBrand={receiptData.cardBrand}
-          cardNumber={receiptData.cardNumber}
+          receiptDetails={receiptData?.receiptDetails}
+          cardBrand={receiptData?.cardBrand}
+          cardNumber={receiptData?.cardNumber}
           ref={componentRef}
         />
-        ;
       </div>
     );
-  }
+  };
 
   return (
-    <div>
+    <>
+      <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
+        <Dialog.Panel>{getPanel()}</Dialog.Panel>
+      </Dialog>
+
       <MemberPayment
         currentPage={selectedPage}
         onClickPagenation={handleClickPagination}
@@ -86,6 +79,6 @@ export const MemberPaymentContainer = ({ nextPaymentDate }: TProps) => {
         nextPaymentDate={nextPaymentDate}
         onClickReceiptButton={handleClickReceiptButton}
       ></MemberPayment>
-    </div>
+    </>
   );
 };
