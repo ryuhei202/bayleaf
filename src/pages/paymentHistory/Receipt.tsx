@@ -12,7 +12,6 @@ type TProps = {
   receiptDetails: TReceiptDetails;
   cardBrand: string;
   cardNumber: string;
-  onClick: () => void;
 };
 export const Receipts = React.forwardRef<HTMLDivElement, TProps>(
   (
@@ -23,16 +22,14 @@ export const Receipts = React.forwardRef<HTMLDivElement, TProps>(
       cardBrand,
       cardNumber,
       usingPoint,
-      onClick,
     },
     ref
   ) => {
-    const date = new Date(receiptCreatedAt);
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-
-    const formattedDate = `${year}年${month}月${day}日`;
+    const formattedDate = receiptCreatedAt.replace(
+      /(\d{4})-(\d{2})-(\d{2})/,
+      "$1年$2月$3日"
+    );
+    const year = receiptCreatedAt.substring(0, 4);
 
     const getTotalPrice = (receiptDetails: TReceiptDetails) => {
       let totalPrice = 0;
@@ -43,16 +40,12 @@ export const Receipts = React.forwardRef<HTMLDivElement, TProps>(
     };
 
     return (
-      <div
-        className="text-[1px] flex flex-col text-center w-90 p-5"
-        ref={ref}
-        onClick={() => onClick}
-      >
+      <div className="text-[1px] flex flex-col text-center w-90 p-5" ref={ref}>
         <div>
-          <div className="">
+          <div>
             発行日 : <span>{formattedDate}</span>
           </div>
-          <h2 className="text-[14px] font-bold">{`領収書　(注文番号 :${memberPaymentId})`}</h2>
+          <h2 className="text-[14px] font-bold">{`領収書 (注文番号 :${memberPaymentId})`}</h2>
           <div className="underline text-[#428bca]">印刷してご利用ください</div>
         </div>
 
@@ -71,13 +64,13 @@ export const Receipts = React.forwardRef<HTMLDivElement, TProps>(
               </span>
             </table>
           </div>
-          <div className="w-1/2 float-left font-bold text-right underline">
-            　　　　　　　　　　　　様
+          <div className="w-1/2 float-left font-bold text-right border-b">
+            <p>様</p>
           </div>
         </div>
         <br />
 
-        <div className="">
+        <div>
           <h2 className="text-[12px] font-bold mb-1">支払い内容</h2>
           <div>
             <div className="float-left w-3/5 text-left">
