@@ -6,17 +6,19 @@ type TProps = {
   maxPage: number;
   currentPage: number;
   onClickPagination: (page: number) => void;
+  className?: string;
 };
 
 export const Pagination = ({
   maxPage,
   currentPage,
   onClickPagination,
+  className,
 }: TProps) => {
   const isBackDisabled = currentPage <= 1;
   const isNextDisabled = currentPage >= maxPage;
   return (
-    <div className="flex justify-around items-center">
+    <div className={`flex justify-around items-center ${className ?? ""}`}>
       <Button
         className={`rounded-[44px]  w-[44px] h-[44px] relative ${
           isBackDisabled ? "bg-[#D8D8D2]" : "bg-[#F4F3EF]"
@@ -27,7 +29,7 @@ export const Pagination = ({
         <BackIcon className="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]"></BackIcon>
       </Button>
       <div>
-        <div className="text-themeGray flex text-2xl w-20 justify-around">
+        <div className="text-themeGray flex text-xl w-20 justify-around">
           {currentPage}
           <div className="text-[#C8C9C3]">/</div>
           {maxPage}
