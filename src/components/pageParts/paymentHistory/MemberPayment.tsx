@@ -19,12 +19,7 @@ export const MemberPayment = ({
 }: TProps) => {
   return (
     <>
-      <Typography
-        weight="regular"
-        size="xl"
-        color="theme-gray"
-        className="ml-4"
-      >
+      <Typography weight="regular" size="xl" color="primary" className="ml-4">
         決済履歴
       </Typography>
       <div className="border-[0.5px] border-gray my-2" />
@@ -32,7 +27,7 @@ export const MemberPayment = ({
         <Typography
           weight="regular"
           size="base"
-          color="theme-gray"
+          color="primary"
           className="ml-2 mb-4 basis-3/5"
         >
           次回決済予定日:
@@ -40,7 +35,7 @@ export const MemberPayment = ({
         <Typography
           weight="regular"
           size="base"
-          color="theme-gray"
+          color="primary"
           className="ml-2 mb-4  basis-2/5"
         >
           {nextPaymentDate}
