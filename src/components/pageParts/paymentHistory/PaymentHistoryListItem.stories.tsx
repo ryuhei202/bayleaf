@@ -20,7 +20,7 @@ DefaultValues.args = {
     paymentId: "34567876",
     priceTaxIn: 10000,
     point: 30,
-    memberPaymentId: 5,
+    id: 5,
     paymentDate: "2022年5月24日",
     paymentTypeName: "月額利用料金",
     isAvailableReceipt: true,
