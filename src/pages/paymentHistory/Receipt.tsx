@@ -12,6 +12,7 @@ type TProps = {
   receiptDetails: TReceiptDetails;
   cardBrand: string;
   cardNumber: string;
+  finalPrice: number;
 };
 export const Receipts = React.forwardRef<HTMLDivElement, TProps>(
   (
@@ -22,14 +23,15 @@ export const Receipts = React.forwardRef<HTMLDivElement, TProps>(
       cardBrand,
       cardNumber,
       usingPoint,
+      finalPrice,
     },
     ref
   ) => {
-    const formattedDate = receiptCreatedAt.replace(
-      /(\d{4})-(\d{2})-(\d{2})/,
+    const formattedDate = receiptCreatedAt?.replace(
+      /^(\d{4})-(\d{2})-(\d{2}).*$/,
       "$1年$2月$3日"
     );
-    const year = receiptCreatedAt.substring(0, 4);
+    const year = receiptCreatedAt?.substring(0, 4);
 
     const getTotalPrice = (receiptDetails: TReceiptDetails) => {
       let totalPrice = 0;
@@ -40,13 +42,15 @@ export const Receipts = React.forwardRef<HTMLDivElement, TProps>(
     };
 
     return (
-      <div className="text-[1px] flex flex-col text-center w-90 p-5" ref={ref}>
+      <div
+        className="text-[1px] flex flex-col text-center w-90 p-5 bg-white"
+        ref={ref}
+      >
         <div>
           <div>
             発行日 : <span>{formattedDate}</span>
           </div>
           <h2 className="text-[14px] font-bold">{`領収書 (注文番号 :${memberPaymentId})`}</h2>
-          <div className="underline text-[#428bca]">印刷してご利用ください</div>
         </div>
 
         <div className="mt-5">
@@ -59,8 +63,7 @@ export const Receipts = React.forwardRef<HTMLDivElement, TProps>(
               <span> : {memberPaymentId} </span>
               <br />
               <span className="font-bold">
-                ご請求額 : ¥
-                {(getTotalPrice(receiptDetails) - usingPoint).toLocaleString()}
+                ご請求額 : ¥{finalPrice.toLocaleString()}
               </span>
             </table>
           </div>
@@ -116,8 +119,7 @@ export const Receipts = React.forwardRef<HTMLDivElement, TProps>(
               <br /> -----
               <br />
               <span className="font-bold">
-                ご請求額 : ¥
-                {(getTotalPrice(receiptDetails) - usingPoint).toLocaleString()}
+                ご請求額 : ¥{finalPrice.toLocaleString()}
               </span>
             </div>
           </div>
