@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { TMembersIndexResponse } from "../../../api/members/TMembersIndexResponse";
-import { MemberListContainer } from "../../../pages/hearing/MemberListContainer";
+import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
+import { MemberListContainer } from "../hearing/MemberListContainer";
+
 import { MemberPaymentContainer } from "./MemberPaymentContainer";
+
 export const PaymentHistory = () => {
   const [member, setMember] =
     useState<TMembersIndexResponse | undefined>(undefined);
