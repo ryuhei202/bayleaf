@@ -42,10 +42,7 @@ export const Receipts = React.forwardRef<HTMLDivElement, TProps>(
     };
 
     return (
-      <div
-        className="text-[1px] flex flex-col text-center w-90 p-5 bg-white"
-        ref={ref}
-      >
+      <div className="text-[1px] flex flex-col text-center w-90 p-5" ref={ref}>
         <div>
           <div>
             発行日 : <span>{formattedDate}</span>
