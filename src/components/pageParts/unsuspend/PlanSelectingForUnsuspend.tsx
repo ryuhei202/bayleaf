@@ -1,4 +1,5 @@
 import { Tab } from "@headlessui/react";
+import liff from "@line/liff/dist/lib";
 import {
   findPlanById,
   LIGHT_PLAN,
@@ -7,15 +8,19 @@ import {
   TPlan,
 } from "../../../models/shared/Plans";
 import { Button } from "../../baseParts/Button";
+import { AlertDialog } from "../../baseParts/dialogs/AlertDialog";
 import { ConfirmDialog } from "../../baseParts/dialogs/ConfirmDialog";
+import { CheckIcon } from "../../baseParts/icons/CheckIcon";
 import { Page } from "../../baseParts/legacy/Page";
 import { TabMenu } from "../../baseParts/TabMenu";
 import { PlanChangePanel } from "../planChange/PlanChangePanel";
 
 type TProps = {
-  readonly planId: number;
+  readonly planId: number | null;
   readonly isLoading: boolean;
+  readonly isCompleted: boolean;
   readonly selectedPlan?: TPlan;
+
   readonly isRentalRemained: boolean;
   readonly onSubmit: () => void;
   readonly onPlanSelect: ({ planId }: { planId: number }) => void;
@@ -25,6 +30,7 @@ type TProps = {
 export const PlanSelectingForUnsuspend = ({
   planId,
   isLoading,
+  isCompleted,
   selectedPlan,
   isRentalRemained,
   onSubmit,
@@ -37,6 +43,10 @@ export const PlanSelectingForUnsuspend = ({
   } as const;
 
   const getDiffPrice = ({ selectedPlan }: { selectedPlan: TPlan }): number => {
+    if (planId === null) {
+      throw Error("予期せぬエラーが発生しました");
+    }
+
     const diffPrice =
       selectedPlan.price.withTax - findPlanById(planId).price.withTax;
     return diffPrice > 0 ? diffPrice : 0;
@@ -80,6 +90,13 @@ export const PlanSelectingForUnsuspend = ({
           onClickCancel={onCancel}
         />
       )}
+      <AlertDialog
+        open={isCompleted}
+        title="プランを開始しました"
+        description={<CheckIcon />}
+        onClick={() => liff.closeWindow()}
+        onClose={() => liff.closeWindow()}
+      />
       <Tab.Group>
         <Tab.List className="flex w-full mt-6">
           <TabMenu className="font-semibold w-1/3">ライト</TabMenu>

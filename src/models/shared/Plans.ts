@@ -122,7 +122,7 @@ export const findPlanById = (planId: number): TPlan => {
     return CASUAL_PLAN;
   }
   if (planId === BUSINESS_PLAN.id) {
-    return CASUAL_PLAN;
+    return BUSINESS_PLAN;
   }
   throw Error("存在しないプランです");
 };
