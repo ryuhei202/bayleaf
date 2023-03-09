@@ -23,18 +23,18 @@ export const PaymentHistoryList = ({
   return (
     <div>
       <div className="flex justify-self-start">
-        <div className="basis-1/4">
+        <div className="basis-2/6">
           <Typography color="strong-gray" size="xs">
             日付
           </Typography>
         </div>
-        <div className="basis-1/4">
-          <Typography color="strong-gray" size="xs">
+        <div className="basis-1/5">
+          <Typography color="strong-gray" size="xs" className="ml-[4px]">
             区分
           </Typography>
         </div>
-        <div className="basis-1/4">
-          <Typography color="strong-gray" size="xs">
+        <div className="basis-2/5">
+          <Typography color="strong-gray" size="xs" className="ml-[8px]">
             金額（税込）
           </Typography>
         </div>
