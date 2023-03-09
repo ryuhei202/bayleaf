@@ -1,3 +1,4 @@
+import * as Sentry from "@sentry/react";
 import {
   CHART_RENTAL_STATUS,
   getRentalStatusesWithNoPlanChanges,
@@ -9,21 +10,31 @@ type TArgs = {
   readonly chartsData: TChartIndexResponse;
 };
 type TPlanChangeValidater = {
-  readonly isStatusNotRentable: boolean;
+  readonly isStatusNotRentable: () => boolean;
   readonly isFirstUserPreparingCoordinate: boolean;
   readonly isSuspend: boolean;
   readonly isMultpleMembers: boolean;
+  readonly isOneShotMember: boolean;
 };
 
 export const getPlanChangeValidater = ({
   membersData,
   chartsData,
 }: TArgs): TPlanChangeValidater => {
-  const isStatusNotRentable = chartsData.charts.some((c) =>
-    getRentalStatusesWithNoPlanChanges({
-      planId: membersData[0].mPlanId,
-    }).includes(c.rentalStatus)
-  );
+  const isStatusNotRentable = (): boolean => {
+    const planId = membersData[0].mPlanId;
+    if (planId === null) {
+      Sentry.captureException(
+        "単発利用ユーザーがプラン変更ページにアクセスしています"
+      );
+      return false;
+    }
+    return chartsData.charts.some((c) =>
+      getRentalStatusesWithNoPlanChanges({
+        planId,
+      }).includes(c.rentalStatus)
+    );
+  };
 
   const isFirstUserPreparingCoordinate =
     membersData[0].isFirstTime &&
@@ -39,10 +50,13 @@ export const getPlanChangeValidater = ({
 
   const isMultpleMembers = membersData.length !== 1;
 
+  const isOneShotMember = membersData[0].mPlanId === null;
+
   return {
     isStatusNotRentable,
     isFirstUserPreparingCoordinate,
     isSuspend,
     isMultpleMembers,
+    isOneShotMember,
   };
 };

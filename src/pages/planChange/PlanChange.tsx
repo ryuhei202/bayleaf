@@ -32,6 +32,7 @@ export const PlanChange = () => {
     isFirstUserPreparingCoordinate,
     isSuspend,
     isMultpleMembers,
+    isOneShotMember,
   } = getPlanChangeValidater({
     membersData,
     chartsData,
@@ -58,9 +59,22 @@ export const PlanChange = () => {
     );
   }
 
+  if (isOneShotMember)
+    return (
+      <div data-testid="isOneShotMember">
+        <PlanChangeWithValidation
+          reason={
+            <Typography className="text-red">
+              単発利用のお客様はプラン変更できません。
+            </Typography>
+          }
+        />
+      </div>
+    );
+
   if (isSuspend) return <Navigate to="/unsuspend" />;
 
-  if (isStatusNotRentable) {
+  if (isStatusNotRentable()) {
     return (
       <div data-testid="isStatusNotRentable">
         <PlanChangeWithValidation
@@ -88,11 +102,20 @@ export const PlanChange = () => {
     );
   }
 
-  if (membersData[0].isFirstTime && chartsData.charts.length === 0) {
+  if (
+    membersData[0].isFirstTime &&
+    membersData[0].mPlanId !== null &&
+    chartsData.charts.length === 0
+  ) {
     return (
       <div data-testid="PlanSelectingForPreMemberContainer">
         <PlanSelectingForPreMemberContainer
-          memberData={membersData[0]}
+          memberData={{
+            id: membersData[0].id,
+            isFirstTime: membersData[0].isFirstTime,
+            isSuspend: membersData[0].isSuspend,
+            mPlanId: membersData[0].mPlanId,
+          }}
           chartsData={chartsData}
         />
       </div>
@@ -101,7 +124,15 @@ export const PlanChange = () => {
 
   return (
     <div data-testid="PlanSelectingContainer">
-      <PlanSelectingContainer memberData={membersData[0]} />
+      <PlanSelectingContainer
+        memberData={{
+          id: membersData[0].id,
+          mPlanId: membersData[0].mPlanId as number,
+          nextPaymentDate: membersData[0].nextPaymentDate as string,
+          rentalRemainingNum: membersData[0].rentalRemainingNum,
+          requestedPlanId: membersData[0].requestedPlanId ?? undefined,
+        }}
+      />
     </div>
   );
 };
