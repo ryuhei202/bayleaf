@@ -10,6 +10,7 @@ type TProps = {
   memberPaymentId: number;
   memberPaymentsData: TMemberPaymentsIndexResponse;
 };
+
 export const ReceiptCointainer = ({
   memberPaymentId,
   memberPaymentsData,
@@ -20,24 +21,36 @@ export const ReceiptCointainer = ({
   });
   if (receiptError) return <ErrorPage message={receiptError.message} />;
   if (!receiptData) return <LoaderPage />;
+  const getTargetReceiptcIndex = memberPaymentsData.memberPayments.findIndex(
+    (memberPayment) => memberPayment.id === memberPaymentId
+  );
   return (
     <div>
-      <ReactToPrint
-        trigger={() => <button>プリントアウト！</button>}
-        content={() => componentRef.current}
-      />
       <Receipts
         memberPaymentId={
-          memberPaymentsData.memberPayments[memberPaymentId].paymentId
+          memberPaymentsData.memberPayments[getTargetReceiptcIndex].paymentId
         }
         receiptCreatedAt={
-          memberPaymentsData.memberPayments[memberPaymentId].paymentDate
+          memberPaymentsData.memberPayments[getTargetReceiptcIndex].paymentDate
         }
-        usingPoint={memberPaymentsData.memberPayments[memberPaymentId].point}
+        usingPoint={
+          memberPaymentsData.memberPayments[getTargetReceiptcIndex].point
+        }
         receiptDetails={receiptData?.receiptDetails}
         cardBrand={receiptData?.cardBrand}
         cardNumber={receiptData?.cardNumber}
+        finalPrice={
+          memberPaymentsData.memberPayments[getTargetReceiptcIndex].priceTaxIn
+        }
         ref={componentRef}
+      />
+      <ReactToPrint
+        trigger={() => (
+          <div className="underline text-[#428bca] text-center mt-2">
+            印刷する
+          </div>
+        )}
+        content={() => componentRef.current}
       />
     </div>
   );

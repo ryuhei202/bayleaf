@@ -13,10 +13,10 @@ export const MemberPaymentContainer = ({ nextPaymentDate }: TProps) => {
   const [selectedPage, setSelectedPage] = useState<number>(1);
   const [isOpen, setIsOpen] = useState(false);
   const [memberPaymentId, setMemberPaymentId] = useState<number>();
-
   const { data: memberPaymentsData, error: memberPaymentError } =
     useMemberPaymentsIndex({
       params: { limit: 10, offset: (selectedPage - 1) * 10, order: "desc" },
+      selectedPage,
     });
 
   const handleClickPagination = (page: number) => {
@@ -31,9 +31,14 @@ export const MemberPaymentContainer = ({ nextPaymentDate }: TProps) => {
   if (memberPaymentError)
     return <ErrorPage message={memberPaymentError.message} />;
   if (!memberPaymentsData) return <LoaderPage />;
-  if (memberPaymentId)
+  if (memberPaymentsData && memberPaymentId)
     return (
-      <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
+      <Dialog
+        open={isOpen}
+        onClose={() => {
+          setMemberPaymentId(undefined);
+        }}
+      >
         <Dialog.Panel>
           {
             <ReceiptCointainer
@@ -50,7 +55,7 @@ export const MemberPaymentContainer = ({ nextPaymentDate }: TProps) => {
       <MemberPayment
         currentPage={selectedPage}
         onClickPagenation={handleClickPagination}
-        maxPage={(memberPaymentsData.totalCount - 1) / 10 + 1}
+        maxPage={Math.floor((memberPaymentsData.totalCount - 1) / 10 + 1)}
         paymentData={memberPaymentsData.memberPayments}
         nextPaymentDate={nextPaymentDate}
         onClickReceiptButton={handleClickReceiptButton}
