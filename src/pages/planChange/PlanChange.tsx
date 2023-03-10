@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useChartIndex } from "../../api/charts/useChartIndex";
+import {
+  TMembersIndexResponse,
+  TNotNullPlanIdMember,
+} from "../../api/members/TMembersIndexResponse";
 import { useMembersIndex } from "../../api/members/useMembersIndex";
 import { Typography } from "../../components/baseParts/legacy/Typography";
 import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
@@ -27,12 +31,30 @@ export const PlanChange = () => {
 
   if (!membersData || !chartsData) return <LoaderPage />;
 
+  const isPlanMember = (
+    data: TMembersIndexResponse[] | TNotNullPlanIdMember[]
+  ): data is TNotNullPlanIdMember[] => {
+    return data.every((m) => m.mPlanId !== null);
+  };
+
+  if (!isPlanMember(membersData))
+    return (
+      <div data-testid="isOneShotMember">
+        <PlanChangeWithValidation
+          reason={
+            <Typography className="text-red">
+              単発利用のお客様はプラン変更できません。
+            </Typography>
+          }
+        />
+      </div>
+    );
+
   const {
     isStatusNotRentable,
     isFirstUserPreparingCoordinate,
     isSuspend,
     isMultpleMembers,
-    isOneShotMember,
   } = getPlanChangeValidater({
     membersData,
     chartsData,
@@ -58,19 +80,6 @@ export const PlanChange = () => {
       </div>
     );
   }
-
-  if (isOneShotMember)
-    return (
-      <div data-testid="isOneShotMember">
-        <PlanChangeWithValidation
-          reason={
-            <Typography className="text-red">
-              単発利用のお客様はプラン変更できません。
-            </Typography>
-          }
-        />
-      </div>
-    );
 
   if (isSuspend) return <Navigate to="/unsuspend" />;
 
