@@ -12,7 +12,8 @@ type TProps = {
 export const MemberPaymentContainer = ({ nextPaymentDate }: TProps) => {
   const [selectedPage, setSelectedPage] = useState<number>(1);
   const [isOpen, setIsOpen] = useState(false);
-  const [memberPaymentId, setMemberPaymentId] = useState<number>();
+  const [memberPaymentId, setMemberPaymentId] =
+    useState<number | undefined>(undefined);
   const { data: memberPaymentsData, error: memberPaymentError } =
     useMemberPaymentsIndex({
       params: { limit: 10, offset: (selectedPage - 1) * 10, order: "desc" },
@@ -31,8 +32,9 @@ export const MemberPaymentContainer = ({ nextPaymentDate }: TProps) => {
   if (memberPaymentError)
     return <ErrorPage message={memberPaymentError.message} />;
   if (!memberPaymentsData) return <LoaderPage />;
-  if (memberPaymentsData && memberPaymentId)
-    return (
+
+  return (
+    <>
       <Dialog
         open={isOpen}
         onClose={() => {
@@ -48,10 +50,6 @@ export const MemberPaymentContainer = ({ nextPaymentDate }: TProps) => {
           }
         </Dialog.Panel>
       </Dialog>
-    );
-
-  return (
-    <>
       <MemberPayment
         currentPage={selectedPage}
         onClickPagenation={handleClickPagination}

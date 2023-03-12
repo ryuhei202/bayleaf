@@ -7,7 +7,7 @@ import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { Receipts } from "./Receipt";
 
 type TProps = {
-  memberPaymentId: number;
+  memberPaymentId: number | undefined;
   memberPaymentsData: TMemberPaymentsIndexResponse;
 };
 
