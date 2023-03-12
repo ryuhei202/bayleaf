@@ -27,6 +27,9 @@ export const BuyItemSelect = ({
   const isSelectable = (item: TSelectBuyItem) =>
     item.isBuyable && !item.isPurchased;
 
+  const isAllSelectedDiscountAvailable =
+    chartItems.find((item) => !item.isBuyable) === undefined;
+
   return (
     <div className="text-center bg-clay">
       <div className="px-6 pb-16">
@@ -40,6 +43,7 @@ export const BuyItemSelect = ({
                 className="my-6"
                 onClick={() => onSelectChartItems(chartItem.id)}
                 key={chartItem.id}
+                data-testid={`BuyItemSelectItemCard-${chartItem.id}`}
               >
                 <SelectWrapper visible={chartItem.isSelected}>
                   <PurchaseItemCard
@@ -91,29 +95,37 @@ export const BuyItemSelect = ({
       <FooterWrapper className="px-3 py-4">
         <div className="flex">
           <div className="flex-grow mt-auto text-start">
-            {allSelectedDiscountPrice ? (
-              <Typography size="xs" color="red">
-                全アイテム選択で
-                <br />
-                <b className="text-base">10%</b>OFFになりました
-              </Typography>
-            ) : (
-              <Typography size="xs" color="red">
-                あと
-                {
-                  chartItems.filter(
-                    (item) => isSelectable(item) && !item.isSelected
-                  ).length
-                }
-                アイテム選択で
-                <br />
-                全アイテム<b className="text-base">10%</b>OFF
-              </Typography>
+            {isAllSelectedDiscountAvailable && (
+              <>
+                {allSelectedDiscountPrice ? (
+                  <div data-testid="BuyItemSelectAllSelectedDiscountLabel">
+                    <Typography size="xs" color="red">
+                      全アイテム選択で
+                      <br />
+                      <b className="text-base">10%</b>OFFになりました
+                    </Typography>
+                  </div>
+                ) : (
+                  <div data-testid="BuyItemSelectSelectableItemRemainingLabel">
+                    <Typography size="xs" color="red">
+                      あと
+                      {
+                        chartItems.filter(
+                          (item) => isSelectable(item) && !item.isSelected
+                        ).length
+                      }
+                      アイテム選択で
+                      <br />
+                      全アイテム<b className="text-base">10%</b>OFF
+                    </Typography>
+                  </div>
+                )}
+              </>
             )}
           </div>
           <div className="text-end mt-auto">
-            {allSelectedDiscountPrice ? (
-              <>
+            {isAllSelectedDiscountAvailable && allSelectedDiscountPrice ? (
+              <div data-testid="BuyItemSelectAllSelectedDiscountPriceLabel">
                 <Typography size="base" className="line-through" color="gray">
                   税込{totalSellingPrice.toLocaleString()}円
                 </Typography>
@@ -126,17 +138,22 @@ export const BuyItemSelect = ({
                   </b>
                   円
                 </Typography>
-              </>
+              </div>
             ) : (
-              <Typography size="base" color="strong-gray">
-                税込
-                <b className="text-xl">{totalSellingPrice.toLocaleString()}</b>
-                円
-              </Typography>
+              <div data-testid="BuyItemSelectPriceWithoutDiscountLabel">
+                <Typography size="base" color="strong-gray">
+                  税込
+                  <b className="text-xl">
+                    {totalSellingPrice.toLocaleString()}
+                  </b>
+                  円
+                </Typography>
+              </div>
             )}
           </div>
         </div>
         <Button
+          dataTestId="BuyItemSelectSubmitButton"
           onClick={onClickConfirm}
           disabled={chartItems.filter((item) => item.isSelected).length === 0}
         >
