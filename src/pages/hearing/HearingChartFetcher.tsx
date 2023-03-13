@@ -1,5 +1,5 @@
 import { useChartIndex } from "../../api/charts/useChartIndex";
-import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
+import { TNotNullPlanIdMember } from "../../api/members/TMembersIndexResponse";
 import { Page } from "../../components/baseParts/legacy/Page";
 import { Typography } from "../../components/baseParts/legacy/Typography";
 import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
@@ -8,7 +8,7 @@ import { HearingFetcher } from "./HearingFetcher";
 import { NewHearingContainer } from "./NewHearingContainer";
 
 type TProps = {
-  readonly member: TMembersIndexResponse;
+  readonly member: TNotNullPlanIdMember;
 };
 export const HearingChartFetcher = ({ member }: TProps) => {
   const { data: chartIndexData, error: chartIndexError } = useChartIndex({

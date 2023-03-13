@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useChartCreate } from "../../api/charts/useChartCreate";
-import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
+import { TNotNullPlanIdMember } from "../../api/members/TMembersIndexResponse";
 import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { BeforeHearingConfirm } from "../../components/pageParts/hearing/BeforeHearingConfirm";
 import { HearingAnswerConfirm } from "../../components/pageParts/hearing/HearingAnswerConfirm";
@@ -13,7 +13,7 @@ import { HearingFormFetcher } from "./HearingFormFetcher";
 import { HearingPostSuccess } from "./HearingPostSuccess";
 
 type TProps = {
-  readonly member: TMembersIndexResponse;
+  readonly member: TNotNullPlanIdMember;
   readonly nextPlanId: number;
 };
 

@@ -1,15 +1,20 @@
 import { useState } from "react";
 import { TChartIndexResponse } from "../../api/charts/TChartIndexResponse";
-import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { useMembersPreMemberPlanChange } from "../../api/members/useMembersPreMemberPlanChange";
 import { Typography } from "../../components/baseParts/legacy/Typography";
 import { PlanSelectingForPreMember } from "../../components/pageParts/planChange/PlanSelectingForPreMember";
 import { findPlanById } from "../../models/shared/Plans";
 
 type TProps = {
-  readonly memberData: TMembersIndexResponse;
+  readonly memberData: {
+    id: number;
+    isFirstTime: boolean;
+    isSuspend: boolean;
+    mPlanId: number;
+  };
   readonly chartsData: TChartIndexResponse;
 };
+
 export const PlanSelectingForPreMemberContainer = ({
   memberData,
   chartsData,
