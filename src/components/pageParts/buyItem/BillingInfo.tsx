@@ -2,7 +2,8 @@ import { Typography } from "../../baseParts/legacy/Typography";
 
 type TProps = {
   price: number;
-  discountedPrice: number;
+  totalSellingPrice: number;
+  allSelectedDiscountPrice?: number;
   grantedPoint: number;
   possesedPoint: number;
   selectedPoint: number;
@@ -11,7 +12,8 @@ type TProps = {
 
 export const BillingInfo = ({
   price,
-  discountedPrice,
+  totalSellingPrice,
+  allSelectedDiscountPrice,
   grantedPoint,
   possesedPoint,
   selectedPoint,
@@ -21,14 +23,38 @@ export const BillingInfo = ({
     <div className="bg-white flex flex-col">
       <div className="border-dashed border-b-[1px] py-8 items-center flex text-right">
         <div className="w-1/2">
-          <Typography color="strong-gray">アイテム合計</Typography>
+          <Typography size="sm" color="gray">
+            参考価格
+          </Typography>
+          <Typography size="sm" color="gray">
+            UWear割引
+          </Typography>
+          {allSelectedDiscountPrice && (
+            <Typography size="sm" color="gray">
+              全購入10%OFF
+            </Typography>
+          )}
+          <Typography color="strong-gray" weight="bold">
+            アイテム合計
+          </Typography>
         </div>
         <div className="w-1/2 pr-6">
-          <Typography className="line-through" color="strong-gray">
+          <Typography size="sm" className="line-through" color="gray">
             ¥{price.toLocaleString()}
           </Typography>
-          <Typography color="red">
-            ¥{discountedPrice.toLocaleString()}
+          <Typography size="sm" color="red">
+            -¥{(price - totalSellingPrice).toLocaleString()}
+          </Typography>
+          {allSelectedDiscountPrice && (
+            <Typography size="sm" color="red">
+              -¥{allSelectedDiscountPrice.toLocaleString()}
+            </Typography>
+          )}
+          <Typography color="strong-gray" weight="bold">
+            ¥
+            {(
+              totalSellingPrice - (allSelectedDiscountPrice ?? 0)
+            ).toLocaleString()}
           </Typography>
         </div>
       </div>
@@ -62,7 +88,7 @@ export const BillingInfo = ({
           ご請求額
         </Typography>
         <Typography className="w-1/2 pr-6" color="strong-gray">
-          ¥{(discountedPrice - selectedPoint).toLocaleString()}
+          ¥{(totalSellingPrice - selectedPoint).toLocaleString()}
         </Typography>
       </div>
 

@@ -1,6 +1,5 @@
 import { TChartItemsIndexResponse } from "../../../api/chartItems/useChartItemsIndex";
 import { Button } from "../../../components/baseParts/Button";
-import { FooterWrapper } from "../../../components/baseParts/legacy/FooterWrapper";
 import { IconButton } from "../../../components/baseParts/legacy/IconButton";
 import { ArrowIcon } from "../../../components/baseParts/legacy/icons/ArrowIcon";
 import { BillingInfo } from "../../../components/pageParts/buyItem/BillingInfo";
@@ -10,6 +9,7 @@ type TProps = {
   selectedItems: TChartItemsIndexResponse[];
   totalPrice: number;
   totalDiscountedPrice: number;
+  allSelectedDiscountPrice?: number;
   totalGrantedPoint: number;
   possesedPoint: number;
   selectedPoint: number;
@@ -23,6 +23,7 @@ export const BuyItemConfirm = ({
   selectedItems,
   totalPrice,
   totalDiscountedPrice,
+  allSelectedDiscountPrice,
   totalGrantedPoint,
   possesedPoint,
   selectedPoint,
@@ -58,15 +59,14 @@ export const BuyItemConfirm = ({
         </div>
         <BillingInfo
           price={totalPrice}
-          discountedPrice={totalDiscountedPrice}
+          totalSellingPrice={totalDiscountedPrice}
+          allSelectedDiscountPrice={allSelectedDiscountPrice}
           grantedPoint={totalGrantedPoint}
           possesedPoint={possesedPoint}
           selectedPoint={selectedPoint}
           onChange={onChange}
         />
-      </div>
-      <FooterWrapper className="px-3 py-4">
-        <div className="flex flex-row text-center">
+        <div className="flex flex-row text-center mt-3">
           <IconButton className="flex-none" onClick={onCancel}>
             <ArrowIcon className="h-10 my-auto" />
           </IconButton>
@@ -74,7 +74,7 @@ export const BuyItemConfirm = ({
             購入する
           </Button>
         </div>
-      </FooterWrapper>
+      </div>
     </div>
   );
 };
