@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useChartIndex } from "../../api/charts/useChartIndex";
+import {
+  TMembersIndexResponse,
+  TNotNullPlanIdMember,
+} from "../../api/members/TMembersIndexResponse";
 import { useMembersIndex } from "../../api/members/useMembersIndex";
 import { Typography } from "../../components/baseParts/legacy/Typography";
 import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
@@ -26,6 +30,25 @@ export const PlanChange = () => {
   if (chartsError) return <ErrorPage message={chartsError.message} />;
 
   if (!membersData || !chartsData) return <LoaderPage />;
+
+  const isPlanMember = (
+    data: TMembersIndexResponse[] | TNotNullPlanIdMember[]
+  ): data is TNotNullPlanIdMember[] => {
+    return data.every((m) => m.mPlanId !== null);
+  };
+
+  if (!isPlanMember(membersData))
+    return (
+      <div data-testid="isOneShotMember">
+        <PlanChangeWithValidation
+          reason={
+            <Typography className="text-red">
+              単発利用のお客様はプラン変更できません。
+            </Typography>
+          }
+        />
+      </div>
+    );
 
   const {
     isStatusNotRentable,
@@ -60,7 +83,7 @@ export const PlanChange = () => {
 
   if (isSuspend) return <Navigate to="/unsuspend" />;
 
-  if (isStatusNotRentable) {
+  if (isStatusNotRentable()) {
     return (
       <div data-testid="isStatusNotRentable">
         <PlanChangeWithValidation
@@ -88,11 +111,20 @@ export const PlanChange = () => {
     );
   }
 
-  if (membersData[0].isFirstTime && chartsData.charts.length === 0) {
+  if (
+    membersData[0].isFirstTime &&
+    membersData[0].mPlanId !== null &&
+    chartsData.charts.length === 0
+  ) {
     return (
       <div data-testid="PlanSelectingForPreMemberContainer">
         <PlanSelectingForPreMemberContainer
-          memberData={membersData[0]}
+          memberData={{
+            id: membersData[0].id,
+            isFirstTime: membersData[0].isFirstTime,
+            isSuspend: membersData[0].isSuspend,
+            mPlanId: membersData[0].mPlanId,
+          }}
           chartsData={chartsData}
         />
       </div>
@@ -101,7 +133,15 @@ export const PlanChange = () => {
 
   return (
     <div data-testid="PlanSelectingContainer">
-      <PlanSelectingContainer memberData={membersData[0]} />
+      <PlanSelectingContainer
+        memberData={{
+          id: membersData[0].id,
+          mPlanId: membersData[0].mPlanId as number,
+          nextPaymentDate: membersData[0].nextPaymentDate as string,
+          rentalRemainingNum: membersData[0].rentalRemainingNum,
+          requestedPlanId: membersData[0].requestedPlanId ?? undefined,
+        }}
+      />
     </div>
   );
 };

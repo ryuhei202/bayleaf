@@ -1,7 +1,7 @@
 import liff from "@line/liff/dist/lib";
 import { TChartResponse } from "../../api/charts/TChartResponse";
 import { useHearingIndex } from "../../api/hearings/useHearingIndex";
-import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
+import { TNotNullPlanIdMember } from "../../api/members/TMembersIndexResponse";
 import { Button } from "../../components/baseParts/legacy/Button";
 import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
@@ -10,7 +10,7 @@ import { sortHearings } from "../../models/hearing/THearingForms";
 import { HearingContainer } from "./HearingContainer";
 
 type TProps = {
-  readonly member: TMembersIndexResponse;
+  readonly member: TNotNullPlanIdMember;
   readonly chart: TChartResponse;
 };
 export const HearingFetcher = ({ member, chart }: TProps) => {
