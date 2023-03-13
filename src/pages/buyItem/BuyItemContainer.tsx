@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  TChartItemsIndexResponse,
-  useChartItemsIndex,
-} from "../../api/chartItems/useChartItemsIndex";
+import { useChartItemsIndex } from "../../api/chartItems/useChartItemsIndex";
 import { useChartBuyItems } from "../../api/charts/useChartBuyItems";
 import { AlertDialog } from "../../components/baseParts/dialogs/AlertDialog";
 import { CheckIcon } from "../../components/baseParts/icons/CheckIcon";
@@ -17,15 +14,15 @@ export type TProps = {
   possesedPoint: number;
 };
 
-export const BuyItemFetcher = ({ chartId, possesedPoint }: TProps) => {
+export const BuyItemContainer = ({ chartId, possesedPoint }: TProps) => {
   const [isConfirm, setIsConfirm] = useState<boolean>(false);
   const [selectedPoint, setSelectedPoint] = useState<number>(0);
   const { data: chartItemsData, error: chartItemsError } = useChartItemsIndex({
     chartId,
   });
-  const [selectedChartItems, setSelectedChartItems] = useState<
-    TChartItemsIndexResponse[]
-  >([]);
+  const [selectedChartItemIds, setSelectedChartItemIds] = useState<number[]>(
+    []
+  );
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
   const {
     mutate,
@@ -43,27 +40,21 @@ export const BuyItemFetcher = ({ chartId, possesedPoint }: TProps) => {
   if (!chartItemsData) return <LoaderPage />;
   if (buyItemsError) return <ErrorPage message={buyItemsError.message} />;
 
-  const isNotUndefined = (
-    targetChartItem: unknown
-  ): targetChartItem is TChartItemsIndexResponse => {
-    return targetChartItem !== undefined;
-  };
-
-  const handeleSelectChartItems = (chartItemId: number) => {
-    const selectedChartItemsIds = selectedChartItems.map((item) => item.id);
-    if (selectedChartItemsIds.includes(chartItemId)) {
-      const newSelectedChartItems = selectedChartItems.filter(
-        (item) => item.id !== chartItemId
-      );
-      setSelectedChartItems(newSelectedChartItems);
+  const handleSelectChartItems = (chartItemId: number) => {
+    const index = selectedChartItemIds.indexOf(chartItemId);
+    if (index === -1) {
+      const newSelectedChartItemIds = [...selectedChartItemIds, chartItemId];
+      setSelectedChartItemIds(newSelectedChartItemIds);
     } else {
-      const targetChartItem = chartItemsData.find((c) => c.id === chartItemId);
-      if (isNotUndefined(targetChartItem)) {
-        const newSelectedChartItems = [...selectedChartItems, targetChartItem];
-        setSelectedChartItems(newSelectedChartItems);
-      }
+      const newSelectedChartItemIds = [...selectedChartItemIds];
+      newSelectedChartItemIds.splice(index, 1);
+      setSelectedChartItemIds(newSelectedChartItemIds);
     }
   };
+
+  const selectedChartItems = chartItemsData.filter((item) =>
+    selectedChartItemIds.includes(item.id)
+  );
 
   const getTotalPrice = () => {
     let initialValue = 0;
@@ -74,14 +65,14 @@ export const BuyItemFetcher = ({ chartId, possesedPoint }: TProps) => {
     return totalPrice;
   };
 
-  const getTotalDiscountedPrice = () => {
+  const getTotalSellingPrice = () => {
     let initialValue = 0;
-    const totalDiscountedPrice = selectedChartItems.reduce(
+    const totalSellingPrice = selectedChartItems.reduce(
       (accumulator, selectedChartItem) =>
         accumulator + selectedChartItem.discountedPrice,
       initialValue
     );
-    return totalDiscountedPrice;
+    return totalSellingPrice;
   };
 
   const getTotalGrantedPoint = () => {
@@ -93,8 +84,25 @@ export const BuyItemFetcher = ({ chartId, possesedPoint }: TProps) => {
     return totalGrantedPoint;
   };
 
-  const getItemIds = () => {
-    return selectedChartItems.map((selectedItem) => selectedItem.id);
+  const getAllSelectedDiscountPrice = () => {
+    const selectableItems = chartItemsData.filter(
+      (item) => item.isBuyable && !item.isPurchased
+    );
+    if (
+      selectedChartItems.length !== selectableItems.length ||
+      selectedChartItems.find((item) => !item.isBuyable)
+    ) {
+      return undefined;
+    }
+    return selectedChartItems.reduce(
+      (accumulator, selectedChartItem) =>
+        accumulator + Math.floor(selectedChartItem.discountedPrice * 0.1),
+      0
+    );
+  };
+
+  const getTotalDiscountedPrice = () => {
+    return getTotalSellingPrice() - (getAllSelectedDiscountPrice() ?? 0);
   };
 
   const isValidPurchased = (): boolean => {
@@ -109,10 +117,13 @@ export const BuyItemFetcher = ({ chartId, possesedPoint }: TProps) => {
     <>
       {isConfirm ? (
         <BuyItemConfirm
-          selectedItems={selectedChartItems}
+          selectedItems={chartItemsData.filter((item) =>
+            selectedChartItemIds.includes(item.id)
+          )}
           totalPrice={getTotalPrice()}
-          totalDiscountedPrice={getTotalDiscountedPrice()}
+          totalSellingPrice={getTotalSellingPrice()}
           totalGrantedPoint={getTotalGrantedPoint()}
+          totalDiscountedPrice={getTotalDiscountedPrice()}
           possesedPoint={possesedPoint}
           selectedPoint={selectedPoint}
           onChange={(selectedPoint) => {
@@ -130,7 +141,7 @@ export const BuyItemFetcher = ({ chartId, possesedPoint }: TProps) => {
           onClick={() => {
             mutate(
               {
-                chartItemIds: getItemIds(),
+                chartItemIds: selectedChartItemIds,
                 totalPrice: getTotalDiscountedPrice(),
                 usingPoint: selectedPoint,
               },
@@ -143,13 +154,20 @@ export const BuyItemFetcher = ({ chartId, possesedPoint }: TProps) => {
           }}
           onCancel={() => setIsConfirm(false)}
           isPurchaseButtonDisabled={isValidPurchased()}
+          allSelectedDiscountPrice={getAllSelectedDiscountPrice()}
         />
       ) : (
         <BuyItemSelect
-          selectedChartItems={selectedChartItems}
-          chartItemsData={chartItemsData}
-          onSelectChartItems={handeleSelectChartItems}
+          chartItems={chartItemsData.map((item) => {
+            return {
+              ...item,
+              isSelected: selectedChartItemIds.includes(item.id),
+            };
+          })}
+          totalSellingPrice={getTotalSellingPrice()}
+          onSelectChartItems={handleSelectChartItems}
           onClickConfirm={() => setIsConfirm(true)}
+          allSelectedDiscountPrice={getAllSelectedDiscountPrice()}
         />
       )}
       <AlertDialog

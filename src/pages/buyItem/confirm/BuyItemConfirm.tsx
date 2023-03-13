@@ -8,6 +8,7 @@ import { PurchaseItemCard } from "../../../components/pageParts/buyItem/Purchase
 type TProps = {
   selectedItems: TChartItemsIndexResponse[];
   totalPrice: number;
+  totalSellingPrice: number;
   totalDiscountedPrice: number;
   allSelectedDiscountPrice?: number;
   totalGrantedPoint: number;
@@ -22,6 +23,7 @@ type TProps = {
 export const BuyItemConfirm = ({
   selectedItems,
   totalPrice,
+  totalSellingPrice,
   totalDiscountedPrice,
   allSelectedDiscountPrice,
   totalGrantedPoint,
@@ -33,7 +35,7 @@ export const BuyItemConfirm = ({
   isPurchaseButtonDisabled,
 }: TProps) => {
   return (
-    <div className="bg-clay">
+    <div className="bg-clay" data-testid="BuyItemConfirm">
       <div className="px-6 py-6">
         <div className="p-8 text-center text-themeGray">
           レンタル中アイテムの購入確認画面
@@ -59,8 +61,9 @@ export const BuyItemConfirm = ({
         </div>
         <BillingInfo
           price={totalPrice}
-          totalSellingPrice={totalDiscountedPrice}
+          totalSellingPrice={totalSellingPrice}
           allSelectedDiscountPrice={allSelectedDiscountPrice}
+          totalDiscountedPrice={totalDiscountedPrice}
           grantedPoint={totalGrantedPoint}
           possesedPoint={possesedPoint}
           selectedPoint={selectedPoint}

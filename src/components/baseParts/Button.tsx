@@ -12,6 +12,7 @@ type Props = {
   radius?: "small" | "large";
   isLoading?: boolean;
   GAEvent?: TGAEvent;
+  dataTestId?: string;
 };
 
 export const Button = ({
@@ -25,6 +26,7 @@ export const Button = ({
   radius,
   isLoading,
   GAEvent,
+  dataTestId,
 }: Props) => {
   let classes: string[] = [
     "px-3",
@@ -101,6 +103,7 @@ export const Button = ({
     <button
       className={`${className ?? ""} ${classes.join(" ")}`}
       onClick={handleClick}
+      data-testid={dataTestId}
     >
       <span className={`text-sm ${spanClasses.join(" ")}`}>{children}</span>
 

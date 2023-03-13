@@ -4,6 +4,7 @@ type TProps = {
   price: number;
   totalSellingPrice: number;
   allSelectedDiscountPrice?: number;
+  totalDiscountedPrice: number;
   grantedPoint: number;
   possesedPoint: number;
   selectedPoint: number;
@@ -14,6 +15,7 @@ export const BillingInfo = ({
   price,
   totalSellingPrice,
   allSelectedDiscountPrice,
+  totalDiscountedPrice,
   grantedPoint,
   possesedPoint,
   selectedPoint,
@@ -30,9 +32,11 @@ export const BillingInfo = ({
             UWear割引
           </Typography>
           {allSelectedDiscountPrice && (
-            <Typography size="sm" color="gray">
-              全購入10%OFF
-            </Typography>
+            <div data-testid="BillingInfoAllSelectedDiscountPriceLabel">
+              <Typography size="sm" color="gray">
+                全購入10%OFF
+              </Typography>
+            </div>
           )}
           <Typography color="strong-gray" weight="bold">
             アイテム合計
@@ -46,15 +50,14 @@ export const BillingInfo = ({
             -¥{(price - totalSellingPrice).toLocaleString()}
           </Typography>
           {allSelectedDiscountPrice && (
-            <Typography size="sm" color="red">
-              -¥{allSelectedDiscountPrice.toLocaleString()}
-            </Typography>
+            <div data-testid="BillingInfoAllSelectedDiscountPrice">
+              <Typography size="sm" color="red">
+                -¥{allSelectedDiscountPrice.toLocaleString()}
+              </Typography>
+            </div>
           )}
           <Typography color="strong-gray" weight="bold">
-            ¥
-            {(
-              totalSellingPrice - (allSelectedDiscountPrice ?? 0)
-            ).toLocaleString()}
+            ¥{totalDiscountedPrice.toLocaleString()}
           </Typography>
         </div>
       </div>
