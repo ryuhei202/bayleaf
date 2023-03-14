@@ -20,7 +20,6 @@ type TProps = {
   readonly isLoading: boolean;
   readonly isCompleted: boolean;
   readonly selectedPlan?: TPlan;
-
   readonly isRentalRemained: boolean;
   readonly onSubmit: () => void;
   readonly onPlanSelect: ({ planId }: { planId: number }) => void;
