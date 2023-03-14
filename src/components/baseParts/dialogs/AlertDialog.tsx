@@ -6,7 +6,7 @@ type TProps = {
   readonly title: string;
   readonly description?: React.ReactNode;
   readonly okBtnText?: string;
-  readonly disabled?: boolean;
+  readonly hidden?: boolean;
   readonly onClick: () => void;
   readonly onClose: () => void;
 };
@@ -15,7 +15,7 @@ export const AlertDialog = ({
   title,
   description,
   okBtnText,
-  disabled,
+  hidden,
   onClick,
   onClose,
 }: TProps) => {
@@ -31,7 +31,7 @@ export const AlertDialog = ({
           {description}
         </Dialog.Description>
         <div className="flex mb-7">
-          {!disabled && (
+          {!hidden && (
             <Button variant="default" onClick={onClick} className="mx-2">
               {okBtnText ?? "OK"}
             </Button>
