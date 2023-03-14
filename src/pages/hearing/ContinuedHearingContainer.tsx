@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useChartCreate } from "../../api/charts/useChartCreate";
 import { THearing } from "../../api/hearings/THearing";
-import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
+import { TNotNullPlanIdMember } from "../../api/members/TMembersIndexResponse";
 import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { BeforeHearingConfirm } from "../../components/pageParts/hearing/BeforeHearingConfirm";
 import { HearingAnswerConfirm } from "../../components/pageParts/hearing/HearingAnswerConfirm";
@@ -14,7 +14,7 @@ import { HearingPostSuccess } from "./HearingPostSuccess";
 
 type TProps = {
   readonly hearings: THearing[];
-  readonly member: TMembersIndexResponse;
+  readonly member: TNotNullPlanIdMember;
 };
 
 export const ContinuedHearingContainer = ({ hearings, member }: TProps) => {

@@ -1,12 +1,17 @@
 import { useCallback, useState } from "react";
-import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { useMembersPlanChange } from "../../api/members/useMembersPlanChange";
 import { usePlanRequestsDestroy } from "../../api/planRequests/usePlanRequestsDestroy";
 import { PlanSelecting } from "../../components/pageParts/planChange/PlanSelecting";
 import { findPlanById, TPlan } from "../../models/shared/Plans";
 
 type TProps = {
-  readonly memberData: TMembersIndexResponse;
+  readonly memberData: {
+    id: number;
+    mPlanId: number;
+    nextPaymentDate: string;
+    rentalRemainingNum: number;
+    requestedPlanId?: number;
+  };
 };
 
 export const PlanSelectingContainer = ({ memberData }: TProps) => {

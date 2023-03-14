@@ -1,5 +1,5 @@
-import liff from "@line/liff/dist/lib";
 import { useCallback, useState } from "react";
+import { useMemberPlansCreate } from "../../api/memberPlans/useMemberPlansCreate";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { useMembersUnsuspend } from "../../api/members/useMemberUnsuspend";
 import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
@@ -11,19 +11,43 @@ type TProps = {
 };
 export const UnsuspendContainer = ({ memberData }: TProps) => {
   const [selectedPlan, setSelectedPlan] = useState<TPlan>();
-  const { mutate, isLoading, error } = useMembersUnsuspend({
+  const [isCompleted, setIsCompleted] = useState<boolean>(false);
+  const {
+    mutate: unsuspendMutate,
+    isLoading: isUnsuspendLoading,
+    error: unsuspendError,
+  } = useMembersUnsuspend({
     memberId: memberData.id,
   });
+  const {
+    mutate: memberPlanMutate,
+    isLoading: isMemberPlanLoading,
+    error: memberPlanError,
+  } = useMemberPlansCreate({
+    memberId: memberData.id,
+  });
+
   const handleSubmit = () => {
     if (!selectedPlan) return;
-    mutate(
-      { planId: selectedPlan.id },
-      {
-        onSuccess: () => {
-          liff.closeWindow();
-        },
-      }
-    );
+    if (memberData.mPlanId === null) {
+      memberPlanMutate(
+        { planId: selectedPlan.id },
+        {
+          onSuccess: () => {
+            setIsCompleted(true);
+          },
+        }
+      );
+    } else {
+      unsuspendMutate(
+        { planId: selectedPlan.id },
+        {
+          onSuccess: () => {
+            setIsCompleted(true);
+          },
+        }
+      );
+    }
   };
 
   const handlePlanSelect = ({ planId }: { planId: number }) => {
@@ -35,12 +59,14 @@ export const UnsuspendContainer = ({ memberData }: TProps) => {
     setSelectedPlan(undefined);
   }, []);
 
-  if (error) return <ErrorPage message={error.message} />;
+  if (unsuspendError) return <ErrorPage message={unsuspendError.message} />;
+  if (memberPlanError) return <ErrorPage message={memberPlanError.message} />;
 
   return (
     <PlanSelectingForUnsuspend
       planId={memberData.mPlanId}
-      isLoading={isLoading}
+      isLoading={isUnsuspendLoading || isMemberPlanLoading}
+      isCompleted={isCompleted}
       selectedPlan={selectedPlan}
       isRentalRemained={memberData.rentalRemainingNum > 0}
       onSubmit={handleSubmit}

@@ -1,12 +1,12 @@
+import { useEffect } from "react";
 import { useChartIndex } from "../../api/charts/useChartIndex";
 import { useMembersIndex } from "../../api/members/useMembersIndex";
-import { useEffect } from "react";
 import { Page } from "../../components/baseParts/legacy/Page";
 import { Typography } from "../../components/baseParts/legacy/Typography";
-import { DeliveryFetcher } from "./DeliveryFetcher";
-import { CHART_RENTAL_STATUS } from "../../models/chart/ChartRentalStatus";
-import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
+import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
+import { CHART_RENTAL_STATUS } from "../../models/chart/ChartRentalStatus";
+import { DeliveryFetcher } from "./DeliveryFetcher";
 
 export const Delivery = () => {
   useEffect(() => {
@@ -38,7 +38,10 @@ export const Delivery = () => {
       </Page>
     );
   }
-  if (!chartIndexData.charts[0]) {
+  if (
+    !chartIndexData.charts[0] ||
+    membersIndexData[0].nextPaymentDate === null
+  ) {
     return (
       <Page className="flex justify-center items-center">
         <Typography>
@@ -47,7 +50,6 @@ export const Delivery = () => {
       </Page>
     );
   }
-
   return (
     <DeliveryFetcher
       chartIndexDataId={chartIndexData.charts[0].id}
