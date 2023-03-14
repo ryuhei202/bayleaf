@@ -182,9 +182,10 @@ export const BuyItemContainer = ({ chartId, possesedPoint }: TProps) => {
             <CheckIcon />
           )
         }
-        onClick={isBuyItemLoading ? () => navigate(0) : () => {}}
-        onClose={isBuyItemLoading ? () => navigate(0) : () => {}}
+        onClick={isBuyItemLoading ? () => {} : () => navigate(0)}
+        onClose={isBuyItemLoading ? () => {} : () => navigate(0)}
         okBtnText="閉じる"
+        disabled={isBuyItemLoading}
       />
     </>
   );
