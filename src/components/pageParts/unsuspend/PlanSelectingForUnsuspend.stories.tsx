@@ -18,4 +18,5 @@ export const Default = Template.bind({});
 Default.args = {
   planId: M_PLAN_IDS.LIGHT,
   isLoading: false,
+  isCompleted: false,
 };
