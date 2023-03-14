@@ -96,7 +96,7 @@ export const BuyItemContainer = ({ chartId, possesedPoint }: TProps) => {
     }
     return selectedChartItems.reduce(
       (accumulator, selectedChartItem) =>
-        accumulator + Math.floor(selectedChartItem.discountedPrice * 0.1),
+        accumulator + Math.ceil(selectedChartItem.discountedPrice * 0.1),
       0
     );
   };
