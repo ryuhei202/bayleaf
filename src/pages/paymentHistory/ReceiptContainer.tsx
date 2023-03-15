@@ -1,55 +1,46 @@
 import { useRef } from "react";
 import ReactToPrint from "react-to-print";
-import { TMemberPaymentsIndexResponse } from "../../api/memberPayments/useMemberPaymentsIndex";
 import { useReceiptShow } from "../../api/receipts/useReceiptShow";
+import { Button } from "../../components/baseParts/legacy/Button";
+import { Loader } from "../../components/baseParts/loaders/Loader";
 import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
-import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { Receipts } from "./Receipt";
 
 type TProps = {
   memberPaymentId: number | undefined;
-  memberPaymentsData: TMemberPaymentsIndexResponse;
+  paymentid: string;
+  receiptCreatedAt: string;
+  usingPoint: number;
+  finalPrice: number;
 };
 
 export const ReceiptCointainer = ({
   memberPaymentId,
-  memberPaymentsData,
+  paymentid,
+  receiptCreatedAt,
+  usingPoint,
+  finalPrice,
 }: TProps) => {
   const componentRef = useRef(null);
   const { data: receiptData, error: receiptError } = useReceiptShow({
     memberPaymentId: memberPaymentId,
   });
   if (receiptError) return <ErrorPage message={receiptError.message} />;
-  if (!receiptData) return <LoaderPage />;
-  const getTargetReceiptcIndex = memberPaymentsData.memberPayments.findIndex(
-    (memberPayment) => memberPayment.id === memberPaymentId
-  );
+  if (!receiptData) return <Loader />;
   return (
     <div>
       <Receipts
-        memberPaymentId={
-          memberPaymentsData.memberPayments[getTargetReceiptcIndex].paymentId
-        }
-        receiptCreatedAt={
-          memberPaymentsData.memberPayments[getTargetReceiptcIndex].paymentDate
-        }
-        usingPoint={
-          memberPaymentsData.memberPayments[getTargetReceiptcIndex].point
-        }
-        receiptDetails={receiptData?.receiptDetails}
-        cardBrand={receiptData?.cardBrand}
-        cardNumber={receiptData?.cardNumber}
-        finalPrice={
-          memberPaymentsData.memberPayments[getTargetReceiptcIndex].priceTaxIn
-        }
+        memberPaymentId={paymentid}
+        receiptCreatedAt={receiptCreatedAt}
+        usingPoint={usingPoint}
+        receiptDetails={receiptData.receiptDetails}
+        cardBrand={receiptData.cardBrand}
+        cardNumber={receiptData.cardNumber}
+        finalPrice={finalPrice}
         ref={componentRef}
       />
       <ReactToPrint
-        trigger={() => (
-          <div className="underline text-[#428bca] text-center mt-2">
-            印刷する
-          </div>
-        )}
+        trigger={() => <Button variant="primary">印刷する</Button>}
         content={() => componentRef.current}
       />
     </div>

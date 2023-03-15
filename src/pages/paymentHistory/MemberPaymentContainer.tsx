@@ -1,6 +1,6 @@
-import { Dialog } from "@headlessui/react";
 import { useState } from "react";
 import { useMemberPaymentsIndex } from "../../api/memberPayments/useMemberPaymentsIndex";
+import { BaseDialog } from "../../components/baseParts/dialogs/BaseDialog";
 import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { MemberPayment } from "./MemberPayment";
@@ -33,23 +33,27 @@ export const MemberPaymentContainer = ({ nextPaymentDate }: TProps) => {
     return <ErrorPage message={memberPaymentError.message} />;
   if (!memberPaymentsData) return <LoaderPage />;
 
+  const targetPaymet = memberPaymentsData.memberPayments.find(
+    (memberPayment) => memberPayment.id === memberPaymentId
+  );
   return (
     <>
-      <Dialog
-        open={isOpen}
-        onClose={() => {
-          setMemberPaymentId(undefined);
-        }}
-      >
-        <Dialog.Panel>
-          {
+      {targetPaymet && (
+        <BaseDialog
+          open={isOpen}
+          title={"領収書"}
+          onClose={() => setIsOpen(false)}
+          description={
             <ReceiptCointainer
               memberPaymentId={memberPaymentId}
-              memberPaymentsData={memberPaymentsData}
+              paymentid={targetPaymet.paymentId}
+              receiptCreatedAt={targetPaymet.paymentDate}
+              usingPoint={targetPaymet.point}
+              finalPrice={targetPaymet.priceTaxIn}
             />
           }
-        </Dialog.Panel>
-      </Dialog>
+        ></BaseDialog>
+      )}
       <MemberPayment
         currentPage={selectedPage}
         onClickPagenation={handleClickPagination}
