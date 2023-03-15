@@ -7,7 +7,7 @@ type TReceiptsDate = {
 };
 
 type TReceiptShowParams = {
-  memberPaymentId: number;
+  memberPaymentId: number | undefined;
 };
 
 export const useReceiptShow = ({
