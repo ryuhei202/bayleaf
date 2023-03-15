@@ -4,6 +4,7 @@ import { useChartItemsIndex } from "../../api/chartItems/useChartItemsIndex";
 import { useChartBuyItems } from "../../api/charts/useChartBuyItems";
 import { AlertDialog } from "../../components/baseParts/dialogs/AlertDialog";
 import { CheckIcon } from "../../components/baseParts/icons/CheckIcon";
+import { Loader } from "../../components/baseParts/loaders/Loader";
 import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { BuyItemConfirm } from "./confirm/BuyItemConfirm";
@@ -23,17 +24,16 @@ export const BuyItemContainer = ({ chartId, possesedPoint }: TProps) => {
   const [selectedChartItemIds, setSelectedChartItemIds] = useState<number[]>(
     []
   );
-  const [isCompleted, setIsCompleted] = useState<boolean>(false);
   const {
     mutate,
     isLoading: isBuyItemLoading,
     error: buyItemsError,
+    isSuccess: isBuyItemSuccess,
   } = useChartBuyItems({ chartId });
   const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    setSelectedPoint(0);
   }, [isConfirm]);
 
   if (chartItemsError) return <ErrorPage message={chartItemsError.message} />;
@@ -139,18 +139,11 @@ export const BuyItemContainer = ({ chartId, possesedPoint }: TProps) => {
             );
           }}
           onClick={() => {
-            mutate(
-              {
-                chartItemIds: selectedChartItemIds,
-                totalPrice: getTotalDiscountedPrice(),
-                usingPoint: selectedPoint,
-              },
-              {
-                onSuccess: () => {
-                  setIsCompleted(true);
-                },
-              }
-            );
+            mutate({
+              chartItemIds: selectedChartItemIds,
+              totalPrice: getTotalDiscountedPrice(),
+              usingPoint: selectedPoint,
+            });
           }}
           onCancel={() => setIsConfirm(false)}
           isPurchaseButtonDisabled={isValidPurchased()}
@@ -166,17 +159,33 @@ export const BuyItemContainer = ({ chartId, possesedPoint }: TProps) => {
           })}
           totalSellingPrice={getTotalSellingPrice()}
           onSelectChartItems={handleSelectChartItems}
-          onClickConfirm={() => setIsConfirm(true)}
+          onClickConfirm={() => {
+            setIsConfirm(true);
+            setSelectedPoint(
+              possesedPoint >= getTotalDiscountedPrice()
+                ? getTotalDiscountedPrice()
+                : possesedPoint
+            );
+          }}
           allSelectedDiscountPrice={getAllSelectedDiscountPrice()}
         />
       )}
       <AlertDialog
-        open={isCompleted}
-        title={"アイテム購入が完了しました"}
-        description={<CheckIcon />}
-        onClick={() => navigate(0)}
-        onClose={() => navigate(0)}
+        open={isBuyItemLoading || isBuyItemSuccess}
+        title={
+          isBuyItemLoading ? "アイテム購入中" : "アイテム購入が完了しました"
+        }
+        description={
+          isBuyItemLoading ? (
+            <Loader caption="画面を閉じないでください" />
+          ) : (
+            <CheckIcon />
+          )
+        }
+        onClick={isBuyItemLoading ? () => {} : () => navigate(0)}
+        onClose={isBuyItemLoading ? () => {} : () => navigate(0)}
         okBtnText="閉じる"
+        hidden={isBuyItemLoading}
       />
     </>
   );
