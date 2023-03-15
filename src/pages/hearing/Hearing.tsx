@@ -20,20 +20,7 @@ export const Hearing = () => {
         <ErrorPage message="単発利用のお客様はこのページを利用できません" />
       ) : (
         <HearingChartFetcher
-          member={{
-            id: member.id,
-            email: member.email,
-            nextPaymentDate: member.nextPaymentDate,
-            mPlanId: member.mPlanId as number,
-            isLatestChartDelivered: member.isLatestChartDelivered,
-            isReturnRequired: member.isReturnRequired,
-            isFirstTime: member.isFirstTime,
-            isSuspend: member.isFirstTime,
-            isPaymentError: member.isPaymentError,
-            rentalRemainingNum: member.rentalRemainingNum,
-            requestedPlanId: member.rentalRemainingNum,
-            point: member.point,
-          }}
+          member={{ ...member, mPlanId: member.mPlanId as number }}
         />
       )}
     </>
