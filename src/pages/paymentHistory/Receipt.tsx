@@ -52,17 +52,15 @@ export const Receipts = React.forwardRef<HTMLDivElement, TProps>(
 
         <div className="mt-5">
           <div className="w-1/2 float-left text-left">
-            <table>
-              <span className="font-bold">注文日 </span>
-              <span>: {formattedDate} </span>
-              <br />
-              <span className="font-bold">注文番号 </span>
-              <span> : {memberPaymentId} </span>
-              <br />
-              <span className="font-bold">
-                ご請求額 : ¥{finalPrice.toLocaleString()}
-              </span>
-            </table>
+            <span className="font-bold">注文日 </span>
+            <span>: {formattedDate} </span>
+            <br />
+            <span className="font-bold">注文番号 </span>
+            <span> : {memberPaymentId} </span>
+            <br />
+            <span className="font-bold">
+              ご請求額 : ¥{finalPrice.toLocaleString()}
+            </span>
           </div>
           <div className="w-1/2 float-left font-bold text-right border-b">
             <p>様</p>
