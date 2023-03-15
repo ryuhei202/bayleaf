@@ -43,6 +43,7 @@ export const PaymentHistoryList = ({
         {memberPayments.map((memberPayment: TMemberPayment) => {
           return (
             <PaymentHistoryListItem
+              key={memberPayment.id}
               memberPayment={memberPayment}
               onClickReceiptButton={onClickReceiptButton}
             />
