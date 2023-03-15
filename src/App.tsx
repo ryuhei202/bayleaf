@@ -15,6 +15,7 @@ import { Dressing } from "./pages/dressing/Dressing";
 import { Hearing } from "./pages/hearing/Hearing";
 import Home from "./pages/Home";
 import { OneShot } from "./pages/oneShot/OneShot";
+import { PaymentHistory } from "./pages/paymentHistory/PaymentHistory";
 import { PlanChange } from "./pages/planChange/PlanChange";
 import { Review } from "./pages/review/Review";
 import { Unsuspend } from "./pages/unsuspend/Unsuspend";
@@ -50,6 +51,7 @@ function App() {
             <Route path="unsuspend" element={<Unsuspend />} />
             <Route path="one_shot" element={<OneShot />} />
             <Route path="buy_items" element={<BuyItem />} />
+            <Route path="payment_history" element={<PaymentHistory />} />
           </Routes>
         </StylistIdContext.Provider>
       </IdTokenContext.Provider>

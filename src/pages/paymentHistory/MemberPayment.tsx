@@ -1,5 +1,7 @@
+import { Page } from "../../components/baseParts/legacy/Page";
 import { Typography } from "../../components/baseParts/legacy/Typography";
 import { Pagination } from "../../components/baseParts/Pagination";
+
 import {
   PaymentHistoryList,
   TMemberPayment,
@@ -21,7 +23,7 @@ export const MemberPayment = ({
   onClickReceiptButton,
 }: TProps) => {
   return (
-    <>
+    <Page className="p-4 flex flex-col">
       <Typography weight="regular" size="xl" color="primary" className="ml-4">
         決済履歴
       </Typography>
@@ -44,17 +46,19 @@ export const MemberPayment = ({
           {nextPaymentDate}
         </Typography>
       </div>
+      <div className="flex-grow">
+        <PaymentHistoryList
+          memberPayments={paymentData}
+          onClickReceiptButton={onClickReceiptButton}
+        />
+      </div>
 
-      <PaymentHistoryList
-        memberPayments={paymentData}
-        onClickReceiptButton={onClickReceiptButton}
-      />
       <Pagination
         maxPage={maxPage}
         currentPage={currentPage}
         onClickPagination={onClickPagenation}
         className="mt-6"
       />
-    </>
+    </Page>
   );
 };

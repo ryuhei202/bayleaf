@@ -12,6 +12,7 @@ type TProps = {
   receiptDetails: TReceiptDetails;
   cardBrand: string;
   cardNumber: string;
+  finalPrice: number;
 };
 export const Receipts = React.forwardRef<HTMLDivElement, TProps>(
   (
@@ -22,14 +23,14 @@ export const Receipts = React.forwardRef<HTMLDivElement, TProps>(
       cardBrand,
       cardNumber,
       usingPoint,
+      finalPrice,
     },
     ref
   ) => {
-    const formattedDate = receiptCreatedAt.replace(
-      /(\d{4})-(\d{2})-(\d{2})/,
+    const formattedDate = receiptCreatedAt?.replace(
+      /^(\d{4})-(\d{2})-(\d{2}).*$/,
       "$1年$2月$3日"
     );
-    const year = receiptCreatedAt.substring(0, 4);
 
     const getTotalPrice = (receiptDetails: TReceiptDetails) => {
       let totalPrice = 0;
@@ -46,26 +47,22 @@ export const Receipts = React.forwardRef<HTMLDivElement, TProps>(
             発行日 : <span>{formattedDate}</span>
           </div>
           <h2 className="text-[14px] font-bold">{`領収書 (注文番号 :${memberPaymentId})`}</h2>
-          <div className="underline text-[#428bca]">印刷してご利用ください</div>
         </div>
 
         <div className="mt-5">
           <div className="w-1/2 float-left text-left">
-            <table>
-              <span className="font-bold">注文日 </span>
-              <span>: {formattedDate} </span>
-              <br />
-              <span className="font-bold">注文番号 </span>
-              <span> : {memberPaymentId} </span>
-              <br />
-              <span className="font-bold">
-                ご請求額 : ¥
-                {(getTotalPrice(receiptDetails) - usingPoint).toLocaleString()}
-              </span>
-            </table>
+            <span className="font-bold">注文日 </span>
+            <span>: {formattedDate} </span>
+            <br />
+            <span className="font-bold">注文番号 </span>
+            <span> : {memberPaymentId} </span>
+            <br />
+            <span className="font-bold">
+              ご請求額 : ¥{finalPrice.toLocaleString()}
+            </span>
           </div>
           <div className="w-1/2 float-left font-bold text-right border-b">
-            <p>様</p>
+            様
           </div>
         </div>
         <br />
@@ -116,14 +113,15 @@ export const Receipts = React.forwardRef<HTMLDivElement, TProps>(
               <br /> -----
               <br />
               <span className="font-bold">
-                ご請求額 : ¥
-                {(getTotalPrice(receiptDetails) - usingPoint).toLocaleString()}
+                ご請求額 : ¥{finalPrice.toLocaleString()}
               </span>
             </div>
           </div>
         </div>
 
-        <div className="mt-[10px] text-[10px]">© {year} Uwear</div>
+        <div className="mt-[10px] text-[10px]">
+          <>© {new Date().getFullYear()} Uwear</>
+        </div>
       </div>
     );
   }
