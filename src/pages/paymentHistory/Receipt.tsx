@@ -31,7 +31,6 @@ export const Receipts = React.forwardRef<HTMLDivElement, TProps>(
       /^(\d{4})-(\d{2})-(\d{2}).*$/,
       "$1年$2月$3日"
     );
-    const year = receiptCreatedAt?.substring(0, 4);
 
     const getTotalPrice = (receiptDetails: TReceiptDetails) => {
       let totalPrice = 0;
@@ -63,7 +62,7 @@ export const Receipts = React.forwardRef<HTMLDivElement, TProps>(
             </span>
           </div>
           <div className="w-1/2 float-left font-bold text-right border-b">
-            <p>様</p>
+            様
           </div>
         </div>
         <br />
@@ -120,7 +119,9 @@ export const Receipts = React.forwardRef<HTMLDivElement, TProps>(
           </div>
         </div>
 
-        <div className="mt-[10px] text-[10px]">© {year} Uwear</div>
+        <div className="mt-[10px] text-[10px]">
+          <>© {new Date().getFullYear()} Uwear</>
+        </div>
       </div>
     );
   }

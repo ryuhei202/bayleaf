@@ -28,7 +28,7 @@ export const ReceiptCointainer = ({
   if (receiptError) return <ErrorPage message={receiptError.message} />;
   if (!receiptData) return <Loader />;
   return (
-    <div>
+    <>
       <Receipts
         memberPaymentId={paymentid}
         receiptCreatedAt={receiptCreatedAt}
@@ -43,6 +43,6 @@ export const ReceiptCointainer = ({
         trigger={() => <Button variant="primary">印刷する</Button>}
         content={() => componentRef.current}
       />
-    </div>
+    </>
   );
 };
