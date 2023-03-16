@@ -124,7 +124,6 @@ export const PlanChange = () => {
             isSuspend: membersData[0].isSuspend,
             mPlanId: membersData[0].mPlanId,
           }}
-          chartsData={chartsData}
         />
       </div>
     );
