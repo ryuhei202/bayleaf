@@ -6,7 +6,8 @@ import {
   STANDARD_PLAN,
 } from "../../../models/shared/Plans";
 import { Button } from "../../baseParts/Button";
-import { AlertDialog } from "../../baseParts/legacy/dialogs/AlertDialog";
+import { AlertDialog } from "../../baseParts/dialogs/AlertDialog";
+import { CheckIcon } from "../../baseParts/icons/CheckIcon";
 import { Page } from "../../baseParts/legacy/Page";
 import { TabMenu } from "../../baseParts/TabMenu";
 import { PlanChangePanel } from "./PlanChangePanel";
@@ -32,12 +33,13 @@ export const PlanSelectingForPreMember = ({
     <Page className="flex flex-col h-full min-h-screen justify-between items-center text-themeGray p-3">
       {selectedPlanName && (
         <AlertDialog
-          open={!!selectedPlanName}
+          open={selectedPlanName !== undefined}
           title={`${selectedPlanName}プランに変更しました`}
+          description={<CheckIcon />}
           onClose={() => {
             liff.closeWindow();
           }}
-          onClickOk={() => {
+          onClick={() => {
             liff.closeWindow();
           }}
         />
