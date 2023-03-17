@@ -56,6 +56,9 @@ const createChartItemIndexResponse = ({
 };
 
 describe("BuyItemContainer.tsx", () => {
+  beforeAll(() => {
+    window.scrollTo = jest.fn();
+  });
   test("アイテムが一つも選択されていない", async () => {
     server.use(
       getChartItemIndexMock({

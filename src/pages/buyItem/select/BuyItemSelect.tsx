@@ -27,8 +27,9 @@ export const BuyItemSelect = ({
   const isSelectable = (item: TSelectBuyItem) =>
     item.isBuyable && !item.isPurchased;
 
-  const isAllSelectedDiscountAvailable =
-    chartItems.find((item) => !item.isBuyable) === undefined;
+  const isAllSelectedDiscountAvailable = chartItems.every(
+    (item) => item.isBuyable || item.isPurchased
+  );
 
   return (
     <div className="text-center bg-clay">

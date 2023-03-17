@@ -90,7 +90,7 @@ export const BuyItemContainer = ({ chartId, possesedPoint }: TProps) => {
     );
     if (
       selectedChartItems.length !== selectableItems.length ||
-      selectedChartItems.find((item) => !item.isBuyable)
+      chartItemsData.some((item) => !(item.isBuyable || item.isPurchased))
     ) {
       return undefined;
     }
