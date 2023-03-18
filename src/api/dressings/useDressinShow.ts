@@ -7,14 +7,14 @@ type TDressingsIndex = {
 };
 
 type TDressingsIndexArgs = {
-  readonly chartId: number;
+  readonly coordinateId: number;
 };
 
-export const useDressingsIndex = ({
-  chartId,
+export const useDressingsShow = ({
+  coordinateId,
 }: TDressingsIndexArgs): TDressingsIndex => {
   const { data, error } = useGetRequest<TDressingsIndexResponse>(
-    `charts/${chartId}/dressings`
+    `coordinates/${coordinateId}/dressings`
   );
 
   return {

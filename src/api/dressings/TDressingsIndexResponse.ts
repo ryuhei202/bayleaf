@@ -1,5 +1,3 @@
 import { TDressing } from "./TDressing";
 
-export type TDressingsIndexResponse = {
-  readonly dressings: TDressing[];
-};
+export type TDressingsIndexResponse = TDressing;
