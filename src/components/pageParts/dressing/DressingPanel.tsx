@@ -2,20 +2,26 @@ import { Tab } from "@headlessui/react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { TNonNullableDressing } from "../../../api/dressings/TDressing";
+import { TNonNullableHearing } from "../../../api/dressings/THearing";
 import { StylistIdContext } from "../../../App";
 import { Button } from "../../baseParts/Button";
 import { TabAlt } from "../../baseParts/legacy/tabs/TabAlt";
+import { SimpifiedHearing } from "../../resourceParts/simplifiedHearing/SimpifiedHearing";
 import { DressingAdvice } from "./DressingAdvice";
 import { DressingChangeItem } from "./DressingChangeItem";
 import { DressingDescription } from "./DressingDescription";
 import { DressingFootwear } from "./DressingFootwear";
-import { DressingHearing } from "./DressingHearing";
 
 type TProps = {
   readonly dressing: TNonNullableDressing;
+  readonly hearingData: TNonNullableHearing;
   readonly dressingIndex: number;
 };
-export const DressingPanel = ({ dressing, dressingIndex }: TProps) => {
+export const DressingPanel = ({
+  dressing,
+  hearingData,
+  dressingIndex,
+}: TProps) => {
   const stylistId = useContext(StylistIdContext);
 
   const getChangeItems = (dressing: TNonNullableDressing) =>
@@ -28,7 +34,11 @@ export const DressingPanel = ({ dressing, dressingIndex }: TProps) => {
         </TabAlt>
       </Tab.List>
       <Tab.Panels className="mt-10">
-        <DressingHearing hearings={dressing.categorizedForms} />
+        <SimpifiedHearing
+          target={hearingData.target}
+          scene={hearingData.scene}
+          impression={hearingData.impression}
+        />
         <DressingDescription
           description={dressing.description}
           comment={dressing.comment}
