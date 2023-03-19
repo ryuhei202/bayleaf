@@ -7,7 +7,7 @@ import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { ChartList } from "../../components/resourceParts/chart/ChartList";
 import { CHART_RENTAL_STATUS } from "../../models/chart/ChartRentalStatus";
-import { DressingFetcher } from "./DressingFetcher";
+import { CoordinateFetcher } from "./CoordinateFetcher";
 
 export const Dressing = () => {
   const [selectedChart, setSelectedChart] =
@@ -45,7 +45,7 @@ export const Dressing = () => {
   return (
     <>
       {selectedChart ? (
-        <DressingFetcher chart={selectedChart} />
+        <CoordinateFetcher chart={selectedChart} />
       ) : (
         <Page>
           <ChartList
