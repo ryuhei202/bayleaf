@@ -5,7 +5,7 @@ type Props = {
   children?: React.ReactNode;
   className?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  variant?: "default" | "light" | "line";
+  variant?: "default" | "light" | "line" | "primary";
   disabled?: boolean;
   disableElevation?: boolean;
   size?: "small" | "medium" | "large" | "none";
