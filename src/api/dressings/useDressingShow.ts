@@ -1,19 +1,19 @@
 import { useGetRequest } from "../useGetRequest";
-import { TDressingsIndexResponse } from "./TDressingsIndexResponse";
+import { TDressingsShowResponse } from "./TDressingsShowResponse";
 
 type TDressingsIndex = {
-  readonly data?: TDressingsIndexResponse;
+  readonly data?: TDressingsShowResponse;
   readonly error: Error | null;
 };
 
-type TDressingsIndexArgs = {
+type TDressingsShowArgs = {
   readonly coordinateId: number;
 };
 
 export const useDressingShow = ({
   coordinateId,
-}: TDressingsIndexArgs): TDressingsIndex => {
-  const { data, error } = useGetRequest<TDressingsIndexResponse>(
+}: TDressingsShowArgs): TDressingsIndex => {
+  const { data, error } = useGetRequest<TDressingsShowResponse>(
     `coordinates/${coordinateId}/dressings`
   );
 
