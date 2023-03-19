@@ -10,7 +10,7 @@ type TDressingsIndexArgs = {
   readonly coordinateId: number;
 };
 
-export const useDressingsShow = ({
+export const useDressingShow = ({
   coordinateId,
 }: TDressingsIndexArgs): TDressingsIndex => {
   const { data, error } = useGetRequest<TDressingsIndexResponse>(
