@@ -1,6 +1,5 @@
 import { TChartResponse } from "../../api/charts/TChartResponse";
-import { TNonNullableDressing } from "../../api/dressings/TDressing";
-import { useDressingsIndex } from "../../api/dressings/useDressingsIndex";
+import { useCoordinateIndex } from "../../api/coordinates/useCoordinateIndex";
 import { Typography } from "../../components/baseParts/legacy/Typography";
 import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
@@ -9,29 +8,27 @@ import { DressingPage } from "./DressingPage";
 type TProps = {
   readonly chart: TChartResponse;
 };
-export const DressingFetcher = ({ chart }: TProps) => {
-  const { data: dressingIndexData, error: dressingIndexError } =
-    useDressingsIndex({ chartId: chart.id });
+export const CoordinateFetcher = ({ chart }: TProps) => {
+  const { data: coordinateDatas, error: coordinateError } = useCoordinateIndex({
+    chartId: chart.id,
+  });
+  if (coordinateError) return <ErrorPage message={coordinateError.message} />;
 
-  if (dressingIndexError)
-    return <ErrorPage message={dressingIndexError.message} />;
-
-  if (!dressingIndexData) return <LoaderPage />;
+  if (!coordinateDatas) return <LoaderPage />;
 
   // リリース直後には着こなしページに必要な情報がまだ存在しない可能性があるため、
   // 以下のどれかが欠けている場合はマイページの着こなしに遷移するようにする
   if (
-    dressingIndexData.dressings.every(
-      (dressing) =>
-        dressing.categorizedForms &&
-        dressing.comment &&
-        dressing.description &&
-        dressing.footwear
+    coordinateDatas.coordinates.every(
+      (cordinate) =>
+        cordinate.id &&
+        cordinate.isReviewed &&
+        cordinate.items &&
     )
   ) {
     return (
       <DressingPage
-        dressings={dressingIndexData.dressings as TNonNullableDressing[]}
+      coordinateDatas={coordinateDatas}
       />
     );
   }
