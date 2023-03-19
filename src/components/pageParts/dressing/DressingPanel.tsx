@@ -48,7 +48,7 @@ export const DressingPanel = ({
         />
         <DressingAdvice advices={dressing.advices} />
         <DressingFootwear footwear={dressing.footwear} />
-        <Button className="mb-16" variant="primary">
+        <Button className="mb-16" variant="default">
           <Link to={`/consult?stylistId=${stylistId}`}>
             着こなしの相談をする
           </Link>
@@ -56,7 +56,7 @@ export const DressingPanel = ({
         {getChangeItems(dressing).length > 0 && (
           <>
             <DressingChangeItem changeItems={getChangeItems(dressing)} />
-            <Button variant="primary">
+            <Button variant="default">
               <Link to={`/consult?stylistId=${stylistId}`}>
                 着こなしの相談をする
               </Link>
