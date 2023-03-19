@@ -20,17 +20,10 @@ export const CoordinateFetcher = ({ chart }: TProps) => {
   // 以下のどれかが欠けている場合はマイページの着こなしに遷移するようにする
   if (
     coordinateDatas.coordinates.every(
-      (cordinate) =>
-        cordinate.id &&
-        cordinate.isReviewed &&
-        cordinate.items &&
+      (cordinate) => cordinate.id && cordinate.isReviewed && cordinate.items
     )
   ) {
-    return (
-      <DressingPage
-      coordinateDatas={coordinateDatas}
-      />
-    );
+    return <DressingPage coordinateDatas={coordinateDatas} />;
   }
 
   window.location.href = `${process.env.REACT_APP_HOST_URL}/rental/plan_check`;
