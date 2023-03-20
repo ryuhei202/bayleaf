@@ -34,7 +34,7 @@ export const Receipts = React.forwardRef<HTMLDivElement, TProps>(
 
     const getTotalPrice = (receiptDetails: TReceiptDetails) => {
       let totalPrice = 0;
-      receiptDetails.map((receipt) => {
+      receiptDetails.forEach((receipt) => {
         totalPrice += receipt.priceTaxIn;
       });
       return totalPrice;

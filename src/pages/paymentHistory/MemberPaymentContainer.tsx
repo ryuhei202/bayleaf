@@ -7,7 +7,7 @@ import { MemberPayment } from "./MemberPayment";
 import { ReceiptCointainer } from "./ReceiptContainer";
 
 type TProps = {
-  nextPaymentDate: string;
+  nextPaymentDate: string | null;
 };
 export const MemberPaymentContainer = ({ nextPaymentDate }: TProps) => {
   const [selectedPage, setSelectedPage] = useState<number>(1);

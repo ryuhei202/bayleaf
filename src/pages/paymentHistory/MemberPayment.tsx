@@ -11,7 +11,7 @@ type TProps = {
   onClickPagenation: (page: number) => void;
   maxPage: number;
   paymentData: TMemberPayment[];
-  nextPaymentDate: string;
+  nextPaymentDate: string | null;
   onClickReceiptButton: (memberPaymentId: number) => void;
 };
 export const MemberPayment = ({
@@ -28,24 +28,27 @@ export const MemberPayment = ({
         決済履歴
       </Typography>
       <div className="border-[0.5px] border-gray my-2" />
-      <div className="flex">
-        <Typography
-          weight="regular"
-          size="base"
-          color="primary"
-          className="ml-2 mb-4 basis-3/5"
-        >
-          次回決済予定日:
-        </Typography>
-        <Typography
-          weight="regular"
-          size="base"
-          color="primary"
-          className="ml-2 mb-4  basis-2/5"
-        >
-          {nextPaymentDate}
-        </Typography>
-      </div>
+      {nextPaymentDate === null && (
+        <div className="flex">
+          <Typography
+            weight="regular"
+            size="base"
+            color="primary"
+            className="ml-2 mb-4 basis-3/5"
+          >
+            次回決済予定日:
+          </Typography>
+          <Typography
+            weight="regular"
+            size="base"
+            color="primary"
+            className="ml-2 mb-4  basis-2/5"
+          >
+            {nextPaymentDate}
+          </Typography>
+        </div>
+      )}
+
       <div className="flex-grow">
         <PaymentHistoryList
           memberPayments={paymentData}
