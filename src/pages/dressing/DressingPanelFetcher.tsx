@@ -7,31 +7,26 @@ import { DressingPanel } from "../../components/pageParts/dressing/DressingPanel
 
 type TProps = {
   coordinateId: number;
-  coordinateIndex: number;
 };
 
-export const DressingPanelFetcher = ({
-  coordinateId,
-  coordinateIndex,
-}: TProps) => {
-  const { data: DressingShowData, error: DressingShowError } = useDressingShow({
+export const DressingPanelFetcher = ({ coordinateId }: TProps) => {
+  const { data: dressingShowData, error: dressingShowError } = useDressingShow({
     coordinateId: coordinateId,
   });
-  const { data: SimplifiedHearingShowDate, error: SimplifiedHearingShowError } =
+  const { data: simplifiedHearingShowData, error: simplifiedHearingShowError } =
     useSimplifiedHearingShow({ coordinateId: coordinateId });
 
-  if (DressingShowError)
-    return <ErrorPage message={DressingShowError.message} />;
-  if (SimplifiedHearingShowError)
-    return <ErrorPage message={SimplifiedHearingShowError.message} />;
+  if (dressingShowError)
+    return <ErrorPage message={dressingShowError.message} />;
+  if (simplifiedHearingShowError)
+    return <ErrorPage message={simplifiedHearingShowError.message} />;
 
-  if (!SimplifiedHearingShowDate || !DressingShowData) return <LoaderPage />;
+  if (!simplifiedHearingShowData || !dressingShowData) return <LoaderPage />;
 
   return (
     <DressingPanel
-      dressing={DressingShowData as TNonNullableDressing}
-      hearingData={SimplifiedHearingShowDate}
-      dressingIndex={coordinateIndex}
+      dressing={dressingShowData as TNonNullableDressing}
+      hearingData={simplifiedHearingShowData}
     />
   );
 };
