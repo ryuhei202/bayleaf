@@ -7,13 +7,9 @@ import { DressingPanel } from "../../components/pageParts/dressing/DressingPanel
 
 type TProps = {
   coordinateId: number;
-  coordinateIndex: number;
 };
 
-export const DressingPanelFetcher = ({
-  coordinateId,
-  coordinateIndex,
-}: TProps) => {
+export const DressingPanelFetcher = ({ coordinateId }: TProps) => {
   const { data: dressingShowData, error: dressingShowError } = useDressingShow({
     coordinateId: coordinateId,
   });
