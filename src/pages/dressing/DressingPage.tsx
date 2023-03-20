@@ -5,16 +5,16 @@ import { TabAlt } from "../../components/baseParts/legacy/tabs/TabAlt";
 import { DressingPanelFetcher } from "./DressingPanelFetcher";
 
 type TProps = {
-  readonly coordinateDatas: TCoordinateIndexResponse[];
+  readonly coordinateDatas: TCoordinateIndexResponse;
 };
 
 export const DressingPage = ({ coordinateDatas }: TProps) => {
   return (
     <Page className="p-5 pb-5">
       <Tab.Group>
-        {coordinateDatas.length > 1 ? (
+        {coordinateDatas.coordinates.length > 1 ? (
           <Tab.List className="w-full flex sticky top-0">
-            {coordinateDatas.map((_, index) => (
+            {coordinateDatas.coordinates.map((_, index) => (
               <TabAlt
                 disableElevation={true}
                 size="small"
@@ -29,11 +29,9 @@ export const DressingPage = ({ coordinateDatas }: TProps) => {
           <></>
         )}
         <Tab.Panels className="mt-10">
-          {coordinateDatas.map((coordinateData, index) => (
+          {coordinateDatas.coordinates.map((coordinateData, index) => (
             <Tab.Panel key={index}>
-              <DressingPanelFetcher
-                coordinateId={coordinateData.coordinates[index].id}
-              />
+              <DressingPanelFetcher coordinateId={coordinateData.id} />
             </Tab.Panel>
           ))}
         </Tab.Panels>
