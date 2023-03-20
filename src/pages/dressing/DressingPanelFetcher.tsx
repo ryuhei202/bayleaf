@@ -21,7 +21,7 @@ export const DressingPanelFetcher = ({ coordinateId }: TProps) => {
     useSimplifiedHearingShow({ coordinateId: coordinateId });
 
   const navigate = useNavigate();
-  const onClickGoToConsultation = (stylistId: number) => {
+  const handleClickGoToConsultation = () => {
     navigate(`/consult?stylistId=${stylistId}`);
   };
 
@@ -36,7 +36,7 @@ export const DressingPanelFetcher = ({ coordinateId }: TProps) => {
     <DressingPanel
       dressing={dressingShowData as TNonNullableDressing}
       hearingData={simplifiedHearingShowData}
-      onClickGoToConsultation={() => onClickGoToConsultation}
+      onClickGoToConsultation={handleClickGoToConsultation}
     />
   );
 };
