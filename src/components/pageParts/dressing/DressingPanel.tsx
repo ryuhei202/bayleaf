@@ -1,7 +1,4 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
 import { TNonNullableDressing } from "../../../api/dressings/TDressing";
-import { StylistIdContext } from "../../../App";
 import { Button } from "../../baseParts/Button";
 import { SimpifiedHearing } from "../../resourceParts/simplifiedHearing/SimpifiedHearing";
 import { DressingAdvice } from "./DressingAdvice";
@@ -12,6 +9,7 @@ import { DressingFootwear } from "./DressingFootwear";
 type TProps = {
   readonly dressing: TNonNullableDressing;
   readonly hearingData: TSimplifiedHearing;
+  readonly stylistId: number | undefined;
 };
 
 type TSimplifiedHearing = {
@@ -20,9 +18,7 @@ type TSimplifiedHearing = {
   impression: string;
 };
 
-export const DressingPanel = ({ dressing, hearingData }: TProps) => {
-  const stylistId = useContext(StylistIdContext);
-
+export const DressingPanel = ({ dressing, hearingData, stylistId }: TProps) => {
   const getChangeItems = (dressing: TNonNullableDressing) =>
     dressing.coordinateItems.filter((i) => i.isChangeItem).map((i) => i.item);
   return (
@@ -42,15 +38,15 @@ export const DressingPanel = ({ dressing, hearingData }: TProps) => {
       <DressingAdvice advices={dressing.advices} />
       <DressingFootwear footwear={dressing.footwear} />
       <Button className="mb-16" variant="default">
-        <Link to={`/consult?stylistId=${stylistId}`}>着こなしの相談をする</Link>
+        {/* <Link to={`/consult?stylistId=${stylistId}`}>着こなしの相談をする</Link> */}
       </Button>
       {getChangeItems(dressing).length > 0 && (
         <>
           <DressingChangeItem changeItems={getChangeItems(dressing)} />
           <Button variant="default">
-            <Link to={`/consult?stylistId=${stylistId}`}>
-              着こなしの相談をする
-            </Link>
+            {/* <Link to={`/consult?stylistId=${stylistId}`}> */}
+            着こなしの相談をする
+            {/* </Link> */}
           </Button>
         </>
       )}

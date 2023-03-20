@@ -21,7 +21,7 @@ DefaultValues.decorators = [
 ];
 DefaultValues.args = {
   dressing: {
-    coordinateId: 123,
+    coordinateId: 12345,
     description:
       "今回のコーデは恋人とショッピングに行くということで、少し洋服に気を使いたいシーンに合わせて、半袖シャツにスラックスで程よくラフなコーデにしました。トップスにブルーの色味を使い、みずみずしく清涼感のある印象にしています。顔まわりに明るい色を取り入れることで、顔色が明るくなるので、パッと爽やかな雰囲気に見えます。なで肩の方はゆったりシルエットを綺麗に着こなすことができるので、上下ともにゆとりのあるサイズ感で軽さを出すのがポイントです。靴はレザースニーカーを合わせると、硬すぎずラフすぎずバランスが取れるのでおすすめです！",
     comment: {
@@ -35,11 +35,11 @@ DefaultValues.args = {
       },
       {
         description: "カジュアル感を出しつつ、キレイめ要素を残して",
-        imageFileName: null,
+        imageFileName: `/images/advice/DSCF0295__tri.jpg`,
       },
       {
         description: "洗練された優しい印象のコーデに",
-        imageFileName: null,
+        imageFileName: `/images/advice/DSCF0295__tri.jpg`,
       },
     ],
     footwear: {
@@ -66,4 +66,5 @@ DefaultValues.args = {
     scene: "ショッピング、外食",
     impression: "清潔感",
   },
+  stylistId: 1,
 };
