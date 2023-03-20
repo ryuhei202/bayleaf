@@ -1,37 +1,42 @@
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { TNonNullableDressing } from "../../api/dressings/TDressing";
 import { useDressingShow } from "../../api/dressings/useDressingShow";
 import { useSimplifiedHearingShow } from "../../api/simplifiedHearings/useSimplifiedHearingShow";
+import { StylistIdContext } from "../../App";
 import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { DressingPanel } from "../../components/pageParts/dressing/DressingPanel";
 
 type TProps = {
   coordinateId: number;
-  coordinateIndex: number;
 };
 
-export const DressingPanelFetcher = ({
-  coordinateId,
-  coordinateIndex,
-}: TProps) => {
-  const { data: DressingShowData, error: DressingShowError } = useDressingShow({
+export const DressingPanelFetcher = ({ coordinateId }: TProps) => {
+  const stylistId = useContext(StylistIdContext);
+  const { data: dressingShowData, error: dressingShowError } = useDressingShow({
     coordinateId: coordinateId,
   });
-  const { data: SimplifiedHearingShowDate, error: SimplifiedHearingShowError } =
+  const { data: simplifiedHearingShowData, error: simplifiedHearingShowError } =
     useSimplifiedHearingShow({ coordinateId: coordinateId });
 
-  if (DressingShowError)
-    return <ErrorPage message={DressingShowError.message} />;
-  if (SimplifiedHearingShowError)
-    return <ErrorPage message={SimplifiedHearingShowError.message} />;
+  const navigate = useNavigate();
+  const handleClickGoToConsultation = () => {
+    navigate(`/consult?stylistId=${stylistId}`);
+  };
 
-  if (!SimplifiedHearingShowDate || !DressingShowData) return <LoaderPage />;
+  if (dressingShowError)
+    return <ErrorPage message={dressingShowError.message} />;
+  if (simplifiedHearingShowError)
+    return <ErrorPage message={simplifiedHearingShowError.message} />;
+
+  if (!simplifiedHearingShowData || !dressingShowData) return <LoaderPage />;
 
   return (
     <DressingPanel
-      dressing={DressingShowData as TNonNullableDressing}
-      hearingData={SimplifiedHearingShowDate}
-      dressingIndex={coordinateIndex}
+      dressing={dressingShowData as TNonNullableDressing}
+      hearingData={simplifiedHearingShowData}
+      onClickGoToConsultation={handleClickGoToConsultation}
     />
   );
 };
