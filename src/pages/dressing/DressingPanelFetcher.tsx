@@ -1,6 +1,8 @@
+import { useContext } from "react";
 import { TNonNullableDressing } from "../../api/dressings/TDressing";
 import { useDressingShow } from "../../api/dressings/useDressingShow";
 import { useSimplifiedHearingShow } from "../../api/simplifiedHearings/useSimplifiedHearingShow";
+import { StylistIdContext } from "../../App";
 import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { DressingPanel } from "../../components/pageParts/dressing/DressingPanel";
@@ -10,6 +12,7 @@ type TProps = {
 };
 
 export const DressingPanelFetcher = ({ coordinateId }: TProps) => {
+  const stylistId = useContext(StylistIdContext);
   const { data: dressingShowData, error: dressingShowError } = useDressingShow({
     coordinateId: coordinateId,
   });
@@ -27,6 +30,7 @@ export const DressingPanelFetcher = ({ coordinateId }: TProps) => {
     <DressingPanel
       dressing={dressingShowData as TNonNullableDressing}
       hearingData={simplifiedHearingShowData}
+      stylistId={stylistId}
     />
   );
 };
