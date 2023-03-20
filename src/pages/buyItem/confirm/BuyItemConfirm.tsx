@@ -1,6 +1,5 @@
 import { TChartItemsIndexResponse } from "../../../api/chartItems/useChartItemsIndex";
 import { Button } from "../../../components/baseParts/Button";
-import { FooterWrapper } from "../../../components/baseParts/legacy/FooterWrapper";
 import { IconButton } from "../../../components/baseParts/legacy/IconButton";
 import { ArrowIcon } from "../../../components/baseParts/legacy/icons/ArrowIcon";
 import { BillingInfo } from "../../../components/pageParts/buyItem/BillingInfo";
@@ -9,7 +8,9 @@ import { PurchaseItemCard } from "../../../components/pageParts/buyItem/Purchase
 type TProps = {
   selectedItems: TChartItemsIndexResponse[];
   totalPrice: number;
+  totalSellingPrice: number;
   totalDiscountedPrice: number;
+  allSelectedDiscountPrice?: number;
   totalGrantedPoint: number;
   possesedPoint: number;
   selectedPoint: number;
@@ -22,7 +23,9 @@ type TProps = {
 export const BuyItemConfirm = ({
   selectedItems,
   totalPrice,
+  totalSellingPrice,
   totalDiscountedPrice,
+  allSelectedDiscountPrice,
   totalGrantedPoint,
   possesedPoint,
   selectedPoint,
@@ -32,7 +35,7 @@ export const BuyItemConfirm = ({
   isPurchaseButtonDisabled,
 }: TProps) => {
   return (
-    <div className="bg-clay">
+    <div className="bg-clay" data-testid="BuyItemConfirm">
       <div className="px-6 py-6">
         <div className="p-8 text-center text-themeGray">
           レンタル中アイテムの購入確認画面
@@ -58,15 +61,15 @@ export const BuyItemConfirm = ({
         </div>
         <BillingInfo
           price={totalPrice}
-          discountedPrice={totalDiscountedPrice}
+          totalSellingPrice={totalSellingPrice}
+          allSelectedDiscountPrice={allSelectedDiscountPrice}
+          totalDiscountedPrice={totalDiscountedPrice}
           grantedPoint={totalGrantedPoint}
           possesedPoint={possesedPoint}
           selectedPoint={selectedPoint}
           onChange={onChange}
         />
-      </div>
-      <FooterWrapper className="px-3 py-4">
-        <div className="flex flex-row text-center">
+        <div className="flex flex-row text-center mt-3">
           <IconButton className="flex-none" onClick={onCancel}>
             <ArrowIcon className="h-10 my-auto" />
           </IconButton>
@@ -74,7 +77,7 @@ export const BuyItemConfirm = ({
             購入する
           </Button>
         </div>
-      </FooterWrapper>
+      </div>
     </div>
   );
 };

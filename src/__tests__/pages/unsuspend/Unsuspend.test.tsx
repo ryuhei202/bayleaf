@@ -31,6 +31,7 @@ describe("Unsuspend.tsx", () => {
             isPaymentError: false,
             rentalRemainingNum: 0,
             requestedPlanId: null,
+            point: 2000,
           },
         ],
       })
@@ -57,6 +58,7 @@ describe("Unsuspend.tsx", () => {
             isPaymentError: true,
             rentalRemainingNum: 0,
             requestedPlanId: null,
+            point: 2000,
           },
         ],
       })
@@ -86,6 +88,7 @@ describe("Unsuspend.tsx", () => {
             isPaymentError: false,
             rentalRemainingNum: 1,
             requestedPlanId: null,
+            point: 2000,
           },
         ],
       })
@@ -112,6 +115,7 @@ describe("Unsuspend.tsx", () => {
             isPaymentError: false,
             rentalRemainingNum: 0,
             requestedPlanId: null,
+            point: 2000,
           },
         ],
       })
@@ -158,6 +162,7 @@ describe("Unsuspend.tsx", () => {
             isPaymentError: false,
             rentalRemainingNum: 0,
             requestedPlanId: null,
+            point: 2000,
           },
           {
             id: 2,
@@ -171,6 +176,7 @@ describe("Unsuspend.tsx", () => {
             isPaymentError: false,
             rentalRemainingNum: 0,
             requestedPlanId: null,
+            point: 2000,
           },
         ],
       })
