@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { TNonNullableDressing } from "../../../api/dressings/TDressing";
-import { TNonNullableHearing } from "../../../api/dressings/THearing";
 import { StylistIdContext } from "../../../App";
 import { Button } from "../../baseParts/Button";
 import { SimpifiedHearing } from "../../resourceParts/simplifiedHearing/SimpifiedHearing";
@@ -12,8 +11,15 @@ import { DressingFootwear } from "./DressingFootwear";
 
 type TProps = {
   readonly dressing: TNonNullableDressing;
-  readonly hearingData: TNonNullableHearing;
+  readonly hearingData: TSimplifiedHearing;
 };
+
+type TSimplifiedHearing = {
+  target: string;
+  scene: string;
+  impression: string;
+};
+
 export const DressingPanel = ({ dressing, hearingData }: TProps) => {
   const stylistId = useContext(StylistIdContext);
 
