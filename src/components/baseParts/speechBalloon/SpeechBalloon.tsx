@@ -2,20 +2,13 @@ type Props = {
   children?: React.ReactNode;
   className?: string;
   arrowPlacement?: "top" | "left" | "right" | "bottom";
-  arrowBackGroundColor?: string;
 };
 type TContentProps = {
   children?: React.ReactNode;
   position: string;
   className?: string;
-  arrowBackGroundColor?: string;
 };
-const Content = ({
-  children,
-  position,
-  className,
-  arrowBackGroundColor,
-}: TContentProps) => {
+const Content = ({ children, position, className }: TContentProps) => {
   return (
     <div className={`${className} m-4`}>
       <div
@@ -26,8 +19,8 @@ const Content = ({
       before:border-r-[12px] before:border-r-transparent 
       before:border-b-[12px] before:border-b-transparent 
       after:content-[''] after:absolute after:block after:w-0 after:h-0 after:rounded-full 
-      after:border-l-[24px] after:border-l-${arrowBackGroundColor}
-      after:border-t-[24px] after:border-t-${arrowBackGroundColor} 
+      after:border-l-[24px] after:border-l-clay
+      after:border-t-[24px] after:border-t-clay 
       after:border-r-[24px] after:border-r-transparent 
       after:border-b-[24px] after:border-b-transparent`}
       >
@@ -41,7 +34,6 @@ export const SpeechBalloon = ({
   children,
   className,
   arrowPlacement,
-  arrowBackGroundColor,
 }: Props) => {
   switch (arrowPlacement) {
     case "left":
@@ -49,7 +41,6 @@ export const SpeechBalloon = ({
         <Content
           position="before:-left-3 before:top-8 before:rotate-[-45deg] after:-left-6 after:top-0 after:rotate-[-45deg]"
           className={className}
-          arrowBackGroundColor={arrowBackGroundColor ?? "clay"}
         >
           {children}
         </Content>
@@ -59,7 +50,6 @@ export const SpeechBalloon = ({
         <Content
           position="before:-right-3 before:top-8 before:rotate-[135deg] after:-right-6 after:top-0 after:rotate-[135deg]"
           className={className}
-          arrowBackGroundColor={arrowBackGroundColor ?? "clay"}
         >
           {children}
         </Content>
@@ -69,7 +59,6 @@ export const SpeechBalloon = ({
         <Content
           position="before:left-10 before:-bottom-3 before:rotate-[-135deg] after:left-12 after:-bottom-6 after:rotate-[-135deg]"
           className={className ?? "clay"}
-          arrowBackGroundColor={arrowBackGroundColor ?? "clay"}
         >
           {children}
         </Content>
@@ -79,7 +68,6 @@ export const SpeechBalloon = ({
         <Content
           position="before:left-10 before:-top-3 before:rotate-[45deg] after:left-12 after:-top-6 after:rotate-[45deg]"
           className={className}
-          arrowBackGroundColor={arrowBackGroundColor ?? "clay"}
         >
           {children}
         </Content>
