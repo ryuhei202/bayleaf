@@ -66,6 +66,4 @@ DefaultValues.args = {
     scene: "ショッピング、外食",
     impression: "清潔感",
   },
-
-  dressingIndex: 1,
 };
