@@ -9,7 +9,6 @@ import { DressingFootwear } from "./DressingFootwear";
 type TProps = {
   readonly dressing: TNonNullableDressing;
   readonly hearingData: TSimplifiedHearing;
-  readonly stylistId: number | undefined;
   readonly onClickGoToConsultation: () => void;
 };
 
@@ -22,7 +21,6 @@ type TSimplifiedHearing = {
 export const DressingPanel = ({
   dressing,
   hearingData,
-  stylistId,
   onClickGoToConsultation,
 }: TProps) => {
   const getChangeItems = (dressing: TNonNullableDressing) =>
