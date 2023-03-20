@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { TNonNullableDressing } from "../../api/dressings/TDressing";
 import { useDressingShow } from "../../api/dressings/useDressingShow";
 import { useSimplifiedHearingShow } from "../../api/simplifiedHearings/useSimplifiedHearingShow";
@@ -19,6 +20,11 @@ export const DressingPanelFetcher = ({ coordinateId }: TProps) => {
   const { data: simplifiedHearingShowData, error: simplifiedHearingShowError } =
     useSimplifiedHearingShow({ coordinateId: coordinateId });
 
+  const navigate = useNavigate();
+  const handleClickGoToConsultation = () => {
+    navigate(`/consult?stylistId=${stylistId}`);
+  };
+
   if (dressingShowError)
     return <ErrorPage message={dressingShowError.message} />;
   if (simplifiedHearingShowError)
@@ -30,7 +36,7 @@ export const DressingPanelFetcher = ({ coordinateId }: TProps) => {
     <DressingPanel
       dressing={dressingShowData as TNonNullableDressing}
       hearingData={simplifiedHearingShowData}
-      stylistId={stylistId}
+      onClickGoToConsultation={handleClickGoToConsultation}
     />
   );
 };
