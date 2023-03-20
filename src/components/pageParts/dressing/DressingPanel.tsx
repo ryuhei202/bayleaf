@@ -10,6 +10,7 @@ type TProps = {
   readonly dressing: TNonNullableDressing;
   readonly hearingData: TSimplifiedHearing;
   readonly stylistId: number | undefined;
+  readonly onClickGoToConsultation: () => void;
 };
 
 type TSimplifiedHearing = {
@@ -18,7 +19,12 @@ type TSimplifiedHearing = {
   impression: string;
 };
 
-export const DressingPanel = ({ dressing, hearingData, stylistId }: TProps) => {
+export const DressingPanel = ({
+  dressing,
+  hearingData,
+  stylistId,
+  onClickGoToConsultation,
+}: TProps) => {
   const getChangeItems = (dressing: TNonNullableDressing) =>
     dressing.coordinateItems.filter((i) => i.isChangeItem).map((i) => i.item);
   return (
@@ -37,16 +43,18 @@ export const DressingPanel = ({ dressing, hearingData, stylistId }: TProps) => {
       />
       <DressingAdvice advices={dressing.advices} />
       <DressingFootwear footwear={dressing.footwear} />
-      <Button className="mb-16" variant="default">
-        {/* <Link to={`/consult?stylistId=${stylistId}`}>着こなしの相談をする</Link> */}
+      <Button
+        className="mb-16"
+        variant="default"
+        onClick={onClickGoToConsultation}
+      >
+        着こなしの相談をする
       </Button>
       {getChangeItems(dressing).length > 0 && (
         <>
           <DressingChangeItem changeItems={getChangeItems(dressing)} />
-          <Button variant="default">
-            {/* <Link to={`/consult?stylistId=${stylistId}`}> */}
+          <Button variant="default" onClick={onClickGoToConsultation}>
             着こなしの相談をする
-            {/* </Link> */}
           </Button>
         </>
       )}
