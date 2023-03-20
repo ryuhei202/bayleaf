@@ -1,10 +1,10 @@
 import { THearing } from "../../api/hearings/THearing";
-import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
+import { TNotNullPlanIdMember } from "../../api/members/TMembersIndexResponse";
 import { ContinuedHearingContainer } from "./ContinuedHearingContainer";
 import { NewHearingContainer } from "./NewHearingContainer";
 
 type TProps = {
-  readonly member: TMembersIndexResponse;
+  readonly member: TNotNullPlanIdMember;
   readonly hearings: THearing[];
 };
 

@@ -1,14 +1,14 @@
+import { useState } from "react";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
-import { BeforeHearingConfirm } from "../../components/pageParts/hearing/BeforeHearingConfirm";
-import { AnsweredHearings, TAnsweredForm } from "../hearing/HearingContainer";
+import { HEARING_FORM } from "../../models/hearing/THearingForms";
+import { TAnsweredForm } from "../hearing/HearingContainer";
 import { HearingFormFetcher } from "../hearing/HearingFormFetcher";
 
 type TProps = {
   readonly member: TMembersIndexResponse;
-  readonly nextFormId: number | null;
-  readonly answeredHearings: AnsweredHearings;
+  readonly nextFormId: number;
+  readonly previousAnsweredHearing: TAnsweredForm;
   readonly isBackTransition: boolean;
-  readonly onClickFirstNext: () => void;
   readonly onSubmitForm: (
     answer: TAnsweredForm,
     nextFormIdArg: number | null
@@ -19,27 +19,38 @@ type TProps = {
 export const OneShotHearingContainer = ({
   member,
   nextFormId,
-  answeredHearings,
+  previousAnsweredHearing,
   isBackTransition,
-  onClickFirstNext,
   onSubmitForm,
   onCancelForm,
 }: TProps) => {
-  if (nextFormId === null) {
-    return (
-      <BeforeHearingConfirm
-        onClick={onClickFirstNext}
-        planId={member.mPlanId}
-      />
-    );
-  }
+  const [isAvoidFormAnswered, setIsAvoidFormAnswered] = useState(false);
+
+  const handleSubmitForm = (
+    answer: TAnsweredForm,
+    nextFormIdArg: number | null
+  ) => {
+    if (nextFormIdArg === null && !isAvoidFormAnswered) {
+      onSubmitForm(answer, HEARING_FORM.AVOID_ITEM);
+      setIsAvoidFormAnswered(true);
+    } else {
+      onSubmitForm(answer, nextFormIdArg);
+    }
+  };
+
+  const handleCancelForm = () => {
+    if (nextFormId === HEARING_FORM.AVOID_ITEM) {
+      setIsAvoidFormAnswered(false);
+    }
+    onCancelForm();
+  };
 
   return (
     <HearingFormFetcher
-      onSubmitForm={onSubmitForm}
-      onCancelForm={onCancelForm}
+      onSubmitForm={handleSubmitForm}
+      onCancelForm={handleCancelForm}
       nextFormId={nextFormId}
-      previousAnsweredHearing={answeredHearings.forms.slice(-1)[0]}
+      previousAnsweredHearing={previousAnsweredHearing}
       isBackTransition={isBackTransition}
       member={member}
     />

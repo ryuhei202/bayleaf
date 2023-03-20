@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { TOptionParams } from "../../../api/charts/TOptionParams";
 import { THearingFormShowResponse } from "../../../api/hearingForms/THearingFormShowResponse";
 import { TAnsweredForm } from "../../../pages/hearing/HearingContainer";
@@ -106,9 +106,8 @@ export const SingleSelectForm = ({
             {response.options.map((option) =>
               option.isText ? (
                 isEspeciallyCategory ? (
-                  <>
+                  <Fragment key={option.id}>
                     <SelectButton
-                      key={option.id}
                       selected={selectedOption?.id === option.id}
                       onClick={() =>
                         handleClick(
@@ -126,11 +125,10 @@ export const SingleSelectForm = ({
                       {beforeAnswerText?.find((t) => t.id === option.id)
                         ?.text || ""}
                     </Typography>
-                  </>
+                  </Fragment>
                 ) : (
-                  <>
+                  <Fragment key={option.id}>
                     <SelectButton
-                      key={option.id}
                       selected={selectedOption?.id === option.id}
                       onClick={() => handleClick(option.id, option.name)}
                     >
@@ -149,7 +147,7 @@ export const SingleSelectForm = ({
                       }
                       disabled={selectedOption?.id !== option.id}
                     />
-                  </>
+                  </Fragment>
                 )
               ) : (
                 <SelectButton

@@ -7,7 +7,7 @@ import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { ChartList } from "../../components/resourceParts/chart/ChartList";
 import { CHART_RENTAL_STATUS } from "../../models/chart/ChartRentalStatus";
-import { BuyItemFetcher } from "./BuyItemFetcher";
+import { BuyItemContainer } from "./BuyItemContainer";
 
 export const BuyItem = () => {
   const [selectedChart, setSelectedChart] = useState<TChartResponse>();
@@ -48,7 +48,7 @@ export const BuyItem = () => {
   return (
     <>
       {selectedChart ? (
-        <BuyItemFetcher
+        <BuyItemContainer
           chartId={selectedChart.id}
           possesedPoint={membersData[0].point}
         />

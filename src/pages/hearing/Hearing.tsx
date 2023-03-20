@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
+import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { HearingChartFetcher } from "./HearingChartFetcher";
 import { MemberListContainer } from "./MemberListContainer";
 
@@ -15,8 +16,12 @@ export const Hearing = () => {
     <>
       {member === undefined ? (
         <MemberListContainer setMember={setMember} />
+      ) : member.mPlanId === null ? (
+        <ErrorPage message="単発利用のお客様はこのページを利用できません" />
       ) : (
-        <HearingChartFetcher member={member} />
+        <HearingChartFetcher
+          member={{ ...member, mPlanId: member.mPlanId as number }}
+        />
       )}
     </>
   );
