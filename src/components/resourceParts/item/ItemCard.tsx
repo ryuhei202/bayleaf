@@ -27,7 +27,6 @@ export const ItemCard = ({
   selectItem,
 }: TProps) => {
   const isProcessPresent = selectedItems && selectItem && id;
-  const isSelected = isProcessPresent ? selectedItems.includes(id) : false;
   const changeItem = () => {
     if (isProcessPresent) {
       selectedItems.includes(id)

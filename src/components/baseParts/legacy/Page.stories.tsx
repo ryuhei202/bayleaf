@@ -1,6 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { Page } from "./Page";
-import { PageHeader } from "./PageHeader";
 
 export default {
   title: "BaseParts/Legacy/Page",
