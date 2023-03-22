@@ -1,6 +1,4 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { TCategorizedForm } from "../../../api/hearings/TCategorizedForm";
-import { TForm } from "../../../api/hearings/TForm";
 import { DressingHearing } from "./DressingHearing";
 
 export default {

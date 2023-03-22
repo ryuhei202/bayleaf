@@ -1,5 +1,4 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { useState } from "react";
 import { ReviewReasonForm } from "./ReviewReasonForm";
 
 export default {
