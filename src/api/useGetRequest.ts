@@ -1,13 +1,14 @@
+import * as Sentry from "@sentry/react";
 import { useContext } from "react";
 import { useQuery } from "react-query";
-import * as Sentry from "@sentry/react";
 import { IdTokenContext, StylistIdContext } from "../App";
 import { customAxios } from "./customAxios";
 
 export const useGetRequest = <TResponse, TParams = {}>(
   path: string,
   params?: TParams,
-  isEnabled?: boolean
+  isEnabled?: boolean,
+  key?: string
 ): {
   data?: TResponse;
   isLoading?: boolean;
@@ -17,7 +18,7 @@ export const useGetRequest = <TResponse, TParams = {}>(
   const stylistId = useContext(StylistIdContext);
 
   const { data, error, isLoading } = useQuery<TResponse, Error>(
-    path,
+    key ?? path,
     () =>
       customAxios()
         .get(`${process.env.REACT_APP_HOST_URL}/leeaf/${path}`, {
