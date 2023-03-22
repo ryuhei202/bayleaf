@@ -28,7 +28,7 @@ export const DressingDescription = ({
   return (
     <div className="mb-16">
       <Typography size="xl">コーデの説明</Typography>
-      <div className="my-5">
+      <div className="my-5 flex justify-around">
         {coordinateItems.map((item) => {
           return (
             <ItemCard
