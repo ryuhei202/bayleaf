@@ -48,7 +48,27 @@ DefaultValues.args = {
     },
     coordinateItems: [
       {
-        isChangeItem: true,
+        isChangeItem: false,
+        item: {
+          id: 488070,
+          isTops: true,
+          cateSmallName: "柄Tシャツ",
+          imagePaths: ITEM_TEST_IMAGE_URL,
+          color: "オフホワイト",
+        },
+      },
+      {
+        isChangeItem: false,
+        item: {
+          id: 488070,
+          isTops: true,
+          cateSmallName: "柄Tシャツ",
+          imagePaths: ITEM_TEST_IMAGE_URL,
+          color: "オフホワイト",
+        },
+      },
+      {
+        isChangeItem: false,
         item: {
           id: 488070,
           isTops: true,
