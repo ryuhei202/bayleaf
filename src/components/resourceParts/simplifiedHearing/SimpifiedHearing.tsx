@@ -5,11 +5,7 @@ type TProps = {
   scene: string;
   impression: string;
 };
-export const SimpifiedHearing = ({
-  target,
-  scene,
-  impression,
-}: TProps) => {
+export const SimpifiedHearing = ({ target, scene, impression }: TProps) => {
   const hearings = [
     { question: "誰と", answer: target },
     { question: "利用シーン", answer: scene },
@@ -18,28 +14,32 @@ export const SimpifiedHearing = ({
   if (target === "") return <></>;
 
   return (
-    <div className=" m-5 border-2 border-dashed border-themeGray">
-      {hearings.map((hearing, index) => {
-        return (
-          <div
-            className={`py-5 grid grid-cols-3 place-content-center justify-items-center ${
-              index !== hearings.length - 1
-                ? "border-b-2 border-dashed border-themeGray"
-                : ""
-            }`}
-            key={hearing.question}
-          >
-            <div className="flex items-center">
-              <Typography weight="regular" color="primary" size="sm">
-                {hearing.question}
-              </Typography>
+    <>
+      <Typography size="xl">利用シーン</Typography>
+      <div className="border-[1px] border-gray my-5" />
+      <div className=" m-5 border-2 border-dashed border-themeGray">
+        {hearings.map((hearing, index) => {
+          return (
+            <div
+              className={`py-5 grid grid-cols-3 place-content-center justify-items-center ${
+                index !== hearings.length - 1
+                  ? "border-b-2 border-dashed border-themeGray"
+                  : ""
+              }`}
+              key={hearing.question}
+            >
+              <div className="flex items-center">
+                <Typography weight="regular" color="primary" size="sm">
+                  {hearing.question}
+                </Typography>
+              </div>
+              <div className="col-span-2 justify-self-start flex items-center">
+                <Typography>{hearing.answer}</Typography>
+              </div>
             </div>
-            <div className="col-span-2 justify-self-start flex items-center">
-              <Typography>{hearing.answer}</Typography>
-            </div>
-          </div>
-        );
-      })}
-    </div>
+          );
+        })}
+      </div>
+    </>
   );
 };
