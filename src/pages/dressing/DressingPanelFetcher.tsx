@@ -4,6 +4,7 @@ import { TNonNullableDressing } from "../../api/dressings/TDressing";
 import { useDressingShow } from "../../api/dressings/useDressingShow";
 import { useSimplifiedHearingShow } from "../../api/simplifiedHearings/useSimplifiedHearingShow";
 import { StylistIdContext } from "../../App";
+import { Typography } from "../../components/baseParts/legacy/Typography";
 import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { DressingPanel } from "../../components/pageParts/dressing/DressingPanel";
@@ -32,11 +33,28 @@ export const DressingPanelFetcher = ({ coordinateId }: TProps) => {
 
   if (!simplifiedHearingShowData || !dressingShowData) return <LoaderPage />;
 
+  if (
+    dressingShowData.advices &&
+    dressingShowData.categorizedForms &&
+    dressingShowData.comment &&
+    dressingShowData.coordinateId &&
+    dressingShowData.coordinateItems &&
+    dressingShowData.description &&
+    dressingShowData.footwear
+  ) {
+    return (
+      <DressingPanel
+        dressing={dressingShowData as TNonNullableDressing}
+        hearingData={simplifiedHearingShowData}
+        onClickGoToConsultation={handleClickGoToConsultation}
+      />
+    );
+  }
+
+  window.location.href = `${process.env.REACT_APP_HOST_URL}/rental/plan_check`;
   return (
-    <DressingPanel
-      dressing={dressingShowData as TNonNullableDressing}
-      hearingData={simplifiedHearingShowData}
-      onClickGoToConsultation={handleClickGoToConsultation}
-    />
+    <div className="flex justify-center items-center h-screen">
+      <Typography>リダイレクト中...</Typography>
+    </div>
   );
 };
