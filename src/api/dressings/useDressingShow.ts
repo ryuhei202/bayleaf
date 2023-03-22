@@ -14,7 +14,7 @@ export const useDressingShow = ({
   coordinateId,
 }: TDressingsShowArgs): TDressingsIndex => {
   const { data, error } = useGetRequest<TDressingsShowResponse>(
-    `coordinates/${coordinateId}/dressings`
+    `coordinates/${coordinateId}/dressing`
   );
 
   return {
