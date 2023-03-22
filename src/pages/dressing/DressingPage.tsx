@@ -13,7 +13,7 @@ export const DressingPage = ({ coordinateDatas }: TProps) => {
     <Page className="p-5 pb-5">
       <Tab.Group>
         {coordinateDatas.coordinates.length > 1 ? (
-          <Tab.List className="w-full flex sticky top-0">
+          <Tab.List className="w-full flex sticky top-0 z-10">
             {coordinateDatas.coordinates.map((_, index) => (
               <TabAlt
                 disableElevation={true}
