@@ -8,11 +8,12 @@ type TParams = {
 };
 
 export const useMembersPreMemberPlanChange = ({ memberId }: TArgs) => {
-  const { mutate, isLoading } = usePatchRequest<TParams>(
+  const { mutate, isLoading, error } = usePatchRequest<TParams>(
     `/members/${memberId}/pre_member_plan_change`
   );
   return {
     mutate,
     isLoading,
+    error,
   };
 };

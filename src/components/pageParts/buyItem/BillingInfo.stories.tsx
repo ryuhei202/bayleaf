@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { BillingInfo } from "./BillingInfo";
 
 export default {
-  title: "resourceParts/buyItem/BillingInfo",
+  title: "ResourceParts/BuyItem/BillingInfo",
   component: BillingInfo,
   decorators: [
     (Story) => (
@@ -20,7 +20,8 @@ const Template: ComponentStory<typeof BillingInfo> = (args) => (
 export const DefaultValues = Template.bind({});
 DefaultValues.args = {
   price: 48500,
-  discountedPrice: 43500,
+  totalSellingPrice: 43500,
+  allSelectedDiscountPrice: 4600,
   grantedPoint: 4350,
   possesedPoint: 8000,
   selectedPoint: 600,

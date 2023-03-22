@@ -81,6 +81,19 @@ type tMember = { id: number; name: string };
 type Member = { id: number; name: string };
 ```
 
+- レスポンスの型は以下のような命名にする
+- T[コントローラ名][アクション名]Response.ts
+
+```ts
+// Good
+type TMembersIndexResponse = { id: number; name: string };
+
+// Bad
+type MembersIndex = { id: number; name: string };
+type MembersResponse = { id: number; name: string };
+type TMemberIndexResponse = { id: number; name: string };
+```
+
 #### ファイル名
 
 - ts ファイルは camelCase で記述する

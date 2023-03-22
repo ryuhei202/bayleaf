@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { TChartIndexResponse } from "../../api/charts/TChartIndexResponse";
 import { useMembersPreMemberPlanChange } from "../../api/members/useMembersPreMemberPlanChange";
-import { Typography } from "../../components/baseParts/legacy/Typography";
+import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { PlanSelectingForPreMember } from "../../components/pageParts/planChange/PlanSelectingForPreMember";
 import { findPlanById } from "../../models/shared/Plans";
 
@@ -12,15 +11,11 @@ type TProps = {
     isSuspend: boolean;
     mPlanId: number;
   };
-  readonly chartsData: TChartIndexResponse;
 };
 
-export const PlanSelectingForPreMemberContainer = ({
-  memberData,
-  chartsData,
-}: TProps) => {
+export const PlanSelectingForPreMemberContainer = ({ memberData }: TProps) => {
   const [selectedPlanName, setSelectedPlanName] = useState<string>();
-  const { mutate, isLoading } = useMembersPreMemberPlanChange({
+  const { mutate, isLoading, error } = useMembersPreMemberPlanChange({
     memberId: memberData.id,
   });
   const handleSubmit = (planId: number) => {
@@ -33,18 +28,8 @@ export const PlanSelectingForPreMemberContainer = ({
       }
     );
   };
-  if (
-    !memberData.isFirstTime ||
-    memberData.isSuspend ||
-    chartsData.charts.length > 0
-  ) {
-    window.location.href = `${process.env.REACT_APP_HOST_URL}/plan_change`;
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <Typography>リダイレクト中...</Typography>
-      </div>
-    );
-  }
+
+  if (error) return <ErrorPage message={error.message} />;
 
   return (
     <PlanSelectingForPreMember

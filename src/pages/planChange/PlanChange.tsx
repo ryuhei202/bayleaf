@@ -113,8 +113,7 @@ export const PlanChange = () => {
 
   if (
     membersData[0].isFirstTime &&
-    membersData[0].mPlanId !== null &&
-    chartsData.charts.length === 0
+    chartsData.charts.filter((c) => c.planId !== null).length === 0
   ) {
     return (
       <div data-testid="PlanSelectingForPreMemberContainer">
@@ -125,7 +124,6 @@ export const PlanChange = () => {
             isSuspend: membersData[0].isSuspend,
             mPlanId: membersData[0].mPlanId,
           }}
-          chartsData={chartsData}
         />
       </div>
     );
@@ -136,7 +134,7 @@ export const PlanChange = () => {
       <PlanSelectingContainer
         memberData={{
           id: membersData[0].id,
-          mPlanId: membersData[0].mPlanId as number,
+          mPlanId: membersData[0].mPlanId,
           nextPaymentDate: membersData[0].nextPaymentDate as string,
           rentalRemainingNum: membersData[0].rentalRemainingNum,
           requestedPlanId: membersData[0].requestedPlanId ?? undefined,

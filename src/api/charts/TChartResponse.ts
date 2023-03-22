@@ -3,6 +3,6 @@ export type TChartResponse = {
   readonly rentalStatus: number;
   readonly rentalStartedAt: string | null;
   readonly itemImagePaths: string[];
-  readonly planName: string;
-  readonly planId: number;
+  readonly planName: string | null;
+  readonly planId: number | null;
 };

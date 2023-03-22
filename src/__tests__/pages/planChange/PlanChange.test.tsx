@@ -42,6 +42,7 @@ describe("PlanChange.tsx", () => {
             isPaymentError: false,
             rentalRemainingNum: 1,
             requestedPlanId: null,
+            point: 2000,
           },
         ],
       })
@@ -73,6 +74,7 @@ describe("PlanChange.tsx", () => {
             isPaymentError: false,
             rentalRemainingNum: 1,
             requestedPlanId: null,
+            point: 2000,
           },
         ],
       })
@@ -122,6 +124,7 @@ describe("PlanChange.tsx", () => {
             isPaymentError: false,
             rentalRemainingNum: 1,
             requestedPlanId: null,
+            point: 2000,
           },
         ],
       })
@@ -170,6 +173,7 @@ describe("PlanChange.tsx", () => {
             isPaymentError: false,
             rentalRemainingNum: 1,
             requestedPlanId: null,
+            point: 2000,
           },
         ],
       })
@@ -201,6 +205,7 @@ describe("PlanChange.tsx", () => {
             isPaymentError: false,
             rentalRemainingNum: 1,
             requestedPlanId: null,
+            point: 2000,
           },
           {
             id: 3,
@@ -214,6 +219,7 @@ describe("PlanChange.tsx", () => {
             isPaymentError: false,
             rentalRemainingNum: 1,
             requestedPlanId: null,
+            point: 2000,
           },
         ],
       })
@@ -261,6 +267,7 @@ describe("PlanChange.tsx", () => {
             isPaymentError: false,
             rentalRemainingNum: 1,
             requestedPlanId: null,
+            point: 2000,
           },
         ],
       })
@@ -310,6 +317,7 @@ describe("PlanChange.tsx", () => {
             isPaymentError: false,
             rentalRemainingNum: 1,
             requestedPlanId: null,
+            point: 2000,
           },
         ],
       })
@@ -373,6 +381,7 @@ describe("PlanChange.tsx", () => {
             isPaymentError: true,
             rentalRemainingNum: 1,
             requestedPlanId: null,
+            point: 2000,
           },
         ],
       })
@@ -404,6 +413,7 @@ describe("PlanChange.tsx", () => {
             isPaymentError: false,
             rentalRemainingNum: 1,
             requestedPlanId: null,
+            point: 2000,
           },
         ],
       })
