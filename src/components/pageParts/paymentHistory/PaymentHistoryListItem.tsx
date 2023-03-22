@@ -39,7 +39,7 @@ export const PaymentHistoryListItem = ({
             variant="line"
             size="small"
           >
-            <Typography color="strong-gray" className="text-[1px]">
+            <Typography color="strong-gray" className="text-[2px]">
               領収書
             </Typography>
           </Button>

@@ -17,17 +17,21 @@ export const Pagination = ({
 }: TProps) => {
   const isBackDisabled = currentPage <= 1;
   const isNextDisabled = currentPage >= maxPage;
+
   return (
     <div className={`flex justify-around items-center ${className ?? ""}`}>
-      <Button
-        className={`rounded-[44px]  w-[44px] h-[44px] relative ${
-          isBackDisabled ? "bg-[#D8D8D2]" : "bg-[#F4F3EF]"
-        }`}
-        onClick={() => onClickPagination(currentPage - 1)}
-        disabled={isBackDisabled}
-      >
-        <BackIcon className="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]"></BackIcon>
-      </Button>
+      <div className="w-[44px] h-[44px]">
+        <Button
+          className={`rounded-[44px] h-[44px] relative ${
+            isBackDisabled ? "bg-[#D8D8D2]" : "bg-white"
+          }`}
+          onClick={() => onClickPagination(currentPage - 1)}
+          disabled={isBackDisabled}
+        >
+          <BackIcon className="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]"></BackIcon>
+        </Button>
+      </div>
+
       <div>
         <div className="text-themeGray flex text-xl w-20 justify-around">
           {currentPage}
@@ -35,15 +39,17 @@ export const Pagination = ({
           {maxPage}
         </div>
       </div>
-      <Button
-        className={`rounded-[44px] w-[44px] h-[44px] relative ${
-          isNextDisabled ? "bg-[#D8D8D2]" : "bg-[#F4F3EF]"
-        }`}
-        onClick={() => onClickPagination(currentPage + 1)}
-        disabled={isNextDisabled}
-      >
-        <NextIcon className="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]"></NextIcon>
-      </Button>
+      <div className="w-[44px]">
+        <Button
+          className={`rounded-[44px] h-[44px] relative ${
+            isNextDisabled ? "bg-[#D8D8D2]" : "bg-white"
+          }`}
+          onClick={() => onClickPagination(currentPage + 1)}
+          disabled={isNextDisabled}
+        >
+          <NextIcon className="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]"></NextIcon>
+        </Button>
+      </div>
     </div>
   );
 };

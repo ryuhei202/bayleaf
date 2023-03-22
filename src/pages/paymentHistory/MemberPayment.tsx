@@ -28,7 +28,7 @@ export const MemberPayment = ({
         決済履歴
       </Typography>
       <div className="border-[0.5px] border-gray my-2" />
-      {nextPaymentDate === null && (
+      {nextPaymentDate !== null && (
         <div className="flex">
           <Typography
             weight="regular"
