@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { SpeechBalloon } from "./SpeechBalloon";
 import { Typography } from "../legacy/Typography";
+import { SpeechBalloon } from "./SpeechBalloon";
 
 export default {
   title: "BaseParts/SpeechBalloon/SpeechBalloon",
@@ -21,7 +21,6 @@ Default.decorators = [
 ];
 Default.args = {
   arrowPlacement: "left",
-  arrowBackGroundColor: "clay",
   children: (
     <>
       <Typography size="xs">
