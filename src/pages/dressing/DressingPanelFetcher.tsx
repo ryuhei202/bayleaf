@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { TNonNullableDressing } from "../../api/dressings/TDressing";
+import { TDressingsShowResponse } from "../../api/dressings/TDressingsShowResponse";
 import { useDressingShow } from "../../api/dressings/useDressingShow";
 import { useSimplifiedHearingShow } from "../../api/simplifiedHearings/useSimplifiedHearingShow";
 import { StylistIdContext } from "../../App";
@@ -26,6 +27,18 @@ export const DressingPanelFetcher = ({ coordinateId }: TProps) => {
     navigate(`/consult?stylistId=${stylistId}`);
   };
 
+  const isNonNullable = (
+    dressingShowData: TDressingsShowResponse
+  ): dressingShowData is TNonNullableDressing => {
+    return (
+      dressingShowData.advices !== null &&
+      dressingShowData.categorizedForms !== null &&
+      dressingShowData.comment !== null &&
+      dressingShowData.description !== null &&
+      dressingShowData.footwear !== null
+    );
+  };
+
   if (dressingShowError)
     return <ErrorPage message={dressingShowError.message} />;
   if (simplifiedHearingShowError)
@@ -33,18 +46,10 @@ export const DressingPanelFetcher = ({ coordinateId }: TProps) => {
 
   if (!simplifiedHearingShowData || !dressingShowData) return <LoaderPage />;
 
-  if (
-    dressingShowData.advices &&
-    dressingShowData.categorizedForms &&
-    dressingShowData.comment &&
-    dressingShowData.coordinateId &&
-    dressingShowData.coordinateItems &&
-    dressingShowData.description &&
-    dressingShowData.footwear
-  ) {
+  if (isNonNullable(dressingShowData)) {
     return (
       <DressingPanel
-        dressing={dressingShowData as TNonNullableDressing}
+        dressing={dressingShowData}
         hearingData={simplifiedHearingShowData}
         onClickGoToConsultation={handleClickGoToConsultation}
       />
