@@ -32,6 +32,7 @@ DefaultValues.args = {
       priceTaxIn: 8800,
     },
   ],
+  finalPrice: 3000,
   cardBrand: "VISA",
   cardNumber: "1111",
 };
