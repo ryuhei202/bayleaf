@@ -91,7 +91,7 @@ export const BillingInfo = ({
           ご請求額
         </Typography>
         <Typography className="w-1/2 pr-6" color="strong-gray">
-          ¥{(totalSellingPrice - selectedPoint).toLocaleString()}
+          ¥{(totalDiscountedPrice - selectedPoint).toLocaleString()}
         </Typography>
       </div>
 
