@@ -10,6 +10,7 @@ export const DressingFootwear = ({ footwear }: TProps) => {
   return (
     <div className="mb-12">
       <Typography size="xl">コーデに合う靴</Typography>
+      <div className="border-[1px] border-gray my-5" />
       <div className="flex items-center mt-5">
         <ExpandableImage
           defaultImageSrc={`${
