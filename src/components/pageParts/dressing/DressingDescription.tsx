@@ -15,16 +15,6 @@ export const DressingDescription = ({
   comment,
   coordinateItems,
 }: TProps) => {
-  const items = coordinateItems.map((item) => {
-    return {
-      imagePaths: {
-        defaultPath: item.imagePaths.largeThumb,
-        expandedPath: item.imagePaths.large,
-      },
-      caption: `${item.cateSmallName} / ${item.color}`,
-    };
-  });
-
   return (
     <div className="mb-16">
       <Typography size="xl">コーデの説明</Typography>
