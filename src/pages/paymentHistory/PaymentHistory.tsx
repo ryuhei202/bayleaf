@@ -15,7 +15,10 @@ export const PaymentHistory = () => {
       {member === undefined ? (
         <MemberListContainer setMember={setMember} />
       ) : (
-        <MemberPaymentContainer nextPaymentDate={member.nextPaymentDate} />
+        <MemberPaymentContainer
+          nextPaymentDate={member.nextPaymentDate}
+          memberId={member.id}
+        />
       )}
     </>
   );

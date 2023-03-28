@@ -10,20 +10,23 @@ export type TPaginationParams = {
     offset?: number;
     order?: "asc" | "desc";
   };
-  selectedPage: number;
+  memberId: number;
 };
 export const useMemberPaymentsIndex = ({
+  memberId,
   params,
-  selectedPage,
 }: TPaginationParams) => {
-  const { data, error } = useGetRequest<TMemberPaymentsIndexResponse>(
-    `member_payments`,
-    params,
-    undefined,
-    `member_payments/${selectedPage}`
-  );
+  const { data, error, refetch, isRefetching, isRefetchError } =
+    useGetRequest<TMemberPaymentsIndexResponse>(
+      `members/${memberId}/member_payments`,
+      params,
+      undefined
+    );
   return {
     data,
     error,
+    refetch,
+    isRefetching,
+    isRefetchError,
   };
 };

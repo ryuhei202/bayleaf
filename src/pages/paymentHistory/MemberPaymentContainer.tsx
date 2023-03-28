@@ -7,17 +7,27 @@ import { MemberPayment } from "./MemberPayment";
 
 type TProps = {
   nextPaymentDate: string | null;
+  memberId: number;
 };
-export const MemberPaymentContainer = ({ nextPaymentDate }: TProps) => {
+export const MemberPaymentContainer = ({
+  nextPaymentDate,
+  memberId,
+}: TProps) => {
   const [selectedPage, setSelectedPage] = useState<number>(1);
-  const { data: memberPaymentsData, error: memberPaymentError } =
-    useMemberPaymentsIndex({
-      params: { limit: 10, offset: (selectedPage - 1) * 10, order: "desc" },
-      selectedPage,
-    });
+  const {
+    data: memberPaymentsData,
+    error: memberPaymentError,
+    refetch,
+    isRefetching,
+    isRefetchError,
+  } = useMemberPaymentsIndex({
+    memberId,
+    params: { limit: 10, offset: (selectedPage - 1) * 10, order: "desc" },
+  });
 
   const handleClickPagination = (page: number) => {
     setSelectedPage(page);
+    refetch();
   };
 
   const handleClickReceiptButton = (memberPaymentId: number) => {
@@ -29,7 +39,9 @@ export const MemberPaymentContainer = ({ nextPaymentDate }: TProps) => {
 
   if (memberPaymentError)
     return <ErrorPage message={memberPaymentError.message} />;
-  if (!memberPaymentsData) return <LoaderPage />;
+  if (isRefetchError) return <ErrorPage message="読み込みに失敗しました" />;
+
+  if (!memberPaymentsData || isRefetching) return <LoaderPage />;
 
   return (
     <MemberPayment
