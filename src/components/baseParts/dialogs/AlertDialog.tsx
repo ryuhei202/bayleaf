@@ -1,5 +1,5 @@
-import { Dialog } from "@headlessui/react";
 import { Button } from "../Button";
+import { BaseDialog } from "./BaseDialog";
 
 type TProps = {
   readonly open: boolean;
@@ -20,16 +20,12 @@ export const AlertDialog = ({
   onClose,
 }: TProps) => {
   return (
-    <Dialog
+    <BaseDialog
       open={open}
+      title={title}
       onClose={onClose}
-      className="fixed inset-0 h-screen w-screen bg-black/50 z-30"
-    >
-      <Dialog.Panel className="fixed bottom-0 left-1/2 translate-x-[-50%] bg-lightBeige w-screen px-10 py-6 rounded-t-2xl text-themeGray text-center">
-        <Dialog.Title className="pb-5 font-bold">{title}</Dialog.Title>
-        <Dialog.Description className="mb-7 text-xs">
-          {description}
-        </Dialog.Description>
+      description={description}
+      button={
         <div className="flex mb-7">
           {!hidden && (
             <Button variant="default" onClick={onClick} className="mx-2">
@@ -37,7 +33,7 @@ export const AlertDialog = ({
             </Button>
           )}
         </div>
-      </Dialog.Panel>
-    </Dialog>
+      }
+    ></BaseDialog>
   );
 };

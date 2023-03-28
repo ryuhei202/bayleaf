@@ -21,8 +21,9 @@ export const DefaultValues = Template.bind({});
 DefaultValues.args = {
   price: 48500,
   totalSellingPrice: 43500,
-  allSelectedDiscountPrice: 4600,
+  allSelectedDiscountPrice: 4650,
+  totalDiscountedPrice: 39000,
   grantedPoint: 4350,
   possesedPoint: 8000,
-  selectedPoint: 600,
+  selectedPoint: 8000,
 };

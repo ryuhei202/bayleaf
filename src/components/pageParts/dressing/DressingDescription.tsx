@@ -1,7 +1,8 @@
 import { TDressingComment } from "../../../api/dressings/TDressingComment";
 import { TDressingItem } from "../../../api/dressings/TDressingItem";
-import { CoordinateItemImages } from "../../baseParts/legacy/CoordinateItemImages";
 import { Typography } from "../../baseParts/legacy/Typography";
+import { SpeechBalloon } from "../../baseParts/speechBalloon/SpeechBalloon";
+import { ItemCard } from "../../resourceParts/item/ItemCard";
 
 type TProps = {
   readonly description: string;
@@ -14,21 +15,23 @@ export const DressingDescription = ({
   comment,
   coordinateItems,
 }: TProps) => {
-  const items = coordinateItems.map((item) => {
-    return {
-      imagePaths: {
-        defaultPath: item.imagePaths.largeThumb,
-        expandedPath: item.imagePaths.large,
-      },
-      caption: `${item.cateSmallName} / ${item.color}`,
-    };
-  });
-
   return (
     <div className="mb-16">
       <Typography size="xl">コーデの説明</Typography>
-      <div className="my-5">
-        <CoordinateItemImages items={items} />
+      <div className="border-[1px] border-gray my-5" />
+      <div className="my-5 flex justify-around">
+        {coordinateItems.map((item) => {
+          return (
+            <ItemCard
+              imagePaths={{
+                defaultPath: item.imagePaths.largeThumb,
+                expandedPath: item.imagePaths.large,
+              }}
+              categoryName={item.cateSmallName}
+              colorName={item.color}
+            />
+          );
+        })}
       </div>
       <div className="mt-10">
         <Typography className="mx-2 my-2">{description}</Typography>
@@ -39,9 +42,7 @@ export const DressingDescription = ({
             className="rounded-full w-[15vw] h-[15vw] object-cover"
           />
           <div className="table w-full min-h-[15vw]">
-            <Typography className="bg-white table-cell align-middle rounded-lg p-3">
-              {comment.text}
-            </Typography>
+            <SpeechBalloon arrowPlacement="left">{comment.text}</SpeechBalloon>
           </div>
         </div>
       </div>
