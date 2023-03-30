@@ -89,9 +89,9 @@ export const RankSelectingForm = ({
           title="Bランクとは？"
           description={
             <>
-              少し使用感があり、比較的目立たない気になる傷や汚れがあるアイテムです。
+              少し使用感があり、比較的目立たない傷や汚れがあるアイテムです。
               <br />
-              着用上問題ないと判断したアイテムを通常より購入できます。
+              着用上問題ないと判断したアイテムを通常より安く購入できます。
               <br />
               {/* TODO: URL出来次第、hrefに差し込む
               <a href="" className="font-bold underline">
