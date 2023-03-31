@@ -10,6 +10,7 @@ type TProps = {
   point: number;
   discountedPrice: number;
   price: number;
+  rank: string;
   className?: string;
 };
 
@@ -22,6 +23,7 @@ export const PurchaseItemCard = ({
   point,
   discountedPrice,
   price,
+  rank,
   className,
 }: TProps) => {
   return (
@@ -55,6 +57,14 @@ export const PurchaseItemCard = ({
           </Typography>
           <Typography className="leading-4 text-left" color="strong-gray">
             {point}pt
+          </Typography>
+        </div>
+        <div>
+          <Typography className="text-left" color="gray" size="xs">
+            ランク
+          </Typography>
+          <Typography className="leading-4 text-left" color="strong-gray">
+            {rank}
           </Typography>
         </div>
       </div>
