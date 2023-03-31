@@ -35,13 +35,13 @@ export const RankSelectingForm = ({
           <div>
             <SelectButton
               selected={!isSelectableBRank}
-              onClick={() => onSelect(!isSelectableBRank)}
+              onClick={() => onSelect(false)}
             >
               Aランクでコーデを作ってほしい
             </SelectButton>
             <SelectButton
               selected={isSelectableBRank}
-              onClick={() => onSelect(isSelectableBRank)}
+              onClick={() => onSelect(true)}
               className="mt-6"
             >
               Bランクアイテムがあれば、

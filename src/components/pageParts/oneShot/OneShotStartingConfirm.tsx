@@ -14,6 +14,7 @@ type TProps = {
   readonly confirmAnswer: THearingAnswer;
   readonly wearingDate: string;
   readonly isPostLoading: boolean;
+  readonly isSelectableBRank: boolean;
   readonly onSubmit: () => void;
   readonly onCancelForm: () => void;
 };
@@ -21,6 +22,7 @@ export const OneShotStartingConfirm = ({
   confirmAnswer,
   wearingDate,
   isPostLoading,
+  isSelectableBRank,
   onSubmit,
   onCancelForm,
 }: TProps) => {
@@ -40,6 +42,14 @@ export const OneShotStartingConfirm = ({
             <ScheduleDiagram wearDate={wearingDate} />
           </div>
           <AnswerConfirm answer={confirmAnswer.answer} />
+          <div className="bg-white mt-3 rounded-md overflow-hidden px-4 py-4">
+            <Typography color="primary" size="2xl">
+              Bランクを希望しますか？
+            </Typography>
+            <Typography color="primary" className="mt-2 ml-2">
+              {isSelectableBRank ? "希望する" : "希望しない"}
+            </Typography>
+          </div>
         </div>
       </div>
       <FooterWrapper className="px-3 py-4">
