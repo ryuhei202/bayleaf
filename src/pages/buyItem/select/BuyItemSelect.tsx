@@ -61,6 +61,7 @@ export const BuyItemSelect = ({
                     point={chartItem.point}
                     discountedPrice={chartItem.discountedPrice}
                     price={chartItem.price}
+                    rank={chartItem.rank}
                   />
                 </SelectWrapper>
               </div>
@@ -79,6 +80,7 @@ export const BuyItemSelect = ({
                   point={chartItem.point}
                   discountedPrice={chartItem.discountedPrice}
                   price={chartItem.price}
+                  rank={chartItem.rank}
                 />
                 <Typography
                   className="absolute top-1/2 text-center w-full align-top -translate-y-1/2"

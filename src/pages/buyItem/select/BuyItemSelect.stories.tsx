@@ -37,6 +37,7 @@ DefaultValues.args = {
       locationId: 1,
       discountRate: 20,
       isSelected: false,
+      rank: "A",
     },
     {
       id: 2,
@@ -61,6 +62,7 @@ DefaultValues.args = {
       locationId: 1,
       discountRate: 20,
       isSelected: false,
+      rank: "A",
     },
     {
       id: 3,
@@ -85,6 +87,7 @@ DefaultValues.args = {
       locationId: 1,
       discountRate: 80,
       isSelected: false,
+      rank: "A",
     },
   ],
 };
@@ -116,6 +119,7 @@ Purchased.args = {
       locationId: 1,
       discountRate: 20,
       isSelected: false,
+      rank: "A",
     },
     {
       id: 2,
@@ -140,6 +144,7 @@ Purchased.args = {
       locationId: 1,
       discountRate: 20,
       isSelected: false,
+      rank: "A",
     },
     {
       id: 3,
@@ -164,6 +169,7 @@ Purchased.args = {
       locationId: 1,
       discountRate: 80,
       isSelected: false,
+      rank: "A",
     },
   ],
 };
