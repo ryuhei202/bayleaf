@@ -17,6 +17,7 @@ export type TChartItemsIndexResponse = {
   readonly locationId: number | null;
   readonly discountRate: number;
   readonly isBuyable: boolean;
+  readonly rank: string;
 };
 
 type TArgs = {
