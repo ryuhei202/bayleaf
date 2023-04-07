@@ -6,14 +6,14 @@ type TSerialCodesIndex = {
   readonly error: Error | null;
 };
 
-type TArgs = {
-  member_id: number;
+type TParams = {
+  memberId: number | undefined;
 };
 export const useSerialCodesIndex = ({
-  member_id,
-}: TArgs): TSerialCodesIndex => {
+  memberId,
+}: TParams): TSerialCodesIndex => {
   const { data, error } = useGetRequest<TSerialCodesIndexResponse[]>(
-    `${member_id}`
+    `${memberId}`
   );
 
   return {
