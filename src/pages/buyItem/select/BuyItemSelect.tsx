@@ -25,10 +25,10 @@ export const BuyItemSelect = ({
   onClickConfirm,
 }: TProps) => {
   const isSelectable = (item: TSelectBuyItem) =>
-    item.isBuyable && !item.isPurchased;
+    item.isForSale && !item.isPurchased;
 
   const isAllSelectedDiscountAvailable = chartItems.every(
-    (item) => item.isBuyable || item.isPurchased
+    (item) => item.isForSale || item.isPurchased
   );
 
   return (
@@ -58,7 +58,7 @@ export const BuyItemSelect = ({
                     category={chartItem.categoryName}
                     color={chartItem.colorName}
                     discountRate={chartItem.discountRate}
-                    point={chartItem.point}
+                    point={chartItem.purchasePoint}
                     discountedPrice={chartItem.discountedPrice}
                     price={chartItem.price}
                     rank={chartItem.rank}
@@ -77,7 +77,7 @@ export const BuyItemSelect = ({
                   category={chartItem.categoryName}
                   color={chartItem.colorName}
                   discountRate={chartItem.discountRate}
-                  point={chartItem.point}
+                  point={chartItem.purchasePoint}
                   discountedPrice={chartItem.discountedPrice}
                   price={chartItem.price}
                   rank={chartItem.rank}

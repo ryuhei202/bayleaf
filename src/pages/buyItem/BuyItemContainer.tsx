@@ -78,7 +78,8 @@ export const BuyItemContainer = ({ chartId, possesedPoint }: TProps) => {
   const getTotalGrantedPoint = () => {
     let initialValue = 0;
     const totalGrantedPoint = selectedChartItems.reduce(
-      (accumulator, selectedChartItem) => accumulator + selectedChartItem.point,
+      (accumulator, selectedChartItem) =>
+        accumulator + selectedChartItem.purchasePoint,
       initialValue
     );
     return totalGrantedPoint;
@@ -86,11 +87,11 @@ export const BuyItemContainer = ({ chartId, possesedPoint }: TProps) => {
 
   const getAllSelectedDiscountPrice = () => {
     const selectableItems = chartItemsData.filter(
-      (item) => item.isBuyable && !item.isPurchased
+      (item) => item.isForSale && !item.isPurchased
     );
     if (
       selectedChartItems.length !== selectableItems.length ||
-      chartItemsData.some((item) => !(item.isBuyable || item.isPurchased))
+      chartItemsData.some((item) => !(item.isForSale || item.isPurchased))
     ) {
       return undefined;
     }
