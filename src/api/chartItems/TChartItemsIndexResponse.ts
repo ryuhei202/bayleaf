@@ -1,6 +1,6 @@
 import { TItemResponse } from "../shared/TItemResponse";
 
-export type TChartItemsIndexResponse = {
+export type TChartItemsResponse = {
   id: number;
   items: TItemResponse[];
 };
