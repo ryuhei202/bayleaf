@@ -31,7 +31,8 @@
     "web-vitals": "^3.3.0"
   },
   "resolutions": {
-    "autoprefixer": "10.4.5"
+    "autoprefixer": "10.4.5",
+    "@storybook/react-docgen-typescript-plugin": "1.0.6--canary.9.cd77847.0"
   },
   "scripts": {
     "start": "REACT_APP_VERSION=\"$npm_package_version.`git rev-parse --short HEAD`\" PORT=3001 react-scripts start",
