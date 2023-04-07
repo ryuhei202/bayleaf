@@ -86,10 +86,10 @@ export const Button = ({
           case "primary":
             return "bg-themeGray text-slate-200 shadow-themeGray/40 fill-themeGray";
           case "text":
-            return "text-slate-700";
+            return "text-themeGray";
           case "default":
           default:
-            return "bg-white text-slate-700 fill-white";
+            return "bg-white text-themeGray fill-white";
         }
       })()
     );
