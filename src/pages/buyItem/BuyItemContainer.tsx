@@ -52,7 +52,7 @@ export const BuyItemContainer = ({ chartId, possesedPoint }: TProps) => {
     }
   };
 
-  const selectedChartItems = chartItemsData.filter((item) =>
+  const selectedChartItems = chartItemsData.items.filter((item) =>
     selectedChartItemIds.includes(item.id)
   );
 
@@ -86,12 +86,12 @@ export const BuyItemContainer = ({ chartId, possesedPoint }: TProps) => {
   };
 
   const getAllSelectedDiscountPrice = () => {
-    const selectableItems = chartItemsData.filter(
+    const selectableItems = chartItemsData.items.filter(
       (item) => item.isForSale && !item.isPurchased
     );
     if (
       selectedChartItems.length !== selectableItems.length ||
-      chartItemsData.some((item) => !(item.isForSale || item.isPurchased))
+      chartItemsData.items.some((item) => !(item.isForSale || item.isPurchased))
     ) {
       return undefined;
     }
@@ -118,7 +118,7 @@ export const BuyItemContainer = ({ chartId, possesedPoint }: TProps) => {
     <>
       {isConfirm ? (
         <BuyItemConfirm
-          selectedItems={chartItemsData.filter((item) =>
+          selectedItems={chartItemsData.items.filter((item) =>
             selectedChartItemIds.includes(item.id)
           )}
           totalPrice={getTotalPrice()}
@@ -152,7 +152,7 @@ export const BuyItemContainer = ({ chartId, possesedPoint }: TProps) => {
         />
       ) : (
         <BuyItemSelect
-          chartItems={chartItemsData.map((item) => {
+          chartItems={chartItemsData.items.map((item) => {
             return {
               ...item,
               isSelected: selectedChartItemIds.includes(item.id),
