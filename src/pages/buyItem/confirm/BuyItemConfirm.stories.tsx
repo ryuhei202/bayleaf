@@ -16,7 +16,7 @@ DefaultValues.args = {
     {
       id: 1,
       isPurchased: true,
-      isBuyable: true,
+      isForSale: true,
       brandName: "leeap original",
       imagePaths: {
         original:
@@ -51,7 +51,7 @@ AllSelected.args = {
     {
       id: 1,
       isPurchased: true,
-      isBuyable: true,
+      isForSale: true,
       brandName: "leeap original",
       imagePaths: {
         original:
