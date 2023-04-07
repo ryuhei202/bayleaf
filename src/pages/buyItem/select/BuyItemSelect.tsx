@@ -1,11 +1,11 @@
-import { TChartItemsIndexResponse } from "../../../api/chartItems/useChartItemsIndex";
+import { TItemResponse } from "../../../api/shared/TItemResponse";
 import { Button } from "../../../components/baseParts/Button";
 import { FooterWrapper } from "../../../components/baseParts/legacy/FooterWrapper";
 import { Typography } from "../../../components/baseParts/legacy/Typography";
 import { SelectWrapper } from "../../../components/baseParts/wrapper/SelectWrapper";
 import { PurchaseItemCard } from "../../../components/pageParts/buyItem/PurchaseItemCard";
 
-type TSelectBuyItem = TChartItemsIndexResponse & {
+type TSelectBuyItem = TItemResponse & {
   readonly isSelected: boolean;
 };
 

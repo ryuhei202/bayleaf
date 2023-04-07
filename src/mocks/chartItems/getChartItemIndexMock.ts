@@ -1,9 +1,9 @@
 import { rest } from "msw";
-import { TChartItemsIndexResponse } from "./../../api/chartItems/useChartItemsIndex";
+import { TItemResponse } from "../../api/shared/TItemResponse";
 
 type TProps = {
   status: number;
-  response?: TChartItemsIndexResponse[];
+  response?: TItemResponse[];
   chartId: number;
 };
 
