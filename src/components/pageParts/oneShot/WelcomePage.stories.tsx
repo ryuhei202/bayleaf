@@ -18,6 +18,7 @@ Default.args = {
   serialCodesIndexData: [
     {
       serialCampaignId: 1,
+      discountPrice: 300,
     },
   ],
 };
@@ -26,6 +27,7 @@ FirstTimeOneShot.args = {
   serialCodesIndexData: [
     {
       serialCampaignId: 224,
+      discountPrice: 2000,
     },
   ],
 };
