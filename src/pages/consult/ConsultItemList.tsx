@@ -1,8 +1,8 @@
 import React, { useState } from "react";
+import { CompleteButton } from "../../components/baseParts/legacy/CompleteButton";
 import { SelectButtonImage } from "../../components/baseParts/legacy/images/SelectButtonImage";
 import { Page } from "../../components/baseParts/legacy/Page";
 import { PageHeader } from "../../components/baseParts/legacy/PageHeader";
-import { CompleteButton } from "../../components/baseParts/legacy/CompleteButton";
 import { Typography } from "../../components/baseParts/legacy/Typography";
 import { TConsultingItem } from "../../models/consult/TConsultingItem";
 
@@ -55,7 +55,7 @@ export const ConsultItemList = ({
                   color="primary"
                   weight="medium"
                 >
-                  {`${item.cateSmallName}／${item.color}`}
+                  {`${item.categoryName}／${item.colorName}`}
                 </Typography>
               </div>
             ))}

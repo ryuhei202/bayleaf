@@ -13,7 +13,7 @@ const Template: ComponentStory<typeof DesignDetailForm> = (args) => (
 const selectedItem: TConsultingItem = {
   id: 111111,
   isTops: true,
-  cateSmallName: "シャツ",
+  categoryName: "シャツ",
   imagePaths: {
     original:
       "https://stg.leeap.jp/files/preregistered_item/168/16899/IMG_3977.JPG",
@@ -24,7 +24,7 @@ const selectedItem: TConsultingItem = {
     thumb:
       "https://stg.leeap.jp/files/preregistered_item/168/16899/thumb_IMG_3977.JPG",
   },
-  color: "ブラック",
+  colorName: "ブラック",
 };
 
 export const Default = Template.bind({});
