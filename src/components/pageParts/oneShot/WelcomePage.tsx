@@ -3,6 +3,7 @@ import FIRST_CLOTH from "../../../images/icons/cloths/1.svg";
 import THIRD_CLOTH from "../../../images/icons/cloths/3.svg";
 import FORTH_CLOTH from "../../../images/icons/cloths/4.svg";
 import DiagonalLineIcon from "../../../images/icons/diagonal-line.svg";
+import { OneShot, withTax } from "../../../models/shared/OneShot";
 import { Button } from "../../baseParts/Button";
 import { Page } from "../../baseParts/legacy/Page";
 import { Typography } from "../../baseParts/legacy/Typography";
@@ -13,8 +14,28 @@ type TProps = {
   readonly onClickStart: () => void;
 };
 
+//ここにキャンペーンを追加する。
+const campaignIndex = [
+  {
+    firstTimeOneShotSerialCampaignId: 224,
+    campaignWord: "初回キャンペーン!!",
+  },
+];
+
 export const WelcomePage = ({ serialCodesIndexData, onClickStart }: TProps) => {
-  const first_time_one_shot_serial_campaign_id = 224;
+  let discont_price = 0;
+  const isTargetCampaign = (campaignId: number) => {
+    const targetCampaign = serialCodesIndexData.find(
+      (campaign) => campaign.serialCampaignId === campaignId
+    );
+    if (targetCampaign) {
+      discont_price = targetCampaign.discount_price;
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <Page className="flex flex-col h-full min-h-screen justify-between items-center text-themeGray pt-8 px-3 pb-3">
       <Typography size="2xl" className="text-center mb-8">
@@ -24,36 +45,39 @@ export const WelcomePage = ({ serialCodesIndexData, onClickStart }: TProps) => {
         <div className="bg-themeGray text-clay text-center text-[4vw] py-1">
           料金
         </div>
-        {serialCodesIndexData.some(
-          (data) =>
-            data.serialCampaignId === first_time_one_shot_serial_campaign_id
-        ) ? (
+        {isTargetCampaign(campaignIndex[0].firstTimeOneShotSerialCampaignId) ? (
           <>
             <p className="text-center text-[5vw] mt-5 mb-2">
-              <span className="text-[10vw] font-lora line-through">¥5,000</span>
+              <span className="text-[10vw] font-lora line-through">{`¥${OneShot.price.withoutTax}`}</span>
               <br />
-              <span className="text-[4vw] line-through">(税込 ¥5,500)</span>
+              <span className="text-[4vw] line-through">{`(税込 ¥${withTax(
+                OneShot.price.withoutTax
+              )})`}</span>
             </p>
             <div className="indent-[50%]">
               <span className="font-bold">
                 ↓
                 <span className="text-red text-xs ml-2">
-                  初回キャンペーン!!
+                  {campaignIndex[0].campaignWord}
                 </span>
               </span>
             </div>
             <p className="text-center text-[5vw] mb-5">
-              <span className="text-[10vw] font-lora">¥3,000</span>
+              <span className="text-[10vw] font-lora">{`¥${
+                OneShot.price.withoutTax - discont_price
+              }`}</span>
               <br />
-              <span className="text-[4vw]">(税込 ¥3,300)</span>
+              <span className="text-[4vw]">{`(税込 ¥${withTax(
+                OneShot.price.withoutTax - discont_price
+              )})`}</span>
             </p>
           </>
         ) : (
           <>
             <p className="text-center text-[5vw] my-5">
-              <span className="text-[10vw] font-lora">¥5,000</span>
+              <span className="text-[10vw] font-lora">{`¥${OneShot.price.withoutTax}`}</span>
               <br />
-              <span className="text-[4vw]">(税込 ¥5,500)</span>
+              <span className="text-[4vw]">{`(税込 ¥${OneShot.price.withTax})`}</span>
             </p>
           </>
         )}
