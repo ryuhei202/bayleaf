@@ -23,13 +23,13 @@ const campaignIndex = [
 ];
 
 export const WelcomePage = ({ serialCodesIndexData, onClickStart }: TProps) => {
-  let discont_price = 0;
+  let discontPrice = 0;
   const isTargetCampaign = (campaignId: number) => {
     const targetCampaign = serialCodesIndexData.find(
       (campaign) => campaign.serialCampaignId === campaignId
     );
     if (targetCampaign) {
-      discont_price = targetCampaign.discount_price;
+      discontPrice = targetCampaign.discountPrice;
       return true;
     } else {
       return false;
@@ -64,11 +64,11 @@ export const WelcomePage = ({ serialCodesIndexData, onClickStart }: TProps) => {
             </div>
             <p className="text-center text-[5vw] mb-5">
               <span className="text-[10vw] font-lora">{`¥${
-                OneShot.price.withoutTax - discont_price
+                OneShot.price.withoutTax - discontPrice
               }`}</span>
               <br />
               <span className="text-[4vw]">{`(税込 ¥${withTax(
-                OneShot.price.withoutTax - discont_price
+                OneShot.price.withoutTax - discontPrice
               )})`}</span>
             </p>
           </>
