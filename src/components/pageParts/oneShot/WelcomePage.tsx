@@ -14,7 +14,6 @@ type TProps = {
   readonly onClickStart: () => void;
 };
 
-//ここにキャンペーンを追加する。
 const campaignIndex = [
   {
     firstTimeOneShotSerialCampaignId: 224,
