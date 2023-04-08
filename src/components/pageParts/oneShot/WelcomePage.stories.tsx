@@ -14,3 +14,18 @@ const Template: ComponentStory<typeof WelcomePage> = (args) => (
 );
 
 export const Default = Template.bind({});
+Default.args = {
+  serialCodesIndexData: [
+    {
+      serialCampaignId: 1,
+    },
+  ],
+};
+export const FirstTimeOneShot = Template.bind({});
+FirstTimeOneShot.args = {
+  serialCodesIndexData: [
+    {
+      serialCampaignId: 224,
+    },
+  ],
+};
