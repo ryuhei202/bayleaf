@@ -3,7 +3,9 @@ import FIRST_CLOTH from "../../../images/icons/cloths/1.svg";
 import THIRD_CLOTH from "../../../images/icons/cloths/3.svg";
 import FORTH_CLOTH from "../../../images/icons/cloths/4.svg";
 import DiagonalLineIcon from "../../../images/icons/diagonal-line.svg";
-import { OneShot, withTax } from "../../../models/shared/OneShot";
+import { OneShot } from "../../../models/shared/OneShot";
+import { withTax } from "../../../models/shared/Tax";
+
 import { Button } from "../../baseParts/Button";
 import { Page } from "../../baseParts/legacy/Page";
 import { Typography } from "../../baseParts/legacy/Typography";
@@ -22,18 +24,15 @@ const campaignIndex = [
 ];
 
 export const WelcomePage = ({ serialCodesIndexData, onClickStart }: TProps) => {
-  let discontPrice = 0;
-  const isTargetCampaign = (campaignId: number) => {
-    const targetCampaign = serialCodesIndexData.find(
-      (campaign) => campaign.serialCampaignId === campaignId
-    );
-    if (targetCampaign) {
-      discontPrice = targetCampaign.discountPrice;
-      return true;
-    } else {
-      return false;
-    }
-  };
+  const targetCampaign = serialCodesIndexData.find(
+    (campaign) =>
+      campaign.serialCampaignId ===
+      campaignIndex[0].firstTimeOneShotSerialCampaignId
+  );
+
+  const discountPrice = targetCampaign
+    ? targetCampaign.discountPrice
+    : undefined;
 
   return (
     <Page className="flex flex-col h-full min-h-screen justify-between items-center text-themeGray pt-8 px-3 pb-3">
@@ -44,14 +43,12 @@ export const WelcomePage = ({ serialCodesIndexData, onClickStart }: TProps) => {
         <div className="bg-themeGray text-clay text-center text-[4vw] py-1">
           料金
         </div>
-        {isTargetCampaign(campaignIndex[0].firstTimeOneShotSerialCampaignId) ? (
+        {discountPrice ? (
           <>
             <p className="text-center text-[5vw] mt-5 mb-2">
               <span className="text-[10vw] font-lora line-through">{`¥${OneShot.price.withoutTax}`}</span>
               <br />
-              <span className="text-[4vw] line-through">{`(税込 ¥${withTax(
-                OneShot.price.withoutTax
-              )})`}</span>
+              <span className="text-[4vw] line-through">{`(税込 ¥${OneShot.price.withTax})`}</span>
             </p>
             <div className="indent-[50%]">
               <span className="font-bold">
@@ -63,11 +60,11 @@ export const WelcomePage = ({ serialCodesIndexData, onClickStart }: TProps) => {
             </div>
             <p className="text-center text-[5vw] mb-5">
               <span className="text-[10vw] font-lora">{`¥${
-                OneShot.price.withoutTax - discontPrice
+                OneShot.price.withoutTax - discountPrice
               }`}</span>
               <br />
               <span className="text-[4vw]">{`(税込 ¥${withTax(
-                OneShot.price.withoutTax - discontPrice
+                OneShot.price.withoutTax - discountPrice
               )})`}</span>
             </p>
           </>
