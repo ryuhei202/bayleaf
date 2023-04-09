@@ -1,12 +1,8 @@
-import { TAX } from "./Tax";
-
-export const withTax = (price: number) => {
-  return price + price * TAX;
-};
+import { withTax } from "./Tax";
 
 export const OneShot = {
   price: {
-    withTax: withTax(5000),
-    withoutTax: 5000,
+    withTax: withTax(4980),
+    withoutTax: 4980,
   },
 };
