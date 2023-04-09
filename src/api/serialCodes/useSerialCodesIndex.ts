@@ -13,7 +13,7 @@ export const useSerialCodesIndex = ({
   memberId,
 }: TParams): TSerialCodesIndex => {
   const { data, error } = useGetRequest<TSerialCodesIndexResponse[]>(
-    `${memberId}`
+    `members/${memberId}/serial_codes`
   );
 
   return {
