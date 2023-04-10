@@ -9,7 +9,7 @@ import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { OneShotStartingConfirm } from "../../components/pageParts/oneShot/OneShotStartingConfirm";
 import { StartHearingPage } from "../../components/pageParts/oneShot/StartHearingPage";
 import { WearingDateForm } from "../../components/pageParts/oneShot/WearingDateForm";
-import { WelcomePage } from "../../components/pageParts/oneShot/WelcomePage";
+import { WelcomePageFetcher } from "../../components/pageParts/oneShot/WelcomePageFetcher";
 import { THearingAnswer } from "../../models/hearing/THearingAnswer";
 import {
   HEARING_FORM,
@@ -109,7 +109,7 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
 
   switch (step) {
     case "welcome":
-      return <WelcomePage onClickStart={handleClickStart} />;
+      return <WelcomePageFetcher onClickStart={handleClickStart} />;
     case "dateSelecting":
       return (
         <WearingDateForm
