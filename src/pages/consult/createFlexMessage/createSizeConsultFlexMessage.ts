@@ -60,7 +60,7 @@ export const createSizeConsultFlexMessage = (
                       },
                       {
                         type: "text",
-                        text: `${answer.item.cateSmallName}／${answer.item.color}`,
+                        text: `${answer.item.categoryName}／${answer.item.colorName}`,
                         size: "xxs",
                         wrap: true,
                         margin: "md",

@@ -16,6 +16,15 @@ export const Default = Template.bind({});
 const selectedItem: TConsultingItem = {
   id: 111111,
   isTops: true,
+  isPurchased: false,
+  isForSale: true,
+  brandName: "leeap original",
+  price: 15000,
+  discountedPrice: 12000,
+  purchasePoint: 864,
+  locationId: null,
+  discountRate: 20,
+  rank: "A",
   categoryName: "シャツ",
   imagePaths: {
     original:

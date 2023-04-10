@@ -1,21 +1,19 @@
 import { ComponentProps } from "react";
-import { TCoordinateItemResponse } from "../../../api/coordinates/TCoordinateItemResponse";
+import { TItemResponse } from "../../../api/shared/TItemResponse";
 import { CoordinateItemImages } from "../../baseParts/legacy/CoordinateItemImages";
 
 export const convertItemsToItemImagesProps = (
-  itemResponses: TCoordinateItemResponse[]
+  items: TItemResponse[]
 ): ComponentProps<typeof CoordinateItemImages> => {
-  const items = itemResponses.map((item) => {
-    return {
-      imagePaths: {
-        defaultPath: item.imagePaths.largeThumb,
-        expandedPath: item.imagePaths.large,
-      },
-      caption: item.cateSmallName,
-    };
-  });
-
   return {
-    items,
+    items: items.map((item) => {
+      return {
+        imagePaths: {
+          defaultPath: item.imagePaths.largeThumb,
+          expandedPath: item.imagePaths.large,
+        },
+        caption: item.categoryName,
+      };
+    }),
   };
 };
