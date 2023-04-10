@@ -1,3 +1,4 @@
+import { TChartItemsIndexResponse } from "../../../api/chartItems/TChartItemsIndexResponse";
 import { TItemResponse } from "../../../api/shared/TItemResponse";
 import { Button } from "../../../components/baseParts/Button";
 import { FooterWrapper } from "../../../components/baseParts/legacy/FooterWrapper";
@@ -5,7 +6,7 @@ import { Typography } from "../../../components/baseParts/legacy/Typography";
 import { SelectWrapper } from "../../../components/baseParts/wrapper/SelectWrapper";
 import { PurchaseItemCard } from "../../../components/pageParts/buyItem/PurchaseItemCard";
 
-type TSelectBuyItem = TItemResponse & {
+type TSelectBuyItem = TChartItemsIndexResponse & {
   readonly isSelected: boolean;
 };
 
@@ -24,12 +25,12 @@ export const BuyItemSelect = ({
   onSelectChartItems,
   onClickConfirm,
 }: TProps) => {
-  const isSelectable = (item: TSelectBuyItem) =>
+  const isSelectable = (item: TItemResponse) =>
     item.isForSale && !item.isPurchased;
 
-  const isAllSelectedDiscountAvailable = chartItems.every(
-    (item) => item.isForSale || item.isPurchased
-  );
+  const isAllSelectedDiscountAvailable = chartItems
+    .map((chartItems) => chartItems.itemInfo)
+    .every((item) => item.isForSale || item.isPurchased);
 
   return (
     <div className="text-center bg-clay">
@@ -39,7 +40,7 @@ export const BuyItemSelect = ({
         </div>
         <div>
           {chartItems.map((chartItem) =>
-            isSelectable(chartItem) ? (
+            isSelectable(chartItem.itemInfo) ? (
               <div
                 className="my-6"
                 onClick={() => onSelectChartItems(chartItem.id)}
@@ -50,18 +51,18 @@ export const BuyItemSelect = ({
                   <PurchaseItemCard
                     imagePaths={{
                       defaultPath:
-                        chartItem.imagePaths.largeThumb ??
-                        chartItem.imagePaths.large,
-                      expandedPath: chartItem.imagePaths.large,
+                        chartItem.itemInfo.imagePaths.largeThumb ??
+                        chartItem.itemInfo.imagePaths.large,
+                      expandedPath: chartItem.itemInfo.imagePaths.large,
                     }}
-                    brand={chartItem.brandName}
-                    category={chartItem.categoryName}
-                    color={chartItem.colorName}
-                    discountRate={chartItem.discountRate}
-                    point={chartItem.purchasePoint}
-                    discountedPrice={chartItem.discountedPrice}
-                    price={chartItem.price}
-                    rank={chartItem.rank}
+                    brand={chartItem.itemInfo.brandName}
+                    category={chartItem.itemInfo.categoryName}
+                    color={chartItem.itemInfo.colorName}
+                    discountRate={chartItem.itemInfo.discountRate}
+                    point={chartItem.itemInfo.purchasePoint}
+                    discountedPrice={chartItem.itemInfo.discountedPrice}
+                    price={chartItem.itemInfo.price}
+                    rank={chartItem.itemInfo.rank}
                   />
                 </SelectWrapper>
               </div>
@@ -70,17 +71,17 @@ export const BuyItemSelect = ({
                 <PurchaseItemCard
                   className="brightness-50 pointer-events-none"
                   imagePaths={{
-                    defaultPath: chartItem.imagePaths.large,
-                    expandedPath: chartItem.imagePaths.large,
+                    defaultPath: chartItem.itemInfo.imagePaths.large,
+                    expandedPath: chartItem.itemInfo.imagePaths.large,
                   }}
-                  brand={chartItem.brandName}
-                  category={chartItem.categoryName}
-                  color={chartItem.colorName}
-                  discountRate={chartItem.discountRate}
-                  point={chartItem.purchasePoint}
-                  discountedPrice={chartItem.discountedPrice}
-                  price={chartItem.price}
-                  rank={chartItem.rank}
+                  brand={chartItem.itemInfo.brandName}
+                  category={chartItem.itemInfo.categoryName}
+                  color={chartItem.itemInfo.colorName}
+                  discountRate={chartItem.itemInfo.discountRate}
+                  point={chartItem.itemInfo.purchasePoint}
+                  discountedPrice={chartItem.itemInfo.discountedPrice}
+                  price={chartItem.itemInfo.price}
+                  rank={chartItem.itemInfo.rank}
                 />
                 <Typography
                   className="absolute top-1/2 text-center w-full align-top -translate-y-1/2"
@@ -88,7 +89,7 @@ export const BuyItemSelect = ({
                   color="white"
                   weight="bold"
                 >
-                  {chartItem.isPurchased ? "購入済み" : "購入不可"}
+                  {chartItem.itemInfo.isPurchased ? "購入済み" : "購入不可"}
                 </Typography>
               </div>
             )
@@ -114,7 +115,9 @@ export const BuyItemSelect = ({
                       あと
                       {
                         chartItems.filter(
-                          (item) => isSelectable(item) && !item.isSelected
+                          (chartItem) =>
+                            isSelectable(chartItem.itemInfo) &&
+                            !chartItem.isSelected
                         ).length
                       }
                       アイテム選択で

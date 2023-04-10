@@ -2,6 +2,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ReactElement } from "react";
 import { BrowserRouter } from "react-router-dom";
+import { TChartItemsIndexResponse } from "../../../api/chartItems/TChartItemsIndexResponse";
 import { getChartItemIndexMock } from "../../../mocks/chartItems/getChartItemIndexMock";
 import { server } from "../../../mocks/server";
 import { BuyItemContainer } from "../../../pages/buyItem/BuyItemContainer";
@@ -29,30 +30,34 @@ const createChartItemIndexResponse = ({
   id: number;
   isPurchased: boolean;
   isForSale: boolean;
-}) => {
+}): TChartItemsIndexResponse => {
   return {
     id,
-    isPurchased,
-    isForSale,
-    brandName: "leeap original",
-    imagePaths: {
-      original:
-        "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_thumb_IMG_3977.jpeg",
-      large:
-        "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
-      largeThumb:
-        "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_thumb_IMG_3977.jpeg",
-      thumb:
-        "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
+    itemInfo: {
+      id: 111111,
+      isPurchased,
+      isForSale,
+      brandName: "leeap original",
+      imagePaths: {
+        original:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_thumb_IMG_3977.jpeg",
+        large:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
+        largeThumb:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_thumb_IMG_3977.jpeg",
+        thumb:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
+      },
+      categoryName: "ジャケット",
+      colorName: "ブラック",
+      price: 15000,
+      discountedPrice: ITEM_DISCOUNTED_PRICE,
+      purchasePoint: 864,
+      locationId: 1,
+      discountRate: 20,
+      rank: "A",
+      isTops: true,
     },
-    categoryName: "ジャケット",
-    colorName: "ブラック",
-    price: 15000,
-    discountedPrice: ITEM_DISCOUNTED_PRICE,
-    purchasePoint: 864,
-    locationId: 1,
-    discountRate: 20,
-    rank: "",
   };
 };
 

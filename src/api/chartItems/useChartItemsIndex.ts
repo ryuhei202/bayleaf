@@ -1,12 +1,12 @@
 import { useGetRequest } from "../useGetRequest";
-import { TChartItemsResponse } from "./TChartItemsIndexResponse";
+import { TChartItemsIndexResponse } from "./TChartItemsIndexResponse";
 
 type TArgs = {
   readonly chartId: number;
 };
 
 export const useChartItemsIndex = ({ chartId }: TArgs) => {
-  const { data, error } = useGetRequest<TChartItemsResponse>(
+  const { data, error } = useGetRequest<TChartItemsIndexResponse[]>(
     `charts/${chartId}/chart_items`
   );
   return {
