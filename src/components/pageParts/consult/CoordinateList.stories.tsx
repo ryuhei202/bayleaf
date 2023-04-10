@@ -23,6 +23,15 @@ const coordinates: TCoordinateResponse[] = [
     items: [
       {
         id: 111111,
+        isPurchased: false,
+        isForSale: true,
+        brandName: "leeap original",
+        price: 15000,
+        discountedPrice: 12000,
+        purchasePoint: 864,
+        locationId: null,
+        discountRate: 20,
+        rank: "A",
         isTops: false,
         categoryName: "チノパンツ",
         imagePaths: {
@@ -39,6 +48,15 @@ const coordinates: TCoordinateResponse[] = [
       },
       {
         id: 111111,
+        isPurchased: false,
+        isForSale: true,
+        brandName: "leeap original",
+        price: 15000,
+        discountedPrice: 12000,
+        purchasePoint: 864,
+        locationId: null,
+        discountRate: 20,
+        rank: "A",
         isTops: true,
         categoryName: "シャツ",
         imagePaths: {
@@ -55,6 +73,15 @@ const coordinates: TCoordinateResponse[] = [
       },
       {
         id: 111111,
+        isPurchased: false,
+        isForSale: true,
+        brandName: "leeap original",
+        price: 15000,
+        discountedPrice: 12000,
+        purchasePoint: 864,
+        locationId: null,
+        discountRate: 20,
+        rank: "A",
         isTops: true,
         categoryName: "ニット",
         imagePaths: {
@@ -71,6 +98,15 @@ const coordinates: TCoordinateResponse[] = [
       },
       {
         id: 111111,
+        isPurchased: false,
+        isForSale: true,
+        brandName: "leeap original",
+        price: 15000,
+        discountedPrice: 12000,
+        purchasePoint: 864,
+        locationId: null,
+        discountRate: 20,
+        rank: "A",
         isTops: true,
         categoryName: "裏起毛トレーナー",
         imagePaths: {

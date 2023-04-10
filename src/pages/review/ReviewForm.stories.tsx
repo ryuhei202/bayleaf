@@ -1,6 +1,4 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { TCoordinateItemResponse } from "../../api/coordinates/TCoordinateItemResponse";
-import { ITEM_TEST_IMAGE_URL } from "../../images/TestImageUrl";
 import { ReviewForm } from "./ReviewForm";
 
 export default {
@@ -13,22 +11,36 @@ const Template: ComponentStory<typeof ReviewForm> = (args) => (
 );
 
 export const Default = Template.bind({});
-const items: TCoordinateItemResponse[] = [...Array(4)].map(() => {
+const items = [...Array(4)].map(() => {
   return {
     id: 111111,
+    isPurchased: true,
+    isForSale: true,
+    brandName: "leeap original",
+    imagePaths: {
+      original:
+        "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_thumb_IMG_3977.jpeg",
+      large:
+        "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
+      largeThumb:
+        "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
+      thumb:
+        "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
+    },
+    categoryName: "ジャケット",
+    colorName: "ブラック",
+    price: 15000,
+    discountedPrice: 12000,
+    purchasePoint: 864,
+    locationId: 1,
+    discountRate: 20,
+    rank: "A",
     isTops: true,
-    cateSmallName: "シャツ",
-    imagePaths: ITEM_TEST_IMAGE_URL,
-    color: "白",
   };
 });
 
 Default.args = {
-  coordinate: {
-    id: 10,
-    isReviewed: false,
-    items,
-  },
+  items: items,
   reviewOptions: [
     { id: 1, name: "満足した" },
     { id: 2, name: "気になるところがあった" },
