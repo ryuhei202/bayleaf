@@ -7,7 +7,7 @@ type TProps = {
   category: string;
   color: string;
   discountRate: number;
-  point: number;
+  point?: number;
   discountedPrice: number;
   price: number;
   rank: string;
@@ -51,14 +51,16 @@ export const PurchaseItemCard = ({
             <span className="text-xs">({discountRate}OFF)</span>
           </Typography>
         </div>
-        <div>
-          <Typography className="text-left" color="gray" size="xs">
-            ポイント
-          </Typography>
-          <Typography className="leading-4 text-left" color="strong-gray">
-            {point}pt
-          </Typography>
-        </div>
+        {point && (
+          <div>
+            <Typography className="text-left" color="gray" size="xs">
+              ポイント
+            </Typography>
+            <Typography className="leading-4 text-left" color="strong-gray">
+              {point}pt
+            </Typography>
+          </div>
+        )}
         <div>
           <Typography className="text-left" color="gray" size="xs">
             ランク
