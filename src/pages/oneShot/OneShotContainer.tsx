@@ -7,6 +7,7 @@ import { AlertDialog } from "../../components/baseParts/dialogs/AlertDialog";
 import { CheckIcon } from "../../components/baseParts/icons/CheckIcon";
 import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { OneShotStartingConfirm } from "../../components/pageParts/oneShot/OneShotStartingConfirm";
+import { RankSelectingForm } from "../../components/pageParts/oneShot/RankSelectingForm";
 import { StartHearingPage } from "../../components/pageParts/oneShot/StartHearingPage";
 import { WearingDateForm } from "../../components/pageParts/oneShot/WearingDateForm";
 import { WelcomePage } from "../../components/pageParts/oneShot/WelcomePage";
@@ -25,7 +26,9 @@ type TProps = {
 
 export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
   const [step, setStep] =
-    useState<"welcome" | "dateSelecting" | "hearing" | "confirm">("welcome");
+    useState<"welcome" | "dateSelecting" | "hearing" | "rank" | "confirm">(
+      "welcome"
+    );
   const [wearingDate, setWearingDate] = useState<string>("");
   const [answeredHearings, setAnsweredHearings] = useState<AnsweredHearings>({
     forms: [],
@@ -33,6 +36,7 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
   const [nextFormId, setNextFormId] = useState<number | null>(null);
   const [isBackTransition, setIsBackTransition] = useState<boolean>(false);
   const [isPostComplete, setIsPostComplete] = useState(false);
+  const [isSelectableBRank, setIsSelectableBRank] = useState<boolean>(false);
   const {
     mutate,
     isLoading: isPostLoading,
@@ -59,7 +63,7 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
       forms: [...answeredHearings?.forms, answer],
     });
     if (nextFormIdArg === null) {
-      setStep("confirm");
+      setStep("rank");
     }
     setNextFormId(nextFormIdArg);
     setIsBackTransition(false);
@@ -71,6 +75,10 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
     setAnsweredHearings({ forms: newAnswers });
     setNextFormId(lastAnswerId ?? null);
     setIsBackTransition(true);
+  };
+
+  const handleRankSelect = (isSelectable: boolean) => {
+    setIsSelectableBRank(isSelectable);
   };
 
   const categorizeHearingAnswers = (): THearingAnswer => {
@@ -133,6 +141,19 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
           previousAnsweredHearing={answeredHearings.forms.slice(-1)[0]}
           isBackTransition={isBackTransition}
           member={memberData}
+          isAvoidFormAnswered={nextFormId === HEARING_FORM.AVOID_ITEM}
+        />
+      );
+    case "rank":
+      return (
+        <RankSelectingForm
+          isSelectableBRank={isSelectableBRank}
+          onSelect={handleRankSelect}
+          onSubmit={() => setStep("confirm")}
+          onCancel={() => {
+            handleHearingCancel();
+            setStep("hearing");
+          }}
         />
       );
     case "confirm":
@@ -142,6 +163,7 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
             confirmAnswer={categorizeHearingAnswers()}
             wearingDate={wearingDate}
             isPostLoading={isPostLoading}
+            isSelectableBRank={isSelectableBRank}
             onSubmit={() => {
               mutate(
                 {
@@ -152,6 +174,7 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
                       forms: answeredHearings.forms,
                     },
                   ],
+                  isSelectableBRank,
                 },
                 {
                   onSuccess: () => setIsPostComplete(true),
@@ -159,8 +182,7 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
               );
             }}
             onCancelForm={() => {
-              handleHearingCancel();
-              setStep("hearing");
+              setStep("rank");
             }}
           />
           <AlertDialog

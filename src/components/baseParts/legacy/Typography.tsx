@@ -6,6 +6,7 @@ type Props = {
   size?: "2xl" | "xl" | "sm" | "xs" | "base";
   color?: "primary" | "secondary" | "strong-gray" | "gray" | "red" | "white";
   weight?: "regular" | "medium" | "bold";
+  onClick?: () => void;
 };
 
 export const Typography = ({
@@ -14,6 +15,7 @@ export const Typography = ({
   size,
   color,
   weight,
+  onClick,
 }: Props) => {
   let classes: string[] = [];
 
@@ -73,7 +75,10 @@ export const Typography = ({
   classes.push();
 
   return (
-    <p className={`font-body ${classes.join(" ")} ${className ?? ""} `}>
+    <p
+      className={`font-body ${classes.join(" ")} ${className ?? ""} `}
+      onClick={onClick}
+    >
       {children}
     </p>
   );

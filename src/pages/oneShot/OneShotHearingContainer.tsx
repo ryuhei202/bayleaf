@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { HEARING_FORM } from "../../models/hearing/THearingForms";
 import { TAnsweredForm } from "../hearing/HearingContainer";
@@ -9,6 +8,7 @@ type TProps = {
   readonly nextFormId: number;
   readonly previousAnsweredHearing: TAnsweredForm;
   readonly isBackTransition: boolean;
+  readonly isAvoidFormAnswered: boolean;
   readonly onSubmitForm: (
     answer: TAnsweredForm,
     nextFormIdArg: number | null
@@ -21,27 +21,22 @@ export const OneShotHearingContainer = ({
   nextFormId,
   previousAnsweredHearing,
   isBackTransition,
+  isAvoidFormAnswered,
   onSubmitForm,
   onCancelForm,
 }: TProps) => {
-  const [isAvoidFormAnswered, setIsAvoidFormAnswered] = useState(false);
-
   const handleSubmitForm = (
     answer: TAnsweredForm,
     nextFormIdArg: number | null
   ) => {
     if (nextFormIdArg === null && !isAvoidFormAnswered) {
       onSubmitForm(answer, HEARING_FORM.AVOID_ITEM);
-      setIsAvoidFormAnswered(true);
     } else {
       onSubmitForm(answer, nextFormIdArg);
     }
   };
 
   const handleCancelForm = () => {
-    if (nextFormId === HEARING_FORM.AVOID_ITEM) {
-      setIsAvoidFormAnswered(false);
-    }
     onCancelForm();
   };
 
