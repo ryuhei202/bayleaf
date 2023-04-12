@@ -14,20 +14,9 @@ const Template: ComponentStory<typeof WelcomePage> = (args) => (
 );
 
 export const Default = Template.bind({});
-Default.args = {
-  serialCodesIndexData: [
-    {
-      serialCampaignId: 1,
-      discountPrice: 300,
-    },
-  ],
-};
+Default.args = {};
+
 export const FirstTimeOneShot = Template.bind({});
 FirstTimeOneShot.args = {
-  serialCodesIndexData: [
-    {
-      serialCampaignId: 224,
-      discountPrice: 2000,
-    },
-  ],
+  discountPrice: 2000,
 };
