@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { THearingAnswer } from "../../../models/hearing/THearingAnswer";
+import { OneShot } from "../../../models/shared/OneShot";
+import { withTax } from "../../../models/shared/Tax";
 import { ConfirmDialog } from "../../baseParts/dialogs/ConfirmDialog";
 import { FooterWrapper } from "../../baseParts/legacy/FooterWrapper";
 import { Page } from "../../baseParts/legacy/Page";
@@ -16,15 +18,19 @@ type TProps = {
   readonly isPostLoading: boolean;
   readonly onSubmit: () => void;
   readonly onCancelForm: () => void;
+  readonly discountPrice?: number;
 };
+
 export const OneShotStartingConfirm = ({
   confirmAnswer,
   wearingDate,
   isPostLoading,
   onSubmit,
   onCancelForm,
+  discountPrice,
 }: TProps) => {
   const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
+
   return (
     <Page>
       <div className="px-4 mb-10 min-h-[calc(100vh-190px)]">
@@ -68,7 +74,11 @@ export const OneShotStartingConfirm = ({
           ) : (
             <>
               <b>
-                支払金額：¥5478(税込)
+                支払金額：
+                {discountPrice
+                  ? `¥${withTax(OneShot.price.withoutTax - discountPrice)}`
+                  : `¥${OneShot.price.withTax}`}
+                (税込)
                 <br />
                 付与ポイント：300ポイント
               </b>

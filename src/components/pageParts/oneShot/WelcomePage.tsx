@@ -1,8 +1,9 @@
-import { TSerialCodesIndexResponse } from "../../../api/serialCodes/TSerialCodesIndexResponse";
 import FIRST_CLOTH from "../../../images/icons/cloths/1.svg";
 import THIRD_CLOTH from "../../../images/icons/cloths/3.svg";
 import FORTH_CLOTH from "../../../images/icons/cloths/4.svg";
 import DiagonalLineIcon from "../../../images/icons/diagonal-line.svg";
+import { FIRST_TIME_ONE_SHOT_CAMPAIGN } from "../../../models/shared/Campaign";
+
 import { OneShot } from "../../../models/shared/OneShot";
 import { withTax } from "../../../models/shared/Tax";
 
@@ -12,28 +13,11 @@ import { Typography } from "../../baseParts/legacy/Typography";
 import { ScheduleDiagram } from "./ScheduleDiagram";
 
 type TProps = {
-  readonly serialCodesIndexData: TSerialCodesIndexResponse[];
+  readonly discountPrice?: number;
   readonly onClickStart: () => void;
 };
 
-const campaignIndex = [
-  {
-    firstTimeOneShotSerialCampaignId: 224,
-    campaignWord: "初回キャンペーン!!",
-  },
-];
-
-export const WelcomePage = ({ serialCodesIndexData, onClickStart }: TProps) => {
-  const targetCampaign = serialCodesIndexData.find(
-    (campaign) =>
-      campaign.mSerialCampaignId ===
-      campaignIndex[0].firstTimeOneShotSerialCampaignId
-  );
-
-  const discountPrice = targetCampaign
-    ? targetCampaign.discountPrice
-    : undefined;
-
+export const WelcomePage = ({ discountPrice, onClickStart }: TProps) => {
   return (
     <Page className="flex flex-col h-full min-h-screen justify-between items-center text-themeGray pt-8 px-3 pb-3">
       <Typography size="2xl" className="text-center mb-8">
@@ -54,7 +38,7 @@ export const WelcomePage = ({ serialCodesIndexData, onClickStart }: TProps) => {
               <span className="font-bold">
                 ↓
                 <span className="text-red text-xs ml-2">
-                  {campaignIndex[0].campaignWord}
+                  {FIRST_TIME_ONE_SHOT_CAMPAIGN.WORD}
                 </span>
               </span>
             </div>
