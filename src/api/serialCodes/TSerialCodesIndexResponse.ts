@@ -1,4 +1,4 @@
 export type TSerialCodesIndexResponse = {
-  readonly serialCampaignId: number;
+  readonly mSerialCampaignId: number;
   readonly discountPrice: number;
 };
