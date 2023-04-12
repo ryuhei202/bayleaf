@@ -2,7 +2,8 @@ import FIRST_CLOTH from "../../../images/icons/cloths/1.svg";
 import THIRD_CLOTH from "../../../images/icons/cloths/3.svg";
 import FORTH_CLOTH from "../../../images/icons/cloths/4.svg";
 import DiagonalLineIcon from "../../../images/icons/diagonal-line.svg";
-import { campaignIndex } from "../../../models/shared/Campaign";
+import { FIRST_TIME_ONE_SHOT_CAMPAIGN } from "../../../models/shared/Campaign";
+
 import { OneShot } from "../../../models/shared/OneShot";
 import { withTax } from "../../../models/shared/Tax";
 
@@ -12,7 +13,7 @@ import { Typography } from "../../baseParts/legacy/Typography";
 import { ScheduleDiagram } from "./ScheduleDiagram";
 
 type TProps = {
-  readonly discountPrice: number | undefined;
+  readonly discountPrice?: number;
   readonly onClickStart: () => void;
 };
 
@@ -37,7 +38,7 @@ export const WelcomePage = ({ discountPrice, onClickStart }: TProps) => {
               <span className="font-bold">
                 ↓
                 <span className="text-red text-xs ml-2">
-                  {campaignIndex[0].campaignWord}
+                  {FIRST_TIME_ONE_SHOT_CAMPAIGN.WORD}
                 </span>
               </span>
             </div>
