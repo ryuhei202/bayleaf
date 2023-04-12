@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useChartCreate } from "../../api/charts/useChartCreate";
 import { TCategorizedForm } from "../../api/hearings/TCategorizedForm";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
-import { useMembersIndex } from "../../api/members/useMembersIndex";
 import { useSerialCodesIndex } from "../../api/serialCodes/useSerialCodesIndex";
 import { AlertDialog } from "../../components/baseParts/dialogs/AlertDialog";
 import { CheckIcon } from "../../components/baseParts/icons/CheckIcon";
@@ -18,7 +17,8 @@ import {
   HEARING_FORM,
   sortHearingConfirm,
 } from "../../models/hearing/THearingForms";
-import { campaignIndex } from "../../models/shared/Campaign";
+
+import { FIRST_TIME_ONE_SHOT_CAMPAIGN } from "../../models/shared/Campaign";
 import { AnsweredHearings, TAnsweredForm } from "../hearing/HearingContainer";
 import { OneShotHearingContainer } from "./OneShotHearingContainer";
 
@@ -43,11 +43,9 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
     error: postError,
   } = useChartCreate();
 
-  const { data: membersData, error: membersError } = useMembersIndex();
-
   const { data: serialCodesIndexData, error: serialCodesIndexError } =
     useSerialCodesIndex({
-      memberId: membersData ? membersData[0].id : undefined,
+      memberId: memberData.id,
     });
 
   const handleClickStart = () => {
@@ -118,17 +116,12 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
 
   if (postError) return <ErrorPage message={postError.message} />;
 
-  if (membersError) return <ErrorPage message={membersError.message} />;
-  if (!membersData) return <LoaderPage />;
-
   if (serialCodesIndexError)
     return <ErrorPage message={serialCodesIndexError.message} />;
   if (!serialCodesIndexData) return <LoaderPage />;
 
   const targetCampaign = serialCodesIndexData.find(
-    (campaign) =>
-      campaign.mSerialCampaignId ===
-      campaignIndex[0].firstTimeOneShotSerialCampaignId
+    (campaign) => campaign.mSerialCampaignId === FIRST_TIME_ONE_SHOT_CAMPAIGN.ID
   );
 
   const discountPrice = targetCampaign
