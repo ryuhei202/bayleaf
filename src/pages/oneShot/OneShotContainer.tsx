@@ -39,6 +39,13 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
     error: postError,
   } = useChartCreate();
 
+  const { data: membersData, error: membersError } = useMembersIndex();
+
+  const { data: serialCodesIndexData, error: serialCodesIndexError } =
+    useSerialCodesIndex({
+      memberId: membersData ? membersData[0].id : undefined,
+    });
+
   const handleClickStart = () => {
     setStep("dateSelecting");
   };
@@ -106,6 +113,13 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
   };
 
   if (postError) return <ErrorPage message={postError.message} />;
+
+  if (membersError) return <ErrorPage message={membersError.message} />;
+  if (!membersData) return <LoaderPage />;
+
+  if (serialCodesIndexError)
+    return <ErrorPage message={serialCodesIndexError.message} />;
+  if (!serialCodesIndexData) return <LoaderPage />;
 
   switch (step) {
     case "welcome":
