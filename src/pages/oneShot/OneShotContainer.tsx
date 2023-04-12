@@ -3,18 +3,22 @@ import { useState } from "react";
 import { useChartCreate } from "../../api/charts/useChartCreate";
 import { TCategorizedForm } from "../../api/hearings/TCategorizedForm";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
+import { useMembersIndex } from "../../api/members/useMembersIndex";
+import { useSerialCodesIndex } from "../../api/serialCodes/useSerialCodesIndex";
 import { AlertDialog } from "../../components/baseParts/dialogs/AlertDialog";
 import { CheckIcon } from "../../components/baseParts/icons/CheckIcon";
 import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
+import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { OneShotStartingConfirm } from "../../components/pageParts/oneShot/OneShotStartingConfirm";
 import { StartHearingPage } from "../../components/pageParts/oneShot/StartHearingPage";
 import { WearingDateForm } from "../../components/pageParts/oneShot/WearingDateForm";
-import { WelcomePageFetcher } from "../../components/pageParts/oneShot/WelcomePageFetcher";
+import { WelcomePage } from "../../components/pageParts/oneShot/WelcomePage";
 import { THearingAnswer } from "../../models/hearing/THearingAnswer";
 import {
   HEARING_FORM,
   sortHearingConfirm,
 } from "../../models/hearing/THearingForms";
+import { campaignIndex } from "../../models/shared/Campaign";
 import { AnsweredHearings, TAnsweredForm } from "../hearing/HearingContainer";
 import { OneShotHearingContainer } from "./OneShotHearingContainer";
 
@@ -121,9 +125,24 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
     return <ErrorPage message={serialCodesIndexError.message} />;
   if (!serialCodesIndexData) return <LoaderPage />;
 
+  const targetCampaign = serialCodesIndexData.find(
+    (campaign) =>
+      campaign.mSerialCampaignId ===
+      campaignIndex[0].firstTimeOneShotSerialCampaignId
+  );
+
+  const discountPrice = targetCampaign
+    ? targetCampaign.discountPrice
+    : undefined;
+
   switch (step) {
     case "welcome":
-      return <WelcomePageFetcher onClickStart={handleClickStart} />;
+      return (
+        <WelcomePage
+          discountPrice={discountPrice}
+          onClickStart={handleClickStart}
+        />
+      );
     case "dateSelecting":
       return (
         <WearingDateForm
@@ -176,6 +195,7 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
               handleHearingCancel();
               setStep("hearing");
             }}
+            discountPrice={discountPrice}
           />
           <AlertDialog
             open={isPostComplete}
