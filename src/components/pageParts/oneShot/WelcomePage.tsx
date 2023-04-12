@@ -26,7 +26,7 @@ const campaignIndex = [
 export const WelcomePage = ({ serialCodesIndexData, onClickStart }: TProps) => {
   const targetCampaign = serialCodesIndexData.find(
     (campaign) =>
-      campaign.serialCampaignId ===
+      campaign.mSerialCampaignId ===
       campaignIndex[0].firstTimeOneShotSerialCampaignId
   );
 
