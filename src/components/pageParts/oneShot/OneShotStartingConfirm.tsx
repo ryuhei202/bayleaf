@@ -18,7 +18,7 @@ type TProps = {
   readonly isPostLoading: boolean;
   readonly onSubmit: () => void;
   readonly onCancelForm: () => void;
-  readonly discountPrice: number | undefined;
+  readonly discountPrice?: number;
 };
 
 export const OneShotStartingConfirm = ({
