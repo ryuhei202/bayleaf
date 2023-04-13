@@ -3,9 +3,11 @@ import { useState } from "react";
 import { useChartCreate } from "../../api/charts/useChartCreate";
 import { TCategorizedForm } from "../../api/hearings/TCategorizedForm";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
+import { useSerialCodesIndex } from "../../api/serialCodes/useSerialCodesIndex";
 import { AlertDialog } from "../../components/baseParts/dialogs/AlertDialog";
 import { CheckIcon } from "../../components/baseParts/icons/CheckIcon";
 import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
+import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { OneShotStartingConfirm } from "../../components/pageParts/oneShot/OneShotStartingConfirm";
 import { RankSelectingForm } from "../../components/pageParts/oneShot/RankSelectingForm";
 import { StartHearingPage } from "../../components/pageParts/oneShot/StartHearingPage";
@@ -16,6 +18,8 @@ import {
   HEARING_FORM,
   sortHearingConfirm,
 } from "../../models/hearing/THearingForms";
+
+import { FIRST_TIME_ONE_SHOT_CAMPAIGN } from "../../models/shared/Campaign";
 import { AnsweredHearings, TAnsweredForm } from "../hearing/HearingContainer";
 import { OneShotHearingContainer } from "./OneShotHearingContainer";
 
@@ -42,6 +46,11 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
     isLoading: isPostLoading,
     error: postError,
   } = useChartCreate();
+
+  const { data: serialCodesIndexData, error: serialCodesIndexError } =
+    useSerialCodesIndex({
+      memberId: memberData.id,
+    });
 
   const handleClickStart = () => {
     setStep("dateSelecting");
@@ -115,9 +124,26 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
 
   if (postError) return <ErrorPage message={postError.message} />;
 
+  if (serialCodesIndexError)
+    return <ErrorPage message={serialCodesIndexError.message} />;
+  if (!serialCodesIndexData) return <LoaderPage />;
+
+  const targetCampaign = serialCodesIndexData.find(
+    (campaign) => campaign.mSerialCampaignId === FIRST_TIME_ONE_SHOT_CAMPAIGN.ID
+  );
+
+  const discountPrice = targetCampaign
+    ? targetCampaign.discountPrice
+    : undefined;
+
   switch (step) {
     case "welcome":
-      return <WelcomePage onClickStart={handleClickStart} />;
+      return (
+        <WelcomePage
+          discountPrice={discountPrice}
+          onClickStart={handleClickStart}
+        />
+      );
     case "dateSelecting":
       return (
         <WearingDateForm
@@ -184,6 +210,7 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
             onCancelForm={() => {
               setStep("rank");
             }}
+            discountPrice={discountPrice}
           />
           <AlertDialog
             open={isPostComplete}

@@ -104,3 +104,11 @@ Default.args = {
   wearingDate: "2023-1-19",
   isPostLoading: false,
 };
+
+export const FirstTimeOneShot = Template.bind({});
+FirstTimeOneShot.args = {
+  confirmAnswer,
+  wearingDate: "2023-1-19",
+  isPostLoading: false,
+  discountPrice: 2000,
+};
