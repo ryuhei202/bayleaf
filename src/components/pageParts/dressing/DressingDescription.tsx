@@ -32,7 +32,7 @@ export const DressingDescription = ({
                 expandedPath: item.imagePaths.original,
               }}
               className="h-fit"
-            ></PurchaseItemCard>
+            />
           );
         })}
       </div>
