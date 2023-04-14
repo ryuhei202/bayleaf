@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
+import { CompleteButton } from "../../../components/baseParts/legacy/CompleteButton";
 import { ExpandableImage } from "../../../components/baseParts/legacy/images/ExpandableImage";
 import { TextAreaAlt } from "../../../components/baseParts/legacy/inputs/TextAreaAlt";
 import { Page } from "../../../components/baseParts/legacy/Page";
-import { CompleteButton } from "../../../components/baseParts/legacy/CompleteButton";
 import { Typography } from "../../../components/baseParts/legacy/Typography";
 import { TConsultingItem } from "../../../models/consult/TConsultingItem";
 
@@ -37,7 +37,7 @@ export const DesignDetailForm = ({
               color="primary"
               weight="medium"
             >
-              {`${selectedItem.cateSmallName}／${selectedItem.color}`}
+              {`${selectedItem.categoryName}／${selectedItem.colorName}`}
             </Typography>
           </div>
           <Typography className="mt-5">気になる点を教えてください</Typography>

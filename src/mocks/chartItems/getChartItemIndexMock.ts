@@ -1,5 +1,5 @@
 import { rest } from "msw";
-import { TChartItemsIndexResponse } from "./../../api/chartItems/useChartItemsIndex";
+import { TChartItemsIndexResponse } from "../../api/chartItems/TChartItemsIndexResponse";
 
 type TProps = {
   status: number;

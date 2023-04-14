@@ -16,7 +16,7 @@ DefaultValues.args = {
     {
       id: 1,
       isPurchased: true,
-      isBuyable: true,
+      isForSale: true,
       brandName: "leeap original",
       imagePaths: {
         original:
@@ -32,10 +32,11 @@ DefaultValues.args = {
       colorName: "ブラック",
       price: 15000,
       discountedPrice: 12000,
-      point: 864,
+      purchasePoint: 864,
       locationId: 1,
       discountRate: 20,
       rank: "A",
+      isTops: true,
     },
   ],
   totalPrice: 42900,
@@ -51,7 +52,7 @@ AllSelected.args = {
     {
       id: 1,
       isPurchased: true,
-      isBuyable: true,
+      isForSale: true,
       brandName: "leeap original",
       imagePaths: {
         original:
@@ -67,10 +68,11 @@ AllSelected.args = {
       colorName: "ブラック",
       price: 15000,
       discountedPrice: 12000,
-      point: 864,
+      purchasePoint: 864,
       locationId: 1,
       discountRate: 20,
       rank: "A",
+      isTops: true,
     },
   ],
   totalPrice: 42900,

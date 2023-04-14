@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { TCoordinateResponse } from "../../api/coordinates/TCoordinateResponse";
 import { useCoordinateIndex } from "../../api/coordinates/useCoordinateIndex";
 import { Typography } from "../../components/baseParts/legacy/Typography";

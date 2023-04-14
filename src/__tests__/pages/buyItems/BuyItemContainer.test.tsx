@@ -2,6 +2,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ReactElement } from "react";
 import { BrowserRouter } from "react-router-dom";
+import { TChartItemsIndexResponse } from "../../../api/chartItems/TChartItemsIndexResponse";
 import { getChartItemIndexMock } from "../../../mocks/chartItems/getChartItemIndexMock";
 import { server } from "../../../mocks/server";
 import { BuyItemContainer } from "../../../pages/buyItem/BuyItemContainer";
@@ -24,34 +25,39 @@ const ITEM_DISCOUNTED_PRICE = 12000;
 const createChartItemIndexResponse = ({
   id,
   isPurchased,
-  isBuyable,
+  isForSale,
 }: {
   id: number;
   isPurchased: boolean;
-  isBuyable: boolean;
-}) => {
+  isForSale: boolean;
+}): TChartItemsIndexResponse => {
   return {
     id,
-    isPurchased,
-    isBuyable,
-    brandName: "leeap original",
-    imagePaths: {
-      original:
-        "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_thumb_IMG_3977.jpeg",
-      large:
-        "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
-      largeThumb:
-        "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_thumb_IMG_3977.jpeg",
-      thumb:
-        "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
+    itemInfo: {
+      id: 111111,
+      isPurchased,
+      isForSale,
+      brandName: "leeap original",
+      imagePaths: {
+        original:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_thumb_IMG_3977.jpeg",
+        large:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
+        largeThumb:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_thumb_IMG_3977.jpeg",
+        thumb:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
+      },
+      categoryName: "ジャケット",
+      colorName: "ブラック",
+      price: 15000,
+      discountedPrice: ITEM_DISCOUNTED_PRICE,
+      purchasePoint: 864,
+      locationId: 1,
+      discountRate: 20,
+      rank: "A",
+      isTops: true,
     },
-    categoryName: "ジャケット",
-    colorName: "ブラック",
-    price: 15000,
-    discountedPrice: ITEM_DISCOUNTED_PRICE,
-    point: 864,
-    locationId: 1,
-    discountRate: 20,
   };
 };
 
@@ -68,17 +74,17 @@ describe("BuyItemContainer.tsx", () => {
           createChartItemIndexResponse({
             id: 1,
             isPurchased: false,
-            isBuyable: true,
+            isForSale: true,
           }),
           createChartItemIndexResponse({
             id: 2,
             isPurchased: false,
-            isBuyable: true,
+            isForSale: true,
           }),
           createChartItemIndexResponse({
             id: 3,
             isPurchased: false,
-            isBuyable: true,
+            isForSale: true,
           }),
         ],
       })
@@ -107,17 +113,17 @@ describe("BuyItemContainer.tsx", () => {
           createChartItemIndexResponse({
             id: 1,
             isPurchased: false,
-            isBuyable: true,
+            isForSale: true,
           }),
           createChartItemIndexResponse({
             id: 2,
             isPurchased: false,
-            isBuyable: true,
+            isForSale: true,
           }),
           createChartItemIndexResponse({
             id: 3,
             isPurchased: false,
-            isBuyable: true,
+            isForSale: true,
           }),
         ],
       })
@@ -159,17 +165,17 @@ describe("BuyItemContainer.tsx", () => {
           createChartItemIndexResponse({
             id: 1,
             isPurchased: false,
-            isBuyable: true,
+            isForSale: true,
           }),
           createChartItemIndexResponse({
             id: 2,
             isPurchased: false,
-            isBuyable: true,
+            isForSale: true,
           }),
           createChartItemIndexResponse({
             id: 3,
             isPurchased: false,
-            isBuyable: true,
+            isForSale: true,
           }),
         ],
       })
@@ -218,17 +224,17 @@ describe("BuyItemContainer.tsx", () => {
           createChartItemIndexResponse({
             id: 1,
             isPurchased: true,
-            isBuyable: true,
+            isForSale: true,
           }),
           createChartItemIndexResponse({
             id: 2,
             isPurchased: false,
-            isBuyable: true,
+            isForSale: true,
           }),
           createChartItemIndexResponse({
             id: 3,
             isPurchased: false,
-            isBuyable: true,
+            isForSale: true,
           }),
         ],
       })
@@ -257,17 +263,17 @@ describe("BuyItemContainer.tsx", () => {
           createChartItemIndexResponse({
             id: 1,
             isPurchased: true,
-            isBuyable: true,
+            isForSale: true,
           }),
           createChartItemIndexResponse({
             id: 2,
             isPurchased: false,
-            isBuyable: true,
+            isForSale: true,
           }),
           createChartItemIndexResponse({
             id: 3,
             isPurchased: false,
-            isBuyable: true,
+            isForSale: true,
           }),
         ],
       })
@@ -309,17 +315,17 @@ describe("BuyItemContainer.tsx", () => {
           createChartItemIndexResponse({
             id: 1,
             isPurchased: true,
-            isBuyable: true,
+            isForSale: true,
           }),
           createChartItemIndexResponse({
             id: 2,
             isPurchased: false,
-            isBuyable: true,
+            isForSale: true,
           }),
           createChartItemIndexResponse({
             id: 3,
             isPurchased: false,
-            isBuyable: true,
+            isForSale: true,
           }),
         ],
       })
@@ -367,17 +373,17 @@ describe("BuyItemContainer.tsx", () => {
           createChartItemIndexResponse({
             id: 1,
             isPurchased: false,
-            isBuyable: false,
+            isForSale: false,
           }),
           createChartItemIndexResponse({
             id: 2,
             isPurchased: false,
-            isBuyable: true,
+            isForSale: true,
           }),
           createChartItemIndexResponse({
             id: 3,
             isPurchased: false,
-            isBuyable: true,
+            isForSale: true,
           }),
         ],
       })

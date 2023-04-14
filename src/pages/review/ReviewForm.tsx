@@ -1,5 +1,5 @@
-import { TCoordinateResponse } from "../../api/coordinates/TCoordinateResponse";
 import { TReviewOptionResponse } from "../../api/reviews/TReviewOptionResponse";
+import { TItemResponse } from "../../api/shared/TItemResponse";
 import { TSimplifiedHearingShowResponse } from "../../api/simplifiedHearings/TSimplifiedHearingShowResponse";
 import { Button } from "../../components/baseParts/legacy/Button";
 import { CoordinateItemImages } from "../../components/baseParts/legacy/CoordinateItemImages";
@@ -9,14 +9,14 @@ import { convertItemsToItemImagesProps } from "../../components/pageParts/review
 import { SimpifiedHearing } from "../../components/resourceParts/simplifiedHearing/SimpifiedHearing";
 
 type TProps = {
-  readonly coordinate: TCoordinateResponse;
+  readonly items: TItemResponse[];
   readonly reviewOptions: TReviewOptionResponse[];
   readonly simplifiedHearing: TSimplifiedHearingShowResponse;
   readonly onSubmit: (choicedReviewOptionId: number) => void;
 };
 
 export const ReviewForm = ({
-  coordinate,
+  items,
   reviewOptions,
   simplifiedHearing,
   onSubmit,
@@ -33,9 +33,7 @@ export const ReviewForm = ({
             }
             className="mb-16"
           />
-          <CoordinateItemImages
-            {...convertItemsToItemImagesProps(coordinate.items)}
-          />
+          <CoordinateItemImages {...convertItemsToItemImagesProps(items)} />
         </div>
         {simplifiedHearing && (
           <SimpifiedHearing
