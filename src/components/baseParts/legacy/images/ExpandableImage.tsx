@@ -26,7 +26,7 @@ export const ExpandableImage = ({
   };
 
   return (
-    <div className={`h-full ${className ?? ""}`}>
+    <div className={`${className ?? ""}`}>
       <ImageAlt
         imageSrc={defaultImageSrc}
         onClick={handleClickDefaultImage}
