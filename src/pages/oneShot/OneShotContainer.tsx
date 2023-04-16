@@ -136,12 +136,15 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
     ? targetCampaign.discountPrice
     : undefined;
 
+  const point = targetCampaign ? targetCampaign.additionalPoint : undefined;
+
   switch (step) {
     case "welcome":
       return (
         <WelcomePage
           discountPrice={discountPrice}
           onClickStart={handleClickStart}
+          point={point}
         />
       );
     case "dateSelecting":
@@ -211,6 +214,7 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
               setStep("rank");
             }}
             discountPrice={discountPrice}
+            point={point}
           />
           <AlertDialog
             open={isPostComplete}
