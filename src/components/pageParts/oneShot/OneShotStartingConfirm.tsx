@@ -20,6 +20,7 @@ type TProps = {
   readonly onSubmit: () => void;
   readonly onCancelForm: () => void;
   readonly discountPrice?: number;
+  readonly point?: number;
 };
 
 export const OneShotStartingConfirm = ({
@@ -30,6 +31,7 @@ export const OneShotStartingConfirm = ({
   onSubmit,
   onCancelForm,
   discountPrice,
+  point,
 }: TProps) => {
   const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
 
@@ -90,7 +92,7 @@ export const OneShotStartingConfirm = ({
                   : `¥${OneShot.price.withTax}`}
                 (税込)
                 <br />
-                付与ポイント：300ポイント
+                付与ポイント：{point ?? 300}ポイント
               </b>
               <br />
               <br />
