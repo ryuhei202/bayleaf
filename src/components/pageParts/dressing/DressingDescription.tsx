@@ -16,7 +16,7 @@ export const DressingDescription = ({
   coordinateItems,
 }: TProps) => {
   return (
-    <div className="mb-16">
+    <div>
       <Typography size="xl">コーデの説明</Typography>
       <div className="border-[1px] border-gray my-5" />
       <div className="my-5">
@@ -31,7 +31,8 @@ export const DressingDescription = ({
                 defaultPath: item.imagePaths.largeThumb,
                 expandedPath: item.imagePaths.original,
               }}
-              className="h-fit"
+              dense
+              className="mb-2"
             />
           );
         })}
