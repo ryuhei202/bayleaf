@@ -22,7 +22,7 @@ export const DressingChangeItem = ({ changeItems }: TProps) => {
       <Typography size="xs" color="strong-gray" className="mt-2 ml-2">
         ※利用したいシーンに合うアイテムでありながら、別のコーデとして楽しめるアイテムです！
       </Typography>
-      <div className="my-5">
+      <div className="my-5 space-y-2">
         {changeItems.map((item) => (
           <PurchaseItemCard
             {...item}
