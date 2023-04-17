@@ -5,24 +5,28 @@ type TProps = {
   imagePaths: { defaultPath: string; expandedPath: string };
   children: ReactNode;
   className?: string;
+  dense?: boolean;
 };
 
-export const WideItemCard = ({ imagePaths, children, className }: TProps) => {
+export const WideItemCard = ({
+  imagePaths,
+  children,
+  className,
+  dense,
+}: TProps) => {
   return (
     <div
-      className={`flex justify-evenly gap-1 min-h-[230px] ${className ?? ""}`}
+      className={`bg-white rounded-md w-full text-center flex space-x-2 ${
+        dense ? "py-2" : "py-5"
+      } ${className ?? ""}`}
     >
-      <div className="p-5 bg-white rounded-md w-full text-center grid grid-cols-2 gap-5">
-        <div className="flex flex-col justify-around text-center">
-          <ExpandableImage
-            className="h-fit"
-            defaultImageSrc={imagePaths.defaultPath}
-            ExpandedImageSrc={imagePaths.expandedPath}
-            defaultImageClassName="max-w-[80%]"
-          />
-        </div>
-        {children}
-      </div>
+      <ExpandableImage
+        defaultImageSrc={imagePaths.defaultPath}
+        ExpandedImageSrc={imagePaths.expandedPath}
+        defaultImageClassName="m-auto h-32"
+        className="w-[50%] my-auto"
+      />
+      {children}
     </div>
   );
 };

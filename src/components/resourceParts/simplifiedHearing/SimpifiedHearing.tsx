@@ -14,7 +14,7 @@ export const SimpifiedHearing = ({ target, scene, impression }: TProps) => {
   if (target === "") return <></>;
 
   return (
-    <>
+    <div>
       <Typography size="xl">利用シーン</Typography>
       <div className="border-[1px] border-gray my-5" />
       <div className=" m-5 border-2 border-dashed border-themeGray">
@@ -40,6 +40,6 @@ export const SimpifiedHearing = ({ target, scene, impression }: TProps) => {
           );
         })}
       </div>
-    </>
+    </div>
   );
 };

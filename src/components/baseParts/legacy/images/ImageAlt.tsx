@@ -6,15 +6,13 @@ type TProps = {
 
 export const ImageAlt = ({ imageSrc, className, onClick }: TProps) => {
   return (
-    <div className="h-full">
-      <img
-        src={imageSrc}
-        className={`rounded-md object-contain max-h-full max-w-full w-auto h-auto m-auto ${
-          className ?? ""
-        }`}
-        onClick={onClick}
-        alt=""
-      />
-    </div>
+    <img
+      src={imageSrc}
+      className={`rounded-md max-h-full max-w-full w-auto h-auto ${
+        className ?? ""
+      }`}
+      onClick={onClick}
+      alt=""
+    />
   );
 };

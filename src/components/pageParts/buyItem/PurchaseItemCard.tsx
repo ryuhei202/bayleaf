@@ -12,6 +12,7 @@ type TProps = {
   price: number;
   rank: string;
   className?: string;
+  dense?: boolean;
 };
 
 export const PurchaseItemCard = ({
@@ -25,10 +26,11 @@ export const PurchaseItemCard = ({
   price,
   rank,
   className,
+  dense,
 }: TProps) => {
   return (
-    <WideItemCard imagePaths={imagePaths} className={className}>
-      <div className="h-full flex flex-col justify-around">
+    <WideItemCard imagePaths={imagePaths} className={className} dense>
+      <div className="h-fit flex flex-col justify-around space-y-1">
         <div>
           <Typography className="text-left" color="strong-gray" size="xl">
             {brand}
