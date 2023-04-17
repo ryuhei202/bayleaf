@@ -14,3 +14,9 @@ const Template: ComponentStory<typeof WelcomePage> = (args) => (
 );
 
 export const Default = Template.bind({});
+Default.args = {};
+
+export const FirstTimeOneShot = Template.bind({});
+FirstTimeOneShot.args = {
+  discountPrice: 2000,
+};
