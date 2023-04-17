@@ -12,7 +12,6 @@ type TProps = {
   price: number;
   rank: string;
   className?: string;
-  dense?: boolean;
 };
 
 export const PurchaseItemCard = ({
@@ -26,11 +25,10 @@ export const PurchaseItemCard = ({
   price,
   rank,
   className,
-  dense,
 }: TProps) => {
   return (
-    <WideItemCard imagePaths={imagePaths} className={className} dense>
-      <div className="h-fit flex flex-col justify-around space-y-1">
+    <WideItemCard imagePaths={imagePaths} className={className}>
+      <div className="h-fit w-full flex flex-col justify-around space-y-2">
         <div>
           <Typography className="text-left" color="strong-gray" size="xl">
             {brand}
@@ -44,13 +42,14 @@ export const PurchaseItemCard = ({
             価格
           </Typography>
 
-          <Typography className="line-through text-left" color="strong-gray">
-            ￥{price.toLocaleString()}
-          </Typography>
-          <Typography className="leading-3 text-left" color="red">
-            ￥{discountedPrice.toLocaleString()}
-            <br></br>
-            <span className="text-xs">({discountRate}OFF)</span>
+          <Typography className="text-left">
+            <Typography isInline className="line-through" color="strong-gray">
+              ￥{price.toLocaleString()}
+            </Typography>
+            <Typography isInline className="leading-3" color="red">
+              ￥{discountedPrice.toLocaleString()}
+              <span className="text-xs">({discountRate}OFF)</span>
+            </Typography>
           </Typography>
         </div>
         {point && (

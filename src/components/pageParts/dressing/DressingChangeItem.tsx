@@ -6,15 +6,6 @@ type TProps = {
   readonly changeItems: TItemResponse[];
 };
 export const DressingChangeItem = ({ changeItems }: TProps) => {
-  const items = changeItems.map((item) => {
-    return {
-      imagePaths: {
-        defaultPath: item.imagePaths.largeThumb,
-        expandedPath: item.imagePaths.large,
-      },
-      caption: `${item.categoryName} / ${item.colorName}`,
-    };
-  });
   return (
     <div className="mb-16">
       <Typography size="xl">チェンジアイテム</Typography>

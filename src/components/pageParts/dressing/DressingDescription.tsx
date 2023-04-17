@@ -31,7 +31,6 @@ export const DressingDescription = ({
                 defaultPath: item.imagePaths.largeThumb,
                 expandedPath: item.imagePaths.original,
               }}
-              dense
               className="mb-2"
             />
           );
