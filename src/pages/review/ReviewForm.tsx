@@ -1,5 +1,5 @@
-import { TCoordinateResponse } from "../../api/coordinates/TCoordinateResponse";
 import { TReviewOptionResponse } from "../../api/reviews/TReviewOptionResponse";
+import { TItemResponse } from "../../api/shared/TItemResponse";
 import { TSimplifiedHearingShowResponse } from "../../api/simplifiedHearings/TSimplifiedHearingShowResponse";
 import { Button } from "../../components/baseParts/legacy/Button";
 import { CoordinateItemImages } from "../../components/baseParts/legacy/CoordinateItemImages";
@@ -9,14 +9,14 @@ import { convertItemsToItemImagesProps } from "../../components/pageParts/review
 import { SimpifiedHearing } from "../../components/resourceParts/simplifiedHearing/SimpifiedHearing";
 
 type TProps = {
-  readonly coordinate: TCoordinateResponse;
+  readonly items: TItemResponse[];
   readonly reviewOptions: TReviewOptionResponse[];
   readonly simplifiedHearing: TSimplifiedHearingShowResponse;
   readonly onSubmit: (choicedReviewOptionId: number) => void;
 };
 
 export const ReviewForm = ({
-  coordinate,
+  items,
   reviewOptions,
   simplifiedHearing,
   onSubmit,
@@ -24,26 +24,24 @@ export const ReviewForm = ({
   return (
     <Page>
       <div className="flex flex-col justify-between h-full">
-        <div className="px-5">
+        <div className="px-5 mb-8">
           <PageHeader
             title={
               <>
                 今回のコーデはお使いの場所でご利用して、ご満足いただけましたでしょうか?
               </>
             }
-            className="mb-16"
+            className="mb-12"
           />
-          <CoordinateItemImages
-            {...convertItemsToItemImagesProps(coordinate.items)}
-          />
+          {simplifiedHearing && (
+            <SimpifiedHearing
+              target={simplifiedHearing.target}
+              scene={simplifiedHearing.scene}
+              impression={simplifiedHearing.impression}
+            />
+          )}
+          <CoordinateItemImages {...convertItemsToItemImagesProps(items)} />
         </div>
-        {simplifiedHearing && (
-          <SimpifiedHearing
-            target={simplifiedHearing.target}
-            scene={simplifiedHearing.scene}
-            impression={simplifiedHearing.impression}
-          />
-        )}
 
         <div className="flex flex-col space-y-3 bg-white p-5">
           {reviewOptions.map((option) => (

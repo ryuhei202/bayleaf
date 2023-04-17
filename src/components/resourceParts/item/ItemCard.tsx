@@ -37,9 +37,8 @@ export const ItemCard = ({
 
   return (
     <div className="flex justify-evenly gap-1" onClick={changeItem}>
-      <div className="py-5 bg-white rounded-md w-[100px] text-center">
+      <div className="py-5 bg-white rounded-md w-[100px] text-center px-1">
         <ExpandableImage
-          className="max-h-[100px]"
           defaultImageSrc={imagePaths.defaultPath}
           ExpandedImageSrc={imagePaths.expandedPath}
         />

@@ -7,6 +7,7 @@ type Props = {
   color?: "primary" | "secondary" | "strong-gray" | "gray" | "red" | "white";
   weight?: "regular" | "medium" | "bold";
   onClick?: () => void;
+  isInline?: boolean;
 };
 
 export const Typography = ({
@@ -16,6 +17,7 @@ export const Typography = ({
   color,
   weight,
   onClick,
+  isInline,
 }: Props) => {
   let classes: string[] = [];
 
@@ -74,7 +76,14 @@ export const Typography = ({
 
   classes.push();
 
-  return (
+  return isInline ? (
+    <span
+      className={`font-body ${classes.join(" ")} ${className ?? ""} `}
+      onClick={onClick}
+    >
+      {children}
+    </span>
+  ) : (
     <p
       className={`font-body ${classes.join(" ")} ${className ?? ""} `}
       onClick={onClick}

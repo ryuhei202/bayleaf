@@ -8,7 +8,7 @@ type TProps = {
 };
 export const DressingAdvice = ({ advices }: TProps) => {
   return (
-    <div className="mb-16">
+    <div>
       <Typography size="xl">コーデの着こなし方</Typography>
       <div className="border-[1px] border-gray my-5" />
       <div className="mt-5">

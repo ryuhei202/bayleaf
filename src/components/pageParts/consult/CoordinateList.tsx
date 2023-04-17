@@ -20,7 +20,9 @@ export const CoordinateList = ({ coordinates, onClickCoordinate }: TProps) => {
         {coordinates.map((coordinate, index) => (
           <CoordinateListButton
             index={index}
-            coordinate={coordinate}
+            ImagePathThumbs={coordinate.items.map(
+              (item) => item.imagePaths.thumb
+            )}
             onClick={() => onClickCoordinate(coordinate)}
             key={index}
           />

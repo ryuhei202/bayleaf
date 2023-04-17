@@ -7,7 +7,7 @@ type TProps = {
   category: string;
   color: string;
   discountRate: number;
-  point: number;
+  point?: number;
   discountedPrice: number;
   price: number;
   rank: string;
@@ -28,7 +28,7 @@ export const PurchaseItemCard = ({
 }: TProps) => {
   return (
     <WideItemCard imagePaths={imagePaths} className={className}>
-      <div className="h-full flex flex-col justify-around">
+      <div className="h-fit w-full flex flex-col justify-around space-y-2">
         <div>
           <Typography className="text-left" color="strong-gray" size="xl">
             {brand}
@@ -42,23 +42,26 @@ export const PurchaseItemCard = ({
             価格
           </Typography>
 
-          <Typography className="line-through text-left" color="strong-gray">
-            ￥{price.toLocaleString()}
-          </Typography>
-          <Typography className="leading-3 text-left" color="red">
-            ￥{discountedPrice.toLocaleString()}
-            <br></br>
-            <span className="text-xs">({discountRate}OFF)</span>
-          </Typography>
-        </div>
-        <div>
-          <Typography className="text-left" color="gray" size="xs">
-            ポイント
-          </Typography>
-          <Typography className="leading-4 text-left" color="strong-gray">
-            {point}pt
+          <Typography className="text-left">
+            <Typography isInline className="line-through" color="strong-gray">
+              ￥{price.toLocaleString()}
+            </Typography>
+            <Typography isInline className="leading-3" color="red">
+              ￥{discountedPrice.toLocaleString()}
+              <span className="text-xs">({discountRate}OFF)</span>
+            </Typography>
           </Typography>
         </div>
+        {point && (
+          <div>
+            <Typography className="text-left" color="gray" size="xs">
+              ポイント
+            </Typography>
+            <Typography className="leading-4 text-left" color="strong-gray">
+              {point}pt
+            </Typography>
+          </div>
+        )}
         <div>
           <Typography className="text-left" color="gray" size="xs">
             ランク

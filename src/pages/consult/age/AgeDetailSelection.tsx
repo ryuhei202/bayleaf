@@ -38,7 +38,7 @@ export const AgeDetailSelection = ({
             color="primary"
             weight="medium"
           >
-            {`${selectedItem.cateSmallName}／${selectedItem.color}`}
+            {`${selectedItem.categoryName}／${selectedItem.colorName}`}
           </Typography>
         </div>
         <Typography className="text-xl">気になる点を教えてください</Typography>

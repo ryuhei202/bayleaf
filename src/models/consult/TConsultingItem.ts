@@ -1,3 +1,3 @@
-import { TCoordinateItemResponse } from "../../api/coordinates/TCoordinateItemResponse";
+import { TCoordinateResponse } from "../../api/coordinates/TCoordinateResponse";
 
-export type TConsultingItem = TCoordinateItemResponse;
+export type TConsultingItem = TCoordinateResponse["items"][number];

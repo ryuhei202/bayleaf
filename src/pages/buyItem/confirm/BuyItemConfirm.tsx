@@ -1,4 +1,4 @@
-import { TChartItemsIndexResponse } from "../../../api/chartItems/useChartItemsIndex";
+import { TItemResponse } from "../../../api/shared/TItemResponse";
 import { Button } from "../../../components/baseParts/Button";
 import { IconButton } from "../../../components/baseParts/legacy/IconButton";
 import { ArrowIcon } from "../../../components/baseParts/legacy/icons/ArrowIcon";
@@ -6,7 +6,7 @@ import { BillingInfo } from "../../../components/pageParts/buyItem/BillingInfo";
 import { PurchaseItemCard } from "../../../components/pageParts/buyItem/PurchaseItemCard";
 
 type TProps = {
-  selectedItems: TChartItemsIndexResponse[];
+  selectedItems: TItemResponse[];
   totalPrice: number;
   totalSellingPrice: number;
   totalDiscountedPrice: number;
@@ -41,7 +41,7 @@ export const BuyItemConfirm = ({
           レンタル中アイテムの購入確認画面
         </div>
         <div>
-          {selectedItems.map((item: TChartItemsIndexResponse) => (
+          {selectedItems.map((item: TItemResponse) => (
             <PurchaseItemCard
               imagePaths={{
                 defaultPath: item.imagePaths.large,
@@ -51,7 +51,7 @@ export const BuyItemConfirm = ({
               category={item.categoryName}
               color={item.colorName}
               discountRate={item.discountRate}
-              point={item.point}
+              point={item.purchasePoint}
               discountedPrice={item.discountedPrice}
               price={item.price}
               className="my-6"
