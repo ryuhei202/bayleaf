@@ -24,24 +24,24 @@ export const ReviewForm = ({
   return (
     <Page>
       <div className="flex flex-col justify-between h-full">
-        <div className="px-5">
+        <div className="px-5 mb-8">
           <PageHeader
             title={
               <>
                 今回のコーデはお使いの場所でご利用して、ご満足いただけましたでしょうか?
               </>
             }
-            className="mb-16"
+            className="mb-12"
           />
+          {simplifiedHearing && (
+            <SimpifiedHearing
+              target={simplifiedHearing.target}
+              scene={simplifiedHearing.scene}
+              impression={simplifiedHearing.impression}
+            />
+          )}
           <CoordinateItemImages {...convertItemsToItemImagesProps(items)} />
         </div>
-        {simplifiedHearing && (
-          <SimpifiedHearing
-            target={simplifiedHearing.target}
-            scene={simplifiedHearing.scene}
-            impression={simplifiedHearing.impression}
-          />
-        )}
 
         <div className="flex flex-col space-y-3 bg-white p-5">
           {reviewOptions.map((option) => (

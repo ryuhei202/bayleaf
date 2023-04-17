@@ -4,8 +4,14 @@ type TProps = {
   target: string;
   scene: string;
   impression: string;
+  className?: string;
 };
-export const SimpifiedHearing = ({ target, scene, impression }: TProps) => {
+export const SimpifiedHearing = ({
+  target,
+  scene,
+  impression,
+  className,
+}: TProps) => {
   const hearings = [
     { question: "誰と", answer: target },
     { question: "利用シーン", answer: scene },
@@ -14,7 +20,7 @@ export const SimpifiedHearing = ({ target, scene, impression }: TProps) => {
   if (target === "") return <></>;
 
   return (
-    <div>
+    <div className={className ?? ""}>
       <Typography size="xl">利用シーン</Typography>
       <div className="border-[1px] border-gray my-5" />
       <div className=" m-5 border-2 border-dashed border-themeGray">

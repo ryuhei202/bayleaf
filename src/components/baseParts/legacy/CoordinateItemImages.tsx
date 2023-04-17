@@ -15,7 +15,7 @@ export const CoordinateItemImages = ({ items }: TProps) => {
         return (
           <div key={item.imagePaths.defaultPath}>
             <ExpandableImage
-              className="max-h-[120px]"
+              className="h-32"
               defaultImageSrc={item.imagePaths.defaultPath}
               ExpandedImageSrc={item.imagePaths.expandedPath}
             />
