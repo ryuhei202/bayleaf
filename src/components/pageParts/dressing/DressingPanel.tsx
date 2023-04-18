@@ -26,7 +26,7 @@ export const DressingPanel = ({
   const getChangeItems = (dressing: TNonNullableDressing) =>
     dressing.coordinateItems.filter((i) => i.isChangeItem).map((i) => i.item);
   return (
-    <>
+    <div className="space-y-16">
       <SimpifiedHearing
         target={hearingData.target}
         scene={hearingData.scene}
@@ -56,6 +56,6 @@ export const DressingPanel = ({
           </Button>
         </>
       )}
-    </>
+    </div>
   );
 };

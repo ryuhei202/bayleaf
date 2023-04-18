@@ -25,7 +25,7 @@ export const ReviewFormFetcher = ({
   if (simplifiedHearing === undefined) return <LoaderPage />;
   return (
     <ReviewForm
-      coordinate={coordinate}
+      items={coordinate.items}
       simplifiedHearing={simplifiedHearing}
       reviewOptions={reviewOptions}
       onSubmit={onSubmit}

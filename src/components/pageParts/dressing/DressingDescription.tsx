@@ -1,13 +1,13 @@
 import { TDressingComment } from "../../../api/dressings/TDressingComment";
-import { TDressingItem } from "../../../api/dressings/TDressingItem";
+import { TItemResponse } from "../../../api/shared/TItemResponse";
 import { Typography } from "../../baseParts/legacy/Typography";
 import { SpeechBalloon } from "../../baseParts/speechBalloon/SpeechBalloon";
-import { ItemCard } from "../../resourceParts/item/ItemCard";
+import { PurchaseItemCard } from "../buyItem/PurchaseItemCard";
 
 type TProps = {
   readonly description: string;
   readonly comment: TDressingComment;
-  readonly coordinateItems: TDressingItem[];
+  readonly coordinateItems: TItemResponse[];
 };
 
 export const DressingDescription = ({
@@ -16,19 +16,22 @@ export const DressingDescription = ({
   coordinateItems,
 }: TProps) => {
   return (
-    <div className="mb-16">
+    <div>
       <Typography size="xl">コーデの説明</Typography>
       <div className="border-[1px] border-gray my-5" />
-      <div className="my-5 flex justify-around">
+      <div className="my-5">
         {coordinateItems.map((item) => {
           return (
-            <ItemCard
+            <PurchaseItemCard
+              {...item}
+              brand={item.brandName}
+              category={item.categoryName}
+              color={item.colorName}
               imagePaths={{
                 defaultPath: item.imagePaths.largeThumb,
-                expandedPath: item.imagePaths.large,
+                expandedPath: item.imagePaths.original,
               }}
-              categoryName={item.cateSmallName}
-              colorName={item.color}
+              className="mb-2"
             />
           );
         })}

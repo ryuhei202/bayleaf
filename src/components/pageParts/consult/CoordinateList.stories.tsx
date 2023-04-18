@@ -23,8 +23,17 @@ const coordinates: TCoordinateResponse[] = [
     items: [
       {
         id: 111111,
+        isPurchased: false,
+        isForSale: true,
+        brandName: "leeap original",
+        price: 15000,
+        discountedPrice: 12000,
+        purchasePoint: 864,
+        locationId: null,
+        discountRate: 20,
+        rank: "A",
         isTops: false,
-        cateSmallName: "チノパンツ",
+        categoryName: "チノパンツ",
         imagePaths: {
           original:
             "https://stg.leeap.jp/files/preregistered_item/142/14207/IMG_0130.JPG",
@@ -35,12 +44,21 @@ const coordinates: TCoordinateResponse[] = [
           thumb:
             "https://stg.leeap.jp/files/preregistered_item/142/14207/thumb_IMG_0130.JPG",
         },
-        color: "ブラック",
+        colorName: "ブラック",
       },
       {
         id: 111111,
+        isPurchased: false,
+        isForSale: true,
+        brandName: "leeap original",
+        price: 15000,
+        discountedPrice: 12000,
+        purchasePoint: 864,
+        locationId: null,
+        discountRate: 20,
+        rank: "A",
         isTops: true,
-        cateSmallName: "シャツ",
+        categoryName: "シャツ",
         imagePaths: {
           original:
             "https://stg.leeap.jp/files/preregistered_item/164/16436/______1_.JPG",
@@ -51,12 +69,21 @@ const coordinates: TCoordinateResponse[] = [
           thumb:
             "https://stg.leeap.jp/files/preregistered_item/164/16436/thumb_______1_.JPG",
         },
-        color: "ベージュ",
+        colorName: "ベージュ",
       },
       {
         id: 111111,
+        isPurchased: false,
+        isForSale: true,
+        brandName: "leeap original",
+        price: 15000,
+        discountedPrice: 12000,
+        purchasePoint: 864,
+        locationId: null,
+        discountRate: 20,
+        rank: "A",
         isTops: true,
-        cateSmallName: "ニット",
+        categoryName: "ニット",
         imagePaths: {
           original:
             "https://stg.leeap.jp/files/preregistered_item/168/16801/IMG_3520.JPG",
@@ -67,12 +94,21 @@ const coordinates: TCoordinateResponse[] = [
           thumb:
             "https://stg.leeap.jp/files/preregistered_item/168/16801/thumb_IMG_3520.JPG",
         },
-        color: "ブラウン",
+        colorName: "ブラウン",
       },
       {
         id: 111111,
+        isPurchased: false,
+        isForSale: true,
+        brandName: "leeap original",
+        price: 15000,
+        discountedPrice: 12000,
+        purchasePoint: 864,
+        locationId: null,
+        discountRate: 20,
+        rank: "A",
         isTops: true,
-        cateSmallName: "裏起毛トレーナー",
+        categoryName: "裏起毛トレーナー",
         imagePaths: {
           original:
             "https://stg.leeap.jp/files/preregistered_item/166/16615/IMG_3437.JPG",
@@ -83,7 +119,7 @@ const coordinates: TCoordinateResponse[] = [
           thumb:
             "https://stg.leeap.jp/files/preregistered_item/166/16615/thumb_IMG_3437.JPG",
         },
-        color: "エンジ",
+        colorName: "エンジ",
       },
     ],
   },
