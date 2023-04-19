@@ -3,10 +3,10 @@ import { Button } from "../../baseParts/Button";
 import { AlertDialog } from "../../baseParts/dialogs/AlertDialog";
 import { FooterWrapper } from "../../baseParts/legacy/FooterWrapper";
 import { IconButton } from "../../baseParts/legacy/IconButton";
-import { ArrowIcon } from "../../baseParts/legacy/icons/ArrowIcon";
 import { Page } from "../../baseParts/legacy/Page";
 import { SelectButton } from "../../baseParts/legacy/SelectButton";
 import { Typography } from "../../baseParts/legacy/Typography";
+import { ArrowIcon } from "../../baseParts/legacy/icons/ArrowIcon";
 
 type TProps = {
   readonly isSelectableBRank: boolean;
@@ -93,11 +93,15 @@ export const RankSelectingForm = ({
               <br />
               着用上問題ないと判断したアイテムを通常より安く購入できます。
               <br />
-              {/* TODO: URL出来次第、hrefに差し込む
-              <a href="" className="font-bold underline">
+              <a
+                href="https://one.uwear.jp/TRsT8tcJ/pzX3_7sf"
+                className="font-bold underline"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <br />
                 詳しくはこちら
               </a>
-               */}
             </>
           }
           onClose={() => setIsDialogOpen(false)}
