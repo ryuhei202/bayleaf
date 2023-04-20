@@ -2,7 +2,6 @@ import liff from "@line/liff/dist/lib";
 import { AxiosResponse } from "axios";
 import { UseMutateFunction } from "react-query";
 import { TChartCreateForPlanRequest } from "../../../api/charts/TChartCreateForPlanRequest";
-import { TChartCreateRequest } from "../../../api/charts/TChartCreateRequest";
 import { TCategorizedForm } from "../../../api/hearings/TCategorizedForm";
 import { THearing } from "../../../api/hearings/THearing";
 import { TMembersIndexResponse } from "../../../api/members/TMembersIndexResponse";
@@ -152,7 +151,7 @@ export const getContinuedHearingContainerHandler = ({
           throw Error("予期せぬエラーが発生しました");
         }
       });
-    const params: TChartCreateRequest = {
+    const params: TChartCreateForPlanRequest = {
       memberId: member.id,
       hearings,
     };
