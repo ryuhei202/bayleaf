@@ -92,7 +92,7 @@ export const OneShotStartingConfirm = ({
                   : `¥${OneShot.price.withTax}`}
                 (税込)
                 <br />
-                付与ポイント：{point ?? 300}ポイント
+                付与ポイント：{point ? point + 300 : 300}ポイント
               </b>
               <br />
               <br />
