@@ -101,7 +101,9 @@ export const WelcomePage = ({ discountPrice, point, onClickStart }: TProps) => {
           ポイント
         </div>
         <p className="text-center text-[5vw] my-5">
-          <span className="text-[10vw] font-lora">{point ?? 300}</span>
+          <span className="text-[10vw] font-lora">
+            {point ? point + 300 : 300}
+          </span>
           ポイント付与
           <br />
           <span className="text-[3vw]">
