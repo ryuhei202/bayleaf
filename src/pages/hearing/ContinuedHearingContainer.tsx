@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useChartCreate } from "../../api/charts/useChartCreate";
+import { useChartCreateForPlan } from "../../api/charts/useChartCreateForPlan";
 import { THearing } from "../../api/hearings/THearing";
 import { TNotNullPlanIdMember } from "../../api/members/TMembersIndexResponse";
 import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
@@ -7,10 +7,10 @@ import { BeforeHearingConfirm } from "../../components/pageParts/hearing/BeforeH
 import { HearingAnswerConfirm } from "../../components/pageParts/hearing/HearingAnswerConfirm";
 import { PremiumPlanConfirm } from "../../components/pageParts/hearing/PremiumPlanConfirm";
 import { HearingConfirmButtons } from "../../components/resourceParts/hearing/HearingConfirmButtons";
-import { getContinuedHearingContainerHandler } from "./handler/getContinuedHearingContainerHandler";
 import { AnsweredHearings } from "./HearingContainer";
 import { HearingFlowContainer } from "./HearingFlowContainer";
 import { HearingPostSuccess } from "./HearingPostSuccess";
+import { getContinuedHearingContainerHandler } from "./handler/getContinuedHearingContainerHandler";
 
 type TProps = {
   readonly hearings: THearing[];
@@ -35,7 +35,7 @@ export const ContinuedHearingContainer = ({ hearings, member }: TProps) => {
     isLoading: isPostLoading,
     isError: isPostError,
     isSuccess: isPostSuccess,
-  } = useChartCreate();
+  } = useChartCreateForPlan();
 
   const {
     handleSubmitForm,
