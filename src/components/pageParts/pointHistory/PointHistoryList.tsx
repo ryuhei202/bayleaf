@@ -1,7 +1,7 @@
 import { Typography } from "../../baseParts/legacy/Typography";
 import { PointHistoryListItem } from "./PointHistoryListItem";
 
-type TMemberPoint = {
+export type TMemberPoint = {
   readonly id: number;
   readonly createdAt: string;
   readonly point: number;
