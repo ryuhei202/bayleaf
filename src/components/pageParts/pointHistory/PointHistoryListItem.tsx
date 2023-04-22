@@ -11,18 +11,18 @@ export const PointHistoryListItem = ({ point, pointCreatedAt }: TProps) => {
     "$1年$2月$3日"
   );
   return (
-    <div className="bg-white flex justify-self-start items-center h-12 my-1">
-      <div className="basis-2/5">
+    <div className="bg-white flex justify-around items-center h-12 my-1">
+      <div>
         <Typography color="strong-gray" size="xs">
           {formattedDate}
         </Typography>
       </div>
-      <div className="basis-1/4">
+      <div className="mr-14">
         <Typography color="strong-gray" size="xs">
           {point > 0 ? "獲得" : "利用"}
         </Typography>
       </div>
-      <div className="basis-1/4">
+      <div>
         <Typography color="strong-gray" size="xs">
           {point}pt
         </Typography>
