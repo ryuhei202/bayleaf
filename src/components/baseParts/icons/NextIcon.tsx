@@ -13,7 +13,7 @@ export const NextIcon = ({ className }: Props) => {
       className={className}
     >
       <path d="M22 4L16 0L16 8L22 4Z" fill="#979B9A" />
-      <path d="M0 4L16 4" stroke="#979B9A" stroke-width="2" />
+      <path d="M0 4L16 4" stroke="#979B9A" />
     </svg>
   );
 };
