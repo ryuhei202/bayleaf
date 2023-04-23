@@ -21,7 +21,7 @@ export const SimpifiedHearing = ({
 
   return (
     <div className={className ?? ""}>
-      <Typography size="xl">利用シーン</Typography>
+      <Typography size="xl">コーデの利用シーンと見せたい印象</Typography>
       <div className="border-[1px] border-gray my-5" />
       <div className=" m-5 border-2 border-dashed border-themeGray">
         {hearings.map((hearing, index) => {
