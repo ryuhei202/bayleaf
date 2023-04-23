@@ -11,7 +11,7 @@ export type TMemberPointsIndexResponse = {
   readonly totalCount: number;
 };
 
-export type TPaginationParams = {
+type TPaginationParams = {
   params: {
     limit?: number;
     offset?: number;
