@@ -32,6 +32,7 @@ export const DressingDescription = ({
                 expandedPath: item.imagePaths.original,
               }}
               className="mb-2"
+              key={item.id}
             />
           );
         })}
