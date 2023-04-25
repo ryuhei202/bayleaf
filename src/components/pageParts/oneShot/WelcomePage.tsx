@@ -2,7 +2,6 @@ import FIRST_CLOTH from "../../../images/icons/cloths/1.svg";
 import THIRD_CLOTH from "../../../images/icons/cloths/3.svg";
 import FORTH_CLOTH from "../../../images/icons/cloths/4.svg";
 import DiagonalLineIcon from "../../../images/icons/diagonal-line.svg";
-import { FIRST_TIME_ONE_SHOT_CAMPAIGN } from "../../../models/shared/Campaign";
 
 import { OneShot } from "../../../models/shared/OneShot";
 import { withTax } from "../../../models/shared/Tax";
@@ -13,7 +12,7 @@ import { Typography } from "../../baseParts/legacy/Typography";
 import { ScheduleDiagram } from "./ScheduleDiagram";
 
 type TProps = {
-  readonly discountPrice?: number;
+  readonly discountPrice: number;
   readonly onClickStart: () => void;
 };
 
@@ -27,37 +26,34 @@ export const WelcomePage = ({ discountPrice, onClickStart }: TProps) => {
         <div className="bg-themeGray text-clay text-center text-[4vw] py-1">
           料金
         </div>
-        {discountPrice ? (
+        {discountPrice > 0 ? (
           <>
             <p className="text-center text-[5vw] mt-5 mb-2">
-              <span className="text-[10vw] font-lora line-through">{`¥${OneShot.price.withoutTax}`}</span>
+              <span className="text-[10vw] font-lora line-through">{`¥${OneShot.price.withoutTax.toLocaleString()}`}</span>
               <br />
-              <span className="text-[4vw] line-through">{`(税込 ¥${OneShot.price.withTax})`}</span>
+              <span className="text-[4vw] line-through">{`(税込 ¥${OneShot.price.withTax.toLocaleString()})`}</span>
             </p>
             <div className="indent-[50%]">
               <span className="font-bold">
-                ↓
-                <span className="text-red text-xs ml-2">
-                  {FIRST_TIME_ONE_SHOT_CAMPAIGN.WORD}
-                </span>
+                ↓<span className="text-red text-xs ml-2">クーポン適用後</span>
               </span>
             </div>
             <p className="text-center text-[5vw] mb-5">
-              <span className="text-[10vw] font-lora">{`¥${
+              <span className="text-[10vw] font-lora">{`¥${(
                 OneShot.price.withoutTax - discountPrice
-              }`}</span>
+              ).toLocaleString()}`}</span>
               <br />
               <span className="text-[4vw]">{`(税込 ¥${withTax(
                 OneShot.price.withoutTax - discountPrice
-              )})`}</span>
+              ).toLocaleString()})`}</span>
             </p>
           </>
         ) : (
           <>
             <p className="text-center text-[5vw] my-5">
-              <span className="text-[10vw] font-lora">{`¥${OneShot.price.withoutTax}`}</span>
+              <span className="text-[10vw] font-lora">{`¥${OneShot.price.withoutTax.toLocaleString()}`}</span>
               <br />
-              <span className="text-[4vw]">{`(税込 ¥${OneShot.price.withTax})`}</span>
+              <span className="text-[4vw]">{`(税込 ¥${OneShot.price.withTax.toLocaleString()})`}</span>
             </p>
           </>
         )}
