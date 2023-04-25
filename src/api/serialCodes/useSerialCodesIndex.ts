@@ -6,14 +6,19 @@ type TSerialCodesIndex = {
   readonly error: Error | null;
 };
 
-type TParams = {
-  memberId: number | undefined;
+type TArgs = {
+  readonly memberId: number;
+  readonly params: {
+    readonly isOneShot?: boolean;
+  };
 };
 export const useSerialCodesIndex = ({
   memberId,
-}: TParams): TSerialCodesIndex => {
+  params,
+}: TArgs): TSerialCodesIndex => {
   const { data, error } = useGetRequest<TSerialCodesIndexResponse[]>(
-    `members/${memberId}/serial_codes`
+    `members/${memberId}/serial_codes`,
+    params
   );
 
   return {

@@ -1,6 +1,5 @@
 import liff from "@line/liff/dist/lib";
 import { useState } from "react";
-import { useChartCreate } from "../../api/charts/useChartCreate";
 import { TCategorizedForm } from "../../api/hearings/TCategorizedForm";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { useSerialCodesIndex } from "../../api/serialCodes/useSerialCodesIndex";
@@ -19,7 +18,9 @@ import {
   sortHearingConfirm,
 } from "../../models/hearing/THearingForms";
 
-import { FIRST_TIME_ONE_SHOT_CAMPAIGN } from "../../models/shared/Campaign";
+import { useChartCreateForOneShot } from "../../api/charts/useChartCreateForOneShot";
+import { OneShot } from "../../models/shared/OneShot";
+import { withTax } from "../../models/shared/Tax";
 import { AnsweredHearings, TAnsweredForm } from "../hearing/HearingContainer";
 import { OneShotHearingContainer } from "./OneShotHearingContainer";
 
@@ -45,11 +46,14 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
     mutate,
     isLoading: isPostLoading,
     error: postError,
-  } = useChartCreate();
+  } = useChartCreateForOneShot();
 
   const { data: serialCodesIndexData, error: serialCodesIndexError } =
     useSerialCodesIndex({
       memberId: memberData.id,
+      params: {
+        isOneShot: true,
+      },
     });
 
   const handleClickStart = () => {
@@ -128,19 +132,22 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
     return <ErrorPage message={serialCodesIndexError.message} />;
   if (!serialCodesIndexData) return <LoaderPage />;
 
-  const targetCampaign = serialCodesIndexData.find(
-    (campaign) => campaign.mSerialCampaignId === FIRST_TIME_ONE_SHOT_CAMPAIGN.ID
-  );
-
-  const discountPrice = targetCampaign
-    ? targetCampaign.discountPrice
-    : undefined;
+  const discountPrice = (): number => {
+    const singleUseDiscountPrice =
+      serialCodesIndexData.find((data) => data.singleUse)?.discountPrice ?? 0;
+    const recursionDiscountPrice =
+      serialCodesIndexData.find((data) => !data.singleUse)?.discountPrice ?? 0;
+    const totalDiscountPrice = singleUseDiscountPrice + recursionDiscountPrice;
+    return totalDiscountPrice > OneShot.price.withoutTax
+      ? OneShot.price.withoutTax
+      : totalDiscountPrice;
+  };
 
   switch (step) {
     case "welcome":
       return (
         <WelcomePage
-          discountPrice={discountPrice}
+          discountPrice={discountPrice()}
           onClickStart={handleClickStart}
         />
       );
@@ -201,6 +208,9 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
                     },
                   ],
                   isSelectableBRank,
+                  priceTaxIn: withTax(
+                    OneShot.price.withoutTax - discountPrice()
+                  ),
                 },
                 {
                   onSuccess: () => setIsPostComplete(true),
@@ -210,7 +220,7 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
             onCancelForm={() => {
               setStep("rank");
             }}
-            discountPrice={discountPrice}
+            discountPrice={discountPrice()}
           />
           <AlertDialog
             open={isPostComplete}
@@ -219,7 +229,7 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
             onClick={() => liff.closeWindow()}
             onClose={() => liff.closeWindow()}
             okBtnText="閉じる"
-          ></AlertDialog>
+          />
         </>
       );
   }

@@ -1,7 +1,7 @@
 import liff from "@line/liff/dist/lib";
 import { AxiosResponse } from "axios";
 import { UseMutateFunction } from "react-query";
-import { TChartCreateRequest } from "../../../api/charts/TChartCreateRequest";
+import { TChartCreateForPlanRequest } from "../../../api/charts/TChartCreateForPlanRequest";
 import { TCategorizedForm } from "../../../api/hearings/TCategorizedForm";
 import { THearingAnswer } from "../../../models/hearing/THearingAnswer";
 import { HEARING_FORM } from "../../../models/hearing/THearingForms";
@@ -42,7 +42,7 @@ type TArgs = {
   readonly mutate: UseMutateFunction<
     void | AxiosResponse,
     unknown,
-    TChartCreateRequest,
+    TChartCreateForPlanRequest,
     unknown
   >;
 };
@@ -164,7 +164,7 @@ export const getNewHearingContainerHandler = ({
           }),
         };
       });
-    const params: TChartCreateRequest = {
+    const params: TChartCreateForPlanRequest = {
       memberId,
       hearings,
     };

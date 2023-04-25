@@ -19,7 +19,7 @@ type TProps = {
   readonly isSelectableBRank: boolean;
   readonly onSubmit: () => void;
   readonly onCancelForm: () => void;
-  readonly discountPrice?: number;
+  readonly discountPrice: number;
 };
 
 export const OneShotStartingConfirm = ({
@@ -85,9 +85,7 @@ export const OneShotStartingConfirm = ({
             <>
               <b>
                 支払金額：
-                {discountPrice
-                  ? `¥${withTax(OneShot.price.withoutTax - discountPrice)}`
-                  : `¥${OneShot.price.withTax}`}
+                {`¥${withTax(OneShot.price.withoutTax - discountPrice)}`}
                 (税込)
                 <br />
                 付与ポイント：300ポイント
