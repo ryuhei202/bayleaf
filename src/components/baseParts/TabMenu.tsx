@@ -10,17 +10,19 @@ export const TabMenu = ({ children, className, onChangeIsConfirm }: TProps) => {
   return (
     <Tab as={Fragment}>
       {({ selected }) => (
-        <div
-          className={`bg-white rounded-lg flex justify-center items-center mx-1 ${
-            selected
-              ? "border-b-2 border-themeGray"
-              : "border-b border-[#C7C9C4]"
-          } ${className}`}
-          onClick={onChangeIsConfirm}
-        >
-          <p className={`my-3 ${selected ? "opacity-100" : "opacity-20"}`}>
-            {children}
-          </p>
+        <div className="bg-clay w-full pt-5">
+          <div
+            className={`flex justify-center items-center mx-1 ${
+              selected
+                ? "border-b-2 border-themeGray"
+                : "border-b border-[#C7C9C4]"
+            } ${className}`}
+            onClick={onChangeIsConfirm}
+          >
+            <p className={`my-3 ${selected ? "opacity-100" : "opacity-20"}`}>
+              {children}
+            </p>
+          </div>
         </div>
       )}
     </Tab>
