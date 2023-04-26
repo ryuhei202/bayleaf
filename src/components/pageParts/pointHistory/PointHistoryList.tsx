@@ -15,17 +15,17 @@ export const PointHistoryList = ({ memberPoints }: TProps) => {
   return (
     <div>
       <div className="flex">
-        <div className="basis-1/3 ml-6">
+        <div className="basis-1/3 pl-3">
           <Typography color="strong-gray" size="xs">
             日付
           </Typography>
         </div>
-        <div className="basis-1/3 ml-3">
+        <div className="basis-1/3 text-center pr-2">
           <Typography color="strong-gray" size="xs" className="ml-[4px]">
             区分
           </Typography>
         </div>
-        <div className="ml-2">
+        <div className="basis-1/3 text-center">
           <Typography color="strong-gray" size="xs" className="ml-[8px]">
             ポイント
           </Typography>

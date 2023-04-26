@@ -22,9 +22,8 @@ export const Pagination = ({
     <div className={`flex justify-around items-center ${className ?? ""}`}>
       <div className="w-[44px] h-[44px]">
         <Button
-          className={`rounded-[44px] h-[44px] relative ${
-            isBackDisabled ? "bg-[#D8D8D2]" : "bg-white"
-          }`}
+          className={`rounded-[44px] h-[44px] relative`}
+          variant={"light"}
           onClick={() => onClickPagination(currentPage - 1)}
           disabled={isBackDisabled}
         >
@@ -41,9 +40,8 @@ export const Pagination = ({
       </div>
       <div className="w-[44px]">
         <Button
-          className={`rounded-[44px] h-[44px] relative ${
-            isNextDisabled ? "bg-[#D8D8D2]" : "bg-white"
-          }`}
+          className={`rounded-[44px] h-[44px] relativ`}
+          variant={"light"}
           onClick={() => onClickPagination(currentPage + 1)}
           disabled={isNextDisabled}
         >
