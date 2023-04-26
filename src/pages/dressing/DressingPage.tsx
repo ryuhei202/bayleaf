@@ -11,7 +11,7 @@ type TProps = {
 export const DressingPage = ({ coordinateDatas }: TProps) => {
   return (
     <>
-      <Page className="p-5 pb-5">
+      <Page className="px-5 pb-5">
         <Tab.Group>
           <Tab.List className="w-full flex justify-center sticky top-0 z-10">
             {coordinateDatas.coordinates.map((_, index) => (
