@@ -11,7 +11,7 @@ export const TabMenu = ({ children, className, onChangeIsConfirm }: TProps) => {
     <Tab as={Fragment}>
       {({ selected }) => (
         <div
-          className={`flex justify-center items-center mx-1 ${
+          className={`bg-white rounded-lg flex justify-center items-center mx-1 ${
             selected
               ? "border-b-2 border-themeGray"
               : "border-b border-[#C7C9C4]"
