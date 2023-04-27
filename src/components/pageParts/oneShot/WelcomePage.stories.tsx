@@ -19,4 +19,5 @@ Default.args = {};
 export const FirstTimeOneShot = Template.bind({});
 FirstTimeOneShot.args = {
   discountPrice: 2000,
+  additionalPoint: 1000,
 };

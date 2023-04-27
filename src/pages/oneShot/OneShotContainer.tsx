@@ -1,5 +1,6 @@
 import liff from "@line/liff/dist/lib";
 import { useState } from "react";
+import { useChartCreateForOneShot } from "../../api/charts/useChartCreateForOneShot";
 import { TCategorizedForm } from "../../api/hearings/TCategorizedForm";
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
 import { useSerialCodesIndex } from "../../api/serialCodes/useSerialCodesIndex";
@@ -17,8 +18,6 @@ import {
   HEARING_FORM,
   sortHearingConfirm,
 } from "../../models/hearing/THearingForms";
-
-import { useChartCreateForOneShot } from "../../api/charts/useChartCreateForOneShot";
 import { OneShot } from "../../models/shared/OneShot";
 import { withTax } from "../../models/shared/Tax";
 import { AnsweredHearings, TAnsweredForm } from "../hearing/HearingContainer";
@@ -143,12 +142,24 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
       : totalDiscountPrice;
   };
 
+  const additionalPoint = (): number => {
+    const singleUseAdditionalPoint =
+      serialCodesIndexData.find((data) => data.singleUse)?.additionalPoint ?? 0;
+    const recursionAdditionalPoint =
+      serialCodesIndexData.find((data) => !data.singleUse)?.additionalPoint ??
+      0;
+    const totalAdditionalPoint =
+      300 + singleUseAdditionalPoint + recursionAdditionalPoint;
+    return totalAdditionalPoint;
+  };
+
   switch (step) {
     case "welcome":
       return (
         <WelcomePage
           discountPrice={discountPrice()}
           onClickStart={handleClickStart}
+          additionalPoint={additionalPoint()}
         />
       );
     case "dateSelecting":
@@ -221,6 +232,7 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
               setStep("rank");
             }}
             discountPrice={discountPrice()}
+            additionalPoint={additionalPoint()}
           />
           <AlertDialog
             open={isPostComplete}
