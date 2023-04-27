@@ -18,6 +18,7 @@ import {
   HEARING_FORM,
   sortHearingConfirm,
 } from "../../models/hearing/THearingForms";
+import { OneShot } from "../../models/shared/OneShot";
 
 import { AnsweredHearings, TAnsweredForm } from "../hearing/HearingContainer";
 import { OneShotHearingContainer } from "./OneShotHearingContainer";
