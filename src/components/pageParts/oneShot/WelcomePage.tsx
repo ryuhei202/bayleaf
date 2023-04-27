@@ -13,7 +13,7 @@ import { Typography } from "../../baseParts/legacy/Typography";
 import { ScheduleDiagram } from "./ScheduleDiagram";
 
 type TProps = {
-  readonly discountPrice?: number;
+  readonly discountPrice: number;
   readonly additionalPoint: number;
   readonly onClickStart: () => void;
 };

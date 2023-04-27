@@ -19,7 +19,7 @@ type TProps = {
   readonly isSelectableBRank: boolean;
   readonly onSubmit: () => void;
   readonly onCancelForm: () => void;
-  readonly discountPrice?: number;
+  readonly discountPrice: number;
   readonly additionalPoint: number;
 };
 

@@ -19,7 +19,6 @@ import {
   sortHearingConfirm,
 } from "../../models/hearing/THearingForms";
 
-import { FIRST_TIME_ONE_SHOT_CAMPAIGN } from "../../models/shared/Campaign";
 import { AnsweredHearings, TAnsweredForm } from "../hearing/HearingContainer";
 import { OneShotHearingContainer } from "./OneShotHearingContainer";
 
@@ -128,13 +127,16 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
     return <ErrorPage message={serialCodesIndexError.message} />;
   if (!serialCodesIndexData) return <LoaderPage />;
 
-  const targetCampaign = serialCodesIndexData.find(
-    (campaign) => campaign.mSerialCampaignId === FIRST_TIME_ONE_SHOT_CAMPAIGN.ID
-  );
-
-  const discountPrice = targetCampaign
-    ? targetCampaign.discountPrice
-    : undefined;
+  const discountPrice = (): number => {
+    const singleUseDiscountPrice =
+      serialCodesIndexData.find((data) => data.singleUse)?.discountPrice ?? 0;
+    const recursionDiscountPrice =
+      serialCodesIndexData.find((data) => !data.singleUse)?.discountPrice ?? 0;
+    const totalDiscountPrice = singleUseDiscountPrice + recursionDiscountPrice;
+    return totalDiscountPrice > OneShot.price.withoutTax
+      ? OneShot.price.withoutTax
+      : totalDiscountPrice;
+  };
 
   const additionalPoint = (): number => {
     const singleUseAdditionalPoint =
@@ -151,7 +153,7 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
     case "welcome":
       return (
         <WelcomePage
-          discountPrice={discountPrice}
+          discountPrice={discountPrice()}
           onClickStart={handleClickStart}
           additionalPoint={additionalPoint()}
         />
@@ -222,7 +224,7 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
             onCancelForm={() => {
               setStep("rank");
             }}
-            discountPrice={discountPrice}
+            discountPrice={discountPrice()}
             additionalPoint={additionalPoint()}
           />
           <AlertDialog
