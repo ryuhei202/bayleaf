@@ -111,5 +111,5 @@ FirstTimeOneShot.args = {
   wearingDate: "2023-1-19",
   isPostLoading: false,
   discountPrice: 2000,
-  point: 1000,
+  additionalPoint: 1000,
 };
