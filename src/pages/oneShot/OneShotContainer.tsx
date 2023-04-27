@@ -136,7 +136,16 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
     ? targetCampaign.discountPrice
     : undefined;
 
-  const point = targetCampaign ? targetCampaign.additionalPoint : undefined;
+  const additionalPoint = (): number => {
+    const singleUseAdditionalPoint =
+      serialCodesIndexData.find((data) => data.singleUse)?.additionalPoint ?? 0;
+    const recursionAdditionalPoint =
+      serialCodesIndexData.find((data) => !data.singleUse)?.additionalPoint ??
+      0;
+    const totalAdditionalPoint =
+      300 + singleUseAdditionalPoint + recursionAdditionalPoint;
+    return totalAdditionalPoint;
+  };
 
   switch (step) {
     case "welcome":
@@ -144,7 +153,7 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
         <WelcomePage
           discountPrice={discountPrice}
           onClickStart={handleClickStart}
-          point={point}
+          additionalPoint={additionalPoint()}
         />
       );
     case "dateSelecting":
@@ -214,7 +223,7 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
               setStep("rank");
             }}
             discountPrice={discountPrice}
-            point={point}
+            additionalPoint={additionalPoint()}
           />
           <AlertDialog
             open={isPostComplete}
