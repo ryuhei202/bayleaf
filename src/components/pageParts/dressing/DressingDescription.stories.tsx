@@ -1,5 +1,4 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { ITEM_TEST_IMAGE_URL } from "../../../images/TestImageUrl";
 import { DressingDescription } from "./DressingDescription";
 
 export default {
@@ -14,7 +13,7 @@ const Template: ComponentStory<typeof DressingDescription> = (args) => (
 export const DefaultValues = Template.bind({});
 DefaultValues.decorators = [
   (Story) => (
-    <div className="bg-slate-200 w-full p-3">
+    <div className="bg-clay w-full p-3">
       <Story />
     </div>
   ),
@@ -30,23 +29,77 @@ DefaultValues.args = {
     {
       id: 488070,
       isTops: true,
-      cateSmallName: "柄Tシャツ",
-      imagePaths: ITEM_TEST_IMAGE_URL,
-      color: "オフホワイト",
+      isPurchased: false,
+      isForSale: true,
+      brandName: "leeap original",
+      imagePaths: {
+        original:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_thumb_IMG_3977.jpeg",
+        large:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
+        largeThumb:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_thumb_IMG_3977.jpeg",
+        thumb:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
+      },
+      categoryName: "ジャケット",
+      colorName: "ブラック",
+      price: 15000,
+      discountedPrice: 12000,
+      purchasePoint: 864,
+      locationId: 1,
+      discountRate: 20,
+      rank: "A",
     },
     {
       id: 488071,
       isTops: true,
-      cateSmallName: "柄Tシャツ",
-      imagePaths: ITEM_TEST_IMAGE_URL,
-      color: "オフホワイト",
+      isPurchased: false,
+      isForSale: true,
+      brandName: "leeap original",
+      imagePaths: {
+        original:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_thumb_IMG_3977.jpeg",
+        large:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
+        largeThumb:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_thumb_IMG_3977.jpeg",
+        thumb:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
+      },
+      categoryName: "ジャケット",
+      colorName: "ブラック",
+      price: 15000,
+      discountedPrice: 12000,
+      purchasePoint: 864,
+      locationId: 1,
+      discountRate: 20,
+      rank: "A",
     },
     {
       id: 488072,
       isTops: true,
-      cateSmallName: "柄Tシャツ",
-      imagePaths: ITEM_TEST_IMAGE_URL,
-      color: "オフホワイト",
+      isPurchased: false,
+      isForSale: true,
+      brandName: "leeap original",
+      imagePaths: {
+        original:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_thumb_IMG_3977.jpeg",
+        large:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
+        largeThumb:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_thumb_IMG_3977.jpeg",
+        thumb:
+          "https://storage.googleapis.com/bayleaf-stg-uwear.appspot.com/item%20image/large_IMG_3977.jpeg",
+      },
+      categoryName: "ジャケット",
+      colorName: "ブラック",
+      price: 15000,
+      discountedPrice: 12000,
+      purchasePoint: 864,
+      locationId: 1,
+      discountRate: 20,
+      rank: "A",
     },
   ],
 };

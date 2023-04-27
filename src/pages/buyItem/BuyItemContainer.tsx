@@ -59,7 +59,8 @@ export const BuyItemContainer = ({ chartId, possesedPoint }: TProps) => {
   const getTotalPrice = () => {
     let initialValue = 0;
     const totalPrice = selectedChartItems.reduce(
-      (accumulator, selectedChartItem) => accumulator + selectedChartItem.price,
+      (accumulator, selectedChartItem) =>
+        accumulator + selectedChartItem.itemInfo.price,
       initialValue
     );
     return totalPrice;
@@ -69,7 +70,7 @@ export const BuyItemContainer = ({ chartId, possesedPoint }: TProps) => {
     let initialValue = 0;
     const totalSellingPrice = selectedChartItems.reduce(
       (accumulator, selectedChartItem) =>
-        accumulator + selectedChartItem.discountedPrice,
+        accumulator + selectedChartItem.itemInfo.discountedPrice,
       initialValue
     );
     return totalSellingPrice;
@@ -78,7 +79,8 @@ export const BuyItemContainer = ({ chartId, possesedPoint }: TProps) => {
   const getTotalGrantedPoint = () => {
     let initialValue = 0;
     const totalGrantedPoint = selectedChartItems.reduce(
-      (accumulator, selectedChartItem) => accumulator + selectedChartItem.point,
+      (accumulator, selectedChartItem) =>
+        accumulator + selectedChartItem.itemInfo.purchasePoint,
       initialValue
     );
     return totalGrantedPoint;
@@ -86,17 +88,20 @@ export const BuyItemContainer = ({ chartId, possesedPoint }: TProps) => {
 
   const getAllSelectedDiscountPrice = () => {
     const selectableItems = chartItemsData.filter(
-      (item) => item.isBuyable && !item.isPurchased
+      (item) => item.itemInfo.isForSale && !item.itemInfo.isPurchased
     );
     if (
       selectedChartItems.length !== selectableItems.length ||
-      chartItemsData.some((item) => !(item.isBuyable || item.isPurchased))
+      chartItemsData.some(
+        (item) => !(item.itemInfo.isForSale || item.itemInfo.isPurchased)
+      )
     ) {
       return undefined;
     }
     return selectedChartItems.reduce(
       (accumulator, selectedChartItem) =>
-        accumulator + Math.ceil(selectedChartItem.discountedPrice * 0.1),
+        accumulator +
+        Math.ceil(selectedChartItem.itemInfo.discountedPrice * 0.1),
       0
     );
   };
@@ -117,9 +122,9 @@ export const BuyItemContainer = ({ chartId, possesedPoint }: TProps) => {
     <>
       {isConfirm ? (
         <BuyItemConfirm
-          selectedItems={chartItemsData.filter((item) =>
-            selectedChartItemIds.includes(item.id)
-          )}
+          selectedItems={chartItemsData
+            .filter((chartItem) => selectedChartItemIds.includes(chartItem.id))
+            .map((chartItem) => chartItem.itemInfo)}
           totalPrice={getTotalPrice()}
           totalSellingPrice={getTotalSellingPrice()}
           totalGrantedPoint={getTotalGrantedPoint()}
@@ -151,10 +156,10 @@ export const BuyItemContainer = ({ chartId, possesedPoint }: TProps) => {
         />
       ) : (
         <BuyItemSelect
-          chartItems={chartItemsData.map((item) => {
+          chartItems={chartItemsData.map((chartItem) => {
             return {
-              ...item,
-              isSelected: selectedChartItemIds.includes(item.id),
+              ...chartItem,
+              isSelected: selectedChartItemIds.includes(chartItem.id),
             };
           })}
           totalSellingPrice={getTotalSellingPrice()}

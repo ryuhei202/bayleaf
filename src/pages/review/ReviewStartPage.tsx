@@ -1,14 +1,14 @@
-import { useState } from "react";
-import { Button } from "../../components/baseParts/legacy/Button";
+import { Fragment, useState } from "react";
 import { useCoordinateIndex } from "../../api/coordinates/useCoordinateIndex";
+import { Button } from "../../components/baseParts/legacy/Button";
+import { CoordinateItemImages } from "../../components/baseParts/legacy/CoordinateItemImages";
 import { Page } from "../../components/baseParts/legacy/Page";
 import { PageHeader } from "../../components/baseParts/legacy/PageHeader";
 import { Typography } from "../../components/baseParts/legacy/Typography";
+import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
+import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
 import { convertItemsToItemImagesProps } from "../../components/pageParts/review/convertItemsToItemImagesProps";
 import { ReviewFetcher } from "./ReviewFetcher";
-import { CoordinateItemImages } from "../../components/baseParts/legacy/CoordinateItemImages";
-import { LoaderPage } from "../../components/baseParts/pages/LoaderPage";
-import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 
 type TProps = {
   readonly chartId: number;
@@ -58,7 +58,7 @@ export const ReviewStartPage = ({ chartId }: TProps) => {
               />
               {reviewTargetCoordinates.map((coorde, idx) => {
                 return (
-                  <div key={coorde.id}>
+                  <Fragment key={coorde.id}>
                     <Typography
                       size="base"
                       weight="bold"
@@ -69,7 +69,7 @@ export const ReviewStartPage = ({ chartId }: TProps) => {
                     <CoordinateItemImages
                       {...convertItemsToItemImagesProps(coorde.items)}
                     />
-                  </div>
+                  </Fragment>
                 );
               })}
             </div>

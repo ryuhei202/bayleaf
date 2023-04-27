@@ -15,8 +15,17 @@ export const Default = Template.bind({});
 const items: TConsultingItem[] = [
   {
     id: 111111,
+    isPurchased: false,
+    isForSale: true,
+    brandName: "leeap original",
+    price: 15000,
+    discountedPrice: 12000,
+    purchasePoint: 864,
+    locationId: null,
+    discountRate: 20,
+    rank: "A",
     isTops: true,
-    cateSmallName: "シャツ",
+    categoryName: "シャツ",
     imagePaths: {
       original:
         "https://stg.leeap.jp/files/preregistered_item/168/16899/IMG_3977.JPG",
@@ -27,12 +36,21 @@ const items: TConsultingItem[] = [
       thumb:
         "https://stg.leeap.jp/files/preregistered_item/168/16899/thumb_IMG_3977.JPG",
     },
-    color: "ブラック",
+    colorName: "ブラック",
   },
   {
     id: 111112,
     isTops: true,
-    cateSmallName: "シャツ",
+    isPurchased: false,
+    isForSale: true,
+    brandName: "leeap original",
+    price: 15000,
+    discountedPrice: 12000,
+    purchasePoint: 864,
+    locationId: null,
+    discountRate: 20,
+    rank: "A",
+    categoryName: "シャツ",
     imagePaths: {
       original:
         "https://stg.leeap.jp/files/preregistered_item/168/16899/IMG_3977.JPG",
@@ -43,7 +61,7 @@ const items: TConsultingItem[] = [
       thumb:
         "https://stg.leeap.jp/files/preregistered_item/168/16899/thumb_IMG_3977.JPG",
     },
-    color: "ブラック",
+    colorName: "ブラック",
   },
 ];
 

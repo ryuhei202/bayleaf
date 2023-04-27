@@ -87,9 +87,7 @@ export const OneShotStartingConfirm = ({
             <>
               <b>
                 支払金額：
-                {discountPrice
-                  ? `¥${withTax(OneShot.price.withoutTax - discountPrice)}`
-                  : `¥${OneShot.price.withTax}`}
+                {`¥${withTax(OneShot.price.withoutTax - discountPrice)}`}
                 (税込)
                 <br />
                 付与ポイント：{additionalPoint}ポイント
