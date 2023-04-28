@@ -7,16 +7,17 @@ import "./App.css";
 import { ErrorPage } from "./components/baseParts/pages/ErrorPage";
 import { LoaderPage } from "./components/baseParts/pages/LoaderPage";
 import { useAppInitializer } from "./hooks/handler/app/useAppInitializer";
+import Home from "./pages/Home";
 import { BuyItem } from "./pages/buyItem/BuyItem";
 import { Consult } from "./pages/consult/Consult";
 import { Delivery } from "./pages/delivery/Delivery";
 import { Dislike } from "./pages/dislike/Dislike";
 import { Dressing } from "./pages/dressing/Dressing";
 import { Hearing } from "./pages/hearing/Hearing";
-import Home from "./pages/Home";
 import { OneShot } from "./pages/oneShot/OneShot";
 import { PaymentHistory } from "./pages/paymentHistory/PaymentHistory";
 import { PlanChange } from "./pages/planChange/PlanChange";
+import { PointHistory } from "./pages/pointHistory/PointHistory";
 import { Review } from "./pages/review/Review";
 import { Unsuspend } from "./pages/unsuspend/Unsuspend";
 
@@ -52,6 +53,7 @@ function App() {
             <Route path="one_shot" element={<OneShot />} />
             <Route path="buy_items" element={<BuyItem />} />
             <Route path="payment_history" element={<PaymentHistory />} />
+            <Route path="point_history" element={<PointHistory />} />
           </Routes>
         </StylistIdContext.Provider>
       </IdTokenContext.Provider>
