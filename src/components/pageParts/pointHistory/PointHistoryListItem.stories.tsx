@@ -17,6 +17,6 @@ const Template: ComponentStory<typeof PointHistoryListItem> = (args) => (
 );
 export const DefaultValues = Template.bind({});
 DefaultValues.args = {
-  point: 30,
+  point: 5000,
   pointCreatedAt: "2022年5月24日",
 };
