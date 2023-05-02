@@ -6,7 +6,7 @@ LIFF(LINE Front-end Framework)用 web アプリ
 
 ```
 $ node -v
-v16.13.2
+v16.20.0
 ```
 
 ```
