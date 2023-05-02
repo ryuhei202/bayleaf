@@ -1,4 +1,4 @@
-import liff from "@line/liff/dist/lib";
+import liff from "@line/liff";
 import { DropdownMenuAlt } from "./DropdownMenuAlt";
 
 type TProps = {

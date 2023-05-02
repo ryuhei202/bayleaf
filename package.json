@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@headlessui/react": "^1.7.14",
-    "@line/liff": "~2.21.3",
+    "@line/liff": "~2.22.0",
     "@line/liff-inspector": "^1.0.2",
     "@sentry/cli": "^2.16.1",
     "@sentry/react": "^7.46.0",

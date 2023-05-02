@@ -1,4 +1,4 @@
-import liff from "@line/liff/dist/lib";
+import liff from "@line/liff";
 import { useEffect, useState } from "react";
 import { useDislikeCreate } from "../../api/dislikes/useDislikeCreate";
 import { Button } from "../../components/baseParts/legacy/Button";

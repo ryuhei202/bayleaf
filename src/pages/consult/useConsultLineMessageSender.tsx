@@ -1,8 +1,8 @@
-import liff from "@line/liff/dist/lib";
+import liff from "@line/liff";
+import { useState } from "react";
+import { useLineMessageCreate } from "../../api/lineMessages/useLineMessageCreate";
 import { TImagePathsResponse } from "../../api/shared/TImagePathsResponse";
 import { OUTFIT_TEST_IMAGE_URL } from "../../images/TestImageUrl";
-import { useLineMessageCreate } from "../../api/lineMessages/useLineMessageCreate";
-import { useState } from "react";
 
 type ConsultLineMessage = {
   readonly send: (

@@ -1,4 +1,4 @@
-import liff from "@line/liff/dist/lib";
+import liff from "@line/liff";
 import { useState } from "react";
 import { useChartCreateForOneShot } from "../../api/charts/useChartCreateForOneShot";
 import { TCategorizedForm } from "../../api/hearings/TCategorizedForm";

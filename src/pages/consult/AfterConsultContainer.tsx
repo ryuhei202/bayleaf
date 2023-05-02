@@ -1,4 +1,4 @@
-import liff from "@line/liff/dist/lib";
+import liff from "@line/liff";
 import { AfterConsult } from "./AfterConsult";
 
 type TProps = {

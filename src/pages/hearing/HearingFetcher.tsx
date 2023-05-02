@@ -1,4 +1,4 @@
-import liff from "@line/liff/dist/lib";
+import liff from "@line/liff";
 import { TChartResponse } from "../../api/charts/TChartResponse";
 import { useHearingIndex } from "../../api/hearings/useHearingIndex";
 import { TNotNullPlanIdMember } from "../../api/members/TMembersIndexResponse";
