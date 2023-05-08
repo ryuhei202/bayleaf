@@ -1,5 +1,5 @@
 import { Tab } from "@headlessui/react";
-import liff from "@line/liff/dist/lib";
+import liff from "@line/liff";
 import { useState } from "react";
 import {
   findPlanById,

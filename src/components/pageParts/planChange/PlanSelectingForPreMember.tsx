@@ -1,15 +1,15 @@
 import { Tab } from "@headlessui/react";
-import liff from "@line/liff/dist/lib";
+import liff from "@line/liff";
 import {
   LIGHT_PLAN,
   PREMIUM_PLAN,
   STANDARD_PLAN,
 } from "../../../models/shared/Plans";
 import { Button } from "../../baseParts/Button";
+import { TabMenu } from "../../baseParts/TabMenu";
 import { AlertDialog } from "../../baseParts/dialogs/AlertDialog";
 import { CheckIcon } from "../../baseParts/icons/CheckIcon";
 import { Page } from "../../baseParts/legacy/Page";
-import { TabMenu } from "../../baseParts/TabMenu";
 import { PlanChangePanel } from "./PlanChangePanel";
 
 type TProps = {

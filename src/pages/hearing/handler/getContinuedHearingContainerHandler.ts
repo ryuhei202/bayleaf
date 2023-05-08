@@ -1,4 +1,4 @@
-import liff from "@line/liff/dist/lib";
+import liff from "@line/liff";
 import { AxiosResponse } from "axios";
 import { UseMutateFunction } from "react-query";
 import { TChartCreateForPlanRequest } from "../../../api/charts/TChartCreateForPlanRequest";
