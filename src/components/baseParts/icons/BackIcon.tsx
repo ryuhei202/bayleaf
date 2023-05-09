@@ -16,7 +16,7 @@ export const BackIcon = ({ className }: Props) => {
         d="M8.26528e-07 4L6 8L6 9.53674e-07L8.26528e-07 4Z"
         fill="#979B9A"
       />
-      <path d="M22 4L6 4" stroke="#979B9A" stroke-width="2" />
+      <path d="M22 4L6 4" stroke="#979B9A" />
     </svg>
   );
 };

@@ -1,4 +1,4 @@
-import liff from "@line/liff/dist/lib";
+import liff from "@line/liff";
 import { useState } from "react";
 import { useMemberPaymentsIndex } from "../../api/memberPayments/useMemberPaymentsIndex";
 import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";

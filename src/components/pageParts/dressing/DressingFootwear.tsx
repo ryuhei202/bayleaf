@@ -9,7 +9,7 @@ type TProps = {
 export const DressingFootwear = ({ footwear }: TProps) => {
   return (
     <div>
-      <Typography size="xl">コーデに合う靴</Typography>
+      <Typography size="xl">コーデに合わせる靴のおすすめ</Typography>
       <div className="border-[1px] border-gray my-5" />
       <div className="flex items-center mt-5">
         <ExpandableImage

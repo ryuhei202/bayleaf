@@ -46,7 +46,7 @@ export const DressingPanel = ({
         variant="default"
         onClick={onClickGoToConsultation}
       >
-        着こなしの相談をする
+        手持ちの靴の相談をする
       </Button>
       {getChangeItems(dressing).length > 0 && (
         <>

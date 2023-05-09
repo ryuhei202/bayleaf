@@ -17,7 +17,7 @@ export const DressingDescription = ({
 }: TProps) => {
   return (
     <div>
-      <Typography size="xl">コーデの説明</Typography>
+      <Typography size="xl">コーデアイテム</Typography>
       <div className="border-[1px] border-gray my-5" />
       <div className="my-5">
         {coordinateItems.map((item) => {
@@ -32,6 +32,7 @@ export const DressingDescription = ({
                 expandedPath: item.imagePaths.original,
               }}
               className="mb-2"
+              key={item.id}
             />
           );
         })}

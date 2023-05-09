@@ -1,4 +1,4 @@
-import liff from "@line/liff/dist/lib";
+import liff from "@line/liff";
 import { AxiosResponse } from "axios";
 import { UseMutateFunction } from "react-query/types/react/types";
 import { TReviewCreateParams } from "../../api/reviews/useReviewCreate";

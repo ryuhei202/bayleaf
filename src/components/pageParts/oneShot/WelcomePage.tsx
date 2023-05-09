@@ -13,10 +13,15 @@ import { ScheduleDiagram } from "./ScheduleDiagram";
 
 type TProps = {
   readonly discountPrice: number;
+  readonly additionalPoint: number;
   readonly onClickStart: () => void;
 };
 
-export const WelcomePage = ({ discountPrice, onClickStart }: TProps) => {
+export const WelcomePage = ({
+  discountPrice,
+  additionalPoint,
+  onClickStart,
+}: TProps) => {
   return (
     <Page className="flex flex-col h-full min-h-screen justify-between items-center text-themeGray pt-8 px-3 pb-3">
       <Typography size="2xl" className="text-center mb-8">
@@ -96,7 +101,8 @@ export const WelcomePage = ({ discountPrice, onClickStart }: TProps) => {
           ポイント
         </div>
         <p className="text-center text-[5vw] my-5">
-          <span className="text-[10vw] font-lora">300</span>ポイント付与
+          <span className="text-[10vw] font-lora">{additionalPoint}</span>
+          ポイント付与
           <br />
           <span className="text-[3vw]">
             *ポイントはアイテム購入にご利用できます
