@@ -2,13 +2,13 @@ import { useEffect } from "react";
 import { Button } from "./Button";
 
 type Props = {
-  selected: boolean;
-  disabled?: boolean;
-  title?: string;
-  className?: string;
-  imageFilePath?: string;
-  onClick?: () => void;
-  onSelectTransitionEnd?: () => void;
+  readonly selected?: boolean;
+  readonly disabled?: boolean;
+  readonly title: string;
+  readonly className?: string;
+  readonly imageFilePath?: string;
+  readonly onClick: () => void;
+  readonly onSelectTransitionEnd: () => void;
 };
 
 export const SelectableButton = ({
@@ -38,7 +38,7 @@ export const SelectableButton = ({
         <img
           src={imageFilePath}
           alt="selectable-button"
-          className="mx-auto max-h-32 mb-2"
+          className="mx-auto mb-2 max-w-[50%]"
         />
       )}
       {title}
