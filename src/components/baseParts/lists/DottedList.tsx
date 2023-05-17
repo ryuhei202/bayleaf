@@ -1,7 +1,7 @@
 import { Typography } from "../legacy/Typography";
 
 type TProps = {
-  listItems: { question: string; answer: string }[];
+  listItems: { question: string; answer: React.ReactNode }[];
   className?: string;
 };
 
@@ -26,7 +26,7 @@ export const DottedList = ({ listItems, className }: TProps) => {
               </Typography>
             </div>
             <div className="col-span-2 justify-self-start flex items-center">
-              <Typography>{listItem.answer}</Typography>
+              <Typography color="primary">{listItem.answer}</Typography>
             </div>
           </div>
         );
