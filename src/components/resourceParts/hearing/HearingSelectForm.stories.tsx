@@ -12,6 +12,7 @@ const Template: ComponentStory<typeof HearingSelectForm> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
+  title: "好きなロゴを選択してください",
   options: [
     {
       id: 1,
@@ -35,10 +36,3 @@ Default.args = {
     },
   ],
 };
-Default.decorators = [
-  (Story) => (
-    <div className="bg-clay w-full p-3">
-      <Story />
-    </div>
-  ),
-];
