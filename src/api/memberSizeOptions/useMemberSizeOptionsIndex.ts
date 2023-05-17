@@ -1,34 +1,13 @@
+import { TPropertyRecord } from "../../models/shared/TPropertyRecord";
 import { useGetRequest } from "../useGetRequest";
 
 export type TMemberSizeOptionsIndexResponse = {
-  readonly tops: {
-    id: number;
-    name: string;
-  }[];
-  readonly bottoms: {
-    id: number;
-    name: string;
-  }[];
-  readonly shoulder: {
-    id: number;
-    name: string;
-    imageFilePath: string;
-  }[];
-  readonly waist: {
-    id: number;
-    name: string;
-    imageFilePath: string;
-  }[];
-  readonly hip: {
-    id: number;
-    name: string;
-    imageFilePath: string;
-  }[];
-  readonly bust: {
-    id: number;
-    name: string;
-    imageFilePath: string;
-  }[];
+  readonly tops: TPropertyRecord[];
+  readonly bottoms: TPropertyRecord[];
+  readonly shoulder: (TPropertyRecord & { imageFilePath: string })[];
+  readonly waist: (TPropertyRecord & { imageFilePath: string })[];
+  readonly hip: (TPropertyRecord & { imageFilePath: string })[];
+  readonly bust: (TPropertyRecord & { imageFilePath: string })[];
 };
 
 export const useMemberSizeOptionsIndex = () => {
