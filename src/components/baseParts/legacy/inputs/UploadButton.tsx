@@ -12,7 +12,7 @@ export const UploadButton = ({ className, uploadType, onChange }: Props) => {
     "p-3",
     "cursor-pointer",
     "text-base",
-    "rounded-xl",
+    "rounded-full",
     "bg-themeGray",
     "text-slate-200",
     "shadow-themeGray/40",
