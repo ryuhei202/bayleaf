@@ -10,7 +10,7 @@ export default {
 } as ComponentMeta<typeof HearingAboutSizeStart>;
 
 const Template: ComponentStory<typeof HearingAboutSizeStart> = (args) => (
-  <HearingAboutSizeStart {...args} />
+  <HearingAboutSizeStart />
 );
 
 export const Default = Template.bind({});
