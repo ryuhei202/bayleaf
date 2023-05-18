@@ -1,5 +1,4 @@
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
-import { HEARING_FORM } from "../../models/hearing/THearingForms";
 import { TAnsweredForm } from "../hearing/HearingContainer";
 import { HearingFormFetcher } from "../hearing/HearingFormFetcher";
 
@@ -8,7 +7,6 @@ type TProps = {
   readonly nextFormId: number;
   readonly previousAnsweredHearing: TAnsweredForm;
   readonly isBackTransition: boolean;
-  readonly isAvoidFormAnswered: boolean;
   readonly onSubmitForm: (
     answer: TAnsweredForm,
     nextFormIdArg: number | null
@@ -21,7 +19,6 @@ export const OneShotHearingContainer = ({
   nextFormId,
   previousAnsweredHearing,
   isBackTransition,
-  isAvoidFormAnswered,
   onSubmitForm,
   onCancelForm,
 }: TProps) => {
@@ -29,21 +26,13 @@ export const OneShotHearingContainer = ({
     answer: TAnsweredForm,
     nextFormIdArg: number | null
   ) => {
-    if (nextFormIdArg === null && !isAvoidFormAnswered) {
-      onSubmitForm(answer, HEARING_FORM.AVOID_ITEM);
-    } else {
-      onSubmitForm(answer, nextFormIdArg);
-    }
-  };
-
-  const handleCancelForm = () => {
-    onCancelForm();
+    onSubmitForm(answer, nextFormIdArg);
   };
 
   return (
     <HearingFormFetcher
       onSubmitForm={handleSubmitForm}
-      onCancelForm={handleCancelForm}
+      onCancelForm={() => onCancelForm()}
       nextFormId={nextFormId}
       previousAnsweredHearing={previousAnsweredHearing}
       isBackTransition={isBackTransition}
