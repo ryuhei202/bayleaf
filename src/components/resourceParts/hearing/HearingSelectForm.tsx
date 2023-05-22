@@ -1,20 +1,19 @@
+import { TPropertyRecord } from "../../../models/shared/TPropertyRecord";
 import { SelectableButton } from "../../baseParts/SelectableButton";
 import { Page } from "../../baseParts/legacy/Page";
 import { Typography } from "../../baseParts/legacy/Typography";
 
-type TProps = {
+export type TProps = {
+  readonly key?: string;
   readonly title: string;
-  readonly options: {
-    id: number;
-    name: string;
-    imageFilePath?: string;
-  }[];
+  readonly options: (TPropertyRecord & { imageFilePath?: string })[];
   readonly selectedId?: number;
   readonly onClick: (id: number) => void;
   readonly onSubmit: () => void;
   readonly onCancel: () => void;
 };
 export const HearingSelectForm = ({
+  key,
   title,
   options,
   selectedId,
@@ -23,7 +22,7 @@ export const HearingSelectForm = ({
   onCancel,
 }: TProps) => {
   return (
-    <Page className="flex flex-col">
+    <Page className="flex flex-col" key={key}>
       <Typography color="primary" className="mx-auto my-8 text-center">
         {title}
       </Typography>
@@ -34,7 +33,12 @@ export const HearingSelectForm = ({
             onClick={() => onClick(option.id)}
             title={option.name}
             selected={selectedId === option.id}
-            imageFilePath={option.imageFilePath}
+            disabled={selectedId !== undefined && selectedId !== option.id}
+            imageFilePath={
+              option.imageFilePath
+                ? `${process.env.REACT_APP_HOST_URL}/${option.imageFilePath}`
+                : undefined
+            }
             onSelectTransitionEnd={onSubmit}
           />
         ))}
