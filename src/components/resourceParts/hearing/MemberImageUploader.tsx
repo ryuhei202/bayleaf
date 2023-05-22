@@ -1,4 +1,3 @@
-import { useImageUploadHandler } from "../../../hooks/handler/image/useImageUploadHandler";
 import PreviewDefault from "../../../images/preview_default.png";
 import { Button } from "../../baseParts/Button";
 import { IconButton } from "../../baseParts/legacy/IconButton";
@@ -9,19 +8,22 @@ import { ArrowIcon } from "../../baseParts/legacy/icons/ArrowIcon";
 type TProps = {
   readonly onClickNext: () => void;
   readonly onSubmit: (imageFileName: string, imageData: string) => void;
-  readonly isLoading: boolean;
   readonly onCancel: () => void;
+  imageFileName: string | null;
+  imageData: string | null;
+  preUploadImage: string | null;
+  handleChangeFile: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const MemberImageUploader = ({
   onClickNext,
   onSubmit,
-  isLoading,
   onCancel,
+  imageFileName,
+  imageData,
+  preUploadImage,
+  handleChangeFile,
 }: TProps) => {
-  const { imageFileName, imageData, preUploadImage, handleChangeFile } =
-    useImageUploadHandler();
-
   return (
     <Page>
       <IconButton onClick={onCancel} className="mt-5 ml-5">
@@ -45,19 +47,18 @@ export const MemberImageUploader = ({
           <Button
             onClick={() => onSubmit(imageFileName!, imageData!)}
             className="my-3"
-            isLoading={isLoading}
             disabled={!imageFileName && !imageData}
           >
             次へ
           </Button>
-          <p
-            onClick={
-              !!imageFileName && !!imageData ? () => undefined : onClickNext
-            }
-            className="text-center text-sm text-themeGray underline cursor-pointer mt-4"
-          >
-            今は写真を用意できない
-          </p>
+          {!(!!imageFileName && !!imageData) && (
+            <p
+              onClick={onClickNext}
+              className="text-center text-sm text-themeGray underline cursor-pointer mt-4"
+            >
+              今は写真を用意できない
+            </p>
+          )}
         </div>
       </div>
     </Page>
