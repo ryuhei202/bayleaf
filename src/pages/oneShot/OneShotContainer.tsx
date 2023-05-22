@@ -185,7 +185,6 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
           previousAnsweredHearing={answeredHearings.forms.slice(-1)[0]}
           isBackTransition={isBackTransition}
           member={memberData}
-          isAvoidFormAnswered={nextFormId === HEARING_FORM.AVOID_ITEM}
         />
       );
     case "rank":
