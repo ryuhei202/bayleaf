@@ -1,4 +1,5 @@
 import liff from "@line/liff/dist/lib";
+import { useState } from "react";
 import { TMemberSizeOptionsIndexResponse } from "../../api/memberSizeOptions/useMemberSizeOptionsIndex";
 import { useMemberSizesCreate } from "../../api/memberSizes/useMemberSizesCreate";
 import { AlertDialog } from "../../components/baseParts/dialogs/AlertDialog";
@@ -9,20 +10,22 @@ import { HearingAboutSizeStart } from "../../components/resourceParts/hearing/He
 import { HearingSelectForm } from "../../components/resourceParts/hearing/HearingSelectForm";
 import { MemberImageUploader } from "../../components/resourceParts/hearing/MemberImageUploader";
 import { useImageUploadHandler } from "../../hooks/handler/image/useImageUploadHandler";
-import { useFormHandler } from "./handler/useFormHandler";
+import { useSizeSelectFormHandler } from "./handler/useSizeSelectFormHandler";
 
 type TProps = {
   memberId: number;
   memberSizeOptions: TMemberSizeOptionsIndexResponse;
 };
+export type TStep = "start" | "select" | "image" | "confirm";
 
 export const SizeFormsContainer = ({ memberId, memberSizeOptions }: TProps) => {
   const { mutate, isLoading, error, isSuccess } = useMemberSizesCreate({
     memberId,
   });
+  const [step, setStep] = useState<TStep>("start");
 
+  const handleStep = (step: TStep) => setStep(step);
   const {
-    step,
     tops,
     bottoms,
     shoulder,
@@ -30,9 +33,8 @@ export const SizeFormsContainer = ({ memberId, memberSizeOptions }: TProps) => {
     hip,
     bust,
     getFormProps,
-    handleStep,
     handleCancelImageUpload,
-  } = useFormHandler({ memberSizeOptions });
+  } = useSizeSelectFormHandler({ memberSizeOptions, handleStep });
 
   const { imageFileName, imageData, preUploadImage, handleChangeFile } =
     useImageUploadHandler();
@@ -41,19 +43,14 @@ export const SizeFormsContainer = ({ memberId, memberSizeOptions }: TProps) => {
 
   switch (step) {
     case "start":
-      return <HearingAboutSizeStart onClick={() => handleStep("tops")} />;
-    case "tops":
-    case "bottoms":
-    case "shoulder":
-    case "waist":
-    case "hip":
-    case "bust":
+      return <HearingAboutSizeStart onClick={() => setStep("select")} />;
+    case "select":
       return <HearingSelectForm {...getFormProps()} />;
-    case "imageInput":
+    case "image":
       return (
         <MemberImageUploader
-          onClickNext={() => handleStep("confirm")}
-          onSubmit={() => handleStep("confirm")}
+          onClickNext={() => setStep("confirm")}
+          onSubmit={() => setStep("confirm")}
           onCancel={handleCancelImageUpload}
           imageFileName={imageFileName}
           imageData={imageData}
@@ -101,7 +98,7 @@ export const SizeFormsContainer = ({ memberId, memberSizeOptions }: TProps) => {
                     : undefined,
               });
             }}
-            onClickBack={() => handleStep("imageInput")}
+            onClickBack={() => setStep("image")}
           />
           <AlertDialog
             open={isSuccess}

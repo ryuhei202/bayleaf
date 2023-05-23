@@ -1,16 +1,8 @@
 import { useState } from "react";
 import { TMemberSizeOptionsIndexResponse } from "../../../api/memberSizeOptions/useMemberSizeOptionsIndex";
 import { TPropertyRecord } from "../../../models/shared/TPropertyRecord";
-type TStep =
-  | "start"
-  | "tops"
-  | "bottoms"
-  | "shoulder"
-  | "waist"
-  | "hip"
-  | "bust"
-  | "imageInput"
-  | "confirm";
+import { TStep } from "../SizeFormsContainer";
+type TSizeStep = "tops" | "bottoms" | "shoulder" | "waist" | "hip" | "bust";
 
 type TFormProps = {
   readonly key: string;
@@ -24,10 +16,10 @@ type TFormProps = {
 
 type TArgs = {
   readonly memberSizeOptions: TMemberSizeOptionsIndexResponse;
+  readonly handleStep: (step: TStep) => void;
 };
 
 type TUseFormHandler = {
-  readonly step: TStep;
   readonly tops?: number;
   readonly bottoms?: number;
   readonly shoulder?: number;
@@ -35,14 +27,14 @@ type TUseFormHandler = {
   readonly hip?: number;
   readonly bust?: number;
   readonly getFormProps: () => TFormProps;
-  readonly handleStep: (nextStep: TStep) => void;
   readonly handleCancelImageUpload: () => void;
 };
 
-export const useFormHandler = ({
+export const useSizeSelectFormHandler = ({
   memberSizeOptions,
+  handleStep,
 }: TArgs): TUseFormHandler => {
-  const [step, setStep] = useState<TStep>("start");
+  const [sizeStep, setSizeStep] = useState<TSizeStep>("tops");
   const [tops, setTops] = useState<number>();
   const [bottoms, setBottoms] = useState<number>();
   const [shoulder, setShoulder] = useState<number>();
@@ -51,7 +43,7 @@ export const useFormHandler = ({
   const [bust, setBust] = useState<number>();
 
   const getFormProps = (): TFormProps => {
-    switch (step) {
+    switch (sizeStep) {
       case "tops":
         return {
           key: "tops",
@@ -59,8 +51,8 @@ export const useFormHandler = ({
           options: memberSizeOptions.tops,
           selectedId: tops,
           onClick: (id: number) => setTops(id),
-          onSubmit: () => setStep("bottoms"),
-          onCancel: () => setStep("start"),
+          onSubmit: () => setSizeStep("bottoms"),
+          onCancel: () => handleStep("start"),
         };
       case "bottoms":
         return {
@@ -69,10 +61,10 @@ export const useFormHandler = ({
           options: memberSizeOptions.bottoms,
           selectedId: bottoms,
           onClick: (id: number) => setBottoms(id),
-          onSubmit: () => setStep("shoulder"),
+          onSubmit: () => setSizeStep("shoulder"),
           onCancel: () => {
             setTops(undefined);
-            setStep("tops");
+            setSizeStep("tops");
           },
         };
       case "shoulder":
@@ -82,10 +74,10 @@ export const useFormHandler = ({
           options: memberSizeOptions.shoulders,
           selectedId: shoulder,
           onClick: (id: number) => setShoulder(id),
-          onSubmit: () => setStep("waist"),
+          onSubmit: () => setSizeStep("waist"),
           onCancel: () => {
             setBottoms(undefined);
-            setStep("bottoms");
+            setSizeStep("bottoms");
           },
         };
       case "waist":
@@ -95,10 +87,10 @@ export const useFormHandler = ({
           options: memberSizeOptions.waists,
           selectedId: waist,
           onClick: (id: number) => setWaist(id),
-          onSubmit: () => setStep("hip"),
+          onSubmit: () => setSizeStep("hip"),
           onCancel: () => {
             setShoulder(undefined);
-            setStep("shoulder");
+            setSizeStep("shoulder");
           },
         };
       case "hip":
@@ -108,23 +100,23 @@ export const useFormHandler = ({
           options: memberSizeOptions.hips,
           selectedId: hip,
           onClick: (id: number) => setHip(id),
-          onSubmit: () => setStep("bust"),
+          onSubmit: () => setSizeStep("bust"),
           onCancel: () => {
             setWaist(undefined);
-            setStep("waist");
+            setSizeStep("waist");
           },
         };
       case "bust":
         return {
           key: "bust",
-          title: "バストのサイズを選択してください",
+          title: "胸囲のサイズを選択してください",
           options: memberSizeOptions.busts,
           selectedId: bust,
           onClick: (id: number) => setBust(id),
-          onSubmit: () => setStep("imageInput"),
+          onSubmit: () => handleStep("image"),
           onCancel: () => {
             setHip(undefined);
-            setStep("hip");
+            setSizeStep("hip");
           },
         };
       default:
@@ -132,17 +124,12 @@ export const useFormHandler = ({
     }
   };
 
-  const handleStep = (nextStep: TStep) => {
-    setStep(nextStep);
-  };
-
   const handleCancelImageUpload = () => {
     setBust(undefined);
-    setStep("bust");
+    handleStep("select");
   };
 
   return {
-    step,
     tops,
     bottoms,
     shoulder,
@@ -150,7 +137,6 @@ export const useFormHandler = ({
     hip,
     bust,
     getFormProps,
-    handleStep,
     handleCancelImageUpload,
   };
 };
