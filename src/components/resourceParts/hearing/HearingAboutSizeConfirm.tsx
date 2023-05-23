@@ -15,6 +15,7 @@ type TProps = {
   readonly shoulderChoice: string;
   readonly bustChoice: string;
   readonly imageSrc?: string;
+  readonly isLoading: boolean;
   readonly onSubmit: () => void;
   readonly onClickBack: () => void;
 };
@@ -27,6 +28,7 @@ export const HearingAboutSizeConfirm = ({
   shoulderChoice,
   bustChoice,
   imageSrc,
+  isLoading,
   onSubmit,
   onClickBack,
 }: TProps) => {
@@ -60,7 +62,12 @@ export const HearingAboutSizeConfirm = ({
           <IconButton className="flex-none" onClick={onClickBack}>
             <ArrowIcon className="h-10 my-auto" />
           </IconButton>
-          <Button size="none" className="grow ml-3" onClick={onSubmit}>
+          <Button
+            size="none"
+            className="grow ml-3"
+            onClick={onSubmit}
+            isLoading={isLoading}
+          >
             <Typography className="my-auto">登録する</Typography>
           </Button>
         </div>

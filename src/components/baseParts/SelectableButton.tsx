@@ -14,6 +14,7 @@ type Props = {
 export const SelectableButton = ({
   selected,
   title,
+  disabled,
   className,
   imageFilePath,
   onSelectTransitionEnd,
@@ -33,6 +34,7 @@ export const SelectableButton = ({
       variant={selected ? "default" : "light"}
       {...buttonProps}
       radius="small"
+      disabled={disabled}
     >
       {imageFilePath && (
         <img

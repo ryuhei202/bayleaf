@@ -4,10 +4,10 @@ import { useGetRequest } from "../useGetRequest";
 export type TMemberSizeOptionsIndexResponse = {
   readonly tops: TPropertyRecord[];
   readonly bottoms: TPropertyRecord[];
-  readonly shoulder: (TPropertyRecord & { imageFilePath: string })[];
-  readonly waist: (TPropertyRecord & { imageFilePath: string })[];
-  readonly hip: (TPropertyRecord & { imageFilePath: string })[];
-  readonly bust: (TPropertyRecord & { imageFilePath: string })[];
+  readonly shoulders: (TPropertyRecord & { imageFilePath: string })[];
+  readonly waists: (TPropertyRecord & { imageFilePath: string })[];
+  readonly hips: (TPropertyRecord & { imageFilePath: string })[];
+  readonly busts: (TPropertyRecord & { imageFilePath: string })[];
 };
 
 export const useMemberSizeOptionsIndex = () => {

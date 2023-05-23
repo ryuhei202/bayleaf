@@ -4,7 +4,7 @@ type TArgs = {
   memberId: number;
 };
 
-type TMemberSizesCreateParams = {
+export type TMemberSizesCreateParams = {
   readonly tops: number;
   readonly bottoms: number;
   readonly shoulder: number;
@@ -18,9 +18,8 @@ type TMemberSizesCreateParams = {
 };
 
 export const useMemberSizesCreate = ({ memberId }: TArgs) => {
-  const { mutate, isLoading } = usePostRequest<TMemberSizesCreateParams>(
-    `members/${memberId}/member_sizes`
-  );
+  const { mutate, isLoading, error, isSuccess } =
+    usePostRequest<TMemberSizesCreateParams>(`members/${memberId}/member_size`);
 
-  return { mutate, isLoading };
+  return { mutate, isLoading, error, isSuccess };
 };
