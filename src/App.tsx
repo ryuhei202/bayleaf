@@ -11,7 +11,6 @@ import Home from "./pages/Home";
 import { BuyItem } from "./pages/buyItem/BuyItem";
 import { Consult } from "./pages/consult/Consult";
 import { Delivery } from "./pages/delivery/Delivery";
-import { Dislike } from "./pages/dislike/Dislike";
 import { Dressing } from "./pages/dressing/Dressing";
 import { Hearing } from "./pages/hearing/Hearing";
 import { OneShot } from "./pages/oneShot/OneShot";
@@ -46,7 +45,6 @@ function App() {
             <Route path="hearing" element={<Hearing />} />
             <Route path="consult" element={<Consult />} />
             <Route path="dressing" element={<Dressing />} />
-            <Route path="dislike" element={<Dislike />} />
             <Route path="delivery" element={<Delivery />} />
             <Route path="plan_change" element={<PlanChange />} />
             <Route path="unsuspend" element={<Unsuspend />} />
