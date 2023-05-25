@@ -13,6 +13,7 @@ import { Consult } from "./pages/consult/Consult";
 import { Delivery } from "./pages/delivery/Delivery";
 import { Dressing } from "./pages/dressing/Dressing";
 import { Hearing } from "./pages/hearing/Hearing";
+import { HearingAboutSize } from "./pages/hearingAboutSize/HearingAboutSize";
 import { OneShot } from "./pages/oneShot/OneShot";
 import { PaymentHistory } from "./pages/paymentHistory/PaymentHistory";
 import { PlanChange } from "./pages/planChange/PlanChange";
@@ -52,6 +53,7 @@ function App() {
             <Route path="buy_items" element={<BuyItem />} />
             <Route path="payment_history" element={<PaymentHistory />} />
             <Route path="point_history" element={<PointHistory />} />
+            <Route path="hearing_about_size" element={<HearingAboutSize />} />
           </Routes>
         </StylistIdContext.Provider>
       </IdTokenContext.Provider>
