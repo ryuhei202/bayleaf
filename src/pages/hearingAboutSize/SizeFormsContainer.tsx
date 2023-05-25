@@ -1,4 +1,4 @@
-import liff from "@line/liff/dist/lib";
+import liff from "@line/liff";
 import { useState } from "react";
 import { TMemberSizeOptionsIndexResponse } from "../../api/memberSizeOptions/useMemberSizeOptionsIndex";
 import { useMemberSizesCreate } from "../../api/memberSizes/useMemberSizesCreate";
