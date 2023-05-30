@@ -1,4 +1,5 @@
 import { Typography } from "../../baseParts/legacy/Typography";
+import { DottedList } from "../../baseParts/lists/DottedList";
 
 type TProps = {
   target: string;
@@ -22,30 +23,8 @@ export const SimpifiedHearing = ({
   return (
     <div className={className ?? ""}>
       <Typography size="xl">コーデの利用シーンと見せたい印象</Typography>
-      <div className="border-[1px] border-gray my-5" />
-      <div className=" m-5 border-2 border-dashed border-themeGray">
-        {hearings.map((hearing, index) => {
-          return (
-            <div
-              className={`py-5 grid grid-cols-3 place-content-center justify-items-center ${
-                index !== hearings.length - 1
-                  ? "border-b-2 border-dashed border-themeGray"
-                  : ""
-              }`}
-              key={hearing.question}
-            >
-              <div className="flex items-center">
-                <Typography weight="regular" color="primary" size="sm">
-                  {hearing.question}
-                </Typography>
-              </div>
-              <div className="col-span-2 justify-self-start flex items-center">
-                <Typography>{hearing.answer}</Typography>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      <div className="border-[1px] border-gray my-5 " />
+      <DottedList listItems={hearings} className="mx-5" />
     </div>
   );
 };

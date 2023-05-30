@@ -1,13 +1,17 @@
 import React from "react";
 
 type Props = {
+  key?: string;
   children?: React.ReactNode;
   className?: string;
 };
 
-export const Page = ({ children, className }: Props) => {
+export const Page = ({ key, children, className }: Props) => {
   return (
-    <div className={`overflow-auto h-screen bg-clay ${className ?? ""}`}>
+    <div
+      key={key}
+      className={`overflow-auto h-screen bg-clay ${className ?? ""}`}
+    >
       {children}
     </div>
   );
