@@ -5,6 +5,7 @@ import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { BeforeHearingConfirm } from "../../components/pageParts/hearing/BeforeHearingConfirm";
 import { HearingAnswerConfirm } from "../../components/pageParts/hearing/HearingAnswerConfirm";
 import { PremiumPlanConfirm } from "../../components/pageParts/hearing/PremiumPlanConfirm";
+import { RankSelectingForm } from "../../components/pageParts/oneShot/RankSelectingForm";
 import { HearingConfirmButtons } from "../../components/resourceParts/hearing/HearingConfirmButtons";
 import { M_PLAN_IDS } from "../../models/shared/Plans";
 import { AnsweredHearings } from "./HearingContainer";
@@ -29,6 +30,7 @@ export const NewHearingContainer = ({ member, nextPlanId }: TProps) => {
       forms: [],
     });
   const [isBackTransition, setIsBackTransition] = useState<boolean>(false);
+  const [isSelectableBRank, setIsSelectableBRank] = useState<boolean>();
   const {
     mutate,
     isLoading: isPostLoading,
@@ -66,26 +68,46 @@ export const NewHearingContainer = ({ member, nextPlanId }: TProps) => {
   if (nextFormId === null) {
     if (firstAnsweredHearings.forms.length <= 0) {
       return (
-        <BeforeHearingConfirm
-          onClick={handleClickFirstNext}
-          planId={nextPlanId}
+        <div data-testid="beforeHearingConfirm">
+          <BeforeHearingConfirm
+            onClick={handleClickFirstNext}
+            planId={nextPlanId}
+          />
+        </div>
+      );
+    }
+    if (
+      nextPlanId === M_PLAN_IDS.PREMIUM &&
+      secondAnsweredHearings.forms.length <= 0
+    ) {
+      return (
+        <PremiumPlanConfirm
+          onClick={handleClickPremiumNext}
+          onCancel={handleCancelPremiumNext}
         />
       );
     }
-    return nextPlanId === M_PLAN_IDS.PREMIUM &&
-      secondAnsweredHearings.forms.length <= 0 ? (
-      <PremiumPlanConfirm
-        onClick={handleClickPremiumNext}
-        onCancel={handleCancelPremiumNext}
-      />
-    ) : (
+
+    if (isSelectableBRank === undefined) {
+      return (
+        <div data-testid="rankSelectingForm">
+          <RankSelectingForm
+            onSubmit={(isSelectable) => setIsSelectableBRank(isSelectable)}
+            onCancel={handleCancelForm}
+          />
+        </div>
+      );
+    }
+
+    return (
       <HearingAnswerConfirm
         title="ヒアリング確認画面"
         confirmAnswers={formattedConfirmAnswers()}
+        isSelectableBRank={isSelectableBRank}
         footer={
           <HearingConfirmButtons
             onClickComplete={handleSubmitComplete}
-            onClickBack={handleCancelForm}
+            onClickBack={() => setIsSelectableBRank(undefined)}
             isPostLoading={isPostLoading}
           />
         }
