@@ -9,18 +9,13 @@ import { Typography } from "../../baseParts/legacy/Typography";
 import { ArrowIcon } from "../../baseParts/legacy/icons/ArrowIcon";
 
 type TProps = {
-  readonly isSelectableBRank: boolean;
-  readonly onSelect: (value: boolean) => void;
-  readonly onSubmit: () => void;
+  readonly onSubmit: (isSelectable: boolean) => void;
   readonly onCancel: () => void;
 };
-export const RankSelectingForm = ({
-  isSelectableBRank,
-  onSelect,
-  onSubmit,
-  onCancel,
-}: TProps) => {
+export const RankSelectingForm = ({ onSubmit, onCancel }: TProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+  const [isSelectableBRank, setIsSelectableBRank] = useState<boolean>(false);
+
   return (
     <Page className="h-screen">
       <div className="flex flex-col justify-between h-screen">
@@ -35,13 +30,13 @@ export const RankSelectingForm = ({
           <div>
             <SelectButton
               selected={!isSelectableBRank}
-              onClick={() => onSelect(false)}
+              onClick={() => setIsSelectableBRank(false)}
             >
               Aランクでコーデを作ってほしい
             </SelectButton>
             <SelectButton
               selected={isSelectableBRank}
-              onClick={() => onSelect(true)}
+              onClick={() => setIsSelectableBRank(true)}
               className="mt-6"
             >
               Bランクアイテムがあれば、
@@ -77,7 +72,11 @@ export const RankSelectingForm = ({
             <IconButton className="flex-none" onClick={onCancel}>
               <ArrowIcon className="h-10 my-auto" />
             </IconButton>
-            <Button size="none" className="grow ml-3" onClick={onSubmit}>
+            <Button
+              size="none"
+              className="grow ml-3"
+              onClick={() => onSubmit(isSelectableBRank)}
+            >
               <Typography className="my-auto">次へ</Typography>
             </Button>
           </div>

@@ -89,10 +89,6 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
     setIsBackTransition(true);
   };
 
-  const handleRankSelect = (isSelectable: boolean) => {
-    setIsSelectableBRank(isSelectable);
-  };
-
   const categorizeHearingAnswers = (): THearingAnswer => {
     return {
       answer: answeredHearings.forms.reduce(
@@ -190,9 +186,10 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
     case "rank":
       return (
         <RankSelectingForm
-          isSelectableBRank={isSelectableBRank}
-          onSelect={handleRankSelect}
-          onSubmit={() => setStep("confirm")}
+          onSubmit={(isSelectable: boolean) => {
+            setIsSelectableBRank(isSelectable);
+            setStep("confirm");
+          }}
           onCancel={() => {
             handleHearingCancel();
             setStep("hearing");
