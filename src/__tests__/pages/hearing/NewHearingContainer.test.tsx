@@ -1,4 +1,4 @@
-import { cleanup, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ReactElement } from "react";
 import { BrowserRouter } from "react-router-dom";
@@ -111,7 +111,6 @@ describe("NewHearingContainer.tsx", () => {
   });
 
   test("スタンダードプランで全てのヒアリングに回答し終えたら、RankSelectingFormが表示される", async () => {
-    cleanup();
     // Arrange
     server.use(
       getHearingFormShowMock({
