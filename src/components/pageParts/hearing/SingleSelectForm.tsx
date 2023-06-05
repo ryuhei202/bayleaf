@@ -5,12 +5,12 @@ import { TAnsweredForm } from "../../../pages/hearing/HearingContainer";
 import { Button } from "../../baseParts/legacy/Button";
 import { FooterWrapper } from "../../baseParts/legacy/FooterWrapper";
 import { IconButton } from "../../baseParts/legacy/IconButton";
-import { ArrowIcon } from "../../baseParts/legacy/icons/ArrowIcon";
-import { TextAreaAlt } from "../../baseParts/legacy/inputs/TextAreaAlt";
 import { Page } from "../../baseParts/legacy/Page";
 import { PageHeader } from "../../baseParts/legacy/PageHeader";
 import { SelectButton } from "../../baseParts/legacy/SelectButton";
 import { Typography } from "../../baseParts/legacy/Typography";
+import { ArrowIcon } from "../../baseParts/legacy/icons/ArrowIcon";
+import { TextAreaAlt } from "../../baseParts/legacy/inputs/TextAreaAlt";
 
 type TProps = {
   readonly response: THearingFormShowResponse;

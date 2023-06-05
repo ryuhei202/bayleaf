@@ -40,7 +40,7 @@ export const BeforeHearingConfirm = ({ onClick, planId }: TProps) => {
           </div>
         </div>
         <div className="flex flex-col space-y-1 align-middle px-5 py-3 my-auto">
-          <Button onClick={onClick} dataTestId="BuyItemSelectSubmitButton">
+          <Button onClick={onClick} dataTestId="startHearingLabel">
             ヒアリングに進む
           </Button>
         </div>

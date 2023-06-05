@@ -15,7 +15,7 @@ export const getHearingFormShowMock = ({
   return rest.get(
     `${process.env.REACT_APP_HOST_URL}/leeaf/hearing_forms/${hearingFormId}`,
     (_req, res, ctx) => {
-      return res.once(ctx.status(status), ctx.json(response));
+      return res(ctx.status(status), ctx.json(response));
     }
   );
 };

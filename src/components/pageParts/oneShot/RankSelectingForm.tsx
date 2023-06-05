@@ -69,7 +69,11 @@ export const RankSelectingForm = ({ onSubmit, onCancel }: TProps) => {
         </div>
         <FooterWrapper className="px-3 py-4">
           <div className="flex flex-row">
-            <IconButton className="flex-none" onClick={onCancel}>
+            <IconButton
+              className="flex-none"
+              onClick={onCancel}
+              dataTestId="rankFormBackBtnLabel"
+            >
               <ArrowIcon className="h-10 my-auto" />
             </IconButton>
             <Button

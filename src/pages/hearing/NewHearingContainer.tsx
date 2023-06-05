@@ -81,10 +81,12 @@ export const NewHearingContainer = ({ member, nextPlanId }: TProps) => {
       secondAnsweredHearings.forms.length <= 0
     ) {
       return (
-        <PremiumPlanConfirm
-          onClick={handleClickPremiumNext}
-          onCancel={handleCancelPremiumNext}
-        />
+        <div data-testid="premiumPlanConfirm">
+          <PremiumPlanConfirm
+            onClick={handleClickPremiumNext}
+            onCancel={handleCancelPremiumNext}
+          />
+        </div>
       );
     }
 
@@ -100,33 +102,36 @@ export const NewHearingContainer = ({ member, nextPlanId }: TProps) => {
     }
 
     return (
-      <HearingAnswerConfirm
-        title="ヒアリング確認画面"
-        confirmAnswers={formattedConfirmAnswers()}
-        isSelectableBRank={isSelectableBRank}
-        footer={
-          <HearingConfirmButtons
-            onClickComplete={handleSubmitComplete}
-            onClickBack={() => setIsSelectableBRank(undefined)}
-            isPostLoading={isPostLoading}
-          />
-        }
-      />
+      <div data-testid="hearingAnswerConfirm">
+        <HearingAnswerConfirm
+          title="ヒアリング確認画面"
+          confirmAnswers={formattedConfirmAnswers()}
+          isSelectableBRank={isSelectableBRank}
+          footer={
+            <HearingConfirmButtons
+              onClickComplete={handleSubmitComplete}
+              onClickBack={() => setIsSelectableBRank(undefined)}
+              isPostLoading={isPostLoading}
+            />
+          }
+        />
+      </div>
     );
   }
-
   return (
-    <HearingFormFetcher
-      onSubmitForm={handleSubmitForm}
-      onCancelForm={handleCancelForm}
-      nextFormId={nextFormId}
-      previousAnsweredHearing={
-        currentAnswerNumber === 1
-          ? firstAnsweredHearings.forms.slice(-1)[0]
-          : secondAnsweredHearings.forms.slice(-1)[0]
-      }
-      isBackTransition={isBackTransition}
-      member={member}
-    />
+    <div data-testid="hearingFormFetcher">
+      <HearingFormFetcher
+        onSubmitForm={handleSubmitForm}
+        onCancelForm={handleCancelForm}
+        nextFormId={nextFormId}
+        previousAnsweredHearing={
+          currentAnswerNumber === 1
+            ? firstAnsweredHearings.forms.slice(-1)[0]
+            : secondAnsweredHearings.forms.slice(-1)[0]
+        }
+        isBackTransition={isBackTransition}
+        member={member}
+      />
+    </div>
   );
 };
