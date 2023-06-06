@@ -6,9 +6,9 @@
     "@headlessui/react": "^1.7.15",
     "@line/liff": "~2.22.1",
     "@line/liff-inspector": "^1.0.2",
-    "@sentry/cli": "^2.17.5",
-    "@sentry/react": "^7.50.0",
-    "@sentry/tracing": "^7.50.0",
+    "@sentry/cli": "^2.18.1",
+    "@sentry/react": "^7.54.0",
+    "@sentry/tracing": "^7.54.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.2.0",
@@ -83,7 +83,7 @@
     }
   },
   "devDependencies": {
-    "@sentry/webpack-plugin": "^1.20.1",
+    "@sentry/webpack-plugin": "^2.2.0",
     "@storybook/addon-actions": "^6.5.13",
     "@storybook/addon-essentials": "^6.5.13",
     "@storybook/addon-links": "^6.5.13",

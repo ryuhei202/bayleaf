@@ -1,9 +1,9 @@
-import SentryWebpackPlugin from "@sentry/webpack-plugin";
+import { sentryWebpackPlugin } from "@sentry/webpack-plugin";
 
 module.exports = {
   devtool: "source-map",
   plugins: [
-    new SentryWebpackPlugin({
+    sentryWebpackPlugin({
       authToken: process.env.REACT_APP_SENTRY_AUTH_TOKEN,
       org: process.env.REACT_APP_SENTRY_ORG,
       project: process.env.REACT_APP_SENTRY_PROJECT,
