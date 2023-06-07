@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
-import { Button } from "./Button";
+import { Button } from "../Button";
 
 type Props = {
   selected: boolean;
   disabled?: boolean;
   children?: React.ReactNode;
   className?: string;
+  dataTestId?: string;
   onClick?: () => void;
   onSelectTransitionEnd?: () => void;
 };
@@ -14,6 +15,7 @@ export const SelectButton = ({
   selected,
   children,
   className,
+  dataTestId,
   onSelectTransitionEnd,
   ...props
 }: Props) => {
@@ -28,7 +30,8 @@ export const SelectButton = ({
   return (
     <Button
       className={`${className ?? ""} transition ${durationClass}`}
-      variant={selected ? "primary" : "default"}
+      variant={selected ? "default" : "light"}
+      dataTestId={dataTestId ?? ""}
       {...props}
     >
       {children}
