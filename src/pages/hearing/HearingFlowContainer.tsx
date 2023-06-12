@@ -1,5 +1,5 @@
 import { TMembersIndexResponse } from "../../api/members/TMembersIndexResponse";
-import { Button } from "../../components/baseParts/legacy/Button";
+import { Button } from "../../components/baseParts/Button";
 import { HearingAnswerConfirm } from "../../components/pageParts/hearing/HearingAnswerConfirm";
 import { THearingAnswer } from "../../models/hearing/THearingAnswer";
 import { AnsweredHearings, TAnsweredForm } from "./HearingContainer";
@@ -37,46 +37,49 @@ export const HearingFlowContainer = ({
 }: TProps) => {
   if (nextFormId === null) {
     return (
-      <HearingAnswerConfirm
-        title="前回のヒアリング"
-        confirmAnswers={confirmAnswers}
-        coordinateNum={currentAnswerNumber}
-        footer={
-          <>
-            <Button
-              onClick={onClickStart}
-              variant="primary"
-              disableElevation
-              border
-            >
-              ヒアリングを開始する
-            </Button>
-            <Button
-              variant="default"
-              onClick={onClickSameHearing}
-              border={true}
-            >
-              前回と同じ内容でコーデを作る
-            </Button>
-            {currentAnswerNumber === 2 && (
-              <Button variant="text" onClick={onClickBack}>
-                前に戻る
+      <div data-testid="hearingAnswerConfirm">
+        <HearingAnswerConfirm
+          title="前回のヒアリング"
+          confirmAnswers={confirmAnswers}
+          coordinateNum={currentAnswerNumber}
+          footer={
+            <>
+              <Button
+                onClick={onClickStart}
+                disableElevation
+                dataTestId="startHearingBtnLabel"
+              >
+                ヒアリングを開始する
               </Button>
-            )}
-          </>
-        }
-      />
+              <Button
+                variant="default"
+                onClick={onClickSameHearing}
+                dataTestId="sameHearingBtnLabel"
+              >
+                前回と同じ内容でコーデを作る
+              </Button>
+              {currentAnswerNumber === 2 && (
+                <Button variant="line" onClick={onClickBack}>
+                  前に戻る
+                </Button>
+              )}
+            </>
+          }
+        />
+      </div>
     );
   }
 
   return (
-    <HearingFormFetcher
-      onSubmitForm={onSubmitForm}
-      onCancelForm={onCancelForm}
-      nextFormId={nextFormId}
-      previousAnsweredHearing={answeredHearings.forms.slice(-1)[0]}
-      isBackTransition={isBackTransition}
-      member={member}
-    />
+    <div data-testid="hearingFormFetcher">
+      <HearingFormFetcher
+        onSubmitForm={onSubmitForm}
+        onCancelForm={onCancelForm}
+        nextFormId={nextFormId}
+        previousAnsweredHearing={answeredHearings.forms.slice(-1)[0]}
+        isBackTransition={isBackTransition}
+        member={member}
+      />
+    </div>
   );
 };

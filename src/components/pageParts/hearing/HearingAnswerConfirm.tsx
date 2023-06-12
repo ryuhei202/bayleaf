@@ -10,7 +10,7 @@ type TProps = {
   readonly subTitle?: string;
   readonly confirmAnswers: THearingAnswer[];
   readonly coordinateNum?: number;
-  readonly isSelectableBRank: boolean;
+  readonly isSelectableBRank?: boolean;
   readonly footer: JSX.Element;
 };
 
@@ -34,14 +34,16 @@ export const HearingAnswerConfirm = ({
               key={index}
             />
           ))}
-          <div className="bg-white mt-3 rounded-md overflow-hidden px-4 py-4">
-            <Typography color="primary" size="2xl">
-              Bランクを希望しますか？
-            </Typography>
-            <Typography color="primary" className="mt-2 ml-2">
-              {isSelectableBRank ? "希望する" : "希望しない"}
-            </Typography>
-          </div>
+          {isSelectableBRank !== undefined && (
+            <div className="bg-white mt-3 rounded-md overflow-hidden px-4 py-4">
+              <Typography color="primary" size="2xl">
+                Bランクを希望しますか？
+              </Typography>
+              <Typography color="primary" className="mt-2 ml-2">
+                {isSelectableBRank ? "希望する" : "希望しない"}
+              </Typography>
+            </div>
+          )}
         </div>
       </div>
       <FooterWrapper className="px-3 py-4">{footer}</FooterWrapper>
