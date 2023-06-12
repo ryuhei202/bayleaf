@@ -40,7 +40,7 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
   const [nextFormId, setNextFormId] = useState<number | null>(null);
   const [isBackTransition, setIsBackTransition] = useState<boolean>(false);
   const [isPostComplete, setIsPostComplete] = useState(false);
-  const [isSelectableBRank, setIsSelectableBRank] = useState<boolean>(false);
+  const [isSelectableBRank, setIsSelectableBRank] = useState<boolean>();
   const {
     mutate,
     isLoading: isPostLoading,
@@ -204,7 +204,7 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
             confirmAnswer={categorizeHearingAnswers()}
             wearingDate={wearingDate}
             isPostLoading={isPostLoading}
-            isSelectableBRank={isSelectableBRank}
+            isSelectableBRank={isSelectableBRank!}
             onSubmit={() => {
               mutate(
                 {
@@ -215,7 +215,7 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
                       forms: answeredHearings.forms,
                     },
                   ],
-                  isSelectableBRank,
+                  isSelectableBRank: isSelectableBRank!,
                   priceTaxIn: withTax(
                     OneShot.price.withoutTax - discountPrice()
                   ),
@@ -226,6 +226,7 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
               );
             }}
             onCancelForm={() => {
+              setIsSelectableBRank(undefined);
               setStep("rank");
             }}
             discountPrice={discountPrice()}
