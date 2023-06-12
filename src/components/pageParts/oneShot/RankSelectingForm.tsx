@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Button } from "../../baseParts/Button";
 import { AlertDialog } from "../../baseParts/dialogs/AlertDialog";
 import { FooterWrapper } from "../../baseParts/legacy/FooterWrapper";
 import { IconButton } from "../../baseParts/legacy/IconButton";
@@ -9,18 +8,17 @@ import { Typography } from "../../baseParts/legacy/Typography";
 import { ArrowIcon } from "../../baseParts/legacy/icons/ArrowIcon";
 
 type TProps = {
-  readonly isSelectableBRank: boolean;
-  readonly onSelect: (value: boolean) => void;
-  readonly onSubmit: () => void;
+  readonly isSelectableBRank?: boolean;
+  readonly onSelect: (isSelectable: boolean) => void;
   readonly onCancel: () => void;
 };
 export const RankSelectingForm = ({
   isSelectableBRank,
   onSelect,
-  onSubmit,
   onCancel,
 }: TProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+
   return (
     <Page className="h-screen">
       <div className="flex flex-col justify-between h-screen">
@@ -34,14 +32,24 @@ export const RankSelectingForm = ({
           </div>
           <div>
             <SelectButton
-              selected={!isSelectableBRank}
-              onClick={() => onSelect(false)}
+              selected={
+                isSelectableBRank === undefined ? false : !isSelectableBRank
+              }
+              onClick={() => {
+                if (isSelectableBRank !== undefined) return;
+                onSelect(false);
+              }}
             >
               Aランクでコーデを作ってほしい
             </SelectButton>
             <SelectButton
-              selected={isSelectableBRank}
-              onClick={() => onSelect(true)}
+              selected={
+                isSelectableBRank === undefined ? false : isSelectableBRank
+              }
+              onClick={() => {
+                if (isSelectableBRank !== undefined) return;
+                onSelect(true);
+              }}
               className="mt-6"
             >
               Bランクアイテムがあれば、
@@ -74,12 +82,13 @@ export const RankSelectingForm = ({
         </div>
         <FooterWrapper className="px-3 py-4">
           <div className="flex flex-row">
-            <IconButton className="flex-none" onClick={onCancel}>
+            <IconButton
+              className="flex-none"
+              onClick={onCancel}
+              dataTestId="rankFormBackBtnLabel"
+            >
               <ArrowIcon className="h-10 my-auto" />
             </IconButton>
-            <Button size="none" className="grow ml-3" onClick={onSubmit}>
-              <Typography className="my-auto">次へ</Typography>
-            </Button>
           </div>
         </FooterWrapper>
       </div>
