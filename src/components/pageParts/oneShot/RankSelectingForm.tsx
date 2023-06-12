@@ -35,7 +35,10 @@ export const RankSelectingForm = ({
               selected={
                 isSelectableBRank === undefined ? false : !isSelectableBRank
               }
-              onClick={() => onSelect(false)}
+              onClick={() => {
+                if (isSelectableBRank !== undefined) return;
+                onSelect(false);
+              }}
             >
               Aランクでコーデを作ってほしい
             </SelectButton>
@@ -43,7 +46,10 @@ export const RankSelectingForm = ({
               selected={
                 isSelectableBRank === undefined ? false : isSelectableBRank
               }
-              onClick={() => onSelect(true)}
+              onClick={() => {
+                if (isSelectableBRank !== undefined) return;
+                onSelect(true);
+              }}
               className="mt-6"
             >
               Bランクアイテムがあれば、
