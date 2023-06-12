@@ -165,7 +165,6 @@ describe("ContinuedHearingContainer.tsx", () => {
 
     // ランク選択画面でAランクを選択したら、ヒアリング確認画面が表示される
     user.click(await screen.findByText("Aランクでコーデを作ってほしい"));
-    user.click(await screen.findByText("次へ"));
     expect(
       await screen.findByTestId("hearingAnswerConfirm")
     ).toBeInTheDocument();
@@ -222,7 +221,6 @@ describe("ContinuedHearingContainer.tsx", () => {
 
     // ランク選択画面でAランクを選択したら、ヒアリング確認画面が表示される
     user.click(await screen.findByText("Aランクでコーデを作ってほしい"));
-    user.click(await screen.findByText("次へ"));
     expect(
       await screen.findByTestId("hearingAnswerConfirm")
     ).toBeInTheDocument();
@@ -272,7 +270,6 @@ describe("ContinuedHearingContainer.tsx", () => {
 
     // ランク選択画面でAランクを選択したら、ヒアリング確認画面が表示される
     user.click(await screen.findByText("Aランクでコーデを作ってほしい"));
-    user.click(await screen.findByText("次へ"));
     expect(
       await screen.findByTestId("hearingAnswerConfirm")
     ).toBeInTheDocument();
@@ -346,7 +343,6 @@ describe("ContinuedHearingContainer.tsx", () => {
 
     // ランク選択画面でAランクを選択したら、ヒアリング確認画面が表示される
     user.click(await screen.findByText("Aランクでコーデを作ってほしい"));
-    user.click(await screen.findByText("次へ"));
     expect(
       await screen.findByTestId("hearingAnswerConfirm")
     ).toBeInTheDocument();
@@ -406,7 +402,6 @@ describe("ContinuedHearingContainer.tsx", () => {
 
     // ランク選択画面でAランクを選択したら、ヒアリング確認画面が表示される
     user.click(await screen.findByText("Aランクでコーデを作ってほしい"));
-    user.click(await screen.findByText("次へ"));
     expect(
       await screen.findByTestId("hearingAnswerConfirm")
     ).toBeInTheDocument();
@@ -470,7 +465,6 @@ describe("ContinuedHearingContainer.tsx", () => {
     };
     user.click(await screen.findByText(textMatcher));
     expect(await screen.findByTestId("rankSelectingForm")).toBeInTheDocument();
-    user.click(await screen.findByText("次へ"));
     expect(
       await screen.findByTestId("hearingAnswerConfirm")
     ).toBeInTheDocument();
