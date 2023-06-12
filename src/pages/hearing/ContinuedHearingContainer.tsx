@@ -61,6 +61,7 @@ export const ContinuedHearingContainer = ({ hearings, member }: TProps) => {
     firstAnsweredHearings,
     secondAnsweredHearings,
     nextFormId,
+    isSelectableBRank,
     setNextFormId,
     setFirstAnsweredHearings,
     setSecondAnsweredHearings,

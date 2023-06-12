@@ -40,6 +40,7 @@ type TArgs = {
   readonly firstAnsweredHearings: AnsweredHearings;
   readonly secondAnsweredHearings: AnsweredHearings;
   readonly nextFormId: number | null;
+  readonly isSelectableBRank?: boolean;
   readonly setNextFormId: React.Dispatch<React.SetStateAction<number | null>>;
   readonly setIsBackTransition: React.Dispatch<React.SetStateAction<boolean>>;
   readonly setFirstAnsweredHearings: React.Dispatch<
@@ -64,6 +65,7 @@ export const getContinuedHearingContainerHandler = ({
   firstAnsweredHearings,
   secondAnsweredHearings,
   nextFormId,
+  isSelectableBRank,
   setNextFormId,
   setIsBackTransition,
   setFirstAnsweredHearings,
@@ -154,6 +156,7 @@ export const getContinuedHearingContainerHandler = ({
     const params: TChartCreateForPlanRequest = {
       memberId: member.id,
       hearings,
+      isSelectableBRank: isSelectableBRank!,
     };
     mutate(params, {
       onSuccess: () => {

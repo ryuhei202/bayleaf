@@ -50,6 +50,7 @@ export const NewHearingContainer = ({ member, nextPlanId }: TProps) => {
     memberId: member.id,
     secondAnsweredHearings,
     currentAnswerNumber,
+    isSelectableBRank,
     setNextFormId,
     setCurrentAnswerNumber,
     setFirstAnsweredHearings,
