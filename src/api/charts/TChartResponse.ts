@@ -5,4 +5,5 @@ export type TChartResponse = {
   readonly itemImagePaths: string[];
   readonly planName: string | null;
   readonly planId: number | null;
+  readonly isSelectableBRank: boolean;
 };

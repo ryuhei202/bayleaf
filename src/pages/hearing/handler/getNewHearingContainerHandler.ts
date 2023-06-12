@@ -61,11 +61,13 @@ export const getNewHearingContainerHandler = ({
 }: TArgs): THearingContainerHandler => {
   const handleClickFirstNext = () => {
     setNextFormId(HEARING_FORM.FIRST);
+    setIsBackTransition(false);
   };
 
   const handleClickPremiumNext = () => {
     setCurrentAnswerNumber(2);
     setNextFormId(HEARING_FORM.FIRST);
+    setIsBackTransition(false);
   };
 
   const handleCancelPremiumNext = () => {

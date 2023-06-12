@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { M_PLAN_IDS } from "../../../models/shared/Plans";
-import { Button } from "../../baseParts/legacy/Button";
+import { Button } from "../../baseParts/Button";
 import { Page } from "../../baseParts/legacy/Page";
 import { PageHeader } from "../../baseParts/legacy/PageHeader";
 
@@ -40,7 +40,7 @@ export const BeforeHearingConfirm = ({ onClick, planId }: TProps) => {
           </div>
         </div>
         <div className="flex flex-col space-y-1 align-middle px-5 py-3 my-auto">
-          <Button onClick={onClick} variant="primary">
+          <Button onClick={onClick} dataTestId="startHearingLabel">
             ヒアリングに進む
           </Button>
         </div>
