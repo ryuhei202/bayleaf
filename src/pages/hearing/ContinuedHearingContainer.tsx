@@ -103,7 +103,7 @@ export const ContinuedHearingContainer = ({ hearings, member }: TProps) => {
       return (
         <div data-testid="rankSelectingForm">
           <RankSelectingForm
-            onSubmit={(isSelectable) => setIsSelectableBRank(isSelectable)}
+            onSelect={(isSelectable) => setIsSelectableBRank(isSelectable)}
             onCancel={handleCancelForm}
           />
         </div>
