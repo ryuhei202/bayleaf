@@ -186,7 +186,8 @@ export const OneShotContainer = ({ memberData, daysFrom }: TProps) => {
     case "rank":
       return (
         <RankSelectingForm
-          onSubmit={(isSelectable: boolean) => {
+          isSelectableBRank={isSelectableBRank}
+          onSelect={(isSelectable: boolean) => {
             setIsSelectableBRank(isSelectable);
             setStep("confirm");
           }}

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Button } from "../../baseParts/Button";
 import { AlertDialog } from "../../baseParts/dialogs/AlertDialog";
 import { FooterWrapper } from "../../baseParts/legacy/FooterWrapper";
 import { IconButton } from "../../baseParts/legacy/IconButton";
@@ -9,12 +8,16 @@ import { Typography } from "../../baseParts/legacy/Typography";
 import { ArrowIcon } from "../../baseParts/legacy/icons/ArrowIcon";
 
 type TProps = {
-  readonly onSubmit: (isSelectable: boolean) => void;
+  readonly isSelectableBRank?: boolean;
+  readonly onSelect: (isSelectable: boolean) => void;
   readonly onCancel: () => void;
 };
-export const RankSelectingForm = ({ onSubmit, onCancel }: TProps) => {
+export const RankSelectingForm = ({
+  isSelectableBRank,
+  onSelect,
+  onCancel,
+}: TProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
-  const [isSelectableBRank, setIsSelectableBRank] = useState<boolean>(false);
 
   return (
     <Page className="h-screen">
@@ -29,14 +32,18 @@ export const RankSelectingForm = ({ onSubmit, onCancel }: TProps) => {
           </div>
           <div>
             <SelectButton
-              selected={!isSelectableBRank}
-              onClick={() => setIsSelectableBRank(false)}
+              selected={
+                isSelectableBRank === undefined ? false : !isSelectableBRank
+              }
+              onClick={() => onSelect(false)}
             >
               Aランクでコーデを作ってほしい
             </SelectButton>
             <SelectButton
-              selected={isSelectableBRank}
-              onClick={() => setIsSelectableBRank(true)}
+              selected={
+                isSelectableBRank === undefined ? false : isSelectableBRank
+              }
+              onClick={() => onSelect(true)}
               className="mt-6"
             >
               Bランクアイテムがあれば、
@@ -76,13 +83,6 @@ export const RankSelectingForm = ({ onSubmit, onCancel }: TProps) => {
             >
               <ArrowIcon className="h-10 my-auto" />
             </IconButton>
-            <Button
-              size="none"
-              className="grow ml-3"
-              onClick={() => onSubmit(isSelectableBRank)}
-            >
-              <Typography className="my-auto">次へ</Typography>
-            </Button>
           </div>
         </FooterWrapper>
       </div>

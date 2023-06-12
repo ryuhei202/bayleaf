@@ -94,7 +94,8 @@ export const NewHearingContainer = ({ member, nextPlanId }: TProps) => {
       return (
         <div data-testid="rankSelectingForm">
           <RankSelectingForm
-            onSubmit={(isSelectable) => setIsSelectableBRank(isSelectable)}
+            isSelectableBRank={isSelectableBRank}
+            onSelect={(isSelectable) => setIsSelectableBRank(isSelectable)}
             onCancel={handleCancelForm}
           />
         </div>
