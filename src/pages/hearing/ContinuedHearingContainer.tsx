@@ -6,6 +6,7 @@ import { ErrorPage } from "../../components/baseParts/pages/ErrorPage";
 import { BeforeHearingConfirm } from "../../components/pageParts/hearing/BeforeHearingConfirm";
 import { HearingAnswerConfirm } from "../../components/pageParts/hearing/HearingAnswerConfirm";
 import { PremiumPlanConfirm } from "../../components/pageParts/hearing/PremiumPlanConfirm";
+import { RankSelectingForm } from "../../components/pageParts/oneShot/RankSelectingForm";
 import { HearingConfirmButtons } from "../../components/resourceParts/hearing/HearingConfirmButtons";
 import { AnsweredHearings } from "./HearingContainer";
 import { HearingFlowContainer } from "./HearingFlowContainer";
@@ -30,6 +31,7 @@ export const ContinuedHearingContainer = ({ hearings, member }: TProps) => {
     });
   const [isBackTransition, setIsBackTransition] = useState<boolean>(false);
   const [isHearingStarted, setIsHearingStarted] = useState<boolean>(false);
+  const [isSelectableBRank, setIsSelectableBRank] = useState<boolean>();
   const {
     mutate,
     isLoading: isPostLoading,
@@ -59,6 +61,7 @@ export const ContinuedHearingContainer = ({ hearings, member }: TProps) => {
     firstAnsweredHearings,
     secondAnsweredHearings,
     nextFormId,
+    isSelectableBRank,
     setNextFormId,
     setFirstAnsweredHearings,
     setSecondAnsweredHearings,
@@ -76,35 +79,52 @@ export const ContinuedHearingContainer = ({ hearings, member }: TProps) => {
 
   if (!isHearingStarted) {
     return (
-      <BeforeHearingConfirm
-        onClick={handleClickHearingStart}
-        planId={member.mPlanId}
-      />
+      <div data-testid="beforeHearingConfirm">
+        <BeforeHearingConfirm
+          onClick={handleClickHearingStart}
+          planId={member.mPlanId}
+        />
+      </div>
     );
   }
 
   if (shouldAnswerTwo()) {
     return (
-      <PremiumPlanConfirm
-        onClick={handleClickPremiumNext}
-        onCancel={handleCancelPremiumNext}
-      />
+      <div data-testid="premiumPlanConfirm">
+        <PremiumPlanConfirm
+          onClick={handleClickPremiumNext}
+          onCancel={handleCancelPremiumNext}
+        />
+      </div>
     );
   }
 
   if (isAnsweredAll()) {
-    return (
-      <HearingAnswerConfirm
-        title="ヒアリング確認画面"
-        confirmAnswers={getConfirmAnswers()}
-        footer={
-          <HearingConfirmButtons
-            onClickComplete={handlePost}
-            onClickBack={handleCancelForm}
-            isPostLoading={isPostLoading}
+    if (isSelectableBRank === undefined) {
+      return (
+        <div data-testid="rankSelectingForm">
+          <RankSelectingForm
+            onSelect={(isSelectable) => setIsSelectableBRank(isSelectable)}
+            onCancel={handleCancelForm}
           />
-        }
-      />
+        </div>
+      );
+    }
+    return (
+      <div data-testid="hearingAnswerConfirm">
+        <HearingAnswerConfirm
+          title="ヒアリング確認画面"
+          confirmAnswers={getConfirmAnswers()}
+          isSelectableBRank={isSelectableBRank}
+          footer={
+            <HearingConfirmButtons
+              onClickComplete={handlePost}
+              onClickBack={() => setIsSelectableBRank(undefined)}
+              isPostLoading={isPostLoading}
+            />
+          }
+        />
+      </div>
     );
   }
 

@@ -6,6 +6,7 @@ type Props = {
   className?: string;
   onClick?: () => void;
   GAEvent?: TGAEvent;
+  dataTestId?: string;
 };
 
 export const IconButton = ({
@@ -13,6 +14,7 @@ export const IconButton = ({
   className,
   onClick,
   GAEvent,
+  dataTestId,
 }: Props) => {
   const handleClick = () => {
     if (onClick === undefined) return;
@@ -25,6 +27,7 @@ export const IconButton = ({
     <button
       className={`${className ?? ""} text-slate-700`}
       onClick={handleClick}
+      data-testid={dataTestId}
     >
       {children}
     </button>

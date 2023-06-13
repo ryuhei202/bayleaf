@@ -31,6 +31,7 @@ export const HearingFetcher = ({ member, chart }: TProps) => {
         confirmAnswers={hearingIndexData.hearings.map((hearing) => {
           return { answer: hearing.categorizedForms };
         })}
+        isSelectableBRank={chart.isSelectableBRank}
         footer={
           <Button
             variant="primary"

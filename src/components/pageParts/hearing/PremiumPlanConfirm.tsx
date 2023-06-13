@@ -1,4 +1,4 @@
-import { Button } from "../../baseParts/legacy/Button";
+import { Button } from "../../baseParts/Button";
 import { Page } from "../../baseParts/legacy/Page";
 import { PageHeader } from "../../baseParts/legacy/PageHeader";
 
@@ -19,10 +19,10 @@ export const PremiumPlanConfirm = ({ onClick, onCancel }: TProps) => {
           </div>
         </div>
         <div className="flex flex-col space-y-1 align-middle px-5 py-3 my-auto">
-          <Button onClick={onClick} variant="primary">
+          <Button onClick={onClick} dataTestId="nextHearingLabel">
             二度目のヒアリングに進む
           </Button>
-          <Button onClick={onCancel} variant="text">
+          <Button onClick={onCancel} variant="line">
             一つ前に戻る
           </Button>
         </div>
