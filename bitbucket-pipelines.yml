@@ -39,6 +39,6 @@ pipelines:
           script:
             - pipe: atlassian/firebase-deploy:3.0.0
               variables:
-                FIREBASE_TOKEN: $FIREBASE_TOKEN
+                KEY_FILE: $KEY_FILE_PRODUCTION
                 PROJECT_ID: "production"
                 DEBUG: "true"
