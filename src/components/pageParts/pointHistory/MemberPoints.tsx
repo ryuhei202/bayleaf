@@ -5,7 +5,7 @@ import { PointHistoryList, TMemberPoint } from "./PointHistoryList";
 
 type TProps = {
   currentPage: number;
-  onClickPagination: (page: number) => void;
+  onClickPagenation: (page: number) => void;
   maxPage: number;
   pointData: TMemberPoint[];
   totalPoint: number;
@@ -13,7 +13,7 @@ type TProps = {
 
 export const MemberPoints = ({
   currentPage,
-  onClickPagination,
+  onClickPagenation,
   maxPage,
   pointData,
   totalPoint,
@@ -48,7 +48,7 @@ export const MemberPoints = ({
       <Pagination
         maxPage={maxPage}
         currentPage={currentPage}
-        onClickPagination={onClickPagination}
+        onClickPagination={onClickPagenation}
         className="mt-6"
       />
     </Page>

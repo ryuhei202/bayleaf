@@ -26,9 +26,9 @@ export const useMemberPointsIndex = ({
   const { data, error, refetch, isRefetching, isRefetchError } =
     useGetRequest<TMemberPointsIndexResponse>(
       `members/${memberId}/member_points`,
-      params
+      params,
+      undefined
     );
-
   return {
     data,
     error,

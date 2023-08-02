@@ -14,7 +14,7 @@ export const useGetRequest = <TResponse, TParams = {}>(
 
   const { data, error, isLoading, refetch, isRefetching, isRefetchError } =
     useQuery<TResponse, Error>(
-      path + JSON.stringify(params),
+      path,
       () =>
         customAxios()
           .get(`${process.env.REACT_APP_HOST_URL}/leeaf/${path}`, {
