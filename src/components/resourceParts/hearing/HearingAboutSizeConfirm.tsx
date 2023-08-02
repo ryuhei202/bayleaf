@@ -50,14 +50,14 @@ export const HearingAboutSizeConfirm = ({
   ];
   return (
     <Page>
-      <div className="flex flex-col h-screen px-5">
+      <div className="flex flex-col min-h-screen px-5">
         <PageHeader
           title={<>このサイズ情報で登録しますか？</>}
           className="mb-8"
         />
         <DottedList listItems={listItems} />
       </div>
-      <FooterWrapper className="px-3 py-4 ">
+      <FooterWrapper className="px-3 py-4">
         <div className="flex flex-row">
           <IconButton className="flex-none" onClick={onClickBack}>
             <ArrowIcon className="h-10 my-auto" />
