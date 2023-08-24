@@ -18,6 +18,8 @@ export const Hearing = () => {
         <MemberListContainer setMember={setMember} />
       ) : member.mPlanId === null ? (
         <ErrorPage message="単発利用のお客様はこのページを利用できません" />
+      ) : member.isSuspend ? (
+        <ErrorPage message="停止中のお客様はこのページを利用できません" />
       ) : (
         <HearingChartFetcher
           member={{ ...member, mPlanId: member.mPlanId as number }}
