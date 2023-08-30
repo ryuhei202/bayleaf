@@ -10,7 +10,7 @@ export const EditIcon = ({ className, strokeWidth }: Props) => {
       height="18"
       viewBox="0 0 17 18"
       style={{ width: "1em", height: "1em", verticalAlign: "-.2em" }}
-      className={`${className ?? ""} stroke-current fill-transparent`}
+      className={`${className ?? ""} fill-transparent stroke-current`}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path

@@ -10,8 +10,8 @@ export const DressingFootwear = ({ footwear }: TProps) => {
   return (
     <div>
       <Typography size="xl">コーデに合わせる靴のおすすめ</Typography>
-      <div className="border-[1px] border-gray my-5" />
-      <div className="flex items-center mt-5">
+      <div className="my-5 border-[1px] border-gray" />
+      <div className="mt-5 flex items-center">
         <ExpandableImage
           defaultImageSrc={`${
             process.env.REACT_APP_HOST_URL + footwear.imagePath
@@ -23,7 +23,7 @@ export const DressingFootwear = ({ footwear }: TProps) => {
         />
         <Typography className="px-6">{footwear.name}</Typography>
       </div>
-      <Typography size="xs" color="strong-gray" className="mt-4 ml-2">
+      <Typography size="xs" color="strong-gray" className="ml-2 mt-4">
         ※お持ちの靴と合うか確認したい場合は、スタイリストまでお持ちの靴のお写真をお送りください。
       </Typography>
     </div>

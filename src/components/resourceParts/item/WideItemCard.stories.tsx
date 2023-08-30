@@ -31,7 +31,7 @@ Default.args = {
 
 Default.decorators = [
   (WideItemCard) => (
-    <div className="bg-clay w-full p-2">
+    <div className="w-full bg-clay p-2">
       <WideItemCard>
         <div>
           <p>text</p>

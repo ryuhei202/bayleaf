@@ -12,14 +12,14 @@ type TProps = {
 export const AfterConsult = ({ title, subTitle, btnText, onClick }: TProps) => {
   return (
     <Page>
-      <div className="flex flex-col h-full justify-between">
-        <div className="space-y-1 text-center	h-[50vh] relative">
-          <div className="absolute w-[100vw] px-5 py-3 bottom-0">
+      <div className="flex h-full flex-col justify-between">
+        <div className="relative h-[50vh]	space-y-1 text-center">
+          <div className="absolute bottom-0 w-[100vw] px-5 py-3">
             <PageHeader title={title} className="mb-8" />
             <Typography>{subTitle}</Typography>
           </div>
         </div>
-        <div className="flex flex-col space-y-1 align-middle px-5 py-3 my-auto">
+        <div className="my-auto flex flex-col space-y-1 px-5 py-3 align-middle">
           <Button onClick={onClick} variant="primary">
             {btnText}
           </Button>

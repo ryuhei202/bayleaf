@@ -22,8 +22,8 @@ export const BillingInfo = ({
   onChange,
 }: TProps) => {
   return (
-    <div className="bg-white flex flex-col">
-      <div className="border-dashed border-b-[1px] py-8 items-center flex text-right">
+    <div className="flex flex-col bg-white">
+      <div className="flex items-center border-b-[1px] border-dashed py-8 text-right">
         <div className="w-1/2">
           <Typography size="sm" color="gray">
             参考価格
@@ -62,14 +62,14 @@ export const BillingInfo = ({
         </div>
       </div>
 
-      <div className="border-dashed border-b-[1px] py-8 flex">
-        <Typography className="text-right w-1/2" color="strong-gray">
+      <div className="flex border-b-[1px] border-dashed py-8">
+        <Typography className="w-1/2 text-right" color="strong-gray">
           ポイントを利用する
         </Typography>
         <div className="w-1/2 pr-6">
           <Typography className="text-right" color="strong-gray">
             <input
-              className="border rounded mr-0.5 w-1/2 text-right"
+              className="mr-0.5 w-1/2 rounded border text-right"
               value={selectedPoint.toString()}
               type="number"
               onChange={(e) => onChange(Number(e.target.value))}
@@ -86,7 +86,7 @@ export const BillingInfo = ({
         </div>
       </div>
 
-      <div className="border-dashed border-b-[1px] py-8 flex text-right ">
+      <div className="flex border-b-[1px] border-dashed py-8 text-right ">
         <Typography className=" w-1/2" color="strong-gray">
           ご請求額
         </Typography>
@@ -95,7 +95,7 @@ export const BillingInfo = ({
         </Typography>
       </div>
 
-      <div className="border-dashed border-b-[1px] py-8 flex text-right">
+      <div className="flex border-b-[1px] border-dashed py-8 text-right">
         <Typography className="w-1/2" color="strong-gray">
           付与ポイント
         </Typography>

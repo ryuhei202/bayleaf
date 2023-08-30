@@ -10,10 +10,10 @@ export const DressingAdvice = ({ advices }: TProps) => {
   return (
     <div>
       <Typography size="xl">コーデの着こなし方</Typography>
-      <div className="border-[1px] border-gray my-5" />
+      <div className="my-5 border-[1px] border-gray" />
       <div className="mt-5">
         {advices.map((advice, index) => (
-          <div className="flex items-center my-3" key={index}>
+          <div className="my-3 flex items-center" key={index}>
             <ExpandableImage
               defaultImageSrc={`${
                 advice.imageFileName
@@ -27,7 +27,7 @@ export const DressingAdvice = ({ advices }: TProps) => {
               }`}
               className="w-[15vw]"
             />
-            <Typography className="px-4 w-[80vw]">
+            <Typography className="w-[80vw] px-4">
               {advice.description}
             </Typography>
           </div>

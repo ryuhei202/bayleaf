@@ -24,7 +24,7 @@ export const HearingAnswerConfirm = ({
 }: TProps) => {
   return (
     <Page>
-      <div className="px-2 mb-10 min-h-[calc(100vh-190px)]">
+      <div className="mb-10 min-h-[calc(100vh-190px)] px-2">
         <PageHeader title={title} subtitle={subTitle ?? ""} />
         <div className="mx-1.5">
           {confirmAnswers.map((confirmAnswer, index) => (
@@ -35,11 +35,11 @@ export const HearingAnswerConfirm = ({
             />
           ))}
           {isSelectableBRank !== undefined && (
-            <div className="bg-white mt-3 rounded-md overflow-hidden px-4 py-4">
+            <div className="mt-3 overflow-hidden rounded-md bg-white p-4">
               <Typography color="primary" size="2xl">
                 Bランクを希望しますか？
               </Typography>
-              <Typography color="primary" className="mt-2 ml-2">
+              <Typography color="primary" className="ml-2 mt-2">
                 {isSelectableBRank ? "希望する" : "希望しない"}
               </Typography>
             </div>

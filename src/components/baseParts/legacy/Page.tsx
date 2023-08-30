@@ -10,7 +10,7 @@ export const Page = ({ key, children, className }: Props) => {
   return (
     <div
       key={key}
-      className={`overflow-auto h-screen bg-clay ${className ?? ""}`}
+      className={`h-screen overflow-auto bg-clay ${className ?? ""}`}
     >
       {children}
     </div>

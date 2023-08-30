@@ -35,7 +35,7 @@ export const Review = () => {
 
   if (chartIndexData.charts.length === 0)
     return (
-      <Page className="flex justify-center items-center">
+      <Page className="flex items-center justify-center">
         <Typography>
           <>レビュー対象のレンタルはありません。</>
         </Typography>

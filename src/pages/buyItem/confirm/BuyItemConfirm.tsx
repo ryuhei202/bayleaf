@@ -36,7 +36,7 @@ export const BuyItemConfirm = ({
 }: TProps) => {
   return (
     <div className="bg-clay" data-testid="BuyItemConfirm">
-      <div className="px-6 py-6">
+      <div className="p-6">
         <div className="p-8 text-center text-themeGray">
           レンタル中アイテムの購入確認画面
         </div>
@@ -70,9 +70,9 @@ export const BuyItemConfirm = ({
           selectedPoint={selectedPoint}
           onChange={onChange}
         />
-        <div className="flex flex-row text-center mt-3">
+        <div className="mt-3 flex flex-row text-center">
           <IconButton className="flex-none" onClick={onCancel}>
-            <ArrowIcon className="h-10 my-auto" />
+            <ArrowIcon className="my-auto h-10" />
           </IconButton>
           <Button onClick={onClick} disabled={isPurchaseButtonDisabled}>
             購入する

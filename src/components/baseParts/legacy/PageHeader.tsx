@@ -14,7 +14,7 @@ export const PageHeader = ({ title, subtitle, className }: Props) => {
         size="2xl"
         color="primary"
         weight="bold"
-        className="leading-9 mb-2 xs:text-xl"
+        className="mb-2 leading-9 xs:text-xl"
       >
         {title}
       </Typography>

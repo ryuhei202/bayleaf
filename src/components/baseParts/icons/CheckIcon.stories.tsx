@@ -12,7 +12,7 @@ export const Default = Template.bind({});
 
 Default.decorators = [
   (Story) => (
-    <div className="bg-clay w-full p-3">
+    <div className="w-full bg-clay p-3">
       <Story />
     </div>
   ),

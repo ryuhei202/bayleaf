@@ -6,7 +6,7 @@ export default {
   component: BillingInfo,
   decorators: [
     (Story) => (
-      <div className="m-1 p-2 bg-clay">
+      <div className="m-1 bg-clay p-2">
         <Story />
       </div>
     ),

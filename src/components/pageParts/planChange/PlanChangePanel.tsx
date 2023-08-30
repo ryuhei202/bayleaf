@@ -10,7 +10,7 @@ type TProps = {
 export const PlanChangePanel = ({ plan, text, children }: TProps) => {
   return (
     <>
-      <Typography className="text-center pt-8 pb-2">{text}</Typography>
+      <Typography className="pb-2 pt-8 text-center">{text}</Typography>
       <PlanChangeCard plan={plan} />
       {children}
     </>

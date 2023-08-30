@@ -14,7 +14,7 @@ export const DropdownMenuAlt = ({
 }: TProps) => {
   return (
     <select
-      className={`py-1 px-2 w-full rounded-md bg-inherit border-solid border-2 border-themeGray ${
+      className={`w-full rounded-md border-2 border-solid border-themeGray bg-inherit px-2 py-1 ${
         className ?? ""
       }`}
       value={value}

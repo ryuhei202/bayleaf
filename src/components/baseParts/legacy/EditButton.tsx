@@ -14,10 +14,10 @@ export const EditButton = ({ ...props }: Props) => {
       border
       radius="small"
       size="none"
-      className="flex justify-center h-8"
+      className="flex h-8 justify-center"
     >
       <Typography size="xs" className="my-auto">
-        <EditIcon className="text-base my-auto mr-1" />
+        <EditIcon className="my-auto mr-1 text-base" />
         編集
       </Typography>
     </Button>

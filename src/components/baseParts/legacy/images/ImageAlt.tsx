@@ -8,7 +8,7 @@ export const ImageAlt = ({ imageSrc, className, onClick }: TProps) => {
   return (
     <img
       src={imageSrc}
-      className={`rounded-md max-h-full max-w-full ${className ?? ""}`}
+      className={`max-h-full max-w-full rounded-md ${className ?? ""}`}
       onClick={onClick}
       alt=""
     />

@@ -26,7 +26,7 @@ export const HearingSelectForm = ({
       <Typography color="primary" className="mx-auto my-8 text-center">
         {title}
       </Typography>
-      <div className="grid grid-cols-2 gap-4 mx-8">
+      <div className="mx-8 grid grid-cols-2 gap-4">
         {options.map((option) => (
           <SelectableButton
             key={option.id}
@@ -46,7 +46,7 @@ export const HearingSelectForm = ({
       <Typography
         weight="regular"
         color="primary"
-        className="mt-auto mb-8 underline underline-offset-1 text-center"
+        className="mb-8 mt-auto text-center underline underline-offset-1"
         size="sm"
         onClick={onCancel}
       >

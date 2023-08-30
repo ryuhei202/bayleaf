@@ -33,15 +33,16 @@ export const ExpandableImage = ({
         className={defaultImageClassName}
       />
       {isExpanded ? (
-        <div className="fixed top-0 right-0 left-0 bottom-0 flex justify-center items-center flex-col z-50">
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center">
           <div
-            className="absolute bg-black bg-opacity-40 w-full h-full -z-10"
+            // eslint-disable-next-line tailwindcss/no-custom-classname
+            className="bg-opacity/40 absolute -z-10 h-full w-full bg-black"
             onClick={handleClickClose}
           ></div>
-          <div className="max-w-[80vw] max-h-[80vh] flex justify-center">
+          <div className="flex max-h-[80vh] max-w-[80vw] justify-center">
             <ImageAlt imageSrc={ExpandedImageSrc} />
           </div>
-          <div className="w-40 mt-3">
+          <div className="mt-3 w-40">
             <Button onClick={handleClickClose}>閉じる</Button>
           </div>
         </div>

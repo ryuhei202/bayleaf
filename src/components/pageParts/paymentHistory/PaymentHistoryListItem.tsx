@@ -16,7 +16,7 @@ export const PaymentHistoryListItem = ({
     "$1年$2月$3日"
   );
   return (
-    <div className="bg-white flex justify-self-start items-center h-12 my-1">
+    <div className="my-1 flex h-12 items-center justify-self-start bg-white">
       <div className="basis-2/5">
         <Typography color="strong-gray" size="xs">
           {formattedDate}

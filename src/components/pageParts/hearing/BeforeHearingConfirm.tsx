@@ -11,9 +11,9 @@ type TProps = {
 export const BeforeHearingConfirm = ({ onClick, planId }: TProps) => {
   return (
     <Page>
-      <div className="flex flex-col h-full justify-between">
-        <div className="space-y-1	h-[50vh] relative">
-          <div className="absolute w-[100vw] px-5 py-3 bottom-0">
+      <div className="flex h-full flex-col justify-between">
+        <div className="relative	h-[50vh] space-y-1">
+          <div className="absolute bottom-0 w-[100vw] px-5 py-3">
             <PageHeader
               title="次回発送するコーディネートのために、ヒアリングに答えていただきます"
               subtitle={
@@ -39,7 +39,7 @@ export const BeforeHearingConfirm = ({ onClick, planId }: TProps) => {
             </p>
           </div>
         </div>
-        <div className="flex flex-col space-y-1 align-middle px-5 py-3 my-auto">
+        <div className="my-auto flex flex-col space-y-1 px-5 py-3 align-middle">
           <Button onClick={onClick} dataTestId="startHearingLabel">
             ヒアリングに進む
           </Button>

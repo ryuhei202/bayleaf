@@ -31,7 +31,7 @@ export const Delivery = () => {
   if (!chartIndexData || !membersIndexData) return <LoaderPage />;
   if (membersIndexData.length !== 1) {
     return (
-      <Page className="flex justify-center items-center">
+      <Page className="flex items-center justify-center">
         <Typography>
           <>ユーザーが複数人います</>
         </Typography>
@@ -43,7 +43,7 @@ export const Delivery = () => {
     membersIndexData[0].nextPaymentDate === null
   ) {
     return (
-      <Page className="flex justify-center items-center">
+      <Page className="flex items-center justify-center">
         <Typography>
           <>配送指定日選択の期間外です。</>
         </Typography>

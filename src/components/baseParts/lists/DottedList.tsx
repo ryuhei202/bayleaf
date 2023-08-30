@@ -13,7 +13,7 @@ export const DottedList = ({ listItems, className }: TProps) => {
       {listItems.map((listItem, index) => {
         return (
           <div
-            className={`py-5 grid grid-cols-3 place-content-center justify-items-center ${
+            className={`grid grid-cols-3 place-content-center justify-items-center py-5 ${
               index !== listItems.length - 1
                 ? "border-b-2 border-dashed border-themeGray"
                 : ""
@@ -25,7 +25,7 @@ export const DottedList = ({ listItems, className }: TProps) => {
                 {listItem.question}
               </Typography>
             </div>
-            <div className="col-span-2 justify-self-start flex items-center">
+            <div className="col-span-2 flex items-center justify-self-start">
               <Typography color="primary">{listItem.answer}</Typography>
             </div>
           </div>

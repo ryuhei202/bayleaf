@@ -62,7 +62,7 @@ WideCard.args = {
 
 Default.decorators = [
   (Story) => (
-    <div className="flex justify-center bg-clay gap-3 py-10">
+    <div className="flex justify-center gap-3 bg-clay py-10">
       <>
         <Story />
         <Story />

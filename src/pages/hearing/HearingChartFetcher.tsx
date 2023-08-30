@@ -24,7 +24,7 @@ export const HearingChartFetcher = ({ member }: TProps) => {
 
   if (member.isReturnRequired) {
     return (
-      <Page className="flex justify-center items-center">
+      <Page className="flex items-center justify-center">
         <div>
           <Typography>
             返却が必要な洋服があります。 <br />

@@ -37,13 +37,13 @@ export const ItemCard = ({
 
   return (
     <div className="flex justify-evenly gap-1" onClick={changeItem}>
-      <div className="py-5 bg-white rounded-md w-[100px] text-center px-1">
+      <div className="w-[100px] rounded-md bg-white px-1 py-5 text-center">
         <ExpandableImage
           defaultImageSrc={imagePaths.defaultPath}
           ExpandedImageSrc={imagePaths.expandedPath}
         />
         <Typography
-          className="mt-4 mb-1 text-center"
+          className="mb-1 mt-4 text-center"
           size="sm"
           color="strong-gray"
           weight="medium"

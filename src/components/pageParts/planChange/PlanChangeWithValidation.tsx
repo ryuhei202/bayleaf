@@ -14,12 +14,12 @@ type TProps = {
 };
 export const PlanChangeWithValidation = ({ reason }: TProps) => {
   return (
-    <Page className="flex flex-col h-full min-h-screen justify-between items-center text-themeGray p-3">
+    <Page className="flex h-full min-h-screen flex-col items-center justify-between p-3 text-themeGray">
       <Tab.Group>
-        <Tab.List className="flex w-full mt-6">
-          <TabMenu className="font-semibold w-1/3">ライト</TabMenu>
-          <TabMenu className="font-semibold w-1/3">スタンダード</TabMenu>
-          <TabMenu className="font-semibold w-1/3">プレミアム</TabMenu>
+        <Tab.List className="mt-6 flex w-full">
+          <TabMenu className="w-1/3 font-semibold">ライト</TabMenu>
+          <TabMenu className="w-1/3 font-semibold">スタンダード</TabMenu>
+          <TabMenu className="w-1/3 font-semibold">プレミアム</TabMenu>
         </Tab.List>
         <Tab.Panels className="w-[90%] pb-12">
           <Tab.Panel>

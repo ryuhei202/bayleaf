@@ -19,7 +19,7 @@ export const ChartListButton = ({ chart, onClick }: Props) => {
         <>レンタル開始日: {chart.rentalStartedAt}</>
       </Typography>
 
-      <div className="flex h-[100px] justify-center space-x-2 mt-4">
+      <div className="mt-4 flex h-[100px] justify-center space-x-2">
         {chart.itemImagePaths.map((iamgePath, index) => {
           return <ImageAlt imageSrc={iamgePath} key={index} />;
         })}
