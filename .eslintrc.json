@@ -1,0 +1,14 @@
+{
+  "extends": ["react-app", "react-app/jest", "plugin:tailwindcss/recommended"],
+  "rules": {
+    "no-console": "error"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.stories.*"],
+      "rules": {
+        "import/no-anonymous-default-export": "off"
+      }
+    }
+  ]
+}

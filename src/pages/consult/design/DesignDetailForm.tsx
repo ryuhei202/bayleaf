@@ -24,9 +24,9 @@ export const DesignDetailForm = ({
 
   return (
     <Page>
-      <div className="flex flex-col justify-between h-full">
-        <div className="px-5 py-5">
-          <div className="w-[120px] ml-auto mr-auto">
+      <div className="flex h-full flex-col justify-between">
+        <div className="p-5">
+          <div className="mx-auto w-[120px]">
             <ExpandableImage
               defaultImageSrc={selectedItem.imagePaths.largeThumb}
               ExpandedImageSrc={selectedItem.imagePaths.large}

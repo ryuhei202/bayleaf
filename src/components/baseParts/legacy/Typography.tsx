@@ -78,16 +78,13 @@ export const Typography = ({
 
   return isInline ? (
     <span
-      className={`font-body ${classes.join(" ")} ${className ?? ""} `}
+      className={`${classes.join(" ")} ${className ?? ""} `}
       onClick={onClick}
     >
       {children}
     </span>
   ) : (
-    <p
-      className={`font-body ${classes.join(" ")} ${className ?? ""} `}
-      onClick={onClick}
-    >
+    <p className={`${classes.join(" ")} ${className ?? ""} `} onClick={onClick}>
       {children}
     </p>
   );

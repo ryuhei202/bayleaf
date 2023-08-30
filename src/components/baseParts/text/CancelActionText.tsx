@@ -8,8 +8,8 @@ type TProps = {
 export const CancelActionText = ({ children, onClick }: TProps) => {
   return (
     <button className="text-red" onClick={onClick}>
-      <img className="inline w-5 h-5" src={ErrorIcon} alt={"ビックリマーク"} />
-      <span className="underline underline-offset-2 decoration-0 font-thin text-sm align-middle ">
+      <img className="inline h-5 w-5" src={ErrorIcon} alt={"ビックリマーク"} />
+      <span className="align-middle text-sm font-thin underline decoration-0 underline-offset-2 ">
         {children}
       </span>
     </button>

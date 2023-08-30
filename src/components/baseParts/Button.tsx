@@ -108,7 +108,7 @@ export const Button = ({
       <span className={`text-sm ${spanClasses.join(" ")}`}>{children}</span>
 
       {isLoading ? (
-        <div className="absolute flex justify-center items-center inset-0 z-10"></div>
+        <div className="absolute inset-0 z-10 flex items-center justify-center"></div>
       ) : (
         <></>
       )}

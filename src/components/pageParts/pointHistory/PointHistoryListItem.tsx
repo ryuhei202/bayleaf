@@ -11,7 +11,7 @@ export const PointHistoryListItem = ({ point, pointCreatedAt }: TProps) => {
     "$1年$2月$3日"
   );
   return (
-    <div className="bg-white flex items-center h-12 my-1">
+    <div className="my-1 flex h-12 items-center bg-white">
       <div className="basis-1/3 text-center">
         <Typography color="strong-gray" size="xs">
           {formattedDate}

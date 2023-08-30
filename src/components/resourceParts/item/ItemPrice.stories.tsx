@@ -36,7 +36,7 @@ Default.args = {
 
 Default.decorators = [
   (Story) => (
-    <div className="bg-clay w-full p-2">
+    <div className="w-full bg-clay p-2">
       <Story />
     </div>
   ),

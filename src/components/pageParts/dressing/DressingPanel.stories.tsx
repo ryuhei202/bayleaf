@@ -13,7 +13,7 @@ const Template: ComponentStory<typeof DressingPanel> = (args) => (
 export const DefaultValues = Template.bind({});
 DefaultValues.decorators = [
   (Story) => (
-    <div className="bg-clay w-full p-3">
+    <div className="w-full bg-clay p-3">
       <Story />
     </div>
   ),
@@ -144,7 +144,7 @@ DefaultValues.args = {
 export const WithCahngeItems = Template.bind({});
 WithCahngeItems.decorators = [
   (Story) => (
-    <div className="bg-clay w-full p-3">
+    <div className="w-full bg-clay p-3">
       <Story />
     </div>
   ),

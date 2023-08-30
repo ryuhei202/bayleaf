@@ -38,7 +38,7 @@ Default.args = {
 
 Default.decorators = [
   (Story) => (
-    <div className="bg-slate-200 w-full h-screen p-5">
+    <div className="h-screen w-full bg-slate-200 p-5">
       <Story />
     </div>
   ),

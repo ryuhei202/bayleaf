@@ -20,7 +20,7 @@ export const PointHistoryList = ({ memberPoints }: TProps) => {
             日付
           </Typography>
         </div>
-        <div className="basis-1/3 text-center pr-2">
+        <div className="basis-1/3 pr-2 text-center">
           <Typography color="strong-gray" size="xs" className="ml-[4px]">
             区分
           </Typography>

@@ -37,24 +37,24 @@ export const OneShotStartingConfirm = ({
 
   return (
     <Page>
-      <div className="px-4 mb-10 min-h-[calc(100vh-190px)]">
+      <div className="mb-10 min-h-[calc(100vh-190px)] px-4">
         <PageHeader
           title="入力の確認"
           subtitle="この内容をもとにコーデを作成します"
         />
         <div className="mx-1.5">
-          <div className="bg-white mt-3 rounded-md overflow-hidden px-4 py-4">
+          <div className="mt-3 overflow-hidden rounded-md bg-white p-4">
             <Typography color="primary" size="2xl" className="mb-6">
               レンタルスケジュール
             </Typography>
             <ScheduleDiagram wearDate={wearingDate} />
           </div>
           <AnswerConfirm answer={confirmAnswer.answer} />
-          <div className="bg-white mt-3 rounded-md overflow-hidden px-4 py-4">
+          <div className="mt-3 overflow-hidden rounded-md bg-white p-4">
             <Typography color="primary" size="2xl">
               Bランクを希望しますか？
             </Typography>
-            <Typography color="primary" className="mt-2 ml-2">
+            <Typography color="primary" className="ml-2 mt-2">
               {isSelectableBRank ? "希望する" : "希望しない"}
             </Typography>
           </div>

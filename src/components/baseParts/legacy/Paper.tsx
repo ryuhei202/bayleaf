@@ -10,7 +10,7 @@ export const Paper = ({ children, className }: Props) => {
     <div
       className={`${
         className ?? ""
-      } rounded-lg w-full h-fit px-3 py-6 bg-white`}
+      } h-fit w-full rounded-lg bg-white px-3 py-6`}
     >
       {children}
     </div>

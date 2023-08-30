@@ -23,18 +23,18 @@ export const MemberPayment = ({
   onClickReceiptButton,
 }: TProps) => {
   return (
-    <Page className="p-4 flex flex-col">
+    <Page className="flex flex-col p-4">
       <Typography weight="regular" size="xl" color="primary" className="ml-4">
         決済履歴
       </Typography>
-      <div className="border-[0.5px] border-gray my-2" />
+      <div className="my-2 border-[0.5px] border-gray" />
       {nextPaymentDate !== null && (
         <div className="flex">
           <Typography
             weight="regular"
             size="base"
             color="primary"
-            className="ml-2 mb-4 basis-3/5"
+            className="mb-4 ml-2 basis-3/5"
           >
             次回決済予定日:
           </Typography>
@@ -42,14 +42,14 @@ export const MemberPayment = ({
             weight="regular"
             size="base"
             color="primary"
-            className="ml-2 mb-4  basis-2/5"
+            className="mb-4 ml-2  basis-2/5"
           >
             {nextPaymentDate}
           </Typography>
         </div>
       )}
 
-      <div className="flex-grow">
+      <div className="grow">
         <PaymentHistoryList
           memberPayments={paymentData}
           onClickReceiptButton={onClickReceiptButton}

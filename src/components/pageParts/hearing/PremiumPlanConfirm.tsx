@@ -9,16 +9,16 @@ type TProps = {
 export const PremiumPlanConfirm = ({ onClick, onCancel }: TProps) => {
   return (
     <Page>
-      <div className="flex flex-col h-full justify-between">
-        <div className="space-y-1	h-[50vh] relative">
-          <div className="absolute w-[100vw] px-5 py-3 bottom-0">
+      <div className="flex h-full flex-col justify-between">
+        <div className="relative	h-[50vh] space-y-1">
+          <div className="absolute bottom-0 w-[100vw] px-5 py-3">
             <PageHeader
               title="プレミアムプランの方は2コーデですので2回答えていただきます"
               className="mb-8"
             />
           </div>
         </div>
-        <div className="flex flex-col space-y-1 align-middle px-5 py-3 my-auto">
+        <div className="my-auto flex flex-col space-y-1 px-5 py-3 align-middle">
           <Button onClick={onClick} dataTestId="nextHearingLabel">
             二度目のヒアリングに進む
           </Button>

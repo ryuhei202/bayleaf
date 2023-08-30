@@ -14,7 +14,7 @@ const Template: ComponentStory<typeof TabMenu> = (args) => (
 export const Default = Template.bind({});
 Default.decorators = [
   (Story) => (
-    <div className=" bg-clay w-full p-3">
+    <div className=" w-full bg-clay p-3">
       <Tab.Group>
         <Tab.List className="flex">
           <Story />
@@ -33,8 +33,8 @@ Default.decorators = [
 Default.args = {
   children: (
     <div className="text-themeGray">
-      <span className="font-semibold pr-2">コーデ</span>
-      <span className="font-bold text-2xl  font-lora tracking-widest">01</span>
+      <span className="pr-2 font-semibold">コーデ</span>
+      <span className="font-lora text-2xl  font-bold tracking-widest">01</span>
     </div>
   ),
   className: "w-1/3",

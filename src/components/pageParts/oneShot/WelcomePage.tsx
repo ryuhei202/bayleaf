@@ -23,28 +23,28 @@ export const WelcomePage = ({
   onClickStart,
 }: TProps) => {
   return (
-    <Page className="flex flex-col h-full min-h-screen justify-between items-center text-themeGray pt-8 px-3 pb-3">
-      <Typography size="2xl" className="text-center mb-8">
+    <Page className="flex h-full min-h-screen flex-col items-center justify-between px-3 pb-3 pt-8 text-themeGray">
+      <Typography size="2xl" className="mb-8 text-center">
         単発レンタルを開始する
       </Typography>
-      <div className="w-full border-solid border border-themeGray rounded-md bg-clay">
-        <div className="bg-themeGray text-clay text-center text-[4vw] py-1">
+      <div className="w-full rounded-md border border-solid border-themeGray bg-clay">
+        <div className="bg-themeGray py-1 text-center text-[4vw] text-clay">
           料金
         </div>
         {discountPrice > 0 ? (
           <>
-            <p className="text-center text-[5vw] mt-5 mb-2">
-              <span className="text-[10vw] font-lora line-through">{`¥${OneShot.price.withoutTax.toLocaleString()}`}</span>
+            <p className="mb-2 mt-5 text-center text-[5vw]">
+              <span className="font-lora text-[10vw] line-through">{`¥${OneShot.price.withoutTax.toLocaleString()}`}</span>
               <br />
               <span className="text-[4vw] line-through">{`(税込 ¥${OneShot.price.withTax.toLocaleString()})`}</span>
             </p>
             <div className="indent-[50%]">
               <span className="font-bold">
-                ↓<span className="text-red text-xs ml-2">クーポン適用後</span>
+                ↓<span className="ml-2 text-xs text-red">クーポン適用後</span>
               </span>
             </div>
-            <p className="text-center text-[5vw] mb-5">
-              <span className="text-[10vw] font-lora">{`¥${(
+            <p className="mb-5 text-center text-[5vw]">
+              <span className="font-lora text-[10vw]">{`¥${(
                 OneShot.price.withoutTax - discountPrice
               ).toLocaleString()}`}</span>
               <br />
@@ -55,30 +55,30 @@ export const WelcomePage = ({
           </>
         ) : (
           <>
-            <p className="text-center text-[5vw] my-5">
-              <span className="text-[10vw] font-lora">{`¥${OneShot.price.withoutTax.toLocaleString()}`}</span>
+            <p className="my-5 text-center text-[5vw]">
+              <span className="font-lora text-[10vw]">{`¥${OneShot.price.withoutTax.toLocaleString()}`}</span>
               <br />
               <span className="text-[4vw]">{`(税込 ¥${OneShot.price.withTax.toLocaleString()})`}</span>
             </p>
           </>
         )}
 
-        <div className="bg-themeGray text-clay text-center text-[4vw] py-1">
+        <div className="bg-themeGray py-1 text-center text-[4vw] text-clay">
           服の枚数
         </div>
         <div className="flex justify-center">
-          <div className="w-1/3 flex py-8">
+          <div className="flex w-1/3 py-8">
             <img
               src={FORTH_CLOTH}
               alt="cloth-icon"
-              className="w-1/3 -mr-4 z-10"
+              className="z-10 -mr-4 w-1/3"
             />
-            <img src={FIRST_CLOTH} alt="cloth-icon" className="w-1/3 -mr-2" />
-            <img src={THIRD_CLOTH} alt="cloth-icon" className="w-1/3 z-10" />
+            <img src={FIRST_CLOTH} alt="cloth-icon" className="-mr-2 w-1/3" />
+            <img src={THIRD_CLOTH} alt="cloth-icon" className="z-10 w-1/3" />
           </div>
-          <p className="text-center text-[5vw] flex justify-center items-center py-5">
+          <p className="flex items-center justify-center py-5 text-center text-[5vw]">
             <span>
-              <span className="text-[10vw] font-lora">1</span> コーデ
+              <span className="font-lora text-[10vw]">1</span> コーデ
             </span>
             <img
               src={DiagonalLineIcon}
@@ -87,21 +87,21 @@ export const WelcomePage = ({
               className="mx-1"
             />
             <span>
-              <span className="text-[10vw] font-lora">3</span> アイテム
+              <span className="font-lora text-[10vw]">3</span> アイテム
             </span>
           </p>
         </div>
-        <div className="bg-themeGray text-clay text-center text-[4vw] py-1">
+        <div className="bg-themeGray py-1 text-center text-[4vw] text-clay">
           レンタル期間
         </div>
         <div className="w-full p-4">
           <ScheduleDiagram />
         </div>
-        <div className="bg-themeGray text-clay text-center text-[4vw] py-1">
+        <div className="bg-themeGray py-1 text-center text-[4vw] text-clay">
           ポイント
         </div>
-        <p className="text-center text-[5vw] my-5">
-          <span className="text-[10vw] font-lora">{additionalPoint}</span>
+        <p className="my-5 text-center text-[5vw]">
+          <span className="font-lora text-[10vw]">{additionalPoint}</span>
           ポイント付与
           <br />
           <span className="text-[3vw]">

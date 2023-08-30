@@ -98,7 +98,7 @@ export const MultipleSelectForm = ({
 
   return (
     <Page className="h-screen">
-      <div className="flex flex-col justify-between h-screen">
+      <div className="flex h-screen flex-col justify-between">
         <div className="px-5 pb-5">
           <PageHeader
             title={<>{response.title}</>}
@@ -168,12 +168,12 @@ export const MultipleSelectForm = ({
                 label: memberId,
               }}
             >
-              <ArrowIcon className="h-10 my-auto" />
+              <ArrowIcon className="my-auto h-10" />
             </IconButton>
             <Button
               disabled={validateNextButton()}
               size="none"
-              className="grow ml-3"
+              className="ml-3 grow"
               onClick={handleSubmit}
             >
               <Typography className="my-auto">次へ</Typography>

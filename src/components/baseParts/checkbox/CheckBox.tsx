@@ -18,9 +18,9 @@ export const CheckBox = ({
           type="checkbox"
           checked={checked}
           onChange={onChange}
-          className="form-checkbox text-themeGray rounded-md"
+          className="form-checkbox rounded-md text-themeGray"
         />
-        <span className="text-sm ml-2">{children}</span>
+        <span className="ml-2 text-sm">{children}</span>
       </label>
     </div>
   );

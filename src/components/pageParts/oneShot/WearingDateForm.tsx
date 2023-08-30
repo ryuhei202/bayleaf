@@ -21,9 +21,9 @@ export const WearingDateForm = ({
   lastDate.setDate(lastDate.getDate() + 30);
 
   return (
-    <Page className="flex flex-col h-full min-h-screen justify-between items-center text-themeGray p-3">
+    <Page className="flex h-full min-h-screen flex-col items-center justify-between p-3 text-themeGray">
       <div>
-        <Typography size="2xl" className="text-center my-8">
+        <Typography size="2xl" className="my-8 text-center">
           利用日を選択してください
         </Typography>
         <ScheduleDiagram

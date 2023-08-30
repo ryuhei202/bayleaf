@@ -33,7 +33,7 @@ export const DatetimePicker = ({
     </DropdownMenuAlt>
   ) : (
     <input
-      className="border-2 border-themeGray resize-none py-1 w-full px-3 rounded-md bg-clay"
+      className="w-full resize-none rounded-md border-2 border-themeGray bg-clay px-3 py-1"
       type="date"
       onChange={(e) => onChangeDate(e.target.value)}
       value={currentDate}

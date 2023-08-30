@@ -6,7 +6,7 @@ export const CheckIcon = () => {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className="w-24 h-24 text-[#659B5E]"
+      className="h-24 w-24 text-[#659B5E]"
     >
       <path
         strokeLinecap="round"

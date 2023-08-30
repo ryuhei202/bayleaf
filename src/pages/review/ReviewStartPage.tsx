@@ -30,7 +30,7 @@ export const ReviewStartPage = ({ chartId }: TProps) => {
 
   if (reviewTargetCoordinates.length === 0) {
     return (
-      <Page className="flex justify-center items-center">
+      <Page className="flex items-center justify-center">
         <Typography>
           <>レビュー対象のコーデはありません。</>
         </Typography>
@@ -44,7 +44,7 @@ export const ReviewStartPage = ({ chartId }: TProps) => {
         <ReviewFetcher coordinates={reviewTargetCoordinates} />
       ) : (
         <Page>
-          <div className="flex flex-col justify-between h-full">
+          <div className="flex h-full flex-col justify-between">
             <div className="px-5">
               <PageHeader
                 title={
@@ -62,7 +62,7 @@ export const ReviewStartPage = ({ chartId }: TProps) => {
                     <Typography
                       size="base"
                       weight="bold"
-                      className="text-center mt-10 mb-4"
+                      className="mb-4 mt-10 text-center"
                     >
                       コーデ {idx + 1}
                     </Typography>

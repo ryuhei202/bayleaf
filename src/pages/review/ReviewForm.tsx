@@ -23,8 +23,8 @@ export const ReviewForm = ({
 }: TProps) => {
   return (
     <Page>
-      <div className="flex flex-col justify-between h-full">
-        <div className="px-5 mb-8">
+      <div className="flex h-full flex-col justify-between">
+        <div className="mb-8 px-5">
           <PageHeader
             title={
               <>

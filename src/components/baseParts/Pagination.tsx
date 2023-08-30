@@ -19,20 +19,20 @@ export const Pagination = ({
   const isNextDisabled = currentPage >= maxPage;
 
   return (
-    <div className={`flex justify-around items-center ${className ?? ""}`}>
-      <div className="w-[44px] h-[44px]">
+    <div className={`flex items-center justify-around ${className ?? ""}`}>
+      <div className="h-[44px] w-[44px]">
         <Button
-          className={`rounded-[44px] h-[44px] relative`}
+          className={`relative h-[44px] rounded-[44px]`}
           variant={"light"}
           onClick={() => onClickPagination(currentPage - 1)}
           disabled={isBackDisabled}
         >
-          <BackIcon className="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]"></BackIcon>
+          <BackIcon className="absolute left-1/2 top-1/2 translate-x-[-50%] translate-y-[-50%]"></BackIcon>
         </Button>
       </div>
 
       <div>
-        <div className="text-themeGray flex text-xl w-20 justify-around">
+        <div className="flex w-20 justify-around text-xl text-themeGray">
           {currentPage}
           <div className="text-[#C8C9C3]">/</div>
           {maxPage}
@@ -40,12 +40,12 @@ export const Pagination = ({
       </div>
       <div className="w-[44px]">
         <Button
-          className={`rounded-[44px] h-[44px] relativ`}
+          className={`h-[44px] rounded-[44px]`}
           variant={"light"}
           onClick={() => onClickPagination(currentPage + 1)}
           disabled={isNextDisabled}
         >
-          <NextIcon className="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]"></NextIcon>
+          <NextIcon className="absolute left-1/2 top-1/2 translate-x-[-50%] translate-y-[-50%]"></NextIcon>
         </Button>
       </div>
     </div>

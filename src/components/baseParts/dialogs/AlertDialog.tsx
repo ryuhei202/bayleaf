@@ -26,7 +26,7 @@ export const AlertDialog = ({
       onClose={onClose}
       description={description}
       button={
-        <div className="flex mb-7">
+        <div className="mb-7 flex">
           {!hidden && (
             <Button variant="default" onClick={onClick} className="mx-2">
               {okBtnText ?? "OK"}

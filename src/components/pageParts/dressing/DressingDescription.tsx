@@ -18,7 +18,7 @@ export const DressingDescription = ({
   return (
     <div>
       <Typography size="xl">コーデアイテム</Typography>
-      <div className="border-[1px] border-gray my-5" />
+      <div className="my-5 border-[1px] border-gray" />
       <div className="my-5">
         {coordinateItems.map((item) => {
           return (
@@ -38,14 +38,14 @@ export const DressingDescription = ({
         })}
       </div>
       <div className="mt-10">
-        <Typography className="mx-2 my-2">{description}</Typography>
-        <div className="flex mt-10 space-x-3">
+        <Typography className="m-2">{description}</Typography>
+        <div className="mt-10 flex space-x-3">
           <img
             src={`${process.env.REACT_APP_HOST_URL}${comment.stylistIcon}`}
             alt="stylistIcon"
-            className="rounded-full w-[15vw] h-[15vw] object-cover"
+            className="h-[15vw] w-[15vw] rounded-full object-cover"
           />
-          <div className="table w-full min-h-[15vw]">
+          <div className="table min-h-[15vw] w-full">
             <SpeechBalloon arrowPlacement="left">{comment.text}</SpeechBalloon>
           </div>
         </div>

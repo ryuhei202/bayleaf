@@ -28,12 +28,12 @@ export const PurchaseItemCard = ({
 }: TProps) => {
   return (
     <WideItemCard imagePaths={imagePaths} className={className}>
-      <div className="h-fit w-full flex flex-col justify-around space-y-2">
+      <div className="flex h-fit w-full flex-col justify-around space-y-2">
         <div>
           <Typography className="text-left" color="strong-gray" size="xl">
             {brand}
           </Typography>
-          <Typography className="leading-3 text-left" size="xs" color="gray">
+          <Typography className="text-left leading-3" size="xs" color="gray">
             {category}/{color}
           </Typography>
         </div>
@@ -57,7 +57,7 @@ export const PurchaseItemCard = ({
             <Typography className="text-left" color="gray" size="xs">
               ポイント
             </Typography>
-            <Typography className="leading-4 text-left" color="strong-gray">
+            <Typography className="text-left leading-4" color="strong-gray">
               {point}pt
             </Typography>
           </div>
@@ -66,7 +66,7 @@ export const PurchaseItemCard = ({
           <Typography className="text-left" color="gray" size="xs">
             ランク
           </Typography>
-          <Typography className="leading-4 text-left" color="strong-gray">
+          <Typography className="text-left leading-4" color="strong-gray">
             {rank}
           </Typography>
         </div>

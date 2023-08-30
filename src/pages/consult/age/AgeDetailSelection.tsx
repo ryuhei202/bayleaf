@@ -25,9 +25,9 @@ export const AgeDetailSelection = ({
     <Page>
       <div className="p-8">
         <IconButton onClick={onCancel}>
-          <ArrowIcon className="h-10 my-auto" />
+          <ArrowIcon className="my-auto h-10" />
         </IconButton>
-        <div className="w-[120px] my-16 ml-auto mr-auto">
+        <div className="mx-auto my-16 w-[120px]">
           <ExpandableImage
             defaultImageSrc={selectedItem.imagePaths.largeThumb}
             ExpandedImageSrc={selectedItem.imagePaths.large}

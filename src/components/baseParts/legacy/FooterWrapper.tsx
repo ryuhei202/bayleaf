@@ -6,7 +6,7 @@ type Props = {
 export const FooterWrapper = ({ children, className }: Props) => {
   return (
     <div
-      className={`sticky bottom-0 bg-[#F6F6F6] space-y-3 ${className ?? ""}`}
+      className={`sticky bottom-0 space-y-3 bg-[#F6F6F6] ${className ?? ""}`}
     >
       {children}
     </div>
