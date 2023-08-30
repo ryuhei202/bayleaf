@@ -9,20 +9,20 @@ export const SelectWrapper = ({ visible, children }: TProps) => {
   return (
     <div>
       {visible ? (
-        <div className="border-2 border-themeGray relative rounded-md">
+        <div className="relative rounded-md border-2 border-themeGray">
           <span
-            className="text-center absolute -top-3 left-1/2 text-white 
-          bg-themeGray w-6 h-6 flex justify-center items-center rounded-full -translate-x-1/2 "
+            className="absolute -top-3 left-1/2 flex h-6 
+          w-6 -translate-x-1/2 items-center justify-center rounded-full bg-themeGray text-center text-white "
           >
             ✔︎
           </span>
           {children}
         </div>
       ) : (
-        <div className="border-2 border-slate-300 relative rounded-md">
+        <div className="relative rounded-md border-2 border-slate-300">
           <span
-            className="text-center absolute -top-3 left-1/2 text-white 
-          bg-slate-300 w-6 h-6 flex justify-center items-center rounded-full -translate-x-1/2 "
+            className="absolute -top-3 left-1/2 flex h-6 
+          w-6 -translate-x-1/2 items-center justify-center rounded-full bg-slate-300 text-center text-white "
           >
             ✔︎
           </span>

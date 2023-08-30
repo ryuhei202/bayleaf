@@ -21,8 +21,8 @@ export const ItemPartSizeSelectButtons = ({
   onPartChanged,
 }: TProps) => {
   return (
-    <div className="px-6 flex mt-4 justify-center">
-      <Typography className="flex-1 mt-auto mb-auto">{item.part}</Typography>
+    <div className="mt-4 flex justify-center px-6">
+      <Typography className="my-auto flex-1">{item.part}</Typography>
       {Object.values(item.buttonType).map((buttonType, index) => (
         <SelectButton
           key={index}

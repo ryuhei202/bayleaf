@@ -33,7 +33,7 @@ export const BuyItemSelect = ({
     .every((item) => item.isForSale || item.isPurchased);
 
   return (
-    <div className="text-center bg-clay">
+    <div className="bg-clay text-center">
       <div className="px-6 pb-16">
         <div className="p-8 text-center text-themeGray">
           レンタルアイテムの購入
@@ -67,9 +67,9 @@ export const BuyItemSelect = ({
                 </SelectWrapper>
               </div>
             ) : (
-              <div className="my-6 relative" key={chartItem.id}>
+              <div className="relative my-6" key={chartItem.id}>
                 <PurchaseItemCard
-                  className="brightness-50 pointer-events-none"
+                  className="pointer-events-none brightness-50"
                   imagePaths={{
                     defaultPath: chartItem.itemInfo.imagePaths.large,
                     expandedPath: chartItem.itemInfo.imagePaths.large,
@@ -84,7 +84,7 @@ export const BuyItemSelect = ({
                   rank={chartItem.itemInfo.rank}
                 />
                 <Typography
-                  className="absolute top-1/2 text-center w-full align-top -translate-y-1/2"
+                  className="absolute top-1/2 w-full -translate-y-1/2 text-center align-top"
                   size="2xl"
                   color="white"
                   weight="bold"
@@ -98,7 +98,7 @@ export const BuyItemSelect = ({
       </div>
       <FooterWrapper className="px-3 py-4">
         <div className="flex">
-          <div className="flex-grow mt-auto text-start">
+          <div className="mt-auto grow text-start">
             {isAllSelectedDiscountAvailable && (
               <>
                 {allSelectedDiscountPrice ? (
@@ -129,7 +129,7 @@ export const BuyItemSelect = ({
               </>
             )}
           </div>
-          <div className="text-end mt-auto">
+          <div className="mt-auto text-end">
             {isAllSelectedDiscountAvailable && allSelectedDiscountPrice ? (
               <div data-testid="BuyItemSelectAllSelectedDiscountPriceLabel">
                 <Typography size="base" className="line-through" color="gray">

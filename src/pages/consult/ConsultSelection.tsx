@@ -12,7 +12,7 @@ type TProps = {
 export const ConsultSelection = ({ onClickOption }: TProps) => {
   return (
     <div className="mx-8">
-      <Typography className="text-3xl my-12">
+      <Typography className="my-12 text-3xl">
         相談内容を選択してください。
       </Typography>
       {Object.values(ConsultChoice).map((option, i) =>
@@ -20,7 +20,7 @@ export const ConsultSelection = ({ onClickOption }: TProps) => {
           <Button
             variant="text"
             border
-            className="mb-4 px-10 bg-white h-20"
+            className="mb-4 h-20 bg-white px-10"
             onClick={() => onClickOption(option)}
             key={i}
           >

@@ -39,7 +39,7 @@ export const Dislike = () => {
 
   return (
     <Page>
-      <div className="px-5 flex flex-col justify-between min-h-screen mb-10">
+      <div className="mb-10 flex min-h-screen flex-col justify-between px-5">
         <div>
           <PageHeader
             title="トップスに対して苦手な柄やアイテムはありますか？"

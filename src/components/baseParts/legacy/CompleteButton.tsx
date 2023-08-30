@@ -18,7 +18,7 @@ export const CompleteButton = ({
   <div className="flex flex-row px-5 py-3">
     {onClickBack !== undefined ? (
       <IconButton onClick={onClickBack}>
-        <ArrowIcon className="h-10 my-auto" />
+        <ArrowIcon className="my-auto h-10" />
       </IconButton>
     ) : (
       <></>

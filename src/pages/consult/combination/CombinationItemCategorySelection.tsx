@@ -23,7 +23,7 @@ export const CombinationItemCategorySelection = ({
   const [currentCategory, setCurrentCategory] = useState(itemCategory);
   return (
     <Page>
-      <div className="flex flex-col justify-between h-full">
+      <div className="flex h-full flex-col justify-between">
         <div className="px-5">
           <PageHeader
             title={

@@ -18,7 +18,7 @@ export const Message = ({ variant, children, className }: TProps) => {
 
   return (
     <div
-      className={`p-3 text-center text-clay rounded-md  ${variantStyles.join(
+      className={`rounded-md p-3 text-center text-clay  ${variantStyles.join(
         " "
       )} ${className ?? ""}`}
     >

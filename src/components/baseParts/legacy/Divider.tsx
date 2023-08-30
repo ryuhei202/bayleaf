@@ -3,5 +3,5 @@ type Props = {
 };
 
 export const Divider = ({ className }: Props) => {
-  return <hr className={`${className ?? ""} text-slate-200 w-full`} />;
+  return <hr className={`${className ?? ""} w-full text-slate-200`} />;
 };

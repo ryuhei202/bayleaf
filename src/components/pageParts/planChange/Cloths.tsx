@@ -16,57 +16,57 @@ export const Cloths = ({ planId }: TProps) => {
   switch (planId) {
     case LIGHT_PLAN.id:
       return (
-        <div className="w-1/3 flex py-8">
+        <div className="flex w-1/3 py-8">
           <img
             src={FIRST_CLOTH}
             alt="cloth-icon"
-            className="w-1/3 -mr-4 z-10"
+            className="z-10 -mr-4 w-1/3"
           />
-          <img src={SECOND_CLOTH} alt="cloth-icon" className="w-1/3 -mr-2" />
-          <img src={THIRD_CLOTH} alt="cloth-icon" className="w-1/3 z-10" />
+          <img src={SECOND_CLOTH} alt="cloth-icon" className="-mr-2 w-1/3" />
+          <img src={THIRD_CLOTH} alt="cloth-icon" className="z-10 w-1/3" />
         </div>
       );
     case STANDARD_PLAN.id:
       return (
-        <div className="w-1/3 flex py-8">
+        <div className="flex w-1/3 py-8">
           <img
             src={FORTH_CLOTH}
             alt="cloth-icon"
-            className="w-1/3 -mr-4 z-10"
+            className="z-10 -mr-4 w-1/3"
           />
-          <img src={FIRST_CLOTH} alt="cloth-icon" className="w-1/3 -mr-2" />
-          <img src={THIRD_CLOTH} alt="cloth-icon" className="w-1/3 z-10" />
+          <img src={FIRST_CLOTH} alt="cloth-icon" className="-mr-2 w-1/3" />
+          <img src={THIRD_CLOTH} alt="cloth-icon" className="z-10 w-1/3" />
         </div>
       );
     case PREMIUM_PLAN.id:
       return (
-        <div className="w-1/3 h-[111px] flex flex-wrap pt-5">
+        <div className="flex h-[111px] w-1/3 flex-wrap pt-5">
           <div className="my-auto">
             <div className="flex">
               <img
                 src={FIRST_CLOTH}
                 alt="cloth-icon"
-                className="w-1/3 -mr-4 z-0"
+                className="z-0 -mr-4 w-1/3"
               />
               <img
                 src={SECOND_CLOTH}
                 alt="cloth-icon"
-                className="w-1/3 -mr-2"
+                className="-mr-2 w-1/3"
               />
-              <img src={THIRD_CLOTH} alt="cloth-icon" className="w-1/3 z-0" />
+              <img src={THIRD_CLOTH} alt="cloth-icon" className="z-0 w-1/3" />
             </div>
-            <div className="flex translate-x-[15%] translate-y-[-50%] z-20">
+            <div className="z-20 flex translate-x-[15%] translate-y-[-50%]">
               <img
                 src={FORTH_CLOTH}
                 alt="cloth-icon"
-                className="w-1/3 -mr-4 z-20"
+                className="z-20 -mr-4 w-1/3"
               />
               <img
                 src={FIRST_CLOTH}
                 alt="cloth-icon"
-                className="w-1/3 -mr-2 z-10"
+                className="z-10 -mr-2 w-1/3"
               />
-              <img src={THIRD_CLOTH} alt="cloth-icon" className="w-1/3 z-20" />
+              <img src={THIRD_CLOTH} alt="cloth-icon" className="z-20 w-1/3" />
             </div>
           </div>
         </div>

@@ -26,7 +26,7 @@ export const ConsultFetcher = ({ chartId }: TProps) => {
 
   if (coordinateData.coordinates.length === 0)
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex h-screen items-center justify-center">
         <Typography>
           <>着こなし相談対象のコーデはありません。</>
         </Typography>

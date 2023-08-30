@@ -36,7 +36,7 @@ export const WearingPhoto = ({
   return (
     <div className="m-8">
       <IconButton onClick={onCancel}>
-        <ArrowIcon className="h-10 my-auto" />
+        <ArrowIcon className="my-auto h-10" />
       </IconButton>
       <PageHeader title="着用写真を送ってください" />
       <Typography className="my-6">
@@ -45,12 +45,12 @@ export const WearingPhoto = ({
         着用写真をもとにサイズ感や着こなしを確認します。
       </Typography>
 
-      <div className="flex h-[150px] justify-center space-x-3 mt-4">
+      <div className="mt-4 flex h-[150px] justify-center space-x-3">
         {items.map((item) => {
           return <ImageAlt imageSrc={item.imagePaths.large} key={item.id} />;
         })}
       </div>
-      <hr className="border-none h-1 bg-gray-400 my-5" />
+      <hr className="my-5 h-1 border-none bg-gray" />
 
       <ImageUploader
         onChange={onChangeFile}

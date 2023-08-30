@@ -138,11 +138,7 @@ describe("BuyItemContainer.tsx", () => {
         await user.click(screen.getByTestId("BuyItemSelectItemCard-1"))
     );
 
-    await waitFor(() =>
-      expect(
-        screen.queryByTestId("BuyItemSelectSelectableItemRemainingLabel")
-      ).toBeInTheDocument()
-    );
+    await screen.findByTestId("BuyItemSelectSelectableItemRemainingLabel");
     expect(
       screen.queryByTestId("BuyItemSelectPriceWithoutDiscountLabel")
     ).toBeInTheDocument();
@@ -192,22 +188,14 @@ describe("BuyItemContainer.tsx", () => {
     await user.click(screen.getByTestId("BuyItemSelectItemCard-2"));
     await user.click(screen.getByTestId("BuyItemSelectItemCard-3"));
 
-    await waitFor(() =>
-      expect(
-        screen.queryByTestId("BuyItemSelectAllSelectedDiscountLabel")
-      ).toBeInTheDocument()
-    );
+    await screen.findByTestId("BuyItemSelectAllSelectedDiscountLabel");
     expect(
       screen.queryByTestId("BuyItemSelectAllSelectedDiscountPriceLabel")
     ).toBeInTheDocument();
 
     user.click(screen.getByTestId("BuyItemSelectSubmitButton"));
 
-    await waitFor(() =>
-      expect(
-        screen.queryByTestId("BillingInfoAllSelectedDiscountPriceLabel")
-      ).toBeInTheDocument()
-    );
+    await screen.findByTestId("BillingInfoAllSelectedDiscountPriceLabel");
     expect(
       screen.queryByTestId("BillingInfoAllSelectedDiscountPrice")
     ).toHaveTextContent(
@@ -288,11 +276,7 @@ describe("BuyItemContainer.tsx", () => {
         await user.click(screen.getByTestId("BuyItemSelectItemCard-2"))
     );
 
-    await waitFor(() =>
-      expect(
-        screen.queryByTestId("BuyItemSelectSelectableItemRemainingLabel")
-      ).toBeInTheDocument()
-    );
+    await screen.findByTestId("BuyItemSelectSelectableItemRemainingLabel");
     expect(
       screen.queryByTestId("BuyItemSelectPriceWithoutDiscountLabel")
     ).toBeInTheDocument();
@@ -341,22 +325,14 @@ describe("BuyItemContainer.tsx", () => {
     );
     await user.click(screen.getByTestId("BuyItemSelectItemCard-3"));
 
-    await waitFor(() =>
-      expect(
-        screen.queryByTestId("BuyItemSelectAllSelectedDiscountLabel")
-      ).toBeInTheDocument()
-    );
+    await screen.findByTestId("BuyItemSelectAllSelectedDiscountLabel");
     expect(
       screen.queryByTestId("BuyItemSelectAllSelectedDiscountPriceLabel")
     ).toBeInTheDocument();
 
     user.click(screen.getByTestId("BuyItemSelectSubmitButton"));
 
-    await waitFor(() =>
-      expect(
-        screen.queryByTestId("BillingInfoAllSelectedDiscountPriceLabel")
-      ).toBeInTheDocument()
-    );
+    await screen.findByTestId("BillingInfoAllSelectedDiscountPriceLabel");
     expect(
       screen.queryByTestId("BillingInfoAllSelectedDiscountPrice")
     ).toHaveTextContent(

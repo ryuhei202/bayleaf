@@ -21,7 +21,7 @@ export const RankSelectingForm = ({
 
   return (
     <Page className="h-screen">
-      <div className="flex flex-col justify-between h-screen">
+      <div className="flex h-screen flex-col justify-between">
         <div className="px-5 pb-5">
           <div>
             <Typography size="xl" className="my-8" color="primary">
@@ -69,7 +69,7 @@ export const RankSelectingForm = ({
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
-              className="w-6 h-6"
+              className="h-6 w-6"
             >
               <path
                 fillRule="evenodd"
@@ -87,7 +87,7 @@ export const RankSelectingForm = ({
               onClick={onCancel}
               dataTestId="rankFormBackBtnLabel"
             >
-              <ArrowIcon className="h-10 my-auto" />
+              <ArrowIcon className="my-auto h-10" />
             </IconButton>
           </div>
         </FooterWrapper>

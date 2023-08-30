@@ -18,7 +18,7 @@ export const CoordinateListButton = ({
     <Button onClick={onClick}>
       <Typography className="text-xl">コーデ{index + 1}</Typography>
 
-      <div className="flex h-[100px] justify-center space-x-2 mt-4">
+      <div className="mt-4 flex h-[100px] justify-center space-x-2">
         {ImagePathThumbs.map((thumb) => {
           return <ImageAlt imageSrc={thumb} key={thumb} />;
         })}

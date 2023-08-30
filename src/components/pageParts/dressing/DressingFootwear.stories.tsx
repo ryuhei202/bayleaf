@@ -13,7 +13,7 @@ const Template: ComponentStory<typeof DressingFootwear> = (args) => (
 export const DefaultValues = Template.bind({});
 DefaultValues.decorators = [
   (Story) => (
-    <div className="bg-slate-200 w-full p-3">
+    <div className="w-full bg-slate-200 p-3">
       <Story />
     </div>
   ),

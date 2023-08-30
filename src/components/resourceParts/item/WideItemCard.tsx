@@ -10,7 +10,7 @@ type TProps = {
 export const WideItemCard = ({ imagePaths, children, className }: TProps) => {
   return (
     <div
-      className={`bg-white px-5 rounded-md w-full text-center flex space-x-2 py-2 ${
+      className={`flex w-full space-x-2 rounded-md bg-white px-5 py-2 text-center ${
         className ?? ""
       }`}
     >
@@ -18,7 +18,7 @@ export const WideItemCard = ({ imagePaths, children, className }: TProps) => {
         defaultImageSrc={imagePaths.defaultPath}
         ExpandedImageSrc={imagePaths.expandedPath}
         defaultImageClassName="mx-auto h-32"
-        className="w-[50%] my-auto mr-2"
+        className="my-auto mr-2 w-[50%]"
       />
       {children}
     </div>

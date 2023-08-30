@@ -34,7 +34,7 @@ export const ConsultItemList = ({
 
   return (
     <Page>
-      <div className="flex flex-col justify-between h-full">
+      <div className="flex h-full flex-col justify-between">
         <div className="px-5">
           <PageHeader title={title} className="mb-8" />
           <Typography>気になるアイテムを選択してください</Typography>
@@ -42,7 +42,7 @@ export const ConsultItemList = ({
             {items.map((item) => (
               <div className="w-[120px]" key={item.id}>
                 <SelectButtonImage
-                  className="space-x-2 mt-4 ml-auto mr-auto"
+                  className="mx-auto mt-4 space-x-2"
                   imageSrc={item.imagePaths.largeThumb}
                   value={""}
                   onChange={(event) => handleChange(item, event.target.checked)}

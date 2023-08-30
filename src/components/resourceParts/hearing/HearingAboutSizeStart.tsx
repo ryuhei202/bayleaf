@@ -7,8 +7,8 @@ type TProps = {
 };
 export const HearingAboutSizeStart = ({ onClick }: TProps) => {
   return (
-    <Page className="flex flex-col items-center px-8 min-h-screen justify-between">
-      <div className="flex flex-col items-center justify-end h-1/2">
+    <Page className="flex min-h-screen flex-col items-center justify-between px-8">
+      <div className="flex h-1/2 flex-col items-center justify-end">
         <PageHeader
           title="サイズについてのヒアリング"
           subtitle={

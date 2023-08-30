@@ -23,7 +23,7 @@ export const SimpifiedHearing = ({
   return (
     <div className={className ?? ""}>
       <Typography size="xl">コーデの利用シーンと見せたい印象</Typography>
-      <div className="border-[1px] border-gray my-5 " />
+      <div className="my-5 border-[1px] border-gray " />
       <DottedList listItems={hearings} className="mx-5" />
     </div>
   );

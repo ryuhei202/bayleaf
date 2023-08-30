@@ -19,17 +19,17 @@ export const MemberPoints = ({
   totalPoint,
 }: TProps) => {
   return (
-    <Page className="p-4 flex flex-col">
+    <Page className="flex flex-col p-4">
       <Typography weight="regular" size="xl" color="primary" className="ml-4">
         ポイント履歴
       </Typography>
-      <div className="border-[0.5px] border-gray my-2" />
-      <div className="flex mb-4">
+      <div className="my-2 border-[0.5px] border-gray" />
+      <div className="mb-4 flex">
         <Typography
           weight="regular"
           size="base"
           color="primary"
-          className="grow ml-2"
+          className="ml-2 grow"
         >
           合計ポイント:
         </Typography>
@@ -42,7 +42,7 @@ export const MemberPoints = ({
           {totalPoint}pt
         </Typography>
       </div>
-      <div className="flex-grow">
+      <div className="grow">
         <PointHistoryList memberPoints={pointData} />
       </div>
       <Pagination

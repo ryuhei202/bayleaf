@@ -107,7 +107,7 @@ export const Button = ({
       <span className={isLoading ? "opacity-40" : ""}>{children}</span>
 
       {isLoading ? (
-        <div className="absolute flex justify-center items-center inset-0"></div>
+        <div className="absolute inset-0 flex items-center justify-center"></div>
       ) : (
         <></>
       )}

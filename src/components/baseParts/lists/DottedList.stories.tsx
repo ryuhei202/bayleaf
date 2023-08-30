@@ -25,7 +25,7 @@ Hearing.args = {
 
 Hearing.decorators = [
   (Story) => (
-    <div className="bg-clay w-full h-screen p-5">
+    <div className="h-screen w-full bg-clay p-5">
       <Story />
     </div>
   ),
@@ -45,7 +45,7 @@ MemberSize.args = {
 };
 MemberSize.decorators = [
   (Story) => (
-    <div className="bg-clay w-full h-screen p-5">
+    <div className="h-screen w-full bg-clay p-5">
       <Story />
     </div>
   ),

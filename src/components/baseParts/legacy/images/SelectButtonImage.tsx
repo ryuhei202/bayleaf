@@ -18,10 +18,10 @@ export const SelectButtonImage = ({
   checked,
 }: TProps) => {
   return (
-    <div className={`w-fit relative ${className ?? ""}`}>
+    <div className={`relative w-fit ${className ?? ""}`}>
       <input
         type="checkbox"
-        className="form-checkbox absolute right-1.5 bottom-1.5 rounded-full text-themeGray focus:outline-none h-5 w-5"
+        className="form-checkbox absolute bottom-1.5 right-1.5 h-5 w-5 rounded-full text-themeGray focus:outline-none"
         value={value}
         onChange={onChange}
         checked={checked}

@@ -82,7 +82,7 @@ export const DeliveryPage = ({
           )}
         </div>
 
-        <div className="flex gap-3 mb-4">
+        <div className="mb-4 flex gap-3">
           <SelectButton
             selected={isShortest}
             onClick={() => onSelectShortest(true)}

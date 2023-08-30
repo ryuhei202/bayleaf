@@ -14,7 +14,7 @@ const Template: ComponentStory<typeof Paper> = (args) => <Paper {...args} />;
 export const Default = Template.bind({});
 Default.decorators = [
   (Story) => (
-    <div className="bg-slate-200 w-full p-3">
+    <div className="w-full bg-slate-200 p-3">
       <Story />
     </div>
   ),

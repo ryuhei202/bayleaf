@@ -26,10 +26,10 @@ export const MemberImageUploader = ({
 }: TProps) => {
   return (
     <Page>
-      <IconButton onClick={onCancel} className="mt-5 ml-5">
-        <ArrowIcon className="h-10 my-auto" />
+      <IconButton onClick={onCancel} className="ml-5 mt-5">
+        <ArrowIcon className="my-auto h-10" />
       </IconButton>
-      <div className="flex flex-col px-5 h-full">
+      <div className="flex h-full flex-col px-5">
         <PageHeader
           title={
             <>
@@ -54,7 +54,7 @@ export const MemberImageUploader = ({
           {!(!!imageFileName && !!imageData) && (
             <p
               onClick={onClickNext}
-              className="text-center text-sm text-themeGray underline cursor-pointer mt-4"
+              className="mt-4 cursor-pointer text-center text-sm text-themeGray underline"
             >
               今は写真を用意できない
             </p>
