@@ -20,7 +20,6 @@ export const Delivery = () => {
         CHART_RENTAL_STATUS.WAIT_DELIVERY,
         CHART_RENTAL_STATUS.WAIT_RENTAL_RETURN,
       ],
-      isHearingCompleted: true,
       limit: 1,
       order: "DESC",
     },
