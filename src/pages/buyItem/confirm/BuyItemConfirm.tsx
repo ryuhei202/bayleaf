@@ -82,7 +82,7 @@ export const BuyItemConfirm = ({
             <ArrowIcon className="my-auto h-10" />
           </IconButton>
           <Button onClick={onOpenDialog} disabled={isPurchaseButtonDisabled}>
-            購入する
+            最終確認へ進む
           </Button>
         </div>
       </div>
