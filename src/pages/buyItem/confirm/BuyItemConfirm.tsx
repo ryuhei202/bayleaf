@@ -1,5 +1,6 @@
 import { TItemResponse } from "../../../api/shared/TItemResponse";
 import { Button } from "../../../components/baseParts/Button";
+import { ConfirmDialog } from "../../../components/baseParts/dialogs/ConfirmDialog";
 import { IconButton } from "../../../components/baseParts/legacy/IconButton";
 import { ArrowIcon } from "../../../components/baseParts/legacy/icons/ArrowIcon";
 import { BillingInfo } from "../../../components/pageParts/buyItem/BillingInfo";
@@ -17,7 +18,10 @@ type TProps = {
   onChange: (selectedPoint: number) => void;
   onClick: () => void;
   onCancel: () => void;
+  onCloseDialog: () => void;
+  onOpenDialog?: () => void;
   isPurchaseButtonDisabled: boolean;
+  isOpenConfirmDialog: boolean;
 };
 
 export const BuyItemConfirm = ({
@@ -32,7 +36,10 @@ export const BuyItemConfirm = ({
   onChange,
   onClick,
   onCancel,
+  onCloseDialog,
+  onOpenDialog,
   isPurchaseButtonDisabled,
+  isOpenConfirmDialog,
 }: TProps) => {
   return (
     <div className="bg-clay" data-testid="BuyItemConfirm">
@@ -74,11 +81,20 @@ export const BuyItemConfirm = ({
           <IconButton className="flex-none" onClick={onCancel}>
             <ArrowIcon className="my-auto h-10" />
           </IconButton>
-          <Button onClick={onClick} disabled={isPurchaseButtonDisabled}>
+          <Button onClick={onOpenDialog} disabled={isPurchaseButtonDisabled}>
             購入する
           </Button>
         </div>
       </div>
+      <ConfirmDialog
+        open={isOpenConfirmDialog}
+        title="購入確認"
+        description="購入するとキャンセルできません。購入を確定しますか？"
+        okBtnText="購入を確定する"
+        onClickOk={onClick}
+        onClickCancel={onCloseDialog}
+        onClose={onCloseDialog}
+      />
     </div>
   );
 };
