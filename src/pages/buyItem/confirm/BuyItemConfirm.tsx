@@ -91,7 +91,10 @@ export const BuyItemConfirm = ({
         title="購入確認"
         description="購入するとキャンセルできません。購入を確定しますか？"
         okBtnText="購入を確定する"
-        onClickOk={onClick}
+        onClickOk={() => {
+          onClick();
+          onCloseDialog();
+        }}
         onClickCancel={onCloseDialog}
         onClose={onCloseDialog}
       />
