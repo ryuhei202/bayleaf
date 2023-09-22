@@ -17,8 +17,6 @@ export type TProps = {
 
 export const BuyItemContainer = ({ chartId, possesedPoint }: TProps) => {
   const [isConfirm, setIsConfirm] = useState<boolean>(false);
-  const [isOpenConfirmDialog, setIsOpenConfirmDialog] =
-    useState<boolean>(false);
   const [selectedPoint, setSelectedPoint] = useState<number>(0);
   const { data: chartItemsData, error: chartItemsError } = useChartItemsIndex({
     chartId,
@@ -146,25 +144,15 @@ export const BuyItemContainer = ({ chartId, possesedPoint }: TProps) => {
             );
           }}
           onClick={() => {
-            mutate(
-              {
-                chartItemIds: selectedChartItemIds,
-                totalPrice: getTotalDiscountedPrice(),
-                usingPoint: selectedPoint,
-              },
-              {
-                onSuccess: () => {
-                  setIsOpenConfirmDialog(false);
-                },
-              }
-            );
+            mutate({
+              chartItemIds: selectedChartItemIds,
+              totalPrice: getTotalDiscountedPrice(),
+              usingPoint: selectedPoint,
+            });
           }}
           onCancel={() => setIsConfirm(false)}
           isPurchaseButtonDisabled={isValidPurchased()}
           allSelectedDiscountPrice={getAllSelectedDiscountPrice()}
-          isOpenConfirmDialog={isOpenConfirmDialog}
-          onOpenDialog={() => setIsOpenConfirmDialog(true)}
-          onCloseDialog={() => setIsOpenConfirmDialog(false)}
         />
       ) : (
         <BuyItemSelect

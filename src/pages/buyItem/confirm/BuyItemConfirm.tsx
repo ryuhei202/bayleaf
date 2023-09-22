@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { TItemResponse } from "../../../api/shared/TItemResponse";
 import { Button } from "../../../components/baseParts/Button";
 import { ConfirmDialog } from "../../../components/baseParts/dialogs/ConfirmDialog";
@@ -18,10 +19,7 @@ type TProps = {
   onChange: (selectedPoint: number) => void;
   onClick: () => void;
   onCancel: () => void;
-  onCloseDialog: () => void;
-  onOpenDialog?: () => void;
   isPurchaseButtonDisabled: boolean;
-  isOpenConfirmDialog: boolean;
 };
 
 export const BuyItemConfirm = ({
@@ -36,11 +34,9 @@ export const BuyItemConfirm = ({
   onChange,
   onClick,
   onCancel,
-  onCloseDialog,
-  onOpenDialog,
   isPurchaseButtonDisabled,
-  isOpenConfirmDialog,
 }: TProps) => {
+  const [isOpenDialog, setIsOpenDialog] = useState<boolean>(false);
   return (
     <div className="bg-clay" data-testid="BuyItemConfirm">
       <div className="p-6">
@@ -81,22 +77,25 @@ export const BuyItemConfirm = ({
           <IconButton className="flex-none" onClick={onCancel}>
             <ArrowIcon className="my-auto h-10" />
           </IconButton>
-          <Button onClick={onOpenDialog} disabled={isPurchaseButtonDisabled}>
+          <Button
+            onClick={() => setIsOpenDialog(true)}
+            disabled={isPurchaseButtonDisabled}
+          >
             最終確認へ進む
           </Button>
         </div>
       </div>
       <ConfirmDialog
-        open={isOpenConfirmDialog}
+        open={isOpenDialog}
         title="購入確認"
         description="購入するとキャンセルできません。購入を確定しますか？"
         okBtnText="購入を確定する"
         onClickOk={() => {
           onClick();
-          onCloseDialog();
+          setIsOpenDialog(false);
         }}
-        onClickCancel={onCloseDialog}
-        onClose={onCloseDialog}
+        onClickCancel={() => setIsOpenDialog(false)}
+        onClose={() => setIsOpenDialog(false)}
       />
     </div>
   );
