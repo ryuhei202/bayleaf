@@ -16,7 +16,7 @@ jobs:
           find ./build -name *.map -delete
       - uses: chromaui/action@v1
         with:
-          token: ${{ secrets.CHROMATIC_TOKEN }}
+          projectToken: ${{ secrets.CHROMATIC_TOKEN }}
           exitZeroOnChanges: true
           exitOnceUploaded: true
       - uses: FirebaseExtended/action-hosting-deploy@v0
