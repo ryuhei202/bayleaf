@@ -32,9 +32,9 @@ export const DeliveryPageContainer = ({
   );
   const [isShortest, setIsShortest] = useState(true);
   const [selectedDate, setSelectedDate] = useState("");
-  const [time, setTime] = useState(
-    deliveryDateShowData.chartDeliveryTime?.time.toString() ??
-      deliveryDateShowData.memberDeliveryTime.toString()
+  const [time, setTime] = useState<number>(
+    deliveryDateShowData.chartDeliveryTime?.time ??
+      deliveryDateShowData.memberDeliveryTime
   );
   const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState(false);
 
@@ -128,8 +128,7 @@ export const DeliveryPageContainer = ({
             <br></br>
             配送希望時間：
             {deliveryDateShowData.deliveryTimeOptions.find(
-              (option) =>
-                option.id === deliveryDateShowData.chartDeliveryTime?.time
+              (option) => option.id === time
             )?.name ?? "指定無し"}
           </>
         }
