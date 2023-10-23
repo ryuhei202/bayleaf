@@ -31,8 +31,8 @@ type TProps = {
   };
   selectedDate: string;
   onSelectDate: (date: string) => void;
-  selectedDeliveryTime: string;
-  onSelectDeliveryTime: (deliveryTime: string) => void;
+  selectedDeliveryTime: number;
+  onSelectDeliveryTime: (deliveryTime: number) => void;
   onSubmit: () => void;
   isLoading: boolean;
 };
@@ -120,8 +120,10 @@ export const DeliveryPage = ({
         <div className="my-5">
           <Typography color="strong-gray">配送希望時間</Typography>
           <DropdownMenuAlt
-            value={selectedDeliveryTime}
-            onChange={(event) => onSelectDeliveryTime(event.target.value)}
+            value={selectedDeliveryTime.toString()}
+            onChange={(event) =>
+              onSelectDeliveryTime(parseInt(event.target.value))
+            }
           >
             {deliveryTimeOptions.map((category) => (
               <option key={category.id} value={category.id}>
