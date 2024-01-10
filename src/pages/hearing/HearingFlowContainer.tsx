@@ -55,13 +55,13 @@ export const HearingFlowContainer = ({
                 variant="default"
                 onClick={() => onClickSameHearing(false)}
               >
-                前回と同じシーンで色味はそのままコーデを作る
+                前回と同じシーン・印象でコーデを作る
               </Button>
               <Button
                 variant="default"
                 onClick={() => onClickSameHearing(true)}
               >
-                前回と同じシーンで色味は変えてコーデを作る
+                前回と同じシーンで印象は変えてコーデを作る
               </Button>
               {currentAnswerNumber === 2 && (
                 <Button variant="line" onClick={onClickBack}>
